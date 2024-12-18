@@ -2,7 +2,7 @@ version: "3"
 
 services:
   admin:
-    container_name: admin
+    container_name: frontend_admin
     build:
       context: .
       dockerfile: ./apps/admin/Dockerfile
@@ -13,7 +13,7 @@ services:
       - app_network
 
   service:
-    container_name: service
+    container_name: frontend_service
     build:
       context: .
       dockerfile: ./apps/service/Dockerfile
