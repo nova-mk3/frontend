@@ -48,9 +48,9 @@ COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/.next/standalone ./
 COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/.next/static ./apps/admin/.next/static 
 COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/public ./apps/admin/public
 
-EXPOSE 3002
+EXPOSE 3001
 # Next.js에서 포트를 지정하는 방법은 환경 변수 PORT를 설정하는 것입니다.
-ENV PORT=3002
+ENV PORT=3001
 
 # 실행 명령어
 CMD node apps/admin/server.js
