@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  admin:
+    container_name: admin
+    build:
+      context: .
+      dockerfile: ./apps/admin/Dockerfile
+    restart: always
+    ports:
+      - 3002:3002
+    networks:
+      - app_network
+
+  service:
+    container_name: service
+    build:
+      context: .
+      dockerfile: ./apps/service/Dockerfile
+    restart: always
+    ports:
+      - 3003:3003
+    networks:
+      - app_network
+
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+networks:
+  app_network:
+    driver: bridge
