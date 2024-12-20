@@ -9,8 +9,6 @@ services:
     restart: always
     ports:
       - 3001:3001
-    networks:
-      - app_network
 
   service:
     container_name: frontend_service
@@ -20,11 +18,6 @@ services:
     restart: always
     ports:
       - 3002:3002
-    networks:
-      - app_network
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname
-networks:
-  app_network:
-    driver: bridge
