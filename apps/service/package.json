@@ -11,7 +11,9 @@
   "dependencies": {
     "next": "15.1.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^2.5.5",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -20,6 +22,7 @@
     "@nova/jest-config": "workspace:*",
     "@nova/tailwind-config": "workspace:*",
     "@nova/typescript-config": "workspace:*",
+    "@nova/ui": "workspace:*",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
