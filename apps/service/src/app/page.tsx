@@ -1,13 +1,13 @@
-'use client';
-import { Button } from "@nova/ui/Button";
+"use client";
+import { Button } from "@nova/ui/components/button";
 export default function Home() {
   return (
-    <div className="relative">
+    <div>
       this is service
       <Button
         className="absolute right-2 top-2"
         onClick={() => console.log("asdf")}
-        variant="ghost"
+        variant="outline"
       >
         <div>asdf</div>
       </Button>

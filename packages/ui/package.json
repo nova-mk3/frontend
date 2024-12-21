@@ -4,11 +4,11 @@
   "type": "module",
   "private": true,
   "exports": {
-    "./Button": "./components/ui/button.tsx"
+    "./lib/*": "./lib/*.ts",
+    "./components/*": "./components/ui/*.tsx"
   },
   "scripts": {
-    "lint": "eslint . --max-warnings 0",
-    "build": "tsc --noEmit"
+    "lint": "eslint . --max-warnings 0"
   },
   "devDependencies": {
     "@nova/eslint-config": "workspace:*",
