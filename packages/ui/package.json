@@ -8,7 +8,9 @@
     "./components/*": "./components/ui/*.tsx"
   },
   "scripts": {
-    "lint": "eslint . --max-warnings 0"
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+
   },
   "devDependencies": {
     "@nova/eslint-config": "workspace:*",
