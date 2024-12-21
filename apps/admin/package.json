@@ -22,6 +22,7 @@
     "@nova/jest-config": "workspace:*",
     "@nova/tailwind-config": "workspace:*",
     "@nova/typescript-config": "workspace:*",
+    "@nova/ui": "workspace:*",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
