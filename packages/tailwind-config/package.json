@@ -5,9 +5,11 @@
   "private": true,
   "exports": {
     "./postcss": "./postcss.config.mjs",
-    "./tailwind": "./tailwind.config.mjs"
+    "./tailwind": "./tailwind.config.mjs",
+    "./globalcss": "./globals.css"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.15",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7"
   },

@@ -1,18 +1,4 @@
 export const tailwindConfig = {
-  // content: [
-  //   "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-  //   "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-  //   "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  // ],
-  // theme: {
-  //   extend: {
-  //     colors: {
-  //       background: "var(--background)",
-  //       foreground: "var(--foreground)",
-  //     },
-  //   },
-  // },
-  // plugins: [],
   darkMode: "class",
   content: [
     "app/**/*.{ts,tsx}",
@@ -24,39 +10,15 @@ export const tailwindConfig = {
   theme: {
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
+        primary: "hsl(var(--primary))",
+        background01: "hsl(var(--background-01))",
+        ui01: "hsl(var(--ui-01))",
+        ui02: "hsl(var(--ui-02))",
+        text01: "hsl(var(--text-01))",
+        text02: "hsl(var(--text-02))",
+        line01: "hsl(var(--line-01))",
+        danger: "hsl(var(--danger))",
+        success: "hsl(var(--success))",
       },
       borderRadius: {
         lg: `var(--radius)`,
@@ -64,16 +26,41 @@ export const tailwindConfig = {
         sm: "calc(var(--radius) - 4px)",
       },
       screens: {
-        mobile: { max: '768px' },
+        mobile: { max: "768px" },
       },
       fontFamily: {
-        pretendard: ['var(--font-pretendard)'],
+        pretendard: ["var(--font-pretendard)"],
+        paperlogy: ["var(--font-paperlogy)"],
+      },
+      letterSpacing: {
+        wide1: "0.1px",
+        wide2: "0.15px",
+        wide3: "0.25px",
+        wide4: "0.4px",
+        wide5: "0.5px",
+      },
+      fontSize: {
+        d1: ["57px", { lineHeight: "64px", fontWeight: "400" }],
+        d2: ["45px", { lineHeight: "52px", fontWeight: "400" }],
+        d3: ["36px", { lineHeight: "44px", fontWeight: "400" }],
+
+        h1: ["32px", { lineHeight: "40px", fontWeight: "400" }],
+        h2: ["28px", { lineHeight: "36px", fontWeight: "400" }],
+        h3: ["24px", { lineHeight: "32px", fontWeight: "400" }],
+
+        t1: ["22px", { lineHeight: "28px", fontWeight: "400" }],
+        t2: ["16px", { lineHeight: "24px", fontWeight: "400" }],
+        t3: ["14px", { lineHeight: "20px", fontWeight: "400" }],
+
+        l1: ["14px", { lineHeight: "20px", fontWeight: "400" }],
+        l2: ["12px", { lineHeight: "16px", fontWeight: "400" }],
+        l3: ["11px", { lineHeight: "16px", fontWeight: "400" }],
+
+        b1: ["16px", { lineHeight: "24px", fontWeight: "400" }],
+        b2: ["14px", { lineHeight: "20px", fontWeight: "400" }],
+        b3: ["12px", { lineHeight: "16px", fontWeight: "400" }],
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
 };
-
-
-
-
