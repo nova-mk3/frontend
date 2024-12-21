@@ -63,7 +63,17 @@ export const tailwindConfig = {
         md: `calc(var(--radius) - 2px)`,
         sm: "calc(var(--radius) - 4px)",
       },
+      screens: {
+        mobile: { max: '768px' },
+      },
+      fontFamily: {
+        pretendard: ['var(--font-pretendard)'],
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
 };
+
+
+
+

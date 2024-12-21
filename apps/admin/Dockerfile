@@ -53,4 +53,4 @@ EXPOSE 3001
 ENV PORT=3001
 
 # 실행 명령어
-CMD node apps/admin/server.js
+CMD HOST=localhost PORT=3002 node apps/service/server.js

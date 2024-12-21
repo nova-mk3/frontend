@@ -47,4 +47,4 @@ EXPOSE 3002
 # Next.js에서 포트를 지정하는 방법은 환경 변수 PORT를 설정하는 것입니다.
 ENV PORT=3002
 
-CMD node apps/service/server.js
+CMD HOST=localhost PORT=3002 node apps/service/server.js
