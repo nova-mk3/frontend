@@ -6,5 +6,12 @@
   "exports": {
     "./postcss": "./postcss.config.mjs",
     "./tailwind": "./tailwind.config.mjs"
+  },
+  "dependencies": {
+    "tailwind-merge": "^2.5.5",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
   }
 }
