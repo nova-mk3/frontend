@@ -9,10 +9,21 @@
     "format": "turbo format",
     "prepare": "husky"
   },
+  "lint-staged": {
+    "*.{js,ts,tsx,css,scss}": [
+      "turbo format"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
     "husky": "^9.1.7",
+    "lint-staged": "^15.2.11",
     "prettier": "^3.4.2",
     "turbo": "^2.3.3",
     "typescript": "5.7.2"

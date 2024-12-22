@@ -12,10 +12,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "bg-primary shadow hover:bg-primary/90",
-        secondary:
-          "bg-success shadow-sm hover:bg-danger/80",
+        default: "bg-primary shadow hover:bg-primary/90",
+        secondary: "bg-success shadow-sm hover:bg-danger/80",
       },
       size: {
         default: "h-9 px-4 py-2",
@@ -28,7 +26,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 export interface ButtonProps
@@ -47,7 +45,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       />
     );
-  }
+  },
 );
 Button.displayName = "Button";
 

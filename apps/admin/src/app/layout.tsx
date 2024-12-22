@@ -7,7 +7,6 @@ export const metadata: Metadata = {
   description: "nova admin",
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
