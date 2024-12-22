@@ -6,6 +6,7 @@ services:
     build:
       context: .
       dockerfile: ./apps/admin/Dockerfile
+    image: frontend_admin_image:latest
     restart: always
     ports:
       - 3001:3001
@@ -15,6 +16,7 @@ services:
     build:
       context: .
       dockerfile: ./apps/service/Dockerfile
+    image: frontend_service_image:latest
     restart: always
     ports:
       - 3002:3002
