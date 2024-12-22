@@ -11,7 +11,7 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx,css,scss}": [
-      "turbo format"
+      "prettier --write"
     ]
   },
   "husky": {
