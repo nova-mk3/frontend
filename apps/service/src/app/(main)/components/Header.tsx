@@ -14,7 +14,7 @@ export default function Header() {
         priority={true}
         className="cursor-pointer"
       />
-      <div className="flex flex-row  items-center ml-[20px]">
+      <div className="flex flex-row  items-center ml-[20px] mobile:hidden">
         <Navigation />
       </div>
       <div className="flex items-center ml-auto">
