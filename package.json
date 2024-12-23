@@ -2,7 +2,6 @@
   "name": "frontend",
   "private": true,
   "scripts": {
-    "husky": "husky install",
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
