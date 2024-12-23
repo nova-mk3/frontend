@@ -16,9 +16,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${pretendard.variable} font-pretendard`}>
-      <body className="max-w-screen-xl mx-auto">
-        <Header />
-        {children}
+      <body>
+        {/* 추후 수정 예정 @kwonja */}
+        <div id="root" className="max-w-screen-xl mx-auto">
+          <Header />
+          {children}
+        </div>
       </body>
     </html>
   );

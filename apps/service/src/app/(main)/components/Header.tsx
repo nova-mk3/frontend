@@ -1,6 +1,8 @@
-"use clinet";
+"use client";
 import React from "react";
 import Image from "next/image";
+import Navigation from "./Navigation";
+
 export default function Header() {
   return (
     <div className="flex flex-row algin border-b-[1px] border-line01 px-[17px] py-[10px]">
@@ -12,16 +14,8 @@ export default function Header() {
         priority={true}
         className="cursor-pointer"
       />
-      <div className="flex flex-row t-m font-bold items-center g-[20px]">
-        <p className="w-[60px] h-[24px] flex content-center justify-center">
-          소개
-        </p>
-        <p className="w-[60px] h-[24px] flex content-center justify-center">
-          서비스
-        </p>
-        <p className="w-[60px] h-[24px] flex content-center justify-center">
-          가이드
-        </p>
+      <div className="flex flex-row  items-center ml-[20px]">
+        <Navigation />
       </div>
       <div className="flex items-center ml-auto">
         <div className="flex flex-row justify-center items-center mobile:hidden">
@@ -32,7 +26,6 @@ export default function Header() {
             회원가입
           </p>
         </div>
-
         <Image
           src="/image/hamburger.svg"
           width={20}

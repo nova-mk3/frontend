@@ -56,4 +56,4 @@ ENV PORT=3001
 ENV HOST=localhost
 
 # 실행 명령어만 분리합니다.
-CMD ["node", "apps/service/server.js"]
+CMD ["node", "apps/admin/server.js"]
