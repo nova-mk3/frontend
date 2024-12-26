@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "PORT=3002 next start",
     "lint": "next lint",
@@ -29,6 +29,7 @@
     "@nova/tailwind-config": "workspace:*",
     "@nova/typescript-config": "workspace:*",
     "@nova/ui": "workspace:*",
+    "@svgr/webpack": "^8.1.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",

@@ -40,7 +40,7 @@ export function FileFormField({
               <FormLabel
                 className={cn(
                   "t-m !font-bold ml-1 text-text01 transition-colors peer-focus:text-primary",
-                  errors[name] && "text-danger"
+                  errors[name] && "text-danger",
                 )}
               >
                 {label}
@@ -57,7 +57,7 @@ export function FileFormField({
             </FormControl>
 
             {preview ? (
-              <div className="mt-2">
+              <div className="mt-[4px]">
                 <Image
                   src={preview}
                   onClick={handleIconClick}
@@ -76,7 +76,7 @@ export function FileFormField({
                   "w-10 h-10 p-2 rounded-sm !mt-[4px] border-line01 group",
                   errors[name]
                     ? "border-danger"
-                    : "border-line01 focus:border-primary"
+                    : "border-line01 focus:border-primary",
                 )}
                 aria-label="프로필 이미지 업로드"
               >
