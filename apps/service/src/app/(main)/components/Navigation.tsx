@@ -1,16 +1,23 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import {
+  Crown,
+  Folder,
+  History,
+  Layers,
+  Users,
+  Image,
+  ShieldCheck,
+  BookText,
+} from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
-  // NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  // NavigationMenuViewport,
 } from "@nova/ui/components/navigation-menu";
 export default function Navigation() {
   return (
@@ -28,12 +35,7 @@ export default function Navigation() {
                   <li className="flex items-center h-[60px]  rounded-lg hover:bg-ui01">
                     <div className="flex flex-row items-center">
                       <div className="w-[60px] h-[50px] flex justify-center items-center border-r-[1px] border-line01">
-                        <Image
-                          src="/image/History.svg"
-                          width={24}
-                          height={24}
-                          alt="연혁"
-                        />
+                        <History size={28} />
                       </div>
                       <div className="flex flex-col ml-[16px] t-m">
                         <p className="font-bold">연혁</p>
@@ -46,15 +48,10 @@ export default function Navigation() {
 
               <NavigationMenuLink asChild>
                 <Link href="/">
-                  <li className="flex items-center w-[285px] h-[60px] hover:bg-ui01">
+                  <li className="flex items-center w-[285px] h-[60px]  rounded-lg hover:bg-ui01">
                     <div className="flex flex-row items-center">
                       <div className="w-[60px] h-[50px] flex justify-center items-center border-r-[1px] border-line01">
-                        <Image
-                          src="/image/People.svg"
-                          width={24}
-                          height={24}
-                          alt="연혁"
-                        />
+                        <Users size={28} />
                       </div>
                       <div className="flex flex-col ml-[16px] t-m">
                         <p className="font-bold">동아리원 소개</p>
@@ -70,12 +67,7 @@ export default function Navigation() {
                   <li className="flex items-center w-[285px] h-[60px]  rounded-lg hover:bg-ui01">
                     <div className="flex flex-row items-center">
                       <div className="w-[60px] h-[50px] flex justify-center items-center border-r-[1px] border-line01">
-                        <Image
-                          src="/image/Person.svg"
-                          width={24}
-                          height={24}
-                          alt="연혁"
-                        />
+                        <Crown size={28} />
                       </div>
                       <div className="flex flex-col ml-[16px] t-m">
                         <p className="font-bold">임원소개</p>
@@ -90,7 +82,7 @@ export default function Navigation() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="font-bold">
+          <NavigationMenuTrigger className="t-m font-bold">
             게시판
           </NavigationMenuTrigger>
           <NavigationMenuContent>
@@ -100,12 +92,7 @@ export default function Navigation() {
                   <li className="flex items-center h-[60px]  rounded-lg hover:bg-ui01">
                     <div className="flex flex-row items-center">
                       <div className="w-[60px] h-[50px] flex justify-center items-center border-r-[1px] border-line01">
-                        <Image
-                          src="/image/Layers.svg"
-                          width={24}
-                          height={24}
-                          alt="연혁"
-                        />
+                        <Layers size={28} />
                       </div>
                       <div className="flex flex-col ml-[16px] t-m">
                         <p className="font-bold">통합 게시판</p>
@@ -118,15 +105,10 @@ export default function Navigation() {
 
               <NavigationMenuLink asChild>
                 <Link href="/">
-                  <li className="flex items-center w-[285px] h-[60px] hover:bg-ui01">
+                  <li className="flex items-center w-[285px] h-[60px] rounded-lg hover:bg-ui01">
                     <div className="flex flex-row items-center">
                       <div className="w-[60px] h-[50px] flex justify-center items-center border-r-[1px] border-line01">
-                        <Image
-                          src="/image/Folder.svg"
-                          width={24}
-                          height={24}
-                          alt="연혁"
-                        />
+                        <Folder size={28} />
                       </div>
                       <div className="flex flex-col ml-[16px] t-m">
                         <p className="font-bold">족보 게시판</p>
@@ -142,12 +124,7 @@ export default function Navigation() {
                   <li className="flex items-center w-[285px] h-[60px]  rounded-lg hover:bg-ui01">
                     <div className="flex flex-row items-center">
                       <div className="w-[60px] h-[50px] flex justify-center items-center border-r-[1px] border-line01">
-                        <Image
-                          src="/image/Picture.svg"
-                          width={24}
-                          height={24}
-                          alt="연혁"
-                        />
+                        <Image size={28} />
                       </div>
                       <div className="flex flex-col ml-[16px] t-m">
                         <p className="font-bold">사진게시판</p>
@@ -162,7 +139,7 @@ export default function Navigation() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="font-bold">
+          <NavigationMenuTrigger className="t-m font-bold">
             가이드
           </NavigationMenuTrigger>
           <NavigationMenuContent>
@@ -172,12 +149,7 @@ export default function Navigation() {
                   <li className="flex items-center h-[60px]  rounded-lg hover:bg-ui01">
                     <div className="flex flex-row items-center">
                       <div className="w-[60px] h-[50px] flex justify-center items-center border-r-[1px] border-line01">
-                        <Image
-                          src="/image/Check.svg"
-                          width={24}
-                          height={24}
-                          alt="연혁"
-                        />
+                        <ShieldCheck size={28} />
                       </div>
                       <div className="flex flex-col ml-[16px] t-m">
                         <p className="font-bold">노바 생활 가이드</p>
@@ -190,15 +162,10 @@ export default function Navigation() {
 
               <NavigationMenuLink asChild>
                 <Link href="/">
-                  <li className="flex items-center w-[285px] h-[60px] hover:bg-ui01">
+                  <li className="flex items-center w-[285px] h-[60px] rounded-lg hover:bg-ui01">
                     <div className="flex flex-row items-center">
                       <div className="w-[60px] h-[50px] flex justify-center items-center border-r-[1px] border-line01">
-                        <Image
-                          src="/image/People.svg"
-                          width={24}
-                          height={24}
-                          alt="연혁"
-                        />
+                        <BookText size={28} />
                       </div>
                       <div className="flex flex-col ml-[16px] t-m">
                         <p className="font-bold">노바 임원 지침서</p>

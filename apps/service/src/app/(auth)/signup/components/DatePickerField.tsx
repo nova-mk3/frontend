@@ -46,7 +46,7 @@ export function DatePickerForm({
                   variant={"outline"}
                   className={cn(
                     "w-[180px] pl-3 h-10 text-left b-m !mt-[4px] focus:border-primary focus:text-primary shadow-sm rounded-sm",
-                    !field.value && "text-muted-foreground"
+                    !field.value && "text-muted-foreground",
                   )}
                 >
                   {field.value ? (

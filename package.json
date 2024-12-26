@@ -12,7 +12,7 @@
     "*.{js,ts,tsx,css,scss}": [
       "prettier --write"
     ]
-  },
+  }, 
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
