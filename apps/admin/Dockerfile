@@ -48,9 +48,12 @@ COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/.next/standalone ./
 COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/.next/static ./apps/admin/.next/static 
 COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/public ./apps/admin/public
 
+# 포트를 노출합니다.
 EXPOSE 3001
-# Next.js에서 포트를 지정하는 방법은 환경 변수 PORT를 설정하는 것입니다.
-ENV PORT=3001
 
-# 실행 명령어
-CMD HOST=localhost PORT=3002 node apps/service/server.js
+# 환경 변수를 설정합니다.
+ENV PORT=3001
+ENV HOST=localhost
+
+# 실행 명령어만 분리합니다.
+CMD ["node", "apps/admin/server.js"]

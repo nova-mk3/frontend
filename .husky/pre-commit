@@ -1,0 +1,2 @@
+npx lint-staged --allow-empty  # 커밋이 없을때 에러를 뱉는데, 이거 그냥 넘어가게끔 해줬습니다
+pnpm build lint

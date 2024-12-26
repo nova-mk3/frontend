@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     --radius: 0.5rem;
@@ -15,8 +14,8 @@
     --line-01: 0 0% 85%;
     --danger: 6 100% 69%;
     --success: 199 100% 62%;
-    --font-pretendard: 'Pretendard', sans-serif;
-    --font-paperlogy: 'Paperlogy', sans-serif;
+    --font-pretendard: "Pretendard", sans-serif;
+    --font-paperlogy: "Paperlogy", sans-serif;
   }
 
   /* 다크모드 설정(이긴 한데 그냥 똑같음) */
@@ -37,62 +36,62 @@
 
 @layer components {
   .d-l {
-    @apply !text-d1 font-paperlogy
+    @apply !text-d1 font-paperlogy;
   }
 
   .d-m {
-    @apply !text-d2 font-paperlogy
+    @apply !text-d2 font-paperlogy;
   }
 
   .d-s {
-    @apply !text-d3 font-paperlogy
+    @apply !text-d3 font-paperlogy;
   }
 
   .h-l {
-    @apply !text-h1 font-pretendard
+    @apply !text-h1 font-pretendard;
   }
 
   .h-m {
-    @apply !text-h2 font-pretendard
+    @apply !text-h2 font-pretendard;
   }
 
   .h-s {
-    @apply !text-h3 font-pretendard
+    @apply !text-h3 font-pretendard;
   }
 
   .t-l {
-    @apply !text-t1 font-pretendard
+    @apply !text-t1 font-pretendard;
   }
 
   .t-m {
-    @apply !text-t2 font-pretendard tracking-wide2
+    @apply !text-t2 font-pretendard tracking-wide2;
   }
 
   .t-s {
-    @apply !text-t3 font-pretendard tracking-wide1
+    @apply !text-t3 font-pretendard tracking-wide1;
   }
 
   .l-l {
-    @apply !text-l1 font-paperlogy tracking-wide1
+    @apply !text-l1 font-paperlogy tracking-wide1;
   }
 
   .l-m {
-    @apply !text-l2 font-paperlogy tracking-wide5
+    @apply !text-l2 font-paperlogy tracking-wide5;
   }
 
   .l-s {
-    @apply !text-l3 font-paperlogy tracking-wide5
+    @apply !text-l3 font-paperlogy tracking-wide5;
   }
 
   .b-l {
-    @apply !text-b1 font-pretendard tracking-wide5
+    @apply !text-b1 font-pretendard tracking-wide5;
   }
 
   .b-m {
-    @apply !text-b2 font-pretendard tracking-wide3
+    @apply !text-b2 font-pretendard tracking-wide3;
   }
 
   .b-s {
-    @apply !text-b3 font-pretendard tracking-wide4
+    @apply !text-b3 font-pretendard tracking-wide4;
   }
 }
