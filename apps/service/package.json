@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "PORT=3002 next start",
     "lint": "next lint",
@@ -38,7 +38,8 @@
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5"
+    "typescript": "^5",
+    "lucide-react": "^0.468.0"
   },
   "packageManager": "pnpm@9.0.0"
 }
