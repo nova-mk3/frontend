@@ -12,8 +12,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary shadow hover:bg-primary/90",
+        default: "bg-primary shadow hover:bg-primary/90 text-background01",
         secondary: "bg-success shadow-sm hover:bg-danger/80",
+        outline: "bg-background01 border border-line01 text-text01",
+        transparent: "bg-transparent text-text01",
       },
       size: {
         default: "h-9 px-4 py-2",

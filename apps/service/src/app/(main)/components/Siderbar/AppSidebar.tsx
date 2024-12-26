@@ -10,7 +10,7 @@ interface SiderbarProps {
 export default function AppSidebar({ toggle, isOpen }: SiderbarProps) {
   return (
     <div
-      className={`border z-20 rounded-lg h-screen overflow-y-auto fixed right-0 top-0 bg-background01 transition-all duration-500 shadow ease-linear transform ${
+      className={`border z-20 rounded-lg h-screen overflow-y-auto fixed right-0 top-0 bg-background01 transition-all duration-300 shadow ease-linear transform ${
         isOpen ? "right-0 w-[100%]" : "right-[-100%] w-[100%]"
       } max-w-[400px]`}
     >

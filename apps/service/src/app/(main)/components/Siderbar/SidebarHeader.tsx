@@ -27,7 +27,7 @@ export default function SidebarHeader({ toggle }: HeaderProps) {
       <>
         <div className="flex flex-row items-end gap-[9px]">
           <p className="h-s">
-            <Link href="/signup" className="underline underline-offset-8">
+            <Link href="/signin" className="underline underline-offset-8">
               로그인
             </Link>
             을 해주세요

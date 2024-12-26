@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Logo from "@/public/image/LogoWithName.svg";
 import Image from "next/image";
 import Navigation from "./Navigation";
 import Link from "next/link";
@@ -16,15 +17,8 @@ export default function Header() {
   return (
     <>
       <div className="flex flex-row algin border-b-[1px] border-line01 px-[17px] py-[10px] relative">
-        <Link href="/">
-          <Image
-            src="/image/Logo.svg"
-            alt="로고"
-            width={161.83}
-            height={45}
-            priority={true}
-            className="cursor-pointer"
-          />
+        <Link href={"/"}>
+          <Logo width={161.83} height={45} fill={"#B096F5"} />
         </Link>
         <div className="flex flex-row items-center ml-[20px] mobile:hidden">
           <Navigation />
@@ -32,15 +26,16 @@ export default function Header() {
         <div className="flex items-center ml-auto">
           {!isLogin ? (
             <div className="flex flex-row justify-center items-center gap-[22px] mobile:hidden">
-              <p className="w-[60px] h-[24px] flex content-center justify-center cursor-pointer">
-                로그인
-              </p>
-              <p
-                className="w-[60px] h-[24px] flex content-center justify-center cursor-pointer "
-                onClick={() => alert("개발중")}
-              >
-                회원가입
-              </p>
+              <Link href="/signin">
+                <p className="w-[60px] h-[24px] flex content-center justify-center cursor-pointer">
+                  로그인
+                </p>
+              </Link>
+              <Link href="signup">
+                <p className="w-[60px] h-[24px] flex content-center justify-center cursor-pointer ">
+                  회원가입
+                </p>
+              </Link>
             </div>
           ) : (
             <div className="flex flex-row justify-center items-center gap-[22px] mobile:hidden">
