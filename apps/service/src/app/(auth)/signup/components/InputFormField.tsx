@@ -22,12 +22,16 @@ export function InputFormField({
   label,
   placeHolder,
   type = "text",
+  inputMode,
+  pattern,
 }: {
   form: UseFormReturn<SignupInput>;
   name: StringKeys<SignupInput>;
   label: string;
   placeHolder: string;
   type?: string;
+  inputMode?: "numeric";
+  pattern?: string;
 }) {
   const { isFocused, inputRef } = useInputFocus();
 
@@ -45,7 +49,7 @@ export function InputFormField({
                   ? "text-danger"
                   : isFocused
                     ? "text-primary"
-                    : "text-text01"
+                    : "text-text01",
               )}
             >
               {label}
@@ -58,10 +62,12 @@ export function InputFormField({
                 "peer b-m h-10 transition-colors rounded-sm border-line01",
                 error
                   ? "text-danger border-danger placeholder:text-danger"
-                  : "focus:border-primary focus:text-primary focus:placeholder-primary"
+                  : "focus:border-primary focus:text-primary focus:placeholder-primary",
               )}
               type={type}
               placeholder={placeHolder}
+              {...(inputMode ? { inputMode } : {})}
+              {...(pattern ? { pattern } : {})}
               {...field}
             />
           </FormControl>

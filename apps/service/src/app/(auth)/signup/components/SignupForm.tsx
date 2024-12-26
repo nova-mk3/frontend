@@ -57,7 +57,9 @@ export function SignupForm() {
           name={"studentId"}
           label={"학번"}
           placeHolder={"학번을 입력하세요"}
-          type="number"
+          type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
         />
         <div className="flex gap-4 items-center">
           <SelectFormField form={form} name={"grade"} label="학년" />
@@ -96,7 +98,7 @@ export function SignupForm() {
         />
         <div>
           <Button
-            className="mt-8 w-full b-l"
+            className="mt-8 w-full b-l mobile:mb-5"
             type="submit"
             disabled={!form.formState.isValid}
           >
