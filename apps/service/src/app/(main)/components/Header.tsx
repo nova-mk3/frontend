@@ -66,7 +66,7 @@ export default function Header() {
             onClick={() => setIsSiderbar(true)}
           />
         </div>
-        <AppSidebar toggle={toggleSiderbar} isOpen={isSiderbar} />
+        <AppSidebar toggleSiderbar={toggleSiderbar} isOpen={isSiderbar} />
       </div>
     </>
   );

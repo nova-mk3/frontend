@@ -60,6 +60,9 @@ export const tailwindConfig = {
         b2: ["14px", { lineHeight: "20px", fontWeight: "400" }],
         b3: ["12px", { lineHeight: "16px", fontWeight: "400" }],
       },
+      boxShadow : {
+        footer : '0 0 8px rgba(0, 0, 0, 0.1)'
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],
