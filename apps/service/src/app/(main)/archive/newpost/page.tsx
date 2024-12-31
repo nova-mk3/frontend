@@ -1,15 +1,9 @@
 "use client";
-import { Button } from "@nova/ui/components/button";
+import { Button } from "@nova/ui/components/ui/button";
+import { PlateEditor } from "@nova/ui/components/editor/plate-editor";
 import React from "react";
 import TextareaAutosize from "react-textarea-autosize";
-import {
-  usePlateEditor,
-  Plate,
-  PlateContent,
-} from "@udecode/plate-common/react";
-
 export default function Page() {
-  const editor = usePlateEditor();
   return (
     <div className="flex flex-col mt-5 w-[80%] h-[calc(100vh-86px)] mx-auto relative">
       {/* 제목 입력란 */}
@@ -28,14 +22,8 @@ export default function Page() {
       </div>
 
       {/* 본문 스크롤 영역 */}
-      <div className="flex-1 overflow-y-auto mb-[100px] t-m">
-        <Plate editor={editor}>
-          <PlateContent
-            placeholder="내용을 입력하세요"
-            className="outline-none"
-          />
-        </Plate>
-      </div>
+
+      <PlateEditor />
 
       {/* 하단 바 (버튼 등) */}
       <div className="flex items-center absolute bottom-0 w-full h-[64px] p-4 shadow-footer z-10 bg-white">

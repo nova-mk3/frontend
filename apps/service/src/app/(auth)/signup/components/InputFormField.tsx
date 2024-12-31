@@ -5,8 +5,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@nova/ui/components/form";
-import { Input } from "@nova/ui/components/input";
+} from "@nova/ui/components/ui/form";
+import { Input } from "@nova/ui/components/ui/input";
 import { cn } from "@nova/ui/lib/utils";
 import { UseFormReturn } from "react-hook-form";
 import { useInputFocus } from "../hooks/useInputFocus";

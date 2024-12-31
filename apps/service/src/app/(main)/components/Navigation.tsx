@@ -18,7 +18,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@nova/ui/components/navigation-menu";
+} from "@nova/ui/components/ui/navigation-menu";
 export default function Navigation() {
   return (
     <NavigationMenu>

@@ -8,8 +8,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@nova/ui/components/form";
-import { RadioGroup, RadioGroupItem } from "@nova/ui/components/radio-group";
+} from "@nova/ui/components/ui/form";
+import { RadioGroup, RadioGroupItem } from "@nova/ui/components/ui/radio-group";
 import { UseFormReturn } from "react-hook-form";
 
 export function RadioFormField({
