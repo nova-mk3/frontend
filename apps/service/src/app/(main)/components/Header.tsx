@@ -1,13 +1,14 @@
 "use client";
-import React, { useState } from "react";
 import Logo from "@/public/image/LogoWithName.svg";
-import Image from "next/image";
-import Navigation from "./Navigation";
-import Link from "next/link";
-import AppSidebar from "./Siderbar/AppSidebar";
+import { cn } from "@nova/ui/lib/utils";
 import { Menu } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { HTMLAttributes, useState } from "react";
+import Navigation from "./Navigation";
+import AppSidebar from "./Siderbar/AppSidebar";
 
-export default function Header() {
+export default function Header({ className }: HTMLAttributes<HTMLDivElement>) {
   const [isLogin] = useState(false);
   const [isSiderbar, setIsSiderbar] = useState(false);
 
@@ -16,7 +17,12 @@ export default function Header() {
   };
   return (
     <>
-      <div className="flex flex-row algin border-b-[1px] border-line01 px-[17px] py-[10px] relative">
+      <div
+        className={cn(
+          className,
+          "flex flex-row algin border-b-[1px] border-line01 px-[17px] py-[10px] relative",
+        )}
+      >
         <Link href={"/"}>
           <Logo width={161.83} height={45} fill={"#B096F5"} />
         </Link>
