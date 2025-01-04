@@ -1,17 +1,23 @@
 import React from "react";
 import HeartIcon from "@/public/image/Heart.svg";
 interface LikeProps {
-  isLiked: boolean;
+  isLiked?: boolean;
   onLikeToggle?: () => void;
-  count: number;
+  count?: number;
+  className?: string;
 }
 
-export default function Like({ isLiked, count, onLikeToggle }: LikeProps) {
+export default function Like({
+  isLiked,
+  count,
+  onLikeToggle,
+  className,
+}: LikeProps) {
   return (
     <div
       className={`w-[66px] h-[25px] flex flex-row items-center rounded-md gap-[15px] justify-center cursor-pointer
-    ${isLiked ? "bg-primary" : " bg-white border-line01 border"}
-    
+    ${isLiked ? "bg-primary" : " bg-white border-line01 border "}
+    ${className}
     `}
       onClick={onLikeToggle}
     >
