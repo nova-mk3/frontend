@@ -74,14 +74,14 @@ import { TogglePlugin } from "@udecode/plate-toggle/react";
 import { HeadingElement } from "../plate-ui/heading-element";
 import { HighlightLeaf } from "../plate-ui/highlight-leaf";
 // import { HrElement } from '@/components/plate-ui/hr-element';
-// import { ImageElement } from '@/components/plate-ui/image-element';
+import { ImageElement } from "../plate-ui/image-element";
 // import { InlineEquationElement } from '@/components/plate-ui/inline-equation-element';
 import { KbdLeaf } from "../plate-ui/kbd-leaf";
 // import { LinkElement } from '@/components/plate-ui/link-element';
 // import { MediaAudioElement } from '@/components/plate-ui/media-audio-element';
-// import { MediaEmbedElement } from '@/components/plate-ui/media-embed-element';
-// import { MediaFileElement } from '@/components/plate-ui/media-file-element';
-// import { MediaPlaceholderElement } from '@/components/plate-ui/media-placeholder-element';
+import { MediaEmbedElement } from "../plate-ui/media-embed-element";
+import { MediaFileElement } from "../plate-ui/media-file-element";
+import { MediaPlaceholderElement } from "../plate-ui/media-placeholder-element";
 // import { MediaVideoElement } from '@/components/plate-ui/media-video-element';
 // import { MentionElement } from '@/components/plate-ui/mention-element';
 // import { MentionInputElement } from '@/components/plate-ui/mention-input-element';
@@ -112,7 +112,7 @@ export const viewComponents = {
   // [CommentsPlugin.key]: CommentLeaf,
   // [DatePlugin.key]: DateElement,
   // [EquationPlugin.key]: EquationElement,
-  // [FilePlugin.key]: MediaFileElement,
+  [FilePlugin.key]: MediaFileElement,
   [HEADING_KEYS.h1]: withProps(HeadingElement, { variant: "h1" }),
   [HEADING_KEYS.h2]: withProps(HeadingElement, { variant: "h2" }),
   [HEADING_KEYS.h3]: withProps(HeadingElement, { variant: "h3" }),
@@ -121,15 +121,15 @@ export const viewComponents = {
   [HEADING_KEYS.h6]: withProps(HeadingElement, { variant: "h6" }),
   [HighlightPlugin.key]: HighlightLeaf,
   // [HorizontalRulePlugin.key]: HrElement,
-  // [ImagePlugin.key]: ImageElement,
+  [ImagePlugin.key]: ImageElement,
   // [InlineEquationPlugin.key]: InlineEquationElement,
   [ItalicPlugin.key]: withProps(PlateLeaf, { as: "em" }),
   [KbdPlugin.key]: KbdLeaf,
   // [LinkPlugin.key]: LinkElement,
-  // [MediaEmbedPlugin.key]: MediaEmbedElement,
+  [MediaEmbedPlugin.key]: MediaEmbedElement,
   // [MentionPlugin.key]: MentionElement,
   [ParagraphPlugin.key]: ParagraphElement,
-  // [PlaceholderPlugin.key]: MediaPlaceholderElement,
+  [PlaceholderPlugin.key]: MediaPlaceholderElement,
   [StrikethroughPlugin.key]: withProps(PlateLeaf, { as: "s" }),
   [SubscriptPlugin.key]: withProps(PlateLeaf, { as: "sub" }),
   [SuperscriptPlugin.key]: withProps(PlateLeaf, { as: "sup" }),

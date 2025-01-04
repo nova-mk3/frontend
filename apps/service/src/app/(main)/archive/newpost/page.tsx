@@ -1,9 +1,35 @@
 "use client";
 import { Button } from "@nova/ui/components/ui/button";
 import { PlateEditor } from "@nova/ui/components/editor/plate-editor";
-import React from "react";
+import React, { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import Tags from "../components/Tags";
+import { Input } from "@nova/ui/components/ui/input";
 export default function Page() {
+  const [taglist, setTaglist] = useState<string[]>(["태그1", "태그"]);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const input = e.currentTarget.value.trim();
+      if (input && !taglist.includes(input)) {
+        setTaglist([...taglist, input]);
+        e.currentTarget.value = "";
+      }
+    } else if (e.key === "Backspace") {
+      const input = e.currentTarget.value;
+      if (input === "" && taglist.length > 0) {
+        // 마지막 태그 삭제
+        taglist.pop();
+        const data = [...taglist];
+        setTaglist(data);
+      }
+    }
+  };
+  const deleteTags = (tagname: string) => {
+    setTaglist((list) => list.filter((tag) => tag !== tagname));
+  };
+
   return (
     <div className="flex flex-col mt-5 w-[80%] h-[calc(100vh-86px)] mx-auto relative">
       {/* 제목 입력란 */}
@@ -15,14 +41,18 @@ export default function Page() {
       </div>
 
       {/* 태그 영역 */}
-      <div className="flex-none flex flex-row gap-2 my-5 t-m">
-        <p>태그</p>
-        <p>태그</p>
-        <p>태그</p>
+      <div className="flex flex-row flex-wrap gap-2 my-5 t-m">
+        {taglist.map((tag, index) => (
+          <Tags key={index} onClick={deleteTags} tagname={tag} />
+        ))}
+        <Input
+          className="w-[210px]"
+          placeholder="태그를 입력하세요"
+          onKeyDown={handleKeyDown}
+        />
       </div>
 
       {/* 본문 스크롤 영역 */}
-
       <PlateEditor />
 
       {/* 하단 바 (버튼 등) */}

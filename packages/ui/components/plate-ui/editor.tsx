@@ -80,7 +80,7 @@ const editorVariants = cva(
         ai: "w-full px-0 text-base md:text-sm",
         aiChat:
           "max-h-[min(70vh,320px)] w-full max-w-[700px] overflow-y-auto px-3 py-2 text-base md:text-sm",
-        default: "p-2 before:opacity-30 t-m overflow-y-auto flex-1",
+        default: "p-4 before:opacity-30 t-m overflow-y-auto flex-1",
         demo: "size-full px-16 pb-72 pt-4 text-base sm:px-[max(64px,calc(50%-350px))]",
         fullWidth: "size-full px-16 pb-72 pt-4 text-base sm:px-24",
         none: "",

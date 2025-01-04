@@ -31,16 +31,16 @@ import { basicNodesPlugins } from "./basic-nodes-plugins";
 // import { commentsPlugin } from './comments-plugin';
 // import { cursorOverlayPlugin } from './cursor-overlay-plugin';
 // import { deletePlugins } from './delete-plugins';
-// import { dndPlugins } from './dnd-plugins';
+import { dndPlugins } from "./dnd-plugins";
 // import { equationPlugins } from './equation-plugins';
 import { exitBreakPlugin } from "./exit-break-plugin";
 // import { indentListPlugins } from './indent-list-plugins';
 // import { lineHeightPlugin } from './line-height-plugin';
 // import { linkPlugin } from './link-plugin';
-// import { mediaPlugins } from './media-plugins';
+import { mediaPlugins } from "./media-plugins";
 // import { mentionPlugin } from './mention-plugin';
 import { resetBlockTypePlugin } from "./reset-block-type-plugin";
-// import { softBreakPlugin } from './soft-break-plugin';
+import { softBreakPlugin } from "./soft-break-plugin";
 // import { tablePlugin } from './table-plugin';
 // import { tocPlugin } from './toc-plugin';
 
@@ -53,7 +53,7 @@ export const viewPlugins = [
   //   tablePlugin,
   TogglePlugin,
   //   tocPlugin,
-  //   ...mediaPlugins,
+  ...mediaPlugins,
   //   ...equationPlugins,
   CalloutPlugin,
   ColumnPlugin,
@@ -86,12 +86,12 @@ export const editorPlugins = [
   autoformatPlugin,
   //   cursorOverlayPlugin,
   //   ...blockMenuPlugins,
-  //   ...dndPlugins,
+  ...dndPlugins,
   EmojiPlugin,
   exitBreakPlugin,
   resetBlockTypePlugin,
   //   ...deletePlugins,
-  //   softBreakPlugin,
+  softBreakPlugin,
   TrailingBlockPlugin.configure({ options: { type: ParagraphPlugin.key } }),
 
   // Deserialization
