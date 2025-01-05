@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import Title from "./components/Title";
 import ContentList from "./components/ContentList";
 import { PageNation } from "./components/PageNation";
@@ -12,7 +12,9 @@ export default function page() {
     <div className="flex flex-col t-m w-[80%] mx-auto">
       <Title />
       <ContentList />
-      <PageNation size={size} totalPage={totalPage} className="my-4" />
+      <Suspense>
+        <PageNation size={size} totalPage={totalPage} className="my-4" />
+      </Suspense>
     </div>
   );
 }
