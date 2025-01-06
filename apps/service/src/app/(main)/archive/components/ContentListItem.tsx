@@ -3,9 +3,11 @@ import { CircleUser } from "lucide-react";
 import Image from "next/image";
 import Like from "./Like";
 import Comment from "./Comment";
+import { EllipsisVertical } from "lucide-react";
+import Kebab from "./Kebab";
 export default function ContentListItem() {
   return (
-    <div className="flex flex-row gap-[15px] justify-between w-[90%] mx-auto h-[250px] border-line01 border t-m rounded-lg px-[12px] py-[20px]">
+    <div className="flex flex-row gap-[15px] justify-between w-[90%] mx-auto min-h-[250px] border-line01 border t-m rounded-lg px-[12px] py-[20px]">
       <div className="flex flex-col gap-[10px] w-full">
         {/* 컨텐츠 헤더 */}
         <div className="w-full flex flex-row items-center gap-[10px]">
@@ -14,15 +16,27 @@ export default function ContentListItem() {
           <div className="w-[1px] h-[20px] bg-line01"></div>
           <p className="b-s">2024.01.01</p>
 
-          {/* 내가 쓴 글이면 수정,삭제 버튼 추가 예정 
-          나중에 여기 공유버튼 추가해도 괜찮을듯*/}
-          <div className="ml-auto flex flex-row gap-[10px]">
+          <div className="ml-auto flex flex-row gap-[10px] b-s mobile:hidden">
             <p>수정</p>
             <div className="w-[1px] h-[20px] bg-line01"></div>
             <p>삭제</p>
           </div>
-        </div>
 
+          <div className="ml-auto hidden mobile:block">
+            <Kebab />
+          </div>
+        </div>
+        <div>
+          <Image
+            src="/image/cat.jpg"
+            alt="이미지"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "100%", height: "auto" }}
+            className="border-line01 border rounded-lg hidden mobile:block"
+          />
+        </div>
         {/* 컨텐츠 타이틀 */}
         <div className=" w-full min-h-[45px] t-l border p-2 rounded-md">
           <p className="line-clamp-1">
@@ -43,6 +57,7 @@ export default function ContentListItem() {
             내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
           </p>
         </div>
+        {/* 좋아요 댓글 공유 등등.. */}
         <div className="flex flex-row gap-[5px]">
           <Like count={1} className="" />
           <Comment />
@@ -56,7 +71,7 @@ export default function ContentListItem() {
         alt="이미지"
         width={220}
         height={220}
-        className="border-line01 border rounded-lg"
+        className="border-line01 border rounded-lg mobile:hidden"
       />
     </div>
   );

@@ -19,13 +19,16 @@ export default function Title() {
             <SelectValue placeholder="정렬 선택" />
           </SelectTrigger>
           <SelectContent className="bg-background01">
-            <SelectItem value="seq" className="cursor-pointer">
+            <SelectItem value="seq" className="cursor-pointer hover:bg-line01">
               가나다순
             </SelectItem>
-            <SelectItem value="new" className="cursor-pointer">
+            <SelectItem value="new" className="cursor-pointer hover:bg-line01">
               최신순
             </SelectItem>
-            <SelectItem value="popular" className="cursor-pointer">
+            <SelectItem
+              value="popular"
+              className="cursor-pointer hover:bg-line01"
+            >
               인기순
             </SelectItem>
           </SelectContent>
