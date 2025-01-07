@@ -8,9 +8,11 @@ import {
   SelectItem,
   SelectContent,
 } from "@nova/ui/components/ui/select";
+import { Button } from "@nova/ui/components/ui/button";
+import Link from "next/link";
 export default function Title() {
   return (
-    <div className="flex flex-row flex-wrap justify-center mt-[60px] border-line01 border-b-[1px] py-5 mobile:flex-col mobile:items-center">
+    <div className="flex flex-row flex-wrap mt-[60px] border-primary border-b-[1px] py-5 mobile:flex-col mobile:items-center">
       <p className="d-l text-primary mobile:mb-[15px]">족보 게시판</p>
 
       <div className="flex flex-row items-center gap-[15px] ml-auto mt-auto mobile:flex-col mobile:w-full">
@@ -40,6 +42,11 @@ export default function Title() {
           />
           <Search size="24" />
         </div>
+        <Link href="/archive/newpost" className="mobile:w-full">
+          <Button variant="default" className="mobile:w-full">
+            글쓰기
+          </Button>
+        </Link>
       </div>
     </div>
   );

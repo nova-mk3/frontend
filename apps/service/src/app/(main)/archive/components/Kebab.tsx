@@ -1,4 +1,6 @@
 import React from "react";
+import { Pencil, Trash2, CircleX } from "lucide-react";
+
 import {
   DropdownMenu,
   DropdownMenuClose,
@@ -16,15 +18,22 @@ export default function Kebab() {
       </DropdownMenuTrigger>
       <DropdownMenuGroup>
         <DropdownMenuItem>
-          {" "}
-          <span>수정하기</span>
+          <div className="flex flex-row items-center justify-center gap-2">
+            <Pencil size={16} />
+            <span>수정하기</span>
+          </div>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          {" "}
-          <span>삭제하기</span>
+          <div className="flex flex-row items-center justify-center gap-2">
+            <Trash2 size={16} />
+            <span>삭제하기</span>
+          </div>
         </DropdownMenuItem>
         <DropdownMenuClose>
-          <span>닫기</span>
+          <div className="flex flex-row items-center justify-center gap-2">
+            <CircleX size={16} />
+            <span>닫기</span>
+          </div>
         </DropdownMenuClose>
       </DropdownMenuGroup>
     </DropdownMenu>

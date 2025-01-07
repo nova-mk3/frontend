@@ -10,14 +10,12 @@ import React, {
 interface DropdownContextProps {
   isOpen: boolean;
   toggle: (e: React.MouseEvent<HTMLDivElement>) => void;
-  close: () => void;
 }
 
 //컨텍스트를 생성
 const DropdownContext = createContext<DropdownContextProps>({
   isOpen: false,
   toggle: () => {},
-  close: () => {},
 });
 
 interface DropdownMenuProps {
@@ -28,13 +26,12 @@ export function DropdownMenu({ children }: DropdownMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = (e: React.MouseEvent<HTMLDivElement>) => {
-    console.log("토글클릭");
     e.stopPropagation();
     setIsOpen((prev) => !prev);
   };
   const close = () => setIsOpen(false);
 
-  const dropdownRef = useRef<HTMLDivElement>(null); // ref 생성
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -58,7 +55,7 @@ export function DropdownMenu({ children }: DropdownMenuProps) {
   }, [isOpen]);
 
   return (
-    <DropdownContext.Provider value={{ isOpen, toggle, close }}>
+    <DropdownContext.Provider value={{ isOpen, toggle }}>
       <div className="relative flex flex-col gap-5 t-s" ref={dropdownRef}>
         {children}
       </div>
@@ -94,7 +91,7 @@ export const DropdownMenuItem = ({
 }: DropdownMenuItemProps) => {
   return (
     <div
-      className="w-full p-1 flex justify-center items-center hover:bg-line01 rounded-lg cursor-pointer"
+      className="w-full p-1 flex justify-center items-center hover:bg-line01/50 rounded-md cursor-pointer"
       onClick={onClick}
     >
       {children}
@@ -107,12 +104,12 @@ interface DropdownMenuGroupProps {
 }
 
 export const DropdownMenuGroup = ({ children }: DropdownMenuGroupProps) => {
-  const { isOpen, close } = useContext(DropdownContext);
+  const { isOpen } = useContext(DropdownContext);
 
   return (
     <div
-      className={`absolute top-full right-0 mt-[4px] w-[200px] p-[10px] flex flex-col gap-[10px] border-line01 border rounded-lg bg-background01 z-50 transition ease-in-out duration-300
-        ${isOpen ? "opacity-100 scale-100 block" : "opacity-0 scale-95 pointer-events-none"}
+      className={`absolute top-full right-0 mt-[4px] w-[200px] py-[10px] px-[5px] flex flex-col gap-[5px] border-line01 border rounded-lg bg-background01 z-50 transition ease-in-out duration-300
+        ${isOpen ? "opacity-100 scale-100 block" : "opacity-0 scale-100 pointer-events-none"}
       `}
     >
       {children}
