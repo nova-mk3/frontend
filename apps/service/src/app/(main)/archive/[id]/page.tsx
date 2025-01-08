@@ -2,7 +2,7 @@ import React from "react";
 import Title from "./components/Title";
 import SubTitle from "./components/SubTitle";
 import Content from "./components/Content";
-import Comment from "./components/Comment";
+import CommentLayout from "./components/CommentLayout";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -15,7 +15,7 @@ export default async function page({ params }: Props) {
       <Title />
       <SubTitle />
       <Content />
-      <Comment />
+      <CommentLayout />
     </div>
   );
 }
