@@ -5,7 +5,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import { Button } from "@nova/ui/components/ui/button";
 export default function CommentForm() {
   return (
-    <div className="w-[90%] mx-auto p-1">
+    <div className="w-[90%] mx-auto p-1 mb-3">
       <div className="border-line01 border rounded-md">
         <TextareaAutosize
           className="flex w-full min-h-[98px] t-m resize-none outline-none p-4 border-none"
