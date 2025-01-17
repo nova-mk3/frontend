@@ -54,7 +54,7 @@ export function SignupForm() {
         />
         <InputFormField
           form={form}
-          name={"studentId"}
+          name={"studentId"}  
           label={"학번"}
           placeHolder={"학번을 입력하세요"}
           type="text"
