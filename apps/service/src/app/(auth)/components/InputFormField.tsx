@@ -1,12 +1,12 @@
-import { Button } from "@nova/ui/components/button";
+import { Button } from "@nova/ui/components/ui/button";
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@nova/ui/components/form";
-import { Input } from "@nova/ui/components/input";
+} from "@nova/ui/components/ui/form";
+import { Input } from "@nova/ui/components/ui/input";
 import { cn } from "@nova/ui/lib/utils";
 import { Eye, EyeClosed } from "lucide-react";
 import { JSX, useState } from "react";

@@ -7,14 +7,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@nova/ui/components/form";
+} from "@nova/ui/components/ui/form";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@nova/ui/components/select";
+} from "@nova/ui/components/ui/select";
 import { UseFormReturn } from "react-hook-form";
 
 export function SelectFormField({

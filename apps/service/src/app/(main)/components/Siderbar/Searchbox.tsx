@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "@nova/ui/components/input";
+import { Input } from "@nova/ui/components/ui/input";
 import { Search } from "lucide-react";
 export default function Searchbox() {
   return (

@@ -18,10 +18,10 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@nova/ui/components/navigation-menu";
+} from "@nova/ui/components/ui/navigation-menu";
 export default function Navigation() {
   return (
-    <NavigationMenu>
+    <NavigationMenu className="z-[51]">
       <NavigationMenuList className="gap-[20px]">
         <NavigationMenuItem>
           <NavigationMenuTrigger className="t-m font-bold">
@@ -88,7 +88,7 @@ export default function Navigation() {
           <NavigationMenuContent>
             <ul className="flex flex-col gap-[15px] p-4 md:w-[325px] lg:grid-cols-[.75fr_1fr] bg-background01">
               <NavigationMenuLink asChild>
-                <Link href="/">
+                <Link href="/board">
                   <li className="flex items-center h-[60px]  rounded-lg hover:bg-ui01">
                     <div className="flex flex-row items-center">
                       <div className="w-[60px] h-[50px] flex justify-center items-center border-r-[1px] border-line01">
@@ -104,7 +104,7 @@ export default function Navigation() {
               </NavigationMenuLink>
 
               <NavigationMenuLink asChild>
-                <Link href="/">
+                <Link href="/archive">
                   <li className="flex items-center w-[285px] h-[60px] rounded-lg hover:bg-ui01">
                     <div className="flex flex-row items-center">
                       <div className="w-[60px] h-[50px] flex justify-center items-center border-r-[1px] border-line01">
@@ -120,7 +120,7 @@ export default function Navigation() {
               </NavigationMenuLink>
 
               <NavigationMenuLink asChild>
-                <Link href="/">
+                <Link href="/picture">
                   <li className="flex items-center w-[285px] h-[60px]  rounded-lg hover:bg-ui01">
                     <div className="flex flex-row items-center">
                       <div className="w-[60px] h-[50px] flex justify-center items-center border-r-[1px] border-line01">
@@ -178,6 +178,7 @@ export default function Navigation() {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
+
       </NavigationMenuList>
     </NavigationMenu>
   );

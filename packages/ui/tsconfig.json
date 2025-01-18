@@ -1,9 +1,14 @@
 {
   "extends": "@nova/typescript-config/react-library.json",
   "compilerOptions": {
-    "module": "ESNext",
-    "moduleResolution": "node",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
     "baseUrl": ".",
+    "noEmit": true,
     "paths": {
       "@/*": ["./*"],
     },

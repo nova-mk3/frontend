@@ -1,9 +1,9 @@
 import LogoWithName from "@/public/image/LogoWithName.svg";
 import { SigninInput, SigninSchema } from "@/src/schema/signin.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@nova/ui/components/button";
-import { Checkbox } from "@nova/ui/components/checkbox";
-import { Form } from "@nova/ui/components/form";
+import { Button } from "@nova/ui/components/ui/button";
+import { Checkbox } from "@nova/ui/components/ui/checkbox";
+import { Form } from "@nova/ui/components/ui/form";
 import { IdCard, Lock } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";

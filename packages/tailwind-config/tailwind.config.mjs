@@ -5,7 +5,7 @@ export const tailwindConfig = {
     "components/**/*.{ts,tsx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "../../packages/ui/components/ui/*.{js,ts,jsx,tsx}",
+    "../../packages/ui/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -15,10 +15,11 @@ export const tailwindConfig = {
         ui01: "hsl(var(--ui-01))",
         ui02: "hsl(var(--ui-02))",
         text01: "hsl(var(--text-01))",
-        text02: "hsl(var(--text-02))",
+        text02: "hsl(var(--text-02))",   
         line01: "hsl(var(--line-01))",
         danger: "hsl(var(--danger))",
         success: "hsl(var(--success))",
+        placeholder : "hsl(var(--placeholder))",
       },
       borderRadius: {
         lg: `var(--radius)`,
@@ -60,6 +61,9 @@ export const tailwindConfig = {
         b2: ["14px", { lineHeight: "20px", fontWeight: "400" }],
         b3: ["12px", { lineHeight: "16px", fontWeight: "400" }],
       },
+      boxShadow : {
+        footer : '0 0 8px rgba(0, 0, 0, 0.1)'
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

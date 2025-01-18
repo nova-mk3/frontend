@@ -2,8 +2,8 @@
 
 import { SignupInput, SignupSchema } from "@/src/schema/signup.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@nova/ui/components/button";
-import { Form } from "@nova/ui/components/form";
+import { Button } from "@nova/ui/components/ui/button";
+import { Form } from "@nova/ui/components/ui/form";
 
 import { useForm } from "react-hook-form";
 import { InputFormField } from "../../components/InputFormField";
@@ -54,7 +54,7 @@ export function SignupForm() {
         />
         <InputFormField
           form={form}
-          name={"studentId"}
+          name={"studentId"}  
           label={"학번"}
           placeHolder={"학번을 입력하세요"}
           type="text"

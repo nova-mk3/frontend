@@ -1,4 +1,4 @@
-import { tailwindConfig } from "@nova/tailwind-config/tailwind.config.mjs";
+import { tailwindConfig } from "@nova/tailwind-config/tailwind";
 
 export default {
   ...tailwindConfig,
