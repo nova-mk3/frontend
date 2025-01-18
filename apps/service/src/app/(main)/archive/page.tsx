@@ -10,7 +10,7 @@ export default function page() {
 
   return (
     <div className="flex flex-col t-m w-[80%] mx-auto">
-      <Title />
+      <Title title="족보게시판"/>
       <ContentList />
       <Suspense>
         <PageNation size={size} totalPage={totalPage} className="my-4" />

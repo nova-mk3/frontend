@@ -6,6 +6,8 @@ import Navigation from "./Navigation";
 import Link from "next/link";
 import AppSidebar from "./Siderbar/AppSidebar";
 import { Menu } from "lucide-react";
+import Tendinous from "./Tendinous";
+
 
 export default function Header() {
   const [isLogin] = useState(false);
@@ -23,7 +25,9 @@ export default function Header() {
         <div className="flex flex-row items-center ml-[20px] mobile:hidden">
           <Navigation />
         </div>
+
         <div className="flex items-center ml-auto">
+        <Tendinous className="mr-6" href="/opinion"/>
           {!isLogin ? (
             <div className="flex flex-row justify-center items-center gap-[22px] mobile:hidden">
               <Link href="/signin">
@@ -31,7 +35,7 @@ export default function Header() {
                   로그인
                 </p>
               </Link>
-              <Link href="signup">
+              <Link href="/signup">
                 <p className="w-[60px] h-[24px] flex content-center justify-center cursor-pointer ">
                   회원가입
                 </p>

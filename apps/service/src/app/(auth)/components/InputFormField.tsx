@@ -1,4 +1,4 @@
-import { Button } from "@nova/ui/components/button";
+import { Button } from "@nova/ui/components/ui/button";
 import {
   FormControl,
   FormField,
