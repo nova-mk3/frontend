@@ -10,7 +10,7 @@ interface NavigationProps {
 
 export default function Navigation({ className }: NavigationProps) {
   return (
-    <div className='mt-5 bg-placeholder py-2 px-2'>
+    <div className='mt-5 bg-background02 py-2 px-2'>
       <ul className='flex flex-row gap-2 flex-wrap w-[80%] mx-auto'>
         <NavigationMenuItem href="/board">
           <Layers size={20} />전체보기

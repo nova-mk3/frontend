@@ -12,6 +12,7 @@ export const tailwindConfig = {
       colors: {
         primary: "hsl(var(--primary))",
         background01: "hsl(var(--background-01))",
+        background02 : "rgb(var(--background-02))",
         ui01: "hsl(var(--ui-01))",
         ui02: "hsl(var(--ui-02))",
         text01: "hsl(var(--text-01))",
@@ -19,7 +20,6 @@ export const tailwindConfig = {
         line01: "hsl(var(--line-01))",
         danger: "hsl(var(--danger))",
         success: "hsl(var(--success))",
-        placeholder : "rgb(var(--placeholder))",
       },
       borderRadius: {
         lg: `var(--radius)`,

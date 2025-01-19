@@ -57,7 +57,9 @@ export default function CommentItem({
       {/* 대댓글 위치 */}
 
       {isReplyOpen && (
-        <div className="flex flex-col gap-7 bg-line01/50 w-[95%] mx-auto">
+        <div className="flex flex-col gap-7 bg-background02 rounded-lg w-[95%] mx-auto">
+          <ReplyCommentItem />
+          <ReplyCommentItem />
           <ReplyCommentItem />
 
           {isReplyFormOpen ? (

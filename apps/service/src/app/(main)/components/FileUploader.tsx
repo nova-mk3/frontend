@@ -34,10 +34,10 @@ export default function FileUploader() {
           <p className='h-s'>파일 선택</p>
           <p className="text-success mt-auto l-l ml-3">파일은 최대 10개까지 가능합니다</p>
         </div>
-        <div className='flex flex-row flex-wrap gap-4'>
+        <div className='flex flex-row flex-wrap gap-3'>
 
           {
-            selectedFiles.length > 0 && selectedFiles.map((file, index) => (<FileItem name={file.name} onRemove={handleRemoveFile} index={index} key={index}/>))
+            selectedFiles.length > 0 && selectedFiles.map((file, index) => (<FileItem name={file.name} onRemove={handleRemoveFile} index={index} key={index} mode="input"/>))
           }
             <label htmlFor="fileUpload" className="inline-flex cursor-pointer items-center"><FilePlus width={30} height={30}/></label>
             <input
@@ -49,7 +49,7 @@ export default function FileUploader() {
             className="hidden"
             />
             {
-              selectedFiles.length === 0 && <p className='text-placeholder flex items-center'>파일을 선택해주세요</p>
+              selectedFiles.length === 0 && <p className='text-text02 flex items-center'>파일을 선택해주세요</p>
             }
         </div>
     </div>
