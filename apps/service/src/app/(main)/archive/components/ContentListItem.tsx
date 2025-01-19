@@ -7,7 +7,7 @@ import { EllipsisVertical } from "lucide-react";
 import Kebab from "./Kebab";
 export default function ContentListItem() {
   return (
-    <div className="flex flex-row gap-[15px] justify-between w-[90%] mx-auto min-h-[250px] border-line01 border t-m rounded-lg px-[12px] py-[20px]">
+    <div className="flex flex-row gap-[15px] justify-between w-[90%] mx-auto min-h-[250px] t-m px-[12px] py-[20px] border-b-[1px] border-line01">
       <div className="flex flex-col gap-[10px] w-full">
         {/* 컨텐츠 헤더 */}
         <div className="w-full flex flex-row items-center gap-[10px]">
@@ -34,11 +34,11 @@ export default function ContentListItem() {
             height={0}
             sizes="100vw"
             style={{ width: "100%", height: "auto" }}
-            className="border-line01 border rounded-lg hidden mobile:block"
+            className="rounded-lg hidden mobile:block"
           />
         </div>
         {/* 컨텐츠 타이틀 */}
-        <div className=" w-full min-h-[45px] t-l border p-2 rounded-md">
+        <div className=" w-full min-h-[45px] t-l  p-2 rounded-md !font-bold">
           <p className="line-clamp-1">
             2024 이건명 족보 모음집2024 이건명 족보 모음집2024 이건명 족보
             모음집2024 이건명 족보 모음집2024 이건명 족보 모음집2024 이건명 족보
@@ -52,7 +52,7 @@ export default function ContentListItem() {
         </div>
 
         {/* 컨텐츠 내용 */}
-        <div className="b-l border min-h-[90px] h-full p-2 rounded-md">
+        <div className="b-l min-h-[90px] h-full p-2 rounded-md text-text02">
           <p className="line-clamp-3">
             내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
           </p>

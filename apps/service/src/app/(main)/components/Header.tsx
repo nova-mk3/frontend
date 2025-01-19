@@ -16,6 +16,7 @@ export default function Header() {
   const toggleSiderbar = () => {
     setIsSiderbar((prev) => !prev);
   };
+
   return (
     <>
       <div className="flex flex-row algin border-b-[1px] border-line01 px-[17px] py-[10px] relative">
@@ -27,7 +28,7 @@ export default function Header() {
         </div>
 
         <div className="flex items-center ml-auto">
-        <Tendinous className="mr-6" href="/opinion"/>
+        <Tendinous className="mobile:hidden" href="/opinion"/>
           {!isLogin ? (
             <div className="flex flex-row justify-center items-center gap-[22px] mobile:hidden">
               <Link href="/signin">

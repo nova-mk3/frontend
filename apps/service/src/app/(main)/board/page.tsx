@@ -5,6 +5,6 @@ import Title from '../archive/components/Title'
 export default function page() {
   return (
     <>
-      <Title title='통합 게시판'/>
+      <Title title='통합 게시판' />
     </>
 )}

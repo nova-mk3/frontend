@@ -10,11 +10,11 @@ interface NavigationProps {
 
 export default function Navigation({ className }: NavigationProps) {
   return (
-    <div
-      className={'p-2 border-line01 border-[1px] rounded-xl fixed -translate-y-1/2 left-[10%]'}
-      style={{ top: 'calc(50% - 0px)' }}
-    >
-      <ul className='flex flex-col gap-2'>
+    <div className='mt-5 bg-placeholder py-2 px-2'>
+      <ul className='flex flex-row gap-2 flex-wrap w-[80%] mx-auto'>
+        <NavigationMenuItem href="/board">
+          <Layers size={20} />전체보기
+        </NavigationMenuItem>
         <NavigationMenuItem href="/board/any">
           <Book size={20} />자유게시판
         </NavigationMenuItem>
@@ -26,9 +26,6 @@ export default function Navigation({ className }: NavigationProps) {
         </NavigationMenuItem>
         <NavigationMenuItem href="/board/notice">
           <Pin size={20} />공지사항
-        </NavigationMenuItem>
-        <NavigationMenuItem href="/board">
-          <Layers size={20} />전체보기
         </NavigationMenuItem>
       </ul>
     </div>
@@ -46,13 +43,12 @@ export function NavigationMenuItem({ children, href, className }: ItemsProps) {
 
   // 현재 URL과 링크의 href가 같다면 활성화된 스타일을 적용
   const isActive = pathname === href;
-  console.log(pathname)
   return (
     <Link href={href}>
       <li
         className={`${
-          isActive ? 'bg-primary text-background01' : 'hover:bg-primary hover:text-background01'
-        } px-3 py-2 cursor-pointer rounded-xl flex flex-row gap-2 items-center w-full ${className}`}
+          isActive ? 'bg-primary text-background01' : 'hover:bg-line01/50 border-line01 border-[1px]'
+        } px-3 py-2 cursor-pointer rounded-xl flex flex-row gap-2 items-center w-full bg-background01 ${className}`}
       >
         {children}
       </li>
