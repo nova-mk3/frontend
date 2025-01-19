@@ -19,7 +19,7 @@ export const tailwindConfig = {
         line01: "hsl(var(--line-01))",
         danger: "hsl(var(--danger))",
         success: "hsl(var(--success))",
-        placeholder : "hsl(var(--placeholder))",
+        placeholder : "rgb(var(--placeholder))",
       },
       borderRadius: {
         lg: `var(--radius)`,

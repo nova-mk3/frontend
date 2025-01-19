@@ -20,28 +20,11 @@ interface TitleProps{
 export default function Title({title, className} : TitleProps) {
   return (
     <div className={`flex flex-row flex-wrap border-primary border-b-[1px] py-5 mobile:flex-col mobile:items-center  ${className}`}>
+      <div className="flex mobile:flex-col mobile:items-center">
       <p className="d-l text-primary mobile:mb-[15px]">{title}</p>
-
+      <p className="b-m ml-2 mt-auto mobile:mb-4">여러분들의 건의가 개발자에게 큰 힘이 됩니다😀</p>
+      </div>
       <div className="flex flex-row items-center gap-[15px] ml-auto mt-auto mobile:flex-col mobile:w-full">
-        <Select>
-          <SelectTrigger className="w-[180px] mobile:w-full">
-            <SelectValue placeholder="정렬 선택" />
-          </SelectTrigger>
-          <SelectContent className="bg-background01">
-            <SelectItem value="seq" className="cursor-pointer hover:bg-line01">
-              가나다순
-            </SelectItem>
-            <SelectItem value="new" className="cursor-pointer hover:bg-line01">
-              최신순
-            </SelectItem>
-            <SelectItem
-              value="popular"
-              className="cursor-pointer hover:bg-line01"
-            >
-              인기순
-            </SelectItem>
-          </SelectContent>
-        </Select>
         <div className="flex flex-row items-center gap-[15px] w-full">
           <Input
             placeholder="검색어를 입력하세요"
@@ -58,3 +41,4 @@ export default function Title({title, className} : TitleProps) {
     </div>
   );
 }
+

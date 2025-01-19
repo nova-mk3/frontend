@@ -7,9 +7,11 @@ export default function layout({
   children: React.ReactNode;
 }>) {
   return (
+    <>
+    <Navigation/>
     <div className='flex flex-col t-m w-[80%] mx-auto'>
-        <Navigation/>
         {children}
     </div>
+    </>
   )
 }
