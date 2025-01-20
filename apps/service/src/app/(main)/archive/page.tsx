@@ -6,7 +6,7 @@ import { PageNation } from "./components/PageNation";
 
 export default function page() {
   const size = 5;
-  const [totalPage, setTotalPage] = useState(6);
+  const [totalPage, setTotalPage] = useState(10);
 
   return (
     <div className="flex flex-col t-m w-[80%] mx-auto">

@@ -6,7 +6,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import Tags from "../components/Tags";
 import { Input } from "@nova/ui/components/ui/input";
 import FilePlus from "@/public/image/FilePlus.svg";
-import FileUploader from "./components/FileUploader";
+import FileUploader from "../../components/FileUploader";
 
 import {
   Select,
@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@nova/ui/components/ui/select"
+import WriteBottomLayout from "../../components/WriteBottomLayout";
 
 export default function Page() {
 
@@ -68,7 +69,7 @@ export default function Page() {
       {/* 제목 입력란 */}
       <div className="flex-none border-line01 border-b-[1px] pb-5">
         <TextareaAutosize
-          className="flex w-full h-[40px] h-l resize-none outline-none"
+          className="flex w-full h-[40px] h-l resize-none outline-none cursor-not-allowed"
           placeholder="제목은 자동으로 작성됩니다"
           defaultValue={title}
           onChange={handleTitleChange}
@@ -119,14 +120,8 @@ export default function Page() {
       </div>
 
       {/* 하단 바 (버튼 등) */}
-      <div className="flex items-center absolute bottom-0 w-full h-[64px] p-4 shadow-footer z-10 bg-white">
-        <div className="flex flex-row gap-[20px] ml-auto items-center">
-          <Button className="t-l w-[112px]" variant="text">
-            임시저장
-          </Button>
-          <Button className="w-[112px] t-l">작성</Button>
-        </div>
-      </div>
+       <WriteBottomLayout/>
+
     </div>
   );
 }

@@ -21,7 +21,7 @@ export default function Like({
     `}
       onClick={onLikeToggle}
     >
-      <HeartIcon fill={`${isLiked ? "#ffffff" : "#d9d9d9"}`} />
+      <HeartIcon width={15} fill={`${isLiked ? "#ffffff" : "#d9d9d9"}`} />
 
       <p className={`t-s ${isLiked ? "text-background01" : "text-line01"}`}>
         {count}
