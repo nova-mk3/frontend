@@ -1,4 +1,5 @@
 import React from "react";
+import Like from "../../components/Like";
 
 interface SubTitle {
   title?: string;
@@ -23,6 +24,7 @@ export default function SubTitle({
       </div>
 
       <div className="flex flex-row gap-3 items-end ml-auto">
+        <Like count={1} className="hidden mobile:flex"/>
         <p>수정</p>
         <div className="w-[1px] h-[20px] bg-line01"></div>
         <p>삭제</p>

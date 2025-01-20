@@ -17,6 +17,7 @@ export const tailwindConfig = {
         ui02: "hsl(var(--ui-02))",
         text01: "hsl(var(--text-01))",
         text02: "hsl(var(--text-02))",   
+        text03: "rgb(var(--text-03))",   
         line01: "hsl(var(--line-01))",
         danger: "hsl(var(--danger))",
         success: "hsl(var(--success))",

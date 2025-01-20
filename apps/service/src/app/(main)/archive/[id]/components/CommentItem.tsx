@@ -6,6 +6,7 @@ import ReplyButton from "./ReplyButton";
 import ReplyCommentForm from "./ReplyCommentForm";
 import ReplyCommentItem from "./ReplyCommentItem";
 import { Button } from "@nova/ui/components/ui/button";
+import Like from "../../components/Like";
 
 interface ItemProps {
   created?: string;
