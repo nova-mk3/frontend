@@ -10,13 +10,10 @@ interface AsideProps {
 
 export default function Aside({count=15 , className} : AsideProps) {
   return (
-    <div className={`w-[64px] h-[100%] sticky top-[250px] bg-background02 flex flex-col items-center gap-1.5 p-2 rounded-[32px] mobile:hidden ${className}`}>
+    <div className={`w-[64px] h-[100%] bg-background02 flex flex-col mt-52 items-center gap-1.5 p-2 rounded-[32px] sticky top-[100px] mobile:hidden ${className}`}>
         <EmojiCirCleButton onClick={()=>alert("아직 준비중입니다")}><HeartIcon width={24}/></EmojiCirCleButton>
         <p className='text-[#868E96]'>{count}</p>
-    
         <EmojiCirCleButton><Share2 size={24}/></EmojiCirCleButton>
-            
-
     </div>
   )
 }
