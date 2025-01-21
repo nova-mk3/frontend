@@ -1,7 +1,7 @@
 "use client"
 import Link from 'next/link';
 import React from 'react';
-import { Hand, Pin, MessageSquareMore, Book, Layers } from 'lucide-react';
+import { Hand, Pin, MessageSquareMore, Book, Layers, House } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 interface NavigationProps {
@@ -13,7 +13,10 @@ export default function Navigation({ className }: NavigationProps) {
     <div className='mt-5 bg-background02 py-2 px-2'>
       <ul className='flex flex-row gap-2 flex-wrap w-[80%] mx-auto'>
         <NavigationMenuItem href="/board">
-          <Layers size={20} />전체보기
+        <House size={20} />CLUB NOVA
+        </NavigationMenuItem>
+        <NavigationMenuItem href="/board/all">
+          <Layers size={20} />전체글보기
         </NavigationMenuItem>
         <NavigationMenuItem href="/board/any">
           <Book size={20} />자유게시판
