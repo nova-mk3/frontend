@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import Title from '../../archive/components/Title'
 import { PageNation } from '../../archive/components/PageNation'
 
@@ -52,8 +52,9 @@ export default function page() {
         </div>
 
         </div>
-
+        <Suspense>
         <PageNation size={5} totalPage={10} className='mt-5'/>
+        </Suspense>
     </div>
   )
 }
