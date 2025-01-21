@@ -1,5 +1,5 @@
 import React from 'react'
-import Title from '../../archive/components/Title'
+import Title from '../components/Title'
 
 export default function page() {
   return (

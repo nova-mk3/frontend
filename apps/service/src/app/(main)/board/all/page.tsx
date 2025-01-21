@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import Title from '../../archive/components/Title'
+import Title from '../components/Title'
 import { PageNation } from '../../archive/components/PageNation'
 
 export default function page() {
@@ -48,7 +48,6 @@ export default function page() {
             </div>
             <div className='t-s'>조회수 5</div>
             </div>
-
         </div>
 
         </div>

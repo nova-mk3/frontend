@@ -6,7 +6,7 @@ import Comment from "./Comment";
 import { EllipsisVertical } from "lucide-react";
 import Kebab from "./Kebab";
 import Link from "next/link";
-
+import { FolderDown } from 'lucide-react';
 interface ContentListItemProps {
   id? : number
   profileImage?: string;
@@ -74,9 +74,13 @@ export default function ContentListItem({title="임시 제목입니다", content
           </Link>
         </div>
         {/* 좋아요 댓글 공유 등등.. */}
-        <div className="flex flex-row gap-[5px]">
+        <div className="flex flex-row gap-[5px] items-center">
           <Like count={1} className="" isLiked={isLiked} />
           <Comment count={comments}/>
+          <div className="flex flex-row items-center px-2 border rounded-md w-[66px] h-[25px] justify-center gap-[15px] text-text03">
+          <FolderDown size={18}/>
+          <p>3</p>
+          </div>
         </div>
       </div>
 
