@@ -1,8 +1,8 @@
 import "@nova/tailwind-config/globalcss";
 import type { Metadata } from "next";
 import { pretendard } from "../../theme/fonts";
-import Sidebar from "./components/Sidebar";
-
+import AdminSidebar from "./components/AdminSidebar";
+import { SidebarProvider , SidebarTrigger } from "@nova/ui/components/ui/sidebar";
 
 export const metadata: Metadata = {
   title: "novAdmin",
@@ -16,11 +16,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${pretendard.variable} font-pretendard`}>
-      <body>
-        <div className="flex max-w-screen-xl max-h-screen">
-          <Sidebar/>
+      <body className="flex max-w-screen-xl max-h-screen">
+      <SidebarProvider>
+        <AdminSidebar/>
+        <main>
+          <SidebarTrigger />
           {children}
-        </div>
+        </main>
+       </SidebarProvider>
       </body>
     </html>
   );
