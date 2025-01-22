@@ -3,6 +3,7 @@
 
 import {
     Sidebar,
+    SidebarFooter,
     SidebarContent,
     SidebarHeader,
     SidebarGroup,
@@ -46,21 +47,21 @@ const items = [
 
 export default function AdminSidebar() {
   return (
-    <Sidebar>
-      <SidebarHeader className="flex items-center">
+    <Sidebar className="flex flex-col h-screen pt-5">
+      <SidebarHeader className="flex-grow-0 flex items-center justify-center">
         <Logo width={50} fill="#B096F5" className="block"/>
-        <div className="text-[38px] font-bold text-primary">novAdmin</div>
+        <div className="text-4xl font-bold text-primary">novAdmin</div>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="flex-grow items-center justify-center">
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="flex items-center justify-center">
               {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem key={item.title} className="w-[70%] m-1 p-3 min-h-0 rounded-xl hover:bg-primary hover:text-white">
                   <SidebarMenuButton asChild>
-                    <a href={item.href}>
-                      <item.icon />
-                      <span>{item.title}</span>
+                    <a href={item.href} className="flex gap-2">
+                      <item.icon style={{width:'32px' , height:'32px'}}/>
+                      <span className="pl-3 text-3xl">{item.title}</span>
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -69,6 +70,7 @@ export default function AdminSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter className="flex-grow-0"></SidebarFooter>
     </Sidebar>
   )
 }
