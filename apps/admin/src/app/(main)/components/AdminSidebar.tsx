@@ -1,3 +1,4 @@
+"use client";
 // 공식문서의 app-sidebar와 동일하다.
 
 import {
@@ -10,7 +11,6 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
   } from "@nova/ui/components/ui/sidebar";
-import Image from "next/image";
 import Logo from "@/public/image/Logo.svg";
 import { ScrollText, Users , TestTubeDiagonal , PcCase } from "lucide-react";
 
@@ -47,7 +47,9 @@ const items = [
 export default function AdminSidebar() {
   return (
     <Sidebar>
-      <SidebarHeader>Admin
+      <SidebarHeader className="flex items-center">
+        <Logo width={50} fill="#B096F5" className="block"/>
+        <div className="text-[38px] font-bold text-primary">novAdmin</div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
