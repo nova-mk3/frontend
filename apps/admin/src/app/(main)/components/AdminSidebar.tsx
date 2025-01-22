@@ -47,7 +47,7 @@ const items = [
 
 export default function AdminSidebar() {
   return (
-    <Sidebar className="flex flex-col h-screen pt-5">
+    <Sidebar className="flex flex-col h-screen pt-5 shadow-md  rounded-2xl">
       <SidebarHeader className="flex-grow-0 flex items-center justify-center">
         <Logo width={50} fill="#B096F5" className="block"/>
         <div className="text-4xl font-bold text-primary">novAdmin</div>
