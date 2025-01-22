@@ -11,10 +11,11 @@
     --ui-02: 0 0% 98%;
     --text-01: 240 7% 12%;
     --text-02: 240 12% 34%;
+    --text-03: 134, 142, 150;
     --line-01: 0 0% 85%;
     --danger: 6 100% 69%;
     --success: 199 100% 62%;
-    --muted: 240 4.8% 95.9%;
+    --background-02: 241, 243, 245;       
     --font-pretendard: "Pretendard", sans-serif;
     --font-paperlogy: "Paperlogy", sans-serif;
   }

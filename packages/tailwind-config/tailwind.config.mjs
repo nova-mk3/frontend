@@ -12,14 +12,15 @@ export const tailwindConfig = {
       colors: {
         primary: "hsl(var(--primary))",
         background01: "hsl(var(--background-01))",
+        background02 : "rgb(var(--background-02))",
         ui01: "hsl(var(--ui-01))",
         ui02: "hsl(var(--ui-02))",
         text01: "hsl(var(--text-01))",
-        text02: "hsl(var(--text-02))",
+        text02: "hsl(var(--text-02))",   
+        text03: "rgb(var(--text-03))",   
         line01: "hsl(var(--line-01))",
         danger: "hsl(var(--danger))",
         success: "hsl(var(--success))",
-        muted : "hsl(var(--muted)",
       },
       borderRadius: {
         lg: `var(--radius)`,

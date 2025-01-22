@@ -6,9 +6,9 @@ import { Button } from "@nova/ui/components/ui/button";
 import { Form } from "@nova/ui/components/ui/form";
 
 import { useForm } from "react-hook-form";
+import { InputFormField } from "../../components/InputFormField";
 import { DatePickerForm } from "./DatePickerField";
 import { FileFormField } from "./FileFormField";
-import { InputFormField } from "./InputFormField";
 import { RadioFormField } from "./RadioFormField";
 import { SelectFormField } from "./SelectFormField";
 
@@ -54,7 +54,7 @@ export function SignupForm() {
         />
         <InputFormField
           form={form}
-          name={"studentId"}
+          name={"studentId"}  
           label={"학번"}
           placeHolder={"학번을 입력하세요"}
           type="text"
