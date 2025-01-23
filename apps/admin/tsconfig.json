@@ -17,6 +17,6 @@
     "next-env.d.ts",
     "next.config.js",
     ".next/types/**/*.ts"
-  ],
+, "../../packages/ui/components/ui/MemberCard.tsx"  ],
   "exclude": ["node_modules"]
 }
