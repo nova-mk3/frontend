@@ -47,13 +47,22 @@ const newMembersData = [
 ]
 
 const executiveData = [
-    {studentId : "2019019014" , name: '최가은', grade: 4, phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
-    {studentId : "2019019015" , name: '박상준', grade: 4, phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
-    {studentId : "2019019016" , name: '서범수', grade: 2, phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
-    {studentId : "2019019017" , name: '이지현', grade: 4, phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
-    {studentId : "2019019018" , name: '손동선', grade: 3, phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
-    {studentId : "2019019019" , name: '김준희', grade: 2, phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
-    {studentId : "2019019020" , name: '이형진', grade: 4, phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
+    {studentId : "2019019014" , name: '최가은', grade: "4학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr", executivetype: "회장"},
+    {studentId : "2019019015" , name: '박상준', grade: "4학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr", executivetype: "부회장"},
+    {studentId : "2019019016" , name: '서범수', grade: "초과학기", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr", executivetype: "임원"},
+    {studentId : "2019019017" , name: '이지현', grade: "3학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr", executivetype: "임원"},
+    {studentId : "2019019018" , name: '손동선', grade: "3학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr", executivetype: "임원"},
+    {studentId : "2019019019" , name: '김준희', grade: "졸업생", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr", executivetype: "임원"},
+    {studentId : "2019019020" , name: '이형진', grade: "4학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr", executivetype: "임원"},
 ];
 
-export { membersData , newMembersData , executiveData };
+const executiveYear = [
+    {year : 2024},
+    {year : 2023},
+    {year : 2022},
+    {year : 2021},
+    {year : 2020},
+    {year : 2019},
+]
+
+export { membersData , newMembersData , executiveData , executiveYear };

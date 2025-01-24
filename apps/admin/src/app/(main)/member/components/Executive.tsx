@@ -1,23 +1,81 @@
 // Members 페이지
 import MemberCard from "@nova/ui/components/ui/MemberCard";
 import { Button } from "@nova/ui/components/ui/Button";
+import { useEffect, useState } from "react";
+import { executiveYear , executiveData  } from "./memberTempData";
+
+interface Member {
+  studentId: string;
+  name: string;
+  birthday: string;
+  phoneNumber: string;
+  email: string;
+  grade: string;
+  image?: string;
+  executivetype: string;
+}
+
+interface Year {
+  year: number;
+}
 
 export default function Executive() {
-    return (
-      <div className="font-pretendard">
-        <div>
-          회장
-        </div>
-        <MemberCard name="고양이" type="admin"/>
-        <div>
-          부회장
-        </div>
-        <MemberCard name="고양이" type="admin"/>
-        <div>
-          임원
-        </div>
-        <MemberCard name="고양이" type="admin"/>
+  const [years, setYears] = useState<Year[]>([]);
+  const [data, setData] = useState<Member[]>([]);
+  const [selectedYear, setSelectedYear] = useState<number | null>(null); // 선택된 연도 상태
+
+  useEffect(() => {
+    setYears(executiveYear);
+    setData(executiveData);
+    if (executiveYear.length > 0) {
+      const maxYear = Math.max(...executiveYear.map(({ year }) => year));
+      setSelectedYear(maxYear);
+    }
+  }, []);
+
+  const categories = [
+    { title: "회장", members: data.filter(member => member.executivetype === "회장") },
+    { title: "부회장", members: data.filter(member => member.executivetype === "부회장") },
+    { title: "임원", members: data.filter(member => member.executivetype === "임원") },
+  ];
+
+  return (
+    <div className="font-pretendard">
+      <div className="flex m-4 w-[1400px]">
+        {years.map(({ year }) => (
+          <Button
+            key={year}
+            onClick={() => setSelectedYear(year)}
+            className={`mr-2 w-[100px] ${
+              selectedYear === year ? "bg-text02 hover:bg-text02" : "bg-line01 hover:bg-text02"
+            }`}
+          >
+            {year}
+          </Button>
+        ))}
+        <Button variant={"default"} className="w-[100px]">연도 추가</Button>
       </div>
-    );
-  }
-  
+
+      {categories.map(({ title, members }) => (
+        <div key={title} className="mb-8">
+          <div className="text-lg font-bold ml-4">
+            {title}
+          </div>
+          <div className="flex flex-wrap">
+            {members.length > 0 ? (
+              members.map(member => (
+                <MemberCard
+                  key={member.studentId}
+                  name={member.name}
+                  type="admin"
+                />
+              ))
+            ) : (
+              <div className="text-gray-500">등록된 임원이 없습니다.</div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
