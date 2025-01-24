@@ -1,6 +1,5 @@
 "use client";
 // Members 페이지
-import MemberCard from "@nova/ui/components/ui/MemberCard";
 import { Button } from "@nova/ui/components/ui/Button";
 import NewMembers from "./components/NewMember";
 import ManageMembers from "./components/ManageMembers";
