@@ -1,6 +1,6 @@
 import { Input } from "@nova/ui/components/ui/input";
 import React from "react";
-import { Search,Folder } from "lucide-react";
+import { Layers, Search } from "lucide-react";
 import {
   Select,
   SelectTrigger,
@@ -15,12 +15,13 @@ import Link from "next/link";
 interface TitleProps{
   title? : string;
   className?: string;
+  TitleImage? : React.ReactElement<SVGElement>
 }
 
-export default function Title({title, className} : TitleProps) {
+export default function Title({title, className ,TitleImage} : TitleProps) {
   return (
     <div className={`flex flex-row flex-wrap items-end border-primary border-b-[1px] py-5 mobile:flex-col mobile:items-center  ${className}`}>
-      <p className="t-l !font-bold text-primary mobile:mb-[15px] flex flex-row gap-1 items-center"> <Folder size={24} />{title}</p>
+      <p className="t-l !font-bold text-primary mobile:mb-[15px] flex items-center gap-2">{TitleImage}{title}</p>
 
       <div className="flex flex-row items-center gap-[15px] ml-auto mt-auto mobile:flex-col mobile:w-full">
         <Select>
@@ -49,7 +50,7 @@ export default function Title({title, className} : TitleProps) {
           />
           <Search size="24" />
         </div>
-        <Link href="/archive/newpost" className="mobile:w-full">
+        <Link href="/board/newpost" className="mobile:w-full">
           <Button variant="default" className="mobile:w-full">
             글쓰기
           </Button>
@@ -58,3 +59,5 @@ export default function Title({title, className} : TitleProps) {
     </div>
   );
 }
+
+
