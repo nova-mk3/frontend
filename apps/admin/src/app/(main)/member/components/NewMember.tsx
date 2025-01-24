@@ -26,12 +26,9 @@ export default function NewMembers(){
 
   return (
     <div className="font-pretendard flex flex-col min-h-[700px] w-[1400px]">
-      {/* 상단 영역 */}
       <div className="text-xl font-bold m-4">
         총 {data.length}명
       </div>
-  
-      {/* 메인 컨텐츠 */}
       {data.length > 0 ? (
         <div className="flex-grow">
           {data.map((member) => (

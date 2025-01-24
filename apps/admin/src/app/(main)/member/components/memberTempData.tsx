@@ -1,6 +1,16 @@
   // 임시 데이터 생성
 const membersData = [
-    {studentId : "2019019014" , name: 'Alice', grade: "1학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
+    {studentId : "2019019114" , name: 'Alice', grade: "1학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
+    {studentId : "2019019214" , name: 'Alice', grade: "1학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
+    {studentId : "2019019314" , name: 'Alice', grade: "1학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
+    {studentId : "2019019414" , name: 'Alice', grade: "1학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
+    {studentId : "2019019514" , name: 'Alice', grade: "1학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
+    {studentId : "2019019614" , name: 'Alice', grade: "1학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
+    {studentId : "2019019714" , name: 'Alice', grade: "1학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
+    {studentId : "2019019814" , name: 'Alice', grade: "1학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
+    {studentId : "2019019914" , name: 'Alice', grade: "1학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
+    {studentId : "2019011014" , name: 'Alice', grade: "1학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
+    {studentId : "2019012014" , name: 'Alice', grade: "1학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
     {studentId : "2019019015" , name: 'Bob', grade: "2학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
     {studentId : "2019019016" , name: 'Charlie', grade: "3학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
     {studentId : "2019019017" , name: 'Alice', grade: "4학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
@@ -12,9 +22,10 @@ const membersData = [
     {studentId : "2019019023" , name: 'Alice', grade: "2학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
     {studentId : "2019019024" , name: 'Bob', grade: "3학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
     {studentId : "2019019025" , name: 'Charlie', grade: "4학년", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
-    {studentId : "2019019026" , name: 'Alice', grade: "졸업생", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
-    {studentId : "2019019027" , name: 'Bob', grade: "졸업생", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
-    {studentId : "2019019028" , name: 'Charlie', grade: "졸업생", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},    
+    {studentId : "2019019026" , name: 'Alice', grade: "졸업", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
+    {studentId : "2019019027" , name: 'Bob', grade: "졸업", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
+    {studentId : "2019019028" , name: 'Charlie', grade: "휴학", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},
+    {studentId : "2019019029" , name: 'Charlie', grade: "초과학기", phoneNumber: '010-0000-0000', birthday: '2000-07-10', email: "meow0710@Catholic.co.kr"},    
 ];
 
 const newMembersData = [
