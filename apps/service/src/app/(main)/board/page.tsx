@@ -23,10 +23,10 @@ export default function page() {
 
     </div>
     <div className='grid grid-cols-3 gap-4 mobile:grid-cols-1'>
-      <ItemList title={"공지사항"}/>
-      <ItemList  title={"Q&A"}/>
-      <ItemList  title={"자기소개"}/>
-      <ItemList  title={"자유게시판"}/>
+      <ItemList title={"공지사항"} href='/board/notice'/>
+      <ItemList  title={"Q&A"} href='/board/qna'/>
+      <ItemList  title={"자기소개"} href='/board/selfintro'/>
+      <ItemList  title={"자유게시판"} href='/board/any'/>
       </div>
     </div>
 )}

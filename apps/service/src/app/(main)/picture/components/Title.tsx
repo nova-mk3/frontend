@@ -20,7 +20,7 @@ interface TitleProps{
 export default function Title({title, className} : TitleProps) {
   return (
     <div className={`flex flex-row flex-wrap items-end border-primary border-b-[1px] py-5 mobile:flex-col mobile:items-center  ${className}`}>
-      <p className="t-l !font-bold text-primary mobile:mb-[15px] flex flex-row gap-1 items-center"> <Image size={28} />{title}</p>
+      <p className="t-l !font-bold text-primary mobile:mb-[15px] flex flex-row gap-2 items-center"> <Image size={28} />{title}</p>
 
       <div className="flex flex-row items-center gap-[15px] ml-auto mt-auto mobile:flex-col mobile:w-full">
         <Select>
@@ -49,7 +49,7 @@ export default function Title({title, className} : TitleProps) {
           />
           <Search size="24" />
         </div>
-        <Link href="/archive/newpost" className="mobile:w-full">
+        <Link href="/picture/newpost" className="mobile:w-full">
           <Button variant="default" className="mobile:w-full">
             글쓰기
           </Button>

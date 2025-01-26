@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@nova/ui/components/ui/select"
 import WriteBottomLayout from "../../components/WriteBottomLayout";
+import useYearRange from "@/src/libs/hooks/useYearRange";
 
 export default function Page() {
 
@@ -27,7 +28,10 @@ export default function Page() {
   const [subjectName, setSubjectName] = useState("");
   const [professorName, setProfessorName] = useState("");
   const [term,setTerm] = useState("");
+  const [year,setYear] = useState("");
 
+  const currentYear = new Date().getFullYear();
+  const years = useYearRange(2000, currentYear);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
@@ -46,22 +50,32 @@ export default function Page() {
   }
 
   useEffect(() => {
-    let newTitle = "";
-  
-    if (subjectName) {
-      newTitle += `[${subjectName}]`;
+    let newTitle = '';
+
+    // year가 있다면 맨 앞에 배치
+    if (year) {
+      // 형식을 원하시는 대로 조정해 보세요. (예: [2023] 과 같이 사용하거나 그냥 2023)
+      newTitle += `[${year}]`;
     }
-  
+
+    if (subjectName) {
+      // 이미 year가 들어갔다면 그 뒤에 공백을 추가한 후 [subjectName]를 붙임
+      newTitle += newTitle ? ` [${subjectName}]` : `[${subjectName}]`;
+    }
+
     if (professorName) {
+      // 기존에 무언가가 있다면 앞에 공백 하나, 없다면 그냥 교수 이름
       newTitle += newTitle ? ` ${professorName}` : `${professorName}`;
     }
-  
+
     if (term) {
+      // 기존에 무언가가 있다면 ' - ' 붙여서 term, 없다면 그냥 term
       newTitle += newTitle ? ` - ${term}` : `${term}`;
     }
-  
+
     setTitle(newTitle);
-  }, [subjectName, professorName, term]);
+    
+  }, [year, subjectName, professorName, term]);
   
 
   return (
@@ -88,8 +102,32 @@ export default function Page() {
         <Input placeholder="교수명을 입력해주세요" defaultValue={professorName} onChange={handleProfessorChange}/>
       </div>
 
+      <div className="flex flex-row gap-5">
+
+      <div>
        {/* 학기 선택(아직 value를 정하지 않음)*/}
-       <label className="t-m !font-bold">학기</label>
+       <label className="t-m !font-bold">년도</label>
+       <Select onValueChange={setYear} defaultValue={year}>
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="년도 선택"/>
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          {
+            years.map(year => (
+              <SelectItem key={year} value={year.toString()}>
+                {year}
+              </SelectItem>
+            ))
+          }
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+    </div>
+
+    {/* 학기 선택(아직 value를 정하지 않음)*/}
+    <div>
+    <label className="t-m !font-bold">학기</label>
        <Select onValueChange={setTerm} defaultValue={term}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="학기 선택"/>
@@ -103,6 +141,9 @@ export default function Page() {
         </SelectGroup>
       </SelectContent>
     </Select>
+    </div>
+      </div>
+
       </div>
 
       {/* 첨부 파일 영역 */} 

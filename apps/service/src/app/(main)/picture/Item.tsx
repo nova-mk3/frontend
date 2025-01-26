@@ -20,6 +20,7 @@ export default function Item() {
               <div className='flex flex-row border-t-[1px] border-line01 px-3 py-1 t-s text-text02 gap-2'>
               <div>좋아요 5</div>
               <div>댓글 5</div>
+              <div>사진 3</div>
               </div>
             </div>
   )
