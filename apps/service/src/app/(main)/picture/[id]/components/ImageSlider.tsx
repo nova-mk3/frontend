@@ -65,9 +65,7 @@ const ImageSlider = ({  speed = 500, infinite = false } : ImageSliderProps) => {
        className='object-cover cursor-pointer'
        onClick={() => openModal(0)}
       />
-      <div className='absolute top-2 right-2 bg-text02 rounded-md p-1 flex items-center'>
-        <Download size={24} className='cursor-pointer text-background01'/>
-      </div>
+    
      </div>
 
      <div className='min-w-full relative'>
@@ -77,11 +75,8 @@ const ImageSlider = ({  speed = 500, infinite = false } : ImageSliderProps) => {
        fill={true}
        sizes="100vw"
        className='object-cover'
-       onClick={() => openModal(0)}
       />
-      <div className='absolute top-2 right-2 bg-text02 rounded-md p-1 flex items-center'>
-        <Download size={24} className='cursor-pointer text-background01'/>
-      </div>
+    
      </div>
 
      <div className='min-w-full relative'>
@@ -91,11 +86,8 @@ const ImageSlider = ({  speed = 500, infinite = false } : ImageSliderProps) => {
        fill={true}
        sizes="100vw"
        className='object-cover'
-       onClick={() => openModal(0)}
       />
-      <div className='absolute top-2 right-2 bg-text02 rounded-md p-1 flex items-center'>
-        <Download size={24} className='cursor-pointer text-background01'/>
-      </div>
+      
      </div>
 
   </Slider>
@@ -176,10 +168,15 @@ export const Slider = ({className,children,speed,infinite} : SliderProps)=>{
         transitionProperty: 'transform', // 전환할 속성 명시
         transitionTimingFunction: 'ease-in-out', // 전환 타이밍 함수 설정
       }}>
+
+
+
       {children}
       </div>
 
-      
+      <div className='absolute top-2 right-2 bg-text02 rounded-md p-1 flex items-center'>
+        <Download size={24} className='cursor-pointer text-background01'/>
+      </div>
 
       {/* 왼쪽 화살표 */}
       <ChevronLeft

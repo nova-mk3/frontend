@@ -18,24 +18,8 @@ interface ModalProps {
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, currentIndex,total, setCurrentIndex }) => {
 
-  const [imageData, setImageData] = useState<{ src: string; width: number; height: number } | null>(null);
 
-  useEffect(() => {
-    const fetchImageInfo = async () => {
-      const img = new window.Image();
-      img.src = "/image/cat1.jpg"; // 이미지 경로
 
-      img.onload = () => {
-        setImageData({
-          src: img.src,
-          width: img.naturalWidth,
-          height: img.naturalHeight,
-        });
-      };
-    };
-
-    fetchImageInfo();
-  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -62,6 +46,17 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, currentIndex,total, setC
     };
   }, [isOpen, currentIndex]);
 
+
+  const handlePrevImage = (e : React.MouseEvent)=>{
+    prevImage();
+    e.stopPropagation();
+  }
+  const handleNextImage = (e : React.MouseEvent)=>{
+    nextImage();
+    e.stopPropagation();
+  }
+
+
   const prevImage = () => {
     const newIndex = currentIndex > 0 ? currentIndex - 1 : total -1;
     setCurrentIndex(newIndex);
@@ -76,7 +71,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, currentIndex,total, setC
 
   return (
     // 임시 버튼 추후에 디자인 수정 예정
-    <div className="fixed inset-0 z-10 flex items-center justify-center bg-black/90 ">
+    <div className="fixed inset-0 z-10 flex items-center justify-center bg-black/90 " onClick={onClose}>
       {/* 닫기 버튼 */}
       <button
         onClick={onClose}
@@ -95,7 +90,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, currentIndex,total, setC
 
       {/* 좌측 화살표 */}
       <button
-        onClick={prevImage}
+        onClick={handlePrevImage}
         className="absolute left-5 text-white bg-gray-800 p-2 rounded-full hover:bg-gray-700 focus:outline-none z-50"
         aria-label="Previous Image"
       >
@@ -104,7 +99,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, currentIndex,total, setC
 
       {/* 우측 화살표 */}
       <button
-        onClick={nextImage}
+        onClick={handleNextImage}
         className="absolute right-5 text-white bg-gray-800 p-2 rounded-full hover:bg-gray-700 focus:outline-none z-50"
         aria-label="Next Image"
       >
@@ -113,10 +108,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, currentIndex,total, setC
 
 
 
-      {/* 각각의 내부 크기를 들고 있어야하는데 이걸 고민해보자 */}
+
+      {/* TODO: 사이즈 원본 크기 이야기 */}
 
       
-      {/* 서버에서 원본 사이즈를 보내줘야할거 같은데 */}
       <div className="relative mx-auto overflow-hidden z-10">
       {/* 이미지 표시 */}
       <div className="flex w-screen h-screen"
@@ -131,6 +126,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, currentIndex,total, setC
                    width={3000}
                    height={0}
                    className='object-contain'
+                   onClick={(e)=>e.stopPropagation()}
                 />
         </div>
         <div className="min-w-full   relative z-20 flex justify-center p-[10%]">
