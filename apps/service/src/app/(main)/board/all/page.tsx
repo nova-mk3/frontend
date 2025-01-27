@@ -10,8 +10,8 @@ export default function page() {
         <Title title="전체글보기" TitleImage={<Layers size={20}/>}/>
 
 
-        <Item/>
-        <Item/>
+        <Item labelName='공지'/>
+        <Item labelName='공지'/>
         <Item/>
         <Item/>
         <Item/>
