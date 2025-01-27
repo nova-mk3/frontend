@@ -1,8 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 export default function Item() {
   return (
     <div className='w-[100%] border rounded-lg flex flex-col cursor-pointer shadow-md transition ease-in-out hover:-translate-y-2 duration-300'>
+      <Link href="/picture/1">
               <Image
                       src="/image/cat.jpg"
                       alt="이미지"
@@ -22,6 +24,7 @@ export default function Item() {
               <div>댓글 5</div>
               <div>사진 3</div>
               </div>
+              </Link>
             </div>
   )
 }
