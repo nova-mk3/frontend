@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Item from './Item'
 export default function page() {
   return (
-    <div className='flex flex-col t-m w-[80%] mx-auto'>
+    <div className='flex flex-col mx-auto'>
       <Title title="사진 게시판" className='mb-5'/>
 
 
