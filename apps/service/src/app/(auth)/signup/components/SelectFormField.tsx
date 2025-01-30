@@ -21,15 +21,13 @@ export function SelectFormField({
   form,
   name,
   label,
+  options,
 }: {
   form: UseFormReturn<SignupInput>;
   name: keyof SignupInput;
   label: string;
+  options: string[];
 }) {
-  const options =
-    (SignupSchema._def.schema.shape[name]?._def?.typeName === "ZodEnum" &&
-      SignupSchema._def.schema.shape[name]?._def?.values) ||
-    [];
 
   return (
     <FormField
@@ -51,8 +49,8 @@ export function SelectFormField({
               </SelectTrigger>
             </FormControl>
             <SelectContent className="bg-background01 focus:text-primary focus-border-primary focus:ring-primary focus:ring-1">
-              {options.map((option) => (
-                <SelectItem key={option} value={option}>
+              {options.map((option, index) => (
+                <SelectItem key={index} value={option}>
                   {option}
                 </SelectItem>
               ))}

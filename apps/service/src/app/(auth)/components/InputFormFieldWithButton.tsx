@@ -10,16 +10,15 @@ import { Input } from "@nova/ui/components/ui/input";
 import { cn } from "@nova/ui/lib/utils";
 import { Eye, EyeClosed } from "lucide-react";
 import { JSX, useState } from "react";
-import { Path, UseFormReturn } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import { useInputFocus } from "../signup/hooks/useInputFocus";
-import { SignupInput } from "@/src/schema/signup.schema";
 
 // StringKeys 타입 정의: T에서 string 또는 number 타입의 키만 추출
 type StringKeys<T> = {
   [K in keyof T]: T[K] extends string | number ? K : never;
 }[keyof T];
 
-export function InputFormField<T extends Record<string, any>>({
+export function InputFormFieldWithButton<T extends Record<string, any>>({
   form,
   name,
   label,
@@ -30,9 +29,11 @@ export function InputFormField<T extends Record<string, any>>({
   leftIcon,
   hasToggleIcon,
   disabled = false,
+  btnText,
+  onClick,
 }: {
   form: UseFormReturn<T>;
-   name: Path<SignupInput>;
+  name: StringKeys<T>;
   label: string;
   placeHolder: string;
   type?: string;
@@ -41,9 +42,12 @@ export function InputFormField<T extends Record<string, any>>({
   leftIcon?: JSX.Element;
   hasToggleIcon?: boolean;
   disabled?: boolean;
-}) {
+  btnText?: string;
+  onClick?: (value : string) => void;
+} ) {
   const { isFocused, inputRef } = useInputFocus();
   const [showPassword, setShowPassword] = useState(false);
+
   return (
     <FormField
       control={form.control}
@@ -80,6 +84,8 @@ export function InputFormField<T extends Record<string, any>>({
               {leftIcon}
             </div>
           )}
+          <div className="flex w-full gap-2">
+
           <FormControl ref={inputRef}>
             <Input
               className={cn(
@@ -97,6 +103,13 @@ export function InputFormField<T extends Record<string, any>>({
               {...field}
             />
           </FormControl>
+          <Button
+              type="button"
+              onClick={ ()=> onClick?.(field.value) }
+             >
+              {btnText}
+            </Button>
+          </div>
           {hasToggleIcon && (
             <Button
               type="button"
