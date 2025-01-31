@@ -72,26 +72,35 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, currentIndex,total, setC
   return (
     // 임시 버튼 추후에 디자인 수정 예정
     <div className="fixed inset-0 z-10 flex items-center justify-center bg-black/90 " onClick={onClose}>
-      {/* 닫기 버튼 */}
+
+      {/* 상단 아이콘 모음 */}
+      <div className='absolute top-5 right-5 flex flex-row gap-4'>
+      
       <button
         onClick={onClose}
-        className="absolute top-5 right-4 text-white bg-gray-800 p-2 rounded-full hover:bg-gray-700 focus:outline-none z-50"
-        aria-label="Close Modal"
-      >
-        <X size={24} />
-      </button>
-      <button
-        onClick={onClose}
-        className="absolute top-5 right-16 text-white bg-gray-800 p-2 rounded-full hover:bg-gray-700 focus:outline-none z-50"
+        className=" text-white 0  z-50"
         aria-label="Close Modal"
       >
         <Download size={24} />
       </button>
+      <button
+        onClick={onClose}
+        className=" text-white rounded-full  z-50"
+        aria-label="Close Modal"
+      >
+        <X size={24} />
+      </button>
+      </div>
+
+      <div className='absolute top-5 left-1/2 transform -translate-x-1/2 text-white t-m flex h-[24px] items-center'>
+        {currentIndex} / {total}
+      </div>
+
 
       {/* 좌측 화살표 */}
       <button
         onClick={handlePrevImage}
-        className="absolute left-5 text-white bg-gray-800 p-2 rounded-full hover:bg-gray-700 focus:outline-none z-50"
+        className="absolute left-5 text-white z-50"
         aria-label="Previous Image"
       >
         <ChevronLeft size={24} />
@@ -100,7 +109,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, currentIndex,total, setC
       {/* 우측 화살표 */}
       <button
         onClick={handleNextImage}
-        className="absolute right-5 text-white bg-gray-800 p-2 rounded-full hover:bg-gray-700 focus:outline-none z-50"
+        className="absolute right-5 text-white z-50"
         aria-label="Next Image"
       >
         <ChevronRight size={24} />

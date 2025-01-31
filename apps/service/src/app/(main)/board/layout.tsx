@@ -26,7 +26,7 @@ export default function layout({
     return (
     <>
     <Navigation/>
-    <div className='flex flex-col t-m w-[80%] mx-auto'>
+    <div className='flex flex-col t-m mx-auto w-full screenLg:w-[80%]'>
         {children}
     </div>
     </>

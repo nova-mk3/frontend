@@ -29,6 +29,8 @@ export const tailwindConfig = {
       },
       screens: {
         mobile: { max: "768px" },
+        screenLg : {max : "1280px" },
+        screenMd : {max : "1020px" },
       },
       fontFamily: {
         pretendard: ["var(--font-pretendard)"],
