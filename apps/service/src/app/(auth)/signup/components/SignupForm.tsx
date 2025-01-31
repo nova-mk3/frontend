@@ -61,7 +61,7 @@ const form = useForm<SignupInput>({
     name: "isContact",
   });
 
-
+  //TODO: 로직을 좀 더 직관적으로 만들 필요가 있음
   useEffect(()=>{
     if(emailSentMessage === null)return;
 
@@ -213,6 +213,7 @@ const form = useForm<SignupInput>({
           label={"비밀번호"}
           placeHolder={"********"}
           type="password"
+          hasToggleIcon
         />
         <InputFormField
           form={form}
@@ -220,13 +221,14 @@ const form = useForm<SignupInput>({
           label={"비밀번호 확인"}
           placeHolder={"********"}
           type="password"
+          hasToggleIcon
         />
         
         <div>
           <Button
             className="mt-8 w-full b-l mb-5"
             type="submit"
-            disabled={false}
+            disabled={!form.formState.isValid}
           >
             회원가입
           </Button>

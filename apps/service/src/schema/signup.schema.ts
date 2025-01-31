@@ -106,7 +106,7 @@ const userSchema = z.object({
 const passwordSchema = z.object({
   password: z
       .string()
-      .min(24, { message: "비밀번호는 24글자 이상이어야 합니다." })
+      .min(8, { message: "비밀번호는 8글자 이상이어야 합니다." })
       .refine((password) => isStrongPassword(password), {
         message: "소문자, 대문자, 숫자, 특수문자를 모두 포함해야 합니다.",
       }),

@@ -89,7 +89,7 @@ export function InputFormField<T extends Record<string, any>>({
                   : "focus:border-primary focus:text-primary focus:placeholder-primary",
                 leftIcon ? "pl-10" : "",
               )}
-              type={hasToggleIcon && !showPassword ? "password" : type}
+              type={hasToggleIcon && !showPassword ? type : "text"}
               placeholder={placeHolder}
               disabled={disabled}
               {...(inputMode ? { inputMode } : {})}
