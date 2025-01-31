@@ -22,7 +22,7 @@ export default function page() {
       </div>
 
     </div>
-    <div className='grid grid-cols-3 gap-4 mobile:grid-cols-1'>
+    <div className='grid gap-4 xl:grid-cols-4 lg:grid-cols-2 mobile:grid-cols-1'>
       <ItemList title={"공지사항"} href='/board/notice'/>
       <ItemList  title={"Q&A"} href='/board/qna'/>
       <ItemList  title={"자기소개"} href='/board/selfintro'/>

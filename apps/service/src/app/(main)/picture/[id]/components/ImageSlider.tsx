@@ -182,7 +182,7 @@ export const Slider = ({className,children,speed,infinite} : SliderProps)=>{
       <ChevronLeft
       size={40}
         onClick={() => moveToSlide(currentIndex - 1)}
-        className="absolute top-1/2 left-4 transform -translate-y-1/2  text-white bg-text02 p-2 rounded-full hover:bg-opacity-75 focus:outline-none cursor-pointer"
+        className="absolute top-1/2 left-0 transform -translate-y-1/2  text-white p-2  focus:outline-none cursor-pointer"
         aria-label="Previous Slide"
       />
    
@@ -191,7 +191,7 @@ export const Slider = ({className,children,speed,infinite} : SliderProps)=>{
       <ChevronRight
         size={40}
         onClick={() => moveToSlide(currentIndex + 1)}
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white bg-text02 p-2 rounded-full hover:bg-opacity-75 focus:outline-none cursor-pointer"
+        className="absolute top-1/2 right-0 transform -translate-y-1/2 text-white p-2 focus:outline-none cursor-pointer"
         aria-label="Next Slide"
       />
 
