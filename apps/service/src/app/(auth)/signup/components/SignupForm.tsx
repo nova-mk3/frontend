@@ -30,7 +30,7 @@ const form = useForm<SignupInput>({
       grade: "1학년",
       semester: "1학기",
       emailCode: '',
-      confirmEmailCode : '',
+      confirmEmailCode : '1',
       birth: new Date("1998-10-13"),
       profileImage: undefined,
       phoneNumber: "",
@@ -38,6 +38,7 @@ const form = useForm<SignupInput>({
       confirmPassword: "",
       studentType : "재학생",
       isWork : "",
+      job : '',
     },
     mode: "onChange",
   });
@@ -76,6 +77,7 @@ const form = useForm<SignupInput>({
   },[isEmail])
 
 
+  console.log(form.formState.isValid);
  
   
   function onSubmit(values: SignupInput) {
@@ -160,7 +162,7 @@ const form = useForm<SignupInput>({
               <RadioFormField form={form} name={"isWork"} label={"재직여부"} options={[{value : "true", label : "예"},{value : "false", label : "아니오"}]}/>
               <InputFormField
                 form={form}
-                name={"contactInfo"}  
+                name={"job"}  
                 label={"직무"}
                 placeHolder={"직무를 입력해주세요"}
                 type="text"
