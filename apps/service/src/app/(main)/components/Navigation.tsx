@@ -47,7 +47,7 @@ export default function Navigation() {
               </NavigationMenuLink>
 
               <NavigationMenuLink asChild>
-                <Link href="/">
+                <Link href="/people">
                   <li className="flex items-center w-[285px] h-[60px]  rounded-lg hover:bg-ui01">
                     <div className="flex flex-row items-center">
                       <div className="w-[60px] h-[50px] flex justify-center items-center border-r-[1px] border-line01">
@@ -63,7 +63,7 @@ export default function Navigation() {
               </NavigationMenuLink>
 
               <NavigationMenuLink asChild>
-                <Link href="/">
+                <Link href="/executive">
                   <li className="flex items-center w-[285px] h-[60px]  rounded-lg hover:bg-ui01">
                     <div className="flex flex-row items-center">
                       <div className="w-[60px] h-[50px] flex justify-center items-center border-r-[1px] border-line01">
