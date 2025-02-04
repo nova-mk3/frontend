@@ -6,11 +6,11 @@ export default function Item() {
          <Image
                 src="/image/cat.jpg"
                 alt="user profile"
-                width={60}
-                height={60}
-                className='w-[60px] h-[60px] object-cover rounded-full'
+                width={50}
+                height={50}
+                className='w-[50px] h-[50px] object-cover rounded-full'
          />
-         <p className='ml-auto t-l'>권성민</p>
+         <p className='ml-auto t-l '>권성민</p>
     </div>
   )
 }

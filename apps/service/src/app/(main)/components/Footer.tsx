@@ -24,7 +24,7 @@ export default function Footer() {
             </div>
 
             <div className='flex flex-col gap-2'>
-            <p className='!font-bold'>지침서</p>
+            <p className='!font-bold'>가이드</p>
             <p>노바 생활 가이드</p>
             <p>노바 임원 지침서</p>
             </div>

@@ -17,7 +17,7 @@ export function FileFormField({
   form,
   name,
   label,
-  accept = "image/*",
+  accept = "image/*"
 }: {
   form: UseFormReturn<SignupInput>;
   name: Path<SignupInput>;
@@ -64,7 +64,7 @@ export function FileFormField({
                   alt="Profile Preview"
                   width={40}
                   height={40}
-                  className="w-10 h-10 object-cover rounded-full cursor-pointer"
+                  className={`w-10 h-10 object-cover rounded-full cursor-pointer`}
                 />
                 <X size={15} onClick={handleReset}  className="cursor-pointer mb-auto"/>
               </div>

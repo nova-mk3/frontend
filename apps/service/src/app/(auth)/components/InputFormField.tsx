@@ -32,7 +32,7 @@ export function InputFormField<T extends Record<string, any>>({
   disabled = false,
 }: {
   form: UseFormReturn<T>;
-   name: Path<SignupInput>;
+   name: Path<T>;
   label: string;
   placeHolder: string;
   type?: string;
