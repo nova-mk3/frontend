@@ -26,7 +26,7 @@ interface Member {
 
 export default function ManageMembers() {
   const [data, setData] = useState<Member[]>([]);
-
+  const [viewType , setViewType] = useState<"small"|"medium">("small");
   useEffect(() => {
     // API 연동 위치
     setData(membersData);
@@ -46,15 +46,15 @@ export default function ManageMembers() {
   return (
     <div className="font-pretendard">
       <div className="flex m-4 w-[1400px]">
-        <Select>
+        <Select value={viewType} onValueChange={(value) => setViewType(value as "small" | "medium")}>
             <SelectTrigger className="w-[100px] mr-[10px]">
-                <SelectValue placeholder="작게 보기" />
+                <SelectValue>{viewType === "small" ? "작게보기" : "크게보기"}</SelectValue>
             </SelectTrigger>
             <SelectContent className="bg-background01" style={{minWidth: "100px"}}>
                 <SelectItem value="small" className="cursor-pointer">
                     작게 보기
                 </SelectItem>
-                <SelectItem value="big" className="cursor-pointer">
+                <SelectItem value="medium" className="cursor-pointer">
                     크게 보기
                 </SelectItem>                        
             </SelectContent>
@@ -75,7 +75,7 @@ export default function ManageMembers() {
       {categories.map(({ title, members }) => (
         <div key={title} className="">
           <div className="text-lg font-bold ml-4">
-            {title} - {members.length}명
+            {title} - {members.length}명 {viewType}
           </div>
           <div className="flex flex-wrap">
             {members.length > 0 ? (
@@ -83,7 +83,7 @@ export default function ManageMembers() {
                 <MemberCard
                   key={member.studentId}
                   name={member.name}
-                  type="small"
+                  type={viewType}
                 />
               ))
             ) : (
