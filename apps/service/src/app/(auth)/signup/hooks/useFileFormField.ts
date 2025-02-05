@@ -26,9 +26,10 @@ export function useFileFormField({
         setPreview(reader.result as string);
       };
       reader.readAsDataURL(file);
-    } else {
-      setPreview(null);
-    }
+    } 
+    // else {
+    //   setPreview(null);
+    // }
   }, [file]);
 
   useEffect(() => {
@@ -39,9 +40,10 @@ export function useFileFormField({
       const selectedFile = target.files?.[0];
       if (selectedFile) {
         setValue(name, selectedFile, { shouldValidate: true });
-      } else {
-        setValue(name, undefined, { shouldValidate: true });
-      }
+      } 
+      // else {
+      //   setValue(name, undefined, { shouldValidate: true });
+      // }
     };
     input.addEventListener("change", handleChange);
     return () => {
@@ -55,10 +57,16 @@ export function useFileFormField({
     }
   };
 
+  const handleReset = ()=>{
+    setPreview(null);
+    setValue(name, undefined, { shouldValidate: true });
+  }
+
   return {
     preview,
     inputRef,
     errors,
     handleIconClick,
+    handleReset
   };
 }

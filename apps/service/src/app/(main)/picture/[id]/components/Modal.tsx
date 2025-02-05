@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { ChevronLeft, ChevronRight, Download, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Download, X, ZoomIn, ZoomOut } from 'lucide-react';
 import Image from 'next/image';
 interface ImageType {
   src: string;
@@ -74,8 +74,21 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, currentIndex,total, setC
     <div className="fixed inset-0 z-10 flex items-center justify-center bg-black/90 " onClick={onClose}>
 
       {/* 상단 아이콘 모음 */}
-      <div className='absolute top-5 right-5 flex flex-row gap-4'>
-      
+      <div className='absolute top-5 right-5 flex flex-row gap-4 items-center'>
+      <button
+        onClick={onClose}
+        className=" text-white 0  z-50"
+        aria-label="Close Modal"
+      >
+        <ZoomIn size={24} />
+      </button>
+      <button
+        onClick={onClose}
+        className=" text-white 0  z-50"
+        aria-label="Close Modal"
+      >
+        <ZoomOut size={24} />
+      </button>
       <button
         onClick={onClose}
         className=" text-white 0  z-50"
@@ -93,7 +106,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, currentIndex,total, setC
       </div>
 
       <div className='absolute top-5 left-1/2 transform -translate-x-1/2 text-white t-m flex h-[24px] items-center'>
-        {currentIndex} / {total}
+        {currentIndex+1} / {total}
       </div>
 
 

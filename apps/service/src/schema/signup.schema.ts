@@ -88,10 +88,18 @@ const userSchema = z.object({
       phoneNumber: z.string().optional(),
       emailCheck: z.boolean().refine((val) => val === true,{
         message: "인증한 이메일과 다른지 확인하세요!"
-      }),
+      }).optional(),
 }).superRefine((data, ctx) => {
-  if (data.emailCode !== data.confirmEmailCode) {
-    console.log(data);
+
+  if (data.emailCheck === false) {
+    console.log("ㅎ")
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "이메일 인증을 해야합니다.",
+      path: ["emailCode"],
+    });
+  }
+  else if (data.emailCode !== data.confirmEmailCode) {
     ctx.addIssue({
       code: z.ZodIssueCode.custom,
       message: "인증코드가 일치하지 않습니다",
