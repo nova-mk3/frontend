@@ -26,22 +26,29 @@ interface Member {
 
 export default function ManageMembers() {
   const [data, setData] = useState<Member[]>([]);
+  const [viewData, setViewData] = useState<Member[]>([]);
   const [viewType , setViewType] = useState<"small"|"medium">("small");
   useEffect(() => {
     // API 연동 위치
     setData(membersData);
+    setViewData(membersData);
   }, []);
 
   // 카테고리별 데이터 분류
   const categories = [
-    { title: "1학년", members: data.filter(member => member.grade === "1학년") },
-    { title: "2학년", members: data.filter(member => member.grade === "2학년") },
-    { title: "3학년", members: data.filter(member => member.grade === "3학년") },
-    { title: "4학년", members: data.filter(member => member.grade === "4학년") },
-    { title: "초과학기", members: data.filter(member => member.grade === "초과학기") },
-    { title: "휴학생", members: data.filter(member => member.grade === "휴학") },
-    { title: "졸업생", members: data.filter(member => member.grade === "졸업") },
+    { title: "1학년", members: viewData.filter(member => member.grade === "1학년") },
+    { title: "2학년", members: viewData.filter(member => member.grade === "2학년") },
+    { title: "3학년", members: viewData.filter(member => member.grade === "3학년") },
+    { title: "4학년", members: viewData.filter(member => member.grade === "4학년") },
+    { title: "초과학기", members: viewData.filter(member => member.grade === "초과학기") },
+    { title: "휴학생", members: viewData.filter(member => member.grade === "휴학") },
+    { title: "졸업생", members: viewData.filter(member => member.grade === "졸업") },
   ];
+
+  const Search = (text : string) => {
+    console.log(text);
+    setViewData(data.filter(member => member.name.includes(text)));
+  }
 
   return (
     <div className="font-pretendard">
@@ -63,6 +70,7 @@ export default function ManageMembers() {
           <Input
             placeholder="이름으로 검색하기"
             className="w-[250px] h-[36px] px-2 py-1 rounded-lg flex-1"
+            onKeyDown={(e) => e.key === "Enter" && Search((e.target as HTMLInputElement).value)}
           />
         </div>
         <div className="flex flex-row items-center gap-[15px] ml-auto">
