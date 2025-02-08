@@ -35,7 +35,7 @@ export default function page() {
         label={"현재 비밀번호"}
         placeHolder={"현재 비밀번호를 입력하세요"}
         />
-
+        
 <InputFormField 
         form={form}
         name={"newPassword"}
