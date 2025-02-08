@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, Download, X, ZoomIn, ZoomOut } from 'lucide-react';
 import Image from 'next/image';
+import { useSliderStore } from '@/src/store/ImageSlider';
 interface ImageType {
   src: string;
   alt: string;
@@ -11,15 +12,12 @@ interface ImageType {
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  currentIndex: number;
   total: number;
-  setCurrentIndex: (index: number) => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, currentIndex,total, setCurrentIndex }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, total }) => {
 
-
-
+  const {currentIndex,setCurrentIndex}=useSliderStore();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
