@@ -35,7 +35,7 @@ export default function page() {
         label={"현재 비밀번호"}
         placeHolder={"현재 비밀번호를 입력하세요"}
         />
-
+        
 <InputFormField 
         form={form}
         name={"newPassword"}
@@ -43,12 +43,12 @@ export default function page() {
         placeHolder={"새 비밀번호를 입력해주세요"}
         />
 
-<InputFormField 
-        form={form}
-        name={"confirmNewPassword"}
-        label={"새 비밀번호 확인"}
-        placeHolder={"한번 더 입력해주세요"}
-        />
+    <InputFormField 
+            form={form}
+            name={"confirmNewPassword"}
+            label={"새 비밀번호 확인"}
+            placeHolder={"한번 더 입력해주세요"}
+            />
 
       <div>
           <Button
