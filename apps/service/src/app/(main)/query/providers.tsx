@@ -2,11 +2,12 @@
 
 // Since QueryClientProvider relies on useContext under the hood, we have to put 'use client' on top
 import {
+    defaultShouldDehydrateQuery,
   isServer,
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
@@ -14,6 +15,12 @@ function makeQueryClient() {
         // With SSR, we usually want to set some default staleTime
         // above 0 to avoid refetching immediately on the client
         staleTime: 60 * 1000,
+      },
+      dehydrate: {
+        // include pending queries in dehydration //이걸 사용하면 await 과정이 빠지게된다.
+        shouldDehydrateQuery: (query) =>
+          defaultShouldDehydrateQuery(query) ||
+          query.state.status === 'pending',
       },
     },
   })
@@ -43,6 +50,11 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   const queryClient = getQueryClient()
 
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+        {process.env.NODE_ENV === 'development' && (
+        <ReactQueryDevtools initialIsOpen={false} />
+      )}
+        {children}
+        </QueryClientProvider>
   )
 }
