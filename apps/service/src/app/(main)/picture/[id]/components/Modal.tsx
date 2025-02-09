@@ -1,13 +1,11 @@
 'use client';
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, {  useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Download, X, ZoomIn, ZoomOut } from 'lucide-react';
 import Image from 'next/image';
 import { useSliderStore } from '@/src/store/ImageSlider';
-interface ImageType {
-  src: string;
-  alt: string;
-}
+
+
 
 interface ModalProps {
   isOpen: boolean;
@@ -109,22 +107,31 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, total }) => {
 
 
       {/* 좌측 화살표 */}
-      <button
-        onClick={handlePrevImage}
-        className="absolute left-5 text-white z-50"
-        aria-label="Previous Image"
-      >
-        <ChevronLeft size={24} />
-      </button>
+
+      {
+        currentIndex !== 0 && (
+                <button
+              onClick={handlePrevImage}
+              className="absolute left-5 text-white z-50"
+              aria-label="Previous Image"
+            >
+              <ChevronLeft size={24} />
+            </button>
+        )
+      }
 
       {/* 우측 화살표 */}
-      <button
+      {
+        currentIndex !== total-1 && (
+          <button
         onClick={handleNextImage}
         className="absolute right-5 text-white z-50"
         aria-label="Next Image"
       >
         <ChevronRight size={24} />
       </button>
+        )
+      }
 
 
 

@@ -3,9 +3,6 @@
 import { useSliderStore } from "@/src/store/ImageSlider";
 import { ChevronLeft, ChevronRight, Download } from "lucide-react";
 import React from "react";
-import { useState } from "react";
-
-
 
 
 interface settings {
@@ -20,7 +17,6 @@ interface settings {
   export const Slider = ({className,children,speed,infinite} : SliderProps)=>{
   
     const {currentIndex,setCurrentIndex}=useSliderStore();
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const count = React.Children.count(children);
     const totalSlides = count;
   
@@ -71,21 +67,29 @@ interface settings {
         </div>
   
         {/* 왼쪽 화살표 */}
-        <ChevronLeft
-        size={40}
-          onClick={() => moveToSlide(currentIndex - 1)}
-          className="absolute top-1/2 left-0 transform -translate-y-1/2  text-white p-2  focus:outline-none cursor-pointer"
-          aria-label="Previous Slide"
-        />
+        {
+          currentIndex !== 0 && (
+            <ChevronLeft
+              size={40}
+              onClick={() => moveToSlide(currentIndex - 1)}
+              className="absolute top-1/2 left-0 transform -translate-y-1/2 text-white p-2 focus:outline-none cursor-pointer"
+              aria-label="Previous Slide"
+            />
+          )}
      
   
         {/* 오른쪽 화살표 */}
-        <ChevronRight
-          size={40}
-          onClick={() => moveToSlide(currentIndex + 1)}
-          className="absolute top-1/2 right-0 transform -translate-y-1/2 text-white p-2 focus:outline-none cursor-pointer"
-          aria-label="Next Slide"
-        />
+        {
+          currentIndex !== totalSlides-1 && (
+              <ChevronRight
+                        size={40}
+                        onClick={() => moveToSlide(currentIndex + 1)}
+                        className="absolute top-1/2 right-0 transform -translate-y-1/2 text-white p-2 focus:outline-none cursor-pointer"
+                        aria-label="Next Slide"
+                      />
+                  )
+        }
+        
   
         {/* 도트 네비게이션 */}
         <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">

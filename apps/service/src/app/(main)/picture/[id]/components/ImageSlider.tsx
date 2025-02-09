@@ -1,9 +1,7 @@
 "use client"
 import { useState } from 'react';
 import Image from 'next/image';
-import { ChevronLeft,ChevronRight } from 'lucide-react';
 import React from 'react';
-import { Download } from 'lucide-react';
 import Modal from './Modal';
 import { Slider } from './Slider';
 
@@ -14,17 +12,15 @@ interface ImageSliderProps {
   infinite?: boolean;
 }
 
-const settings = {
-  speed: 500,
-  infinite: false,
-};
-
-
 
 const ImageSlider = ({  speed = 500, infinite = false } : ImageSliderProps) => {
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
   const count = 3;
-
+  const settings ={
+    speed: speed,
+    infinite : infinite
+  }
 
   const openModal = () => {
     setIsModalOpen(true);
