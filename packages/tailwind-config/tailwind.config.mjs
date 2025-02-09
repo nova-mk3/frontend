@@ -29,6 +29,8 @@ export const tailwindConfig = {
       },
       screens: {
         mobile: { max: "768px" },
+        screenLg : {max : "1280px" },
+        screenMd : {max : "1020px" },
       },
       fontFamily: {
         pretendard: ["var(--font-pretendard)"],
@@ -63,7 +65,8 @@ export const tailwindConfig = {
         b3: ["12px", { lineHeight: "16px", fontWeight: "400" }],
       },
       boxShadow : {
-        footer : '0 0 8px rgba(0, 0, 0, 0.1)'
+        footer : '0 0 8px rgba(0, 0, 0, 0.1)',
+        card: '4px 0px 4px 0 rgba(0, 0, 0, 0.25), 0px 4px 4px 0 rgba(0, 0, 0, 0.25)',
       }
     },
   },

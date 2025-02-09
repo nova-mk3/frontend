@@ -4,12 +4,13 @@ import Title from '../archive/components/Title'
 import Item from './components/Item'
 import Link from 'next/link'
 import { Button } from '@nova/ui/components/ui/button'
+import ItemList from './components/ItemList'
 
 export default function page() {
   return (
-    <div className='flex flex-row flex-wrap justify-center gap-5 pt-10'>
-      <div className={`flex flex-col  border-primary border-b-[1px] py-5 mobile:flex-col mobile:items-center w-full`}>
-      <p className="d-l text-primary mx-auto">Welcome to Club Nova</p>
+    <div className='flex flex-col justify-center gap-5 pt-10'>
+      <div className={`flex flex-col  border-primary border-b-[1px] py-5 mobile:flex-col mobile:items-center w-full mobile:gap-2`}>
+      <p className="d-l text-primary mx-auto mobile:d-s">Welcome to Club Nova</p>
 
       <div className="flex flex-row items-center gap-[15px] ml-auto mt-auto mobile:flex-col mobile:w-full">
         
@@ -21,11 +22,11 @@ export default function page() {
       </div>
 
     </div>
-      <Item title={"공지사항"}/>
-      <Item title={"Q&A"}/>
-      <Item title={"자기소개"}/>
-      <Item title={"자유게시판"}/>
-      <Item title={"자유게시판"} none={true}/>
-      <Item title={"자유게시판"} none={true}/>
+    <div className='grid gap-4 xl:grid-cols-4 lg:grid-cols-2 mobile:grid-cols-1'>
+      <ItemList title={"공지사항"} href='/board/notice'/>
+      <ItemList  title={"Q&A"} href='/board/qna'/>
+      <ItemList  title={"자기소개"} href='/board/selfintro'/>
+      <ItemList  title={"자유게시판"} href='/board/any'/>
+      </div>
     </div>
 )}

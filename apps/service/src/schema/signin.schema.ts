@@ -10,7 +10,7 @@ export const SigninSchema = z.object({
     .regex(/^\d+$/, { message: "학번은 숫자만 입력할 수 있습니다." }),
   password: z
     .string()
-    .min(24, { message: "비밀번호가 너무 짧습니다." })
+    .min(8, { message: "비밀번호는 8글자 이상이어야 합니다." })
     .refine((password) => isStrongPassword(password), {
       message: "소문자, 대문자, 숫자, 특수문자를 모두 포함해야 합니다.",
     }),

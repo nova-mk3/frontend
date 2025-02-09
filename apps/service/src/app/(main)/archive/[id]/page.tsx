@@ -13,16 +13,18 @@ export default async function page({ params }: Props) {
   const { id } = await params;
 
   return (
-    <div className="flex flex-row t-m w-[80%] mx-auto gap-[50px]">
+    <div className="flex flex-col t-m w-[80%] mx-auto">
+      <Title />
+      <div className="flex flex-row gap-[50px]">
       <Aside/>
       <div className="flex flex-col gap-[20px] mx-auto flex-1">
-      <Title />
-      <SubTitle />
+      <SubTitle/>
       <FileListLayout>
         <FileList/>
       </FileListLayout>
       <Content />
       <CommentLayout />
+      </div>
       </div>
     </div>
   );

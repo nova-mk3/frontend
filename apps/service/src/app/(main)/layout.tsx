@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import React from "react";
 import { pretendard } from "../../theme/font";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
   title: "nova",
@@ -21,6 +22,7 @@ export default function RootLayout({
         <div id="root" className="max-w-screen-xl mx-auto">
           <Header />
           {children}
+          <Footer/>
         </div>
       </body>
     </html>

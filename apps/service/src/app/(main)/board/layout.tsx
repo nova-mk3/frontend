@@ -1,15 +1,32 @@
+"use client"
+
 import React from 'react'
 import Navigation from './components/Navigation';
+import { usePathname } from 'next/navigation';
 
 export default function layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
+
+  const pathname = usePathname();
+  
+    // 현재 URL과 링크의 href가 같다면 활성화된 스타일을 적용
+    const isActive = pathname === '/board/newpost';
+
+    if(isActive){
+      return (<div className='flex flex-col t-m w-[80%] mx-auto'>
+        {children}
+    </div>)
+    }
+
+
+    else 
+    return (
     <>
     <Navigation/>
-    <div className='flex flex-col t-m w-[80%] mx-auto'>
+    <div className='flex flex-col t-m mx-auto w-full screenLg:w-[80%]'>
         {children}
     </div>
     </>

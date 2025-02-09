@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* microsoft Edge input 눈 없애기 */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
 @layer base {
   :root {
     --radius: 0.5rem;

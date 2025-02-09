@@ -54,7 +54,7 @@ export function SigninForm() {
             name={"password"}
             label={"비밀번호"}
             placeHolder={"********"}
-            type="text"
+            type="password"
             leftIcon={<Lock size={18} />}
             hasToggleIcon
           />
