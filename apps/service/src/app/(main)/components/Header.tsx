@@ -10,6 +10,7 @@ import AppSidebar from "./Siderbar/AppSidebar";
 
 export default function Header({ className }: HTMLAttributes<HTMLDivElement>) {
   const [isLogin] = useState(false);
+  // sidebar 가 아니라 siderbar라고 한 이유가 있나? @kwonja
   const [isSiderbar, setIsSiderbar] = useState(false);
 
   const toggleSiderbar = () => {

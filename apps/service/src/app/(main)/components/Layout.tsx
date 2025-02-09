@@ -10,7 +10,6 @@ export default function Layout({
 }>) {
   const pathName = usePathname();
   const isLandingPage = pathName == "/";
-  console.log(isLandingPage);
 
   return (
     <body>
@@ -23,7 +22,7 @@ export default function Layout({
             : "max-w-screen-xl mx-auto"
         }
       >
-        {/* 사라지고 나타나는걸 스크롤 이벤트로 처리해야 한다. */}
+        {/* TODO: 사라지고 나타나는걸 스크롤 이벤트로 처리해야 한다. */}
         <Header />
         {children}
       </div>
