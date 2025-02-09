@@ -19,7 +19,7 @@ const ImageSlider = ({  speed = 500, infinite = false } : ImageSliderProps) => {
   const count = 3;
   const settings ={
     speed: speed,
-    infinite : infinite
+    infinite : infinite,
   }
 
   const openModal = () => {
