@@ -75,36 +75,39 @@ const userSchema = z.object({
         message: "이메일이 비어 있습니다."
       }).email({ message: "이메일 형식에 맞지 않습니다." }),
       emailCode : z.string(),
-      confirmEmailCode: z.string().optional(),
       birth: z.date().optional(),
       profilePhoto: z
-        .instanceof(File)
-        .refine((file) => file instanceof File, {
-          message: "프로필 이미지는 파일이어야 합니다.",
-        })
-        .refine((file: File) => file.type.startsWith("image/"), {
-          message: "이미지 파일만 업로드할 수 있습니다.",
-        })
-        .optional(),
+      .instanceof(File)
+      .refine((file) => file instanceof File, {
+        message: "프로필 이미지는 파일이어야 합니다.",
+      })
+      .refine((file: File) => file.type.startsWith("image/"), {
+        message: "이미지 파일만 업로드할 수 있습니다.",
+      })
+      .optional(),
       phoneNumber: z.string().optional(),
       emailCheck: z.boolean().refine((val) => val === true,{
-        message: "인증한 이메일과 다른지 확인하세요!"
+        message: "인증이 필요합니다."
+      }).optional(),
+      emailCodeCheck : z.boolean().refine((val) => val === true,{
+        message: "인증이 필요합니다."
       }).optional(),
 }).superRefine((data, ctx) => {
 
   if (data.emailCheck === false) {
-    console.log("ㅎ")
+
     ctx.addIssue({
       code: z.ZodIssueCode.custom,
       message: "이메일 인증을 해야합니다.",
       path: ["emailCode"],
     });
   }
-  else if (data.emailCode !== data.confirmEmailCode) {
+  else if (data.emailCodeCheck === false) {
+
     ctx.addIssue({
       code: z.ZodIssueCode.custom,
-      message: "인증코드가 일치하지 않습니다",
-      path: ["emailCode"],
+      message: "인증을 해야합니다",
+      path: ["emailCodeCheck"],
     });
   }
 }); 

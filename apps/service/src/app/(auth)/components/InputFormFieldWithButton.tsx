@@ -28,7 +28,7 @@ export function InputFormFieldWithButton<T extends Record<string, any>>({
   pattern,
   leftIcon,
   hasToggleIcon,
-  disabled = false,
+  disabled,
   btnText,
   onClick,
 }: {
@@ -107,7 +107,7 @@ export function InputFormFieldWithButton<T extends Record<string, any>>({
               type="button"
               onClick={ ()=> onClick?.(field.value) }
              >
-              {btnText}
+              { disabled === true ? "변경" : btnText}
             </Button>
           </div>
           {hasToggleIcon && (

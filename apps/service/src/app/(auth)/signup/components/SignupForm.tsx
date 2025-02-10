@@ -14,13 +14,16 @@ import { SelectFormField } from "./SelectFormField";
 import { InputFormFieldWithButton } from "../../components/InputFormFieldWithButton";
 import { useEffect, useState } from "react";
 import GraduationYearSelect from "./GraduationYearSelect";
+import { verifyEmail, verifyEmailCode } from "@/src/api/auth";
+import { ZodError } from "zod";
 
 // TODO : 사이사이에 숨어있는 as 들 없애기.
 export function SignupForm() {
 
   // 이메일 인증 메시지 상태
   const [emailSentMessage, setEmailSentMessage] = useState<string | null>(null);
-  const [emailVerifiedMessage, setEmailVerifiedMessage] = useState<string | null>(null);
+  const [emailVerifiedMessageSuccess, setEmailVerifiedMessageSuccess] = useState<string | null>(null);
+  const [emailVerifiedMessageDanger, setEmailVerifiedMessageDanger] = useState<string | null>(null);
   
 const form = useForm<SignupInput>({
     resolver: zodResolver(SignupSchema),
@@ -31,8 +34,8 @@ const form = useForm<SignupInput>({
       grade: "1학년",
       semester: "1학기",
       emailCode: '',
-      emailCheck: false,
-      confirmEmailCode : '',
+      emailCodeCheck : undefined,
+      emailCheck: undefined,
       birth: new Date("1998-10-13"),
       profilePhoto: undefined,
       phoneNumber: "",
@@ -51,6 +54,14 @@ const form = useForm<SignupInput>({
     control: form.control,
     name: "graduation",
   });
+  const emailCheck = useWatch({
+    control: form.control,
+    name: "emailCheck",
+  });
+  const emailCodeCheck = useWatch({
+    control: form.control,
+    name: "emailCodeCheck",
+  });
   const isWork = useWatch({
     control: form.control,
     name: "work",
@@ -66,37 +77,60 @@ const form = useForm<SignupInput>({
     name: "contact",
   });
 
-  //TODO: 로직을 좀 더 직관적으로 만들 필요가 있음
-  useEffect(()=>{
-    if(emailSentMessage === null)return;
-
-
-    // 이메일인증을 성공했는데, 이메일 변경이 일어났을때 에러메시지 출력
-    if(emailSentMessage !== null){
-      form.setValue("emailCheck" , false ,{shouldValidate: true})
-      setEmailSentMessage(null);
-    }
-
-
-  },[isEmail])
-
-
-  console.log(form.formState.isValid);
- 
   
   function onSubmit(values: SignupInput) {
     console.log(values);
   }
-  function onEmailSubmit(value : string) {
+  async function onEmailSubmit(value : string) {
     if(form?.formState.errors.email) return;
 
-   setEmailSentMessage("이메일 인증번호가 전송되었습니다! 메일을 확인해주세요"); // 이메일 인증번호 전송 메시지
-   form.setValue("emailCheck" , true ,{shouldValidate: true})
+    //미인증상태
+    if(!emailCheck)
+    {
+      const response =  await verifyEmail(value);
+      setEmailSentMessage(response.data);
+      form.clearErrors("emailCode");
+      form.setValue("emailCheck" , true ,{shouldValidate: true})
+    }
+    //인증 이메일 변경
+    else if(emailCheck === true) {
+      form.setValue("emailCheck" , false ,{shouldValidate: true})
+      form.setValue("emailCodeCheck" , false ,{shouldValidate: true})
+      form.setValue("emailCode" , "" ,{shouldValidate: true})
+      setEmailSentMessage("");
+      setEmailVerifiedMessageSuccess(null);
+      setEmailVerifiedMessageDanger(null);
+    }
   }
 
-  function onEmailNumberSubmit(value : string) {
+  async function onEmailNumberSubmit(value : string) {
 
-    setEmailVerifiedMessage("이메일 인증이 완료되었습니다!"); // 이메일 인증 성공 메시지
+    if(!emailCheck){
+      { form.setError("email", { message: "이메일인증을 진행해주세요!" })}
+      return;
+    }
+
+     try{
+      const response = await verifyEmailCode({
+        email : isEmail,
+        authCode : value
+      });
+      if(response.status === 401){
+          setEmailVerifiedMessageDanger("인증번호가 다릅니다"); 
+          setEmailVerifiedMessageSuccess(null);
+      }
+      else if(response.status === 200){
+        form.setValue("emailCodeCheck" , true ,{shouldValidate: true}) 
+        setEmailVerifiedMessageSuccess("이메일 인증이 완료되었습니다!"); 
+        setEmailVerifiedMessageDanger(null);
+      }
+      
+     }catch(error :any){
+       
+       console.log(error);
+     }
+
+     
   }
 
   return (
@@ -127,6 +161,7 @@ const form = useForm<SignupInput>({
           placeHolder={"xxxxx@xxxxx.com"}
           type="email"
           btnText="인증번호 전송"
+          disabled={emailCheck === true ? true : false}
           onClick={onEmailSubmit}
         />
         {form.formState.errors.emailCheck && <p className="b-s text-danger">{form.formState.errors.emailCheck?.message}</p>}
@@ -141,8 +176,8 @@ const form = useForm<SignupInput>({
           btnText="확인"
           onClick={onEmailNumberSubmit}
         />
-        {emailVerifiedMessage && <p className="b-s text-success">{emailVerifiedMessage}</p>} {/* 이메일 인증 성공 메시지 */}
-
+        {emailVerifiedMessageSuccess && <p className="b-s text-success">{emailVerifiedMessageSuccess}</p>} {/* 이메일 인증 성공 메시지 */}
+        {emailVerifiedMessageDanger && <p className="b-s text-danger">{emailVerifiedMessageDanger}</p>} {/* 이메일 인증 실패 메시지 */}
         
         <RadioFormField form={form} name={"graduation"} label={"소속"} options={[{value : false, label : "재학생"},{value : true, label : "졸업생"}]}/>
 
@@ -243,3 +278,4 @@ const form = useForm<SignupInput>({
     </Form>
   );
 }
+
