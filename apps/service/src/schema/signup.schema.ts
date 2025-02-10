@@ -14,21 +14,22 @@ export let semester = ["1학기", "2학기"];
 const studentSchema = z
   .object({
 
-    studentType : z.enum(["재학생", "졸업생"]),
+    graduation : z.boolean(),
     // 학부생
     grade: z.enum(Zodgrade).optional(),
     semester: z.enum(Zodsemester).optional(),
-    isAbsence : z.string().optional(),
+    absence : z.boolean(),
 
     
     // 졸업생 
-    isWork :  z.string().optional(),
+    year: z.string(),
+    work :  z.string().optional(),
     job : z.string().optional(),
-    isContact : z.string().optional(),
+    contact : z.boolean(),
     contactInfo : z.string().optional(),
-    contactInfoDescription : z.string().optional(),
+    contactDescription : z.string().optional(),
   }).superRefine((data, ctx) => {
-    if (data.studentType === "재학생") {
+    if (data.graduation === true) {
       // 재학생일 경우, grade, semester, isAbsence만 필수로 요구
       if (!data.grade) {
         ctx.addIssue({
@@ -44,16 +45,16 @@ const studentSchema = z
           code: z.ZodIssueCode.custom,
         });
       }
-      if (!data.isAbsence) {
+      if (!data.absence) {
         ctx.addIssue({
           path: ["isAbsence"],
           message: "결석 여부는 필수입니다.",
           code: z.ZodIssueCode.custom,
         });
       }
-    } else if (data.studentType === "졸업생") {
+    } else if (data.graduation === false) {
       // 졸업생일 경우, isWork, job, isContact, contactInfo만 필수로 요구
-      if (!data.isWork) {
+      if (!data.work) {
         ctx.addIssue({
           path: ["isWork"],
           message: "근무 여부는 필수입니다.",
@@ -76,7 +77,7 @@ const userSchema = z.object({
       emailCode : z.string(),
       confirmEmailCode: z.string().optional(),
       birth: z.date().optional(),
-      profileImage: z
+      profilePhoto: z
         .instanceof(File)
         .refine((file) => file instanceof File, {
           message: "프로필 이미지는 파일이어야 합니다.",

@@ -13,6 +13,7 @@ import { RadioFormField } from "./RadioFormField";
 import { SelectFormField } from "./SelectFormField";
 import { InputFormFieldWithButton } from "../../components/InputFormFieldWithButton";
 import { useEffect, useState } from "react";
+import GraduationYearSelect from "./GraduationYearSelect";
 
 // TODO : 사이사이에 숨어있는 as 들 없애기.
 export function SignupForm() {
@@ -33,24 +34,26 @@ const form = useForm<SignupInput>({
       emailCheck: false,
       confirmEmailCode : '',
       birth: new Date("1998-10-13"),
-      profileImage: undefined,
+      profilePhoto: undefined,
       phoneNumber: "",
       password: "",
       confirmPassword: "",
-      studentType : "재학생",
-      isWork : "",
+      graduation : false,
+      work : "",
       job : '',
+      contact : undefined,
+      contactDescription : "",
     },
     mode: "onChange",
   });
 
-  const studentType = useWatch({
+  const graduation = useWatch({
     control: form.control,
-    name: "studentType",
+    name: "graduation",
   });
   const isWork = useWatch({
     control: form.control,
-    name: "isWork",
+    name: "work",
   });
 
   const isEmail = useWatch({
@@ -60,7 +63,7 @@ const form = useForm<SignupInput>({
 
   const isContact = useWatch({
     control: form.control,
-    name: "isContact",
+    name: "contact",
   });
 
   //TODO: 로직을 좀 더 직관적으로 만들 필요가 있음
@@ -141,26 +144,26 @@ const form = useForm<SignupInput>({
         {emailVerifiedMessage && <p className="b-s text-success">{emailVerifiedMessage}</p>} {/* 이메일 인증 성공 메시지 */}
 
         
-        <RadioFormField form={form} name={"studentType"} label={"소속"} options={[{value : "재학생", label : "재학생"},{value : "졸업생", label : "졸업생"}]}/>
+        <RadioFormField form={form} name={"graduation"} label={"소속"} options={[{value : false, label : "재학생"},{value : true, label : "졸업생"}]}/>
 
 
         {
-          studentType === "재학생" && (
+          graduation === false && (
             <>
              <div className="flex gap-4 items-center">
             <SelectFormField form={form} name={"grade"} label="학년" options={grade}/>
             <SelectFormField form={form} name={"semester"} label="학기" options={semester}/>
             </div>
-            <RadioFormField form={form} name={"isAbsence"} label={"휴학"} options={[{value : "예", label : "예"},{value : "아니오", label : "아니오"}]}/>
+            <RadioFormField form={form} name={"absence"} label={"휴학"} options={[{value : true, label : "예"},{value : false, label : "아니오"}]}/>
             </>
           )
         }
 
         {
-          studentType === "졸업생" && (
+          graduation === true && (
             <>
-
-              <RadioFormField form={form} name={"isWork"} label={"재직여부"} options={[{value : "true", label : "예"},{value : "false", label : "아니오"}]}/>
+              <GraduationYearSelect form={form} name={"year"} label="졸업년도" options={semester}/>
+              <RadioFormField form={form} name={"work"} label={"재직여부"} options={[{value : true, label : "예"},{value : false, label : "아니오"}]}/>
               <InputFormField
                 form={form}
                 name={"job"}  
@@ -169,7 +172,7 @@ const form = useForm<SignupInput>({
                 type="text"
                 disabled={ isWork === "false" && true}
               />
-              <RadioFormField form={form} name={"isContact"} label={"연락 공개 여부"} options={[{value : "true", label : "예"},{value : "false", label : "아니오"}]}/>
+              <RadioFormField form={form} name={"contact"} label={"연락 공개 여부"} options={[{value : true, label : "예"},{value : false, label : "아니오"}]}/>
               
               <InputFormField
                 form={form}
@@ -177,16 +180,16 @@ const form = useForm<SignupInput>({
                 label={"연락처"}
                 placeHolder={"연락수단을 입력해주세요! ex) 인스타, 오픈채팅방 링크 등등"}
                 type="text"
-                disabled={ isContact === "false" && true}
+                disabled={ isContact === false && true}
               />
 
                <InputFormField
                 form={form}
-                name={"contactInfoDescription"}  
+                name={"contactDescription"}  
                 label={"연락 방법 설명"}
                 placeHolder={"연락시 주의사항을 설명해주세요!"}
                 type="text"
-                disabled={ isContact === "false" && true}
+                disabled={ isContact === false && true}
               />
 
             </>
@@ -197,7 +200,7 @@ const form = useForm<SignupInput>({
           <DatePickerForm form={form} name={"birth"} label={"생년월일"} />
           <FileFormField
             form={form}
-            name="profileImage"
+            name="profilePhoto"
             label="프로필 사진"
             accept="image/*"
           />
@@ -231,7 +234,7 @@ const form = useForm<SignupInput>({
           <Button
             className="mt-8 w-full b-l mb-5"
             type="submit"
-            disabled={!form.formState.isValid}
+            // disabled={!form.formState.isValid}
           >
             회원가입
           </Button>

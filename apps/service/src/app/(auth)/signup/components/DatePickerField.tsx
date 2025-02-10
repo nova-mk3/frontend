@@ -60,12 +60,15 @@ export function DatePickerForm({
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
+                captionLayout="dropdown-buttons"
                 className="bg-background01"
                 mode="single"
+                fromYear={2000} 
+                toYear={new Date().getFullYear()}
                 selected={field.value as Date}
                 onSelect={field.onChange}
                 disabled={(date) =>
-                  date > new Date() || date < new Date("1900-01-01")
+                  date > new Date() || date < new Date("2000-01-01")
                 }
                 locale={ko}
                 initialFocus

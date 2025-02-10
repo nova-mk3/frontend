@@ -21,7 +21,7 @@ export function RadioFormField({
   form: UseFormReturn<SignupInput>;
   name: keyof SignupInput;
   label: string;
-  options: { value: string ; label: string }[];
+  options: { value: any ; label: string }[];
 }) {
   return (
     <FormField
