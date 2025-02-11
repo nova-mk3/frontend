@@ -12,7 +12,7 @@ const GraduationYearSelect = ({
   form: UseFormReturn<SignupInput>;
   name: keyof SignupInput;
   label: string;
-  options: string[];
+  options?: string[];
 }) => {
   // 매 렌더 시 getGraduationYears() 호출하여 최신 옵션을 생성
   const graduationYears = getGraduationYears();

@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { isStrongPassword } from "../libs/utils/isStrongPassword";
+import { truncate } from "node:fs/promises";
 
 
 // z.enum value를 변수로 관리하고 싶은데, 리터럴만 받아야한다고 하는데 고민이 더 필요할듯
@@ -18,18 +19,18 @@ const studentSchema = z
     // 학부생
     grade: z.enum(Zodgrade).optional(),
     semester: z.enum(Zodsemester).optional(),
-    absence : z.boolean(),
+    absence : z.boolean().optional(),
 
     
     // 졸업생 
-    year: z.string(),
-    work :  z.string().optional(),
+    year: z.string().optional(),
+    work :  z.boolean().optional(),
     job : z.string().optional(),
-    contact : z.boolean(),
+    contact : z.boolean().optional(),
     contactInfo : z.string().optional(),
     contactDescription : z.string().optional(),
   }).superRefine((data, ctx) => {
-    if (data.graduation === true) {
+    if (data.graduation === false) {
       // 재학생일 경우, grade, semester, isAbsence만 필수로 요구
       if (!data.grade) {
         ctx.addIssue({
@@ -45,19 +46,26 @@ const studentSchema = z
           code: z.ZodIssueCode.custom,
         });
       }
-      if (!data.absence) {
+      if (data.absence === undefined) {
         ctx.addIssue({
-          path: ["isAbsence"],
+          path: ["absence"],
           message: "결석 여부는 필수입니다.",
           code: z.ZodIssueCode.custom,
         });
       }
-    } else if (data.graduation === false) {
+    } else if (data.graduation === true) {
       // 졸업생일 경우, isWork, job, isContact, contactInfo만 필수로 요구
-      if (!data.work) {
+      if (data.work === undefined) {
         ctx.addIssue({
-          path: ["isWork"],
+          path: ["work"],
           message: "근무 여부는 필수입니다.",
+          code: z.ZodIssueCode.custom,
+        });
+      }
+      if (!data.year) {
+        ctx.addIssue({
+          path: ["year"],
+          message: "졸업년도는 필수입니다",
           code: z.ZodIssueCode.custom,
         });
       }
@@ -67,7 +75,7 @@ const studentSchema = z
 
 const userSchema = z.object({
   username: z.string(),
-    studentId: z
+    studentNumber: z
       .string()
       .min(10, { message: "학번은 10자리 이상이어야 합니다." })
       .regex(/^\d+$/, { message: "학번은 숫자만 입력할 수 있습니다." }),

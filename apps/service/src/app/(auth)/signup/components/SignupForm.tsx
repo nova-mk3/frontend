@@ -14,7 +14,7 @@ import { SelectFormField } from "./SelectFormField";
 import { InputFormFieldWithButton } from "../../components/InputFormFieldWithButton";
 import { useEffect, useState } from "react";
 import GraduationYearSelect from "./GraduationYearSelect";
-import { verifyEmail, verifyEmailCode } from "@/src/api/auth";
+import { GraduationSignUpRequest, MemberSignUpRequest, signup, SignUpData, verifyEmail, verifyEmailCode } from "@/src/api/auth";
 import { useMutation } from "@tanstack/react-query";
 
 // TODO : 사이사이에 숨어있는 as 들 없애기.
@@ -32,11 +32,12 @@ const form = useForm<SignupInput>({
     defaultValues: { 
       username: "",
       email: "",
-      studentId: "",
+      studentNumber: "",
       grade: "1학년",
       semester: "1학기",
       emailCode: '',
       emailCodeCheck : undefined,
+      absence : undefined,
       emailCheck: undefined,
       birth: new Date("1998-10-13"),
       profilePhoto: undefined,
@@ -44,9 +45,9 @@ const form = useForm<SignupInput>({
       password: "",
       confirmPassword: "",
       graduation : false,
-      work : "",
+      work : undefined,
       job : '',
-      contact : undefined,
+      contact : false,
       contactInfo: "",
       contactDescription : "",
     },
@@ -90,8 +91,7 @@ const form = useForm<SignupInput>({
       form.setValue("emailCheck" , true ,{shouldValidate: true})
     },
     onError: (error) => {
-      // 오류 발생 시 처리 로직 (예: 오류 메시지 표시)
-      console.error("이메일 인증 실패:", error);
+      console.log(error);
     },
   });
 
@@ -109,14 +109,23 @@ const form = useForm<SignupInput>({
     },
   });
 
+  const useSignupMutation = useMutation({
+    mutationFn: (data : SignUpData) => signup(data),
+    onSuccess: (data : any) => {
+      setEmailSentMessage(data.data);
+      form.clearErrors("emailCode");
+      form.setValue("emailCheck" , true ,{shouldValidate: true})
+    },
+    onError: (error) => {
+      alert(error.message);
+    },
+  })
 
 
-  function onSubmit(values: SignupInput) {
-    console.log(values);
-  }
+
   async function onEmailSubmit(value : string) {
     if(form?.formState.errors.email) return;
-
+    
     //미인증상태
     if(!emailCheck){ useVerifyEmailMutation.mutate(value);}
     //인증 이메일 변경
@@ -129,9 +138,9 @@ const form = useForm<SignupInput>({
       setEmailVerifiedMessageDanger(null);
     }
   }
-
+  
   function onEmailNumberSubmit(value : string) {
-
+    
     if(!emailCheck){
       { form.setError("email", { message: "이메일인증을 진행해주세요!" })}
       return;
@@ -139,6 +148,49 @@ const form = useForm<SignupInput>({
     useVerifyEmailCodeMutation.mutate({email : isEmail,authCode : value});
   }
 
+  
+  function onSubmit(values: SignupInput) {
+
+    const grade = Number(values.grade![0]);
+
+    const memberSignUpRequest: MemberSignUpRequest = {
+      studentNumber : values.studentNumber,
+      password : values.password,
+      name : values.username,
+      email : values.email,
+      graduation: values.graduation,
+      grade: grade,      
+      semester: Number(values.semester),
+      absence : values.absence!,
+      profilePhoto : "", //나중에 file로 바뀌어야함
+      phone : values.phoneNumber,
+      birth : !values.birth ? "" : values.birth.toLocaleDateString('ko-KR')
+    };
+
+    // [2] graduation이 true라면 graduationSignUpRequest 만들기
+    let graduationSignUpRequest: GraduationSignUpRequest | undefined;
+    if (values.graduation) {
+      graduationSignUpRequest = {
+        year: Number(values.year!.split("년")[0]),
+        contact: values.contact!,
+        work: values.work!,
+        job : values.job!,
+        contactInfo : values.contactInfo!,
+        contactDescription : values.contactDescription!
+      };
+    }
+
+    // [3] 최종 SignUpData 조합
+    const requestData: SignUpData = {
+      memberSignUpRequest,
+      graduationSignUpRequest
+    };
+
+    
+    useSignupMutation.mutate(requestData);
+
+  }
+  
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
@@ -152,7 +204,7 @@ const form = useForm<SignupInput>({
 
         <InputFormField
           form={form}
-          name={"studentId"}  
+          name={"studentNumber"}  
           label={"학번"}
           placeHolder={"학번을 입력하세요"}
           type="text"
@@ -203,7 +255,7 @@ const form = useForm<SignupInput>({
         {
           graduation === true && (
             <>
-              <GraduationYearSelect form={form} name={"year"} label="졸업년도" options={semester}/>
+              <GraduationYearSelect form={form} name={"year"} label="졸업년도"/>
               <RadioFormField form={form} name={"work"} label={"재직여부"} options={[{value : true, label : "예"},{value : false, label : "아니오"}]}/>
               <InputFormField
                 form={form}
@@ -211,7 +263,7 @@ const form = useForm<SignupInput>({
                 label={"직무"}
                 placeHolder={"직무를 입력해주세요"}
                 type="text"
-                disabled={ isWork === "false" && true}
+                disabled={ isWork === false && true}
               />
               <RadioFormField form={form} name={"contact"} label={"연락 공개 여부"} options={[{value : true, label : "예"},{value : false, label : "아니오"}]}/>
               
@@ -275,7 +327,6 @@ const form = useForm<SignupInput>({
           <Button
             className="mt-8 w-full b-l mb-5"
             type="submit"
-            // disabled={!form.formState.isValid}
           >
             회원가입
           </Button>

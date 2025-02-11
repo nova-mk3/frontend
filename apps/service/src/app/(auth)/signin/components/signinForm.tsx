@@ -8,6 +8,8 @@ import { IdCard, Lock } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { InputFormField } from "../../components/InputFormField";
+import { useMutation } from "@tanstack/react-query";
+import { login } from "@/src/api/auth";
 
 export function SigninForm() {
   const form = useForm<SigninInput>({
@@ -19,8 +21,19 @@ export function SigninForm() {
     mode: "onChange",
   });
 
+  const useLoginMutation =  useMutation({
+      mutationFn: ({studentNumber,password} : {studentNumber : string,password : string}) => login({studentNumber, password}),
+      onSuccess: (data : any) => {
+        //로그인 성공
+      },
+      onError: (error) => {
+        //로그인 실패 -> 없는 아이디 입니다? 이런 에러가 있나 -> 일단 보류
+        console.log(error);
+      },
+    });
   function onSubmit(values: SigninInput) {
     console.log(values);
+    useLoginMutation.mutate({studentNumber: values.studentId, password: values.password});
   }
 
   return (
