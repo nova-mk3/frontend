@@ -3,6 +3,7 @@ import MemberCard from "@nova/ui/components/ui/MemberCard";
 import { Button } from "@nova/ui/components/ui/button";
 import { useEffect, useState } from "react";
 import { executiveYear , executiveData  } from "./memberTempData";
+import ExecutiveModal from './ExecutiveModal';
 
 interface Member {
   studentId: string;
@@ -23,6 +24,7 @@ export default function Executive() {
   const [years, setYears] = useState<Year[]>([]);
   const [data, setData] = useState<Member[]>([]);
   const [selectedYear, setSelectedYear] = useState<number | null>(null); // 선택된 연도 상태
+  const [open, setOpen] = useState(true);
 
   useEffect(() => {
     setYears(executiveYear);
@@ -74,13 +76,14 @@ export default function Executive() {
               <div className="text-gray-500">등록된 임원이 없습니다.</div>
             )}
             {title === "임원" && (
-              <Button className="ml-2 mt-2 w-[700px] h-[80px] text-2xl" onClick={() => console.log("임원 추가")}>
+              <Button className="ml-2 mt-2 w-[700px] h-[80px] text-2xl" onClick={() => setOpen(true)}>
                 + 임원 추가
               </Button>
             )}
           </div>
         </div>
       ))}
+      <ExecutiveModal open={open} onClose={() =>setOpen(false)}/>
     </div>
   );
 }

@@ -110,6 +110,8 @@ export default function ManageMembers() {
                 <MemberCard
                   key={member.studentId}
                   name={member.name}
+                  phoneNumber={member.phoneNumber}
+                  studentId={member.studentId}
                   type={viewType}
                 />
               ))
