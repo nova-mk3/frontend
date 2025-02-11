@@ -73,6 +73,11 @@ export default function Executive() {
             ) : (
               <div className="text-gray-500">등록된 임원이 없습니다.</div>
             )}
+            {title === "임원" && (
+              <Button className="ml-2 mt-2 w-[700px] h-[80px] text-2xl" onClick={() => console.log("임원 추가")}>
+                + 임원 추가
+              </Button>
+            )}
           </div>
         </div>
       ))}
