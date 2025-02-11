@@ -25,11 +25,13 @@ export default function Modal({ open, onClose }: ModalProps) {
   const [isVisible, setIsVisible] = useState(open); // 실제 렌더링 여부
   const [isAnimating, setIsAnimating] = useState(false); // 애니메이션 실행 여부
   const [data, setData] = useState<Member[]>([]);
+  const [viewData, setViewData] = useState<Member[]>([]);
 
   useEffect(() => {
     if (open) {
         //TODO : API 연동
         setData(membersData);
+        setViewData(membersData);
         setIsVisible(true);
         setTimeout(() => setIsAnimating(true), 10); // 애니메이션 적용 (약간의 지연 필요)
     } else {
@@ -39,6 +41,10 @@ export default function Modal({ open, onClose }: ModalProps) {
   }, [open]);
 
   if (!isVisible) return null;
+
+  const Search = (text: string) => {
+    setViewData(data.filter((member) => member.name.includes(text)));
+  }
 
   return (
     <div
@@ -57,7 +63,7 @@ export default function Modal({ open, onClose }: ModalProps) {
             <Input
                 placeholder="이름으로 검색하기"
                 className="w-[400px] h-[36px] rounded-lg flex"
-                onKeyDown={(e) => e.key === "Enter" && console.log((e.target as HTMLInputElement).value)}
+                onKeyDown={(e) => e.key === "Enter" && Search((e.target as HTMLInputElement).value)}
             />
             <div className="flex gap-2 mr-5">
                 <Button variant={"text"} onClick={onClose}>취소</Button>
@@ -65,7 +71,7 @@ export default function Modal({ open, onClose }: ModalProps) {
             </div>
         </div>
         <div className="flex flex-wrap overflow-auto max-h-[500px] rounded-lg" style={{scrollbarWidth:"none"}}>
-            {data.map((member) => (
+            {viewData.map((member) => (
                 <MemberCard
                     key={member.studentId}
                     name={member.name}
