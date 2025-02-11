@@ -1,6 +1,6 @@
 // Members 페이지
 import MemberCard from "@nova/ui/components/ui/MemberCard";
-import { Button } from "@nova/ui/components/ui/Button";
+import { Button } from "@nova/ui/components/ui/button";
 import { useEffect, useState } from "react";
 import { executiveYear , executiveData  } from "./memberTempData";
 
