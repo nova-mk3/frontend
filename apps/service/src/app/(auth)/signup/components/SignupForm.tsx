@@ -15,10 +15,12 @@ import { InputFormFieldWithButton } from "../../components/InputFormFieldWithBut
 import { useEffect, useState } from "react";
 import GraduationYearSelect from "./GraduationYearSelect";
 import { verifyEmail, verifyEmailCode } from "@/src/api/auth";
-import { ZodError } from "zod";
+import { useMutation } from "@tanstack/react-query";
 
 // TODO : 사이사이에 숨어있는 as 들 없애기.
 export function SignupForm() {
+
+   
 
   // 이메일 인증 메시지 상태
   const [emailSentMessage, setEmailSentMessage] = useState<string | null>(null);
@@ -45,6 +47,7 @@ const form = useForm<SignupInput>({
       work : "",
       job : '',
       contact : undefined,
+      contactInfo: "",
       contactDescription : "",
     },
     mode: "onChange",
@@ -77,7 +80,37 @@ const form = useForm<SignupInput>({
     name: "contact",
   });
 
-  
+
+  // 이것도 따로 관리할 수 있을 것 같다는 의견
+  const useVerifyEmailMutation = useMutation({
+    mutationFn: (email: string) => verifyEmail(email),
+    onSuccess: (data : any) => {
+      setEmailSentMessage(data.data);
+      form.clearErrors("emailCode");
+      form.setValue("emailCheck" , true ,{shouldValidate: true})
+    },
+    onError: (error) => {
+      // 오류 발생 시 처리 로직 (예: 오류 메시지 표시)
+      console.error("이메일 인증 실패:", error);
+    },
+  });
+
+  const useVerifyEmailCodeMutation = useMutation({
+    mutationFn: ({email,authCode} : {email : string, authCode : string}) => verifyEmailCode({email,authCode}),
+    onSuccess: (data : any) => {
+      form.setValue("emailCodeCheck" , true ,{shouldValidate: true}) 
+        setEmailVerifiedMessageSuccess(data.data); 
+        setEmailVerifiedMessageDanger(null);
+    },
+    onError: (error) => {
+
+      setEmailVerifiedMessageDanger(error.message); 
+      setEmailVerifiedMessageSuccess(null);
+    },
+  });
+
+
+
   function onSubmit(values: SignupInput) {
     console.log(values);
   }
@@ -85,13 +118,7 @@ const form = useForm<SignupInput>({
     if(form?.formState.errors.email) return;
 
     //미인증상태
-    if(!emailCheck)
-    {
-      const response =  await verifyEmail(value);
-      setEmailSentMessage(response.data);
-      form.clearErrors("emailCode");
-      form.setValue("emailCheck" , true ,{shouldValidate: true})
-    }
+    if(!emailCheck){ useVerifyEmailMutation.mutate(value);}
     //인증 이메일 변경
     else if(emailCheck === true) {
       form.setValue("emailCheck" , false ,{shouldValidate: true})
@@ -103,34 +130,13 @@ const form = useForm<SignupInput>({
     }
   }
 
-  async function onEmailNumberSubmit(value : string) {
+  function onEmailNumberSubmit(value : string) {
 
     if(!emailCheck){
       { form.setError("email", { message: "이메일인증을 진행해주세요!" })}
       return;
     }
-
-     try{
-      const response = await verifyEmailCode({
-        email : isEmail,
-        authCode : value
-      });
-      if(response.status === 401){
-          setEmailVerifiedMessageDanger("인증번호가 다릅니다"); 
-          setEmailVerifiedMessageSuccess(null);
-      }
-      else if(response.status === 200){
-        form.setValue("emailCodeCheck" , true ,{shouldValidate: true}) 
-        setEmailVerifiedMessageSuccess("이메일 인증이 완료되었습니다!"); 
-        setEmailVerifiedMessageDanger(null);
-      }
-      
-     }catch(error :any){
-       
-       console.log(error);
-     }
-
-     
+    useVerifyEmailCodeMutation.mutate({email : isEmail,authCode : value});
   }
 
   return (
