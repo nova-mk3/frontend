@@ -1,8 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 export default function Item() {
   return (
     <div className='w-[100%] border rounded-lg flex flex-col cursor-pointer shadow-md transition ease-in-out hover:-translate-y-2 duration-300'>
+      <Link href="/picture/1">
               <Image
                       src="/image/cat.jpg"
                       alt="이미지"
@@ -10,17 +12,20 @@ export default function Item() {
                       height={0}
                       sizes="100vw"
                       style={{ width: "100%", height: "auto" }}
-                      className="border-line01 rounded-lg"
+                      className="border-line01 rounded-t-lg"
               />
               <div className='p-3 flex flex-col gap-3'>
               <div className='t-l'>제목입니다</div>
     
-              <div className='t-m text-text02'>내용입니다</div>
+              <div className='t-m text-text02 min-h-[48px]'>내용입니다</div>
               </div>
               <div className='flex flex-row border-t-[1px] border-line01 px-3 py-1 t-s text-text02 gap-2'>
               <div>좋아요 5</div>
               <div>댓글 5</div>
+              <div>사진 3</div>
+              <div className='ml-auto'>권성민</div>
               </div>
+              </Link>
             </div>
   )
 }

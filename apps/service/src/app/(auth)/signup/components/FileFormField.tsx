@@ -8,7 +8,7 @@ import {
   FormMessage,
 } from "@nova/ui/components/ui/form";
 import { cn } from "@nova/ui/lib/utils";
-import { Image as ImageIcon } from "lucide-react";
+import { Image as ImageIcon, X } from "lucide-react";
 import Image from "next/image";
 import { Path, UseFormReturn } from "react-hook-form";
 import { useFileFormField } from "../hooks/useFileFormField";
@@ -17,14 +17,14 @@ export function FileFormField({
   form,
   name,
   label,
-  accept = "image/*",
+  accept = "image/*"
 }: {
   form: UseFormReturn<SignupInput>;
   name: Path<SignupInput>;
   label: string;
   accept?: string;
 }) {
-  const { preview, inputRef, errors, handleIconClick } = useFileFormField({
+  const { preview, inputRef, errors, handleIconClick,handleReset } = useFileFormField({
     form,
     name,
   });
@@ -57,15 +57,16 @@ export function FileFormField({
             </FormControl>
 
             {preview ? (
-              <div className="mt-[4px]">
+              <div className="relative mt-[4px] flex flex-row items-center">
                 <Image
                   src={preview}
                   onClick={handleIconClick}
                   alt="Profile Preview"
                   width={40}
                   height={40}
-                  className="w-10 h-10 object-cover rounded-full"
+                  className={`w-10 h-10 object-cover rounded-full cursor-pointer`}
                 />
+                <X size={15} onClick={handleReset}  className="cursor-pointer mb-auto"/>
               </div>
             ) : (
               <Button

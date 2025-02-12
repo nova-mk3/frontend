@@ -1,6 +1,8 @@
 import React, { ChangeEvent, useState } from 'react'
 import FilePlus from "@/public/image/FilePlus.svg";
 import FileItem from './FileItem';
+
+
 export default function FileUploader() {
     const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
@@ -11,6 +13,7 @@ export default function FileUploader() {
 
     const filesArray: File[] = Array.from(files);
 
+    // preview: URL.createObjectURL(file), 이게 미리보기를 만드는 코드 -> 나중에 수정할 것
     // 현재 선택된 파일 수와 새로 추가하려는 파일 수의 합이 10을 초과하지 않는지 확인
     if (selectedFiles.length + filesArray.length > 10) {
       alert('최대 10개의 파일만 업로드할 수 있습니다.');

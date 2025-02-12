@@ -10,8 +10,9 @@ import { Input } from "@nova/ui/components/ui/input";
 import { cn } from "@nova/ui/lib/utils";
 import { Eye, EyeClosed } from "lucide-react";
 import { JSX, useState } from "react";
-import { UseFormReturn } from "react-hook-form";
+import { Path, UseFormReturn } from "react-hook-form";
 import { useInputFocus } from "../signup/hooks/useInputFocus";
+import { SignupInput } from "@/src/schema/signup.schema";
 
 // StringKeys 타입 정의: T에서 string 또는 number 타입의 키만 추출
 type StringKeys<T> = {
@@ -28,9 +29,10 @@ export function InputFormField<T extends Record<string, any>>({
   pattern,
   leftIcon,
   hasToggleIcon,
+  disabled = false,
 }: {
   form: UseFormReturn<T>;
-  name: StringKeys<T>;
+   name: Path<T>;
   label: string;
   placeHolder: string;
   type?: string;
@@ -38,10 +40,10 @@ export function InputFormField<T extends Record<string, any>>({
   pattern?: string;
   leftIcon?: JSX.Element;
   hasToggleIcon?: boolean;
+  disabled?: boolean;
 }) {
   const { isFocused, inputRef } = useInputFocus();
   const [showPassword, setShowPassword] = useState(false);
-
   return (
     <FormField
       control={form.control}
@@ -87,8 +89,9 @@ export function InputFormField<T extends Record<string, any>>({
                   : "focus:border-primary focus:text-primary focus:placeholder-primary",
                 leftIcon ? "pl-10" : "",
               )}
-              type={hasToggleIcon && !showPassword ? "password" : type}
+              type={hasToggleIcon && !showPassword ? type : "text"}
               placeholder={placeHolder}
+              disabled={disabled}
               {...(inputMode ? { inputMode } : {})}
               {...(pattern ? { pattern } : {})}
               {...field}

@@ -13,7 +13,7 @@ export default function SubTitle({
   data = "2025.01.07",
 }: SubTitle) {
   return (
-    <div className="flex flex-col border-line01  pt-5 mobile:flex-col">
+    <div className="flex flex-col border-line01  pt-5 mobile:flex-col mt-[40px]">
       <p className="d-m">{title}</p>
 
       <div className="flex flex-row mt-2">

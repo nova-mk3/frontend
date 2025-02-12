@@ -1,57 +1,112 @@
 "use client";
 
-import { SignupInput, SignupSchema } from "@/src/schema/signup.schema";
+import {  grade, semester, SignupInput, SignupSchema } from "@/src/schema/signup.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nova/ui/components/ui/button";
 import { Form } from "@nova/ui/components/ui/form";
 
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { InputFormField } from "../../components/InputFormField";
 import { DatePickerForm } from "./DatePickerField";
 import { FileFormField } from "./FileFormField";
 import { RadioFormField } from "./RadioFormField";
 import { SelectFormField } from "./SelectFormField";
+import { InputFormFieldWithButton } from "../../components/InputFormFieldWithButton";
+import { useEffect, useState } from "react";
 
 // TODO : 사이사이에 숨어있는 as 들 없애기.
 export function SignupForm() {
-  const form = useForm<SignupInput>({
+
+  // 이메일 인증 메시지 상태
+  const [emailSentMessage, setEmailSentMessage] = useState<string | null>(null);
+  const [emailVerifiedMessage, setEmailVerifiedMessage] = useState<string | null>(null);
+  
+const form = useForm<SignupInput>({
     resolver: zodResolver(SignupSchema),
-    defaultValues: {
+    defaultValues: { 
       username: "",
       email: "",
       studentId: "",
       grade: "1학년",
       semester: "1학기",
+      emailCode: '',
+      emailCheck: false,
+      confirmEmailCode : '',
       birth: new Date("1998-10-13"),
       profileImage: undefined,
-      gender: "남성",
       phoneNumber: "",
       password: "",
       confirmPassword: "",
+      studentType : "재학생",
+      isWork : "",
+      job : '',
     },
     mode: "onChange",
   });
 
+  const studentType = useWatch({
+    control: form.control,
+    name: "studentType",
+  });
+  const isWork = useWatch({
+    control: form.control,
+    name: "isWork",
+  });
+
+  const isEmail = useWatch({
+    control: form.control,
+    name: "email",
+  });
+
+  const isContact = useWatch({
+    control: form.control,
+    name: "isContact",
+  });
+
+  //TODO: 로직을 좀 더 직관적으로 만들 필요가 있음
+  useEffect(()=>{
+    if(emailSentMessage === null)return;
+
+
+    // 이메일인증을 성공했는데, 이메일 변경이 일어났을때 에러메시지 출력
+    if(emailSentMessage !== null){
+      form.setValue("emailCheck" , false ,{shouldValidate: true})
+      setEmailSentMessage(null);
+    }
+
+
+  },[isEmail])
+
+
+  console.log(form.formState.isValid);
+ 
+  
   function onSubmit(values: SignupInput) {
     console.log(values);
+  }
+  function onEmailSubmit(value : string) {
+    if(form?.formState.errors.email) return;
+
+   setEmailSentMessage("이메일 인증번호가 전송되었습니다! 메일을 확인해주세요"); // 이메일 인증번호 전송 메시지
+   form.setValue("emailCheck" , true ,{shouldValidate: true})
+  }
+
+  function onEmailNumberSubmit(value : string) {
+
+    setEmailVerifiedMessage("이메일 인증이 완료되었습니다!"); // 이메일 인증 성공 메시지
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+
         <InputFormField
           form={form}
           name={"username"}
           label={"이름"}
           placeHolder={"이름을 입력하세요"}
         />
-        <InputFormField
-          form={form}
-          name={"email"}
-          label={"이메일"}
-          placeHolder={"xxxxx@xxxxx.com"}
-          type="email"
-        />
+
         <InputFormField
           form={form}
           name={"studentId"}  
@@ -61,10 +116,83 @@ export function SignupForm() {
           inputMode="numeric"
           pattern="[0-9]*"
         />
-        <div className="flex gap-4 items-center">
-          <SelectFormField form={form} name={"grade"} label="학년" />
-          <SelectFormField form={form} name={"semester"} label="학기" />
-        </div>
+        {/* 이메일 인증 */}
+        <InputFormFieldWithButton
+         form={form}
+          name={"email"}
+          label={"이메일"}
+          placeHolder={"xxxxx@xxxxx.com"}
+          type="email"
+          btnText="인증번호 전송"
+          onClick={onEmailSubmit}
+        />
+        {form.formState.errors.emailCheck && <p className="b-s text-danger">{form.formState.errors.emailCheck?.message}</p>}
+        {emailSentMessage && <p className="b-s text-success">{emailSentMessage}</p>} {/* 이메일 전송 성공 메시지 */}
+
+        <InputFormFieldWithButton
+         form={form}
+          name={"emailCode"}
+          label={"인증"}
+          placeHolder={"인증번호를 입력해주세요"}
+          type="text"
+          btnText="확인"
+          onClick={onEmailNumberSubmit}
+        />
+        {emailVerifiedMessage && <p className="b-s text-success">{emailVerifiedMessage}</p>} {/* 이메일 인증 성공 메시지 */}
+
+        
+        <RadioFormField form={form} name={"studentType"} label={"소속"} options={[{value : "재학생", label : "재학생"},{value : "졸업생", label : "졸업생"}]}/>
+
+
+        {
+          studentType === "재학생" && (
+            <>
+             <div className="flex gap-4 items-center">
+            <SelectFormField form={form} name={"grade"} label="학년" options={grade}/>
+            <SelectFormField form={form} name={"semester"} label="학기" options={semester}/>
+            </div>
+            <RadioFormField form={form} name={"isAbsence"} label={"휴학"} options={[{value : "예", label : "예"},{value : "아니오", label : "아니오"}]}/>
+            </>
+          )
+        }
+
+        {
+          studentType === "졸업생" && (
+            <>
+
+              <RadioFormField form={form} name={"isWork"} label={"재직여부"} options={[{value : "true", label : "예"},{value : "false", label : "아니오"}]}/>
+              <InputFormField
+                form={form}
+                name={"job"}  
+                label={"직무"}
+                placeHolder={"직무를 입력해주세요"}
+                type="text"
+                disabled={ isWork === "false" && true}
+              />
+              <RadioFormField form={form} name={"isContact"} label={"연락 공개 여부"} options={[{value : "true", label : "예"},{value : "false", label : "아니오"}]}/>
+              
+              <InputFormField
+                form={form}
+                name={"contactInfo"}  
+                label={"연락처"}
+                placeHolder={"연락수단을 입력해주세요! ex) 인스타, 오픈채팅방 링크 등등"}
+                type="text"
+                disabled={ isContact === "false" && true}
+              />
+
+               <InputFormField
+                form={form}
+                name={"contactInfoDescription"}  
+                label={"연락 방법 설명"}
+                placeHolder={"연락시 주의사항을 설명해주세요!"}
+                type="text"
+                disabled={ isContact === "false" && true}
+              />
+
+            </>
+          )
+        }
+        
         <div className="flex gap-6 items-center">
           <DatePickerForm form={form} name={"birth"} label={"생년월일"} />
           <FileFormField
@@ -74,7 +202,7 @@ export function SignupForm() {
             accept="image/*"
           />
         </div>
-        <RadioFormField form={form} name={"gender"} label={"성별"} />
+        
         <InputFormField
           form={form}
           name={"phoneNumber"}
@@ -88,6 +216,7 @@ export function SignupForm() {
           label={"비밀번호"}
           placeHolder={"********"}
           type="password"
+          hasToggleIcon
         />
         <InputFormField
           form={form}
@@ -95,10 +224,12 @@ export function SignupForm() {
           label={"비밀번호 확인"}
           placeHolder={"********"}
           type="password"
+          hasToggleIcon
         />
+        
         <div>
           <Button
-            className="mt-8 w-full b-l mobile:mb-5"
+            className="mt-8 w-full b-l mb-5"
             type="submit"
             disabled={!form.formState.isValid}
           >

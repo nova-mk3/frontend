@@ -11,7 +11,7 @@ interface ItemProps {
 }
 
 const MakeNameToAnonymous = (name: string) => {
-    return name.split("")[0] + "**";
+    return "***";
   };
 
 export default function ListItem({number=1,title="문의 드립니다",date="2025.01.19",name="권성민",isReply=false,isRead,className} : ItemProps) {
