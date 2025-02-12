@@ -24,7 +24,7 @@ export default function Executive() {
   const [years, setYears] = useState<Year[]>([]);
   const [data, setData] = useState<Member[]>([]);
   const [selectedYear, setSelectedYear] = useState<number | null>(null); // 선택된 연도 상태
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     setYears(executiveYear);

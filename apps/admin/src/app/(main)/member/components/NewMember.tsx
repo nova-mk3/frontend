@@ -2,6 +2,7 @@
 import MemberCard from "@nova/ui/components/ui/MemberCard";
 import { newMembersData } from "./memberTempData";
 import { useEffect , useState } from "react";
+import MemberCardModal from './MemberCardModal';
 
 interface Member {
   studentId: string;
@@ -18,6 +19,7 @@ interface Member {
 
 export default function NewMembers(){
   const [data, setData] = useState<Member[]>([]);
+  const [open , setOpen] = useState(false);
   useEffect(()=>{
     // API 연동 위치
     setData(newMembersData);
@@ -36,6 +38,7 @@ export default function NewMembers(){
               name={member.name}
               grade={member.grade}
               type="large"
+              onClick={()=>setOpen(true)}
             />
           ))}
         </div>
@@ -46,6 +49,7 @@ export default function NewMembers(){
           </div>
         </div>
       )}
+     <MemberCardModal open={open} onClose={()=>setOpen(false)} type="newMember"/>
     </div>
   );
 }

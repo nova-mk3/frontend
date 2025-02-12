@@ -11,6 +11,9 @@ import TempImageLink from "./../../../../../../service/public/image/cat.jpg";
 interface MemberCardModalProps {
   open: boolean;
   onClose: () => void;
+  type: "member" | "newMember";
+  Aceept?: () => void;
+  Reject?: () => void;
 }
 
 // 더미 데이터
@@ -31,7 +34,7 @@ const MemberInfo = ({ icon: Icon, label }: { icon: any; label: string }) => (
   </div>
 );
 
-export default function MemberCardModal({ open, onClose }: MemberCardModalProps) {
+export default function MemberCardModal({ open, onClose , type , Aceept , Reject }: MemberCardModalProps) {
   const [isVisible, setIsVisible] = useState(open); // 실제 렌더링 여부
   const [isAnimating, setIsAnimating] = useState(false); // 애니메이션 실행 여부
 
@@ -81,11 +84,18 @@ export default function MemberCardModal({ open, onClose }: MemberCardModalProps)
             <div className="text-xl text-gray-700">
               다른 요소들 추가시 여기에 추가
             </div>
-
-            <div className="flex justify-end space-x-4 mt-6">
-              <Button variant="default" onClick={onClose}>변경취소</Button>
-              <Button variant="default" onClick={onClose}>확인</Button>
-            </div>
+            {type === "member" ? (
+              <div className="flex justify-end space-x-4 mt-6">
+                <Button variant="default" onClick={onClose}>변경취소</Button>
+                <Button variant="default" onClick={onClose}>확인</Button>
+              </div>
+            ) : type === "newMember" ? (
+              <div className="flex justify-end space-x-4 mt-6">
+                <Button variant="default" onClick={onClose}>취소</Button>
+                <Button variant="default" onClick={Aceept}>수락</Button>
+                <Button variant="default" onClick={Reject}>반려</Button>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

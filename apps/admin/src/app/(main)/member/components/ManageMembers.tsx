@@ -124,7 +124,7 @@ export default function ManageMembers() {
           </div>
         </div>
       ))}
-     <MemberCardModal open={open} onClose={()=>setOpen(false)}/>
+     <MemberCardModal open={open} onClose={()=>setOpen(false)} type="member"/>
     </div>
   );
 }
