@@ -4,6 +4,7 @@ import { Input } from "@nova/ui/components/ui/input";
 import { Button } from "@nova/ui/components/ui/Button";
 import { useEffect, useState } from "react";
 import { membersData } from "./memberTempData";
+import MemberCardModal from './MemberCardModal';
 import { 
   Select,
   SelectContent,
@@ -28,6 +29,7 @@ export default function ManageMembers() {
   const [data, setData] = useState<Member[]>([]);
   const [viewData, setViewData] = useState<Member[]>([]);
   const [viewType , setViewType] = useState<"small"|"medium">("small");
+  const [open , setOpen] = useState(false);
   useEffect(() => {
     // API 연동 위치
     setData(membersData);
@@ -113,6 +115,7 @@ export default function ManageMembers() {
                   phoneNumber={member.phoneNumber}
                   studentId={member.studentId}
                   type={viewType}
+                  onClick={()=>setOpen(true)}
                 />
               ))
             ) : (
@@ -121,6 +124,7 @@ export default function ManageMembers() {
           </div>
         </div>
       ))}
+     <MemberCardModal open={open} onClose={()=>setOpen(false)}/>
     </div>
   );
 }

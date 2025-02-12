@@ -29,14 +29,15 @@ interface MembercardProps {
     birthday? : string,
     email? : string,
     grade? : string,
+    onClick? : () => void
 }
 
 export default function MemberCard({
-    name = "고양이" , type = "small" , phoneNumber = "010-0000-0000" , studentId="2019019014" , birthday="2000-01-01" , email="CatHolic@chungbuk.ac.kr", grade="1학년"
+    name = "고양이" , type = "small" , phoneNumber = "010-0000-0000" , studentId="2019019014" , birthday="2000-01-01" , email="CatHolic@chungbuk.ac.kr", grade="1학년" , onClick = (() => {console.log("meow")})
 } : MembercardProps) {
     if(type === "small"){
         return (
-            <div className={`w-[200px] h-[80px] m-[8px] flex border border-primary rounded-lg items-center hover:bg-background02 cursor-pointer`}>
+            <div onClick={onClick} className={`w-[200px] h-[80px] m-[8px] flex border border-primary rounded-lg items-center hover:bg-background02 cursor-pointer`}>
                 <Image 
                     src={TempImageLink} 
                     alt="profileImage" 
@@ -49,7 +50,7 @@ export default function MemberCard({
         )
     }else if(type === "medium"){
         return (
-            <div className={`w-[600px] h-[80px] m-[8px] flex border border-primary rounded-lg items-center hover:bg-background02 cursor-pointer`}>
+            <div onClick={onClick} className={`w-[600px] h-[80px] m-[8px] flex border border-primary rounded-lg items-center hover:bg-background02 cursor-pointer`}>
                 <Image 
                     src={TempImageLink} 
                     alt="profileImage" 
@@ -102,7 +103,7 @@ export default function MemberCard({
         )
     }else if(type === "large"){
         return (
-            <div className={`w-[1400px] h-[160px] m-[8px] flex border border-primary rounded-lg items-center hover:bg-background02 cursor-pointer`}>
+            <div onClick={onClick} className={`w-[1400px] h-[160px] m-[8px] flex border border-primary rounded-lg items-center hover:bg-background02 cursor-pointer`}>
                 <Image 
                     src={TempImageLink} 
                     alt="profileImage" 
