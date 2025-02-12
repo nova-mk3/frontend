@@ -26,7 +26,6 @@ const data = {
   grade: "1학년",
 };
 
-// ✅ 재사용 가능한 컴포넌트: 회원 정보 표시
 const MemberInfo = ({ icon: Icon, label }: { icon: any; label: string }) => (
   <div className="flex items-center space-x-3">
     <Icon className="h-8 w-8 text-gray-600" />

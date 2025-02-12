@@ -16,7 +16,7 @@
     "**/*.tsx",
     "next-env.d.ts",
     "next.config.js",
-    ".next/types/**/*.ts"
-, "../../packages/ui/components/ui/MemberCard.tsx"  ],
+    ".next/types/**/*.ts", 
+  ],
   "exclude": ["node_modules"]
 }

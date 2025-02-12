@@ -1,14 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
-
-// TODO : 대부분은 service의 signin 내용 가져와서 사용
+import { Background } from "./components/background";
+import { SigninForm } from "./components/signinForm";
 
 export default function Signin() {
-    return (
-        <div>
-            사이드바에요;
-        </div>
-    )
+  return (
+    <div className="relative w-screen h-screen bg-primary flex justify-center items-center overflow-hidden">
+      <Background className="mobile:hidden" />
+      <SigninForm />
+    </div>
+  );
 }
