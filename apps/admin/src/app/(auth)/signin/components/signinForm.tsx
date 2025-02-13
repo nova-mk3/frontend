@@ -1,16 +1,19 @@
-import { SigninInput, SigninSchema } from "../../../../../../service/src/schema/signin.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { SigninInput } from "../../../../../../service/src/schema/signin.schema";
+// import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nova/ui/components/ui/button";
 import { Form } from "@nova/ui/components/ui/form";
 import { IdCard, Lock } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { InputFormField } from "../../../../../../service/src/app/(auth)/components/InputFormField";
+// import { InputFormField } from "../../../../../../service/src/app/(auth)/components/InputFormField";
+import { InputFormField } from "./InputFormField";
 import Logo from "./../../../../../public/image/Logo.svg";
+
+
 
 export function SigninForm() {
   const form = useForm<SigninInput>({
-    resolver: zodResolver(SigninSchema),
+    // resolver: zodResolver(SigninSchema),
     defaultValues: {
       studentId: "",
       password: "",

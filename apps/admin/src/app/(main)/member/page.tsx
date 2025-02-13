@@ -1,6 +1,6 @@
 "use client";
 // Members 페이지
-import { Button } from "@nova/ui/components/ui/Button";
+import { Button } from "@nova/ui/components/ui/button";
 import NewMembers from "./components/NewMember";
 import ManageMembers from "./components/ManageMembers";
 import Executive from "./components/Executive";
