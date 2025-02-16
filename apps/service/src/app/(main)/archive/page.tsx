@@ -15,6 +15,6 @@ export default function page() {
       <Suspense>
         <PageNation size={size} totalPage={totalPage} className="my-4" />
       </Suspense>
-    </div>
+    </div>  
   );
 }

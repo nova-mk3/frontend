@@ -1,75 +1,130 @@
 "use client";
-import { Button } from "@nova/ui/components/ui/button";
 // import { PlateEditor } from "@nova/ui/components/editor/plate-editor"; //plate.js 라이브러리인데 일단은 제외
 import React, { useEffect, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
-import { Input } from "@nova/ui/components/ui/input";
+
 import WriteBottomLayout from "../../components/WriteBottomLayout";
 import FileUploader from "../../components/FileUploader";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { OpinionInput, OpinionSchema } from "@/src/schema/opinion.schema";
-import { Form } from "@nova/ui/components/ui/form";
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@nova/ui/components/ui/select";
+import { POST_TYPE_OPTIONS } from "@/src/constant/board";
+import { IntegratedInput, IntegratedSchema } from "@/src/schema/integrated.schema";
+import {  useMutation } from "@tanstack/react-query";
+import { IntegradePostRequest, IntegratedBoardPost} from "@/src/api/board/integrated";
+import { useRouter } from "next/navigation";
+import { useBoardIdStore } from "@/src/store/BoardId";
+import { UploadFilesAPI } from "@/src/api/board/file";
 
 export default function Page() {
 
+  const router = useRouter();
+
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const {INTEGRATED} =useBoardIdStore();
     const {
+         control,
         register,
         handleSubmit,
         formState: { errors, isValid },
-      } = useForm<OpinionInput>({
-        resolver: zodResolver(OpinionSchema),
+      } = useForm<IntegratedInput>({
+        resolver: zodResolver(IntegratedSchema),
         mode: "onChange",
         defaultValues: {
             title: "",
             content: "",
+            category : "",
           },
       });
 
-
-      const onSubmit = (data: OpinionInput) => {
-        console.log("작성된 데이터:", data);
-        
-      };
       
-  const [content, setContent] = useState("");
-  const [title, setTitle] = useState("");
-  const [selectedFiles, setSelectedFiles] = useState([]);
-  const [subjectName, setSubjectName] = useState("");
-  const [professorName, setProfessorName] = useState("");
-  const [term,setTerm] = useState("");
+      const useIntegratedBoardMutation = useMutation({
+        mutationFn: (data : IntegradePostRequest) => IntegratedBoardPost(data),
+        onSuccess: (data : any) => {
+          alert("글쓰기 성공");
+          router.push(`/board/${data.data.id}`);
+        },
+        onError: (error) => {
+          alert(error.message);
+          console.log(error);
+        },
+      })
+
+
+      const useFileUploadMutation = useMutation({
+        mutationFn: ( {data,POST_TYPE_OPTIONS} : { data : FormData, POST_TYPE_OPTIONS : string}) => UploadFilesAPI(data, POST_TYPE_OPTIONS),
+      })
+
+      const onSubmit = async(data: IntegratedInput) => {
+        // 파일이 없을때는 파일 업로드 생략
+        // 파일이 존재할때는 파일 업로드가 성공하면 게시글 생성
+        const formData = new FormData();
+  
+        selectedFiles.forEach((file) => {
+          formData.append("files", file);
+        });
+  
+        if(selectedFiles.length > 0)
+        {
+          try {
+            const response = await useFileUploadMutation.mutateAsync({
+              data : formData,
+              POST_TYPE_OPTIONS : data.category
+            }); 
+
+            // 업로드 성공 후 다른 API 호출 예시
+            useIntegratedBoardMutation.mutate({
+              title : data.title,
+              content : data.content,
+              postType : data.category,
+              fileIds : [...response.data],
+              boardId : INTEGRATED,
+            })
+          } catch (error) {
+            alert("파일 업로드 실패");
+            console.log(error);
+          }
+        }
+        else{
+          useIntegratedBoardMutation.mutate({
+            title : data.title,
+            content : data.content,
+            postType : data.category,
+            fileIds : [],
+            boardId : INTEGRATED,
+          })
+        }
+   
+      };
 
 
   return (
     <form className="flex flex-col mt-5 w-[80%] h-[calc(100vh-86px)] mx-auto relative" onSubmit={handleSubmit(onSubmit)}>
 
 
-        <Select>
-          <SelectTrigger className="w-[180px] mobile:w-full mb-5">
-            <SelectValue placeholder="카테고리 선택" />
-          </SelectTrigger>
-          <SelectContent className="bg-background01">
-            <SelectItem value="qna" className="cursor-pointer">
-              Q&A
-            </SelectItem>
-            <SelectItem value="notice" className="cursor-pointer">
-              공지사항
-            </SelectItem>
-            <SelectItem
-              value="any"
-              className="cursor-pointer"
-            >
-              자유게시판
-            </SelectItem>
-            <SelectItem
-              value="selfintro"
-              className="cursor-pointer"
-            >
-              자기소개
-            </SelectItem>
-          </SelectContent>
-        </Select>
+     <Controller
+        name="category"  // The name you want to register the value with
+        control={control}
+        defaultValue=""  // Set a default value if needed
+        render={({ field }) => (
+          <Select
+          onValueChange={field.onChange}
+          defaultValue={field.value as string}
+          >
+            <SelectTrigger className="w-[180px] mobile:w-full mb-5">
+              <SelectValue placeholder="카테고리 선택" />
+            </SelectTrigger>
+            <SelectContent className="bg-background01">
+              {POST_TYPE_OPTIONS.map((option) => (
+                <SelectItem value={option.value} key={option.value} className="cursor-pointer">
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
+      />
 
 
       {/* 제목 입력란 */}
@@ -86,7 +141,7 @@ export default function Page() {
       {!errors.title && <p className="h-[24px]"></p>}
 
       {/* 첨부 파일 영역 */} 
-      <FileUploader/>
+      <FileUploader selectedFiles={selectedFiles} setSelectedFiles={setSelectedFiles} />
 
       {/* 본문 스크롤 영역 */}
       {/* <PlateEditor /> */}

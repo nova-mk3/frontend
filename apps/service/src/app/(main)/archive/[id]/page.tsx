@@ -9,6 +9,8 @@ import Aside from "./components/Aside";
 interface Props {
   params: Promise<{ id: string }>;
 }
+
+
 export default async function page({ params }: Props) {
   const { id } = await params;
 
@@ -19,9 +21,9 @@ export default async function page({ params }: Props) {
       <Aside/>
       <div className="flex flex-col gap-[20px] mx-auto flex-1">
       <SubTitle/>
-      <FileListLayout>
+      {/* <FileListLayout>
         <FileList/>
-      </FileListLayout>
+      </FileListLayout> */}
       <Content />
       <CommentLayout />
       </div>

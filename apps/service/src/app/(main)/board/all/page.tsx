@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
-import Title from '../components/Title'
+import Title from '../components/BoardListTitle'
 import { PageNation } from '../../archive/components/PageNation'
-import Item from '../components/Item'
+import Item from '../components/BoardListItem'
 import { Layers } from 'lucide-react'
 
 export default function page() {

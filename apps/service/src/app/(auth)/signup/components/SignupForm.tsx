@@ -16,10 +16,11 @@ import { useEffect, useState } from "react";
 import GraduationYearSelect from "./GraduationYearSelect";
 import { GraduationSignUpRequest, MemberSignUpRequest, signup, SignUpData, verifyEmail, verifyEmailCode } from "@/src/api/auth";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 // TODO : 사이사이에 숨어있는 as 들 없애기.
 export function SignupForm() {
-
+  const router = useRouter();
    
 
   // 이메일 인증 메시지 상태
@@ -98,12 +99,13 @@ const form = useForm<SignupInput>({
   const useVerifyEmailCodeMutation = useMutation({
     mutationFn: ({email,authCode} : {email : string, authCode : string}) => verifyEmailCode({email,authCode}),
     onSuccess: (data : any) => {
+      console.log(data);
       form.setValue("emailCodeCheck" , true ,{shouldValidate: true}) 
         setEmailVerifiedMessageSuccess(data.data); 
         setEmailVerifiedMessageDanger(null);
     },
     onError: (error) => {
-
+      console.log(error);
       setEmailVerifiedMessageDanger(error.message); 
       setEmailVerifiedMessageSuccess(null);
     },
@@ -112,9 +114,8 @@ const form = useForm<SignupInput>({
   const useSignupMutation = useMutation({
     mutationFn: (data : SignUpData) => signup(data),
     onSuccess: (data : any) => {
-      setEmailSentMessage(data.data);
-      form.clearErrors("emailCode");
-      form.setValue("emailCheck" , true ,{shouldValidate: true})
+      alert(data.data);
+      router.push('/signin');
     },
     onError: (error) => {
       alert(error.message);
@@ -142,7 +143,7 @@ const form = useForm<SignupInput>({
   function onEmailNumberSubmit(value : string) {
     
     if(!emailCheck){
-      { form.setError("email", { message: "이메일인증을 진행해주세요!" })}
+      { form.setError("email", { message: "이메일인증을 진행해주세요! 이메일을 지웠다가 다시 써주세요" })}
       return;
     }
     useVerifyEmailCodeMutation.mutate({email : isEmail,authCode : value});

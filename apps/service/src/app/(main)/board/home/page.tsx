@@ -1,10 +1,9 @@
 import React from 'react'
-import Navigation from './components/Navigation'
-import Title from '../archive/components/Title'
-import Item from './components/Item'
+
 import Link from 'next/link'
 import { Button } from '@nova/ui/components/ui/button'
-import ItemList from './components/ItemList'
+import ItemList from '../components/HomeListItem'
+
 
 export default function page() {
   return (

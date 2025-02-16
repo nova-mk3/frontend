@@ -1,25 +1,22 @@
 import React from 'react'
-import FileItem from '../../../components/FileItem'
+import ViewFileItem, { FileItemProps } from '../../../components/ViewFileItem'
 
 interface FileListProps {
-    files?: File[]
+    files: FileItemProps[]
 }
 
 
 export function FileList( {files} : FileListProps) {
-
-    const a = (index: number) =>{}
     if(!files || files.length === 0) return <p className='text-text02 p-1'>저장된 파일이 없습니다</p>
 
     if(files.length > 0){
     return (
         <div className='flex flex-row gap-2 flex-wrap'>{
             files.map( (file,index) => (
-                    <FileItem index={index} name={file.name} mode="view"/>
+                    <ViewFileItem key={index} id={file.id} downloadUrl={file.downloadUrl} originalFileName={file.originalFileName}/>
             ))}
-        
             </div>
-            )
+        )
       
     }
 

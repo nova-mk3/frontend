@@ -1,5 +1,5 @@
 import React from 'react'
-import Item, { ItemProps } from './Item';
+import Item, { ItemProps } from './BoardListItem';
 import Link from 'next/link';
 
 
@@ -12,7 +12,7 @@ interface ItemListProps{
 }
 
 
-export default function ItemList({none,className,title,data,href} : ItemListProps) {
+export default function HomeListItem({none,className,title,data,href} : ItemListProps) {
     if(none){
         return <div className='w-[32%] flex justify-center items-center bg-background02'>
             준비중입니다.
@@ -27,10 +27,10 @@ export default function ItemList({none,className,title,data,href} : ItemListProp
 
         <div className='w-full h-[1px] bg-primary mt-1'></div>
 
-        <Item/>
-        <Item/>
-        <Item/>
-        <Item/>
+        {/* <Item href="/"/>
+        <Item href="/"/>
+        <Item href="/"/>
+        <Item href="/"/> */}
       </div>
   )
 }

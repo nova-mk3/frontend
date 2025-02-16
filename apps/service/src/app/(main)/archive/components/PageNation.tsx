@@ -7,7 +7,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@nova/ui/components/ui/pagination";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 
 interface PaginationProps {
@@ -18,6 +18,7 @@ interface PaginationProps {
 
 export function PageNation({ totalPage, size, className }: PaginationProps) {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
 
   const paginationRange = useMemo(() => {
@@ -36,14 +37,22 @@ export function PageNation({ totalPage, size, className }: PaginationProps) {
     return pages;
   }, [totalPage, size, currentPage]);
 
+
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", page.toString());
+    router.push(`?${params.toString()}`); // 새로고침 없이 URL 업데이트
+  };
+
   return (
     <Pagination className={className}>
       <PaginationContent>
         {/* Previous Page Button */}
         <PaginationItem>
           <PaginationPrevious
-            href={`?page=${Math.max(1, currentPage - 1)}`}
-            className={currentPage === 1 ? "pointer-events-none" : ""}
+            onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+            // href={`?page=${Math.max(1, currentPage - 1)}`}
+            className={`cursor-pointer  ${currentPage === 1 ? "pointer-events-none" : ""}`}
           />
         </PaginationItem>
 
@@ -51,8 +60,10 @@ export function PageNation({ totalPage, size, className }: PaginationProps) {
         {paginationRange.map((page) => (
           <PaginationItem key={page}>
             <PaginationLink
-              href={`?page=${page}`}
+             onClick={() => handlePageChange(page)}
+              // href={`?page=${page}`}
               isActive={page === currentPage}
+              className="cursor-pointer"
             >
               {page}
             </PaginationLink>
@@ -62,8 +73,10 @@ export function PageNation({ totalPage, size, className }: PaginationProps) {
         {/* Next Page Button */}
         <PaginationItem>
           <PaginationNext
-            href={`?page=${Math.min(totalPage, currentPage + 1)}`}
-            className={currentPage === totalPage ? "pointer-events-none" : ""}
+          onClick={() => handlePageChange(Math.min(totalPage, currentPage + 1))}
+            // href={`?page=${Math.min(totalPage, currentPage + 1)}`}
+            className={`cursor-pointer  ${currentPage === totalPage ? "pointer-events-none" : ""}`}
+            
           />
         </PaginationItem>
       </PaginationContent>

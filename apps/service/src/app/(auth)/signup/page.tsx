@@ -1,5 +1,3 @@
-"use client";
-
 import { Background } from "./components/background";
 import { SignupForm } from "./components/SignupForm";
 

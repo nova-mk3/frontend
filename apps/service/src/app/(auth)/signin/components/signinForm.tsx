@@ -1,3 +1,5 @@
+"use client"
+
 import LogoWithName from "@/public/image/LogoWithName.svg";
 import { SigninInput, SigninSchema } from "@/src/schema/signin.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,8 +12,10 @@ import { useForm } from "react-hook-form";
 import { InputFormField } from "../../components/InputFormField";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "@/src/api/auth";
+import { useRouter } from "next/navigation";
 
 export function SigninForm() {
+  const router = useRouter();
   const form = useForm<SigninInput>({
     resolver: zodResolver(SigninSchema),
     defaultValues: {
@@ -24,15 +28,16 @@ export function SigninForm() {
   const useLoginMutation =  useMutation({
       mutationFn: ({studentNumber,password} : {studentNumber : string,password : string}) => login({studentNumber, password}),
       onSuccess: (data : any) => {
+        
         //로그인 성공
+        alert(data.message);
+        router.push("/");
       },
       onError: (error) => {
-        //로그인 실패 -> 없는 아이디 입니다? 이런 에러가 있나 -> 일단 보류
-        console.log(error);
+        alert(error.message);
       },
     });
   function onSubmit(values: SigninInput) {
-    console.log(values);
     useLoginMutation.mutate({studentNumber: values.studentId, password: values.password});
   }
 
@@ -77,7 +82,7 @@ export function SigninForm() {
               {/* TODO : 선택 시 토큰 저장 위치를 다르게 하기. session, cookie의 차이 */}
               <p className="b-m text-text01">로그인 정보 저장하기</p>
             </div>
-            <p className="b-m text-text01">비밀번호 찾기</p>
+            <p className="b-m text-text01 cursor-pointer" onClick={ ()=>alert("아직은 찾을 수 없습니다")}>비밀번호 찾기</p>
           </div>
 
           <div>

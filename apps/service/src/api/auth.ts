@@ -1,38 +1,29 @@
-
+import { BASE_URL } from "../constant/config";
+import { api } from "./core";
+import axios, { AxiosError } from "axios";
 
 export async function verifyEmail(email : string) {
-  const response = await fetch('/api/email-auth', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email }),
-  });
-
-  if (!response.ok) {
-    // 에러 응답이 JSON 형태라면 파싱해서 메시지 전달
-    const errorData = await response.json();
-    const message = errorData?.message || "에러가 발생했습니다.";
-    throw new Error(message);
-  }
-
-  return response.json();
+  const response = await api.post('/nova/email-auth', { email: email });
+  return response.data;
 }
 
-export async function verifyEmailCode( {email,authCode} : {email : string,authCode : string}) {
-    const response = await fetch('/api/email-auth/check', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email,authCode })
+export async function verifyEmailCode({ email, authCode }: { email: string; authCode: string }) {
+  try {
+    const response = await api.post(`/nova/email-auth/check`, {
+      email,
+      authCode,
     });
-    
-    if (!response.ok) {  
-      const errorData = await response.json();
-      console.log(errorData);
-      const message = errorData?.message || "에러가 발생했습니다.";
-      throw new Error(message); //Error를 던저야 인식함!
+    return response.data; // 요청 성공 시 데이터 반환
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      // Axios 에러 처리 (서버 응답이 있는 경우)
+      throw new Error(error.response?.data?.message || "Something went wrong!");
+    } else {
+      // 일반 에러 처리
+      throw new Error("Unexpected error occurred.");
     }
-    return response.json();
+  }
 }
-
 
 
 /*
@@ -42,20 +33,30 @@ response 객체는 서버를 통해 스트림 형태로 존재한다.
 문자열 json으로 되어있는걸 .json으로 가져와야한다. 이때 .json 역시 비동기로 작동해 await를 사용하거나 then()으로 값을 처리해줘야함!
 */
 
-export async function login( {studentNumber,password} : {studentNumber : string,password : string}) {
-  const response = await fetch('/api/email-auth/check', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ studentNumber,password })
-  });
-  
-  if (!response.ok) {  
-    const errorData = await response.json();
-    console.log(errorData);
-    const message = errorData?.message || "에러가 발생했습니다.";
-    throw new Error(message);
+export async function login({
+  studentNumber,
+  password,
+}: {
+  studentNumber: string;
+  password: string;
+}) {
+  try {
+    const response = await api.post("/api/auth/login", {
+      studentNumber,
+      password,
+    });
+    return response.data; // 로그인 성공 시 반환할 데이터
+  } catch (error: any) {
+    // React Query에서 사용할 에러만 던져줌
+    if (error.response) {
+      const message = error.response.data?.message || "서버에서 에러가 발생했습니다.";
+      throw new Error(message);
+    } else if (error.request) {
+      throw new Error("서버에 응답이 없습니다. 네트워크 상태를 확인하세요.");
+    } else {
+      throw new Error(error.message || "에러가 발생했습니다.");
+    }
   }
-  return response.json();
 }
 
 
@@ -109,7 +110,7 @@ export async function signup(signUpData: SignUpData) {
     };
   }
   
-  const response = await fetch('/api/members', {
+  const response = await fetch(`/nova/members`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(requestBody),

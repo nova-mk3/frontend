@@ -12,19 +12,19 @@ export default function Navigation({ className }: NavigationProps) {
   return (
     <div className='mt-5 bg-background02 py-2 px-2'>
       <ul className='flex flex-row gap-2 flex-wrap w-[80%] mx-auto'>
-        <NavigationMenuItem href="/board">
+        <NavigationMenuItem href="/board/home">
         <House size={20} />CLUB NOVA
         </NavigationMenuItem>
         <NavigationMenuItem href="/board/all">
           <Layers size={20} />전체글보기
         </NavigationMenuItem>
-        <NavigationMenuItem href="/board/any">
+        <NavigationMenuItem href="/board/free">
           <Book size={20} />자유게시판
         </NavigationMenuItem>
         <NavigationMenuItem href="/board/qna">
           <MessageSquareMore size={20} />Q&A
         </NavigationMenuItem>
-        <NavigationMenuItem href="/board/selfintro">
+        <NavigationMenuItem href="/board/introduction">
           <Hand size={20} />자기소개
         </NavigationMenuItem>
         <NavigationMenuItem href="/board/notice">
@@ -45,7 +45,7 @@ export function NavigationMenuItem({ children, href, className }: ItemsProps) {
     const pathname = usePathname();
 
   // 현재 URL과 링크의 href가 같다면 활성화된 스타일을 적용
-  const isActive = pathname === href;
+  const isActive = pathname.includes(href);
   return (
     <Link href={href}>
       <li

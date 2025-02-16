@@ -4,7 +4,7 @@ import React from "react";
 import { pretendard } from "../../theme/font";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Providers from "./query/providers";
+import Providers from "../../query/providers";
 
 export const metadata: Metadata = {
   title: "nova",
