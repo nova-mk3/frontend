@@ -44,6 +44,7 @@ export function PageNation({ totalPage, size, className }: PaginationProps) {
     router.push(`?${params.toString()}`); // 새로고침 없이 URL 업데이트
   };
 
+  if(!totalPage) return null;
   return (
     <Pagination className={className}>
       <PaginationContent>

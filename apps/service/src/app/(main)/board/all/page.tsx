@@ -1,25 +1,34 @@
-import React, { Suspense } from 'react'
-import Title from '../components/BoardListTitle'
-import { PageNation } from '../../archive/components/PageNation'
-import Item from '../components/BoardListItem'
-import { Layers } from 'lucide-react'
+"use client";
+import Post from "./Post";
 
-export default function page() {
+import { BOARD_SIZE, POST_TYPE } from "@/src/constant/board";
+import {  useRouter, useSearchParams } from "next/navigation";
+import BoardListTitle from "../components/BoardListTitle";
+import { Layers, MessageSquareMore } from "lucide-react";
+
+import ErrorBoundaryWrapper from "../../components/ErrorBoundaryWrapper";
+import { useEffect, useState } from "react";
+
+export default function Page() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const currentPage = parseInt(searchParams.get("page") || "1", 10);
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("query") || "");
+  const [sortOption, setSortOption] = useState(searchParams.get("sort") || "asc");
+
   return (
-    <div>
-        <Title title="전체글보기" TitleImage={<Layers size={20}/>}/>
-
-
-        <Item labelName='공지'/>
-        <Item labelName='공지'/>
-        <Item/>
-        <Item/>
-        <Item/>
-
-  
-        <Suspense>
-        <PageNation size={5} totalPage={10} className='mt-5'/>
-        </Suspense>
-    </div>
-  )
+    <>
+      <BoardListTitle 
+      title="전체글보기" 
+      TitleImage={<Layers size={24}/> }
+      searchQuery={searchQuery}
+      setSearchQuery={setSearchQuery}
+      sortOption={sortOption}
+      setSortOption={setSortOption}
+      />
+      <ErrorBoundaryWrapper>
+        <Post  page={currentPage} size={BOARD_SIZE} sort={sortOption} />
+      </ErrorBoundaryWrapper>
+    </>
+  );
 }

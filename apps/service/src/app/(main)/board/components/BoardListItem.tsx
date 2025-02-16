@@ -1,8 +1,9 @@
 import React from 'react'
 import Link from 'next/link';
 import { formatDate } from '@/src/libs/utils/dateParsing';
+import { POST_TYPE } from '@/src/constant/board';
 
-export interface ItemProps {
+export interface BoardListItemType {
     className?: string
     id: string;
     authorName: string;
@@ -17,11 +18,11 @@ export interface ItemProps {
     viewCount: number;
     href : string;
 }
-export default function BoardListItem({title="제목입니다",content="컨텐츠 내용입니다",createdTime="2025.01.01",authorName="권성민", viewCount=5,likeCount=5,commentCount=5,className, type, href} : ItemProps) {
+export default function BoardListItem({title,content,createdTime,authorName, viewCount,likeCount,commentCount,className, type, href} : BoardListItemType) {
   
   return (
     <div className={`border-b-[1px] border-line01 flex flex-col pb-3 ${className}`}>
-        <Link href={href} className='hover:underline' style={{ width: 'max-content' }}><Title title={title}/></Link>
+        <Link href={href} className='hover:underline' style={{ width: 'max-content' }}><Title title={title} type={type}/></Link>
         <Link href={href} className='hover:underline' style={{ width: 'max-content' }}> <div className='t-m mt-3' >{content}</div></Link>
             <div className='mt-4 flex flex-col text-text02'>
             <div className='flex flex-row gap-2'>
@@ -41,19 +42,21 @@ export default function BoardListItem({title="제목입니다",content="컨텐�
 
 interface ItemTitleProps{
   title?: string
-  labelName? : string;
+  type? : string;
   className? : string;
 }
-function Title({title, labelName, className} : ItemTitleProps ) {
+function Title({title, type, className} : ItemTitleProps ) {
 
-  if(labelName)
+  if(type === POST_TYPE.NOTICE)
     return (
-      <div className='t-l !font-bold mt-3 flex flex-row gap-2'><p className='bg-primary rounded-lg t-s flex items-center justify-center text-background01 w-[40px] '>{labelName}</p> {title}</div>
-    )
+      <div className='t-l !font-bold mt-3 flex flex-row gap-2'><p className='bg-primary rounded-lg t-s flex items-center justify-center text-background01 w-[40px] '>{
+       type
+      }</p> {title}</div>
+  )
 
-  if(labelName === undefined || labelName === ""){
-    return (
+  
+  return (
       <div className='t-l !font-bold mt-3 flex flex-row gap-2'>{title}</div>
-    )
-  } 
+  )
+
 }

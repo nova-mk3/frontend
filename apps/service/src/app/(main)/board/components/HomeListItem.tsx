@@ -1,23 +1,33 @@
 import React from 'react'
-import Item, { ItemProps } from './BoardListItem';
+import Item, { BoardListItemType } from './BoardListItem';
 import Link from 'next/link';
+import BoardListItem from './BoardListItem';
 
 
-interface ItemListProps{
-    title? : string;
+interface HomeListItemType  {
     className? : string;
-    none ? : boolean
-    data? : ItemProps;
-    href : string;
+    data : BoardListItemType[],
+    title : string;
+    href : string;  
 }
 
 
-export default function HomeListItem({none,className,title,data,href} : ItemListProps) {
-    if(none){
-        return <div className='w-[32%] flex justify-center items-center bg-background02'>
-            준비중입니다.
-        </div>
+export default function HomeListItem({className, data,title,href } : HomeListItemType) {
+
+
+    if(data.length === 0){
+        return (
+            <div className={`flex flex-col ${className}`}>
+                <div className='flex flex-row items-end'>
+                <div className=' t-m !font-bold text-primary'>{title}</div>
+                <Link href={href} className='t-s ml-auto text-text02 cursor-pointer'><div>더보기 &gt;</div></Link>
+                </div>
+                <div className='w-full h-[1px] bg-primary mt-1'></div>
+                <div className='bg-background02 h-full flex items-center justify-center !font-bold'>게시글이 없습니다 😔</div>
+              </div>
+          )
     }
+   
   return (
     <div className={`flex flex-col ${className}`}>
         <div className='flex flex-row items-end'>
@@ -25,12 +35,28 @@ export default function HomeListItem({none,className,title,data,href} : ItemList
         <Link href={href} className='t-s ml-auto text-text02 cursor-pointer'><div>더보기 &gt;</div></Link>
         </div>
 
+    
         <div className='w-full h-[1px] bg-primary mt-1'></div>
 
-        {/* <Item href="/"/>
-        <Item href="/"/>
-        <Item href="/"/>
-        <Item href="/"/> */}
+         {
+            data.map((post) => (
+                  <BoardListItem
+                    key={post.id}
+                    id={post.id}
+                    authorName={post.authorName}
+                    authorProfilePhoto={post.authorProfilePhoto}
+                    title={post.title}
+                    content={post.content}
+                    type={post.type}
+                    createdTime={post.createdTime}
+                    modifiedTime={post.modifiedTime}
+                    likeCount={post.likeCount}
+                    commentCount={post.commentCount}
+                    viewCount={post.viewCount}
+                    href={`/board/${post.type.toLowerCase()}/${post.id}`}
+                  />
+            ))
+        }
       </div>
   )
 }

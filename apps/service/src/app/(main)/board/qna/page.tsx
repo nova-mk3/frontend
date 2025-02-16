@@ -1,7 +1,7 @@
 "use client";
 import Post from "./Post";
 
-import { POST_TYPE } from "@/src/constant/board";
+import { BOARD_SIZE, POST_TYPE } from "@/src/constant/board";
 import {  useRouter, useSearchParams } from "next/navigation";
 import BoardListTitle from "../components/BoardListTitle";
 import { MessageSquareMore } from "lucide-react";
@@ -15,8 +15,7 @@ export default function Page() {
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
   const [searchQuery, setSearchQuery] = useState(searchParams.get("query") || "");
   const [sortOption, setSortOption] = useState(searchParams.get("sort") || "asc");
-  const postType = POST_TYPE.QNA;
-  const size = 5;
+
 
   return (
     <>
@@ -29,7 +28,7 @@ export default function Page() {
       setSortOption={setSortOption}
       />
       <ErrorBoundaryWrapper>
-        <Post postType={postType} page={currentPage} size={size} sort={sortOption} />
+        <Post postType={POST_TYPE.QNA} page={currentPage} size={BOARD_SIZE} sort={sortOption} />
       </ErrorBoundaryWrapper>
     </>
   );

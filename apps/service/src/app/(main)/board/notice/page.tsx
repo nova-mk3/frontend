@@ -1,14 +1,35 @@
-import React from 'react'
-import Title from '../components/BoardListTitle'
-import { Pin } from 'lucide-react'
-import Item from '../components/BoardListItem'
+"use client";
+import Post from "./Post";
 
-export default function page() {
+import { BOARD_SIZE, POST_TYPE } from "@/src/constant/board";
+import {  useRouter, useSearchParams } from "next/navigation";
+import BoardListTitle from "../components/BoardListTitle";
+import {  Pin } from "lucide-react";
+
+import ErrorBoundaryWrapper from "../../components/ErrorBoundaryWrapper";
+import { useEffect, useState } from "react";
+
+export default function Page() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const currentPage = parseInt(searchParams.get("page") || "1", 10);
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("query") || "");
+  const [sortOption, setSortOption] = useState(searchParams.get("sort") || "asc");
+
+
   return (
-    <div>
-        {/* <Title title='공지사항' TitleImage={ <Pin size={20} />}/> */}
-
-   
-    </div>
-  )
+    <>
+      <BoardListTitle 
+      title="공지사항" 
+      TitleImage={<Pin size={20}/> }
+      searchQuery={searchQuery}
+      setSearchQuery={setSearchQuery}
+      sortOption={sortOption}
+      setSortOption={setSortOption}
+      />
+      <ErrorBoundaryWrapper>
+        <Post postType={POST_TYPE.NOTICE} page={currentPage} size={BOARD_SIZE} sort={sortOption} />
+      </ErrorBoundaryWrapper>
+    </>
+  );
 }

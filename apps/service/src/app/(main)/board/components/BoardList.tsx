@@ -1,5 +1,6 @@
+
 import React from "react";
-import BoardItem from "./BoardListItem";
+import BoardListItem from "./BoardListItem";
 
 
 export interface Post {
@@ -21,12 +22,19 @@ interface PostPreview{
 }
 export default function BoardList({content} : PostPreview) {
 
+  if(content.length  === 0)
+    return (
+      <div className="w-full bg-background02 h-[745px] flex items-center justify-center">
+        <p className="!font-bold">게시글이 없습니다 😔</p>
+      </div>
+    );
+  console.log(content);
 
   return (
     <div className="flex flex-col">
       {
         content.map((post) => (
-          <BoardItem
+          <BoardListItem
             key={post.id}
             id={post.id}
             authorName={post.authorName}

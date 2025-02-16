@@ -5,25 +5,24 @@ import { PageNation } from '../../archive/components/PageNation'
 import ItemList from '../components/HomeListItem';
 import ContentList from '../components/BoardList';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { IntegratedBoardGet } from '@/src/api/board/integrated';
+import { BoardAllList, IntegratedBoardGet } from '@/src/api/board/integrated';
 import { useBoardIdStore } from '@/src/store/BoardId';
 import { ErrorBoundary } from 'react-error-boundary'
 interface Props{
-    postType : string;
     page : number;
     size : number;
     sort : string;
 }
 
-export default function Post({postType,page,size,sort} : Props) {
+export default function Post({page,size,sort} : Props) {
     const {INTEGRATED} = useBoardIdStore();
-    const { data, isLoading, error } = useSuspenseQuery({
-        
-        queryKey: [["postQNA", postType, page, size, sort, INTEGRATED]],
-        queryFn: () => IntegratedBoardGet({ postType, page : page-1, size, sort , boardId : INTEGRATED}),
+    const { data } = useSuspenseQuery({
+
+        queryKey: [["postAll",  page, size, sort, INTEGRATED]],
+        queryFn: () => BoardAllList({  page : page-1, size, sort , boardId : INTEGRATED}),
   
       });
-
+      
     return (
       <div>
           <ContentList content={data.data.content}/>

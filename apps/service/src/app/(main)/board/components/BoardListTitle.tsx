@@ -45,7 +45,9 @@ export default function BoardListTitle({title, className ,TitleImage,searchQuery
             className="w-[250px] h-[36px] px-2 py-1 rounded-lg flex-1"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <Search size="24" className="cursor-pointer" onClick={handleSearch}/>
+          <div className="cursor-pointer rounded-lg hover:bg-background02 p-1" onClick={handleSearch}>
+          <Search size="24"/>
+          </div>
         </div>
         <Link href="/board/newpost" className="mobile:w-full">
           <Button variant="default" className="mobile:w-full">

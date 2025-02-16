@@ -28,3 +28,5 @@ export const POST_TYPE_OPTIONS = [
       label: "자기소개",
     },
 ];
+
+export const BOARD_SIZE=5;

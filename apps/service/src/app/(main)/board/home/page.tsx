@@ -1,8 +1,9 @@
 import React from 'react'
-
 import Link from 'next/link'
 import { Button } from '@nova/ui/components/ui/button'
-import ItemList from '../components/HomeListItem'
+import HomeListItem from '../components/HomeListItem'
+import Post from './Post'
+import ErrorBoundaryWrapper from '../../components/ErrorBoundaryWrapper'
 
 
 export default function page() {
@@ -21,11 +22,8 @@ export default function page() {
       </div>
 
     </div>
-    <div className='grid gap-4 xl:grid-cols-4 lg:grid-cols-2 mobile:grid-cols-1'>
-      <ItemList title={"공지사항"} href='/board/notice'/>
-      <ItemList  title={"Q&A"} href='/board/qna'/>
-      <ItemList  title={"자기소개"} href='/board/selfintro'/>
-      <ItemList  title={"자유게시판"} href='/board/any'/>
-      </div>
+    <ErrorBoundaryWrapper>
+    <Post/>
+    </ErrorBoundaryWrapper>
     </div>
 )}
