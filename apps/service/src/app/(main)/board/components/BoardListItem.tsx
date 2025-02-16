@@ -22,7 +22,7 @@ export default function BoardListItem({title,content,createdTime,authorName, vie
   
   return (
     <div className={`border-b-[1px] border-line01 flex flex-col pb-3 ${className}`}>
-        <Link href={href} className='hover:underline' style={{ width: 'max-content' }}><Title title={title} type={type}/></Link>
+        <Link href={href}  style={{ width: 'max-content' }}><Title title={title} type={type}/></Link>
         <Link href={href} className='hover:underline' style={{ width: 'max-content' }}> <div className='t-m mt-3' >{content}</div></Link>
             <div className='mt-4 flex flex-col text-text02'>
             <div className='flex flex-row gap-2'>
@@ -49,14 +49,16 @@ function Title({title, type, className} : ItemTitleProps ) {
 
   if(type === POST_TYPE.NOTICE)
     return (
-      <div className='t-l !font-bold mt-3 flex flex-row gap-2'><p className='bg-primary rounded-lg t-s flex items-center justify-center text-background01 w-[40px] '>{
+      <div className='t-l !font-bold mt-3 flex flex-row gap-2'><p className='bg-primary rounded-lg t-s flex items-center justify-center text-background01 px-1.5 '>{
        type
-      }</p> {title}</div>
+      }</p> 
+      <p className='hover:underline'>{title}</p>
+      </div>
   )
 
   
   return (
-      <div className='t-l !font-bold mt-3 flex flex-row gap-2'>{title}</div>
+      <div className='t-l !font-bold mt-3 flex flex-row gap-2 hover:underline'>{title}</div>
   )
 
 }
