@@ -3,6 +3,7 @@ import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import { Suspense, ReactNode } from 'react';
 import FallbackErrorUI from './ErrorFallBack';
+import PendingFallbackUI from './PendingFallbackUI';
 
 
 interface ErrorBoundaryWrapperProps {
@@ -17,7 +18,7 @@ export default function ErrorBoundaryWrapper({ children }: ErrorBoundaryWrapperP
           onReset={reset}
           fallbackRender={FallbackErrorUI}
         >
-          <Suspense fallback={<div className="w-full h-[745px]"></div>}>
+          <Suspense fallback={<PendingFallbackUI/>}>
             {children}
           </Suspense>
         </ErrorBoundary>

@@ -7,7 +7,7 @@ import BoardListTitle from "../components/BoardListTitle";
 import { Book, MessageSquareMore } from "lucide-react";
 
 import ErrorBoundaryWrapper from "../../components/ErrorBoundaryWrapper";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 
 export default function Page() {
   const searchParams = useSearchParams();
