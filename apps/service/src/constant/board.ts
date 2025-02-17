@@ -6,7 +6,7 @@ export const POST_TYPE = {
     PICTURES: "PICTURES",
     QNA: "QNA",
     SUGGESTION: "SUGGESTION",
-};
+} as const;
 
 export type PostType = typeof POST_TYPE[keyof typeof POST_TYPE];
 

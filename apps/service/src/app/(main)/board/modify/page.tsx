@@ -1,26 +1,38 @@
 "use client";
-// import { PlateEditor } from "@nova/ui/components/editor/plate-editor"; //plate.js 라이브러리인데 일단은 제외
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
+
 import WriteBottomLayout from "../../components/WriteBottomLayout";
-import FileUploader  from "../../components/FileUploader";
-import { Controller, useForm, useWatch } from "react-hook-form";
+import FileUploader from "../../components/FileUploader";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@nova/ui/components/ui/select";
-import {  POST_TYPE_OPTIONS } from "@/src/constant/board";
+import { POST_TYPE_OPTIONS } from "@/src/constant/board";
 import { IntegratedInput, IntegratedSchema } from "@/src/schema/integrated.schema";
 import {  useMutation } from "@tanstack/react-query";
 import { IntegradePostRequest, IntegratedBoardPost} from "@/src/api/board/integrated";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useBoardIdStore } from "@/src/store/BoardId";
-import { FileItemProps } from "../../components/ViewFileItem";
+import { UploadFilesAPI } from "@/src/api/board/file";
+import { usePostDetailQuery } from "../query/postqueries";
+import { FileListLayout,FileList } from "../../archive/[id]/components/FileListLayout";
 
 export default function Page() {
+    const {INTEGRATED} = useBoardIdStore();
+  const searchParams = useSearchParams();  
+  const postId = searchParams.get("id") || "";
+  const postType = searchParams.get("type") || "";
 
   const router = useRouter();
+  const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
 
-  const [selectedFiles, setSelectedFiles] = useState<FileItemProps[]>([]);
-  const {INTEGRATED} =useBoardIdStore();
+ 
+
+
+   const {data } = usePostDetailQuery(postId, INTEGRATED);
+
+
     const {
          control,
         register,
@@ -30,9 +42,9 @@ export default function Page() {
         resolver: zodResolver(IntegratedSchema),
         mode: "onChange",
         defaultValues: {
-            title: "",
-            content: "",
-            category : "",
+            title: data.data.title,
+            content: data.data.content,
+            category : postType,
           },
       });
 
@@ -40,8 +52,8 @@ export default function Page() {
       const useIntegratedBoardMutation = useMutation({
         mutationFn: (data : IntegradePostRequest) => IntegratedBoardPost(data),
         onSuccess: (data : any) => {
-          alert("글쓰기 성공");
-          router.push(`/board/${data.data.id}`);
+          alert("변경 성공");
+          router.push(`/board/${postType.toLocaleLowerCase()}/${data.data.id}`);
         },
         onError: (error) => {
           alert(error.message);
@@ -50,22 +62,51 @@ export default function Page() {
       })
 
 
-     
+      const useFileUploadMutation = useMutation({
+        mutationFn: ( {data,POST_TYPE_OPTIONS} : { data : FormData, POST_TYPE_OPTIONS : string}) => UploadFilesAPI(data, POST_TYPE_OPTIONS),
+      })
 
       const onSubmit = async(data: IntegratedInput) => {
-        useIntegratedBoardMutation.mutate({
-          title : data.title,
-          content : data.content,
-          postType : data.category,
-          fileIds : selectedFiles.map( (file) => file.id),
-          boardId : INTEGRATED,
-        })
-       
-      };
-       const watchcategory = useWatch({
-          control: control,
-          name: "category",
+        // 파일이 없을때는 파일 업로드 생략
+        // 파일이 존재할때는 파일 업로드가 성공하면 게시글 생성
+        const formData = new FormData();
+  
+        selectedFiles.forEach((file) => {
+          formData.append("files", file);
         });
+  
+        if(selectedFiles.length > 0)
+        {
+          try {
+            const response = await useFileUploadMutation.mutateAsync({
+              data : formData,
+              POST_TYPE_OPTIONS : data.category
+            }); 
+
+            // 업로드 성공 후 다른 API 호출 예시
+            useIntegratedBoardMutation.mutate({
+              title : data.title,
+              content : data.content,
+              postType : data.category,
+              fileIds : [...response.data],
+              boardId : INTEGRATED,
+            })
+          } catch (error) {
+            alert("파일 업로드 실패");
+            console.log(error);
+          }
+        }
+        else{
+          useIntegratedBoardMutation.mutate({
+            title : data.title,
+            content : data.content,
+            postType : data.category,
+            fileIds : [],
+            boardId : INTEGRATED,
+          })
+        }
+   
+      };
 
 
   return (
@@ -109,11 +150,9 @@ export default function Page() {
       {errors.title?.message && <p className="text-danger">{errors.title?.message}</p>}
       {!errors.title && <p className="h-[24px]"></p>}
 
-      {/* 첨부 파일 영역 */} 
-      <FileUploader files={selectedFiles} setSelectedFiles={setSelectedFiles} POST_TYPE_OPTIONS={watchcategory}/>
+      {/* 첨부 파일 영역 */}
+      
 
-      {/* 본문 스크롤 영역 */}
-      {/* <PlateEditor /> */}
       <div className="flex-1 overflow-y-auto mb-[80px] border-line01 border-[1px] p-5 rounded-md relative">
       <TextareaAutosize
           className="flex w-full t-m resize-none outline-none h-[40px] overflow-hidden"

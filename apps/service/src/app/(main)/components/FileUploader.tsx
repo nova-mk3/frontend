@@ -1,30 +1,67 @@
 import React, { ChangeEvent } from 'react';
 import FilePlus from "@/public/image/FilePlus.svg";
 import PostFileItem from './PostFileItem';
+import { useMutation } from '@tanstack/react-query';
+import { DelelteFilesAPI, UploadFilesAPI } from '@/src/api/board/file';
+import { FileItemProps } from './ViewFileItem';
+
 
 interface FileUploaderProps {
-  selectedFiles: File[];
-  setSelectedFiles: React.Dispatch<React.SetStateAction<File[]>>;
+  files: FileItemProps[];
+  setSelectedFiles: React.Dispatch<React.SetStateAction<FileItemProps[]>>;
+  POST_TYPE_OPTIONS: string;
 }
 
-export default function FileUploader({ selectedFiles, setSelectedFiles }: FileUploaderProps) {
+export default function FileUploader({ files, setSelectedFiles,POST_TYPE_OPTIONS }: FileUploaderProps) {
+
+   const useFileUploadMutation = useMutation({
+          mutationFn: ( {data,POST_TYPE_OPTIONS} : { data : FormData, POST_TYPE_OPTIONS : string}) => UploadFilesAPI(data, POST_TYPE_OPTIONS),
+          onSuccess(data : any) {
+            // 성공하면 여기서 받은 데이터로 파일 업로드 성공!
+            // setSelectedFiles((prevFiles) => [...prevFiles,...data.files]);
+          }, 
+          onError(error) {
+            alert("파일 업로드 실패");
+            console.log(error.message);
+          }
+    })
+
+        
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>): void => {
+
+    if (POST_TYPE_OPTIONS === ""){
+      alert("카테고리를 선택해주세요");
+      return;
+    }
+    //파일을 받아서 업로드 하는 로직을 만들어야함
     const files: FileList | null = e.target.files;
     if (!files) return;
 
     const filesArray: File[] = Array.from(files);
 
-    if (selectedFiles.length + filesArray.length > 10) {
+    if (files.length + filesArray.length > 10) {
       alert('최대 10개의 파일만 업로드할 수 있습니다.');
       return;
     }
+    const formdata = new FormData();
 
-    setSelectedFiles((prevFiles) => [...prevFiles, ...filesArray]);
-    e.target.value = ''; // reset the file input
+    filesArray.forEach((file) => {
+      formdata.append("files", file);
+    });
+
+    useFileUploadMutation.mutate({data : formdata,POST_TYPE_OPTIONS});
+    e.target.value="";
   };
 
-  const handleRemoveFile = (index: number): void => {
-    setSelectedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+  const handleRemoveFile = async(id: string) => {
+    
+    try{
+      await DelelteFilesAPI(id);
+      setSelectedFiles(prevFiles => prevFiles.filter(file => file.id!== id));
+    }catch(error : any){
+      alert("파일 삭제 실패")
+    }
+
   };
 
   return (
@@ -34,13 +71,13 @@ export default function FileUploader({ selectedFiles, setSelectedFiles }: FileUp
         <p className="text-success mt-auto l-l ml-3">파일은 최대 10개까지 가능합니다</p>
       </div>
       <div className='flex flex-row flex-wrap gap-3'>
-        {selectedFiles.length > 0 &&
-          selectedFiles.map((file, index) => (
+        {files.length > 0 &&
+          files.map((file, index) => (
             <PostFileItem
-              name={file.name}
+              name={file.originalFileName}
               onRemove={handleRemoveFile}
-              index={index}
               key={index}
+              id={file.id}
             />
           ))}
         <label htmlFor="fileUpload" className="inline-flex cursor-pointer items-center">
@@ -54,7 +91,7 @@ export default function FileUploader({ selectedFiles, setSelectedFiles }: FileUp
           onChange={handleFileChange}
           className="hidden"
         />
-        {selectedFiles.length === 0 && <p className='text-text02 flex items-center'>파일을 선택해주세요</p>}
+        {files.length === 0 && <p className='text-text02 flex items-center'>파일을 선택해주세요</p>}
       </div>
     </div>
   );

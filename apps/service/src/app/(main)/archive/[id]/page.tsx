@@ -20,7 +20,7 @@ export default async function page({ params }: Props) {
       <div className="flex flex-row gap-[50px]">
       <Aside/>
       <div className="flex flex-col gap-[20px] mx-auto flex-1">
-      <SubTitle/>
+      {/* <SubTitle/> */}
       {/* <FileListLayout>
         <FileList/>
       </FileListLayout> */}

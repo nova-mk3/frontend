@@ -9,8 +9,9 @@ import { IntegratedBoardGet } from '@/src/api/board/integrated';
 import { useBoardIdStore } from '@/src/store/BoardId';
 import { ErrorBoundary } from 'react-error-boundary';
 import { usePostListQuery } from '../query/postqueries';
+import { PostType } from '@/src/constant/board';
 interface Props{
-    postType : string;
+    postType : PostType;
     page : number;
     size : number;
     sort : string;

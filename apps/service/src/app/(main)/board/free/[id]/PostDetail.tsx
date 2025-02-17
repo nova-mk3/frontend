@@ -34,7 +34,7 @@ export default  function PostDetail({id} : PostDetailProps) {
       <div className="flex flex-row gap-[50px]">
       <Aside count={response.likeCount}/>
       <div className="flex flex-col gap-[20px] mx-auto flex-1">
-      <SubTitle title={response.title} writer={response.authorName} date={response.createdTime} viewCount={response.viewCount}/>
+      {/* <SubTitle title={response.title} writer={response.authorName} date={response.createdTime} viewCount={response.viewCount} /> */}
       <FileListLayout>
         <FileList files={response.files}/>
       </FileListLayout>

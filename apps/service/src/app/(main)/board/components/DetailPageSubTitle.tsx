@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import Like from "../../components/Like";
 import { formatDate } from "@/src/libs/utils/dateParsing";
 import { useRouter } from "next/navigation";
 import { PostType } from "@/src/constant/board";
+import Like from "../../archive/components/Like";
 
 interface SubTitle {
   title?: string;
@@ -12,21 +12,22 @@ interface SubTitle {
   likeCount? : number;
   viewCount? : number;
   postId : string;
-
+  postType : PostType
 }
 
-export default function SubTitle({
+export default function DetailPageSubTitle({
   title = "게시판 제목",
   writer = "권자몬",
   date = "2025.01.07",
   likeCount,
   viewCount,
-  postId
+  postId,
+  postType
 }: SubTitle) {
 
   const router = useRouter();
   const handleModify = () => {
-    router.push(`/board/modify?id=${postId}%P`);
+    router.push(`/board/modify?id=${postId}&type=${postType}`);
   };
   return (
     <div className="flex flex-col border-line01  pt-5 mobile:flex-col mt-[40px]">

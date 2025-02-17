@@ -8,7 +8,9 @@ export const UploadFilesAPI = async(formdata : FormData, postType : string)=>{
     return response.data;
 }
 
-
+/*
+파일 다운로드
+*/
 export const DownloadFilesAPI = async (fileId: string) => {
     try {
       const response = await Authapi.get(`/nova/files/${fileId}/download`, {
@@ -34,4 +36,14 @@ export const DownloadFilesAPI = async (fileId: string) => {
       console.error('File download failed:', error);
       alert('파일 다운로드 실패');
     }
-  }; 
+};
+
+
+/*
+파일 삭제
+*/
+
+export const DelelteFilesAPI = async(fileId : string)=>{
+  const response = await Authapi.delete(`/nova/files/${fileId}`);
+  return response.data;
+}
