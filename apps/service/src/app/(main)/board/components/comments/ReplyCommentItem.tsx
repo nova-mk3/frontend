@@ -4,20 +4,27 @@ import React, { useState } from "react";
 import { CircleUser } from "lucide-react";
 import ReplyButton from "./ReplyButton";
 import ReplyCommentForm from "./ReplyCommentForm";
+import { formatDate } from "@/src/libs/utils/dateParsing";
 
-interface ItemProps {
-  created?: string;
-  profileImage?: string;
-  content?: string;
+interface ReplyCommentItemProps {
+  id : string;
+  authorName : string;
+  authorProfilePhoto : string;
+  children : ReplyCommentItemProps[],
+  content : string
+  modifiedTime : string
+  createdTime : string
   className?: string;
-  name?: string;
 }
 export default function ReplyCommentItem({
   className,
-  created = "2025.01.08",
-  content = "임시적 내용입니다",
-  name = "권자몬",
-}: ItemProps) {
+  authorName,
+  authorProfilePhoto,
+  children,
+  content,
+  modifiedTime,
+  createdTime
+}: ReplyCommentItemProps) {
   const [isReplyOpen, setReplyOpen] = useState(false);
 
   const toggleReply = () => {
@@ -32,8 +39,8 @@ export default function ReplyCommentItem({
       <div className="flex flex-row items-center gap-4">
         <CircleUser size={40} />
         <div className="flex flex-col justify-center">
-          <p>{name}</p>
-          <p>{created}</p>
+          <p>{authorName}</p>
+          <p>{formatDate(createdTime)}</p>
         </div>
 
         {/* 수정 삭제 버튼도 컴포넌트로 만들어야겠음 */}

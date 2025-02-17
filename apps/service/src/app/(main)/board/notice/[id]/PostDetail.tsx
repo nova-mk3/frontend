@@ -12,7 +12,8 @@ import { useBoardIdStore } from '@/src/store/BoardId';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { IntegratedBoardGetDetail } from '@/src/api/board/integrated';
 import CommentTitle from '../../components/comments/CommentTitle';
-import { usePostDetailQuery } from '../../query/postqueries.ts';
+import { usePostDetailQuery } from '../../query/postqueries';
+
 
 interface PostDetailProps{
     id: string;

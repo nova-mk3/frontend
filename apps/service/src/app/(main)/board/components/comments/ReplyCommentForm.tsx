@@ -1,17 +1,43 @@
+import { CommentAPIType, CommentsPost } from "@/src/api/board/comments";
 import { Button } from "@nova/ui/components/ui/button";
-import React from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import React, { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
 interface ReplyCommentFormProps {
-  toggle?: () => void;
+  toggle: () => void;
+  postId: string;
+  parentCommentId?: string;
+  
 }
-export default function ReplyCommentForm({ toggle }: ReplyCommentFormProps) {
+export default function ReplyCommentForm({ toggle,postId,parentCommentId }: ReplyCommentFormProps) {
+  const [value,setValue] = useState("");
+  const queryClient = useQueryClient();
+
+  const useCommentMutation =  useMutation({
+    mutationFn: ({postId,content,parentCommentId} : CommentAPIType) => CommentsPost({postId,content,parentCommentId}),
+    onSuccess: (data : any) => {
+      console.log(data);
+      setValue("");
+      toggle();
+      //여기도 보면 쿼리데이터에 추가만 해줘여할거 같아
+    },
+    onError: (error) => {
+      alert(error.message);
+    },
+  });
+  const handleSubmit = ()=>{
+    useCommentMutation.mutate({postId,content : value, parentCommentId});
+  }
+
   return (
     <div className="flex flex-col w-[90%] gap-3 mx-auto p-1 my-3">
       <div className="border-line01 border rounded-md">
         <TextareaAutosize
           className="flex w-full min-h-[98px] t-m resize-none outline-none p-4 border-none"
           placeholder="댓글을 입력하세요"
+          value={value}
+          onChange={(e)=> setValue(e.target.value)}
         />
       </div>
       {/* 버튼 wrapper 컴포넌트로 리펙토링 예정 */}
@@ -23,7 +49,7 @@ export default function ReplyCommentForm({ toggle }: ReplyCommentFormProps) {
         >
           취소
         </Button>
-        <Button className="flex w-[120px]">댓글 작성</Button>
+        <Button className="flex w-[120px]" onClick={handleSubmit}>댓글 작성</Button>
       </div>
     </div>
   );

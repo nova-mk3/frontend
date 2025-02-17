@@ -21,10 +21,34 @@ export default function CommentForm({parentCommentId="",postId} : CommentFormPro
   const useCommentMutation =  useMutation({
     mutationFn: ({postId,content,parentCommentId} : CommentAPIType) => CommentsPost({postId,content,parentCommentId}),
     onSuccess: (data : any) => {
-      setValue("");
-      // TODO : setQueryData로 api 호출 최적화
-      queryClient.invalidateQueries({ queryKey : postKeys.detail(postId)});
-      queryClient.invalidateQueries({ queryKey : commentsKeys.lists(postId)});
+      setValue("");   
+
+      queryClient.setQueryData(
+        commentsKeys.lists(postId),
+        (previous: any) => {
+
+         return {
+          ...previous,
+           data : [...previous.data, data.data],
+         }
+        }
+      )
+
+      queryClient.setQueryData(
+        postKeys.detail(postId),
+        (previous: any) => {
+
+    
+         return {
+          ...previous,
+           data : {...previous.data,
+            commentCount : previous.data.commentCount +1,
+           },
+         }
+        //  진짜 신기한게 ++previous.data.commentCount 이렇게 기존 데이터의 불변성을 해치면 반영되지 않는다 이건 어케하는거노...
+        }
+      )
+
     },
     onError: (error) => {
       alert(error.message);

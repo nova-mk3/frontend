@@ -79,7 +79,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       
             staleTime: 60 * 1000,  // 1분 동안 데이터를 stale로 간주하지 않음
             retry: 0,
-            throwOnError: true
+            throwOnError: true,
           },
         },
       })

@@ -19,8 +19,9 @@ export interface CommentItemProps {
   modifiedTime : string
   createdTime : string
   className?: string;
+  postId: string;
 }
-export default function CommentListItem({ id,authorName,authorProfilePhoto,children,content,modifiedTime,createdTime,className}: CommentItemProps) {
+export default function CommentListItem({ id,authorName,authorProfilePhoto,children,content,modifiedTime,createdTime,className,postId}: CommentItemProps) {
   const [isReplyOpen, setReplyOpen] = useState(false);
   const [isReplyFormOpen, setReplyFormOpen] = useState(false);
   const toggleReply = () => {
@@ -53,18 +54,29 @@ export default function CommentListItem({ id,authorName,authorProfilePhoto,child
       {/*  */}
       <div className="w-full min-h-[100px] p-1">{content}</div>
       {/* 대댓글 열기 -> 대댓글을 열었을때 입력폼도 나와줘야함 */}
-      <ReplyButton isOpen={isReplyOpen} toggle={toggleReply} />
+      <ReplyButton isOpen={isReplyOpen} toggle={toggleReply} count={children.length}/>
 
       {/* 대댓글 위치 */}
 
       {isReplyOpen && (
         <div className="flex flex-col gap-7 bg-background02 rounded-lg w-[95%] mx-auto">
-          <ReplyCommentItem />
-          <ReplyCommentItem />
-          <ReplyCommentItem />
+          {
+            children.map((child) => (
+              <ReplyCommentItem
+                key={child.id}
+                id={child.id}
+                authorName={child.authorName}
+                authorProfilePhoto={child.authorProfilePhoto}
+                content={child.content}
+                modifiedTime={child.modifiedTime}
+                createdTime={child.createdTime}
+                children={child.children}
+              />
+            ))
+          }
 
           {isReplyFormOpen ? (
-            <ReplyCommentForm toggle={toggleReplyForm} />
+            <ReplyCommentForm toggle={toggleReplyForm}  parentCommentId={id} postId={postId}/>
           ) : (
             <Button className="w-[90%] mx-auto mb-7" onClick={toggleReplyForm}>
               답글 작성

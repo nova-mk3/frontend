@@ -6,7 +6,6 @@ import { useCommentsListQuery } from '../../query/comments'
 
 interface CommentListProps{
     postId: string;
-    parentCommentId?: string;
   }
 export default function CommentList({postId} : CommentListProps) {
     const {data} = useCommentsListQuery(postId);
@@ -14,7 +13,6 @@ export default function CommentList({postId} : CommentListProps) {
     
   return (
     <>
-
             {
             data.data.map((item: CommentItemProps) => (
                 <CommentListItem
@@ -26,6 +24,7 @@ export default function CommentList({postId} : CommentListProps) {
                 content={item.content}
                 modifiedTime={item.modifiedTime}
                 createdTime={item.createdTime}
+                postId={postId}
                 />
             ))
             }
