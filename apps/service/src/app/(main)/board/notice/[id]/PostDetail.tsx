@@ -13,6 +13,9 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { IntegratedBoardGetDetail } from '@/src/api/board/integrated';
 import CommentTitle from '../../components/comments/CommentTitle';
 import { usePostDetailQuery } from '../../query/postqueries';
+import CommentForm from '../../components/comments/CommentForm';
+import ErrorBoundaryWrapper from '../../../components/ErrorBoundaryWrapper';
+import CommentList from '../../components/comments/CommentList';
 
 
 interface PostDetailProps{
@@ -31,6 +34,8 @@ export default  function PostDetail({id} : PostDetailProps) {
       <div className="flex flex-row gap-[50px]">
       <Aside count={data.data.likeCount}/>
       <div className="flex flex-col gap-[20px] mx-auto flex-1">
+
+        {/* 게시판 내용 */}
       <SubTitle title={data.data.title} writer={data.data.authorName} date={data.data.createdTime} viewCount={data.data.viewCount}/>
       <FileListLayout>
         <FileList files={data.data.files}/>
@@ -40,7 +45,16 @@ export default  function PostDetail({id} : PostDetailProps) {
       title='전체 댓글'
       count={data.data.commentCount}
       />
+      {/* 댓글 부분 */}
+      <CommentForm postId={id as string}/>
+          <ErrorBoundaryWrapper>
+          <CommentList postId={id as string}/>
+      </ErrorBoundaryWrapper>
+      
       </div>
+
+
+    
       </div>
     </div>
   );

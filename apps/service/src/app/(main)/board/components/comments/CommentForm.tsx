@@ -45,7 +45,7 @@ export default function CommentForm({parentCommentId="",postId} : CommentFormPro
             commentCount : previous.data.commentCount +1,
            },
          }
-        //  진짜 신기한게 ++previous.data.commentCount 이렇게 기존 데이터의 불변성을 해치면 반영되지 않는다 이건 어케하는거노...
+             //개인적인 생각은 깊은복사를 통해 값을 비교하는것 같음
         }
       )
 

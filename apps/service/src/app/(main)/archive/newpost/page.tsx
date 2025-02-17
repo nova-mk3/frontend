@@ -147,7 +147,7 @@ export default function Page() {
       </div>
 
       {/* 첨부 파일 영역 */} 
-      <FileUploader/>
+      {/* <FileUploader/> */}
 
       {/* 본문 스크롤 영역 */}
       {/* <PlateEditor /> */}

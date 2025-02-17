@@ -78,7 +78,7 @@ export default function CommentListItem({ id,authorName,authorProfilePhoto,child
           {isReplyFormOpen ? (
             <ReplyCommentForm toggle={toggleReplyForm}  parentCommentId={id} postId={postId}/>
           ) : (
-            <Button className="w-[90%] mx-auto mb-7" onClick={toggleReplyForm}>
+            <Button className={`w-[90%] mx-auto mb-7 ${children.length === 0 && 'mt-7'}`} onClick={toggleReplyForm}>
               답글 작성
             </Button>
           )}

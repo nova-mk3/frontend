@@ -3,6 +3,7 @@ import { Button } from "@nova/ui/components/ui/button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import { commentsKeys } from "../../query/comments";
 
 interface ReplyCommentFormProps {
   toggle: () => void;
@@ -14,20 +15,38 @@ export default function ReplyCommentForm({ toggle,postId,parentCommentId }: Repl
   const [value,setValue] = useState("");
   const queryClient = useQueryClient();
 
-  const useCommentMutation =  useMutation({
+  const useReplyCommentMutation =  useMutation({
     mutationFn: ({postId,content,parentCommentId} : CommentAPIType) => CommentsPost({postId,content,parentCommentId}),
     onSuccess: (data : any) => {
       console.log(data);
       setValue("");
       toggle();
-      //여기도 보면 쿼리데이터에 추가만 해줘여할거 같아
+      
+
+       queryClient.setQueryData(
+              commentsKeys.lists(postId),
+              (oldData: any) => {
+                if (!oldData) return oldData;
+            
+                //이게 되는게 레전드인데
+                return {
+                  ...oldData,
+                  data: oldData.data.map((comment: any) => 
+                    comment.id === parentCommentId
+                      ? { ...comment, children: [...comment.children, data.data] }
+                      : comment
+                  ),
+                };
+              }
+        )
+
     },
     onError: (error) => {
       alert(error.message);
     },
   });
   const handleSubmit = ()=>{
-    useCommentMutation.mutate({postId,content : value, parentCommentId});
+    useReplyCommentMutation.mutate({postId,content : value, parentCommentId});
   }
 
   return (
