@@ -1,8 +1,9 @@
 "use client";
 import React from 'react'
-import CommentForm from '../../../components/CommentForm'
-import CommentItem from '../../../components/CommentItem'
+import CommentForm from '../../../components/comments/CommentForm'
 import { useParams } from 'next/navigation';
+import CommentList from '../../../components/comments/CommentList';
+import ErrorBoundaryWrapper from '@/src/app/(main)/components/ErrorBoundaryWrapper';
 
 export default function page() {
 
@@ -15,7 +16,9 @@ export default function page() {
     <div className="flex flex-col gap-[20px] mx-auto flex-1">
 
       <CommentForm postId={id as string}/>
-      <CommentItem />
+      <ErrorBoundaryWrapper>
+      <CommentList postId={id as string}/>
+      </ErrorBoundaryWrapper>
     </div>
     </div>
     </div>

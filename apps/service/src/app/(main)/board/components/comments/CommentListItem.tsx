@@ -7,21 +7,20 @@ import ReplyCommentForm from "./ReplyCommentForm";
 import ReplyCommentItem from "./ReplyCommentItem";
 import { Button } from "@nova/ui/components/ui/button";
 import ReplyButton from "./ReplyButton";
+import { formatDate } from "@/src/libs/utils/dateParsing";
 
 
-interface ItemProps {
-  created?: string;
-  profileImage?: string;
-  content?: string;
+export interface CommentItemProps {
+  id : string;
+  authorName : string;
+  authorProfilePhoto : string;
+  children : CommentItemProps[],
+  content : string
+  modifiedTime : string
+  createdTime : string
   className?: string;
-  name?: string;
 }
-export default function CommentItem({
-  className,
-  created = "2025.01.08",
-  content = "임시적 내용입니다",
-  name = "권자몬",
-}: ItemProps) {
+export default function CommentListItem({ id,authorName,authorProfilePhoto,children,content,modifiedTime,createdTime,className}: CommentItemProps) {
   const [isReplyOpen, setReplyOpen] = useState(false);
   const [isReplyFormOpen, setReplyFormOpen] = useState(false);
   const toggleReply = () => {
@@ -39,8 +38,8 @@ export default function CommentItem({
       <div className="flex flex-row items-center gap-4">
         <CircleUser size={40} />
         <div className="flex flex-col justify-center">
-          <p>{name}</p>
-          <p>{created}</p>
+          <p>{authorName}</p>
+          <p>{formatDate(createdTime)}</p>
         </div>
 
         {/* 수정 삭제 버튼도 컴포넌트로 만들어야겠음 */}

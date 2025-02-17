@@ -52,8 +52,6 @@ export async function IntegratedBoardGet({postType,page,size,sort,boardId} : Par
 }
 
 
-
-
 /*
 게시글 상세 조회
 */

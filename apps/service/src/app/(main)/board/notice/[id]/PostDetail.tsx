@@ -11,7 +11,8 @@ import { MessageSquareMore } from 'lucide-react';
 import { useBoardIdStore } from '@/src/store/BoardId';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { IntegratedBoardGetDetail } from '@/src/api/board/integrated';
-import CommentTitle from '../../components/CommentTitle';
+import CommentTitle from '../../components/comments/CommentTitle';
+import { usePostDetailQuery } from '../../query/postqueries.ts';
 
 interface PostDetailProps{
     id: string;
@@ -21,11 +22,7 @@ export default  function PostDetail({id} : PostDetailProps) {
 
   const {INTEGRATED} = useBoardIdStore();
 
-  const { data, isLoading, error } = useSuspenseQuery({
-      // 부모에서 prefetchQuery 할 때 썼던 키와 동일하게
-      queryKey: ["Detail", { INTEGRATED, id }],
-      queryFn: () => IntegratedBoardGetDetail({  boardId : INTEGRATED , postId : id},),
-  });
+  const { data } = usePostDetailQuery(id,INTEGRATED);
   console.log(data);
   return (
     <div className="flex flex-col t-m w-full mx-auto">

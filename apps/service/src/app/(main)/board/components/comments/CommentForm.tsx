@@ -5,8 +5,9 @@ import TextareaAutosize from "react-textarea-autosize";
 import { Button } from "@nova/ui/components/ui/button";
 import {  useMutation, useQueryClient } from "@tanstack/react-query";
 import { CommentAPIType, CommentsPost } from "@/src/api/board/comments";
-import { useRouter } from 'next/navigation'
-import { useBoardIdStore } from "@/src/store/BoardId";
+import { postKeys } from "../../query/postqueries";
+import { commentsKeys } from "../../query/comments";
+
 
 
 interface CommentFormProps{
@@ -16,11 +17,14 @@ interface CommentFormProps{
 export default function CommentForm({parentCommentId="",postId} : CommentFormProps) {
   const [value,setValue] = useState("");
   const queryClient = useQueryClient();
+  
   const useCommentMutation =  useMutation({
     mutationFn: ({postId,content,parentCommentId} : CommentAPIType) => CommentsPost({postId,content,parentCommentId}),
     onSuccess: (data : any) => {
       setValue("");
-      queryClient.invalidateQueries({ queryKey: ['Detail'] });
+      // TODO : setQueryData로 api 호출 최적화
+      queryClient.invalidateQueries({ queryKey : postKeys.detail(postId)});
+      queryClient.invalidateQueries({ queryKey : commentsKeys.lists(postId)});
     },
     onError: (error) => {
       alert(error.message);
