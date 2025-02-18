@@ -1,7 +1,7 @@
 // app/api/auth/login/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import * as cookie from 'cookie';
-import { api } from '@/src/api/core';
+import { api, EXTERNAL_URL } from '@/src/api/core';
 
 /*
 서버에서 쿠키를 만들어 사용하지만 결국 httpOnly를 사용해 보안을 강화하려면 외부서버에서 jwt를 쿠키로 처리해야한다
@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json(); // JSON 형식의 요청 본문 읽기
     const { studentNumber, password } = body;
     // 외부 서버에 로그인 요청
-    const externalResponse = await api.post('/nova/members/login', {
+    const externalResponse = await api.post(`${EXTERNAL_URL}/members/login`, {
       studentNumber,
       password,
     });

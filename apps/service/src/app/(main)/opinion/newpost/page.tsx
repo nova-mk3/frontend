@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { Input } from "@nova/ui/components/ui/input";
 import WriteBottomLayout from "../../components/WriteBottomLayout";
-import FileUploader from "../../components/FileUploader";
+import FileUploader from "../../components/File/FileUploader";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { OpinionInput, OpinionSchema } from "@/src/schema/opinion.schema";

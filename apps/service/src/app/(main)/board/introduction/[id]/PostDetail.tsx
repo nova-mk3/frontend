@@ -3,7 +3,7 @@
 import React from 'react'
 import Aside from '../../../archive/[id]/components/Aside';
 import SubTitle from '../../../archive/[id]/components/SubTitle';
-import { FileListLayout,FileList } from '../../../archive/[id]/components/FileListLayout';
+import { FileListLayout,FileList } from '../../../components/File/ViewFileLayout';
 import CommentLayout from '../../../archive/[id]/components/CommentLayout';
 import Content from '../../../archive/[id]/components/Content';
 import DetailPageTitle from '../../components/DetailPageTitle';

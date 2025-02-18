@@ -13,7 +13,9 @@ export default function layout({
   const pathname = usePathname();
   
     // 현재 URL과 링크의 href가 같다면 활성화된 스타일을 적용
-    const isActive = pathname === '/board/newpost';
+    let isActive = null;
+
+    if(pathname === '/board/newpost' || pathname === '/board/modify') isActive = true;
 
     if(isActive){
       return (<div className='flex flex-col t-m w-[80%] mx-auto'>

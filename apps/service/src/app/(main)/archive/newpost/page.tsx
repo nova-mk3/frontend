@@ -6,7 +6,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import Tags from "../components/Tags";
 import { Input } from "@nova/ui/components/ui/input";
 import FilePlus from "@/public/image/FilePlus.svg";
-import FileUploader from "../../components/FileUploader";
+import FileUploader from "../../components/File/FileUploader";
 
 import {
   Select,

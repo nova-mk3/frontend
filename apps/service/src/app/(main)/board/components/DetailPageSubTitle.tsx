@@ -4,6 +4,7 @@ import { formatDate } from "@/src/libs/utils/dateParsing";
 import { useRouter } from "next/navigation";
 import { PostType } from "@/src/constant/board";
 import Like from "../../archive/components/Like";
+import { IntegratedBoardDelete } from "@/src/api/board/integrated";
 
 interface SubTitle {
   title?: string;
@@ -12,7 +13,8 @@ interface SubTitle {
   likeCount? : number;
   viewCount? : number;
   postId : string;
-  postType : PostType
+  postType : PostType;
+  boardId : string;
 }
 
 export default function DetailPageSubTitle({
@@ -22,12 +24,22 @@ export default function DetailPageSubTitle({
   likeCount,
   viewCount,
   postId,
-  postType
+  postType,
+  boardId
 }: SubTitle) {
 
   const router = useRouter();
   const handleModify = () => {
     router.push(`/board/modify?id=${postId}&type=${postType}`);
+  };
+  const handleDelete = async() => {
+    try {
+      await IntegratedBoardDelete({boardId, postId})
+      alert("삭제 성공!")
+      router.push(`/board/${postType.toLocaleLowerCase()}`)
+    }catch(error : any){
+      console.log(error);
+    }
   };
   return (
     <div className="flex flex-col border-line01  pt-5 mobile:flex-col mt-[40px]">
@@ -47,7 +59,7 @@ export default function DetailPageSubTitle({
         
         <p className="cursor-pointer" onClick={handleModify}>수정</p>
         <div className="w-[1px] h-[20px] bg-line01"></div>
-        <p className="cursor-pointer">삭제</p>
+        <p className="cursor-pointer" onClick={handleDelete}>삭제</p>
       </div>
       </div>
     </div>

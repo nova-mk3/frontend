@@ -2,14 +2,12 @@
 
 import React from 'react'
 import Aside from '../../../archive/[id]/components/Aside';
-import { FileListLayout,FileList } from '../../../archive/[id]/components/FileListLayout';
+import { FileListLayout,FileList } from '../../../components/File/ViewFileLayout';
 
 import Content from '../../../archive/[id]/components/Content';
 import DetailPageTitle from '../../components/DetailPageTitle';
-import { MessageSquareMore } from 'lucide-react';
 import { useBoardIdStore } from '@/src/store/BoardId';
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { IntegratedBoardGetDetail } from '@/src/api/board/integrated';
+
 import CommentTitle from '../../components/comments/CommentTitle';
 import { usePostDetailQuery } from '../../query/postqueries';
 import CommentForm from '../../components/comments/CommentForm';
@@ -17,6 +15,7 @@ import ErrorBoundaryWrapper from '../../../components/ErrorBoundaryWrapper';
 import CommentList from '../../components/comments/CommentList';
 import { POST_TYPE } from '@/src/constant/board';
 import DetailPageSubTitle from '../../components/DetailPageSubTitle';
+import { Pin } from 'lucide-react';
 
 
 interface PostDetailProps{
@@ -28,16 +27,16 @@ export default  function PostDetail({id} : PostDetailProps) {
   const {INTEGRATED} = useBoardIdStore();
 
   const { data } = usePostDetailQuery(id,INTEGRATED);
-  console.log(data);
+
   return (
     <div className="flex flex-col t-m w-full mx-auto">
-      <DetailPageTitle title='Q&A' TitleImage={ <MessageSquareMore size={20} />}/>
+      <DetailPageTitle title={POST_TYPE.NOTICE} TitleImage={ <Pin size={20} />}/>
       <div className="flex flex-row gap-[50px]">
       <Aside count={data.data.likeCount}/>
       <div className="flex flex-col gap-[20px] mx-auto flex-1">
 
         {/* 게시판 내용 */}
-      <DetailPageSubTitle title={data.data.title} writer={data.data.authorName} date={data.data.createdTime} viewCount={data.data.viewCount} postId={id} postType={POST_TYPE.NOTICE}/>
+      <DetailPageSubTitle title={data.data.title} writer={data.data.authorName} date={data.data.createdTime} viewCount={data.data.viewCount} postId={id} postType={POST_TYPE.NOTICE} boardId={INTEGRATED}/>
       <FileListLayout>
         <FileList files={data.data.files}/>
       </FileListLayout>

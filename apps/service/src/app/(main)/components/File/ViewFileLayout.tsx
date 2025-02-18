@@ -1,5 +1,5 @@
 import React from 'react'
-import ViewFileItem, { FileItemProps } from '../../../components/ViewFileItem'
+import ViewFileItem, { FileItemProps } from './ViewFileItem';
 
 interface FileListProps {
     files: FileItemProps[]

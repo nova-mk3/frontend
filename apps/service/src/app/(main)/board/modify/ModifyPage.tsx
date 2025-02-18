@@ -1,63 +1,88 @@
 "use client";
-// import { PlateEditor } from "@nova/ui/components/editor/plate-editor"; //plate.js 라이브러리인데 일단은 제외
-import React, { useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
+
 import WriteBottomLayout from "../../components/WriteBottomLayout";
-import { Controller, useForm, useWatch } from "react-hook-form";
+import FileUploader from "../../components/File/FileUploader";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@nova/ui/components/ui/select";
-import {  POST_TYPE_OPTIONS } from "@/src/constant/board";
+import { POST_TYPE_OPTIONS } from "@/src/constant/board";
 import { IntegratedInput, IntegratedSchema } from "@/src/schema/integrated.schema";
 import {  useMutation } from "@tanstack/react-query";
-import { IntegradePostRequest, IntegratedBoardPost} from "@/src/api/board/integrated";
+import {  IntegratedBoardPut, IntegratedPutRequest} from "@/src/api/board/integrated";
 import { useRouter } from "next/navigation";
 import { useBoardIdStore } from "@/src/store/BoardId";
-import {  UploadFilesAPI } from "@/src/api/board/file";
-import PostFileUploader from "../../components/File/PostFileUploader";
+import { UploadFilesAPI } from "@/src/api/board/file";
+import { usePostDetailQuery } from "../query/postqueries";
+import ModifyFileUploader from "../../components/File/ModifyFileUploader";
+import { FileItemProps } from "../../components/File/ViewFileItem";
 
-export default function Page() {
+interface props{
+    postId : string;
+    postType : string;
+}
+export default function ModifyPage({postId , postType} : props) {
+    const {INTEGRATED} = useBoardIdStore();
 
   const router = useRouter();
-
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const {INTEGRATED} =useBoardIdStore();
 
+  const [originFiles,setOriginFiles] = useState<FileItemProps[]>([]);
+  const [willDeleteFiles, setwillDeleteFiles] = useState<string[]>([]);
+
+ 
+
+   const {data } = usePostDetailQuery(postId, INTEGRATED);
+   console.log(data);
+
+   
     const {
          control,
         register,
         handleSubmit,
+        reset,
         formState: { errors, isValid },
       } = useForm<IntegratedInput>({
         resolver: zodResolver(IntegratedSchema),
         mode: "onChange",
         defaultValues: {
-            title: "",
-            content: "",
-            category : "",
+            title: data.data.title,
+            content: data.data.content,
+            category : postType,
           },
       });
 
+      useEffect( ()=>{
+        setOriginFiles([...data.data.files]);
+      },[])
       
       const useIntegratedBoardMutation = useMutation({
-        mutationFn: (data : IntegradePostRequest) => IntegratedBoardPost(data),
+        mutationFn: (data : IntegratedPutRequest) => IntegratedBoardPut(data),
         onSuccess: (data : any) => {
-          alert("글쓰기 성공");
-          // 글쓰기 성공과 함께 랜더링
-       
-          router.push(`/board/${watchcategory.toLocaleLowerCase()}/${data.data.id}`);
+            console.log(data);
+          alert("변경 성공");
+          router.push(`/board/${postType.toLocaleLowerCase()}/${data.data.id}`);
         },
         onError: (error) => {
-
           alert(error.message);
           console.log(error);
         },
       })
+
 
       const useFileUploadMutation = useMutation({
         mutationFn: ( {data,POST_TYPE_OPTIONS} : { data : FormData, POST_TYPE_OPTIONS : string}) => UploadFilesAPI(data, POST_TYPE_OPTIONS),
       })
 
       const onSubmit = async(data: IntegratedInput) => {
+
+
+
+
+
+
         // 파일이 없을때는 파일 업로드 생략
         // 파일이 존재할때는 파일 업로드가 성공하면 게시글 생성
         const formData = new FormData();
@@ -73,14 +98,17 @@ export default function Page() {
               data : formData,
               POST_TYPE_OPTIONS : data.category
             }); 
+
+            const temp = [...response.data.map((file :any)=>{
+                return file.id;
+            })];
             // 업로드 성공 후 다른 API 호출 예시
             useIntegratedBoardMutation.mutate({
               title : data.title,
               content : data.content,
-              postType : data.category,
-              fileIds : [...response.data.map((file :any)=>{
-                return file.id;
-              })],
+              fileIds : [...originFiles.map( (file)=> file.id), ...temp],
+              deleteFileIds : [...willDeleteFiles],
+              postId : postId,
               boardId : INTEGRATED,
             })
           } catch (error) {
@@ -89,32 +117,23 @@ export default function Page() {
           }
         }
         else{
+            console.log(...originFiles.map( (file)=> file.id));
           useIntegratedBoardMutation.mutate({
             title : data.title,
             content : data.content,
-            postType : data.category,
-            fileIds : [],
-            boardId : INTEGRATED,
+              fileIds : [...originFiles.map( (file)=> file.id)],
+              deleteFileIds : [...willDeleteFiles],
+              postId : postId,
+              boardId : INTEGRATED,
           })
         }
    
       };
 
 
-       const watchcategory = useWatch({
-          control: control,
-          name: "category",
-        });
-
-       
-    
-
   return (
     <form className="flex flex-col mt-5 w-[80%] h-[calc(100vh-86px)] mx-auto relative" onSubmit={handleSubmit(onSubmit)}>
 
-
-      
-     {/* TODO: 좀 더 컴포넌트 화 가능할듯! */}
       <div className="flex flex-row gap-2 items-center mb-2">
         <label className="t-m !font-bold">
           카테고리
@@ -155,21 +174,27 @@ export default function Page() {
         />
       </div>
       
-      {errors.title?.message && <p className="text-danger text-[0.8rem]">{errors.title?.message}</p>}
+      {errors.title?.message && <p className="text-danger">{errors.title?.message}</p>}
       {!errors.title && <p className="h-[24px]"></p>}
 
-      {/* 첨부 파일 영역 */} 
-      <PostFileUploader selectedFiles={selectedFiles} setSelectedFiles={setSelectedFiles}/>
+      {/* 첨부 파일 영역 */}
+      <ModifyFileUploader 
+      selectedFiles={selectedFiles} 
+      setSelectedFiles={setSelectedFiles}
+      originFiles={originFiles} 
+      setOriginFiles={setOriginFiles}
+      willdeletedFiles={willDeleteFiles} 
+      setwillDeleteFiles={setwillDeleteFiles} 
+      />
 
-      {/* 본문 스크롤 영역 */}
-      {/* <PlateEditor /> */}
+
       <div className="flex-1 overflow-y-auto mb-[80px] border-line01 border-[1px] p-5 rounded-md relative">
       <TextareaAutosize
           className="flex w-full t-m resize-none outline-none h-[40px] overflow-hidden"
           placeholder={"내용을 작성해주세요"}
           {...register("content")}
         />
-        {errors.content?.message && <p className="text-[0.8rem] absolute right-4 top-4 text-danger">{errors.content?.message}</p>}
+        {errors.content?.message && <p className="absolute right-4 top-4 text-danger">{errors.content?.message}</p>}
       </div>
 
       {/* 하단 바 (버튼 등) */}

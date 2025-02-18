@@ -23,7 +23,7 @@ export default function HomeListItem({className, data,title,href } : HomeListIte
                 <Link href={href} className='t-s ml-auto text-text02 cursor-pointer'><div>더보기 &gt;</div></Link>
                 </div>
                 <div className='w-full h-[1px] bg-primary mt-1'></div>
-                <div className='bg-background02 h-full flex items-center justify-center !font-bold'>게시글이 없습니다 😔</div>
+                <div className='bg-background02 h-full flex items-center justify-center !font-bold min-h-[200px]'>게시글이 없습니다 😔</div>
               </div>
           )
     }

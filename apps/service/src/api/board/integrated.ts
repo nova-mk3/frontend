@@ -1,6 +1,7 @@
 
 import { PostType } from "@/src/constant/board";
 import { Authapi } from "../core";
+import { throwErrorMessage } from "@/src/libs/utils/throwError";
 
 export interface IntegradePostRequest {
   title : string,
@@ -23,13 +24,18 @@ export async function IntegratedBoardPost(
     boardId,
   } : IntegradePostRequest
 ) {
-  const response = await Authapi.post(`/nova/boards/${boardId}/posts`, {
-    title,
-    content,
-    postType,
-    fileIds
-  });
-  return response.data;
+
+  try{
+    const response = await Authapi.post(`/nova/boards/${boardId}/posts`, {
+      title,
+      content,
+      postType,
+      fileIds
+    });
+    return response.data;
+  }catch(error : any){
+     throwErrorMessage(error);
+  }
 }
 
 interface Params {
@@ -77,4 +83,74 @@ export async function BoardAllList({ boardId ,page,size,sort} : Params ) {
 export async function BoardLatestList({ boardId } : Params ) {
   const response = await Authapi.get(`/nova/boards/${boardId}/posts/latest`);
   return response.data;
+}
+
+
+/*
+게시글 수정!
+*/
+
+export interface IntegratedPutRequest {
+  title : string,
+  content : string,
+  boardId : string,
+  fileIds : string[],
+  postId : string,
+  deleteFileIds : string[];
+}
+
+export async function IntegratedBoardPut(
+{
+    title,
+    content,
+    fileIds,
+    boardId,
+    postId,
+    deleteFileIds
+  } : IntegratedPutRequest
+) {
+
+  try{
+    const response = await Authapi.put(`/nova/boards/${boardId}/posts/${postId}`, {
+      title,
+      content,
+      fileIds,
+      deleteFileIds
+    });
+    console.log(response);
+    return response.data;
+  }catch(error : any){
+     throwErrorMessage(error);
+  }
+}
+
+
+/*
+게시글 삭제
+*/
+
+export interface IntegratedPutRequest {
+  title : string,
+  content : string,
+  boardId : string,
+  fileIds : string[],
+  postId : string,
+  deleteFileIds : string[];
+}
+
+export async function IntegratedBoardDelete(
+{
+
+    boardId,
+    postId,
+
+  } : {boardId: string, postId: string}
+) {
+
+  try{
+    const response = await Authapi.delete(`/nova/boards/${boardId}/posts/${postId}`);
+    return response.data;
+  }catch(error : any){
+     throwErrorMessage(error);
+  }
 }

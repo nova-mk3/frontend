@@ -1,8 +1,9 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import FilePlus from "@/public/image/FilePlus.svg";
 import PostFileItem from './PostFileItem';
 import { useMutation } from '@tanstack/react-query';
 import { DelelteFilesAPI, UploadFilesAPI } from '@/src/api/board/file';
+import { usePathname } from 'next/navigation';
 import { FileItemProps } from './ViewFileItem';
 
 
@@ -13,22 +14,19 @@ interface FileUploaderProps {
 }
 
 export default function FileUploader({ files, setSelectedFiles,POST_TYPE_OPTIONS }: FileUploaderProps) {
-
+  const [isDirty, setIsDirty] = useState(false);
    const useFileUploadMutation = useMutation({
           mutationFn: ( {data,POST_TYPE_OPTIONS} : { data : FormData, POST_TYPE_OPTIONS : string}) => UploadFilesAPI(data, POST_TYPE_OPTIONS),
           onSuccess(data : any) {
-            // 성공하면 여기서 받은 데이터로 파일 업로드 성공!
-            // setSelectedFiles((prevFiles) => [...prevFiles,...data.files]);
+            setSelectedFiles((prevFiles) => [...prevFiles,...data.data]);
           }, 
           onError(error) {
             alert("파일 업로드 실패");
             console.log(error.message);
           }
     })
-
-        
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>): void => {
-
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+     console.log("파일인식")
     if (POST_TYPE_OPTIONS === ""){
       alert("카테고리를 선택해주세요");
       return;
@@ -73,12 +71,13 @@ export default function FileUploader({ files, setSelectedFiles,POST_TYPE_OPTIONS
       <div className='flex flex-row flex-wrap gap-3'>
         {files.length > 0 &&
           files.map((file, index) => (
-            <PostFileItem
-              name={file.originalFileName}
-              onRemove={handleRemoveFile}
-              key={index}
-              id={file.id}
-            />
+            // <PostFileItem
+            //   name={file.originalFileName}
+            //   onRemove={handleRemoveFile}
+            //   key={index}
+            //   id={file.id}
+            // />
+            <></>
           ))}
         <label htmlFor="fileUpload" className="inline-flex cursor-pointer items-center">
           <FilePlus width={30} height={30} />

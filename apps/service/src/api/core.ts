@@ -1,5 +1,6 @@
 import axios from 'axios';
 export const BASE_URL = 'http://localhost:3000';
+export const EXTERNAL_URL = 'http://localhost:8080/api/v1';
 import cookie from 'js-cookie';
 const config = {
     baseURL: BASE_URL,

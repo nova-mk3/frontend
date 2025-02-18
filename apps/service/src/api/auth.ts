@@ -1,4 +1,4 @@
-import { BASE_URL } from "../constant/config";
+import { throwErrorMessage } from "../libs/utils/throwError";
 import { api } from "./core";
 import axios, { AxiosError } from "axios";
 
@@ -47,15 +47,7 @@ export async function login({
     });
     return response.data; // 로그인 성공 시 반환할 데이터
   } catch (error: any) {
-    // React Query에서 사용할 에러만 던져줌
-    if (error.response) {
-      const message = error.response.data?.message || "서버에서 에러가 발생했습니다.";
-      throw new Error(message);
-    } else if (error.request) {
-      throw new Error("서버에 응답이 없습니다. 네트워크 상태를 확인하세요.");
-    } else {
-      throw new Error(error.message || "에러가 발생했습니다.");
-    }
+    throwErrorMessage(error);
   }
 }
 
