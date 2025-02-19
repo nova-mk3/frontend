@@ -14,7 +14,7 @@ export default function CommentList({postId} : CommentListProps) {
   return (
     <>
             {
-            data.data.map((item: CommentItemProps) => (
+            data.map((item: CommentItemProps) => (
                 <CommentListItem
                 key={item.id}
                 id={item.id}

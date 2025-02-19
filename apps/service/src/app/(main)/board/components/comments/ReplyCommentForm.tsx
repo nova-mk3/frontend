@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { commentsKeys } from "../../query/comments";
+import { postKeys } from "../../query/postqueries";
 
 interface ReplyCommentFormProps {
   toggle: () => void;
@@ -18,28 +19,23 @@ export default function ReplyCommentForm({ toggle,postId,parentCommentId }: Repl
   const useReplyCommentMutation =  useMutation({
     mutationFn: ({postId,content,parentCommentId} : CommentAPIType) => CommentsPost({postId,content,parentCommentId}),
     onSuccess: (data : any) => {
-      console.log(data);
+ 
       setValue("");
-      toggle();
+      //TODO : 쿼리 리펙토링할 수 있을거 같긴하다
+      queryClient.invalidateQueries({
+              queryKey: commentsKeys.list(postId),
+              refetchType : 'all'
+        })
+      queryClient.setQueryData(
+              postKeys.detail(postId),
+              (previous: any) => {
       
-
-       queryClient.setQueryData(
-              commentsKeys.list(postId),
-              (oldData: any) => {
-                if (!oldData) return oldData;
-            
-                //이게 되는게 레전드인데
-                return {
-                  ...oldData,
-                  data: oldData.data.map((comment: any) => 
-                    comment.id === parentCommentId
-                      ? { ...comment, children: [...comment.children, data.data] }
-                      : comment
-                  ),
-                };
+               return {
+                ...previous,
+                 commentCount : previous.commentCount +1,
+                 }
               }
-        )
-
+            )
     },
     onError: (error) => {
       alert(error.message);

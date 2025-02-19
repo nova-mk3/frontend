@@ -22,30 +22,19 @@ export default function CommentForm({parentCommentId="",postId} : CommentFormPro
     mutationFn: ({postId,content,parentCommentId} : CommentAPIType) => CommentsPost({postId,content,parentCommentId}),
     onSuccess: (data : any) => {
       setValue("");   
-
-      queryClient.setQueryData(
-        commentsKeys.list(postId),
-        (previous: any) => {
-
-         return {
-          ...previous,
-           data : [...previous.data, data.data],
-         }
-        }
-      )
+      queryClient.invalidateQueries({
+        queryKey: commentsKeys.list(postId),
+        refetchType : 'all'
+      })
 
       queryClient.setQueryData(
         postKeys.detail(postId),
         (previous: any) => {
 
-    
          return {
           ...previous,
-           data : {...previous.data,
-            commentCount : previous.data.commentCount +1,
-           },
-         }
-             //개인적인 생각은 깊은복사를 통해 값을 비교하는것 같음
+           commentCount : previous.commentCount +1,
+           }
         }
       )
 
