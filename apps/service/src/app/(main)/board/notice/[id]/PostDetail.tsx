@@ -9,13 +9,14 @@ import DetailPageTitle from '../../components/DetailPageTitle';
 import { useBoardIdStore } from '@/src/store/BoardId';
 
 import CommentTitle from '../../components/comments/CommentTitle';
-import { usePostDetailQuery } from '../../query/postqueries';
+import { postKeys, usePostDetailQuery } from '../../query/postqueries';
 import CommentForm from '../../components/comments/CommentForm';
 import ErrorBoundaryWrapper from '../../../components/ErrorBoundaryWrapper';
 import CommentList from '../../components/comments/CommentList';
 import { POST_TYPE } from '@/src/constant/board';
 import DetailPageSubTitle from '../../components/DetailPageSubTitle';
 import { Pin } from 'lucide-react';
+import { useQueryClient } from '@tanstack/react-query';
 
 
 interface PostDetailProps{
@@ -27,6 +28,17 @@ export default  function PostDetail({id} : PostDetailProps) {
   const {INTEGRATED} = useBoardIdStore();
 
   const { data } = usePostDetailQuery(id,INTEGRATED);
+  const queryClient= useQueryClient();
+
+  // queryClient.invalidateQueries({
+  //                   queryKey: postKeys.listmain(),
+  //                   refetchType: 'inactive',
+  //                 });
+                  
+  //                 queryClient.invalidateQueries({
+  //                   queryKey: postKeys.typelists(POST_TYPE.NOTICE),
+  //                   refetchType: 'inactive',
+  // });
 
   return (
     <div className="flex flex-col t-m w-full mx-auto">
@@ -45,6 +57,7 @@ export default  function PostDetail({id} : PostDetailProps) {
       title='전체 댓글'
       count={data.commentCount}
       />
+
       {/* 댓글 부분 */}
       <CommentForm postId={id as string}/>
           <ErrorBoundaryWrapper>

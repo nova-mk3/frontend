@@ -92,7 +92,7 @@ export const AlretModalTrigger = ({ children }: AlretModalTriggerProps) => {
 
   return (
     <div
-      className="cursor-pointer p-1"
+      className="cursor-pointer"
       onClick={toggle}
     >
       {children}
@@ -135,7 +135,7 @@ export const AlretModalCancel = ({ children,className,onClick }: AlretModalCance
     if (onClick) onClick(e); // 외부에서 전달된 함수 실행
     close(); // 모달 닫기
   };
-  
+
   return (
     <Button
       variant={"text"}

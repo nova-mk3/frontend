@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { PostType } from "@/src/constant/board";
 import Like from "../../archive/components/Like";
 import { IntegratedBoardDelete } from "@/src/api/board/integrated";
+import AlertDialog from "../../components/AlertDialog";
+import { useQueryClient } from "@tanstack/react-query";
+import { postKeys } from "../query/postqueries";
 
 interface SubTitle {
   title?: string;
@@ -27,7 +30,7 @@ export default function DetailPageSubTitle({
   postType,
   boardId
 }: SubTitle) {
-
+  const queryClient= useQueryClient();
   const router = useRouter();
   const handleModify = () => {
     router.push(`/board/modify?id=${postId}&type=${postType}`);
@@ -35,9 +38,10 @@ export default function DetailPageSubTitle({
   const handleDelete = async() => {
     try {
       await IntegratedBoardDelete({boardId, postId})
-      alert("삭제 성공!")
       router.push(`/board/${postType.toLocaleLowerCase()}`)
     
+        // TODO : 왔다갔다 하는 조회수 부분은 어떻게 할까 -> 개인적인의견 그렇게 중요한 요소가 아닌데 api 재요청을 할 필요가 있을까        
+
     }catch(error : any){
       console.log(error);
     }
@@ -60,7 +64,7 @@ export default function DetailPageSubTitle({
         
         <p className="cursor-pointer" onClick={handleModify}>수정</p>
         <div className="w-[1px] h-[20px] bg-line01"></div>
-        <p className="cursor-pointer" onClick={handleDelete}>삭제</p>
+        <AlertDialog title="게시글" triggerName="삭제" onAction={handleDelete}/>
       </div>
       </div>
     </div>

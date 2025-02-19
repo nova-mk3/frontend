@@ -32,7 +32,7 @@ export async function IntegratedBoardPost(
       postType,
       fileIds
     });
-    return response.data;
+    return response.data.data;
   }catch(error : any){
      throwErrorMessage(error);
   }
@@ -54,7 +54,7 @@ interface Params {
 */
 export async function IntegratedBoardGet({postType,page,size,sort,boardId} : Params ) {
   const response = await Authapi.get(`/nova/boards/${boardId}/posts?postType=${postType}&page=${page}&size=${size}&sort=${sort}`);
-  return response.data;
+  return response.data.data;
 }
 
 
@@ -73,7 +73,7 @@ export async function IntegratedBoardGetDetail({postId, boardId} : Params ) {
 
 export async function BoardAllList({ boardId ,page,size,sort} : Params ) {
   const response = await Authapi.get(`/nova/boards/${boardId}/posts/all?page=${page}&size=${size}&sort=${sort}`);
-  return response.data;
+  return response.data.data;
 }
 
 /*
@@ -82,7 +82,7 @@ export async function BoardAllList({ boardId ,page,size,sort} : Params ) {
 
 export async function BoardLatestList({ boardId } : Params ) {
   const response = await Authapi.get(`/nova/boards/${boardId}/posts/latest`);
-  return response.data;
+  return response.data.data;
 }
 
 
@@ -148,7 +148,7 @@ export async function IntegratedBoardDelete(
 
   try{
     const response = await Authapi.delete(`/nova/boards/${boardId}/posts/${postId}`);
-    return response.data;
+    return response.data.data;
   }catch(error : any){
      throwErrorMessage(error);
   }

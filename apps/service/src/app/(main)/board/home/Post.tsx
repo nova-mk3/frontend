@@ -14,10 +14,10 @@ export default function Post() {
     
   return (
     <div className='grid gap-4 xl:grid-cols-4 lg:grid-cols-2 mobile:grid-cols-1'>
-         <HomeListItem title={"공지사항"} href='/board/notice' data={data.data[POST_TYPE.NOTICE]}/>
-         <HomeListItem  title={"Q&A"} href='/board/qna' data={data.data[POST_TYPE.QNA]}/>
-         <HomeListItem  title={"자기소개"} href='/board/introduction' data={data.data[POST_TYPE.INTRODUCTION]}/>
-         <HomeListItem  title={"자유게시판"} href='/board/free' data={data.data[POST_TYPE.FREE]}/>
+         <HomeListItem title={"공지사항"} href='/board/notice' data={data[POST_TYPE.NOTICE]}/>
+         <HomeListItem  title={"Q&A"} href='/board/qna' data={data[POST_TYPE.QNA]}/>
+         <HomeListItem  title={"자기소개"} href='/board/introduction' data={data[POST_TYPE.INTRODUCTION]}/>
+         <HomeListItem  title={"자유게시판"} href='/board/free' data={data[POST_TYPE.FREE]}/>
     </div>
   )
 }

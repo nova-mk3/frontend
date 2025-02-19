@@ -21,9 +21,9 @@ export default function Post({page,size,sort} : Props) {
     
     return (
       <div>
-          <ContentList content={data.data.content}/>
+          <ContentList content={data.content}/>
           <Suspense fallback={<div className='h-[36px]'></div>}> 
-                  <PageNation size={size} totalPage={data.data.totalPages} className="my-4" />
+                  <PageNation size={size} totalPage={data.totalPages} className="my-4" />
           </Suspense>
       </div>
     )
