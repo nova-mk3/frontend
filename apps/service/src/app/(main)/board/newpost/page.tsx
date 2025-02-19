@@ -3,9 +3,8 @@
 import React, { useEffect, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import WriteBottomLayout from "../../components/WriteBottomLayout";
-import { Controller, useForm, useWatch } from "react-hook-form";
+import {  useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@nova/ui/components/ui/select";
 import {  POST_TYPE_OPTIONS } from "@/src/constant/board";
 import { IntegratedInput, IntegratedSchema } from "@/src/schema/integrated.schema";
 import {  useMutation } from "@tanstack/react-query";
@@ -14,6 +13,10 @@ import { useRouter } from "next/navigation";
 import { useBoardIdStore } from "@/src/store/BoardId";
 import {  UploadFilesAPI } from "@/src/api/board/file";
 import PostFileUploader from "../../components/File/PostFileUploader";
+import { SelectFormField } from "@/src/app/(auth)/signup/components/SelectFormField";
+import { Form } from "@nova/ui/components/ui/form";
+import TextareaFormField from "@/src/app/(auth)/signup/components/TextareaFormField";
+import TextareaFormContentField from "@/src/app/(auth)/signup/components/TextareaFormContentField";
 
 export default function Page() {
 
@@ -22,12 +25,7 @@ export default function Page() {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const {INTEGRATED} =useBoardIdStore();
 
-    const {
-         control,
-        register,
-        handleSubmit,
-        formState: { errors, isValid },
-      } = useForm<IntegratedInput>({
+    const form = useForm<IntegratedInput>({
         resolver: zodResolver(IntegratedSchema),
         mode: "onChange",
         defaultValues: {
@@ -58,6 +56,7 @@ export default function Page() {
       })
 
       const onSubmit = async(data: IntegratedInput) => {
+
         // 파일이 없을때는 파일 업로드 생략
         // 파일이 존재할때는 파일 업로드가 성공하면 게시글 생성
         const formData = new FormData();
@@ -102,7 +101,7 @@ export default function Page() {
 
 
        const watchcategory = useWatch({
-          control: control,
+          control: form.control,
           name: "category",
         });
 
@@ -110,70 +109,46 @@ export default function Page() {
     
 
   return (
-    <form className="flex flex-col mt-5 w-[80%] h-[calc(100vh-86px)] mx-auto relative" onSubmit={handleSubmit(onSubmit)}>
+    <Form {...form}>
+    <form className="flex flex-col mt-5 w-[80%] h-[calc(100vh-86px)] mx-auto relative" onSubmit={form.handleSubmit(onSubmit)}>
 
 
       
      {/* TODO: 좀 더 컴포넌트 화 가능할듯! */}
-      <div className="flex flex-row gap-2 items-center mb-2">
-        <label className="t-m !font-bold">
-          카테고리
-      </label>
-      {errors.category?.message && <p className="text-danger text-[0.8rem] transition-colors">{errors.category?.message}</p>}
-      </div>
-     <Controller
-        name="category"  // The name you want to register the value with
-        control={control}
-        defaultValue=""  // Set a default value if needed
-        render={({ field }) => (
-          <Select
-          onValueChange={field.onChange}
-          defaultValue={field.value as string}
-          >
-            <SelectTrigger className="w-[180px] mobile:w-full mb-5">
-              <SelectValue placeholder="카테고리 선택" />
-            </SelectTrigger>
-            <SelectContent className="bg-background01">
-              {POST_TYPE_OPTIONS.map((option) => (
-                <SelectItem value={option.value} key={option.value} className="cursor-pointer">
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        )}
-      />
+     <SelectFormField
+        form={form}
+        name="category"
+        label="카테고리"
+        options={POST_TYPE_OPTIONS}
+     />
+
+      
 
 
       {/* 제목 입력란 */}
-        
-      <div className="flex-none border-line01 border-b-[1px] pb-5">
-        <TextareaAutosize
-          className="flex w-full h-[40px] h-l resize-none outline-none"
-          placeholder="제목을 작성해주세요"
-          {...register("title")}
-        />
-      </div>
+      <TextareaFormField
+       form={form}
+       name="title"
+       placeholder="제목을 입력하세요"
+      /> 
       
-      {errors.title?.message && <p className="text-danger text-[0.8rem]">{errors.title?.message}</p>}
-      {!errors.title && <p className="h-[24px]"></p>}
+      
 
       {/* 첨부 파일 영역 */} 
       <PostFileUploader selectedFiles={selectedFiles} setSelectedFiles={setSelectedFiles}/>
 
       {/* 본문 스크롤 영역 */}
       {/* <PlateEditor /> */}
-      <div className="flex-1 overflow-y-auto mb-[80px] border-line01 border-[1px] p-5 rounded-md relative">
-      <TextareaAutosize
-          className="flex w-full t-m resize-none outline-none h-[40px] overflow-hidden"
-          placeholder={"내용을 작성해주세요"}
-          {...register("content")}
-        />
-        {errors.content?.message && <p className="text-[0.8rem] absolute right-4 top-4 text-danger">{errors.content?.message}</p>}
-      </div>
+
+      <TextareaFormContentField
+      form={form}
+      name="content"
+      placeholder="내용을 입력하세요"
+      />
 
       {/* 하단 바 (버튼 등) */}
       <WriteBottomLayout/>
     </form>
+    </Form>
   );
 }
