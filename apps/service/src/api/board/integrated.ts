@@ -64,7 +64,7 @@ export async function IntegratedBoardGet({postType,page,size,sort,boardId} : Par
 
 export async function IntegratedBoardGetDetail({postId, boardId} : Params ) {
   const response = await Authapi.get(`/nova/boards/${boardId}/posts/${postId}`);
-  return response.data;
+  return response.data.data;
 }
 
 /*
@@ -117,8 +117,7 @@ export async function IntegratedBoardPut(
       fileIds,
       deleteFileIds
     });
-    console.log(response);
-    return response.data;
+    return response.data.data;
   }catch(error : any){
      throwErrorMessage(error);
   }

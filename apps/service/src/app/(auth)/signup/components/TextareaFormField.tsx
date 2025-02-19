@@ -1,5 +1,5 @@
 "use client"
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@nova/ui/components/ui/form';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage, useFormField } from '@nova/ui/components/ui/form';
 import React from 'react'
 import { Path, UseFormReturn } from 'react-hook-form';
 import TextareaAutosize from "react-textarea-autosize";
@@ -22,6 +22,7 @@ export default function TextareaFormField<T extends Record<string, any>>(
         className = "",
     } : TextareaFormFieldProps<T>
 ) {
+    const { error, formMessageId } = useFormField();
   return (
     <FormField
       control={form.control}

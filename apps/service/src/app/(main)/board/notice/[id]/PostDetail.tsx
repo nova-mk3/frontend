@@ -32,18 +32,18 @@ export default  function PostDetail({id} : PostDetailProps) {
     <div className="flex flex-col t-m w-full mx-auto">
       <DetailPageTitle title={POST_TYPE.NOTICE} TitleImage={ <Pin size={20} />}/>
       <div className="flex flex-row gap-[50px]">
-      <Aside count={data.data.likeCount}/>
+      <Aside count={data.likeCount}/>
       <div className="flex flex-col gap-[20px] mx-auto flex-1">
 
         {/* 게시판 내용 */}
-      <DetailPageSubTitle title={data.data.title} writer={data.data.authorName} date={data.data.createdTime} viewCount={data.data.viewCount} postId={id} postType={POST_TYPE.NOTICE} boardId={INTEGRATED}/>
+      <DetailPageSubTitle title={data.title} writer={data.authorName} date={data.createdTime} viewCount={data.viewCount} postId={id} postType={POST_TYPE.NOTICE} boardId={INTEGRATED}/>
       <FileListLayout>
-        <FileList files={data.data.files}/>
+        <FileList files={data.files}/>
       </FileListLayout>
-      <Content content={data.data.content}/>
+      <Content content={data.content}/>
       <CommentTitle
       title='전체 댓글'
-      count={data.data.commentCount}
+      count={data.commentCount}
       />
       {/* 댓글 부분 */}
       <CommentForm postId={id as string}/>

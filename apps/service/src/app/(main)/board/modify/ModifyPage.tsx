@@ -1,23 +1,22 @@
 "use client";
 import React, {  useEffect, useState } from "react";
-import TextareaAutosize from "react-textarea-autosize";
-
 import WriteBottomLayout from "../../components/WriteBottomLayout";
-import FileUploader from "../../components/File/FileUploader";
-import { Controller, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@nova/ui/components/ui/select";
-import { POST_TYPE_OPTIONS } from "@/src/constant/board";
+import { useForm } from "react-hook-form";
+import { POST_TYPE_OPTIONS, PostType } from "@/src/constant/board";
 import { IntegratedInput, IntegratedSchema } from "@/src/schema/integrated.schema";
-import {  useMutation } from "@tanstack/react-query";
+import {  useMutation, useQueryClient } from "@tanstack/react-query";
 import {  IntegratedBoardPut, IntegratedPutRequest} from "@/src/api/board/integrated";
 import { useRouter } from "next/navigation";
 import { useBoardIdStore } from "@/src/store/BoardId";
 import { UploadFilesAPI } from "@/src/api/board/file";
-import { usePostDetailQuery } from "../query/postqueries";
+import { postKeys, usePostDetailQuery } from "../query/postqueries";
 import ModifyFileUploader from "../../components/File/ModifyFileUploader";
 import { FileItemProps } from "../../components/File/ViewFileItem";
+import TextareaFormContentField from "@/src/app/(auth)/signup/components/TextareaFormContentField";
+import { Form } from "@nova/ui/components/ui/form";
+import { SelectFormField } from "@/src/app/(auth)/signup/components/SelectFormField";
+import TextareaFormField from "@/src/app/(auth)/signup/components/TextareaFormField";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface props{
     postId : string;
@@ -31,39 +30,44 @@ export default function ModifyPage({postId , postType} : props) {
 
   const [originFiles,setOriginFiles] = useState<FileItemProps[]>([]);
   const [willDeleteFiles, setwillDeleteFiles] = useState<string[]>([]);
-
- 
+  const queryClient = useQueryClient();
 
    const {data } = usePostDetailQuery(postId, INTEGRATED);
-   console.log(data);
-
    
-    const {
-         control,
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors, isValid },
-      } = useForm<IntegratedInput>({
+    const form = useForm<IntegratedInput>({
         resolver: zodResolver(IntegratedSchema),
         mode: "onChange",
         defaultValues: {
-            title: data.data.title,
-            content: data.data.content,
+            title: data.title,
+            content: data.content,
             category : postType,
           },
       });
 
       useEffect( ()=>{
-        setOriginFiles([...data.data.files]);
+        setOriginFiles([...data.files]);
       },[])
       
       const useIntegratedBoardMutation = useMutation({
         mutationFn: (data : IntegratedPutRequest) => IntegratedBoardPut(data),
         onSuccess: (data : any) => {
-            console.log(data);
           alert("변경 성공");
-          router.push(`/board/${postType.toLocaleLowerCase()}/${data.data.id}`);
+
+          // 내 수정사항은 나만 다시보면 된다 -> api 호출 최적화
+          queryClient.setQueryData(
+            postKeys.detail(postId),
+             data
+          )
+
+          // 변경한 리스트 재호출
+          queryClient.invalidateQueries(
+            {
+              queryKey : postKeys.lists(),
+              refetchType : 'inactive',
+            }
+          );
+          
+          router.push(`/board/${postType.toLocaleLowerCase()}/${data.id}`);
         },
         onError: (error) => {
           alert(error.message);
@@ -77,11 +81,6 @@ export default function ModifyPage({postId , postType} : props) {
       })
 
       const onSubmit = async(data: IntegratedInput) => {
-
-
-
-
-
 
         // 파일이 없을때는 파일 업로드 생략
         // 파일이 존재할때는 파일 업로드가 성공하면 게시글 생성
@@ -132,50 +131,27 @@ export default function ModifyPage({postId , postType} : props) {
 
 
   return (
-    <form className="flex flex-col mt-5 w-[80%] h-[calc(100vh-86px)] mx-auto relative" onSubmit={handleSubmit(onSubmit)}>
+    <Form {...form}>
+    <form className="flex flex-col mt-5 w-[80%] h-[calc(100vh-86px)] mx-auto relative" onSubmit={form.handleSubmit(onSubmit)}>
 
-      <div className="flex flex-row gap-2 items-center mb-2">
-        <label className="t-m !font-bold">
-          카테고리
-      </label>
-      {errors.category?.message && <p className="text-danger text-[0.8rem] transition-colors">{errors.category?.message}</p>}
-      </div>
-     <Controller
-        name="category"  // The name you want to register the value with
-        control={control}
-        defaultValue=""  // Set a default value if needed
-        render={({ field }) => (
-          <Select
-          onValueChange={field.onChange}
-          defaultValue={field.value as string}
-          >
-            <SelectTrigger className="w-[180px] mobile:w-full mb-5">
-              <SelectValue placeholder="카테고리 선택" />
-            </SelectTrigger>
-            <SelectContent className="bg-background01">
-              {POST_TYPE_OPTIONS.map((option) => (
-                <SelectItem value={option.value} key={option.value} className="cursor-pointer">
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        )}
-      />
 
+      
+     <SelectFormField
+        form={form}
+        name="category"
+        label="카테고리"
+        options={POST_TYPE_OPTIONS}
+        className="w-[180px] mobile:w-full mb-5"
+     />
 
       {/* 제목 입력란 */}
-        
-      <div className="flex-none border-line01 border-b-[1px] pb-5">
-        <TextareaAutosize
-          className="flex w-full h-[40px] h-l resize-none outline-none"
-          placeholder="제목을 작성해주세요"
-          {...register("title")}
-        />
-      </div>
+            <TextareaFormField
+             form={form}
+             name="title"
+             placeholder="제목을 입력하세요"
+      /> 
       
-      {errors.title?.message && <p className="text-danger">{errors.title?.message}</p>}
-      {!errors.title && <p className="h-[24px]"></p>}
+    
 
       {/* 첨부 파일 영역 */}
       <ModifyFileUploader 
@@ -188,17 +164,15 @@ export default function ModifyPage({postId , postType} : props) {
       />
 
 
-      <div className="flex-1 overflow-y-auto mb-[80px] border-line01 border-[1px] p-5 rounded-md relative">
-      <TextareaAutosize
-          className="flex w-full t-m resize-none outline-none h-[40px] overflow-hidden"
-          placeholder={"내용을 작성해주세요"}
-          {...register("content")}
-        />
-        {errors.content?.message && <p className="absolute right-4 top-4 text-danger">{errors.content?.message}</p>}
-      </div>
+      <TextareaFormContentField
+           form={form}
+           name="content"
+           placeholder="내용을 입력하세요"
+           />
 
       {/* 하단 바 (버튼 등) */}
-      <WriteBottomLayout/>
+            <WriteBottomLayout/>
     </form>
+    </Form>
   );
 }

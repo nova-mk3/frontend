@@ -5,16 +5,13 @@ import { useBoardIdStore } from '@/src/store/BoardId';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { BoardLatestList } from '@/src/api/board/integrated';
 import { POST_TYPE } from '@/src/constant/board';
+import { usePosLatestListQuery } from '../query/postqueries';
 
 export default function Post() {
 
     const {INTEGRATED} = useBoardIdStore();
-    const { data, isLoading, error } = useSuspenseQuery({
-        
-        queryKey: [["postLatest",  INTEGRATED]],
-        queryFn: () => BoardLatestList({ boardId : INTEGRATED}),
-  
-      });
+    const { data, isLoading, error } = usePosLatestListQuery({ boardId : INTEGRATED});
+    
   return (
     <div className='grid gap-4 xl:grid-cols-4 lg:grid-cols-2 mobile:grid-cols-1'>
          <HomeListItem title={"공지사항"} href='/board/notice' data={data.data[POST_TYPE.NOTICE]}/>

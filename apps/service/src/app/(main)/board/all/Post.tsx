@@ -8,6 +8,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { BoardAllList, IntegratedBoardGet } from '@/src/api/board/integrated';
 import { useBoardIdStore } from '@/src/store/BoardId';
 import { ErrorBoundary } from 'react-error-boundary'
+import { usePostAllListQuery } from '../query/postqueries';
 interface Props{
     page : number;
     size : number;
@@ -16,12 +17,7 @@ interface Props{
 
 export default function Post({page,size,sort} : Props) {
     const {INTEGRATED} = useBoardIdStore();
-    const { data } = useSuspenseQuery({
-
-        queryKey: [["postAll",  page, size, sort, INTEGRATED]],
-        queryFn: () => BoardAllList({  page : page-1, size, sort , boardId : INTEGRATED}),
-  
-      });
+    const { data } = usePostAllListQuery({ page : page-1, size, sort , boardId : INTEGRATED})
       
     return (
       <div>

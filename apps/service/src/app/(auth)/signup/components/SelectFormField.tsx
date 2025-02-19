@@ -34,14 +34,16 @@ export function SelectFormField<T extends Record<string, any>>({
   name,
   label,
   options,
-  placeholder = "선택"
+  placeholder = "선택",
+  className=""
 }: {
   form: UseFormReturn<T>;
   name: Path<T>;
   label: string;
   options: string[] | OptionObject[];
   placeholder?: string;
- }
+  className?: string;
+}
 ) {
 
   return (
@@ -61,7 +63,7 @@ export function SelectFormField<T extends Record<string, any>>({
             defaultValue={field.value as string}
           >
             <FormControl>
-              <SelectTrigger className="w-24 !mt-[4px] border-line01 h-10 rounded-sm">
+              <SelectTrigger className={`w-24 !mt-[4px] border-line01 h-10 rounded-sm ${className}`}>
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
             </FormControl>

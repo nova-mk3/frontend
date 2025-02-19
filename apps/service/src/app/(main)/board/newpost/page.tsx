@@ -43,6 +43,7 @@ export default function Page() {
           // 글쓰기 성공과 함께 랜더링
        
           router.push(`/board/${watchcategory.toLocaleLowerCase()}/${data.data.id}`);
+          
         },
         onError: (error) => {
 
@@ -120,6 +121,7 @@ export default function Page() {
         name="category"
         label="카테고리"
         options={POST_TYPE_OPTIONS}
+        className="w-[180px] mobile:w-full mb-5"
      />
 
       

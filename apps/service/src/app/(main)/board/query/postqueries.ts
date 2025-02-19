@@ -6,13 +6,24 @@ import { BoardAllList, BoardLatestList, IntegratedBoardGet, IntegratedBoardGetDe
 import { PostType } from "@/src/constant/board";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
+interface SearchFilter{
+  page: number;
+  size: number;
+  sort: string;
+}
+
 export const postKeys = {
     all: ['posts',] as const,
-    lists: (postType : PostType) => [...postKeys.all, 'list',postType] as const,
-    // list: (filters: string, postType : PostType) => [...postKeys.lists(postType), { filters }] as const,
+    lists : () => [...postKeys.all, 'list'] as const,
+    list : (filters : SearchFilter) =>[...postKeys.lists(), filters] as const,  //전체보기
+
+    typelists: (postType : PostType) => [...postKeys.lists(),postType] as const,
+
+    typelist: (filters : SearchFilter, postType : PostType) => [...postKeys.lists(),postType, filters] as const,
+
     details: () => [...postKeys.all, 'detail'] as const,
     detail: (postId: string) => [...postKeys.details(), postId] as const,
-    latest : ['latest'] as const,
+    latest : ()=> [...postKeys.lists(), 'latest'] as const,
 }
 
 
@@ -33,7 +44,7 @@ export const usePostListQuery = ({postType,page,size,sort,boardId} : {
     boardId : string
 }) => {
     return useSuspenseQuery({
-      queryKey: postKeys.lists(postType), 
+      queryKey: postKeys.typelist({page,size,sort} , postType ), 
       queryFn: () => IntegratedBoardGet({ postType,page,size,sort,boardId }),
     });
 };
@@ -45,7 +56,7 @@ export const usePostAllListQuery = ({page,size,sort,boardId} : {
     boardId : string
 }) => {
     return useSuspenseQuery({
-      queryKey: postKeys.all, 
+      queryKey: postKeys.list({page,size,sort}), 
       queryFn: () => BoardAllList({ page,size,sort,boardId }),
     });
 };
@@ -54,7 +65,7 @@ export const usePosLatestListQuery = ({boardId} : {
     boardId : string
 }) => {
     return useSuspenseQuery({
-      queryKey: postKeys.latest, 
+      queryKey: postKeys.latest(), 
       queryFn: () => BoardLatestList({ boardId }),
     });
 };

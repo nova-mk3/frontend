@@ -24,7 +24,7 @@ export default function CommentForm({parentCommentId="",postId} : CommentFormPro
       setValue("");   
 
       queryClient.setQueryData(
-        commentsKeys.lists(postId),
+        commentsKeys.list(postId),
         (previous: any) => {
 
          return {
