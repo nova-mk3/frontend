@@ -16,7 +16,6 @@
     "**/*.tsx",
     "next-env.d.ts",
     "next.config.js",
-    ".next/types/**/*.ts"
-, "src/app/(main)/board/query/postqueries.ts"  ],
+    ".next/types/**/*.ts" ],
   "exclude": ["node_modules"]
 }

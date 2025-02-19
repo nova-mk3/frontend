@@ -60,12 +60,16 @@ export default function ModifyPage({postId , postType} : props) {
           )
 
           // 변경한 리스트 재호출
-          queryClient.invalidateQueries(
-            {
-              queryKey : postKeys.lists(),
-              refetchType : 'inactive',
-            }
-          );
+          queryClient.invalidateQueries({
+            queryKey: postKeys.listmain(),
+            refetchType: 'inactive',
+          });
+          
+          queryClient.invalidateQueries({
+            queryKey: postKeys.typelists(postType as PostType),
+            refetchType: 'inactive',
+          });
+          
           
           router.push(`/board/${postType.toLocaleLowerCase()}/${data.id}`);
         },

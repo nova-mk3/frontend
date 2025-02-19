@@ -1,13 +1,12 @@
 "use client";
 // import { PlateEditor } from "@nova/ui/components/editor/plate-editor"; //plate.js 라이브러리인데 일단은 제외
 import React, { useEffect, useState } from "react";
-import TextareaAutosize from "react-textarea-autosize";
 import WriteBottomLayout from "../../components/WriteBottomLayout";
 import {  useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {  POST_TYPE_OPTIONS } from "@/src/constant/board";
+import {  POST_TYPE_OPTIONS, PostType } from "@/src/constant/board";
 import { IntegratedInput, IntegratedSchema } from "@/src/schema/integrated.schema";
-import {  useMutation } from "@tanstack/react-query";
+import {  useMutation, useQueryClient } from "@tanstack/react-query";
 import { IntegradePostRequest, IntegratedBoardPost} from "@/src/api/board/integrated";
 import { useRouter } from "next/navigation";
 import { useBoardIdStore } from "@/src/store/BoardId";
@@ -17,11 +16,12 @@ import { SelectFormField } from "@/src/app/(auth)/signup/components/SelectFormFi
 import { Form } from "@nova/ui/components/ui/form";
 import TextareaFormField from "@/src/app/(auth)/signup/components/TextareaFormField";
 import TextareaFormContentField from "@/src/app/(auth)/signup/components/TextareaFormContentField";
+import { postKeys } from "../query/postqueries";
 
 export default function Page() {
 
   const router = useRouter();
-
+  const queryClient = useQueryClient();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const {INTEGRATED} =useBoardIdStore();
 
@@ -40,10 +40,21 @@ export default function Page() {
         mutationFn: (data : IntegradePostRequest) => IntegratedBoardPost(data),
         onSuccess: (data : any) => {
           alert("글쓰기 성공");
-          // 글쓰기 성공과 함께 랜더링
-       
+          
           router.push(`/board/${watchcategory.toLocaleLowerCase()}/${data.data.id}`);
           
+
+          // 전체글보기, 노바 홈 
+          queryClient.invalidateQueries({
+                      queryKey: postKeys.listmain(),
+                      refetchType: 'inactive',
+                    });
+                    
+          //내가 쓴 글의 리스트          
+          queryClient.invalidateQueries({
+                      queryKey: postKeys.typelists(watchcategory as PostType),
+                      refetchType: 'inactive',
+            });
         },
         onError: (error) => {
 

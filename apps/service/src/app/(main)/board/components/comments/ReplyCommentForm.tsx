@@ -24,7 +24,7 @@ export default function ReplyCommentForm({ toggle,postId,parentCommentId }: Repl
       
 
        queryClient.setQueryData(
-              commentsKeys.lists(postId),
+              commentsKeys.list(postId),
               (oldData: any) => {
                 if (!oldData) return oldData;
             

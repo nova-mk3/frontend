@@ -37,6 +37,7 @@ export default function DetailPageSubTitle({
       await IntegratedBoardDelete({boardId, postId})
       alert("삭제 성공!")
       router.push(`/board/${postType.toLocaleLowerCase()}`)
+    
     }catch(error : any){
       console.log(error);
     }
