@@ -19,7 +19,7 @@ export default function Page() {
   return (
     <>
       <BoardListTitle 
-      title="전체글보기" 
+      title={POST_TYPE.ALL} 
       TitleImage={<Layers size={24}/> }
       searchQuery={searchQuery}
       setSearchQuery={setSearchQuery}

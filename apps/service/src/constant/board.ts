@@ -6,6 +6,7 @@ export const POST_TYPE = {
     PICTURES: "PICTURES",
     QNA: "QNA",
     SUGGESTION: "SUGGESTION",
+    ALL : "ALL"
 } as const;
 
 export type PostType = typeof POST_TYPE[keyof typeof POST_TYPE];
@@ -30,3 +31,14 @@ export const POST_TYPE_OPTIONS = [
 ];
 
 export const BOARD_SIZE=5;
+
+export const POST_TYPE_LABEL : Record<PostType , string>={
+    EXAM_ARCHIVE: "EXAM_ARCHIVE",
+    FREE: "자유게시판",
+    INTRODUCTION: "자기소개",
+    NOTICE: "공지사항",
+    PICTURES: "PICTURES",
+    QNA: "Q&A",
+    SUGGESTION: "SUGGESTION",
+    ALL : "전체글보기"
+}

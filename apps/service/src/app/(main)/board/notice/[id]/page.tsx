@@ -1,16 +1,7 @@
 "use client";
-import React, { Suspense, useEffect, useState } from 'react'
-import Aside from '../../components/Aside';
-import SubTitle from '../../../archive/[id]/components/SubTitle';
-import { FileListLayout,FileList } from '../../../components/File/ViewFileLayout';
-import CommentLayout from '../../../archive/[id]/components/CommentLayout';
-import Content from '../../../archive/[id]/components/Content';
-import DetailPageTitle from '../../components/DetailPageTitle';
-import { MessageSquareMore } from 'lucide-react';
-import { useBoardIdStore } from '@/src/store/BoardId';
+import React from 'react'
 import { useParams } from 'next/navigation';
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { IntegratedBoardGetDetail } from '@/src/api/board/integrated';
+
 
 import ErrorBoundaryWrapper from '../../../components/ErrorBoundaryWrapper';
 import PendingFallbackUI from '../../../components/PendingFallbackUI';
@@ -28,7 +19,7 @@ export default  function page() {
 
   return (
     <ErrorBoundaryWrapper>
-      <PostDetail id={id as string}/>
+      <PostDetail postId={id as string}/>
     </ErrorBoundaryWrapper>
   );
 }

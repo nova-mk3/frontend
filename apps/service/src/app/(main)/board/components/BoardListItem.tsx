@@ -47,11 +47,10 @@ interface ItemTitleProps{
 }
 function Title({title, type, className} : ItemTitleProps ) {
 
+  // 임시로 공지로 고정, 추후에 태그 용도로 쓰이면 그때 분리할 예정
   if(type === POST_TYPE.NOTICE)
     return (
-      <div className='t-l !font-bold mt-3 flex flex-row gap-2'><p className='bg-primary rounded-lg t-s flex items-center justify-center text-background01 px-1.5 '>{
-       type
-      }</p> 
+      <div className='t-l !font-bold mt-3 flex flex-row gap-2'><p className='bg-primary rounded-lg t-s flex items-center justify-center text-background01 px-1.5 '>공지</p> 
       <p className='hover:underline'>{title}</p>
       </div>
   )

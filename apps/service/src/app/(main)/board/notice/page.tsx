@@ -18,7 +18,7 @@ export default function Page() {
   return (
     <>
       <BoardListTitle 
-      title="공지사항" 
+      title={POST_TYPE.NOTICE} 
       TitleImage={<Pin size={20}/> }
       searchQuery={searchQuery}
       setSearchQuery={setSearchQuery}

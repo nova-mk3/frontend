@@ -1,17 +1,15 @@
 "use client";
 import Post from "./Post";
-
 import { BOARD_SIZE, POST_TYPE } from "@/src/constant/board";
-import {  useRouter, useSearchParams } from "next/navigation";
+import {   useSearchParams } from "next/navigation";
 import BoardListTitle from "../components/BoardListTitle";
-import { Book, Hand, MessageSquareMore } from "lucide-react";
+import {  Pin } from "lucide-react";
 
 import ErrorBoundaryWrapper from "../../components/ErrorBoundaryWrapper";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 
 export default function Page() {
   const searchParams = useSearchParams();
-  const router = useRouter();
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
   const [searchQuery, setSearchQuery] = useState(searchParams.get("query") || "");
   const [sortOption, setSortOption] = useState(searchParams.get("sort") || "asc");
@@ -20,8 +18,8 @@ export default function Page() {
   return (
     <>
       <BoardListTitle 
-      title="자기소개" 
-      TitleImage={<Hand size={20}/> }
+      title={POST_TYPE.INTRODUCTION}
+      TitleImage={<Pin size={20}/> }
       searchQuery={searchQuery}
       setSearchQuery={setSearchQuery}
       sortOption={sortOption}

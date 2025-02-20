@@ -20,33 +20,20 @@ import { useQueryClient } from '@tanstack/react-query';
 
 
 interface PostDetailProps{
-    id: string;
+    postId: string;
 }
   
-export default  function PostDetail({id} : PostDetailProps) {
+export default  function PostDetail({postId} : PostDetailProps) {
 
   const {INTEGRATED} = useBoardIdStore();
+  const { data } = usePostDetailQuery(postId,INTEGRATED);
 
-  const { data } = usePostDetailQuery(id,INTEGRATED);
-  const queryClient= useQueryClient();
-
-  // queryClient.invalidateQueries({
-  //                   queryKey: postKeys.listmain(),
-  //                   refetchType: 'inactive',
-  //                 });
-                  
-  //                 queryClient.invalidateQueries({
-  //                   queryKey: postKeys.typelists(POST_TYPE.NOTICE),
-  //                   refetchType: 'inactive',
-  // });
-
-  console.log(data);
 
   return (
     <div className="flex flex-col t-m w-full mx-auto">
       <DetailPageTitle title={POST_TYPE.NOTICE} TitleImage={ <Pin size={20} />}/>
       <div className="flex flex-row gap-[50px]">
-      <Aside count={data.likeCount} liked={data.liked} postId={id}/>
+      <Aside count={data.likeCount} liked={data.liked} postId={postId}/>
       <div className="flex flex-col gap-[20px] mx-auto flex-1">
 
         {/* 게시판 내용 */}
@@ -55,7 +42,7 @@ export default  function PostDetail({id} : PostDetailProps) {
       writer={data.authorName} 
       date={data.createdTime} 
       viewCount={data.viewCount} 
-      postId={id} 
+      postId={postId} 
       postType={POST_TYPE.NOTICE} 
       boardId={INTEGRATED}
       likeCount={data.likeCount}
@@ -72,14 +59,12 @@ export default  function PostDetail({id} : PostDetailProps) {
       />
 
       {/* 댓글 부분 */}
-      <CommentForm postId={id as string}/>
+      <CommentForm postId={postId as string}/>
           <ErrorBoundaryWrapper>
-          <CommentList postId={id as string}/>
+          <CommentList postId={postId as string}/>
       </ErrorBoundaryWrapper>
       
       </div>
-
-
     
       </div>
     </div>

@@ -5,12 +5,13 @@ import { Button } from "@nova/ui/components/ui/button";
 import Link from "next/link";
 import SelectSortComponent from "../../components/SortOption";
 import { useRouter, useSearchParams } from "next/navigation";
+import { POST_TYPE_LABEL, PostType } from "@/src/constant/board";
 
 
 interface BoardListTitleProps {
-  title?: string;
+  title: string;
   className?: string;
-  TitleImage?: React.ReactElement<SVGElement>;
+  TitleImage: React.ReactElement<SVGElement>;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   sortOption: string;
@@ -32,7 +33,7 @@ export default function BoardListTitle({title, className ,TitleImage,searchQuery
   
   return (
     <div className={`flex flex-row flex-wrap items-end border-primary border-b-[1px] py-5 mobile:flex-col mobile:items-center  ${className}`}>
-      <p className="t-l !font-bold text-primary mobile:mb-[15px] flex items-center gap-2">{TitleImage}{title}</p>
+      <p className="t-l !font-bold text-primary mobile:mb-[15px] flex items-center gap-2">{TitleImage}{POST_TYPE_LABEL[title as PostType]}</p>
 
       <div className="flex flex-row items-center gap-[15px] ml-auto mt-auto mobile:flex-col mobile:w-full">
         <SelectSortComponent
