@@ -65,7 +65,7 @@ export default function DesktopLike({liked,postId} : LikeProps) {
 
    if(liked === true){
     return (
-        <EmojiCirCleButton onClick={()=> onUnLike()} className='bg-primary border-none hover:opacity-90'><HeartIcon width={24} className="text-white"/></EmojiCirCleButton>
+        <EmojiCirCleButton onClick={()=> onUnLike()} className='bg-primary border-none hover:opacity-90 animate-in  slide-in-from-top-[30%] duration-1000'><HeartIcon width={24} className="text-white"/></EmojiCirCleButton>
       )
    }
    else{
