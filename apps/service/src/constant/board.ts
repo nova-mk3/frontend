@@ -33,12 +33,12 @@ export const POST_TYPE_OPTIONS = [
 export const BOARD_SIZE=5;
 
 export const POST_TYPE_LABEL : Record<PostType , string>={
-    EXAM_ARCHIVE: "EXAM_ARCHIVE",
+    EXAM_ARCHIVE: "족보게시판",
     FREE: "자유게시판",
     INTRODUCTION: "자기소개",
     NOTICE: "공지사항",
-    PICTURES: "PICTURES",
+    PICTURES: "사진게시판",
     QNA: "Q&A",
-    SUGGESTION: "SUGGESTION",
+    SUGGESTION: "건의함",
     ALL : "전체글보기"
 }

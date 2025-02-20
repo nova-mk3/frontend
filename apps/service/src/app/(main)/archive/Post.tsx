@@ -1,11 +1,11 @@
 "use client";
 
-import React, { Suspense, useState } from 'react'
-import ContentList from '../components/BoardList';
+import React, { Suspense } from 'react'
 import { useBoardIdStore } from '@/src/store/BoardId';
-import { usePostListQuery } from '../query/postqueries';
 import { PostType } from '@/src/constant/board';
-import { PageNation } from '../../components/PageNation';
+import { usePostListQuery } from '../board/query/postqueries';
+import { PageNation } from '../components/PageNation';
+import BoardList from '../board/components/BoardList';
 
 interface Props{
     postType : PostType;
@@ -21,7 +21,7 @@ export default function Post({postType,page,size,sort} : Props) {
 
     return (
       <div>
-          <ContentList content={data.content}/>
+          <BoardList content={data.content}/>
           <Suspense fallback={<div className='h-[36px]'></div>}> 
                   <PageNation size={size} totalPage={data.totalPages} className="my-4" />
           </Suspense>

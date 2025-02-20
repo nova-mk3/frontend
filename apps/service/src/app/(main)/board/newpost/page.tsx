@@ -41,7 +41,7 @@ export default function Page() {
         onSuccess: (data : any) => {
           alert("글쓰기 성공");
           
-          router.push(`/board/${watchcategory.toLocaleLowerCase()}/${data.data.id}`);
+          router.push(`/board/${watchcategory.toLocaleLowerCase()}/${data.id}`);
           
 
           // 전체글보기, 노바 홈 
@@ -122,7 +122,7 @@ export default function Page() {
 
   return (
     <Form {...form}>
-    <form className="flex flex-col mt-5 w-[80%] h-[calc(100vh-86px)] mx-auto relative" onSubmit={form.handleSubmit(onSubmit)}>
+    <form className="flex flex-col mt-5 w-[80%] h-[calc(100vh-86px)] mx-auto relative " onSubmit={form.handleSubmit(onSubmit)}>
 
 
       
@@ -143,6 +143,7 @@ export default function Page() {
        form={form}
        name="title"
        placeholder="제목을 입력하세요"
+       className="mt-5"
       /> 
       
       

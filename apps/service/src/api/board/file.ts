@@ -9,7 +9,7 @@ export const UploadFilesAPI = async(formdata : FormData, postType : string)=>{
   try{
 
     const response = await Authapi.post(`/nova/files?postType=${ postType}`,formdata);
-    return response.data.data;
+    return response.data;
   }catch(error : any){
     throwErrorMessage(error);
   }

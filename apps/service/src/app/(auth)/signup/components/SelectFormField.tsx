@@ -23,10 +23,13 @@ interface OptionObject {
 }
 
 // type guard 함수: 옵션 배열이 string[]인지 검사합니다.
-function isStringOptions(options: string[] | OptionObject[]): options is string[] {
-  // 빈 배열인 경우에는 타입을 확정하기 어렵지만, 별도의 렌더링 이슈가 없다면
-  // 기본적으로 string[]로 간주할 수도 있습니다.
+function isStringOptions(options: string[] | OptionObject[] | number[]): options is string[] {
   return options.length === 0 || typeof options[0] === "string";
+}
+
+// type guard 함수: 옵션 배열이 number[]인지 검사합니다.
+function isNumberOptions(options: string[] | OptionObject[] | number[]): options is number[] {
+  return options.length > 0 && typeof options[0] === "number";
 }
 
 export function SelectFormField<T extends Record<string, any>>({
@@ -40,7 +43,7 @@ export function SelectFormField<T extends Record<string, any>>({
   form: UseFormReturn<T>;
   name: Path<T>;
   label: string;
-  options: string[] | OptionObject[];
+  options: string[] | OptionObject[] | number[];
   placeholder?: string;
   className?: string;
 }
@@ -67,17 +70,23 @@ export function SelectFormField<T extends Record<string, any>>({
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
             </FormControl>
-            <SelectContent className="bg-background01 focus:text-primary focus-border-primary focus:ring-primary focus:ring-1">
-            {isStringOptions(options)
+             <SelectContent className="bg-background01 focus:text-primary focus-border-primary focus:ring-primary focus:ring-1">
+              {isStringOptions(options)
                 ? options.map((option, index) => (
                     <SelectItem key={index} value={option} className="cursor-pointer">
                       {option}
                     </SelectItem>
                   ))
-                : options.map((option, index) => (
-                  <SelectItem value={option.value} key={option.value} className="cursor-pointer">
-                  {option.label}
-                </SelectItem>
+                : isNumberOptions(options)
+                ? options.map((option, index) => (
+                    <SelectItem key={index} value={String(option)} className="cursor-pointer">
+                      {option}
+                    </SelectItem>
+                  ))
+                : options.map((option) => (
+                    <SelectItem key={option.value} value={option.value} className="cursor-pointer">
+                      {option.label}
+                    </SelectItem>
                   ))}
             </SelectContent>
           </Select>

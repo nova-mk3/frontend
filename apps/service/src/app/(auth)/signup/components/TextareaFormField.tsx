@@ -12,6 +12,7 @@ interface TextareaFormFieldProps<T extends Record<string, any>>{
     label?: string;
     placeholder?: string;
     className?: string;
+    readonly? : boolean;
 }
 export default function TextareaFormField<T extends Record<string, any>>(
     {
@@ -20,6 +21,7 @@ export default function TextareaFormField<T extends Record<string, any>>(
         label="",
         placeholder = "",
         className = "",
+        readonly = false,
     } : TextareaFormFieldProps<T>
 ) {
     const { error, formMessageId } = useFormField();
@@ -34,12 +36,13 @@ export default function TextareaFormField<T extends Record<string, any>>(
             {label}
           </FormLabel> */}
           <FormControl>
-          <div className={ `flex-none border-line01 border-b-[1px] mt-5 pb-5 ${className}`}>
+          <div className={ `flex-none border-line01 border-b-[1px]  pb-5 ${className}`}>
             <TextareaAutosize
               className="flex w-full h-[40px] h-l resize-none outline-none"
               placeholder={placeholder}
               defaultValue={field.value as string}
               onChange={field.onChange}
+              readOnly={readonly}
             />
           </div>
           </FormControl>

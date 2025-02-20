@@ -3,7 +3,7 @@ import Post from "./Post";
 import { BOARD_SIZE, POST_TYPE } from "@/src/constant/board";
 import {   useSearchParams } from "next/navigation";
 import BoardListTitle from "../components/BoardListTitle";
-import {  Pin } from "lucide-react";
+import {  Hand, Pin } from "lucide-react";
 
 import ErrorBoundaryWrapper from "../../components/ErrorBoundaryWrapper";
 import {  useState } from "react";
@@ -19,7 +19,7 @@ export default function Page() {
     <>
       <BoardListTitle 
       title={POST_TYPE.INTRODUCTION}
-      TitleImage={<Pin size={20}/> }
+      TitleImage={<Hand size={20}/> }
       searchQuery={searchQuery}
       setSearchQuery={setSearchQuery}
       sortOption={sortOption}

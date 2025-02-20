@@ -50,7 +50,7 @@ export default function BoardListTitle({title, className ,TitleImage,searchQuery
           <Search size="24"/>
           </div>
         </div>
-        <Link href="/board/newpost" className="mobile:w-full">
+        <Link href="/archive/newpost" className="mobile:w-full">
           <Button variant="default" className="mobile:w-full">
             글쓰기
           </Button>

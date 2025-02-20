@@ -4,7 +4,7 @@ import React from 'react'
 import Aside from '../../components/Aside';
 import { FileListLayout,FileList } from '../../../components/File/ViewFileLayout';
 
-import Content from '../../../archive/[id]/components/Content';
+import Content from '../../components/DetailPageContent';
 import DetailPageTitle from '../../components/DetailPageTitle';
 import { useBoardIdStore } from '@/src/store/BoardId';
 
@@ -15,8 +15,8 @@ import ErrorBoundaryWrapper from '../../../components/ErrorBoundaryWrapper';
 import CommentList from '../../components/comments/CommentList';
 import { POST_TYPE } from '@/src/constant/board';
 import DetailPageSubTitle from '../../components/DetailPageSubTitle';
-import { Pin } from 'lucide-react';
-import { useQueryClient } from '@tanstack/react-query';
+import { Book, Hand, MessageSquareMore } from 'lucide-react';
+
 
 
 interface PostDetailProps{
@@ -31,7 +31,7 @@ export default  function PostDetail({postId} : PostDetailProps) {
 
   return (
     <div className="flex flex-col t-m w-full mx-auto">
-      <DetailPageTitle title={POST_TYPE.FREE} TitleImage={ <Pin size={20} />}/>
+      <DetailPageTitle title={POST_TYPE.FREE} TitleImage={ <Book size={20} />}/>
       <div className="flex flex-row gap-[50px]">
       <Aside count={data.likeCount} liked={data.liked} postId={postId}/>
       <div className="flex flex-col gap-[20px] mx-auto flex-1">
@@ -43,7 +43,7 @@ export default  function PostDetail({postId} : PostDetailProps) {
       date={data.createdTime} 
       viewCount={data.viewCount} 
       postId={postId} 
-      postType={POST_TYPE.FREE} 
+      postType={POST_TYPE.INTRODUCTION} 
       boardId={INTEGRATED}
       likeCount={data.likeCount}
       liked={data.liked}

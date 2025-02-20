@@ -4,7 +4,7 @@ import React from 'react'
 import Aside from '../../components/Aside';
 import { FileListLayout,FileList } from '../../../components/File/ViewFileLayout';
 
-import Content from '../../../archive/[id]/components/Content';
+import Content from '../../components/DetailPageContent';
 import DetailPageTitle from '../../components/DetailPageTitle';
 import { useBoardIdStore } from '@/src/store/BoardId';
 

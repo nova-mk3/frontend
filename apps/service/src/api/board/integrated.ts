@@ -4,7 +4,7 @@ import { Authapi } from "../core";
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
 
 export interface IntegradePostRequest {
-  title : string,
+     title : string,
     content : string,
     postType : string,
     fileIds : string[]

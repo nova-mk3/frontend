@@ -1,14 +1,10 @@
 "use client";
 
 import React, { Suspense, useState } from 'react'
-import { PageNation } from '../../archive/components/PageNation'
-import ItemList from '../components/HomeListItem';
 import ContentList from '../components/BoardList';
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { BoardAllList, IntegratedBoardGet } from '@/src/api/board/integrated';
 import { useBoardIdStore } from '@/src/store/BoardId';
-import { ErrorBoundary } from 'react-error-boundary'
 import { usePostAllListQuery } from '../query/postqueries';
+import { PageNation } from '../../components/PageNation';
 interface Props{
     page : number;
     size : number;

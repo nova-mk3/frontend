@@ -5,7 +5,7 @@ export default function useYearRange(startYear : number, endYear : number) {
 
 
     const yearArray = [];
-    for (let y = startYear; y <= endYear; y++) {
+    for (let y = endYear; y >= startYear; y--) {
       yearArray.push(y);
     }
     return yearArray;
