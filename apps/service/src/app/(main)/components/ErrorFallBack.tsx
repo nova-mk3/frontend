@@ -4,9 +4,9 @@ import { Button } from '@nova/ui/components/ui/button';
 import { FallbackProps } from 'react-error-boundary';
 import Link from 'next/link';
 
+
 // 나오는 에러별로 정리해도 좋을 것 같다
 export default function FallbackErrorUI({ error, resetErrorBoundary }: FallbackProps) {
- 
   return (
     <div className='w-full h-[745px] bg-background02 flex flex-col items-center justify-center mt-8'>
       <span className="text-xl font-bold text-center">
@@ -19,10 +19,20 @@ export default function FallbackErrorUI({ error, resetErrorBoundary }: FallbackP
         <Button
         variant={"default"}
           
-          onClick={() => resetErrorBoundary()}
+          onClick={() => { }}
         >
           다시 불러오기!
         </Button>
+
+
+        <Button
+        variant={"text"}
+          
+          onClick={() => window.history.back()}
+        >
+          뒤로가기
+        </Button>
+
         <Link href="/">
         <Button
         variant={"text"}

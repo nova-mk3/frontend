@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Like from "../../components/Like";
+import Like from "../../../board/components/MobileLike";
 import { formatDate } from "@/src/libs/utils/dateParsing";
 import { useRouter } from "next/navigation";
 import { PostType } from "@/src/constant/board";

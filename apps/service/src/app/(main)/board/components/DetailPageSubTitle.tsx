@@ -3,21 +3,23 @@ import React from "react";
 import { formatDate } from "@/src/libs/utils/dateParsing";
 import { useRouter } from "next/navigation";
 import { PostType } from "@/src/constant/board";
-import Like from "../../archive/components/Like";
+import Like from "./MobileLike";
 import { IntegratedBoardDelete } from "@/src/api/board/integrated";
 import AlertDialog from "../../components/AlertDialog";
 import { useQueryClient } from "@tanstack/react-query";
 import { postKeys } from "../query/postqueries";
+import MobileLike from "./MobileLike";
 
 interface SubTitle {
-  title?: string;
-  writer?: string;
-  date?: string;
-  likeCount? : number;
-  viewCount? : number;
+  title: string;
+  writer: string;
+  date: string;
+  likeCount : number;
+  viewCount : number;
   postId : string;
   postType : PostType;
   boardId : string;
+  liked : boolean;
 }
 
 export default function DetailPageSubTitle({
@@ -28,9 +30,9 @@ export default function DetailPageSubTitle({
   viewCount,
   postId,
   postType,
-  boardId
+  boardId,
+  liked
 }: SubTitle) {
-  const queryClient= useQueryClient();
   const router = useRouter();
   const handleModify = () => {
     router.push(`/board/modify?id=${postId}&type=${postType}`);
@@ -60,7 +62,7 @@ export default function DetailPageSubTitle({
       </div>
 
       <div className="flex flex-row gap-3 items-end ml-auto">
-        <Like count={likeCount} className="hidden mobile:flex"/>
+        <MobileLike count={likeCount} postId={postId} liked={liked}/>
         
         <p className="cursor-pointer" onClick={handleModify}>수정</p>
         <div className="w-[1px] h-[20px] bg-line01"></div>

@@ -50,7 +50,18 @@ export default  function PostDetail({id} : PostDetailProps) {
       <div className="flex flex-col gap-[20px] mx-auto flex-1">
 
         {/* 게시판 내용 */}
-      <DetailPageSubTitle title={data.title} writer={data.authorName} date={data.createdTime} viewCount={data.viewCount} postId={id} postType={POST_TYPE.NOTICE} boardId={INTEGRATED}/>
+      <DetailPageSubTitle 
+      title={data.title} 
+      writer={data.authorName} 
+      date={data.createdTime} 
+      viewCount={data.viewCount} 
+      postId={id} 
+      postType={POST_TYPE.NOTICE} 
+      boardId={INTEGRATED}
+      likeCount={data.likeCount}
+      liked={data.liked}
+      
+      />
       <FileListLayout>
         <FileList files={data.files}/>
       </FileListLayout>

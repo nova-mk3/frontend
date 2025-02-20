@@ -1,7 +1,7 @@
 import React from "react";
 import { CircleUser } from "lucide-react";
 import Image from "next/image";
-import Like from "./Like";
+import Like from "../../board/components/MobileLike";
 import Comment from "./Comment";
 import { EllipsisVertical } from "lucide-react";
 import Kebab from "./Kebab";

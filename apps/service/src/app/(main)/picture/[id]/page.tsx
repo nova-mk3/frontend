@@ -2,7 +2,7 @@ import React from 'react'
 import {Heart, Image} from 'lucide-react'
 import ImageSlider  from './components/ImageSlider';
 import CommentSection from './components/CommentSection';
-import Like from '../../archive/components/Like';
+import Like from '../../board/components/MobileLike';
 interface Props {
     params: Promise<{ id: string }>;
   }
