@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { CircleUser } from "lucide-react";
 import TextareaAutosize from 'react-textarea-autosize';
 import { formatDate } from "@/src/libs/utils/dateParsing";
-import { CommentsDelte, CommentsPut } from "@/src/api/board/comments";
+import { CommentsDelete, CommentsPut } from "@/src/api/board/comments";
 import { useQueryClient } from "@tanstack/react-query";
 import { commentsKeys } from "../../query/comments";
 import { Button } from "@nova/ui/components/ui/button";
@@ -46,7 +46,7 @@ export default function ReplyCommentItem({
 
    const handleDelete = async() => {
         try {
-          await CommentsDelte({commentId : id})
+          await CommentsDelete({commentId : id})
        
           queryClient.invalidateQueries({
             queryKey : commentsKeys.list(postId)
@@ -60,6 +60,7 @@ export default function ReplyCommentItem({
       };
   const handleModifySubmit = async() => {
       try {
+
           await CommentsPut({commentId : id, content : value})
           
           // 캐시에 직접 추가하게되면 로딩시 깜빡거림이 사라짐!

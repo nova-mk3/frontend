@@ -15,13 +15,7 @@ export async function verifyEmailCode({ email, authCode }: { email: string; auth
     });
     return response.data; // 요청 성공 시 데이터 반환
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      // Axios 에러 처리 (서버 응답이 있는 경우)
-      throw new Error(error.response?.data?.message || "Something went wrong!");
-    } else {
-      // 일반 에러 처리
-      throw new Error("Unexpected error occurred.");
-    }
+    throwErrorMessage(error);
   }
 }
 

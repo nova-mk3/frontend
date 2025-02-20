@@ -1,11 +1,18 @@
+import { throwErrorMessage } from "@/src/libs/utils/throwError";
 import { Authapi } from "../core";
+import { ERROR_MESSAGES } from "@/src/constant/error";
 
 /*
 카테고리별 파일 업로드
 */
 export const UploadFilesAPI = async(formdata : FormData, postType : string)=>{
+  try{
+
     const response = await Authapi.post(`/nova/files?postType=${ postType}`,formdata);
     return response.data;
+  }catch(error : any){
+    throwErrorMessage(error);
+  }
 }
 
 /*
@@ -33,8 +40,8 @@ export const DownloadFilesAPI = async (fileId: string) => {
       window.URL.revokeObjectURL(url); // 메모리 해제
       link.remove();
     } catch (error) {
-      console.error('File download failed:', error);
-      alert('파일 다운로드 실패');
+      alert(ERROR_MESSAGES.FILE_ERROR);
+      throwErrorMessage(error);
     }
 };
 
@@ -44,6 +51,11 @@ export const DownloadFilesAPI = async (fileId: string) => {
 */
 
 export const DelelteFilesAPI = async(fileId : string)=>{
-  const response = await Authapi.delete(`/nova/files/${fileId}`);
-  return response.data;
+
+  try{
+    const response = await Authapi.delete(`/nova/files/${fileId}`);
+    return response.data;
+  }catch(error : any){
+    throwErrorMessage(error);
+  }
 }

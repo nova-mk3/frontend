@@ -50,39 +50,51 @@ interface Params {
 
 
 /*
-카테고리별 목록 조회
-*/
-export async function IntegratedBoardGet({postType,page,size,sort,boardId} : Params ) {
-  const response = await Authapi.get(`/nova/boards/${boardId}/posts?postType=${postType}&page=${page}&size=${size}&sort=${sort}`);
-  return response.data.data;
-}
-
-
-/*
-게시글 상세 조회
-*/
-
-export async function IntegratedBoardGetDetail({postId, boardId} : Params ) {
-  const response = await Authapi.get(`/nova/boards/${boardId}/posts/${postId}`);
-  return response.data.data;
+ * 카테고리별 목록 조회
+ */
+export async function IntegratedBoardGet({ postType, page, size, sort, boardId }: Params) {
+  try {
+    const response = await Authapi.get(`/nova/boards/${boardId}/posts?postType=${postType}&page=${page}&size=${size}&sort=${sort}`);
+    return response.data.data;
+  } catch (error) {
+    throwErrorMessage(error);
+  }
 }
 
 /*
-전체 게시판 목록 조회
-*/
-
-export async function BoardAllList({ boardId ,page,size,sort} : Params ) {
-  const response = await Authapi.get(`/nova/boards/${boardId}/posts/all?page=${page}&size=${size}&sort=${sort}`);
-  return response.data.data;
+ * 게시글 상세 조회
+ */
+export async function IntegratedBoardGetDetail({ postId, boardId }: Params) {
+  try {
+    const response = await Authapi.get(`/nova/boards/${boardId}/posts/${postId}`);
+    return response.data.data;
+  } catch (error) {
+    throwErrorMessage(error);
+  }
 }
 
 /*
-각 PostType(QnA, 자유게시판, 자기소개, 공지사항)별 최신 6개 게시글을 가져옵니다.
-*/
+ * 전체 게시판 목록 조회
+ */
+export async function BoardAllList({ boardId, page, size, sort }: Params) {
+  try {
+    const response = await Authapi.get(`/nova/boards/${boardId}/posts/all?page=${page}&size=${size}&sort=${sort}`);
+    return response.data.data;
+  } catch (error) {
+    throwErrorMessage(error);
+  }
+}
 
-export async function BoardLatestList({ boardId } : Params ) {
-  const response = await Authapi.get(`/nova/boards/${boardId}/posts/latest`);
-  return response.data.data;
+/*
+ * 각 PostType(QnA, 자유게시판, 자기소개, 공지사항)별 최신 6개 게시글 조회
+ */
+export async function BoardLatestList({ boardId }: Params) {
+  try {
+    const response = await Authapi.get(`/nova/boards/${boardId}/posts/latest`);
+    return response.data.data;
+  } catch (error) {
+    throwErrorMessage(error);
+  }
 }
 
 

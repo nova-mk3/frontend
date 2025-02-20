@@ -9,7 +9,7 @@ import { Button } from "@nova/ui/components/ui/button";
 import ReplyButton from "./ReplyButton";
 import { formatDate } from "@/src/libs/utils/dateParsing";
 import AlertDialog from "../../../components/AlertDialog";
-import { CommentsDelte, CommentsPut } from "@/src/api/board/comments";
+import { CommentsDelete, CommentsPut } from "@/src/api/board/comments";
 import { useQueryClient } from "@tanstack/react-query";
 import { commentsKeys } from "../../query/comments";
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
@@ -45,14 +45,11 @@ export default function CommentListItem({ id,authorName,authorProfilePhoto,child
 
   const handleDelete = async() => {
       try {
-        await CommentsDelte({commentId : id})
+        await CommentsDelete({commentId : id})
      
         queryClient.invalidateQueries({
           queryKey : commentsKeys.list(postId)
         });
-  
-       
-  
       }catch(error : any){
         console.log(error);
       }
@@ -106,6 +103,7 @@ export default function CommentListItem({ id,authorName,authorProfilePhoto,child
       </div>
 
 
+        { /* */}
       {isModify && <div className="flex flex-col w-[90%] gap-3 mx-auto p-1 my-3">
       <div className="border-line01 border rounded-md">
         <TextareaAutosize

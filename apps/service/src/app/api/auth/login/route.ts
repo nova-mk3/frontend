@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
 
     return response;
   } catch (error) {
-    console.error('로그인 에러:', error);
+    console.log('로그인 에러:', error);
     return NextResponse.json({ message: '로그인 실패' }, { status: 401 });
   }
 }

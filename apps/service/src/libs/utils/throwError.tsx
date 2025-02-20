@@ -1,11 +1,17 @@
+import { ERROR_MESSAGES } from "@/src/constant/error";
 
-export const throwErrorMessage = (error : any)=>{
-    if (error.response) {
-        const message = error.response.data?.message || "서버에서 에러가 발생했습니다.";
-        throw new Error(message);
-      } else if (error.request) {
-        throw new Error("서버에 응답이 없습니다. 네트워크 상태를 확인하세요.");
-      } else {
-        throw new Error(error.message || "에러가 발생했습니다.");
-      }
-}
+export const throwErrorMessage = (error: any) => {
+  console.log(error);
+  if (error.response) {
+    // 서버가 응답한 경우 (HTTP 상태 코드 존재)
+    const status = error.response.status;
+    const message = ERROR_MESSAGES[status] || error.response.data?.message || ERROR_MESSAGES.SERVER_ERROR;
+    throw new Error(message);
+  } else if (error.request) {
+    // 네트워크 오류 (서버 응답 없음)
+    throw new Error(ERROR_MESSAGES.NO_RESPONSE);
+  } else {
+    // 기타 오류 (예: 코드 문제)
+    throw new Error(error.message || ERROR_MESSAGES.GENERAL_ERROR);
+  }
+};
