@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import Aside from '../../../archive/[id]/components/Aside';
+import Aside from '../../components/Aside';
 import { FileListLayout,FileList } from '../../../components/File/ViewFileLayout';
 
 import Content from '../../../archive/[id]/components/Content';
@@ -40,11 +40,13 @@ export default  function PostDetail({id} : PostDetailProps) {
   //                   refetchType: 'inactive',
   // });
 
+  console.log(data);
+
   return (
     <div className="flex flex-col t-m w-full mx-auto">
       <DetailPageTitle title={POST_TYPE.NOTICE} TitleImage={ <Pin size={20} />}/>
       <div className="flex flex-row gap-[50px]">
-      <Aside count={data.likeCount}/>
+      <Aside count={data.likeCount} liked={data.liked} postId={id}/>
       <div className="flex flex-col gap-[20px] mx-auto flex-1">
 
         {/* 게시판 내용 */}

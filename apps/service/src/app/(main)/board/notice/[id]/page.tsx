@@ -1,6 +1,6 @@
 "use client";
 import React, { Suspense, useEffect, useState } from 'react'
-import Aside from '../../../archive/[id]/components/Aside';
+import Aside from '../../components/Aside';
 import SubTitle from '../../../archive/[id]/components/SubTitle';
 import { FileListLayout,FileList } from '../../../components/File/ViewFileLayout';
 import CommentLayout from '../../../archive/[id]/components/CommentLayout';

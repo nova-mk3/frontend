@@ -18,7 +18,6 @@ interface ModifyCommentFormProps {
 }
 export default function ModifyCommentForm({commentId,content,postId,handleSubmit,handleCancel,value,setValue } : ModifyCommentFormProps) {
   
-
   return (
     <div className="flex flex-col w-[90%] gap-3 mx-auto p-1 my-3">
       <div className="border-line01 border rounded-md">

@@ -1,6 +1,5 @@
 import React from 'react'
 import  { AlertModal, AlretModalAction, AlretModalCancel, AlretModalContent, AlretModalOverlay, AlretModalTrigger, }  from '@nova/ui/components/ui/alert-dialog'
-import { Button } from '@nova/ui/components/ui/button';
 
 interface AlertDialogProps{
   title : string

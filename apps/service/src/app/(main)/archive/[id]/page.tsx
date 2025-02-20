@@ -5,7 +5,7 @@ import Content from "./components/Content";
 import CommentLayout from "./components/CommentLayout";
 
 import {FileListLayout,FileList} from "../../components/File/ViewFileLayout";
-import Aside from "./components/Aside";
+import Aside from "../../board/components/Aside";
 interface Props {
   params: Promise<{ id: string }>;
 }

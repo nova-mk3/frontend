@@ -9,7 +9,7 @@ export const UploadFilesAPI = async(formdata : FormData, postType : string)=>{
   try{
 
     const response = await Authapi.post(`/nova/files?postType=${ postType}`,formdata);
-    return response.data;
+    return response.data.data;
   }catch(error : any){
     throwErrorMessage(error);
   }
@@ -54,7 +54,7 @@ export const DelelteFilesAPI = async(fileId : string)=>{
 
   try{
     const response = await Authapi.delete(`/nova/files/${fileId}`);
-    return response.data;
+    return response.data.data;
   }catch(error : any){
     throwErrorMessage(error);
   }
