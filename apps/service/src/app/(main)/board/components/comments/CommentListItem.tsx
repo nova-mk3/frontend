@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 
 import { CircleUser } from "lucide-react";
-import TextareaAutosize from 'react-textarea-autosize';
 import ReplyCommentForm from "./ReplyCommentForm";
 import ReplyCommentItem from "./ReplyCommentItem";
 import { Button } from "@nova/ui/components/ui/button";
@@ -13,6 +12,7 @@ import { CommentsDelete, CommentsPut } from "@/src/api/board/comments";
 import { useQueryClient } from "@tanstack/react-query";
 import { commentsKeys } from "../../query/comments";
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
+import ModifyCommentForm from "./ModifyCommentForm";
 
 
 export interface CommentItemProps {
@@ -31,7 +31,7 @@ export default function CommentListItem({ id,authorName,authorProfilePhoto,child
   const [isReplyOpen, setReplyOpen] = useState(false);
   const [isReplyFormOpen, setReplyFormOpen] = useState(false);
   const [isModify, setModify] = useState(false);
-  const [value,setValue] = useState("");
+  const [value,setValue] = useState(content);
   const toggleModify = ()=>{
     if(isModify === false) setValue(content);
     setModify((prev) =>!prev);
@@ -42,6 +42,7 @@ export default function CommentListItem({ id,authorName,authorProfilePhoto,child
   const toggleReplyForm = () => {
     setReplyFormOpen((prev) => !prev);
   };
+  
 
   const handleDelete = async() => {
       try {
@@ -53,11 +54,11 @@ export default function CommentListItem({ id,authorName,authorProfilePhoto,child
       }catch(error : any){
         console.log(error);
       }
-    };
+  };
 
   const handleModifySubmit = async() => {
     try {
-        await CommentsPut({commentId : id, content : value})
+        await CommentsPut({ commentId : id, content : value})
         
         // 캐시에 직접 추가하게되면 로딩시 깜빡거림이 사라짐!
         queryClient.setQueryData(
@@ -81,7 +82,9 @@ export default function CommentListItem({ id,authorName,authorProfilePhoto,child
       finally{
         toggleModify();
       }
-    }
+}
+
+  
   return (
     <div
       className={`w-full min-h-[210px] flex flex-col gap-3 border-line01 border-b-[1px] py-[24px] ${className}`}
@@ -103,30 +106,18 @@ export default function CommentListItem({ id,authorName,authorProfilePhoto,child
       </div>
 
 
-        { /* */}
-      {isModify && <div className="flex flex-col w-[90%] gap-3 mx-auto p-1 my-3">
-      <div className="border-line01 border rounded-md">
-        <TextareaAutosize
-          className="flex w-full min-h-[98px] t-m resize-none outline-none p-4 border-none"
-          placeholder="댓글을 입력하세요"
-          value={value}
-          onChange={(e)=> setValue(e.target.value)}
-        />
-      </div>
-      {/* 버튼 wrapper 컴포넌트로 리펙토링 예정 */}
-      <div className="flex flex-row  gap-3 ml-auto">
-        <Button
-          variant="text"
-          className="bg-line01/5 hover:bg-line01"
-          onClick={toggleModify}
-        >
-          취소
-        </Button>
-        <Button className="flex w-[120px]" onClick={handleModifySubmit}>댓글 작성</Button>
-      </div>
-    </div>}
+      
+      {isModify && 
+      <ModifyCommentForm
+        commentId={id}
+        content={content}
+        postId={postId}
+        value={value}
+        setValue={setValue}
+        handleSubmit={handleModifySubmit}
+        handleCancel={toggleModify}
+      />}
 
-      {/* 댓글 내용 */}
      {
       !isModify && <div className="w-full min-h-[100px] p-1">{content}</div>
 

@@ -9,6 +9,7 @@ import { commentsKeys } from "../../query/comments";
 import { Button } from "@nova/ui/components/ui/button";
 import AlertDialog from "../../../components/AlertDialog";
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
+import ModifyCommentForm from "./ModifyCommentForm";
 
 interface ReplyCommentItemProps {
   id : string
@@ -118,27 +119,16 @@ export default function ReplyCommentItem({
       </div>
 
 
-      {isModify && <div className="flex flex-col w-[90%] gap-3 mx-auto p-1 my-3">
-      <div className="border-line01 border rounded-md">
-        <TextareaAutosize
-          className="flex w-full min-h-[98px] t-m resize-none outline-none p-4 border-none"
-          placeholder="댓글을 입력하세요"
-          value={value}
-          onChange={(e)=> setValue(e.target.value)}
-        />
-      </div>
-      {/* 버튼 wrapper 컴포넌트로 리펙토링 예정 */}
-      <div className="flex flex-row  gap-3 ml-auto">
-        <Button
-          variant="text"
-          className="bg-line01/5 hover:bg-line01"
-          onClick={toggleModify}
-        >
-          취소
-        </Button>
-        <Button className="flex w-[120px]" onClick={handleModifySubmit}>댓글 작성</Button>
-      </div>
-    </div>}
+       {isModify && 
+            <ModifyCommentForm
+              commentId={id}
+              content={content}
+              postId={postId}
+              value={value}
+              setValue={setValue}
+              handleSubmit={handleModifySubmit}
+              handleCancel={toggleModify}
+      />}
 
       {/* 댓글 내용 */}
      {
