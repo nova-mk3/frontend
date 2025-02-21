@@ -38,7 +38,7 @@ export async function IntegratedBoardPost(
   }
 }
 
-interface Params {
+export interface Params {
   size? : number
   sort? : string
   boardId? : string

@@ -2,6 +2,7 @@
 board에서 사용하는 react-query hooks 모음입니다
 */
 
+import { ArchiveGetDetail } from "@/src/api/board/exam";
 import { BoardAllList, BoardLatestList, IntegratedBoardGet, IntegratedBoardGetDetail } from "@/src/api/board/integrated";
 import { PostType } from "@/src/constant/board";
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
@@ -71,6 +72,14 @@ export const usePosLatestListQuery = ({boardId} : {
       queryKey: postKeys.latest(), 
       queryFn: () => BoardLatestList({ boardId }),
     });
+};
+
+
+export const useArchiveDetailQuery = (postId: string, boardId: string) => {
+  return useSuspenseQuery({
+    queryKey: postKeys.detail(postId), 
+    queryFn: () => ArchiveGetDetail({ boardId, postId }),
+  });
 };
 
 

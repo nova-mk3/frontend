@@ -19,14 +19,15 @@ import { ExamInput, ExamSchema } from "@/src/schema/exam.schema";
 import { InputFormField } from "@/src/app/(auth)/components/InputFormField";
 import { SEMESTER_OPTIONS } from "@/src/constant/exam";
 import useYearRange from "@/src/libs/hooks/useYearRange";
-import { ExamPost, ExamPostRequest } from "@/src/api/board/exam";
+import { postKeys } from "../../board/query/postqueries";
+import { ArchivePost, ArchivePostRequest } from "@/src/api/board/exam";
 
 export default function Page() {
 
   const router = useRouter();
   const queryClient = useQueryClient();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const {INTEGRATED} =useBoardIdStore();
+  const {CLUB_ARCHIVE} =useBoardIdStore();
   const currentYear = new Date().getFullYear();
   const years = useYearRange(2000, currentYear);
     const form = useForm<ExamInput>({
@@ -92,25 +93,21 @@ export default function Page() {
 
       
       const useIntegratedBoardMutation = useMutation({
-        mutationFn: (data : ExamPostRequest) => ExamPost(data),
+        mutationFn: (data : ArchivePostRequest) => ArchivePost(data),
         onSuccess: (data : any) => {
           console.log(data);
           alert("글쓰기 성공");
           
-          router.push(`/board/${POST_TYPE.EXAM_ARCHIVE.toLocaleLowerCase()}/${data.id}`);
+          router.push(`/${POST_TYPE.EXAM_ARCHIVE.toLocaleLowerCase()}/${data.id}`);
           
 
-          // // 전체글보기, 노바 홈 
-          // queryClient.invalidateQueries({
-          //             queryKey: postKeys.listmain(),
-          //             refetchType: 'inactive',
-          //           });
+      
                     
-          // //내가 쓴 글의 리스트          
-          // queryClient.invalidateQueries({
-          //             queryKey: postKeys.typelists(watchcategory as PostType),
-          //             refetchType: 'inactive',
-          //   });
+          //내가 쓴 글의 리스트          
+          queryClient.invalidateQueries({
+                      queryKey: postKeys.typelists(POST_TYPE.EXAM_ARCHIVE),
+                      refetchType: 'inactive',
+            });
         },
         onError: (error) => {
 
@@ -151,7 +148,7 @@ export default function Page() {
               fileIds : [...response.data.map((file :any)=>{
                 return file.id;
               })],
-              boardId : INTEGRATED,
+              boardId : CLUB_ARCHIVE,
             })
           } catch (error) {
             alert("파일 업로드 실패");
@@ -167,7 +164,7 @@ export default function Page() {
             semester : data.semester,
             professorName : data.professorName,
             fileIds : [],
-            boardId : INTEGRATED,
+            boardId : CLUB_ARCHIVE,
           })
         }
    

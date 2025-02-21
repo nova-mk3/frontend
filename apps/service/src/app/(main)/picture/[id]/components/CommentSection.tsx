@@ -1,7 +1,6 @@
 "use client"
 import { Button } from '@nova/ui/components/ui/button';
 import React, { useState } from 'react'
-import CommentItem from '../../../archive/[id]/components/CommentItem';
 
 export default function CommentSection() {
     const [isCommentOpen, setIsCommentOpen] = useState(false);
@@ -14,7 +13,7 @@ export default function CommentSection() {
         ) : (
           <>
             <Button onClick={() => setIsCommentOpen(false)} className='w-full'>댓글 닫기</Button>
-            <CommentItem />
+            {/* <CommentItem /> */}
           </>
         )}
       </div>

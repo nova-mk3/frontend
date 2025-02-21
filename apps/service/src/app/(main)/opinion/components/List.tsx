@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import ListItem from './ListItem'
-import { PageNation } from '../../archive/components/PageNation'
+import { PageNation } from '../../components/PageNation'
 
 
 
@@ -23,6 +23,7 @@ export default function List() {
         <ListItem/>
         <ListItem/>
         <ListItem/>
+        
         <Suspense>
         <PageNation totalPage={10} size={5} className='mt-4'/>
         </Suspense>

@@ -5,7 +5,7 @@ import { useBoardIdStore } from '@/src/store/BoardId';
 import { PostType } from '@/src/constant/board';
 import { usePostListQuery } from '../board/query/postqueries';
 import { PageNation } from '../components/PageNation';
-import BoardList from '../board/components/BoardList';
+import ArchiveList from './components/ArchiveList';
 
 interface Props{
     postType : PostType;
@@ -15,13 +15,14 @@ interface Props{
 }
 
 export default function Post({postType,page,size,sort} : Props) {
-    const {INTEGRATED} = useBoardIdStore();
-    const { data } = usePostListQuery({postType, page : page-1, size, sort , boardId : INTEGRATED})
+    const {CLUB_ARCHIVE} = useBoardIdStore();
+    const { data } = usePostListQuery({postType, page : page-1, size, sort , boardId : CLUB_ARCHIVE})
     
 
+    
     return (
       <div>
-          <BoardList content={data.content}/>
+          <ArchiveList content={data.content}/>
           <Suspense fallback={<div className='h-[36px]'></div>}> 
                   <PageNation size={size} totalPage={data.totalPages} className="my-4" />
           </Suspense>

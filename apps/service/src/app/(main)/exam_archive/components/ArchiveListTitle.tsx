@@ -18,7 +18,7 @@ interface BoardListTitleProps {
   setSortOption: (sort: string) => void;
 }
 
-export default function BoardListTitle({title, className ,TitleImage,searchQuery,sortOption,setSearchQuery,setSortOption } : BoardListTitleProps) {
+export default function ArchiveListTitle({title, className ,TitleImage,searchQuery,sortOption,setSearchQuery,setSortOption } : BoardListTitleProps) {
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -50,7 +50,7 @@ export default function BoardListTitle({title, className ,TitleImage,searchQuery
           <Search size="24"/>
           </div>
         </div>
-        <Link href="/board/newpost" className="mobile:w-full">
+        <Link href="/exam_archive/newpost" className="mobile:w-full">
           <Button variant="default" className="mobile:w-full">
             글쓰기
           </Button>

@@ -15,10 +15,10 @@ export default function layout({
     // 현재 URL과 링크의 href가 같다면 활성화된 스타일을 적용
     let isActive = null;
 
-    if(pathname === '/board/newpost' || pathname === '/board/modify') isActive = true;
+    if(pathname === '/board/newpost' || pathname === '/board/modify' ) isActive = true;
 
     if(isActive){
-      return (<div className='flex flex-col t-m w-[80%] mx-auto'>
+      return (<div className='flex flex-col t-m  mx-auto'>
         {children}
     </div>)
     }
