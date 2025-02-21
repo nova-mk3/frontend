@@ -31,7 +31,7 @@ export default  function PostDetail({postId} : PostDetailProps) {
 
   return (
     <div className="flex flex-col t-m w-full mx-auto">
-      <DetailPageTitle title={POST_TYPE.NOTICE} TitleImage={ <Pin size={20} />}/>
+      <DetailPageTitle title={POST_TYPE.NOTICE} TitleImage={ <Pin size={20} />} defaultHref='/board'/>
       <div className="flex flex-row gap-[50px]">
       <Aside count={data.likeCount} liked={data.liked} postId={postId}/>
       <div className="flex flex-col gap-[20px] mx-auto flex-1">
@@ -47,7 +47,7 @@ export default  function PostDetail({postId} : PostDetailProps) {
       boardId={INTEGRATED}
       likeCount={data.likeCount}
       liked={data.liked}
-      
+       defaultHref='/board'
       />
       <FileListLayout>
         <FileList files={data.files}/>

@@ -20,6 +20,7 @@ interface SubTitle {
   postType : PostType;
   boardId : string;
   liked : boolean;
+  defaultHref? : string;
 }
 
 export default function DetailPageSubTitle({
@@ -31,16 +32,17 @@ export default function DetailPageSubTitle({
   postId,
   postType,
   boardId,
-  liked
+  liked,
+  defaultHref=""
 }: SubTitle) {
   const router = useRouter();
   const handleModify = () => {
-    router.push(`/board/modify?id=${postId}&type=${postType}`);
+    router.push(`${defaultHref}/modify?id=${postId}&type=${postType}`);
   };
   const handleDelete = async() => {
     try {
       await IntegratedBoardDelete({boardId, postId})
-      router.push(`/board/${postType.toLocaleLowerCase()}`)
+      router.push(`${defaultHref}/${postType.toLocaleLowerCase()}`)
     
         // TODO : 왔다갔다 하는 조회수 부분은 어떻게 할까 -> 개인적인의견 그렇게 중요한 요소가 아닌데 api 재요청을 할 필요가 있을까        
 

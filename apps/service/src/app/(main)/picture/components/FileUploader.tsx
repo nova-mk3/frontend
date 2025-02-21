@@ -2,21 +2,25 @@ import React, { ChangeEvent, useState } from 'react'
 import FilePlus from "@/public/image/FilePlus.svg";
 import FileItem from './FileItem';
 
-interface SelectedFile {
+export interface ImageFile {
   file: File;
   preview: string;
 }
 
+interface props {
+  selectedFiles: ImageFile[];
+  setSelectedFiles: React.Dispatch<React.SetStateAction<ImageFile[]>>;
+}
 
-export default function FileUploader() {
-    const [selectedFiles, setSelectedFiles] = useState<SelectedFile[]>([]);
+
+export default function FileUploader({selectedFiles,setSelectedFiles} : props) {
 
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>): void => {
       const files: FileList | null = e.target.files;
       if (!files) return;
   
-      const filesArray: SelectedFile[] = Array.from(files).map((file) => ({
+      const filesArray: ImageFile[] = Array.from(files).map((file) => ({
         file,
         preview: URL.createObjectURL(file),
       }));
