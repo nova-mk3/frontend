@@ -139,7 +139,7 @@ export const AlretModalCancel = ({ children,className,onClick }: AlretModalCance
   return (
     <Button
       variant={"text"}
-      className={cn('',className)}
+      className={cn(className)}
       onClick={close}
     >
       {children}
