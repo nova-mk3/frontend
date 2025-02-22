@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { isStrongPassword } from "../libs/utils/isStrongPassword";
+import { truncate } from "node:fs/promises";
 
 
 // z.enum value를 변수로 관리하고 싶은데, 리터럴만 받아야한다고 하는데 고민이 더 필요할듯
@@ -14,21 +15,22 @@ export let semester = ["1학기", "2학기"];
 const studentSchema = z
   .object({
 
-    studentType : z.enum(["재학생", "졸업생"]),
+    graduation : z.boolean(),
     // 학부생
     grade: z.enum(Zodgrade).optional(),
     semester: z.enum(Zodsemester).optional(),
-    isAbsence : z.string().optional(),
+    absence : z.boolean().optional(),
 
     
     // 졸업생 
-    isWork :  z.string().optional(),
+    year: z.string().optional(),
+    work :  z.boolean().optional(),
     job : z.string().optional(),
-    isContact : z.string().optional(),
+    contact : z.boolean().optional(),
     contactInfo : z.string().optional(),
-    contactInfoDescription : z.string().optional(),
+    contactDescription : z.string().optional(),
   }).superRefine((data, ctx) => {
-    if (data.studentType === "재학생") {
+    if (data.graduation === false) {
       // 재학생일 경우, grade, semester, isAbsence만 필수로 요구
       if (!data.grade) {
         ctx.addIssue({
@@ -44,19 +46,26 @@ const studentSchema = z
           code: z.ZodIssueCode.custom,
         });
       }
-      if (!data.isAbsence) {
+      if (data.absence === undefined) {
         ctx.addIssue({
-          path: ["isAbsence"],
+          path: ["absence"],
           message: "결석 여부는 필수입니다.",
           code: z.ZodIssueCode.custom,
         });
       }
-    } else if (data.studentType === "졸업생") {
+    } else if (data.graduation === true) {
       // 졸업생일 경우, isWork, job, isContact, contactInfo만 필수로 요구
-      if (!data.isWork) {
+      if (data.work === undefined) {
         ctx.addIssue({
-          path: ["isWork"],
+          path: ["work"],
           message: "근무 여부는 필수입니다.",
+          code: z.ZodIssueCode.custom,
+        });
+      }
+      if (!data.year) {
+        ctx.addIssue({
+          path: ["year"],
+          message: "졸업년도는 필수입니다",
           code: z.ZodIssueCode.custom,
         });
       }
@@ -66,7 +75,7 @@ const studentSchema = z
 
 const userSchema = z.object({
   username: z.string(),
-    studentId: z
+    studentNumber: z
       .string()
       .min(10, { message: "학번은 10자리 이상이어야 합니다." })
       .regex(/^\d+$/, { message: "학번은 숫자만 입력할 수 있습니다." }),
@@ -74,36 +83,39 @@ const userSchema = z.object({
         message: "이메일이 비어 있습니다."
       }).email({ message: "이메일 형식에 맞지 않습니다." }),
       emailCode : z.string(),
-      confirmEmailCode: z.string().optional(),
       birth: z.date().optional(),
-      profileImage: z
-        .instanceof(File)
-        .refine((file) => file instanceof File, {
-          message: "프로필 이미지는 파일이어야 합니다.",
-        })
-        .refine((file: File) => file.type.startsWith("image/"), {
-          message: "이미지 파일만 업로드할 수 있습니다.",
-        })
-        .optional(),
+      profilePhoto: z
+      .instanceof(File)
+      .refine((file) => file instanceof File, {
+        message: "프로필 이미지는 파일이어야 합니다.",
+      })
+      .refine((file: File) => file.type.startsWith("image/"), {
+        message: "이미지 파일만 업로드할 수 있습니다.",
+      })
+      .optional(),
       phoneNumber: z.string().optional(),
       emailCheck: z.boolean().refine((val) => val === true,{
-        message: "인증한 이메일과 다른지 확인하세요!"
+        message: "인증이 필요합니다."
+      }).optional(),
+      emailCodeCheck : z.boolean().refine((val) => val === true,{
+        message: "인증이 필요합니다."
       }).optional(),
 }).superRefine((data, ctx) => {
 
   if (data.emailCheck === false) {
-    console.log("ㅎ")
+
     ctx.addIssue({
       code: z.ZodIssueCode.custom,
       message: "이메일 인증을 해야합니다.",
       path: ["emailCode"],
     });
   }
-  else if (data.emailCode !== data.confirmEmailCode) {
+  else if (data.emailCodeCheck === false) {
+
     ctx.addIssue({
       code: z.ZodIssueCode.custom,
-      message: "인증코드가 일치하지 않습니다",
-      path: ["emailCode"],
+      message: "인증을 해야합니다",
+      path: ["emailCodeCheck"],
     });
   }
 }); 

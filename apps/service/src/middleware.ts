@@ -4,7 +4,7 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
 
-  if (pathname === "/archive" || pathname === "/archive/") {
+  if (pathname === "/exam_archive" || pathname === "/exam_archive/") {
     // 이미 page 파라미터가 있는지 확인
     if (!searchParams.has("page")) {
       const url = request.nextUrl.clone();
@@ -19,5 +19,5 @@ export function middleware(request: NextRequest) {
 
 // 미들웨어가 적용될 경로를 지정
 export const config = {
-  matcher: ["/archive", "/archive/"],
+  matcher: ["/exam_archive", "/exam_archive/"],
 };

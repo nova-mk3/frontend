@@ -4,6 +4,7 @@ import React from "react";
 import { pretendard } from "../../theme/font";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Providers from "../../query/providers";
 
 export const metadata: Metadata = {
   title: "nova",
@@ -21,7 +22,7 @@ export default function RootLayout({
         {/* 추후 수정 예정 @kwonja */}
         <div id="root" className="max-w-screen-xl mx-auto">
           <Header />
-          {children}
+          <Providers>{children}</Providers>
           <Footer/>
         </div>
       </body>

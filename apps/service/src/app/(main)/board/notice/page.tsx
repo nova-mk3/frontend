@@ -1,17 +1,14 @@
-import React from 'react'
-import Title from '../components/Title'
-import { Pin } from 'lucide-react'
-import Item from '../components/Item'
+"use client"
+import { Suspense } from "react";
+import SearchPost from "./SearchPost";
 
-export default function page() {
+
+export default function Page() {
+ 
+
   return (
-    <div>
-        <Title title='공지사항' TitleImage={ <Pin size={20} />}/>
-
-        <Item/>
-                <Item/>
-                <Item/>
-                <Item/>
-    </div>
-  )
+     <Suspense>
+      <SearchPost/>
+     </Suspense>
+  );
 }

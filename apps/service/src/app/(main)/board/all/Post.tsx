@@ -1,0 +1,28 @@
+"use client";
+
+import React, { Suspense, useState } from 'react'
+import ContentList from '../components/BoardList';
+import { useBoardIdStore } from '@/src/store/BoardId';
+import { usePostAllListQuery } from '../query/postqueries';
+import { PageNation } from '../../components/PageNation';
+interface Props{
+    page : number;
+    size : number;
+    sort : string;
+}
+
+export default function Post({page,size,sort} : Props) {
+    const {INTEGRATED} = useBoardIdStore();
+    const { data } = usePostAllListQuery({ page : page-1, size, sort , boardId : INTEGRATED})
+    
+    return (
+      <div>
+          <ContentList content={data.content}/>
+          <Suspense fallback={<div className='h-[36px]'></div>}> 
+                  <PageNation size={size} totalPage={data.totalPages} className="my-4" />
+          </Suspense>
+      </div>
+    )
+}
+
+

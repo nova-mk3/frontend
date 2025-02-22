@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { Input } from "@nova/ui/components/ui/input";
 import WriteBottomLayout from "../../components/WriteBottomLayout";
-import FileUploader from "../../components/FileUploader";
+import FileUploader from "../../components/File/FileUploader";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { OpinionInput, OpinionSchema } from "@/src/schema/opinion.schema";
@@ -54,8 +54,8 @@ export default function Page() {
       {errors.title?.message && <p className="text-danger">{errors.title?.message}</p>}
       {!errors.title && <p className="h-[24px]"></p>}
 
-      {/* 첨부 파일 영역 */} 
-      <FileUploader/>
+      {/* 첨부 파일 영역 
+      <FileUploader/> */}
 
       {/* 본문 스크롤 영역 */}
       {/* <PlateEditor /> */}

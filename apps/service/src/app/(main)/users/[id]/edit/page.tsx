@@ -14,55 +14,11 @@ import { Button } from '@nova/ui/components/ui/button';
 
 
 export default function page() {
-    const form = useForm<SignupInput>({
-        resolver: zodResolver(SignupSchema),
-        defaultValues: { 
-          username: "",
-          email: "",
-          studentId: "",
-          grade: "1학년",
-          semester: "1학기",
-          emailCode: '',
-          emailCheck: false,
-          confirmEmailCode : '',
-          birth: new Date("1998-10-13"),
-          profileImage: undefined,
-          phoneNumber: "",
-          password: "",
-          confirmPassword: "",
-          studentType : "재학생",
-          isWork : "",
-          job : '',
-        },
-        mode: "onChange",
-      });
-    
-      function onSubmit(values: SignupInput) {
-          console.log(values);
-        }
 
-      const studentType = useWatch({
-        control: form.control,
-        name: "studentType",
-      });
-      const isWork = useWatch({
-        control: form.control,
-        name: "isWork",
-      });
-    
-      const isEmail = useWatch({
-        control: form.control,
-        name: "email",
-      });
-    
-      const isContact = useWatch({
-        control: form.control,
-        name: "isContact",
-      });
-
+  
   return (
     <div className='w-[400px] mx-auto mobile:w-[90%] mt-10'>
-    <Form {...form}>
+    {/* <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
 
       <FileFormField
@@ -191,7 +147,7 @@ export default function page() {
           </Button>
         </div>
       </form>
-    </Form>
+    </Form> */}
     </div>
   )
 }
