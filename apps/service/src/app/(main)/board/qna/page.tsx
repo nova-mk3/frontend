@@ -24,6 +24,7 @@ export default function Page() {
       setSearchQuery={setSearchQuery}
       sortOption={sortOption}
       setSortOption={setSortOption}
+      defaultHref="/board"
       />
       <ErrorBoundaryWrapper>
         <Post postType={POST_TYPE.QNA} page={currentPage} size={BOARD_SIZE} sort={sortOption} />

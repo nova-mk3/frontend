@@ -48,7 +48,7 @@ export default function Page() {
       
                 //내가 쓴 글의 리스트          
                 queryClient.invalidateQueries({
-                            queryKey: postKeys.typelists(POST_TYPE.EXAM_ARCHIVE),
+                            queryKey: postKeys.typelists(POST_TYPE.PICTURES),
                             refetchType: 'inactive',
                   });
               },

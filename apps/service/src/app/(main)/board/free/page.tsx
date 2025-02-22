@@ -1,14 +1,14 @@
 "use client";
 import Post from "./Post";
 import { BOARD_SIZE, POST_TYPE } from "@/src/constant/board";
-import {   useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import BoardListTitle from "../components/BoardListTitle";
-import {  Book, Pin } from "lucide-react";
-
+import {  Book } from "lucide-react";
 import ErrorBoundaryWrapper from "../../components/ErrorBoundaryWrapper";
-import {  useState } from "react";
+import { useState } from "react";
 
 export default function Page() {
+
   const searchParams = useSearchParams();
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
   const [searchQuery, setSearchQuery] = useState(searchParams.get("query") || "");
@@ -24,6 +24,7 @@ export default function Page() {
       setSearchQuery={setSearchQuery}
       sortOption={sortOption}
       setSortOption={setSortOption}
+      defaultHref="/board"
       />
       <ErrorBoundaryWrapper>
         <Post postType={POST_TYPE.FREE} page={currentPage} size={BOARD_SIZE} sort={sortOption} />
