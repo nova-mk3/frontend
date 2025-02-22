@@ -24,8 +24,9 @@ import { useQueryParams } from "../../components/useQueryParams";
 
 
 export default function ModifyPage() {
-    const {CLUB_ARCHIVE} = useBoardIdStore();
-    const {postId,postType} = useQueryParams();
+
+  const {CLUB_ARCHIVE} = useBoardIdStore();
+  const {postId,postType} = useQueryParams();
   const router = useRouter();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
@@ -35,7 +36,7 @@ export default function ModifyPage() {
 
    const {data } = useArchiveDetailQuery(postId, CLUB_ARCHIVE);
 
-   console.log(data);
+
     const currentYear = new Date().getFullYear();
        const years = useYearRange(2000, currentYear);
        const form = useForm<ExamInput>({
@@ -45,7 +46,7 @@ export default function ModifyPage() {
                title: data.title,
                content: data.content,
                semester : data.semester,
-               year : data.year,
+               year : String(data.year),
                professorName : data.professorName,
                subject : data.subject,
              },
@@ -107,6 +108,7 @@ export default function ModifyPage() {
       const useArchivePutMutation = useMutation({
         mutationFn: (data : ArchivePutRequest) => ArchivePut(data),
         onSuccess: (data : any) => {
+          console.log(data);
           alert("변경 성공");
 
           // 내 수정사항은 나만 다시보면 된다 -> api 호출 최적화
@@ -115,11 +117,6 @@ export default function ModifyPage() {
              data
           )
 
-          // 변경한 리스트 재호출
-          queryClient.invalidateQueries({
-            queryKey: postKeys.listmain(),
-            refetchType: 'inactive',
-          });
           
           queryClient.invalidateQueries({
             queryKey: postKeys.typelists(postType as PostType),
@@ -127,7 +124,7 @@ export default function ModifyPage() {
           });
           
           
-          router.push(`/${postType.toLocaleLowerCase()}/${data.id}`);
+          router.push(`/${postType.toLocaleLowerCase()}/${postId}`);
         },
         onError: (error) => {
           alert(error.message);
@@ -180,7 +177,7 @@ export default function ModifyPage() {
           }
         }
         else{
-            console.log(...originFiles.map( (file)=> file.id));
+        
             useArchivePutMutation.mutate({
               title : data.title,
               content : data.content,

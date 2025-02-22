@@ -23,8 +23,8 @@ export default function ArchiveListItem({title,content,createdTime,authorName, v
   
   return (
     <div className={`border-b-[1px] border-line01 flex flex-col pb-3 ${className}`}>
-        <Link href={href}  style={{ width: 'max-content' }}><Title title={title} type={type}/></Link>
-        <Link href={href} className='hover:underline' style={{ width: 'max-content' }}> <div className='t-m mt-3' >{content}</div></Link>
+        <Link href={href} className='w-full'><Title title={title} type={type}/></Link>
+        <Link href={href} className='hover:underline w-full'> <div className='t-m mt-3' >{content}</div></Link>
             <div className='mt-4 flex flex-col text-text02'>
             <div className='flex flex-row gap-2'>
             <div className='t-m text-text01 hover:underline'>{authorName}</div>
@@ -52,14 +52,14 @@ function Title({title, type, className} : ItemTitleProps ) {
   // 임시로 공지로 고정, 추후에 태그 용도로 쓰이면 그때 분리할 예정
   if(type === POST_TYPE.NOTICE)
     return (
-      <div className='t-l !font-bold mt-3 flex flex-row gap-2'><p className='bg-primary rounded-lg t-s flex items-center justify-center text-background01 px-1.5 '>공지</p> 
-      <p className='hover:underline'>{title}</p>
+      <div className='t-l !font-bold mt-3 flex flex-row gap-2 '><p className='bg-primary rounded-lg t-s flex items-center justify-center text-background01 px-1.5 '>공지</p> 
+      <p className='hover:underline truncate'>{title}</p>
       </div>
   )
 
   
   return (
-      <div className='t-l !font-bold mt-3 flex flex-row gap-2 hover:underline'>{title}</div>
+      <div className='flex-1 t-l !font-bold mt-3 hover:underline truncate'>{title}</div>
   )
 
 }

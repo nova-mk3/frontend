@@ -24,14 +24,17 @@ interface PostDetailProps{
   
 export default  function PostDetail({postId} : PostDetailProps) {
 
+  console.log(postId);
   const {CLUB_ARCHIVE} = useBoardIdStore();
   const { data } = useArchiveDetailQuery(postId,CLUB_ARCHIVE);
 
   console.log(data);
-
+  //
   return (
     <div className="flex flex-col t-m w-full mx-auto">
-      <DetailPageTitle title={POST_TYPE.EXAM_ARCHIVE} TitleImage={ <Folder size={20} />} />
+      <DetailPageTitle title={POST_TYPE.EXAM_ARCHIVE} TitleImage={ 
+        <Folder size={20} />}
+      />
       <div className="flex flex-row gap-[50px]">
       <Aside count={data.likeCount} liked={data.liked} postId={postId}/>
       <div className="flex flex-col gap-[20px] mx-auto flex-1">
@@ -47,6 +50,7 @@ export default  function PostDetail({postId} : PostDetailProps) {
       boardId={CLUB_ARCHIVE}
       likeCount={data.likeCount}
       liked={data.liked}
+      defaultHref='/exam_archive'
       />
       <FileListLayout>
         <FileList files={data.files}/>

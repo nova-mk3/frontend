@@ -13,6 +13,7 @@ interface TextareaFormFieldProps<T extends Record<string, any>>{
     placeholder?: string;
     className?: string;
     readonly? : boolean;
+    disabled?: boolean;
 }
 export default function TextareaFormField<T extends Record<string, any>>(
     {
@@ -40,7 +41,7 @@ export default function TextareaFormField<T extends Record<string, any>>(
             <TextareaAutosize
               className="flex w-full h-[40px] h-l resize-none outline-none"
               placeholder={placeholder}
-              defaultValue={field.value as string}
+              value={field.value as string}
               onChange={field.onChange}
               readOnly={readonly}
             />

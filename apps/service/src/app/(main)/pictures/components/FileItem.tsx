@@ -15,7 +15,6 @@ interface FileItemPropsInput {
 // TODO: 사진클릭했을때 이미지 크게 보는 모달이 필요할듯
 
 export default function FileItem({ name="" , className, onRemove ,index,preview} : FileItemPropsInput) {
-  console.log(index);
   return (
     <div className={` w-[100px] h-[100px] relative rounded-md border-[1px]`}>
       {

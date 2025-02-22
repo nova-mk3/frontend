@@ -42,7 +42,6 @@ export default function Page() {
             subject : "",
           },
       });
-
        const semester = useWatch({
                 control: form.control,
                 name: "semester",

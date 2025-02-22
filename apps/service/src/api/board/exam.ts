@@ -101,7 +101,7 @@ export async function ArchivePut(
     postId,
     deleteFileIds
     });
-    return  response.data;
+    return  response.data.data;
   }catch(error : any){
      throwErrorMessage(error);
   }
