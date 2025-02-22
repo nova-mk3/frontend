@@ -16,10 +16,10 @@ interface BoardListTitleProps {
   setSearchQuery: (query: string) => void;
   sortOption: string;
   setSortOption: (sort: string) => void;
-  defaultHref : string;
+  defaultHref? : string;
 }
 
-export default function BoardListTitle({title, className ,TitleImage,searchQuery,sortOption,setSearchQuery,setSortOption,defaultHref } : BoardListTitleProps) {
+export default function BoardListTitle({title, className ,TitleImage,searchQuery,sortOption,setSearchQuery,setSortOption,defaultHref="" } : BoardListTitleProps) {
 
   const searchParams = useSearchParams();
   const router = useRouter();
