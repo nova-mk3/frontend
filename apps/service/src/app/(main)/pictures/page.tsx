@@ -1,34 +1,14 @@
-"use client"
-import React, { useState } from 'react'
-import { Image } from "lucide-react";
-import BoardListTitle from '../board/components/BoardListTitle'
-import { BOARD_SIZE, POST_TYPE } from '@/src/constant/board'
-import { useSearchParams } from 'next/navigation';
-import ErrorBoundaryWrapper from '../components/ErrorBoundaryWrapper';
-import Post from './Post';
-export default function page() {
+import { Suspense } from "react";
+import SearchPost from "./SearchPost";
 
-   const searchParams = useSearchParams();
-    const currentPage = parseInt(searchParams.get("page") || "1", 10);
-    const [searchQuery, setSearchQuery] = useState(searchParams.get("query") || "");
-    const [sortOption, setSortOption] = useState(searchParams.get("sort") || "asc");
+export default function page() {
     
   return (
 
     <>
-     <BoardListTitle 
-      title={POST_TYPE.PICTURES}
-      TitleImage={<Image size={20}/> }
-      searchQuery={searchQuery}
-      setSearchQuery={setSearchQuery}
-      sortOption={sortOption}
-      setSortOption={setSortOption}
-      defaultHref="/pictures"
-      />
-      <ErrorBoundaryWrapper>
-        <Post postType={POST_TYPE.PICTURES} page={currentPage} size={8} sort={sortOption} />
-      </ErrorBoundaryWrapper>   
-    
+      <Suspense fallback={<>loading...</>}>
+           <SearchPost />
+      </Suspense> 
     
     </>
   //   <div className='flex flex-col mx-auto'>

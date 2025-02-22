@@ -1,34 +1,16 @@
-"use client";
-import Post from "./Post";
-import { BOARD_SIZE, POST_TYPE } from "@/src/constant/board";
-import {   useSearchParams } from "next/navigation";
-import BoardListTitle from "../components/BoardListTitle";
-import {  Hand, Pin } from "lucide-react";
-
-import ErrorBoundaryWrapper from "../../components/ErrorBoundaryWrapper";
-import {  useState } from "react";
+"use client"
+import {  Suspense, useState } from "react";
+import SearchPost from "./SearchPost";
 
 export default function Page() {
-  const searchParams = useSearchParams();
-  const currentPage = parseInt(searchParams.get("page") || "1", 10);
-  const [searchQuery, setSearchQuery] = useState(searchParams.get("query") || "");
-  const [sortOption, setSortOption] = useState(searchParams.get("sort") || "asc");
+ 
 
 
   return (
     <>
-      <BoardListTitle 
-      title={POST_TYPE.INTRODUCTION}
-      TitleImage={<Hand size={20}/> }
-      searchQuery={searchQuery}
-      setSearchQuery={setSearchQuery}
-      sortOption={sortOption}
-      setSortOption={setSortOption}
-      defaultHref="/board"
-      />
-      <ErrorBoundaryWrapper>
-        <Post postType={POST_TYPE.INTRODUCTION} page={currentPage} size={BOARD_SIZE} sort={sortOption} />
-      </ErrorBoundaryWrapper>
+      <Suspense>
+            <SearchPost/>
+           </Suspense>
     </>
   );
 }

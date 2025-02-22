@@ -20,7 +20,6 @@ interface BoardListTitleProps {
 
 export default function ArchiveListTitle({title, className ,TitleImage,searchQuery,sortOption,setSearchQuery,setSortOption } : BoardListTitleProps) {
 
-  const searchParams = useSearchParams();
   const router = useRouter();
 
   const handleSearch = () => {

@@ -39,7 +39,7 @@ export async function ArchivePost(
         professorName,
         fileIds,
     });
-    return response.data.data;
+    return response.data;
   }catch(error : any){
      throwErrorMessage(error);
   }
@@ -101,7 +101,7 @@ export async function ArchivePut(
     postId,
     deleteFileIds
     });
-    return response.data.data;
+    return  response.data;
   }catch(error : any){
      throwErrorMessage(error);
   }
@@ -132,7 +132,7 @@ export async function ArchiveDelete(
 
   try{
     const response = await Authapi.delete(`/nova/boards/${boardId}/exam-posts/${postId}`);
-    return response.data.data;
+    return response.data;
   }catch(error : any){
      throwErrorMessage(error);
   }

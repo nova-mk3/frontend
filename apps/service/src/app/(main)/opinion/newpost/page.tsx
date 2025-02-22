@@ -54,8 +54,8 @@ export default function Page() {
       {errors.title?.message && <p className="text-danger">{errors.title?.message}</p>}
       {!errors.title && <p className="h-[24px]"></p>}
 
-      {/* 첨부 파일 영역 */} 
-      <FileUploader/>
+      {/* 첨부 파일 영역 
+      <FileUploader/> */}
 
       {/* 본문 스크롤 영역 */}
       {/* <PlateEditor /> */}

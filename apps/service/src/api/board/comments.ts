@@ -13,7 +13,7 @@ export interface CommentAPIType {
 export async function CommentsPost({ postId, content, parentCommentId }: CommentAPIType) {
   try {
     const response = await Authapi.post(`/nova/posts/${postId}/comments`, { content, parentCommentId });
-    return response.data.data;
+    return response.data;
   } catch (error) {
     throwErrorMessage(error);
   }

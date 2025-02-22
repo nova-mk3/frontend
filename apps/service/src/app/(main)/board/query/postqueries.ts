@@ -5,7 +5,7 @@ board에서 사용하는 react-query hooks 모음입니다
 import { ArchiveGetDetail } from "@/src/api/board/exam";
 import { BoardAllList, BoardLatestList, IntegratedBoardGet, IntegratedBoardGetDetail } from "@/src/api/board/integrated";
 import { PostType } from "@/src/constant/board";
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import {  useSuspenseQuery } from "@tanstack/react-query";
 
 interface SearchFilter{
   page: number;
@@ -27,7 +27,7 @@ export const postKeys = {
 
     details: () => [...postKeys.all, 'detail'] as const,
     detail: (postId: string) => [...postKeys.details(), postId] as const,
-    latest : ()=> [...postKeys.listmain(), 'latest'] as const,
+    latest : (boardId : string)=> [...postKeys.listmain(), 'latest',boardId] as const,
 }
 
 
@@ -65,11 +65,11 @@ export const usePostAllListQuery = ({page,size,sort,boardId} : {
     });
 };
 
-export const usePosLatestListQuery = ({boardId} : {
+export const usePostLatestListQuery = ({boardId} : {
     boardId : string
 }) => {
     return useSuspenseQuery({
-      queryKey: postKeys.latest(), 
+      queryKey: [...postKeys.latest(boardId)], 
       queryFn: () => BoardLatestList({ boardId }),
     });
 };

@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 import WriteBottomLayout from "../../components/WriteBottomLayout";
 import FileUploader, { ImageFile } from "../components/FileUploader";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {  OpinionSchema } from "@/src/schema/opinion.schema";
 import { PictureInput } from "@/src/schema/picture.schema";
@@ -78,7 +78,7 @@ export default function Page() {
           try {
             const response = await useFileUploadMutation.mutateAsync({
               data : formData,
-              POST_TYPE : POST_TYPE.EXAM_ARCHIVE
+              POST_TYPE : POST_TYPE.PICTURES
             }); 
             // 업로드 성공 후 다른 API 호출 예시
             usePictureMutation.mutate({

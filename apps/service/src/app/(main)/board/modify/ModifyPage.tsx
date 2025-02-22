@@ -17,13 +17,12 @@ import { Form } from "@nova/ui/components/ui/form";
 import { SelectFormField } from "@/src/app/(auth)/signup/components/SelectFormField";
 import TextareaFormField from "@/src/app/(auth)/signup/components/TextareaFormField";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryParams } from "../../components/useQueryParams";
 
-interface props{
-    postId : string;
-    postType : string;
-}
-export default function ModifyPage({postId , postType} : props) {
-    const {INTEGRATED} = useBoardIdStore();
+
+export default function ModifyPage() {
+    const {INTEGRATED} = useBoardIdStore()
+    const {postId,postType} = useQueryParams();
 
   const router = useRouter();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);

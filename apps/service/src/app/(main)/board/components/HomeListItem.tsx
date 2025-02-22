@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import Item, { BoardListItemType } from './BoardListItem';
 import Link from 'next/link';

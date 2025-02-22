@@ -20,14 +20,12 @@ import useYearRange from "@/src/libs/hooks/useYearRange";
 import { SEMESTER_OPTIONS } from "@/src/constant/exam";
 import { InputFormField } from "@/src/app/(auth)/components/InputFormField";
 import { ArchivePut, ArchivePutRequest } from "@/src/api/board/exam";
+import { useQueryParams } from "../../components/useQueryParams";
 
-interface props{
-    postId : string;
-    postType : string;
-}
-export default function ModifyPage({postId , postType} : props) {
+
+export default function ModifyPage() {
     const {CLUB_ARCHIVE} = useBoardIdStore();
-
+    const {postId,postType} = useQueryParams();
   const router = useRouter();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 

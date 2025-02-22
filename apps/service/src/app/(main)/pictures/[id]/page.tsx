@@ -30,7 +30,7 @@ export default async function page({ params }: Props) {
               <div className='flex flex-row mt-3 gap-2 t-m text-text03'>
                 <p>권성민</p>
                 <p className=''>5일전</p>
-                <Like className='ml-auto mr-2' count={5}/>
+                {/* <Like className='ml-auto mr-2' count={5}/> */}
                 <p className=''>수정</p>
                 <p className='w-[1px] h-[20px] bg-line01'></p>
                 <p>삭제</p>

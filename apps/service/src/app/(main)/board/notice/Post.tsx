@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import React, { Suspense, useState } from 'react'
 import ContentList from '../components/BoardList';
