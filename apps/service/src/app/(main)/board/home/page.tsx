@@ -6,7 +6,7 @@ import Layout from "./components/Layout";
 export default function page() {
   return (
     <>
-    <Suspense fallback={<>로딩..</>}>
+    <Suspense>
       <Layout/>
     </Suspense>
     </>

@@ -4,9 +4,10 @@ import HomeListItem from '../../components/HomeListItem'
 import { useBoardIdStore } from '@/src/store/BoardId';
 import { POST_TYPE, POST_TYPE_LABEL } from '@/src/constant/board';
 import { usePostLatestListQuery } from '../../query/postqueries';
+import { useSearchParams } from 'next/navigation';
 
 export default function Post() {
-
+  //  const seartch = useSearchParams(); // 이자식 차이였어...
     const {INTEGRATED} = useBoardIdStore();
     const { data } = usePostLatestListQuery({ boardId : INTEGRATED});
     
