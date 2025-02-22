@@ -16,11 +16,8 @@ interface Props{
 
 export default function Post({postType,page,size,sort} : Props) {
     const {INTEGRATED} = useBoardIdStore();
-    const { data } = usePostListQuery({postType, page : page-1, size, sort , boardId : INTEGRATED})
-
-
-    console.log(data);
-
+    const { data } = usePostListQuery({postType, page : page-1, size, sort , boardId : INTEGRATED});
+    
     
     return (
       <div>

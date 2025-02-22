@@ -26,7 +26,7 @@ export default function BoardListItem({title,content,createdTime,authorName, vie
         <Link href={href} className='hover:underline w-full'> <div className='t-m mt-3' >{content}</div></Link>
             <div className='mt-4 flex flex-col text-text02'>
             <div className='flex flex-row gap-2'>
-            <div className='t-m text-text01 hover:underline'>{authorName}</div>
+            <div className='t-m text-text01 hover:underline cursor-pointer'>{authorName}</div>
             </div>
             <div className='flex flex-row gap-2'>
             <div className='t-s'>{formatDate(createdTime)}</div>

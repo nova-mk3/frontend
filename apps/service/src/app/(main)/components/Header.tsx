@@ -28,7 +28,7 @@ export default function Header() {
         </div>
 
         <div className="flex items-center ml-auto">
-        <Tendinous className="mobile:hidden" href="/opinion"/>
+        <Tendinous className="mobile:hidden" href="/suggestion"/>
           {!isLogin ? (
             <div className="flex flex-row justify-center items-center gap-[22px] mobile:hidden">
               <Link href="/signin">

@@ -32,7 +32,7 @@ export default function Title({title, className} : TitleProps) {
           />
           <Search size="24" />
         </div>
-        <Link href="/opinion/newpost" className="mobile:w-full">
+        <Link href="/suggestion/newpost" className="mobile:w-full">
           <Button variant="default" className="mobile:w-full">
             글쓰기
           </Button>

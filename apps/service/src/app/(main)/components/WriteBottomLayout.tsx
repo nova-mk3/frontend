@@ -1,7 +1,11 @@
 import { Button } from '@nova/ui/components/ui/button'
 import React from 'react'
 import { ArrowLeft } from 'lucide-react';
-export default function WriteBottomLayout() {
+
+interface Props{
+  postBtnname? : string;
+}
+export default function WriteBottomLayout({postBtnname="작성"} : Props) {
   return (
     <div className="flex items-center absolute bottom-0 w-full h-[64px] p-4 shadow-footer z-10 bg-white">
 
@@ -11,7 +15,7 @@ export default function WriteBottomLayout() {
       {/* <Button className="t-l w-[112px]" variant="text">
         임시저장
       </Button> */}
-      <Button className="w-[112px] t-l"  type="submit">작성</Button>
+      <Button className="w-[112px] t-l"  type="submit">{postBtnname}</Button>
     </div>
   </div>
   )
