@@ -123,7 +123,7 @@ const router = useRouter();
     <PostFileUploader selectedFiles={selectedFiles} setSelectedFiles={setSelectedFiles}/>
 
        {/* 본문 스크롤 영역 */}
-          <TextareaFormContentField
+        <TextareaFormContentField
                  form={form}
                  name="content"
                  placeholder="건의 내용을 입력하세요"

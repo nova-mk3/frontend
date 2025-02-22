@@ -17,7 +17,6 @@ import DetailPageContent from '../../board/components/DetailPageContent';
 import DetailPageTitle from '../../board/components/DetailPageTitle';
 
 
-
 interface PostDetailProps{
     postId: string;
 }
@@ -52,6 +51,7 @@ export default  function PostDetail({postId} : PostDetailProps) {
       liked={data.liked}
       defaultHref='/exam_archive'
       />
+      
       <FileListLayout>
         <FileList files={data.files}/>
       </FileListLayout>

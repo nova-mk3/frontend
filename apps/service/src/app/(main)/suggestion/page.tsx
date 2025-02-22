@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import Title from './components/Title'
-import List from './components/List'
+import List from './components/SuggestionList'
+import PendingFallbackUI from '../components/PendingFallbackUI'
+import SearchPost from './SearchPost'
 
 export default function page() {
   return (
-    <div className='flex flex-col t-m w-[80%] mx-auto'>
-      <Title title='건의함' className='mt-5'/>
-      <List/>
-    </div>
+     <Suspense fallback={<PendingFallbackUI/>}>
+          <SearchPost />
+      </Suspense>
   )
 }
+
