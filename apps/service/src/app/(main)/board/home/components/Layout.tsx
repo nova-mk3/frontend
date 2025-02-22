@@ -4,14 +4,13 @@ import { Button } from '@nova/ui/components/ui/button'
 import ErrorBoundaryWrapper from '../../../components/ErrorBoundaryWrapper';
 import dynamic from 'next/dynamic';
 import PendingFallbackUI from '../../../components/PendingFallbackUI';
-import Post from './Post';
 
 
 // TODO: 이렇게 하면 에러를 피할거같긴한데 왜 계속 에러가 나는지는 연구필요
-// const Post = dynamic(() => import('./Post'), {
-//   ssr: false, // 클라이언트에서만 렌더링
-//   loading: () => <PendingFallbackUI />,
-// });
+const Post = dynamic(() => import('./Post'), {
+  ssr: false, // 클라이언트에서만 렌더링
+  loading: () => <PendingFallbackUI />,
+});
 
 export default function Layout() {
   return (
