@@ -5,7 +5,7 @@ interface Props {
 }
 export default function DetailPageContent({content} : Props) {
   return (
-    <div className="min-h-[240px] mt-5">
+    <div className="max-w-none mb-8">
       {content}
     </div>
   );

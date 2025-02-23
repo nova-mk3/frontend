@@ -3,11 +3,14 @@
 import { Button } from '@nova/ui/components/ui/button';
 import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize';
-import { FileListLayout,FileList } from '../../components/File/ViewFileLayout';
 import DetailPageContent from '../../board/components/DetailPageContent';
 import { useSuggestionDetailQuery } from '../query/queries';
-import { Milestone, Unlock,Lock } from 'lucide-react';
+import { Milestone, Unlock,Lock, ChevronLeft, MessageSquare } from 'lucide-react';
 import Link from 'next/link';
+import AdminMessage from '../components/AdminMessage';
+import {Separator} from '@nova/ui/components/ui/separator'
+import { FileListLayout,FileList } from '../components/ViewFileLayout';
+import { toFormattedDate } from '@/src/libs/utils/dateParsing';
 
 
 
@@ -20,47 +23,70 @@ export default  function PostDetail({postId} : PostDetailProps) {
   const isAdmin = true
   const { data } = useSuggestionDetailQuery(postId);
 
-  // console.log(data);
+  console.log(data);
   
   return (
-    <div className="flex flex-col t-m  w-[80%]  mx-auto">
+    <div className="flex flex-col t-m  w-[80%]  mx-auto gap-6">
 
 
-    <div className={`flex flex-row flex-wrap items-end border-primary border-b-[1px] py-5 mobile:flex-col mobile:items-center`}>
+    {/* <div className={`flex flex-row flex-wrap items-end border-primary border-b-[1px] py-5 mobile:flex-col mobile:items-center`}>
       <div className="flex mobile:flex-col mobile:items-center">
       <Link href={'/suggestion'} className="t-l !font-bold text-primary mobile:mb-[15px] flex flex-row gap-1 items-center"><Milestone size={20}/>건의함</Link>
       <p className="b-m ml-2 mt-auto mobile:mb-4">여러분들의 건의가 개발자에게 큰 힘이 됩니다😀</p>
       </div>
-    </div>
+    </div> */}
 
+<div className="border-b bg-background01">
+        <div className="mx-auto px-4 py-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Link
+                href="/suggestion"
+                className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span className="font-medium">건의함</span>
+              </Link>
+              <Separator orientation="vertical" className="h-4 mx-2" />
+              <div className="flex items-center gap-2">
+                <MessageSquare className="w-4 h-4" />
+                <span className="text-sm text-muted-foreground">건의사항 #{data.id}</span>
+              </div>
+            </div>
+            <Button variant="outline">
+              <Link href="/suggestion/newpost">새 건의하기</Link>
+            </Button>
+          </div>
+        </div>
+      </div>
+      
      <div className="mb-8 mt-8">
-        <h1 className="text-3xl font-bold mb-4">시스템 개선 요청드립니다</h1>
+        <h1 className="text-3xl font-bold mb-4">{data.title}</h1>
         <div className="flex items-center gap-4 text-sm text-muted-foreground">
-          <span>2024-02-23 13:45</span>
-          <span>작성자</span>
-          <span className="flex items-center gap-1">
-            {true ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-            {true ? "공개" : "비공개"}
-          </span>
+          <span>{toFormattedDate(data.createdTime)}</span>
+          <span>{data.authorName}</span>
+          <div className="flex items-center gap-1">
+              {true ? <Unlock className="w-4 h-4" /> : <Lock className="w-4 h-4" />}
+              <span className="text-sm">{true ? "공개" : "비공개"}</span>
+          </div>
         </div>
       </div>       
 
+      <DetailPageContent content={data.content}/>
+      <Separator />
+      <span className='text-xl font-semibold'>첨부파일</span>
       <FileListLayout>
               <FileList files={data.files}/>
-        </FileListLayout>
-      <DetailPageContent content={data.content}/>
+      </FileListLayout>
        {/* 관리자 답변 영역 */}
        <div className="mb-12">
-        <h2 className="text-xl font-semibold mb-4">관리자 답변</h2>
-        <div className="bg-background02 rounded-lg p-6">
-          <div className="prose prose-sm max-w-none mb-2">
-            <p>
-              안녕하세요. 검색 기능 개선 요청 감사합니다. 현재 개선 작업을 진행 중이며, 다음 업데이트에 반영될
-              예정입니다.
-            </p>
-          </div>
-          <div className="text-sm text-muted-foreground">2024-02-23 14:30</div>
-        </div>
+        <h2 className="text-xl font-semibold mb-4 mt-8">관리자 답변</h2>
+        {
+          data.adminReply && <AdminMessage content='개선' time={"2024.12.14 13:15"}/>
+        }
+        {
+          !data.adminReply && <AdminMessage content='개선' time={"2024.12.14 13:15"}/>
+        }
       </div>
 
       {/* 관리자 댓글 입력 영역 */}

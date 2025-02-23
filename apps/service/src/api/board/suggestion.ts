@@ -84,29 +84,29 @@ export async function SuggestionGetDetail(postid : string) {
 /*
 건의 게시판 파일 다운로드
 */
-export const SuggestionDownloadFilesAPI = async (fileId: string) => {
-    try {
+export const SuggestionDownloadFilesAPI = async (fileId: string, originalFileName
+  : string) => {
+  try {
       const response = await Authapi.get(`/nova/suggestion-files/${fileId}/download`, {
-        responseType: 'blob', // Blob 데이터로 받기
+          responseType: 'blob', // Blob 데이터로 받기
       });
-  
+
+      // Blob 데이터에서 URL 생성
       const url = window.URL.createObjectURL(response.data);
       const link = document.createElement('a');
       link.href = url;
-  
-      // Content-Disposition 헤더에서 파일명을 추출 (예외 처리 추가)
-      const contentDisposition = response.headers['content-disposition'];
-      const filename = contentDisposition
-        ? decodeURIComponent(contentDisposition.split('filename=')[1]?.replace(/"/g, '') || 'downloaded-file')
-        : 'downloaded-file';
-  
-      link.setAttribute('download', filename); // 파일명 설정
+
+
+      link.setAttribute('download', originalFileName
+      ); // 파일명 설정
       document.body.appendChild(link);
       link.click();
-      window.URL.revokeObjectURL(url); // 메모리 해제
+
+      // 메모리 해제 및 요소 제거
+      window.URL.revokeObjectURL(url);
       link.remove();
-    } catch (error) {
+  } catch (error) {
       alert(ERROR_MESSAGES.FILE_ERROR);
       throwErrorMessage(error);
-    }
+  }
 };

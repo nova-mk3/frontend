@@ -12,13 +12,15 @@ import { Form } from "@nova/ui/components/ui/form";
 import TextareaFormField from "@/src/app/(auth)/signup/components/TextareaFormField";
 import TextareaFormContentField from "@/src/app/(auth)/signup/components/TextareaFormContentField";
 import { RadioFormField } from "@/src/app/(auth)/signup/components/RadioFormField";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { SuggestionFileUploadAPI, SuggestionPost, SuggestionPostRequest } from "@/src/api/board/suggestion";
 import { POST_TYPE } from "@/src/constant/board";
 import { useRouter } from "next/navigation";
 import PostFileUploader from "../../components/File/PostFileUploader";
+import { suggestionKeys } from "../query/queries";
 
 export default function Page() {
+  const queryClient = useQueryClient();
    const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 const router = useRouter();
     const form = useForm<SuggestionInput>({
@@ -39,15 +41,15 @@ const router = useRouter();
           console.log(data);
           alert("글쓰기 성공");
           
-          // router.push(`/${POST_TYPE.SUGGESTION.toLocaleLowerCase()}/${data.id}`);
+          router.push(`/${POST_TYPE.SUGGESTION.toLocaleLowerCase()}/${data.id}`);
 
       
                     
           //내가 쓴 글의 리스트          
-         /*() queryClient.invalidateQueries({
-                      queryKey: postKeys.typelists(POST_TYPE.EXAM_ARCHIVE),
+         queryClient.invalidateQueries({
+                      queryKey: suggestionKeys.list,
                       refetchType: 'inactive',
-          });*/
+          });
         },onError: (error) => {
 
           alert(error.message);

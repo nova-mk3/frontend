@@ -34,7 +34,7 @@ export default function Title({title, className} : TitleProps) {
         </div>
         <Link href="/suggestion/newpost" className="mobile:w-full">
           <Button variant="default" className="mobile:w-full">
-            글쓰기
+            건의하기
           </Button>
         </Link>
       </div>
