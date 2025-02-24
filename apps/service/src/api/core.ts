@@ -38,6 +38,7 @@ Authapi.interceptors.response.use(
       }
     } else {
       // CSR 환경
+        console.log(error);
       if (error.response && error.response.status === 401 || error.response.status ===403) {
         alert("토큰이 만료되었습니다")
         window.location.href="/signin";
