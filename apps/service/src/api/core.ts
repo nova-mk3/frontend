@@ -32,15 +32,15 @@ Authapi.interceptors.response.use(
     // 에러 응답 처리
     if (typeof window === 'undefined') {
       // SSR 환경
-      if (error.response && error.response.status === 401 || error.response.status ===403) {
+      if (error.response && (error.response.status === 401 || error.response.status ===403)) {
         error.context.res.writeHead(302, { Location: '/signin' });
         error.context.res.end();
       }
     } else {
       // CSR 환경
-        console.log(error);
-        console.log(error.response);
-      if (error.response && error.response.status === 401 || error.response.status ===403) {
+      console.log(error);
+      // 연산자 우선순위.. ㅂㄷㅂㄷ
+      if (error.response && (error.response.status === 401 || error.response.status ===403)) {
         alert("토큰이 만료되었습니다")
         window.location.href="/signin";
       }
