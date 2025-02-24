@@ -4,6 +4,7 @@ import { ErrorBoundary  } from 'react-error-boundary';
 import { Suspense, ReactNode } from 'react';
 import FallbackErrorUI from './ErrorFallBack';
 import PendingFallbackUI from './PendingFallbackUI';
+import DeferredComponent from './DeferredComponent';
 
 
 interface ErrorBoundaryWrapperProps {
@@ -18,7 +19,7 @@ export default function ErrorBoundaryWrapper({ children }: ErrorBoundaryWrapperP
           onReset={reset}
           fallbackRender={FallbackErrorUI}
         >
-          <Suspense fallback={<PendingFallbackUI/>}>
+          <Suspense fallback={<DeferredComponent><PendingFallbackUI/></DeferredComponent>}>
             {children}
           </Suspense>
         </ErrorBoundary>

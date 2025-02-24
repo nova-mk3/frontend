@@ -1,4 +1,5 @@
 import { DownloadFilesAPI } from '@/src/api/board/file';
+import { FileDown } from 'lucide-react';
 import React from 'react'
 
 export interface FileItemProps{
@@ -14,8 +15,10 @@ export default function ViewFileItem({ id ,downloadUrl, originalFileName } : Fil
        await DownloadFilesAPI(id);
     }
     return (
-      <div className='bg-muted text-muted-foreground rounded-md py-2 px-4 flex flex-row gap-2 t-s items-center cursor-pointer' onClick={handleDownload}>
+      <div className='bg-accent text-accent-foreground rounded-md py-2 px-4 flex flex-row gap-2 t-s items-center cursor-pointer hover:bg-accent-foreground/10' onClick={handleDownload}>
           <p>{originalFileName}</p>
+          <span className='w-[1px] h-4 bg-line01 mx-1'></span>
+          <FileDown className="w-4 h-4" />
       </div>
     )
 }

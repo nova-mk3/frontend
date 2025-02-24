@@ -24,14 +24,13 @@ export default function BoardList({content} : PostPreview) {
 
   if(content.length  === 0)
     return (
-      <div className="w-full bg-background02 h-[745px] flex items-center justify-center">
+      <div className="w-full bg-background02 h-[745px] flex items-center justify-center mt-8">
         <p className="!font-bold">게시글이 없습니다 😔</p>
       </div>
     );
-  console.log(content);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col min-h-[745px]">
       {
         content.map((post) => (
           <BoardListItem
