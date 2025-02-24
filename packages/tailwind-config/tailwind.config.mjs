@@ -21,6 +21,11 @@ export const tailwindConfig = {
         line01: "hsl(var(--line-01))",
         danger: "hsl(var(--danger))",
         success: "hsl(var(--success))",
+        accent: "hsl(var(--accent))",
+        "accent-foreground": "hsl(var(--accent-foreground))",
+        muted: "hsl(var(--muted))",
+        "muted-foreground": "hsl(var(--muted-foreground))",
+        foreground : "hsl(var(--foreground))",
       },
       borderRadius: {
         lg: `var(--radius)`,

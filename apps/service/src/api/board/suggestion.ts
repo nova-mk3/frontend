@@ -110,3 +110,29 @@ export const SuggestionDownloadFilesAPI = async (fileId: string, originalFileNam
       throwErrorMessage(error);
   }
 };
+
+
+/*
+ *    건의 게시판 답변 읽음 처리
+ */
+export async function SuggestionRead(postid : string) {
+  try {
+    const response = await Authapi.put(`/nova/suggestions/${postid}/read`);
+    return response;
+  } catch (error) {
+    throwErrorMessage(error);
+  }
+}
+
+
+/*
+ *    건의 게시판 답변
+ */
+export async function SuggestionComment({postId, reply} : {postId : string,reply : string}) {
+  try {
+    const response = await Authapi.put(`/nova/suggestions/${postId}/reply`,{reply});
+    return response;
+  } catch (error) {
+    throwErrorMessage(error);
+  }
+}

@@ -78,7 +78,7 @@ export function RadioGroupField({
       <FormControl>
         <RadioGroup
           onValueChange={onChange}
-          defaultValue={value}
+          value={value}
           className="flex gap-6 !mt-[4px]"
         >
           {options.map((option,index) => (

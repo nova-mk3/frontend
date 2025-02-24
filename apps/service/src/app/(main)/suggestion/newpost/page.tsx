@@ -18,6 +18,9 @@ import { POST_TYPE } from "@/src/constant/board";
 import { useRouter } from "next/navigation";
 import PostFileUploader from "../../components/File/PostFileUploader";
 import { suggestionKeys } from "../query/queries";
+import Link from "next/link";
+import { ChevronLeft, MessageSquare } from "lucide-react";
+import { Separator } from "@nova/ui/components/ui/separator";
 
 export default function Page() {
   const queryClient = useQueryClient();
@@ -39,7 +42,6 @@ const router = useRouter();
         mutationFn: (data : SuggestionPostRequest) => SuggestionPost(data),
         onSuccess: (data : any) => {
           console.log(data);
-          alert("글쓰기 성공");
           
           router.push(`/${POST_TYPE.SUGGESTION.toLocaleLowerCase()}/${data.id}`);
 
@@ -104,16 +106,37 @@ const router = useRouter();
 
 
   return (
-    <Form {...form}>
-    <form className="flex flex-col mt-5 gap-5 w-[80%] h-[calc(100vh-86px)] mx-auto relative" onSubmit={form.handleSubmit(onSubmit)}>
-      
-     
-      <TextareaFormField
-            form={form}
-            name="title"
-            placeholder="건의할 제목을 입력하세요"
-        />
 
+    
+    <Form {...form}>
+      
+    <form className="flex flex-col gap-7" onSubmit={form.handleSubmit(onSubmit)}>
+    <div className="border-b bg-background01 t-m">
+        <div className="w-[80%] mx-auto px-4 py-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Link
+                href="/suggestion"
+                className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span className="font-medium ">건의함</span>
+              </Link>
+              <Separator orientation="vertical" className="h-4 mx-2" />
+              <div className="flex items-center gap-2">
+                <MessageSquare className="w-4 h-4" />
+                <span className="text-sm text-muted-foreground">새 건의사항 작성</span>
+              </div>
+            </div>
+            <Button type="submit">
+             등록하기
+            </Button>
+          </div>
+        </div>
+      </div>
+     
+
+     <div className="flex flex-col gap-7  w-[80%] h-[calc(100vh-86px)] mx-auto relative">
     <RadioFormField
       form={form}
       name="private"
@@ -124,18 +147,24 @@ const router = useRouter();
      {/* 첨부 파일 영역 */} 
     <PostFileUploader selectedFiles={selectedFiles} setSelectedFiles={setSelectedFiles}/>
 
-       {/* 본문 스크롤 영역 */}
-        <TextareaFormContentField
-                 form={form}
-                 name="content"
-                 placeholder="건의 내용을 입력하세요"
-        />
+      <TextareaFormField
+            form={form}
+            name="title"
+            placeholder="건의할 제목을 입력하세요"
+      />
+      {/* 본문 스크롤 영역 */}
+       <TextareaFormContentField
+                form={form}
+                name="content"
+                placeholder="건의 내용을 입력하세요"
+       />
 
-      {/* 하단 바 (버튼 등) */}
+      {/* 하단 바 (버튼 등)
       <WriteBottomLayout
       postBtnname="건의"
-      />
+      /> */}
+     </div> 
     </form>
     </Form>
-  );
+    );
 }

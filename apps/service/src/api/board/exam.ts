@@ -57,7 +57,7 @@ export async function ArchiveGetDetail({ postId, boardId }: {postId : string, bo
   }
 }
 /*
-게시글 수정!
+게시글 수정
 */
 
 export interface ArchivePutRequest {

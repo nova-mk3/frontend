@@ -1,8 +1,7 @@
 "use client"
 
 import { Button } from '@nova/ui/components/ui/button';
-import React from 'react'
-import TextareaAutosize from 'react-textarea-autosize';
+import React, { useState } from 'react'
 import DetailPageContent from '../../board/components/DetailPageContent';
 import { useSuggestionDetailQuery } from '../query/queries';
 import { Milestone, Unlock,Lock, ChevronLeft, MessageSquare } from 'lucide-react';
@@ -11,6 +10,8 @@ import AdminMessage from '../components/AdminMessage';
 import {Separator} from '@nova/ui/components/ui/separator'
 import { FileListLayout,FileList } from '../components/ViewFileLayout';
 import { toFormattedDate } from '@/src/libs/utils/dateParsing';
+import { SuggestionComment, SuggestionRead } from '@/src/api/board/suggestion';
+import AdminForm from '../components/AdminForm';
 
 
 
@@ -22,11 +23,25 @@ export default  function PostDetail({postId} : PostDetailProps) {
 
   const isAdmin = true
   const { data } = useSuggestionDetailQuery(postId);
-
+  const [text,setText] = useState("");
   console.log(data);
+
+  const handleRead = async(postId : string)=>{
+
+    await SuggestionRead(postId);
+  }
+//   if(isAdmin){
+//     handleRead(postId);  
+//  }
+
+  const handleAdminComment = async()=>{
+    const res= await SuggestionComment({postId,reply : text});
+    setText("");
+    console.log(res);
+  }
   
   return (
-    <div className="flex flex-col t-m  w-[80%]  mx-auto gap-6">
+    <div className="flex flex-col t-m mx-auto gap-6">
 
 
     {/* <div className={`flex flex-row flex-wrap items-end border-primary border-b-[1px] py-5 mobile:flex-col mobile:items-center`}>
@@ -36,8 +51,8 @@ export default  function PostDetail({postId} : PostDetailProps) {
       </div>
     </div> */}
 
-<div className="border-b bg-background01">
-        <div className="mx-auto px-4 py-3">
+      <div className="border-b bg-background01">
+        <div className="w-[80%] mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Link
@@ -59,7 +74,8 @@ export default  function PostDetail({postId} : PostDetailProps) {
           </div>
         </div>
       </div>
-      
+
+     <div className='flex flex-col w-[80%] mx-auto gap-6'>
      <div className="mb-8 mt-8">
         <h1 className="text-3xl font-bold mb-4">{data.title}</h1>
         <div className="flex items-center gap-4 text-sm text-muted-foreground">
@@ -81,25 +97,15 @@ export default  function PostDetail({postId} : PostDetailProps) {
        {/* 관리자 답변 영역 */}
        <div className="mb-12">
         <h2 className="text-xl font-semibold mb-4 mt-8">관리자 답변</h2>
-        {
-          data.adminReply && <AdminMessage content='개선' time={"2024.12.14 13:15"}/>
-        }
-        {
-          !data.adminReply && <AdminMessage content='개선' time={"2024.12.14 13:15"}/>
-        }
+            <AdminMessage content={data.adminReply} time={"2024.10.25 13:45"}/>
       </div>
 
       {/* 관리자 댓글 입력 영역 */}
       {isAdmin && (
-        <div className="mt-8">
-          <h2 className="text-xl font-semibold mb-4">답변 작성</h2>
-          <TextareaAutosize placeholder="관리자 답변을 입력하세요..." className="flex w-full min-h-[98px] t-m resize-none outline-none p-4 border-[1px]" />
-          <div className="flex justify-end">
-            <Button variant={"default"} className='mt-5'>답변 등록</Button>
-          </div>
-        </div>
+        <AdminForm postId={postId}/>
       )}
     </div>
+    </div> 
   );
 }
 

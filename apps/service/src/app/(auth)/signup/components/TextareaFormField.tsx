@@ -37,9 +37,9 @@ export default function TextareaFormField<T extends Record<string, any>>(
             {label}
           </FormLabel> */}
           <FormControl>
-          <div className={ `flex-none border-line01 border-b-[1px]  pb-5 ${className}`}>
+          <div className={ `flex-none border-line01 rounded-md p-5 border ${className}`}>
             <TextareaAutosize
-              className="flex w-full h-[40px] h-l resize-none outline-none"
+              className="flex w-full h-[40px] t-l resize-none outline-none"
               placeholder={placeholder}
               value={field.value as string}
               onChange={field.onChange}

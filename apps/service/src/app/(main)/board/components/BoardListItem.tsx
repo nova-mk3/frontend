@@ -22,7 +22,7 @@ export interface BoardListItemType {
 export default function BoardListItem({title,content,createdTime,authorName, viewCount,likeCount,commentCount,className, type, href} : BoardListItemType) {
   
   return (
-    <div className={`border-b-[1px] border-line01 flex flex-col p-4 gap-2 hover:bg-muted ${className}`}>
+    <div className={`border-b-[1px] border-line01 flex flex-col p-4 gap-2 hover:bg-gray-50 ${className}`}>
         <Link href={href} className='w-full'><Title title={title} type={type}/></Link>
 
         <Link href={href} className='w-full text-muted-foreground'> <div className='t-m' >{content}</div></Link>
