@@ -1,8 +1,10 @@
 import { ERROR_MESSAGES } from "@/src/constant/error";
 
 export const throwErrorMessage = (error: any) => {
+  console.log("하이")
   console.log(error);
   if (error.response) {
+    console.log(error.response)
     // 서버가 응답한 경우 (HTTP 상태 코드 존재)
     const status = error.response.status;
     const message = error.response.data?.message  || ERROR_MESSAGES[status] || ERROR_MESSAGES.SERVER_ERROR;
