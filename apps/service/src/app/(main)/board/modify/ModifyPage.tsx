@@ -50,6 +50,7 @@ export default function ModifyPage() {
       const useIntegratedBoardMutation = useMutation({
         mutationFn: (data : IntegratedPutRequest) => IntegratedBoardPut(data),
         onSuccess: (data : any) => {
+          console.log(data);
           alert("변경 성공");
 
           // 내 수정사항은 나만 다시보면 된다 -> api 호출 최적화
@@ -58,11 +59,7 @@ export default function ModifyPage() {
              data
           )
 
-          // 변경한 리스트 재호출
-          queryClient.invalidateQueries({
-            queryKey: postKeys.listmain(),
-            refetchType: 'inactive',
-          });
+    
           
           queryClient.invalidateQueries({
             queryKey: postKeys.typelists(postType as PostType),

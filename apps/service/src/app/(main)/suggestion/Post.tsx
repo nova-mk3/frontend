@@ -3,25 +3,25 @@
 import React, { Suspense } from 'react'
 import { useBoardIdStore } from '@/src/store/BoardId';
 import { PostType } from '@/src/constant/board';
-import { usePostListQuery } from '../board/query/postqueries';
 import { PageNation } from '../components/PageNation';
-import PictureList from './components/PictureList';
+import { useSuggestionListQuery } from './query/queries';
+import SuggestionList from './components/SuggestionList';
 
 interface Props{
-    postType : PostType;
     page : number;
     size : number;
     sort : string;
 }
 
-export default function Post({postType,page,size,sort} : Props) {
-    const {INTEGRATED} = useBoardIdStore();
-    const { data } = usePostListQuery({postType, page : page-1, size, sort , boardId : INTEGRATED});
-    
+export default function Post({page,size,sort} : Props) {
+    const { data } = useSuggestionListQuery({ page : page-1, size, sort })
+
+
     
     return (
       <div>
-           <PictureList content={data.content}/>
+           <SuggestionList content={data.content}/>
+
           <Suspense fallback={<div className='h-[36px]'></div>}> 
                   <PageNation size={size} totalPage={data.totalPages} className="my-4" />
           </Suspense>

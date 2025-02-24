@@ -25,6 +25,11 @@ input[type="password"]::-ms-clear {
     --background-02: 241, 243, 245;       
     --font-pretendard: "Pretendard", sans-serif;
     --font-paperlogy: "Paperlogy", sans-serif;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --foreground: 240 10% 3.9%;
   }
 
   /* 다크모드 설정(이긴 한데 그냥 똑같음) */

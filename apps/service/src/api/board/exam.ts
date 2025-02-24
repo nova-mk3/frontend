@@ -57,7 +57,7 @@ export async function ArchiveGetDetail({ postId, boardId }: {postId : string, bo
   }
 }
 /*
-게시글 수정!
+게시글 수정
 */
 
 export interface ArchivePutRequest {
@@ -101,7 +101,7 @@ export async function ArchivePut(
     postId,
     deleteFileIds
     });
-    return  response.data;
+    return  response.data.data;
   }catch(error : any){
      throwErrorMessage(error);
   }

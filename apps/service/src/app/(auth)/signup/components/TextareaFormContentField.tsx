@@ -34,7 +34,7 @@ export default function TextareaFormContentField<T extends Record<string, any>>(
           <FormControl>
           <div className={ ` ${className}`}>
             <TextareaAutosize
-              className="flex w-full t-m resize-none outline-none h-[40px] overflow-hidden"
+              className="flex w-full t-s resize-none outline-none h-[40px] overflow-hidden"
               placeholder={placeholder}
               defaultValue={field.value as string}
               onChange={field.onChange}

@@ -7,8 +7,7 @@ import WriteBottomLayout from "../../components/WriteBottomLayout";
 import FileUploader, { ImageFile } from "../components/FileUploader";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {  OpinionSchema } from "@/src/schema/opinion.schema";
-import { PictureInput } from "@/src/schema/picture.schema";
+import { PictureInput, PictureSchema } from "@/src/schema/picture.schema";
 import { Form } from "@nova/ui/components/ui/form";
 import TextareaFormField from "@/src/app/(auth)/signup/components/TextareaFormField";
 import TextareaFormContentField from "@/src/app/(auth)/signup/components/TextareaFormContentField";
@@ -26,7 +25,7 @@ export default function Page() {
        const {INTEGRATED} =useBoardIdStore();
        const [selectedFiles, setSelectedFiles] = useState<ImageFile[]>([]);
     const form = useForm<PictureInput>({
-        resolver: zodResolver(OpinionSchema),
+        resolver: zodResolver(PictureSchema),
         mode: "onChange",
         defaultValues: {
             title: "",
@@ -57,7 +56,7 @@ export default function Page() {
                 alert(error.message);
                 console.log(error);
               },
-            })
+        })
       
   
       const useFileUploadMutation = useMutation({

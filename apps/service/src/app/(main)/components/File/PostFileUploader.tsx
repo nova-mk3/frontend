@@ -36,9 +36,9 @@ export default function PostFileUploader({setSelectedFiles,selectedFiles} : prop
   };
 
     return (
-    <div className='flex flex-col gap-2 my-5 t-m'>
+    <div className='flex flex-col gap-2  t-m'>
         <div className="flex flex-row gap-2 items-center h-[30px] mb-2">
-          <p className='h-s'>파일 선택</p>
+          <p className='t-l'>첨부파일</p>
           <p className="text-success mt-auto l-l ml-3">파일은 최대 10개까지 가능합니다</p>
         </div>
         <div className='flex flex-row flex-wrap gap-3'>
@@ -46,7 +46,9 @@ export default function PostFileUploader({setSelectedFiles,selectedFiles} : prop
           {
             selectedFiles.length > 0 && selectedFiles.map((file, index) => (<PostFileItem name={file.name} onRemove={handleRemoveFile} index={index} key={index}/>))
           }
-            <label htmlFor="fileUpload" className="inline-flex cursor-pointer items-center"><FilePlus width={30} height={30}/></label>
+            <label htmlFor="fileUpload" className="inline-flex cursor-pointer items-center gap-3"><FilePlus width={30} height={30}/>{
+              selectedFiles.length === 0 && <p className='text-muted-foreground flex items-center'>파일을 선택해주세요</p>
+            }</label>
             <input
             id="fileUpload"
             type="file"
@@ -55,9 +57,7 @@ export default function PostFileUploader({setSelectedFiles,selectedFiles} : prop
             onChange={handleFileChange}
             className="hidden"
             />
-            {
-              selectedFiles.length === 0 && <p className='text-text02 flex items-center'>파일을 선택해주세요</p>
-            }
+            
         </div>
     </div>
   )

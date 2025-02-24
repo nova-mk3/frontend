@@ -21,7 +21,7 @@ export default function Navigation({ className }: NavigationProps) {
         <NavigationMenuItem href="board">
           나의 게시글
         </NavigationMenuItem>
-        <NavigationMenuItem href="opinion">
+        <NavigationMenuItem href="suggestion">
           나의 건의함
         </NavigationMenuItem>
       </ul>
