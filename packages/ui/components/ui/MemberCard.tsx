@@ -1,6 +1,6 @@
 // MemberCard
 // 타입에 따라 MeberCard-small, MemberCard-medium, MemberCard-large로 나누어서 사용
-import React from 'react'
+// TODO : 수락 , 반려 API 연결 및 Image 불러오기
 import Image from 'next/image';
 import { 
     Phone,
@@ -16,24 +16,35 @@ import {
     SelectValue 
 } from "@nova/ui/components/ui/select";
 import { Button } from "@nova/ui/components/ui/button";
-
+import { formatPhoneNumber, formatBirthday } from "../../../../apps/admin/src/utils/formatter";
 // 성민이형의 고양이사진 임시로 사용
 import TempImageLink from "./../../../../apps/service/public/image/cat.jpg";
 
 interface MembercardProps {
     type? : "small" | "medium" | "large" | "admin",
     name? : string,
-    image? : string,
     studentId? : string,
     phoneNumber? : string,
     birthday? : string,
     email? : string,
     grade? : string,
+    profilePhoto?: {
+        downloadUrl: string;
+        id: string;
+        originalFileName: string;
+    }
     onClick? : () => void
 }
 
 export default function MemberCard({
-    name = "고양이" , type = "small" , phoneNumber = "010-0000-0000" , studentId="2019019014" , birthday="2000-01-01" , email="CatHolic@chungbuk.ac.kr", grade="1학년" , onClick = (() => {console.log("meow")})
+    name = "고양이" ,
+    type = "small" ,
+    phoneNumber = "010-0000-0000" ,
+    studentId="2019019014" ,
+    birthday="2000-01-01" ,
+    email="CatHolic@chungbuk.ac.kr",
+    grade="1학년" ,
+    onClick = (() => {console.log("meow")})
 } : MembercardProps) {
     if(type === "small"){
         return (
@@ -113,14 +124,14 @@ export default function MemberCard({
                 />
                 <div className={`text-2xl text-center flex-grow`}>{name}</div>
                 <Phone className={"ml-auto h-8 w-8"}/>
-                <div className={`text-2xl text-center flex-grow`}>{phoneNumber}</div>
+                <div className={`text-2xl text-center flex-grow`}>{formatPhoneNumber(phoneNumber)}</div>
                 <IdCard className={"ml-auto h-8 w-8"}/>
                 <div className={`text-2xl text-center flex-grow`}>{studentId}</div>
                 <Cake className={"ml-auto h-8 w-8"}/>
-                <div className={`text-2xl text-center flex-grow`}>{birthday}</div>
+                <div className={`text-2xl text-center flex-grow`}>{formatBirthday(birthday)}</div>
                 <Mail className={"ml-auto h-8 w-8"}/>
                 <div className={`text-2xl text-center flex-grow`}>{email}</div>
-                <div className={`text-2xl text-center flex-grow`}>{grade}</div>
+                <div className={`text-2xl text-center flex-grow`}>{grade}학년</div>
                 <Button
                     type="button"
                     variant={"default"}

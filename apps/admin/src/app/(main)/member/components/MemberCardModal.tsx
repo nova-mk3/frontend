@@ -10,6 +10,7 @@ import TempImageLink from "./../../../../../../service/public/image/cat.jpg";
 
 interface MemberCardModalProps {
   open: boolean;
+  memberId? : string;
   onClose: () => void;
   type: "member" | "newMember";
   Aceept?: () => void;
@@ -33,7 +34,7 @@ const MemberInfo = ({ icon: Icon, label }: { icon: any; label: string }) => (
   </div>
 );
 
-export default function MemberCardModal({ open, onClose , type , Aceept , Reject }: MemberCardModalProps) {
+export default function MemberCardModal({ open, memberId , onClose , type , Aceept , Reject }: MemberCardModalProps) {
   const [isVisible, setIsVisible] = useState(open); // 실제 렌더링 여부
   const [isAnimating, setIsAnimating] = useState(false); // 애니메이션 실행 여부
 
