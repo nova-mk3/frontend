@@ -9,6 +9,10 @@ import AlertDialog from "../../components/AlertDialog";
 import { useQueryClient } from "@tanstack/react-query";
 import { postKeys } from "../query/postqueries";
 import MobileLike from "./MobileLike";
+import Link from "next/link";
+import { ChevronLeft, MessageSquare } from "lucide-react";
+import { Separator } from "@nova/ui/components/ui/separator";
+import { Button } from "@nova/ui/components/ui/button";
 
 interface SubTitle {
   title: string;
@@ -51,24 +55,26 @@ export default function DetailPageSubTitle({
     }
   };
   return (
-    <div className="flex flex-col border-line01  pt-5 mobile:flex-col mt-[40px]">
-      <p className="d-m">{title}</p>
-
-      <div className="flex flex-row mt-2">
-      <div className="flex flex-row t-m items-end gap-3">
-        <p className="hover:underline cursor-pointer t-l">{writer}</p>
-        <div className="w-[1px] h-[20px] bg-line01"></div>
+    <div className="flex flex-col border-line01 gap-6 mobile:flex-col">
+      
+      <div className="mb-8 mt-8">
+      <h1 className="text-3xl font-bold mb-4 font-pretendard">{title}</h1>
+      <div className="flex flex-row mt-2 text-sm text-muted-foreground">
+      <div className="flex flex-row  items-center gap-4">
+        <p className="hover:underline cursor-pointer">{writer}</p>
+         <Separator orientation="vertical" className="h-4" />
         <p>{formatDate(date)}</p>
-        <div className="w-[1px] h-[20px] bg-line01"></div>
+        <Separator orientation="vertical" className="h-4" />
         <p >조회 : {viewCount}</p>
       </div>
 
-      <div className="flex flex-row gap-3 items-end ml-auto">
+      <div className="flex flex-row gap-4 items-center ml-auto">
         <MobileLike count={likeCount} postId={postId} liked={liked}/>
         
         <p className="cursor-pointer" onClick={handleModify}>수정</p>
-        <div className="w-[1px] h-[20px] bg-line01"></div>
+        <Separator orientation="vertical" className="h-4" />
         <AlertDialog title="게시글" triggerName="삭제" onAction={handleDelete}/>
+      </div>
       </div>
       </div>
     </div>
