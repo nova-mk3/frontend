@@ -23,12 +23,9 @@ interface PostDetailProps{
   
 export default  function PostDetail({postId} : PostDetailProps) {
 
-  console.log(postId);
   const {CLUB_ARCHIVE} = useBoardIdStore();
   const { data } = useArchiveDetailQuery(postId,CLUB_ARCHIVE);
 
-  console.log(data);
-  //
   return (
     <div className="flex flex-col t-m w-full mx-auto">
       <DetailPageTitle title={POST_TYPE.EXAM_ARCHIVE} TitleImage={ 

@@ -25,11 +25,11 @@ export default function BoardListItem({title,content,createdTime,authorName, vie
     <div className={`border-b-[1px] border-line01 flex flex-col p-4 gap-2 hover:bg-gray-50 ${className}`}>
         <Link href={href} className='w-full'><Title title={title} type={type}/></Link>
 
-        <Link href={href} className='w-full text-muted-foreground'> <div className='t-m' >{content}</div></Link>
+        <Link href={href} className='w-full text-muted-foreground'> <div className='text-base' >{content}</div></Link>
             <div className='mt-4 flex flex-row'>
    
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 text-sm">
                 <span className="text-gray-700">{authorName}</span>
                 <span className="text-gray-400">·</span>
                 <span className="text-gray-500">{formatDate(createdTime)}</span>

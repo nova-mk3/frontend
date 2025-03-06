@@ -10,6 +10,11 @@ import { useQueryParams } from "../components/useQueryParams";
 export default function SearchPost() {
   const { currentPage, searchQuery: initialSearchQuery, sortOption: initialSortOption } = useQueryParams();
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
+
+
+
+
+  
   const [sortOption, setSortOption] = useState(initialSortOption);
 
   return (

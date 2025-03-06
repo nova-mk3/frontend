@@ -62,9 +62,9 @@ export default function DetailPageSubTitle({
       <div className="flex flex-row mt-2 text-sm text-muted-foreground">
       <div className="flex flex-row  items-center gap-4">
         <p className="hover:underline cursor-pointer">{writer}</p>
-         <Separator orientation="vertical" className="h-4" />
+         {/* <Separator orientation="vertical" className="h-4" /> */}
         <p>{formatDate(date)}</p>
-        <Separator orientation="vertical" className="h-4" />
+        {/* <Separator orientation="vertical" className="h-4" /> */}
         <p >조회 : {viewCount}</p>
       </div>
 
@@ -72,7 +72,7 @@ export default function DetailPageSubTitle({
         <MobileLike count={likeCount} postId={postId} liked={liked}/>
         
         <p className="cursor-pointer" onClick={handleModify}>수정</p>
-        <Separator orientation="vertical" className="h-4" />
+        {/* <Separator orientation="vertical" className="h-4" /> */}
         <AlertDialog title="게시글" triggerName="삭제" onAction={handleDelete}/>
       </div>
       </div>

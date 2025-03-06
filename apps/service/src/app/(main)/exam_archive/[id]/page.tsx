@@ -2,8 +2,6 @@
 import React from 'react'
 import { useParams } from 'next/navigation';
 
-
-
 import dynamic from 'next/dynamic';
 import ErrorBoundaryWrapper from '../../components/ErrorBoundaryWrapper';
 import PendingFallbackUI from '../../components/PendingFallbackUI';
@@ -14,13 +12,14 @@ const PostDetail = dynamic(() => import("./PostDetail"), {
   loading: () => <PendingFallbackUI />,
 });
   
-export default  function page() {
+export default  function Page() {
   const {id } = useParams();
 
-
   return (
+    <>
     <ErrorBoundaryWrapper>
       <PostDetail postId={id as string}/>
     </ErrorBoundaryWrapper>
+    </>
   );
 }

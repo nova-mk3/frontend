@@ -1,3 +1,4 @@
+"use client"
 import { PropsWithChildren, useEffect, useState } from 'react';
 
 // ** 지연시간 200ms 미만일 때 스켈레톤 미노출 / 200ms 이상일 때 스켈레톤 노출 **

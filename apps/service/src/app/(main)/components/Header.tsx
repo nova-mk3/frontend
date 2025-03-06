@@ -19,7 +19,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="flex flex-row algin border-b-[1px] border-line01 px-[17px] py-[10px] relative">
+      <div className="flex flex-row  border-b  px-4 py-3 relative">
         <Link href={"/"}>
           <Logo width={161.83} height={45} fill={"#B096F5"} />
         </Link>

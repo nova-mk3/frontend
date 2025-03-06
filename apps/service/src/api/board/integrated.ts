@@ -65,12 +65,10 @@ export async function IntegratedBoardGet({ postType, page, size, sort, boardId }
  * 게시글 상세 조회
  */
 export async function IntegratedBoardGetDetail({ postId, boardId }: Params) {
-  try {
+
     const response = await Authapi.get(`/nova/boards/${boardId}/posts/${postId}`);
     return response.data.data;
-  } catch (error) {
-    throwErrorMessage(error);
-  }
+
 }
 
 /*
