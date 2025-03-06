@@ -19,6 +19,7 @@ import CommentList from "../../components/comments/CommentList";
 import { POST_TYPE } from "@/src/constant/board";
 import DetailPageSubTitle from "../../components/DetailPageSubTitle";
 import { Book, Hand, MessageSquareMore } from "lucide-react";
+import { Separator } from "@nova/ui/components/ui/separator";
 
 interface PostDetailProps {
   postId: string;
@@ -53,11 +54,12 @@ export default function PostDetail({ postId }: PostDetailProps) {
             liked={data.liked}
             defaultHref="/board"
           />
+          <Content content={data.content} />
+          <Separator />
+          <p className="text-xl font-semibold">첨부파일</p>
           <FileListLayout>
             <FileList files={data.files} />
           </FileListLayout>
-          <Content content={data.content} />
-          <CommentTitle title="전체 댓글" count={data.commentCount} />
 
           {/* 댓글 부분 */}
           <CommentForm postId={postId as string} />

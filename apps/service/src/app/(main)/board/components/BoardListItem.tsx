@@ -40,7 +40,6 @@ export default function BoardListItem({
       </Link>
 
       <Link href={href} className="w-full text-muted-foreground">
-        {" "}
         <div className="text-base">{content}</div>
       </Link>
       <div className="mt-4 flex flex-row">
