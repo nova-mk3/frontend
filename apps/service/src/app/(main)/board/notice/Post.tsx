@@ -22,7 +22,7 @@ export default function Post() {
   const [sortOption, setSortOption] = useState(initialSortOption);
 
   const { data } = usePostListQuery({
-    postType: POST_TYPE.QNA,
+    postType: POST_TYPE.NOTICE,
     page: currentPage - 1,
     size: BOARD_SIZE,
     sort: sortOption,

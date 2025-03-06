@@ -23,7 +23,9 @@ export default function layout({
     return (
       <>
         <Navigation />
-        <div className="flex flex-col  w-full t-m mx-auto ">{children}</div>
+        <div className="flex flex-col  w-full t-m mx-auto screenLg:w-[80%]">
+          {children}
+        </div>
       </>
     );
 }

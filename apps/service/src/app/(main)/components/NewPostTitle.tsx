@@ -2,7 +2,6 @@ import { Button } from "@nova/ui/components/ui/button";
 import { Separator } from "@nova/ui/components/ui/separator";
 import { ChevronLeft, MessageSquare } from "lucide-react";
 import Link from "next/link";
-import { title } from "process";
 import React from "react";
 interface Props {
   backLinkText: string;

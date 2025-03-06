@@ -134,7 +134,7 @@ export default function Page() {
           backLinkText="통합 게시판"
           title="통합 게시글 작성"
         />
-        <div className="flex flex-col gap-6  w-[80%] h-[calc(100vh-86px)] mx-auto relative">
+        <div className="flex flex-col gap-6 w-[80%] h-[calc(100vh-86px)] mx-auto relative">
           {/* TODO: 좀 더 컴포넌트 화 가능할듯! */}
           <SelectFormField
             form={form}
