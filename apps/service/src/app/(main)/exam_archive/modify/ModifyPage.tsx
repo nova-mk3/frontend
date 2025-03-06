@@ -1,9 +1,9 @@
 "use client";
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import WriteBottomLayout from "../../components/WriteBottomLayout";
 import { useForm, useWatch } from "react-hook-form";
-import { POST_TYPE, POST_TYPE_OPTIONS, PostType } from "@/src/constant/board";
-import {  useMutation, useQueryClient } from "@tanstack/react-query";
+import { POST_TYPE, PostType } from "@/src/constant/board";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useBoardIdStore } from "@/src/store/BoardId";
 import { UploadFilesAPI } from "@/src/api/board/file";
@@ -22,241 +22,230 @@ import { InputFormField } from "@/src/app/(auth)/components/InputFormField";
 import { ArchivePut, ArchivePutRequest } from "@/src/api/board/exam";
 import { useQueryParams } from "../../components/useQueryParams";
 
-
 export default function ModifyPage() {
-
-  const {CLUB_ARCHIVE} = useBoardIdStore();
-  const {postId,postType} = useQueryParams();
+  const { CLUB_ARCHIVE } = useBoardIdStore();
+  const { postId, postType } = useQueryParams();
   const router = useRouter();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
-  const [originFiles,setOriginFiles] = useState<FileItemProps[]>([]);
+  const [originFiles, setOriginFiles] = useState<FileItemProps[]>([]);
   const [willDeleteFiles, setwillDeleteFiles] = useState<string[]>([]);
   const queryClient = useQueryClient();
 
-   const {data } = useArchiveDetailQuery(postId, CLUB_ARCHIVE);
+  const { data } = useArchiveDetailQuery(postId, CLUB_ARCHIVE);
 
+  const currentYear = new Date().getFullYear();
+  const years = useYearRange(2000, currentYear);
+  const form = useForm<ExamInput>({
+    resolver: zodResolver(ExamSchema),
+    mode: "onChange",
+    defaultValues: {
+      title: data.title,
+      content: data.content,
+      semester: data.semester,
+      year: String(data.year),
+      professorName: data.professorName,
+      subject: data.subject,
+    },
+  });
 
-    const currentYear = new Date().getFullYear();
-       const years = useYearRange(2000, currentYear);
-       const form = useForm<ExamInput>({
-           resolver: zodResolver(ExamSchema),
-           mode: "onChange",
-           defaultValues: {
-               title: data.title,
-               content: data.content,
-               semester : data.semester,
-               year : String(data.year),
-               professorName : data.professorName,
-               subject : data.subject,
-             },
-     });
+  useEffect(() => {
+    setOriginFiles([...data.files]);
+  }, []);
 
-      useEffect( ()=>{
-        setOriginFiles([...data.files]);
-      },[])
+  const semester = useWatch({
+    control: form.control,
+    name: "semester",
+  });
 
-       const semester = useWatch({
-                      control: form.control,
-                      name: "semester",
-              });
-      
-              const year = useWatch({
-                control: form.control,
-                name: "year",
-              });
-      
-              const professorName = useWatch({
-                control: form.control,
-                name: "professorName",
-            });
-      
-            const subject = useWatch({
-              control: form.control,
-              name: "subject",
-            });
-      
-            useEffect(() => {
-              let newTitle = '';
-          
-              // year가 있다면 맨 앞에 배치
-              if (year) {
-                // 형식을 원하시는 대로 조정해 보세요. (예: [2023] 과 같이 사용하거나 그냥 2023)
-                newTitle += `[${year}]`;
-              }
-          
-              if (subject) {
-                // 이미 year가 들어갔다면 그 뒤에 공백을 추가한 후 [subject]를 붙임
-                newTitle += newTitle ? ` [${subject}]` : `[${subject}]`;
-              }
-          
-              if (professorName) {
-                // 기존에 무언가가 있다면 앞에 공백 하나, 없다면 그냥 교수 이름
-                newTitle += newTitle ? ` ${professorName}` : `${professorName}`;
-              }
-          
-              if (semester) {
-                // 기존에 무언가가 있다면 ' - ' 붙여서 semester, 없다면 그냥 semester
-                newTitle += newTitle ? ` - ${semester}` : `${semester}`;
-              }
-          
-              form.setValue("title" , newTitle ,{shouldValidate: true})
-              
-            }, [year, subject, professorName, semester]);
-            
-      
-      const useArchivePutMutation = useMutation({
-        mutationFn: (data : ArchivePutRequest) => ArchivePut(data),
-        onSuccess: (data : any) => {
-          console.log(data);
-          alert("변경 성공");
+  const year = useWatch({
+    control: form.control,
+    name: "year",
+  });
 
-          // 내 수정사항은 나만 다시보면 된다 -> api 호출 최적화
-          queryClient.setQueryData(
-            postKeys.detail(postId),
-             data
-          )
+  const professorName = useWatch({
+    control: form.control,
+    name: "professorName",
+  });
 
-          
-          queryClient.invalidateQueries({
-            queryKey: postKeys.typelists(postType as PostType),
-            refetchType: 'inactive',
-          });
-          
-          
-          router.push(`/${postType.toLocaleLowerCase()}/${postId}`);
-        },
-        onError: (error) => {
-          alert(error.message);
-          console.log(error);
-        },
-      })
+  const subject = useWatch({
+    control: form.control,
+    name: "subject",
+  });
 
+  useEffect(() => {
+    let newTitle = "";
 
-      const useFileUploadMutation = useMutation({
-        mutationFn: ( {data,POST_TYPE_OPTIONS} : { data : FormData, POST_TYPE_OPTIONS : string}) => UploadFilesAPI(data, POST_TYPE_OPTIONS),
-      })
+    // year가 있다면 맨 앞에 배치
+    if (year) {
+      // 형식을 원하시는 대로 조정해 보세요. (예: [2023] 과 같이 사용하거나 그냥 2023)
+      newTitle += `[${year}]`;
+    }
 
-      const onSubmit = async(data: ExamInput) => {
+    if (subject) {
+      // 이미 year가 들어갔다면 그 뒤에 공백을 추가한 후 [subject]를 붙임
+      newTitle += newTitle ? ` [${subject}]` : `[${subject}]`;
+    }
 
-        // 파일이 없을때는 파일 업로드 생략
-        // 파일이 존재할때는 파일 업로드가 성공하면 게시글 생성
-        const formData = new FormData();
-  
-        selectedFiles.forEach((file) => {
-          formData.append("files", file);
+    if (professorName) {
+      // 기존에 무언가가 있다면 앞에 공백 하나, 없다면 그냥 교수 이름
+      newTitle += newTitle ? ` ${professorName}` : `${professorName}`;
+    }
+
+    if (semester) {
+      // 기존에 무언가가 있다면 ' - ' 붙여서 semester, 없다면 그냥 semester
+      newTitle += newTitle ? ` - ${semester}` : `${semester}`;
+    }
+
+    form.setValue("title", newTitle, { shouldValidate: true });
+  }, [year, subject, professorName, semester]);
+
+  const useArchivePutMutation = useMutation({
+    mutationFn: (data: ArchivePutRequest) => ArchivePut(data),
+    onSuccess: (data: any) => {
+      console.log(data);
+      alert("변경 성공");
+
+      // 내 수정사항은 나만 다시보면 된다 -> api 호출 최적화
+      queryClient.setQueryData(postKeys.detail(postId), data);
+
+      queryClient.invalidateQueries({
+        queryKey: postKeys.typelists(postType as PostType),
+        refetchType: "inactive",
+      });
+
+      router.push(`/${postType.toLocaleLowerCase()}/${postId}`);
+    },
+    onError: (error) => {
+      alert(error.message);
+      console.log(error);
+    },
+  });
+
+  const useFileUploadMutation = useMutation({
+    mutationFn: ({
+      data,
+      POST_TYPE_OPTIONS,
+    }: {
+      data: FormData;
+      POST_TYPE_OPTIONS: string;
+    }) => UploadFilesAPI(data, POST_TYPE_OPTIONS),
+  });
+
+  const onSubmit = async (data: ExamInput) => {
+    // 파일이 없을때는 파일 업로드 생략
+    // 파일이 존재할때는 파일 업로드가 성공하면 게시글 생성
+    const formData = new FormData();
+
+    selectedFiles.forEach((file) => {
+      formData.append("files", file);
+    });
+
+    if (selectedFiles.length > 0) {
+      try {
+        const response = await useFileUploadMutation.mutateAsync({
+          data: formData,
+          POST_TYPE_OPTIONS: POST_TYPE.EXAM_ARCHIVE,
         });
-  
-        if(selectedFiles.length > 0)
-        {
-          try {
-            const response = await useFileUploadMutation.mutateAsync({
-              data : formData,
-              POST_TYPE_OPTIONS : POST_TYPE.EXAM_ARCHIVE
-            }); 
 
-            const temp = [...response.data.map((file :any)=>{
-                return file.id;
-            })];
-            // 업로드 성공 후 다른 API 호출 예시
-            useArchivePutMutation.mutate({
-              title : data.title,
-              content : data.content,
-              year : Number(data.year),
-              semester : data.semester,
-              subject : data.subject,
-              professorName : data.professorName,
-              fileIds : [...originFiles.map( (file)=> file.id), ...temp],
-              deleteFileIds : [...willDeleteFiles],
-              postId : postId,
-              boardId : CLUB_ARCHIVE,
-            })
-          } catch (error) {
-            alert("파일 업로드 실패");
-            console.log(error);
-          }
-        }
-        else{
-        
-            useArchivePutMutation.mutate({
-              title : data.title,
-              content : data.content,
-              year : Number(data.year),
-              semester : data.semester,
-              subject : data.subject,
-              professorName : data.professorName,
-              fileIds : [...originFiles.map( (file)=> file.id)],
-              deleteFileIds : [...willDeleteFiles],
-              postId : postId,
-              boardId : CLUB_ARCHIVE,
-          })
-        }
-   
-      };
-
+        const temp = [
+          ...response.data.map((file: any) => {
+            return file.id;
+          }),
+        ];
+        // 업로드 성공 후 다른 API 호출 예시
+        useArchivePutMutation.mutate({
+          title: data.title,
+          content: data.content,
+          year: Number(data.year),
+          semester: data.semester,
+          subject: data.subject,
+          professorName: data.professorName,
+          fileIds: [...originFiles.map((file) => file.id), ...temp],
+          deleteFileIds: [...willDeleteFiles],
+          postId: postId,
+          boardId: CLUB_ARCHIVE,
+        });
+      } catch (error) {
+        alert("파일 업로드 실패");
+        console.log(error);
+      }
+    } else {
+      useArchivePutMutation.mutate({
+        title: data.title,
+        content: data.content,
+        year: Number(data.year),
+        semester: data.semester,
+        subject: data.subject,
+        professorName: data.professorName,
+        fileIds: [...originFiles.map((file) => file.id)],
+        deleteFileIds: [...willDeleteFiles],
+        postId: postId,
+        boardId: CLUB_ARCHIVE,
+      });
+    }
+  };
 
   return (
     <Form {...form}>
-        <form className="flex flex-col mt-5 w-[80%] h-[calc(100vh-86px)] mx-auto relative gap-2" onSubmit={form.handleSubmit(onSubmit)}>
-    
-    
+      <form
+        className="flex flex-col mt-5 w-[80%] h-[calc(100vh-86px)] mx-auto relative gap-2"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
         <TextareaFormField
-           form={form}
-           name="title"
-           placeholder="제목은 자동으로 작성됩니다"
-           readonly={true}
-          /> 
-          <InputFormField
-              form={form}
-              name={"subject"}
-              label={"과목명"}
-              placeHolder={"과목명을 입력해주세요"}
-          />
-           <InputFormField
-              form={form}
-              name={"professorName"}
-              label={"교수명"}
-              placeHolder={"교수명을 입력해주세요"}
-          />
+          form={form}
+          name="title"
+          placeholder="제목은 자동으로 작성됩니다"
+          readonly={true}
+        />
+        <InputFormField
+          form={form}
+          name={"subject"}
+          label={"과목명"}
+          placeHolder={"과목명을 입력해주세요"}
+        />
+        <InputFormField
+          form={form}
+          name={"professorName"}
+          label={"교수명"}
+          placeHolder={"교수명을 입력해주세요"}
+        />
         <div className="flex flex-row gap-3 mobile:flex-col">
-         <SelectFormField
+          <SelectFormField
             form={form}
             name="year"
             label="년도"
             options={years}
             className="w-[180px] mobile:w-full mb-5"
-         />
-         <SelectFormField
+          />
+          <SelectFormField
             form={form}
             name="semester"
             label="학기"
             options={SEMESTER_OPTIONS}
             className="w-[180px] mobile:w-full mb-5"
-         />
-         </div>
-    
-        
-  
-          {/* 첨부 파일 영역 */}
-                <ModifyFileUploader 
-                selectedFiles={selectedFiles} 
-                setSelectedFiles={setSelectedFiles}
-                originFiles={originFiles} 
-                setOriginFiles={setOriginFiles}
-                willdeletedFiles={willDeleteFiles} 
-                setwillDeleteFiles={setwillDeleteFiles} 
           />
-    
-    
-          <TextareaFormContentField
+        </div>
+
+        {/* 첨부 파일 영역 */}
+        <ModifyFileUploader
+          selectedFiles={selectedFiles}
+          setSelectedFiles={setSelectedFiles}
+          originFiles={originFiles}
+          setOriginFiles={setOriginFiles}
+          willdeletedFiles={willDeleteFiles}
+          setwillDeleteFiles={setwillDeleteFiles}
+        />
+
+        <TextareaFormContentField
           form={form}
           name="content"
           placeholder="내용을 입력하세요"
-          />
-    
-          {/* 하단 바 (버튼 등) */}
-          <WriteBottomLayout/>
-        </form>
-        </Form>
+        />
+
+        {/* 하단 바 (버튼 등) */}
+        <WriteBottomLayout />
+      </form>
+    </Form>
   );
 }

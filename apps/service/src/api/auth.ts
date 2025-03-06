@@ -1,13 +1,18 @@
 import { throwErrorMessage } from "../libs/utils/throwError";
 import { api } from "./core";
-import axios, { AxiosError } from "axios";
 
-export async function verifyEmail(email : string) {
-  const response = await api.post('/nova/email-auth', { email: email });
+export async function verifyEmail(email: string) {
+  const response = await api.post("/nova/email-auth", { email: email });
   return response.data;
 }
 
-export async function verifyEmailCode({ email, authCode }: { email: string; authCode: string }) {
+export async function verifyEmailCode({
+  email,
+  authCode,
+}: {
+  email: string;
+  authCode: string;
+}) {
   try {
     const response = await api.post(`/nova/email-auth/check`, {
       email,
@@ -18,7 +23,6 @@ export async function verifyEmailCode({ email, authCode }: { email: string; auth
     throwErrorMessage(error);
   }
 }
-
 
 /*
 response 객체는 서버를 통해 스트림 형태로 존재한다.
@@ -35,7 +39,7 @@ export async function login({
   password: string;
 }) {
   try {
-    const response = await api.post("/api/auth/login", {
+    const response = await api.post("/nova/members/login", {
       studentNumber,
       password,
     });
@@ -45,13 +49,12 @@ export async function login({
   }
 }
 
-
 export interface MemberSignUpRequest {
   studentNumber: string;
   password: string;
   name: string;
   email: string;
-  graduation: boolean; 
+  graduation: boolean;
   grade: number;
   semester: number;
   absence: boolean;
@@ -85,20 +88,20 @@ export async function signup(signUpData: SignUpData) {
   // graduationSignUpRequest를 넣을지 말지 분기
   const requestBody: any = {
     memberSignUpRequest: {
-      ...memberSignUpRequest
-    }
+      ...memberSignUpRequest,
+    },
   };
 
   // graduation이 true일 경우에만 graduationSignUpRequest 추가
   if (memberSignUpRequest.graduation && graduationSignUpRequest) {
     requestBody.graduationSignUpRequest = {
-      ...graduationSignUpRequest
+      ...graduationSignUpRequest,
     };
   }
-  
+
   const response = await fetch(`/nova/members`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(requestBody),
   });
 
@@ -111,8 +114,3 @@ export async function signup(signUpData: SignUpData) {
 
   return response.json();
 }
-
-
-
-
-

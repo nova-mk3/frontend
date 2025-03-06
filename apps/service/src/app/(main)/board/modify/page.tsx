@@ -1,12 +1,7 @@
 "use client";
 import React from "react";
-import ErrorBoundaryWrapper from "../../components/ErrorBoundaryWrapper";
 import ModifyPage from "./ModifyPage";
-
+export const dynamic = "force-dynamic";
 export default function page() {
-  return (
-    <ErrorBoundaryWrapper>
-      <ModifyPage />
-    </ErrorBoundaryWrapper>
-  );
+  return <ModifyPage />;
 }

@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { useBoardIdStore } from "@/src/store/BoardId";
 import { useArchiveDetailQuery } from "../../board/query/postqueries";

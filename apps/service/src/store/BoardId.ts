@@ -1,15 +1,14 @@
-
-import { create } from 'zustand';
+import { create } from "zustand";
 
 interface BoardIdState {
-    INTEGRATED: string;
-    CLUB_ARCHIVE: string;
-  
-    setBoardIds: (ids: { INTEGRATED: string; CLUB_ARCHIVE: string }) => void;
-  }
-  
-  export const useBoardIdStore = create<BoardIdState>((set) => ({
-    INTEGRATED: '6e7698b6-1ef6-47fe-be39-cc414f24beaa',
-    CLUB_ARCHIVE: 'fd9197d2-ac8c-487b-b802-73acf531f4de',
-    setBoardIds: (ids) => set(ids),
-  }));
+  INTEGRATED: string;
+  CLUB_ARCHIVE: string;
+
+  setBoardIds: (ids: { INTEGRATED: string; CLUB_ARCHIVE: string }) => void;
+}
+
+export const useBoardIdStore = create<BoardIdState>((set) => ({
+  INTEGRATED: "1ccfd1d4-4283-4d1f-b720-72f82ede6893",
+  CLUB_ARCHIVE: "f4b397bd-4624-4d9d-9d26-957f99c89812",
+  setBoardIds: (ids) => set(ids),
+}));
