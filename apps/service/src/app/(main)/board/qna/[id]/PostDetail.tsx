@@ -51,7 +51,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
               </div>
             </div>
             <Button variant="outline">
-              <Link href="/suggestion/newpost">작성하기</Link>
+              <Link href="/board/newpost">작성하기</Link>
             </Button>
           </div>
         </div>
