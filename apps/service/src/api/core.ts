@@ -1,27 +1,15 @@
-import axios from 'axios';
-export const BASE_URL = 'http://localhost:3000';
-export const EXTERNAL_URL = 'http://localhost:8080/api/v1';
-import cookie from 'js-cookie';
+import axios from "axios";
+export const BASE_URL = "http://localhost:3000";
+export const EXTERNAL_URL = "http://localhost:8080/api/v1";
+import { redirect } from "next/navigation";
 const config = {
-    baseURL: BASE_URL,
-    withCredentials: true,
+  baseURL: BASE_URL,
+  withCredentials: true,
 };
-  
-
 
 // axios 인스턴스 생성
 export const api = axios.create(config); // 일반 API 요청용 인스턴스
 export const Authapi = axios.create(config); // 인증이 필요한 요청용 인스턴스
-
-
-// 요청 인터셉터: 쿠키에서 JWT를 읽어 Authorization 헤더에 추가
-Authapi.interceptors.request.use((config) => {
-  const token = cookie.get('token'); // 쿠키에서 JWT 토큰 읽기
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
 
 Authapi.interceptors.response.use(
   (response) => {
@@ -30,22 +18,27 @@ Authapi.interceptors.response.use(
   },
   (error) => {
     // 에러 응답 처리
-    if (typeof window === 'undefined') {
-      // SSR 환경
-      if (error.response && (error.response.status === 401 || error.response.status ===403)) {
-        error.context.res.writeHead(302, { Location: '/signin' });
-        error.context.res.end();
+    if (typeof window === "undefined") {
+      // SSR 환경 보통 pre-render 상황이 된다
+      if (
+        error.response &&
+        (error.response.status === 401 || error.response.status === 403)
+      ) {
+        redirect("/login");
       }
     } else {
       // CSR 환경
       console.log(error);
       // 연산자 우선순위.. ㅂㄷㅂㄷ
-      if (error.response && (error.response.status === 401 || error.response.status ===403)) {
-        alert("토큰이 만료되었습니다")
-        window.location.href="/signin";
+      if (
+        error.response &&
+        (error.response.status === 401 || error.response.status === 403)
+      ) {
+        alert("토큰이 만료되었습니다");
+        window.location.href = "/signin";
       }
     }
-    
+
     return Promise.reject(error);
   }
 );
