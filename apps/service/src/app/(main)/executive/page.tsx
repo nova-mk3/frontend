@@ -10,7 +10,7 @@ export default function page() {
 
       <div className="flex flex-col gap-6">
         <section>
-          <h2 className="text-2xl font-bold mb-6 flex items-center text-primary">
+          <h2 className="text-2xl font-bold  flex items-center text-primary">
             <span className="inline-block w-3 h-8 bg-primary mr-3"></span>
             회장
           </h2>
@@ -19,15 +19,15 @@ export default function page() {
             <Card />
           </div>
         </section>
-        <h2 className="text-2xl font-bold mb-6 flex items-center text-primary">
-          <span className="inline-block w-3 h-8 bg-primary mr-3"></span>
+        <h2 className="text-2xl font-bold  flex items-center text-gray-400">
+          <span className="inline-block w-3 h-8 bg-gray-400 mr-3"></span>
           부회장
         </h2>
         <div className="flex flex-row md:grid-cols-4 gap-6">
           <Card />
         </div>
-        <h2 className="text-2xl font-bold mb-6 flex items-center text-primary">
-          <span className="inline-block w-3 h-8 bg-primary mr-3"></span>
+        <h2 className="text-2xl font-bold flex items-center text-gray-500">
+          <span className="inline-block w-3 h-8 bg-gray-500 mr-3"></span>
           임원
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
