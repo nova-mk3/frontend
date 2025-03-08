@@ -7,7 +7,7 @@ import { BOARD_SIZE, POST_TYPE } from "@/src/constant/board";
 import { PageNation } from "../../components/PageNation";
 import { useQueryParams } from "../../components/useQueryParams";
 import BoardListTitle from "../components/BoardListTitle";
-import { Book, Pin } from "lucide-react";
+import { Book } from "lucide-react";
 import BoardList from "../components/BoardList";
 
 export default function Post() {
