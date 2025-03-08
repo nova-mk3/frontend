@@ -3,7 +3,7 @@
 import React, { Suspense, useState } from "react";
 import { useBoardIdStore } from "@/src/store/BoardId";
 
-import { Book, Image } from "lucide-react";
+import { Image } from "lucide-react";
 import { useQueryParams } from "../components/useQueryParams";
 import { usePostListQuery } from "../board/query/postqueries";
 import { BOARD_SIZE, POST_TYPE } from "@/src/constant/board";
