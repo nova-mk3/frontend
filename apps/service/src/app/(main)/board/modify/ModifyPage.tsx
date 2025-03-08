@@ -29,14 +29,11 @@ import NewPostTitle from "../../components/NewPostTitle";
 export default function ModifyPage() {
   const { INTEGRATED } = useBoardIdStore();
   const { postId, postType } = useQueryParams();
-
   const router = useRouter();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-
   const [originFiles, setOriginFiles] = useState<FileItemProps[]>([]);
   const [willDeleteFiles, setwillDeleteFiles] = useState<string[]>([]);
   const queryClient = useQueryClient();
-
   const { data } = usePostDetailQuery(postId, INTEGRATED);
 
   const form = useForm<IntegratedInput>({

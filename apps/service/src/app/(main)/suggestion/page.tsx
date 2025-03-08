@@ -1,14 +1,6 @@
-import React, { Suspense } from 'react'
-import Title from './components/Title'
-import List from './components/SuggestionList'
-import PendingFallbackUI from '../components/PendingFallbackUI'
-import SearchPost from './SearchPost'
-
+import React from "react";
+import SearchPost from "./SearchPost";
+export const dynamic = "force-dynamic";
 export default function page() {
-  return (
-     <Suspense fallback={<PendingFallbackUI/>}>
-          <SearchPost />
-      </Suspense>
-  )
+  return <SearchPost />;
 }
-

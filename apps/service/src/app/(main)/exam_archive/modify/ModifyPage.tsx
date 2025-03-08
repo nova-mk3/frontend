@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import WriteBottomLayout from "../../components/WriteBottomLayout";
 import { useForm, useWatch } from "react-hook-form";
 import { POST_TYPE, PostType } from "@/src/constant/board";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -21,16 +20,16 @@ import { SEMESTER_OPTIONS } from "@/src/constant/exam";
 import { InputFormField } from "@/src/app/(auth)/components/InputFormField";
 import { ArchivePut, ArchivePutRequest } from "@/src/api/board/exam";
 import { useQueryParams } from "../../components/useQueryParams";
+import NewPostTitle from "../../components/NewPostTitle";
 
 export default function ModifyPage() {
+  const router = useRouter();
+  const queryClient = useQueryClient();
   const { CLUB_ARCHIVE } = useBoardIdStore();
   const { postId, postType } = useQueryParams();
-  const router = useRouter();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-
   const [originFiles, setOriginFiles] = useState<FileItemProps[]>([]);
   const [willDeleteFiles, setwillDeleteFiles] = useState<string[]>([]);
-  const queryClient = useQueryClient();
 
   const { data } = useArchiveDetailQuery(postId, CLUB_ARCHIVE);
 
@@ -189,62 +188,66 @@ export default function ModifyPage() {
   return (
     <Form {...form}>
       <form
-        className="flex flex-col mt-5 w-[80%] h-[calc(100vh-86px)] mx-auto relative gap-2"
+        className="flex flex-col gap-6"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <TextareaFormField
-          form={form}
-          name="title"
-          placeholder="제목은 자동으로 작성됩니다"
-          readonly={true}
+        <NewPostTitle
+          backLink="/exam_archive"
+          backLinkText="족보 게시판"
+          title="족보 수정"
         />
-        <InputFormField
-          form={form}
-          name={"subject"}
-          label={"과목명"}
-          placeHolder={"과목명을 입력해주세요"}
-        />
-        <InputFormField
-          form={form}
-          name={"professorName"}
-          label={"교수명"}
-          placeHolder={"교수명을 입력해주세요"}
-        />
-        <div className="flex flex-row gap-3 mobile:flex-col">
-          <SelectFormField
+        <div className="flex flex-col gap-6 w-[80%] h-[calc(100vh-86px)] mx-auto relative">
+          <TextareaFormField
             form={form}
-            name="year"
-            label="년도"
-            options={years}
-            className="w-[180px] mobile:w-full mb-5"
+            name="title"
+            placeholder="제목은 자동으로 작성됩니다"
+            readonly={true}
           />
-          <SelectFormField
+          <InputFormField
             form={form}
-            name="semester"
-            label="학기"
-            options={SEMESTER_OPTIONS}
-            className="w-[180px] mobile:w-full mb-5"
+            name={"subject"}
+            label={"과목명"}
+            placeHolder={"과목명을 입력해주세요"}
+          />
+          <InputFormField
+            form={form}
+            name={"professorName"}
+            label={"교수명"}
+            placeHolder={"교수명을 입력해주세요"}
+          />
+          <div className="flex flex-row gap-3 mobile:flex-col">
+            <SelectFormField
+              form={form}
+              name="year"
+              label="년도"
+              options={years}
+              className="w-[180px] mobile:w-full mb-5"
+            />
+            <SelectFormField
+              form={form}
+              name="semester"
+              label="학기"
+              options={SEMESTER_OPTIONS}
+              className="w-[180px] mobile:w-full mb-5"
+            />
+          </div>
+
+          {/* 첨부 파일 영역 */}
+          <ModifyFileUploader
+            selectedFiles={selectedFiles}
+            setSelectedFiles={setSelectedFiles}
+            originFiles={originFiles}
+            setOriginFiles={setOriginFiles}
+            willdeletedFiles={willDeleteFiles}
+            setwillDeleteFiles={setwillDeleteFiles}
+          />
+
+          <TextareaFormContentField
+            form={form}
+            name="content"
+            placeholder="내용을 입력하세요"
           />
         </div>
-
-        {/* 첨부 파일 영역 */}
-        <ModifyFileUploader
-          selectedFiles={selectedFiles}
-          setSelectedFiles={setSelectedFiles}
-          originFiles={originFiles}
-          setOriginFiles={setOriginFiles}
-          willdeletedFiles={willDeleteFiles}
-          setwillDeleteFiles={setwillDeleteFiles}
-        />
-
-        <TextareaFormContentField
-          form={form}
-          name="content"
-          placeholder="내용을 입력하세요"
-        />
-
-        {/* 하단 바 (버튼 등) */}
-        <WriteBottomLayout />
       </form>
     </Form>
   );

@@ -1,10 +1,5 @@
 "use client";
-import { Button } from "@nova/ui/components/ui/button";
-// import { PlateEditor } from "@nova/ui/components/editor/plate-editor"; //plate.js 라이브러리인데 일단은 제외
 import React, { useState } from "react";
-
-import WriteBottomLayout from "../../components/WriteBottomLayout";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -25,9 +20,6 @@ import { POST_TYPE } from "@/src/constant/board";
 import { useRouter } from "next/navigation";
 import PostFileUploader from "../../components/File/PostFileUploader";
 import { suggestionKeys } from "../query/queries";
-import Link from "next/link";
-import { ChevronLeft, MessageSquare } from "lucide-react";
-import { Separator } from "@nova/ui/components/ui/separator";
 import NewPostTitle from "../../components/NewPostTitle";
 
 export default function Page() {
@@ -47,15 +39,12 @@ export default function Page() {
   const useSuggestionPostMutation = useMutation({
     mutationFn: (data: SuggestionPostRequest) => SuggestionPost(data),
     onSuccess: (data: any) => {
-      console.log(data);
-
-      router.push(`/${POST_TYPE.SUGGESTION.toLocaleLowerCase()}/${data.id}`);
-
-      //내가 쓴 글의 리스트
       queryClient.invalidateQueries({
-        queryKey: suggestionKeys.list,
+        queryKey: suggestionKeys.lists(),
         refetchType: "inactive",
       });
+
+      router.push(`/${POST_TYPE.SUGGESTION.toLocaleLowerCase()}/${data.id}`);
     },
     onError: (error) => {
       alert(error.message);
