@@ -18,6 +18,7 @@ Authapi.interceptors.response.use(
   },
   (error) => {
     // 에러 응답 처리
+    console.log(error);
     if (typeof window === "undefined") {
       // SSR 환경 보통 pre-render 상황이 된다
       if (

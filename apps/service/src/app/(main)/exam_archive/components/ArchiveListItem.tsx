@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { formatDate } from "@/src/libs/utils/dateParsing";
 import { POST_TYPE } from "@/src/constant/board";
-import { Download, Eye, FileDown, Heart, MessageSquare } from "lucide-react";
+import { Eye, FileDown, Folder, Heart, MessageSquare } from "lucide-react";
 
 export interface ArchiveListItemType {
   className?: string;
@@ -18,6 +18,7 @@ export interface ArchiveListItemType {
   commentCount: number;
   viewCount: number;
   href: string;
+  fileContentCount: number;
   totalFileDownloadCount: number;
 }
 export default function ArchiveListItem({
@@ -31,6 +32,7 @@ export default function ArchiveListItem({
   className,
   type,
   href,
+  fileContentCount,
   totalFileDownloadCount,
 }: ArchiveListItemType) {
   return (
@@ -56,13 +58,17 @@ export default function ArchiveListItem({
             <Eye className="w-4 h-4" />
             <span className="text-xs">{viewCount}</span>
           </div>
-          <div className="flex items-center gap-1">
+          {/* <div className="flex items-center gap-1">
             <MessageSquare className="w-4 h-4" />
             <span className="text-xs">{commentCount}</span>
-          </div>
+          </div> */}
           <div className="flex items-center gap-1">
             <Heart className="w-4 h-4" />
             <span className="text-xs">{likeCount}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Folder className="w-4 h-4" />
+            <span className="text-xs">{fileContentCount}</span>
           </div>
           <div className="flex items-center gap-1">
             <FileDown className="w-4 h-4" />
