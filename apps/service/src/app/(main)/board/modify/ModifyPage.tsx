@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import WriteBottomLayout from "../../components/WriteBottomLayout";
 import { useForm } from "react-hook-form";
 import { POST_TYPE_OPTIONS, PostType } from "@/src/constant/board";
 import {

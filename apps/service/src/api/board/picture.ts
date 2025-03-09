@@ -52,22 +52,31 @@ export async function PictureGetDetail({
 /*
 게시글 수정
 */
-export async function PictureBoardPut({
+
+export interface PicturePutRequest {
+  title: string;
+  content: string;
+  boardId: string;
+  imageFileIds: string[];
+  postId: string;
+  deleteImageFileIds: string[];
+}
+export async function PicturePut({
   title,
   content,
-  fileIds,
+  imageFileIds,
   boardId,
   postId,
-  deleteFileIds,
-}: IntegratedPutRequest) {
+  deleteImageFileIds,
+}: PicturePutRequest) {
   try {
     const response = await Authapi.put(
       `/nova/boards/${boardId}/picture-posts/${postId}`,
       {
         title,
         content,
-        fileIds,
-        deleteFileIds,
+        imageFileIds,
+        deleteImageFileIds,
       }
     );
     return response.data.data;

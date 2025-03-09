@@ -33,15 +33,15 @@ const ImageSlider = ({
   };
   return (
     <>
-      <Slider {...settings}>
+      <Slider {...settings} images={images}>
         {images.map((image) => (
           <div key={image.id} className="min-w-full relative border">
             <Image
               src={image.imageUrl.replace("/file", "")}
               alt={image.originalFileName}
-              fill
-              sizes="100vw"
-              className="object-cover  cursor-pointer"
+              width={image.width}
+              height={image.height}
+              className="w-full h-auto aspect-square object-cover  cursor-pointer"
               onClick={() => openModal()}
             />
           </div>

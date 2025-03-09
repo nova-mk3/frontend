@@ -1,8 +1,10 @@
 "use client";
 
+import { DownloadFilesAPI } from "@/src/api/board/file";
 import { useSliderStore } from "@/src/store/ImageSlider";
 import { ChevronLeft, ChevronRight, Download } from "lucide-react";
 import React from "react";
+import { ImageProps } from "../PostDetail";
 
 interface settings {
   speed: number;
@@ -12,12 +14,14 @@ interface settings {
 interface SliderProps extends settings {
   children?: React.ReactNode;
   className?: string;
+  images: ImageProps[];
 }
 export const Slider = ({
   className,
   children,
   speed,
   infinite,
+  images,
 }: SliderProps) => {
   const { currentIndex, setCurrentIndex } = useSliderStore();
   const count = React.Children.count(children);
@@ -43,6 +47,11 @@ export const Slider = ({
     }
   };
 
+  const handleDownload = async () => {
+    console.log(images[currentIndex]!.id);
+    await DownloadFilesAPI(images[currentIndex]!.id);
+  };
+
   return (
     <div
       className={`relative w-full h-full mx-auto overflow-hidden ${className}`}
@@ -59,7 +68,10 @@ export const Slider = ({
         {children}
       </div>
 
-      <div className="absolute top-2 right-2 bg-text02 rounded-md p-1 flex items-center">
+      <div
+        className="absolute top-2 right-2 bg-text02 rounded-md p-1 flex items-center"
+        onClick={handleDownload}
+      >
         <Download size={24} className="cursor-pointer text-background01" />
       </div>
 

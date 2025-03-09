@@ -54,7 +54,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
 
   const handleModify = () => {
     router.push(
-      `${POST_TYPE.PICTURES.toLocaleLowerCase()}/modify?id=${postId}&type=${POST_TYPE.PICTURES}`
+      `/${POST_TYPE.PICTURES.toLocaleLowerCase()}/modify?id=${postId}&type=${POST_TYPE.PICTURES}`
     );
   };
 
@@ -97,7 +97,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
               <p className="text-gray-700">{data.authorName}</p>
               <p className="">5일전</p>
               {/* <Like className='ml-auto mr-2' count={5}/> */}
-              <div className="ml-auto flex flex-row gap-2 items-center">
+              <div className="ml-auto flex flex-row gap-2 items-center cursor-pointer">
                 <p className="" onClick={handleModify}>
                   수정
                 </p>

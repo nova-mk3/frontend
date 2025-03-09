@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import FilePlus from "@/public/image/FilePlus.svg";
-import FileItem from "./FileItem";
+import PostFileItem from "./PostFileItem";
 
 export interface ImageFile {
   file: File;
@@ -12,7 +12,7 @@ interface props {
   setSelectedFiles: React.Dispatch<React.SetStateAction<ImageFile[]>>;
 }
 
-export default function FileUploader({
+export default function PostFileUploader({
   selectedFiles,
   setSelectedFiles,
 }: props) {
@@ -53,13 +53,19 @@ export default function FileUploader({
       <div className="flex flex-row flex-wrap gap-5">
         {selectedFiles.length > 0 &&
           selectedFiles.map((file, index) => (
-            <FileItem
+            <PostFileItem
               name={file.file.name}
               onRemove={handleRemoveFile}
               index={index}
               key={index}
               preview={file.preview}
-            />
+            >
+              {index === 0 && (
+                <div className="absolute left-0 bottom-0 w-full h-[24px] z-20 bg-text01 text-background01 t-s flex items-center justify-center rounded-b-md">
+                  대표 사진
+                </div>
+              )}
+            </PostFileItem>
           ))}
         <label
           htmlFor="fileUpload"
