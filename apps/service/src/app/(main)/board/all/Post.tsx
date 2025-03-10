@@ -13,18 +13,16 @@ import BoardList from "../components/BoardList";
 export default function Post() {
   const { INTEGRATED } = useBoardIdStore();
 
-  const {
-    currentPage,
-    searchQuery: initialSearchQuery,
-    sortOption: initialSortOption,
-  } = useQueryParams();
-  const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
-  const [sortOption, setSortOption] = useState(initialSortOption);
+  const { currentPage, keyword, searchType, sortBy, sortDirection } =
+    useQueryParams();
 
   const { data } = usePostAllListQuery({
     page: currentPage - 1,
     size: BOARD_SIZE,
-    sort: sortOption,
+    keyword: keyword,
+    searchType: searchType,
+    sortBy: sortBy,
+    sortDirection: sortDirection,
     boardId: INTEGRATED,
   });
 
@@ -33,10 +31,6 @@ export default function Post() {
       <BoardListTitle
         title={POST_TYPE.ALL}
         TitleImage={<Layers size={20} />}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        sortOption={sortOption}
-        setSortOption={setSortOption}
         defaultHref="/board"
       />
       <div>

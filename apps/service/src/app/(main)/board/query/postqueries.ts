@@ -5,6 +5,8 @@ board에서 사용하는 react-query hooks 모음입니다
 import { ArchiveGetDetail } from "@/src/api/board/exam";
 import {
   BoardAllList,
+  BoardGetParamType,
+  BoardIdParams,
   BoardLatestList,
   IntegratedBoardGet,
   IntegratedBoardGetDetail,
@@ -78,30 +80,47 @@ export const usePostListQuery = ({
 };
 
 export const usePostAllListQuery = ({
+  boardId,
   page,
   size,
-  sort,
-  boardId,
-}: {
-  page: number;
-  size: number;
-  sort: string;
-  boardId: string;
-}) => {
+  searchType,
+  sortBy,
+  sortDirection,
+  keyword,
+}: Omit<Params, "postId" | "postType">) => {
   return useSuspenseQuery({
-    queryKey: postKeys.list({ page, size, sort }),
-    queryFn: () => BoardAllList({ page, size, sort, boardId }),
+    queryKey: postKeys.list({
+      page,
+      size,
+      searchType,
+      sortBy,
+      sortDirection,
+      keyword,
+    }),
+    queryFn: () =>
+      BoardAllList({
+        boardId,
+        page,
+        size,
+        searchType,
+        sortBy,
+        sortDirection,
+        keyword,
+      }),
   });
 };
 
-export const usePostLatestListQuery = ({ boardId }: { boardId: string }) => {
+export const usePostLatestListQuery = ({ boardId }: BoardIdParams) => {
   return useSuspenseQuery({
     queryKey: [...postKeys.latest(boardId)],
     queryFn: () => BoardLatestList({ boardId }),
   });
 };
 
-export const useArchiveDetailQuery = (postId: string, boardId: string) => {
+export const useArchiveDetailQuery = ({
+  postId,
+  boardId,
+}: BoardGetParamType) => {
   return useSuspenseQuery({
     queryKey: postKeys.detail(postId),
     queryFn: () => ArchiveGetDetail({ boardId, postId }),

@@ -15,13 +15,17 @@ import { PageNation } from "../components/PageNation";
 export default function Post() {
   const { CLUB_ARCHIVE } = useBoardIdStore();
 
-  const { currentPage } = useQueryParams();
+  const { currentPage, keyword, searchType, sortBy, sortDirection } =
+    useQueryParams();
 
   const { data } = usePostListQuery({
     postType: POST_TYPE.EXAM_ARCHIVE,
     page: currentPage - 1,
     size: BOARD_SIZE,
-    sort: "",
+    keyword: keyword,
+    searchType: searchType,
+    sortBy: sortBy,
+    sortDirection: sortDirection,
     boardId: CLUB_ARCHIVE,
   });
 
