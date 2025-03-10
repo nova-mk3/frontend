@@ -58,13 +58,13 @@ export default function ArchiveListItem({
             <Eye className="w-4 h-4" />
             <span className="text-xs">{viewCount}</span>
           </div>
-          {/* <div className="flex items-center gap-1">
-            <MessageSquare className="w-4 h-4" />
-            <span className="text-xs">{commentCount}</span>
-          </div> */}
           <div className="flex items-center gap-1">
             <Heart className="w-4 h-4" />
             <span className="text-xs">{likeCount}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <MessageSquare className="w-4 h-4" />
+            <span className="text-xs">{commentCount}</span>
           </div>
           <div className="flex items-center gap-1">
             <Folder className="w-4 h-4" />

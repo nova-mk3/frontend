@@ -1,16 +1,15 @@
 import React from "react";
 import { SelectFormField } from "./SelectFormField";
-import { UseFormReturn } from "react-hook-form";
-import { SignupInput } from "@/src/schema/signup.schema";
+import { Path, UseFormReturn } from "react-hook-form";
 
-const GraduationYearSelect = ({
+const GraduationYearSelect = <T extends Record<string, any>>({
   form,
   name,
   label,
   options,
 }: {
-  form: UseFormReturn<SignupInput>;
-  name: keyof SignupInput;
+  form: UseFormReturn<T>;
+  name: Path<T>;
   label: string;
   options?: string[];
 }) => {
@@ -30,11 +29,11 @@ const GraduationYearSelect = ({
 export default GraduationYearSelect;
 
 export function getGraduationYears() {
-    const startYear = 2000;
-    const currentYear = new Date().getFullYear();
-    const years: string[] = [];
-    for (let year = currentYear; year >= startYear; year--) {
-      years.push(`${year}년`);
-    }
-    return years;
+  const startYear = 2000;
+  const currentYear = new Date().getFullYear();
+  const years: string[] = [];
+  for (let year = currentYear; year >= startYear; year--) {
+    years.push(`${year}년`);
   }
+  return years;
+}

@@ -15,19 +15,17 @@ import { PageNation } from "../components/PageNation";
 export default function Post() {
   const { CLUB_ARCHIVE } = useBoardIdStore();
 
-  const {
-    currentPage,
-    searchQuery: initialSearchQuery,
-    sortOption: initialSortOption,
-  } = useQueryParams();
-  const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
-  const [sortOption, setSortOption] = useState(initialSortOption);
+  const { currentPage, keyword, searchType, sortBy, sortDirection } =
+    useQueryParams();
 
   const { data } = usePostListQuery({
     postType: POST_TYPE.EXAM_ARCHIVE,
     page: currentPage - 1,
     size: BOARD_SIZE,
-    sort: sortOption,
+    keyword: keyword,
+    searchType: searchType,
+    sortBy: sortBy,
+    sortDirection: sortDirection,
     boardId: CLUB_ARCHIVE,
   });
 
@@ -36,10 +34,6 @@ export default function Post() {
       <ArchiveListTitle
         title={POST_TYPE.EXAM_ARCHIVE}
         TitleImage={<Folder size={20} />}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        sortOption={sortOption}
-        setSortOption={setSortOption}
       />
       <div>
         <ArchiveList content={data.content} />

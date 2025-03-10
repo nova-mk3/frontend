@@ -31,7 +31,6 @@ export default function SuggestionListItem({
   index,
   id,
 }: SuggestionItem) {
-  console.log(Private);
   const anonymousName = useMemo(() => MakeNameToAnonymous(title), [title]);
 
   return (
@@ -41,8 +40,9 @@ export default function SuggestionListItem({
     >
       <div className={`w-[60px] text-center`}>{index.substring(0, 2)}</div>
       <div className={`flex flex-row items-center gap-1 flex-1`}>
-        <p className="max-w-[400px] truncate">{title}</p>
+        {/* 이부분 신기하네요 */}
         <Lock size={16} className="text-text02" />
+        <p className="w-0 flex-1 truncate">{title}</p>
       </div>
       <div className={`w-[100px] text-center`}>{anonymousName}</div>
       <div className={`w-[100px] text-center`}>{formatDate(createdTime)}</div>

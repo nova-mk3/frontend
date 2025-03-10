@@ -4,20 +4,33 @@ import React, { Suspense } from "react";
 import { PageNation } from "../components/PageNation";
 import { useSuggestionListQuery } from "./query/queries";
 import SuggestionList from "./components/SuggestionList";
+import Title from "./components/Title";
+import { useQueryParams } from "../components/useQueryParams";
+import { BOARD_SIZE } from "@/src/constant/board";
 
-interface Props {
-  page: number;
-  size: number;
-  sort: string;
-}
+export default function Post() {
+  const { currentPage, keyword, searchType, sortBy, sortDirection } =
+    useQueryParams();
 
-export default function Post({ page, size, sort }: Props) {
-  const { data } = useSuggestionListQuery({ page: page - 1, size, sort });
+  const { data } = useSuggestionListQuery({
+    page: currentPage - 1,
+    size: BOARD_SIZE,
+    keyword: keyword,
+    searchType: searchType,
+    sortBy: sortBy,
+    sortDirection: sortDirection,
+  });
+
   return (
-    <div>
+    <div className="w-[80%] mx-auto">
+      <Title title="건의함" className="mt-5" />
       <SuggestionList content={data.content} />
       <Suspense fallback={<div className="h-[36px]"></div>}>
-        <PageNation size={size} totalPage={data.totalPages} className="my-4" />
+        <PageNation
+          size={BOARD_SIZE}
+          totalPage={data.totalPages}
+          className="my-4"
+        />
       </Suspense>
     </div>
   );

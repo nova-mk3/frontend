@@ -20,7 +20,7 @@ interface PostDetailProps {
 
 export default function PostDetail({ postId }: PostDetailProps) {
   const { CLUB_ARCHIVE } = useBoardIdStore();
-  const { data } = useArchiveDetailQuery(postId, CLUB_ARCHIVE);
+  const { data } = useArchiveDetailQuery({ postId, boardId: CLUB_ARCHIVE });
 
   return (
     <div className="flex flex-col t-m w-full mx-auto">

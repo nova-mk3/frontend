@@ -1,0 +1,31 @@
+"use client";
+import { Input } from "@nova/ui/components/ui/input";
+import { Search } from "lucide-react";
+import React, { useRef } from "react";
+import { useQueryParams } from "./useQueryParams";
+
+export default function SearchInput() {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { setKeyword } = useQueryParams();
+
+  const handleKeywordSearch = () => {
+    if (!inputRef.current) return;
+    const value = inputRef.current.value;
+    setKeyword(value);
+  };
+  return (
+    <div className="flex flex-row items-center gap-[15px] w-full">
+      <Input
+        placeholder="검색어를 입력하세요"
+        className="w-[250px] h-[36px] px-2 py-1 rounded-lg flex-1"
+        ref={inputRef}
+      />
+      <div
+        className="cursor-pointer rounded-lg hover:bg-background02 p-1"
+        onClick={handleKeywordSearch}
+      >
+        <Search size="24" />
+      </div>
+    </div>
+  );
+}

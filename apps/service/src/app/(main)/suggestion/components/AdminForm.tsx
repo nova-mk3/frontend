@@ -20,12 +20,13 @@ export default function AdminForm({
     await SuggestionComment({ postId, reply: text });
     setText("");
 
-    // 해당 페이지
+    // 상세 refetch
     queryClient.invalidateQueries({
       queryKey: suggestionKeys.detail(postId),
       refetchType: "active",
     });
 
+    // 건의함 목록 refetch
     queryClient.invalidateQueries({
       queryKey: suggestionKeys.lists(),
       refetchType: "active",

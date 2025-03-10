@@ -25,7 +25,7 @@ Authapi.interceptors.response.use(
         error.response &&
         (error.response.status === 401 || error.response.status === 403)
       ) {
-        redirect("/login");
+        redirect("/signin");
       }
     } else {
       // CSR 환경
