@@ -4,12 +4,9 @@ import {
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
 import { SuggestionDetail } from "../[id]/PostDetail";
+import { SearchFiilterParamType } from "@/src/api/board/integrated";
 
-interface SearchFilter {
-  page: number;
-  size: number;
-  sort: string;
-}
+type SearchFilter = SearchFiilterParamType;
 
 export const suggestionKeys = {
   all: ["suggestion"] as const,
@@ -24,15 +21,22 @@ export const suggestionKeys = {
 export const useSuggestionListQuery = ({
   page,
   size,
-  sort,
-}: {
-  page: number;
-  size: number;
-  sort: string;
-}) => {
+  searchType,
+  sortBy,
+  sortDirection,
+  keyword,
+}: SearchFiilterParamType) => {
   return useSuspenseQuery({
-    queryKey: suggestionKeys.list({ page, size, sort }),
-    queryFn: () => SuggestionGet({ page, size, sort }),
+    queryKey: suggestionKeys.list({
+      page,
+      size,
+      searchType,
+      sortBy,
+      sortDirection,
+      keyword,
+    }),
+    queryFn: () =>
+      SuggestionGet({ page, size, searchType, sortBy, sortDirection, keyword }),
   });
 };
 

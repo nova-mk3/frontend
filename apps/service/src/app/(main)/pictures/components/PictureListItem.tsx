@@ -59,7 +59,7 @@ export default function PictureListItem({
 
           <div className="t-m text-text02 min-h-[48px]">{content}</div>
         </div>
-        <div className="flex flex-row border-t-[1px] border-line01 px-3 py-2 t-s text-text02 gap-2">
+        <div className="flex flex-row border-t-[1px] border-line01 px-3 py-2 text-sm text-text02 gap-2">
           <div>{formatDate(createdTime)}</div>
           <div className="flex flex-row gap-1 items-center">
             <Heart className="w-4 h-4" />

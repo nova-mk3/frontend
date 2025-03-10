@@ -1,6 +1,5 @@
-import React, { Suspense } from "react";
+import React from "react";
 import ListItem, { SuggestionItem } from "./SuggestionListItem";
-import { PageNation } from "../../components/PageNation";
 import SuggestionListItem from "./SuggestionListItem";
 
 interface SuggestionListProps {
@@ -19,7 +18,7 @@ export default function SuggestionList({ content }: SuggestionListProps) {
         <p className="w-[100px] text-center">답변</p>
       </div>
 
-      {content.map((item, index) => (
+      {content.map((item) => (
         <SuggestionListItem
           key={item.id}
           id={item.id}

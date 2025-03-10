@@ -14,19 +14,17 @@ import { PageNation } from "../components/PageNation";
 export default function Post() {
   const { INTEGRATED } = useBoardIdStore();
 
-  const {
-    currentPage,
-    searchQuery: initialSearchQuery,
-    sortOption: initialSortOption,
-  } = useQueryParams();
-  const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
-  const [sortOption, setSortOption] = useState(initialSortOption);
+  const { currentPage, keyword, searchType, sortBy, sortDirection } =
+    useQueryParams();
 
   const { data } = usePostListQuery({
     postType: POST_TYPE.PICTURES,
     page: currentPage - 1,
-    size: 8,
-    sort: sortOption,
+    size: BOARD_SIZE,
+    keyword: keyword,
+    searchType: searchType,
+    sortBy: sortBy,
+    sortDirection: sortDirection,
     boardId: INTEGRATED,
   });
 
@@ -35,10 +33,6 @@ export default function Post() {
       <BoardListTitle
         title={POST_TYPE.PICTURES}
         TitleImage={<Image size={20} />}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        sortOption={sortOption}
-        setSortOption={setSortOption}
         defaultHref="/pictures"
       />
       <div>

@@ -43,7 +43,7 @@ export interface ImageProps {
 
 const ViewCount = dynamic(() => import("../../board/components/ViewCount"), {
   ssr: false,
-  loading: () => <p>조회 : 0</p>,
+  loading: () => <p>조회 0</p>,
 });
 export default function PostDetail({ postId }: PostDetailProps) {
   const router = useRouter();

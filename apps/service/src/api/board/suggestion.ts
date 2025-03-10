@@ -1,7 +1,7 @@
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
 import { Authapi } from "../core";
 import { ERROR_MESSAGES } from "@/src/constant/error";
-import { SuggestionDetail } from "@/src/app/(main)/suggestion/[id]/PostDetail";
+import { SearchFiilterParamType } from "./integrated";
 
 export interface SuggestionPostRequest {
   title: string;
@@ -53,10 +53,17 @@ interface Params {
 /*
  * 건의 게시판 목록 조회
  */
-export async function SuggestionGet({ page, size, sort }: Params) {
+export async function SuggestionGet({
+  page,
+  size,
+  searchType,
+  keyword,
+  sortBy,
+  sortDirection,
+}: SearchFiilterParamType) {
   try {
     const response = await Authapi.get(
-      `/nova/suggestions?page=${page}&size=${size}&sort=${sort}`
+      `/nova/suggestions/search?page=${page}&size=${size}&searchType=${searchType}&keyword=${keyword}&sortBy=${sortBy}&sortDirection=${sortDirection}`
     );
     return response.data.data;
   } catch (error) {

@@ -22,10 +22,17 @@ export interface Params {
   sortDirection: string;
 }
 
+// 선택
 export type BoardGetParamType = Pick<Params, "postId" | "boardId">;
-export type BoardAllListParamType = Omit<Params, "postId" | "postType">;
-export type BoardCategoryGetParamType = Omit<Params, "postId">;
 export type BoardIdParams = Pick<Params, "boardId">;
+
+// 제외한 나머지
+export type BoardCategoryGetParamType = Omit<Params, "postId">;
+export type BoardAllListParamType = Omit<Params, "postId" | "postType">;
+export type SearchFiilterParamType = Omit<
+  Params,
+  "postId" | "postType" | "boardId"
+>;
 /*
 게시글 작성
 */
