@@ -3,7 +3,7 @@
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import { CalendarIcon } from "lucide-react";
-import { UseFormReturn } from "react-hook-form";
+import { Path, UseFormReturn } from "react-hook-form";
 
 import { SignupInput } from "@/src/schema/signup.schema";
 import { Button } from "@nova/ui/components/ui/button";
@@ -21,13 +21,13 @@ import {
 } from "@nova/ui/components/ui/popover";
 import { cn } from "@nova/ui/lib/utils";
 
-export function DatePickerForm({
+export function DatePickerForm<T extends Record<string, any>>({
   form,
   name,
   label,
 }: {
-  form: UseFormReturn<SignupInput>;
-  name: keyof SignupInput;
+  form: UseFormReturn<T>;
+  name: Path<T>;
   label: string;
 }) {
   return (
@@ -46,7 +46,7 @@ export function DatePickerForm({
                   variant={"outline"}
                   className={cn(
                     "w-[180px] pl-3 h-10 text-left b-m !mt-[4px] focus:border-primary focus:text-primary shadow-sm rounded-sm",
-                    !field.value && "text-muted-foreground",
+                    !field.value && "text-muted-foreground"
                   )}
                 >
                   {field.value ? (
@@ -63,7 +63,7 @@ export function DatePickerForm({
                 captionLayout="dropdown-buttons"
                 className="bg-background01"
                 mode="single"
-                fromYear={2000} 
+                fromYear={2000}
                 toYear={new Date().getFullYear()}
                 selected={field.value as Date}
                 onSelect={field.onChange}

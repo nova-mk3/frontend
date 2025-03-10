@@ -18,7 +18,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const data = await BoardIdGet(); //no-cache
+  // const data = await BoardIdGet(); //no-cache
 
   return (
     <html lang="en" className={`${pretendard.variable} font-pretendard`}>
@@ -27,7 +27,10 @@ export default async function RootLayout({
         <div id="root" className="max-w-screen-xl mx-auto">
           <Header />
           <Providers>
-            <ZustandProvider data={data}>{children}</ZustandProvider>
+            {/* 실제 배포할때 주석제거할 예정 */}
+            {/* <ZustandProvider data={data}> */}
+            {children}
+            {/* </ZustandProvider> */}
           </Providers>
           <Footer />
         </div>

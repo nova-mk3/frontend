@@ -103,7 +103,8 @@ export default function PostDetail({ postId }: PostDetailProps) {
                 </p>
                 <Separator orientation="vertical" className="h-4" />
                 <AlertDialog
-                  title="게시글"
+                  title="게시글 삭제"
+                  subtitle="게시글을 정말로 삭제하시겠습니까?"
                   triggerName="삭제"
                   onAction={handleDelete}
                 />

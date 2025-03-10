@@ -66,7 +66,8 @@ export default function DetailPageSubTitle({
             </p>
 
             <AlertDialog
-              title="게시글"
+              title="게시글 삭제"
+              subtitle="게시글을 정말로 삭제하시겠습니까?"
               triggerName="삭제"
               onAction={handleDelete}
             />

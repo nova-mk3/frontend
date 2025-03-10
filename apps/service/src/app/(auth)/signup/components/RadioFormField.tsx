@@ -1,7 +1,4 @@
 "use client";
-
-import { SignupInput } from "@/src/schema/signup.schema";
-
 import {
   FormControl,
   FormField,
@@ -21,7 +18,7 @@ export function RadioFormField<T extends Record<string, any>>({
   form: UseFormReturn<T>;
   name: Path<T>;
   label: string;
-  options: { value: any ; label: string }[];
+  options: { value: any; label: string }[];
 }) {
   return (
     <FormField
@@ -35,13 +32,12 @@ export function RadioFormField<T extends Record<string, any>>({
             value={field.value}
             onChange={field.onChange}
           />
-          <FormMessage className="b-s text-danger transition-colors"/>
+          <FormMessage className="b-s text-danger transition-colors" />
         </>
       )}
     />
   );
 }
-
 
 // 라디오 아이템 컴포넌트
 export function RadioOption({
@@ -81,7 +77,7 @@ export function RadioGroupField({
           value={value}
           className="flex gap-6 !mt-[4px]"
         >
-          {options.map((option,index) => (
+          {options.map((option, index) => (
             <RadioOption key={index} {...option} />
           ))}
         </RadioGroup>
