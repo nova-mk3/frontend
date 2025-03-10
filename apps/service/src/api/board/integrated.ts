@@ -34,12 +34,15 @@ export async function IntegratedBoardPost({
 }
 
 export interface Params {
-  size?: number;
-  sort?: string;
-  boardId?: string;
-  postType?: PostType;
-  page?: number;
-  postId?: string;
+  postId: string;
+  postType: PostType;
+  size: number;
+  boardId: string;
+  page: number;
+  keyword: string;
+  searchType: string;
+  sortBy: string;
+  sortDirection: string;
 }
 
 /*
@@ -47,14 +50,17 @@ export interface Params {
  */
 export async function IntegratedBoardGet({
   postType,
+  boardId,
   page,
   size,
-  sort,
-  boardId,
-}: Params) {
+  searchType,
+  sortBy,
+  sortDirection,
+  keyword,
+}: Omit<Params, "postId">) {
   try {
     const response = await Authapi.get(
-      `/nova/boards/${boardId}/posts?postType=${postType}&page=${page}&size=${size}&sort=${sort}`
+      `/nova/boards/${boardId}/posts/search?postType=${postType}&page=${page}&size=${size}&searchType=${searchType}&keyword=${keyword}&sortBy=${sortBy}&sortDirection=${sortDirection}`
     );
     return response.data.data;
   } catch (error) {
@@ -65,7 +71,10 @@ export async function IntegratedBoardGet({
 /*
  * 게시글 상세 조회
  */
-export async function IntegratedBoardGetDetail({ postId, boardId }: Params) {
+export async function IntegratedBoardGetDetail({
+  postId,
+  boardId,
+}: Pick<Params, "postId" | "boardId">) {
   const response = await Authapi.get(`/nova/boards/${boardId}/posts/${postId}`);
   return response.data.data;
 }
@@ -73,7 +82,7 @@ export async function IntegratedBoardGetDetail({ postId, boardId }: Params) {
 /*
  * 전체 게시판 목록 조회
  */
-export async function BoardAllList({ boardId, page, size, sort }: Params) {
+export async function BoardAllList({ boardId, page, size }: Params) {
   try {
     const response = await Authapi.get(
       `/nova/boards/${boardId}/posts/all?page=${page}&size=${size}&sort=${sort}`
@@ -87,7 +96,7 @@ export async function BoardAllList({ boardId, page, size, sort }: Params) {
 /*
  * 각 PostType(QnA, 자유게시판, 자기소개, 공지사항)별 최신 6개 게시글 조회
  */
-export async function BoardLatestList({ boardId }: Params) {
+export async function BoardLatestList({ boardId }: Pick<Params, "boardId">) {
   try {
     const response = await Authapi.get(`/nova/boards/${boardId}/posts/latest`);
     return response.data.data;

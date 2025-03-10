@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useState } from "react";
+import React, { Suspense } from "react";
 import { useBoardIdStore } from "@/src/store/BoardId";
 import { usePostListQuery } from "../query/postqueries";
 import { BOARD_SIZE, POST_TYPE } from "@/src/constant/board";
@@ -13,19 +13,17 @@ import BoardList from "../components/BoardList";
 export default function Post() {
   const { INTEGRATED } = useBoardIdStore();
 
-  const {
-    currentPage,
-    searchQuery: initialSearchQuery,
-    sortOption: initialSortOption,
-  } = useQueryParams();
-  const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
-  const [sortOption, setSortOption] = useState(initialSortOption);
+  const { currentPage, keyword, searchType, sortBy, sortDirection } =
+    useQueryParams();
 
   const { data } = usePostListQuery({
     postType: POST_TYPE.FREE,
     page: currentPage - 1,
     size: BOARD_SIZE,
-    sort: sortOption,
+    keyword: keyword,
+    searchType: searchType,
+    sortBy: sortBy,
+    sortDirection: sortDirection,
     boardId: INTEGRATED,
   });
 
@@ -34,10 +32,6 @@ export default function Post() {
       <BoardListTitle
         title={POST_TYPE.FREE}
         TitleImage={<Book size={20} />}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        sortOption={sortOption}
-        setSortOption={setSortOption}
         defaultHref="/board"
       />
       <div>
