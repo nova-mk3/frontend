@@ -1,13 +1,13 @@
 "use client";
 
-import React, { Suspense, useState } from "react";
+import React, { Suspense } from "react";
 import { useBoardIdStore } from "@/src/store/BoardId";
-import { usePostAllListQuery, usePostListQuery } from "../query/postqueries";
+import { usePostAllListQuery } from "../query/postqueries";
 import { BOARD_SIZE, POST_TYPE } from "@/src/constant/board";
 import { PageNation } from "../../components/PageNation";
 import { useQueryParams } from "../../components/useQueryParams";
 import BoardListTitle from "../components/BoardListTitle";
-import { Layers, Pin } from "lucide-react";
+import { Layers } from "lucide-react";
 import BoardList from "../components/BoardList";
 
 export default function Post() {

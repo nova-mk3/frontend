@@ -1,5 +1,5 @@
 import { PostType } from "@/src/constant/board";
-import { Authapi } from "../core";
+import { api, Authapi } from "../core";
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
 
 export interface IntegradePostRequest {
@@ -184,6 +184,38 @@ export async function IntegratedBoardDelete({
     );
     return response.data.data;
   } catch (error: any) {
+    throwErrorMessage(error);
+  }
+}
+
+/*
+게시판 BoardId 호출
+*/
+
+export async function BoardIdGet() {
+  // proxy를 하긴하지만 여러번 하게되면 에러가 엄청 발생함
+  // html을 정적으로 생성할때, rsc를 같이 생성함 -> SSG
+  // SSR인 경우 동적으로 생성하기때문에 HTML 파일이 없음
+  console.log("BoardId api 호출");
+  try {
+    const response = await fetch("http://localhost:8080/api/v1/boards", {
+      method: "GET",
+    });
+
+    // response.ok가 false면 HTTP 에러 상태 (4xx, 5xx 등)
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch /nova/boards. Status: ${response.status}`
+      );
+    }
+
+    // JSON 파싱
+    const json = await response.json();
+
+    // 서버에서 { data: ... } 형태를 내려준다고 가정
+    return json.data;
+  } catch (error) {
+    // 사용자 정의 에러 처리 로직
     throwErrorMessage(error);
   }
 }

@@ -31,7 +31,7 @@ export default function ModifyPage() {
   const [originFiles, setOriginFiles] = useState<FileItemProps[]>([]);
   const [willDeleteFiles, setwillDeleteFiles] = useState<string[]>([]);
 
-  const { data } = useArchiveDetailQuery(postId, CLUB_ARCHIVE);
+  const { data } = useArchiveDetailQuery({ postId, boardId: CLUB_ARCHIVE });
 
   const currentYear = new Date().getFullYear();
   const years = useYearRange(2000, currentYear);
