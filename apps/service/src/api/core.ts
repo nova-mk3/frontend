@@ -1,7 +1,6 @@
 import axios from "axios";
 export const BASE_URL = "http://localhost:3000";
 export const EXTERNAL_URL = "http://localhost:8080/api/v1";
-import { redirect } from "next/navigation";
 const config = {
   baseURL: BASE_URL,
   withCredentials: true,
@@ -25,7 +24,7 @@ Authapi.interceptors.response.use(
         error.response &&
         (error.response.status === 401 || error.response.status === 403)
       ) {
-        redirect("/signin");
+        // redirect("/signin");
       }
     } else {
       // CSR 환경

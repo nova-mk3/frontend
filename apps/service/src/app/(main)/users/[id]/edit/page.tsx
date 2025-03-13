@@ -1,10 +1,19 @@
 import React from "react";
-import EditForm from "../components/EditForm";
+import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
+import Hydration from "./Hydration";
+export const dynamic = "force-dynamic";
 
-export default function page() {
+export default async function page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
   return (
     <div className="w-[400px] mx-auto mobile:w-[90%] mt-10">
-      <EditForm />
+      <ErrorBoundaryWrapper>
+        <Hydration memberId={id} />
+      </ErrorBoundaryWrapper>
     </div>
   );
 }
