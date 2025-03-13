@@ -30,7 +30,7 @@ export default function Header({ memberId }: Props) {
 
         <div className="flex flex-row items-center ml-auto gap-4">
           <Tendinous className="mobile:hidden" href="/suggestion" />
-          {!memberId ? (
+          {memberId === "" ? (
             <div className="flex flex-row justify-center items-center gap-4 mobile:hidden">
               <Link href="/signin">
                 <p className="w-[60px] h-[24px] flex content-center justify-center cursor-pointer">

@@ -9,6 +9,7 @@ import ZustandProvider from "@/src/store/ZustandProvider";
 import { BoardIdGet } from "@/src/api/board/integrated";
 import { redirect } from "next/navigation";
 import { getMemberId } from "@/src/api/user/server";
+import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   title: "nova",
@@ -22,12 +23,17 @@ export default async function RootLayout({
 }>) {
   // const data = await BoardIdGet(); //no-cache
 
-  const memberId = await getMemberId(); // ✅ API Route에서 로그인 상태 확인
-  if (!memberId) {
-    redirect("/signin"); // ✅ 로그인되지 않은 경우 자동 리다이렉트
+  const cookieStore = await cookies();
+  const authToken = cookieStore.get("AUTH_TOKEN")?.value;
+  let memberId = "";
+  if (authToken) {
+    memberId = await getMemberId();
+    if (memberId === null) {
+      redirect("/signin");
+    }
+  } else {
+    memberId = "";
   }
-  // const memberData = await getMember({ memberId });
-  // console.log(memberData);
 
   console.log(memberId);
   return (

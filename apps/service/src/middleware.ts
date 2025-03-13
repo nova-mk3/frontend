@@ -21,9 +21,9 @@ export function middleware(request: NextRequest) {
   const AuthToken = request.cookies.get("AUTH_TOKEN")?.value;
 
   // ✅ `AUTH_TOKEN`이 없으면 즉시 `/signin`으로 리디렉트
-  if ((pathname.startsWith("/board") || pathname === "/") && !AuthToken) {
+  if (pathname.startsWith("/users") && !AuthToken) {
     console.log("🔴 AUTH_TOKEN 없음 - 로그인 페이지로 리디렉트");
-    return NextResponse.redirect(new URL("/signin", request.url));
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   // ✅ `AUTH_TOKEN`이 있을 경우, 응답 쿠키 유지
