@@ -9,12 +9,3 @@ export async function getMember({ memberId }: { memberId: string }) {
     throwErrorMessage(error);
   }
 }
-
-export async function logout() {
-  try {
-    const response = await Authapi.get(`nova/members/logout`);
-    return response.data;
-  } catch (error) {
-    throwErrorMessage(error);
-  }
-}

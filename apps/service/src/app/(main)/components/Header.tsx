@@ -9,9 +9,9 @@ import Tendinous from "./Tendinous";
 import HeaderLoginMenu from "./HeaderLoginMenu";
 
 interface Props {
-  userId: string;
+  memberId: string;
 }
-export default function Header({ userId }: Props) {
+export default function Header({ memberId }: Props) {
   const [isSiderbar, setIsSiderbar] = useState(false);
 
   const toggleSiderbar = () => {
@@ -30,7 +30,7 @@ export default function Header({ userId }: Props) {
 
         <div className="flex flex-row items-center ml-auto gap-4">
           <Tendinous className="mobile:hidden" href="/suggestion" />
-          {!userId ? (
+          {!memberId ? (
             <div className="flex flex-row justify-center items-center gap-4 mobile:hidden">
               <Link href="/signin">
                 <p className="w-[60px] h-[24px] flex content-center justify-center cursor-pointer">
@@ -68,6 +68,7 @@ export default function Header({ userId }: Props) {
                     <Menu size={20} />
                   </div>
                 }
+                memberId={memberId}
               />
             </div>
           )}
