@@ -18,7 +18,6 @@ import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
 import CommentList from "../../components/comments/CommentList";
 import { POST_TYPE } from "@/src/constant/board";
 import DetailPageSubTitle from "../../components/DetailPageSubTitle";
-import { Book, Hand, MessageSquareMore } from "lucide-react";
 import { Separator } from "@nova/ui/components/ui/separator";
 
 interface PostDetailProps {

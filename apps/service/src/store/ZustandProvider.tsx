@@ -17,11 +17,8 @@ export default function ZustandProvider({ children, data }: Props) {
   const clubArchiveId = data.find(
     (item: any) => item.category === "CLUB_ARCHIVE"
   )?.id as string;
-
   // Zustand에 저장
-  React.useEffect(() => {
-    setBoardIds({ INTEGRATED: integratedId, CLUB_ARCHIVE: clubArchiveId });
-  }, [integratedId, clubArchiveId, setBoardIds]);
-
+  // setBoardIds({ INTEGRATED: integratedId, CLUB_ARCHIVE: clubArchiveId });
+  console.log("하이");
   return <>{children}</>;
 }

@@ -34,7 +34,7 @@ export default function ModifyPage() {
   const { data } = useArchiveDetailQuery({ postId, boardId: CLUB_ARCHIVE });
 
   const currentYear = new Date().getFullYear();
-  const years = useYearRange(2000, currentYear);
+  const years = useYearRange(1980, currentYear);
   const form = useForm<ExamInput>({
     resolver: zodResolver(ExamSchema),
     mode: "onChange",

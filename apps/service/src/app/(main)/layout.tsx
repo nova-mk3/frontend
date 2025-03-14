@@ -12,8 +12,8 @@ import { getMemberId } from "@/src/api/user/server";
 import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
-  title: "nova",
-  description: "nova web",
+  title: "NOVA",
+  description: "충북대학교 소프트웨어학과 노바",
 };
 
 export default async function RootLayout({
@@ -21,8 +21,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const data = await BoardIdGet(); //no-cache
-
   const cookieStore = await cookies();
   const authToken = cookieStore.get("AUTH_TOKEN")?.value;
   let memberId = "";
@@ -34,20 +32,13 @@ export default async function RootLayout({
   } else {
     memberId = "";
   }
-
-  console.log(memberId);
   return (
     <html lang="en" className={`${pretendard.variable} font-pretendard`}>
       <body>
         {/* 추후 수정 예정 @kwonja */}
         <div id="root" className="max-w-screen-xl mx-auto">
           <Header memberId={memberId} />
-          <Providers>
-            {/* 실제 배포할때 주석제거할 예정 */}
-            {/* <ZustandProvider data={data}> */}
-            {children}
-            {/* </ZustandProvider> */}
-          </Providers>
+          <Providers>{children}</Providers>
           <Footer />
         </div>
       </body>

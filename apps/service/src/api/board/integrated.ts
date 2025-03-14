@@ -86,8 +86,14 @@ export async function IntegratedBoardGetDetail({
   postId,
   boardId,
 }: BoardGetParamType) {
-  const response = await Authapi.get(`/nova/boards/${boardId}/posts/${postId}`);
-  return response.data.data;
+  try {
+    const response = await Authapi.get(
+      `/nova/boards/${boardId}/posts/${postId}`
+    );
+    return response.data.data;
+  } catch (error) {
+    throwErrorMessage(error);
+  }
 }
 
 /*

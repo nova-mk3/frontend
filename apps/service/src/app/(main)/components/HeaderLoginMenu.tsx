@@ -21,6 +21,7 @@ export default function HeaderLoginMenu({ trigger, memberId }: Props) {
   };
   return (
     <DropdownMenu>
+      {/* asChild를 써주면 태그에 클릭이 붙는게 아니라  자식 element에 클릭 이벤트가 붙는다 */}
       <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
       <DropdownMenuContent className="w-[180px] py-2">
         <DropdownMenuGroup>
