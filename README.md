@@ -1,2 +1,1 @@
-# Nova Frontend
-webhook 테스트
+# [FE] 충북대학교 노바 홈페이지
