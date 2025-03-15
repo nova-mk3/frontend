@@ -18,7 +18,7 @@ import {
 } from "../query/mutation";
 
 export default function Page() {
-  const { INTEGRATED } = useBoardIdStore();
+  const { CLUB_ARCHIVE } = useBoardIdStore();
   const [selectedFiles, setSelectedFiles] = useState<ImageFile[]>([]);
 
   const form = useForm<PictureInput>({
@@ -57,7 +57,7 @@ export default function Page() {
               return file.id;
             }),
           ],
-          boardId: INTEGRATED,
+          boardId: CLUB_ARCHIVE,
         });
       } catch (error) {
         alert("파일 업로드 실패");
@@ -68,7 +68,7 @@ export default function Page() {
         title: data.title,
         content: data.content,
         imageFileIds: [],
-        boardId: INTEGRATED,
+        boardId: CLUB_ARCHIVE,
       });
     }
   };

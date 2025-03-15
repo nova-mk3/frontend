@@ -12,7 +12,7 @@ import PictureList from "./components/PictureList";
 import { PageNation } from "../components/PageNation";
 
 export default function Post() {
-  const { INTEGRATED } = useBoardIdStore();
+  const { CLUB_ARCHIVE } = useBoardIdStore();
 
   const { currentPage, keyword, searchType, sortBy, sortDirection } =
     useQueryParams();
@@ -25,7 +25,7 @@ export default function Post() {
     searchType: searchType,
     sortBy: sortBy,
     sortDirection: sortDirection,
-    boardId: INTEGRATED,
+    boardId: CLUB_ARCHIVE,
   });
 
   return (

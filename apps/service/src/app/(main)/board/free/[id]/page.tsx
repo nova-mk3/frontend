@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id: postId } = await params;
   const postData = await IntegratedBoardGetDetail({
     postId,
-    boardId: "03cbc040-fb83-46f7-9118-f637e9c14679",
+    boardId: "dffc0da3-bfb5-48c9-a8de-bcecab8c3541",
   });
   console.log(postData);
   return {

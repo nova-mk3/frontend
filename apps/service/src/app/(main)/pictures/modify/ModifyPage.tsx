@@ -20,7 +20,7 @@ import { POST_TYPE } from "@/src/constant/board";
 import ModifyFileUploader from "../components/ModifyFileUploader";
 
 export default function ModifyPage() {
-  const { INTEGRATED } = useBoardIdStore();
+  const CLUB_ARCHIVE = useBoardIdStore((state) => state.CLUB_ARCHIVE);
   const { postId } = useQueryParams();
   const [selectedFiles, setSelectedFiles] = useState<ImageFile[]>([]);
   const [originFiles, setOriginFiles] = useState<ImageProps[]>([]);
@@ -28,9 +28,8 @@ export default function ModifyPage() {
 
   const pictureMutation = usePicturePutMutation({ postId });
   const uploadMutation = useFileUploadMutation();
-  const { data } = usePictureDetailQuery(postId, INTEGRATED);
+  const { data } = usePictureDetailQuery({ postId, boardId: CLUB_ARCHIVE });
 
-  console.log(data);
   const form = useForm<PictureInput>({
     resolver: zodResolver(PictureSchema),
     mode: "onChange",
@@ -72,7 +71,7 @@ export default function ModifyPage() {
           imageFileIds: [...originFiles.map((file) => file.id), ...temp],
           deleteImageFileIds: [...willDeleteFiles],
           postId: postId,
-          boardId: INTEGRATED,
+          boardId: CLUB_ARCHIVE,
         });
       } catch (error) {
         alert("파일 업로드 실패");
@@ -86,7 +85,7 @@ export default function ModifyPage() {
         imageFileIds: [...originFiles.map((file) => file.id)],
         deleteImageFileIds: [...willDeleteFiles],
         postId: postId,
-        boardId: INTEGRATED,
+        boardId: CLUB_ARCHIVE,
       });
     }
   };

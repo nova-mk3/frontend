@@ -19,6 +19,7 @@ export default function Navigation({ className }: NavigationProps) {
   return (
     <div className="">
       <ul className="flex flex-row gap-7 flex-wrap mx-auto justify-center border-b-[1px] border-line01">
+        <NavigationMenuItem href="profile">내 프로필</NavigationMenuItem>
         <NavigationMenuItem href="edit">회원정보수정</NavigationMenuItem>
         <NavigationMenuItem href="pwd">비밀번호 변경</NavigationMenuItem>
         <NavigationMenuItem href="email">이메일 변경</NavigationMenuItem>

@@ -4,11 +4,11 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import React from "react";
-import EditForm from "../components/EditForm";
 import { userKeys } from "../query/qureies";
 import { cookies } from "next/headers";
 import { getMember } from "@/src/api/user/server";
-import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
+
+import EditForm from "./EditForm";
 
 interface Props {
   memberId: string;

@@ -42,3 +42,6 @@ export const POST_TYPE_LABEL: Record<PostType, string> = {
   SUGGESTION: "건의함",
   ALL: "전체글보기",
 };
+
+export const INTEGRATED = "dffc0da3-bfb5-48c9-a8de-bcecab8c3541";
+export const CLUB_ARCHIVE = "f7e1e71a-3d42-49d9-be3f-5f87e9321f7c";

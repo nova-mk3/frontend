@@ -35,7 +35,9 @@ Authapi.interceptors.response.use(
         (error.response.status === 401 || error.response.status === 403)
       ) {
         alert("토큰이 만료되었습니다");
-        window.location.href = "/signin";
+        const currentPath = window.location.pathname + window.location.search;
+        console.log(currentPath);
+        window.location.href = `/signin?redirect=${currentPath}`;
       }
     }
 

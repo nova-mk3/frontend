@@ -26,9 +26,9 @@ export default async function RootLayout({
   let memberId = "";
   if (authToken) {
     memberId = await getMemberId();
-    if (memberId === null) {
-      redirect("/signin");
-    }
+    // if (memberId === null) {
+    //   redirect("/signin");
+    // }
   } else {
     memberId = "";
   }

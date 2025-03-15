@@ -13,8 +13,10 @@ import { InputFormField } from "../../components/InputFormField";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "@/src/api/auth";
 import { useRouter } from "next/navigation";
+import { useQueryParams } from "@/src/app/(main)/components/useQueryParams";
 
 export function SigninForm() {
+  const { redirectUrl } = useQueryParams();
   const router = useRouter();
   const form = useForm<SigninInput>({
     resolver: zodResolver(SigninSchema),
@@ -36,7 +38,8 @@ export function SigninForm() {
     onSuccess: (data: any) => {
       //로그인 성공
       alert("로그인 성공");
-      router.push("/");
+
+      router.push(redirectUrl);
     },
     onError: (error) => {
       alert(error.message);
