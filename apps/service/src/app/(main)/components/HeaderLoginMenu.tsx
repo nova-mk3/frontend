@@ -25,23 +25,16 @@ export default function HeaderLoginMenu({ trigger, memberId }: Props) {
       <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
       <DropdownMenuContent className="w-[180px] py-2">
         <DropdownMenuGroup>
-          <Link href={`/users/${memberId}/edit`}>
+          <Link href={`/users/${memberId}`}>
             <DropdownMenuItem className="cursor-pointer px-4 py-2 hover:bg-background02">
-              프로필 수정
+              마이페이지
             </DropdownMenuItem>
           </Link>
-          <DropdownMenuItem className="cursor-pointer px-4 py-2 hover:bg-background02">
-            비밀번호 변경
-          </DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer px-4 py-2 hover:bg-background02">
-            이메일 변경
-          </DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer px-4 py-2 hover:bg-background02">
-            내 게시글
-          </DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer px-4 py-2 hover:bg-background02">
-            내 건의함
-          </DropdownMenuItem>
+          <Link href={`/users/${memberId}/edit`}>
+            <DropdownMenuItem className="cursor-pointer px-4 py-2 hover:bg-background02">
+              설정
+            </DropdownMenuItem>
+          </Link>
           <Separator className="my-1" />
           <DropdownMenuItem
             className="cursor-pointer px-4 py-2 hover:bg-background02"

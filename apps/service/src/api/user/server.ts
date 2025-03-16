@@ -34,17 +34,9 @@ export async function getMemberId() {
   }
 }
 
-export async function getMember({
-  authToken,
-  memberId,
-}: {
-  authToken: string | undefined;
-  memberId: string;
-}) {
-  if (!authToken) {
-    console.error("🔴 AUTH_TOKEN 없음, 인증 실패");
-    return null;
-  }
+export async function getMember({ memberId }: { memberId: string }) {
+  const cookieStore = await cookies();
+  const authToken = cookieStore.get("AUTH_TOKEN")?.value;
   try {
     // ✅ `fetch` 요청 시 `Cookie` 포함
     const res = await fetch(

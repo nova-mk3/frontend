@@ -4,37 +4,43 @@ import {
 } from "next/dist/server/web/spec-extension/cookies";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { verifyAccessToken } from "./api/auth";
 
-export function middleware(request: NextRequest) {
-  const { pathname, searchParams } = request.nextUrl;
-
-  if (pathname === "/exam_archive" || pathname === "/exam_archive/") {
-    // 이미 page 파라미터가 있는지 확인
-    if (!searchParams.has("page")) {
-      const url = request.nextUrl.clone();
-      url.searchParams.set("page", "1");
-      return NextResponse.redirect(url);
-    }
-  }
+export async function middleware(request: NextRequest) {
+  const { pathname, search } = request.nextUrl;
 
   // ✅ `AUTH_TOKEN` 가져오기
   const AuthToken = request.cookies.get("AUTH_TOKEN")?.value;
-
-  // ✅ `AUTH_TOKEN`이 없으면 즉시 `/signin`으로 리디렉트
-  if (pathname.startsWith("/users") && !AuthToken) {
-    console.log("🔴 AUTH_TOKEN 없음 - 로그인 페이지로 리디렉트");
-    return NextResponse.redirect(new URL("/", request.url));
-  }
-
-  // ✅ `AUTH_TOKEN`이 있을 경우, 응답 쿠키 유지
   const response = NextResponse.next();
 
-  if (AuthToken) {
+  if (AuthToken === undefined) {
+    if (pathname.startsWith("/users")) {
+      console.log("🔴 AUTH_TOKEN 없음 - 로그인 페이지로 리디렉트");
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+  } else {
+    const data = await verifyAccessToken(AuthToken);
+    console.log(data);
+
+    if (data.status === 500) {
+      const loginUrl = new URL("/signin", request.url);
+      loginUrl.searchParams.set(
+        "redirect",
+        decodeURIComponent(pathname) + search
+      ); // 이전 URL 저장
+      return NextResponse.redirect(loginUrl);
+    }
+
     response.cookies.set("AUTH_TOKEN", AuthToken);
     applySetCookie(request, response);
   }
+
   return response;
 }
+
+export const config = {
+  matcher: "/",
+};
 
 function applySetCookie(req: NextRequest, res: NextResponse): void {
   // parse the outgoing Set-Cookie header
