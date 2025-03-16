@@ -1,28 +1,26 @@
-import { SigninInput } from "../../../../../../service/src/schema/signin.schema";
 // import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nova/ui/components/ui/button";
 import { Form } from "@nova/ui/components/ui/form";
 import { IdCard, Lock } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-// import { InputFormField } from "../../../../../../service/src/app/(auth)/components/InputFormField";
 import { InputFormField } from "./InputFormField";
-import Logo from "./../../../../../public/image/Logo.svg";
-
-
+import Logo from '@/public/image/Logo.svg';
+import { AdminLogin } from "@/src/api/auth/adminLogin";
+import { SigninInput } from './signin.schema';
 
 export function SigninForm() {
   const form = useForm<SigninInput>({
     // resolver: zodResolver(SigninSchema),
     defaultValues: {
-      studentId: "",
+      studentNumber: "",
       password: "",
     },
     mode: "onChange",
   });
 
   function onSubmit(values: SigninInput) {
-    console.log(values);
+    AdminLogin(values);
   }
 
   return (
@@ -33,7 +31,7 @@ export function SigninForm() {
       }}
     >
       <Link href={"/"} className="flex-grow-0 flex items-center justify-center">
-        <Logo width={50} fill="#B096F5" className="block"/>
+        <Logo height="50px" width="50px" fill="#B096F5" className="block"/>
         <div className="text-4xl font-bold text-primary">novAdmin</div>
       </Link>
       <Form {...form}>
@@ -43,7 +41,7 @@ export function SigninForm() {
         >
           <InputFormField
             form={form}
-            name={"studentId"}
+            name={"studentNumber"}
             label={"ID"}
             placeHolder={"ID를 입력하세요"}
             type="text"

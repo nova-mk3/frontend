@@ -1,27 +1,26 @@
+import cookie from 'js-cookie';
 import { api } from '@/src/api/core';
-import { throwErrorMessage } from '../../../../service/src/libs/utils/throwError';
-
-// 관리자 로그인
 
 export interface AdminLoginRequest {
-    admin : string,
-    password : string,
+    studentNumber: string;
+    password: string;
 }
 
-export async function AdminLogin(
-    {
-        admin ,
+//TODO : JWT 토큰을 따로 안주는거같음 확인이 필요함
+
+export async function AdminLogin({ studentNumber , password }: AdminLoginRequest) {
+  try {
+    const response = await api.post('/nova/members/login', {
+        studentNumber,
         password,
-    }: AdminLoginRequest
-){
-    try{
-        // 아직 관리자로그인 api가 없어서 임의로 작성
-        const response = await api.post('/admin/auth/login', {
-            admin,
-            password,
-        })
-        return response.data;
-    }catch(error:any){
-        alert(error);
+    });
+    const { token } = response.data;
+    if (token) {
+      cookie.set('token', token, { expires: 1 /24 });
     }
+    return response.data;
+  } catch (error: any) {
+    alert("로그인 실패: " + error.message);
+    throw error;
+  }
 }
