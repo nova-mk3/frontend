@@ -7,16 +7,19 @@ export function Background({ className }: HTMLAttributes<HTMLDivElement>) {
       <Logo
         className="absolute rotate-3 top-[40px] left-[210px]"
         fill="#FFFFFF"
+        height="700px"
         width="700px"
       />
       <Logo
         className="absolute rotate-[80deg] top-[-280px] left-[1200px] blur-[1.4px]"
         fill="#FFFFFFC9"
+        height="200px"
         width="200px"
       />
       <Logo
         className="absolute rotate-[40deg] top-[280px] left-[1000px] blur-[1.4px]"
         fill="#FFFFFF79"
+        height="180px"
         width="180px"
       />
       <div className="text-background01 absolute top-[48%] left-[75%]">
