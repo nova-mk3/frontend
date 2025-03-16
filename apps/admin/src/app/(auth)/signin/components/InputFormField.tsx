@@ -12,8 +12,6 @@ import { Eye, EyeClosed } from "lucide-react";
 import { JSX, useState } from "react";
 import { Path, UseFormReturn } from "react-hook-form";
 import { useInputFocus } from "./useInputFocus";
-// import { useInputFocus } from "../signup/hooks/useInputFocus";
-
 
 export function InputFormField<T extends Record<string, any>>({
   form,
@@ -85,7 +83,7 @@ export function InputFormField<T extends Record<string, any>>({
                   : "focus:border-primary focus:text-primary focus:placeholder-primary",
                 leftIcon ? "pl-10" : "",
               )}
-              type={hasToggleIcon && !showPassword ? type : "text"}
+              type={hasToggleIcon ? (showPassword ? "text" : "password") : type}
               placeholder={placeHolder}
               disabled={disabled}
               {...(inputMode ? { inputMode } : {})}
@@ -107,7 +105,7 @@ export function InputFormField<T extends Record<string, any>>({
               )}
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? <EyeClosed size={22} /> : <Eye size={22} />}
+              {showPassword ? <Eye size={22}/>:<EyeClosed size={22} />}
             </Button>
           )}
         </FormItem>
