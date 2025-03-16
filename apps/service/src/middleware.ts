@@ -20,6 +20,7 @@ export async function middleware(request: NextRequest) {
     }
   } else {
     const data = await verifyAccessToken(AuthToken);
+
     console.log(data);
 
     if (data.status === 500) {
@@ -39,7 +40,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: "/",
+  matcher: ["/((?!signin|signup).*)"],
 };
 
 function applySetCookie(req: NextRequest, res: NextResponse): void {
