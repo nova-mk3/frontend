@@ -8,7 +8,7 @@ interface BoardIdState {
 }
 
 export const useBoardIdStore = create<BoardIdState>((set) => ({
-  INTEGRATED: "03cbc040-fb83-46f7-9118-f637e9c14679",
-  CLUB_ARCHIVE: "15ae2c32-f158-49f4-850b-b55b5c55ec67",
+  INTEGRATED: "dffc0da3-bfb5-48c9-a8de-bcecab8c3541",
+  CLUB_ARCHIVE: "f7e1e71a-3d42-49d9-be3f-5f87e9321f7c",
   setBoardIds: (ids) => set(ids),
 }));

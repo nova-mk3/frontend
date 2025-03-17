@@ -16,29 +16,20 @@ Authapi.interceptors.response.use(
     return response;
   },
   (error) => {
-    // 에러 응답 처리
+    // 에러 응답 처리 :  CSR 환경
     console.log(error);
-    if (typeof window === "undefined") {
-      // SSR 환경 보통 pre-render 상황이 된다
-      if (
-        error.response &&
-        (error.response.status === 401 || error.response.status === 403)
-      ) {
-        // redirect("/signin");
-      }
-    } else {
-      // CSR 환경
+    if (typeof window !== "undefined") {
       console.log(error);
-      // 연산자 우선순위.. ㅂㄷㅂㄷ
+
       if (
         error.response &&
         (error.response.status === 401 || error.response.status === 403)
       ) {
         alert("토큰이 만료되었습니다");
-        window.location.href = "/signin";
+        const currentPath = window.location.pathname + window.location.search;
+        window.location.href = `/signin?redirect=${decodeURIComponent(currentPath)}`;
       }
     }
-
     return Promise.reject(error);
   }
 );

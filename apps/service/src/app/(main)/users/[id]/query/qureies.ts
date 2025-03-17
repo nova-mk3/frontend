@@ -1,6 +1,6 @@
 import { getMember } from "@/src/api/user/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { UserProfile } from "../components/EditForm";
+import { UserProfile } from "../edit/EditForm";
 
 export const userKeys = {
   all: ["mypage"] as const,

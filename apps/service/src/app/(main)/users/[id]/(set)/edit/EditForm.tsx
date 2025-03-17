@@ -11,12 +11,13 @@ import { DatePickerForm } from "@/src/app/(auth)/signup/components/DatePickerFie
 import { FileFormField } from "@/src/app/(auth)/signup/components/FileFormField";
 import { Button } from "@nova/ui/components/ui/button";
 import GraduationYearSelect from "@/src/app/(auth)/signup/components/GraduationYearSelect";
-import Modal from "../../../components/Modal";
+
 import {
   ChangeUserInfoInput,
   ChangeUserInfoSchema,
 } from "@/src/schema/changeuserinfo.schema";
-import { useGetUserData } from "../query/qureies";
+import { useGetUserData } from "../../query/qureies";
+import Modal from "@/src/app/(main)/components/Modal";
 
 interface Props {
   memberId: string;

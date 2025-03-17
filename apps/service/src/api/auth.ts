@@ -49,6 +49,19 @@ export async function login({
   }
 }
 
+export async function verifyAccessToken(accessToken: string) {
+  try {
+    const response = await api.post(
+      `nova/members/access-token/verify?accessToken=${accessToken}`
+    );
+    return response.data;
+  } catch (error) {
+    return {
+      status: 500,
+    };
+  }
+}
+
 export async function logout() {
   try {
     const response = await Authapi.get(`nova/members/logout`);
