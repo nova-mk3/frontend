@@ -3,7 +3,7 @@ import { Authapi } from "../../core";
 // Get pending members
 export async function GetPendingMembers() {
     try {
-        const response = await Authapi.get(`/nova/pendingMembers`);
+        const response = await Authapi.get(`/nova/pending-members`);
         console.log(response)
         return response.data.data;
     } catch (error: any) {
@@ -14,7 +14,7 @@ export async function GetPendingMembers() {
 
 export async function GetSpecificPendingMember(pendingMemberId: string) {
     try {
-        const reponse = await Authapi.get(`/nova/pendingMembers/${pendingMemberId}`);
+        const reponse = await Authapi.get(`/nova/pending-members/${pendingMemberId}`);
         return reponse.data;
     }
     catch (error: any) {
@@ -27,7 +27,7 @@ export async function GetSpecificPendingMember(pendingMemberId: string) {
 // Reject pending member
 export async function RejectPendingMember(pendingMemberId: string) {
     try {
-        const response = await Authapi.delete(`/nova/pendingMembers/${pendingMemberId}/rejected`);
+        const response = await Authapi.delete(`/nova/pending-members/${pendingMemberId}/rejected`);
         return response.data;
     } catch (error: any) {
         console.error("Error rejecting pending member:", error);
@@ -38,7 +38,7 @@ export async function RejectPendingMember(pendingMemberId: string) {
 // Approve pending member
 export async function ApprovePendingMember(pendingMemberId: string) {
     try {
-        const response = await Authapi.post(`/nova/pendingMembers/${pendingMemberId}/approved`);
+        const response = await Authapi.post(`/nova/pending-members/${pendingMemberId}`);
         return response.data;
     } catch (error: any) {
         console.error("Error approving pending member:", error);
