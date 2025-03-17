@@ -18,8 +18,6 @@ export interface PendingMemberCardModalProps {
   open: boolean;
   pendingMemberId : string;
   onClose: () => void;
-  Aceept?: () => void;
-  Reject?: () => void;
 }
 
 export interface PendingGraduationResponse {

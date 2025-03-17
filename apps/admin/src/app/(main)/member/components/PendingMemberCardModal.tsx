@@ -5,7 +5,7 @@ import { Button } from "@nova/ui/components/ui/button";
 import Image from "next/image";
 import { Phone, IdCard, Cake, Mail , GraduationCap} from "lucide-react";
 import { PendingMemberCardModalProps, PendingGraduationResponse, PendingMemberResponse } from "@/src/types/pendingMember";
-import { useSpecificPendingMemberQuery } from "@/src/query/pendingMembersQueries";
+import { useApprovePendingMemberMutation, useRejectPendingMemberMutation, useSpecificPendingMemberQuery } from "@/src/query/pendingMembersQueries";
 
 // 임시 프로필 이미지
 import TempImageLink from "./../../../../../../service/public/image/cat.jpg";
@@ -58,15 +58,15 @@ const LeftSide = ({ data, isLoading, error }: { data?: PendingMemberResponse; is
   );
 };
 
-const RightSide = ({ pendingMemberResponse, pendingGraduationResponse ,  isLoading, error ,  onClose, Aceept, Reject }: { 
-  pendingMemberResponse?: PendingMemberResponse;
+const RightSide = ({ pendingMemberResponse, pendingGraduationResponse ,  isLoading, error ,  onClose }: { 
+  pendingMemberResponse: PendingMemberResponse;
   pendingGraduationResponse? : PendingGraduationResponse;
   isLoading: boolean;
   error?: any;
   onClose: () => void | undefined;
-  Aceept: (() => void) | undefined;
-  Reject: (() => void) | undefined;
 }) => {
+  const approveMutation = useApprovePendingMemberMutation();
+  const rejectMutation = useRejectPendingMemberMutation();
   if (isLoading){
     return (
       <div className="flex flex-col justify-between w-[700px]">
@@ -108,17 +108,33 @@ const RightSide = ({ pendingMemberResponse, pendingGraduationResponse ,  isLoadi
       </div>
       <div className="flex justify-end space-x-4 mt-6">
         <Button variant="default" onClick={onClose}>취소</Button>
-        <Button variant="default" onClick={Aceept}>수락</Button>
-        <Button variant="default" onClick={Reject}>반려</Button>
+        <Button
+          variant="default"
+          onClick={() => {
+            onClose();
+            approveMutation.mutate(pendingMemberResponse.pendingMemberId);
+          }}
+        >
+          수락
+        </Button>
+        <Button
+          variant="default"
+          onClick={() => {
+            onClose();
+            rejectMutation.mutate(pendingMemberResponse.pendingMemberId);
+          }}
+        >
+          반려
+        </Button>
       </div>
     </div>
   );
 };
 
-export default function PendingMemberCardModal({ open, pendingMemberId, onClose, Aceept, Reject }: PendingMemberCardModalProps) {
-  const { data, isLoading, error } = useSpecificPendingMemberQuery(pendingMemberId);
+export default function PendingMemberCardModal({ open, pendingMemberId, onClose }: PendingMemberCardModalProps) {
   const [isVisible, setIsVisible] = useState(open);
   const [isAnimating, setIsAnimating] = useState(false);
+  const { data, isLoading, error } = useSpecificPendingMemberQuery(pendingMemberId, isVisible);
 
   useEffect(() => {
     if (open) {
@@ -147,7 +163,9 @@ export default function PendingMemberCardModal({ open, pendingMemberId, onClose,
       >
         <LeftSide data={data?.pendingMemberResponse} isLoading={isLoading} error={error} />
         <div className="w-[2px] bg-gray-300 mx-6" />
-        <RightSide pendingMemberResponse={data?.pendingMemberResponse} pendingGraduationResponse={data?.pendingGraduationResponse} isLoading={isLoading} error={error} onClose={onClose} Aceept={Aceept} Reject={Reject} />
+        {data?.pendingMemberResponse && (
+          <RightSide pendingMemberResponse={data.pendingMemberResponse} pendingGraduationResponse={data?.pendingGraduationResponse} isLoading={isLoading} error={error} onClose={onClose} />
+        )}
       </div>
     </div>
   );
