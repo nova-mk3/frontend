@@ -14,7 +14,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     postId,
     boardId: "03cbc040-fb83-46f7-9118-f637e9c14679",
   });
-  console.log(postData);
   return {
     title: "NOVA",
     description: "충북대학교 소프트웨어학과 노바",
