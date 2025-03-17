@@ -2,7 +2,7 @@
 pendingMembers 에서 사용하는 react-query hooks 모음
 */
 import { useMutation, useQueryClient , useQuery} from '@tanstack/react-query';
-import { GetPendingMembers, GetSpecificPendingMember, ApprovePendingMember, RejectPendingMember } from '../api/main/member/pendingMembers';
+import { GetPendingMembers, GetSpecificPendingMember, ApprovePendingMember, RejectPendingMember } from '../api/main/member/pendingMembersApi';
 import { 
     SpecificPendingMemberApiResponse,
     PendingMembersApiResponse,
