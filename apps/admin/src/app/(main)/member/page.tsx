@@ -1,7 +1,7 @@
 "use client";
 // Members 페이지
 import { Button } from "@nova/ui/components/ui/button";
-import NewMembers from "./components/NewMember";
+import PendingMembers from "./components/PendingMember";
 import ManageMembers from "./components/ManageMembers";
 import Executive from "./components/Executive";
 import { useState } from "react";
@@ -18,7 +18,7 @@ export default function Members() {
       </div>
       <hr />
       <div>
-        {pageName === "NewMembers" && <NewMembers />}
+        {pageName === "NewMembers" && <PendingMembers />}
         {pageName === "ManageMembers" && <ManageMembers />}
         {pageName === "Executive" && <Executive />}
       </div>

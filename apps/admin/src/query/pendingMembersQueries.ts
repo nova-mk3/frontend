@@ -6,7 +6,7 @@ import { GetPendingMembers, GetSpecificPendingMember, ApprovePendingMember, Reje
 import { 
     SpecificPendingMemberApiResponse,
     PendingMembersApiResponse,
-} from '../types/member';
+} from '../types/pendingMember';
 
 
 export const pendingMembersKeys = {

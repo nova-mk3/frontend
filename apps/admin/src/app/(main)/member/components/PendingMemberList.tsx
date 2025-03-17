@@ -1,5 +1,5 @@
 import { useApprovePendingMemberMutation, useRejectPendingMemberMutation } from "@/src/query/pendingMembersQueries";
-import { PendingMemberResponse } from "src/types/member";
+import { PendingMemberResponse } from "@/src/types/pendingMember";
 import MemberCard from "@nova/ui/components/ui/MemberCard";
 
 export default function PendingMemberList({ members, onClick }: { members: PendingMemberResponse[]; onClick: (memberId: string) => void }) {

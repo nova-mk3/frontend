@@ -14,10 +14,9 @@ export interface Member {
     };
 }
 
-export interface MemberCardModalProps {
+export interface PendingMemberCardModalProps {
   open: boolean;
-  memberId : string;
-  type: "member" | "newMember";
+  pendingMemberId : string;
   onClose: () => void;
   Aceept?: () => void;
   Reject?: () => void;

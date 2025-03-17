@@ -4,7 +4,7 @@ import { Input } from "@nova/ui/components/ui/input";
 import { Button } from "@nova/ui/components/ui/button";
 import { useEffect, useState } from "react";
 import { membersData } from "./memberTempData";
-import MemberCardModal from './MemberCardModal';
+import MemberCardModal from './PendingMemberCardModal';
 import { 
   Select,
   SelectContent,

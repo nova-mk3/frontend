@@ -1,10 +1,10 @@
 import { useState } from "react";
-import MemberCardModal from "./MemberCardModal";
+import PendingMemberCardModal from "./PendingMemberCardModal";
 import { usePendingMembersQuery } from "@/src/query/pendingMembersQueries";
 import PendingMemberList from "./PendingMemberList";
 
 
-export default function NewMembers() {
+export default function PendingMembers() {
   const { data, isLoading, error } = usePendingMembersQuery();
   const [open, setOpen] = useState(false);
   const [selectedPendingMemberId, setSelectedPendingMemberId] = useState("");
@@ -45,11 +45,10 @@ export default function NewMembers() {
             </div>
           )}
 
-          <MemberCardModal
+          <PendingMemberCardModal
             open={open}
             onClose={() => setOpen(false)}
-            memberId={selectedPendingMemberId}
-            type="newMember"
+            pendingMemberId={selectedPendingMemberId}
           />
         </>
       )}
