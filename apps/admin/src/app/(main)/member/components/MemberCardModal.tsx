@@ -4,18 +4,10 @@ import { useEffect, useState } from "react";
 import { Button } from "@nova/ui/components/ui/button";
 import Image from "next/image";
 import { Phone, IdCard, Cake, Mail } from "lucide-react";
+import { MemberCardModalProps } from "@/src/types/member";
 
 // 성민이형의 고양이 사진 임시 사용
 import TempImageLink from "./../../../../../../service/public/image/cat.jpg";
-
-interface MemberCardModalProps {
-  open: boolean;
-  memberId? : string;
-  onClose: () => void;
-  type: "member" | "newMember";
-  Aceept?: () => void;
-  Reject?: () => void;
-}
 
 // 더미 데이터
 const data = {
@@ -52,7 +44,6 @@ export default function MemberCardModal({ open, memberId , onClose , type , Acee
 
   return (
     <>
-      {/* 모달 백그라운드 */}
       <div
         className={`fixed inset-0 flex items-center justify-center bg-black/50 z-50 transition-opacity duration-300 ${
           isAnimating ? "opacity-100" : "opacity-0"
@@ -63,7 +54,7 @@ export default function MemberCardModal({ open, memberId , onClose , type , Acee
           className={`flex bg-white p-6 rounded-lg shadow-lg w-[1400px] min-h-[700px] transition-all duration-300 ${
             isAnimating ? "scale-100 opacity-100" : "scale-95 opacity-0"
           }`}
-          onClick={(e) => e.stopPropagation()} // 내부 클릭 시 닫기 방지
+          onClick={(e) => e.stopPropagation()}
         >
           <div className="flex flex-col w-[700px] items-center space-y-8 py-20">
             <Image
