@@ -1,8 +1,8 @@
 import { useApprovePendingMemberMutation, useRejectPendingMemberMutation } from "@/src/query/pendingMembersQueries";
-import { Member } from "src/types/member";
+import { PendingMemberResponse } from "src/types/member";
 import MemberCard from "@nova/ui/components/ui/MemberCard";
 
-export default function PendingMemberList({ members, onClick }: { members: Member[]; onClick: (memberId: string) => void }) {
+export default function PendingMemberList({ members, onClick }: { members: PendingMemberResponse[]; onClick: (memberId: string) => void }) {
   const { mutate: approveMember } = useApprovePendingMemberMutation();
   const { mutate: rejectMember } = useRejectPendingMemberMutation();
 

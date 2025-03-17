@@ -4,7 +4,6 @@ import { Authapi } from "../../core";
 export async function GetPendingMembers() {
     try {
         const response = await Authapi.get(`/nova/pending-members`);
-        console.log(response)
         return response.data.data;
     } catch (error: any) {
         console.error("Error fetching pending members:", error);
@@ -14,8 +13,8 @@ export async function GetPendingMembers() {
 
 export async function GetSpecificPendingMember(pendingMemberId: string) {
     try {
-        const reponse = await Authapi.get(`/nova/pending-members/${pendingMemberId}`);
-        return reponse.data;
+        const response = await Authapi.get(`/nova/pending-members/${pendingMemberId}`);
+        return response.data.data;
     }
     catch (error: any) {
         console.error("Error fetching specific pending member:", error);

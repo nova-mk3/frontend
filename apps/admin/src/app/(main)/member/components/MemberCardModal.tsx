@@ -8,18 +8,9 @@ import { MemberCardModalProps } from "@/src/types/member";
 
 // 성민이형의 고양이 사진 임시 사용
 import TempImageLink from "./../../../../../../service/public/image/cat.jpg";
+import { useSpecificPendingMemberQuery } from "@/src/query/pendingMembersQueries";
 
-// 더미 데이터
-const data = {
-  name: "고양이",
-  studentId: "2019019014",
-  phoneNumber: "010-0000-0000",
-  birthday: "2000-01-01",
-  email: "CatHolic@chungbuk.ac.kr",
-  grade: "1학년",
-};
-
-const MemberInfo = ({ icon: Icon, label }: { icon: any; label: string }) => (
+const MemberInfo = ({ icon: Icon, label }: { icon: any; label: string | undefined }) => (
   <div className="flex items-center space-x-3">
     <Icon className="h-8 w-8 text-gray-600" />
     <div className="text-2xl">{label}</div>
@@ -27,6 +18,7 @@ const MemberInfo = ({ icon: Icon, label }: { icon: any; label: string }) => (
 );
 
 export default function MemberCardModal({ open, memberId , onClose , type , Aceept , Reject }: MemberCardModalProps) {
+  const { data, isLoading, error } = useSpecificPendingMemberQuery(memberId);
   const [isVisible, setIsVisible] = useState(open); // 실제 렌더링 여부
   const [isAnimating, setIsAnimating] = useState(false); // 애니메이션 실행 여부
 
@@ -62,11 +54,11 @@ export default function MemberCardModal({ open, memberId , onClose , type , Acee
               alt="profileImage"
               className="rounded-full w-[160px] h-[160px]"
             />
-            <div className="text-2xl font-bold">{data.name}</div>
-            <MemberInfo icon={Phone} label={data.phoneNumber} />
-            <MemberInfo icon={IdCard} label={`${data.studentId} / ${data.grade}`} />
-            <MemberInfo icon={Cake} label={data.birthday} />
-            <MemberInfo icon={Mail} label={data.email} />
+            <div className="text-2xl font-bold">{data?.pendingMemberResponse.name}</div>
+            <MemberInfo icon={Phone} label={data?.pendingMemberResponse.phone} />
+            <MemberInfo icon={IdCard} label={`${data?.pendingMemberResponse.studentNumber} / ${data?.pendingMemberResponse.grade}학년`} />
+            <MemberInfo icon={Cake} label={data?.pendingMemberResponse.birth} />
+            <MemberInfo icon={Mail} label={data?.pendingMemberResponse.email} />
           </div>
 
           <div className="w-[2px] bg-gray-300 rounded-lg mx-6"></div>
