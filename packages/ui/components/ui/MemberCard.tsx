@@ -28,12 +28,15 @@ interface MembercardProps {
     birthday? : string,
     email? : string,
     grade? : string,
+    pendingMemberId?: string,
+    onClick? : () => void,
+    onApprove?: () => void,
+    onReject?: () => void,
     profilePhoto?: {
         downloadUrl: string;
         id: string;
         originalFileName: string;
-    }
-    onClick? : () => void
+    },
 }
 
 export default function MemberCard({
@@ -44,7 +47,10 @@ export default function MemberCard({
     birthday="2000-01-01" ,
     email="CatHolic@chungbuk.ac.kr",
     grade="1학년" ,
-    onClick = (() => {console.log("meow")})
+    pendingMemberId="00000000",
+    onClick = (() => {console.log("meow")}),
+    onReject = (() => {console.log("reject")}),
+    onApprove = (() => {console.log("approve")}),
 } : MembercardProps) {
     if(type === "small"){
         return (
@@ -55,6 +61,7 @@ export default function MemberCard({
                     width={0}
                     height={0}
                     className='ml-[15px] rounded-full h-[64px] w-[64px]'
+                    priority
                 />
                 <div className={`text-2xl text-center flex-grow`}>{name}</div>
             </div>
@@ -68,6 +75,7 @@ export default function MemberCard({
                     width={0}
                     height={0}
                     className='ml-[15px] rounded-full h-[64px] w-[64px]'
+                    priority
                 />
                 <div className={`text-2xl text-center flex-grow`}>{name}</div>
                 <Phone className={"ml-auto h-8 w-8"}/>
@@ -85,6 +93,7 @@ export default function MemberCard({
                     width={0}
                     height={0}
                     className='ml-[15px] rounded-full h-[64px] w-[64px]'
+                    priority
                 />
                 <div className={`text-2xl text-center flex-grow`}>{name}</div>
                 <Phone className={"ml-auto h-8 w-8"}/>
@@ -121,6 +130,7 @@ export default function MemberCard({
                     width={0}
                     height={0}
                     className='ml-[15px] rounded-full h-[100px] w-[100px]'
+                    priority
                 />
                 <div className={`text-2xl text-center flex-grow`}>{name}</div>
                 <Phone className={"ml-auto h-8 w-8"}/>
@@ -132,22 +142,34 @@ export default function MemberCard({
                 <Mail className={"ml-auto h-8 w-8"}/>
                 <div className={`text-2xl text-center flex-grow`}>{email}</div>
                 <div className={`text-2xl text-center flex-grow`}>{grade}학년</div>
-                <Button
+                <div>
+                    <Button
                     type="button"
                     variant={"default"}
                     size={"sm"}
-                    style={{width:"72px", marginRight:"10px"}}
-                >
+                    style={{ width: "72px", marginRight: "10px" }}
+                    onClick={() => {
+                        if (pendingMemberId && onApprove) {
+                        onApprove();
+                        }
+                    }}
+                    >
                     수락
-                </Button>
-                <Button
+                    </Button>
+                    <Button
                     type="button"
                     variant={"default"}
                     size={"sm"}
-                    style={{width:"72px", marginRight:"10px"}}
-                >
+                    style={{ width: "72px", marginRight: "10px" }}
+                    onClick={() => {
+                        if (pendingMemberId && onReject) {
+                        onReject();
+                        }
+                    }}
+                    >
                     반려
-                </Button>
+                    </Button>
+                </div>
             </div>
         )
     }

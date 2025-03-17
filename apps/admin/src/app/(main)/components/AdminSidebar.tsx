@@ -14,8 +14,7 @@ import {
   } from "@nova/ui/components/ui/sidebar";
 import Logo from "@/public/image/Logo.svg";
 import { ScrollText, Users , TestTubeDiagonal , PcCase } from "lucide-react";
-
-
+import Link from "next/link";
 
 const items = [
   {
@@ -59,10 +58,10 @@ export default function AdminSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title} className="w-[70%] m-1 p-3 min-h-0 rounded-xl hover:bg-primary hover:text-white">
                   <SidebarMenuButton asChild>
-                    <a href={item.href} className="flex gap-2">
+                    <Link href={item.href} className="flex gap-2">
                       <item.icon style={{width:'32px' , height:'32px'}}/>
                       <span className="pl-3 text-3xl">{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

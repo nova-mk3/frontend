@@ -1,81 +1,60 @@
-// Members 페이지
-import MemberCard from "@nova/ui/components/ui/MemberCard";
-import { useState, Suspense } from "react";
+import { useState } from "react";
 import MemberCardModal from "./MemberCardModal";
 import { usePendingMembersQuery } from "@/src/query/pendingMembersQueries";
-
-interface Member {
-  pendingMemberId: string;
-  studentNumber: string;
-  name: string;
-  birth: string;
-  phone: string;
-  email: string;
-  grade: string;
-  profilePhoto: {
-    downloadUrl: string;
-    id: string;
-    originalFileName: string;
-  };
-}
-
-function PendingMemberList({ members, onClick }: { members: Member[]; onClick: (memberId: string) => void }) {
-  return (
-    <div>
-      {members.map((member) => (
-        <MemberCard
-          key={member.pendingMemberId}
-          studentId={member.studentNumber}
-          name={member.name}
-          grade={member.grade}
-          phoneNumber={member.phone}
-          birthday={member.birth}
-          email={member.email}
-          profilePhoto={member.profilePhoto}
-          type="large"
-          onClick={() => onClick(member.pendingMemberId)}
-        />
-      ))}
-    </div>
-  );
-}
+import PendingMemberList from "./PendingMemberList";
 
 
-function NewMembersContent() {
-  const { data } = usePendingMembersQuery();
+export default function NewMembers() {
+  const { data, isLoading, error } = usePendingMembersQuery();
   const [open, setOpen] = useState(false);
-  const [selectedPendingMemberId, setSelectedPendingMemberId] = useState<string>("");
-
+  const [selectedPendingMemberId, setSelectedPendingMemberId] = useState("");
 
   return (
     <div className="font-pretendard flex flex-col min-h-[700px] w-[1400px]">
       <div className="text-xl font-bold m-4">
-        총 {data?.totalPendingMemberCount || 0}명
+        {isLoading
+          ? "데이터 로딩중..."
+          : error
+          ? "오류가 발생했습니다"
+          : `총 ${data?.totalPendingMemberCount || 0}명`}
       </div>
-      {data?.pendingMemberResponseList?.length ? (
-        <div className="flex-grow">
-          <PendingMemberList
-            members={data.pendingMemberResponseList}
-            onClick={(selectedPendingMemberId) => {
-              setSelectedPendingMemberId(selectedPendingMemberId); 
-              setOpen(true); 
-            }}
-          />
-        </div>
-      ) : (
-        <div className="flex-grow flex items-center justify-center w-full">
-          <div className="text-4xl font-bold text-center">신청자가 없습니다.</div>
+      {isLoading && (
+        <div className="text-4xl font-bold text-center w-full flex-grow flex items-center justify-center">
+          데이터 로딩중...
         </div>
       )}
-      <MemberCardModal open={open} onClose={() => setOpen(false)} memberId = {selectedPendingMemberId} type="newMember" /> {/* ✅ 선택된 멤버 ID 전달 */}
+
+      {error && (
+        <div className="text-4xl font-bold text-center text-red-500 w-full flex-grow flex items-center justify-center">
+          오류가 발생했습니다. {error.message}
+        </div>
+      )}
+      {!isLoading && !error && (
+        <>
+          {data?.pendingMemberResponseList?.length ? (
+            <PendingMemberList
+              members={data.pendingMemberResponseList}
+              onClick={(memberId) => {
+                setSelectedPendingMemberId(memberId);
+                setOpen(true);
+              }}
+            />
+          ) : (
+            <div className="flex-grow flex items-center justify-center w-full">
+              <div className="text-4xl font-bold text-center">신청자가 없습니다.</div>
+            </div>
+          )}
+
+          <MemberCardModal
+            open={open}
+            onClose={() => setOpen(false)}
+            memberId={selectedPendingMemberId}
+            type="newMember"
+          />
+        </>
+      )}
     </div>
   );
 }
 
-export default function NewMembers() {
-  return (
-    <Suspense fallback={<p className="text-center text-xl">로딩 중...</p>}>
-      <NewMembersContent />
-    </Suspense>
-  );
-}
+

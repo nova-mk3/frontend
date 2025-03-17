@@ -10,14 +10,6 @@ export const pendingMembersKeys = {
     detail: (pendingMemberId: string) => ['pendingMembers', pendingMemberId] as const,
 };
 
-// export const usePendingMembersQuery = () => {
-//     return useSuspenseQuery({
-//         queryKey: pendingMembersKeys.list(),
-//         queryFn: () => GetPendingMembers(),
-//     });
-// };
-
-// ✅ Suspense를 사용하지 않는 방식 (Suspense 필요하면 suspense: true 추가)
 export const usePendingMembersQuery = () => {
     return useQuery({
       queryKey: pendingMembersKeys.list(),
@@ -39,13 +31,12 @@ export const useApprovePendingMemberMutation = () => {
     return useMutation({
         mutationFn: (pendingMemberId: string) => ApprovePendingMember(pendingMemberId),
         onSuccess: () => {
-            console.log("📌 회원 승인 완료. 목록 갱신 중...");
             queryClient.invalidateQueries({
                 queryKey: pendingMembersKeys.list(),
               });
         },
         onError: (error) => {
-            console.error("🚨 회원 승인 실패:", error);
+            console.error("회원 승인 실패:", error);
         }
     });
 };
@@ -56,13 +47,12 @@ export const useRejectPendingMemberMutation = () => {
     return useMutation({
         mutationFn: (pendingMemberId: string) => RejectPendingMember(pendingMemberId),
         onSuccess: () => {
-            console.log("📌 회원 거부 완료. 목록 갱신 중...");
             queryClient.invalidateQueries({
                 queryKey: pendingMembersKeys.list(),
               });
         },
         onError: (error) => {
-            console.error("🚨 회원 거부 실패:", error);
+            console.error("회원 거부 실패:", error);
         }
     });
 };
