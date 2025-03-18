@@ -3,47 +3,35 @@
 import { useEffect, useState } from "react";
 import { Button } from "@nova/ui/components/ui/button";
 import { Input } from "@nova/ui/components/ui/input";
-import { membersData } from "./memberTempData";
-import MemberCard from './../../../../../../../packages/ui/components/ui/MemberCard';
+import MemberCard from "@nova/ui/components/ui/MemberCard";
+import { ExecutiveModalProps } from "@/src/types/executiveMember";
+import { ManageMember } from "@/src/types/manageMember";
+import { useManageMembersQuery } from "@/src/query/manageMembersQueries";
+import { usePostExecutiveMemberMutation } from "@/src/query/executiveMembersQueries";
+import { enumRoleType } from "@/src/types/executiveMember";
 
-interface ModalProps {
-  open: boolean;
-  onClose: () => void;
-}
-
-interface Member {
-    studentId: string;
-    name: string;
-    birthday: string;
-    phoneNumber: string;
-    email: string;
-    grade: string;
-    image?: string;
-  }
-
-export default function Modal({ open, onClose }: ModalProps) {
-  const [isVisible, setIsVisible] = useState(open); // 실제 렌더링 여부
-  const [isAnimating, setIsAnimating] = useState(false); // 애니메이션 실행 여부
-  const [data, setData] = useState<Member[]>([]);
-  const [viewData, setViewData] = useState<Member[]>([]);
+export default function ExecutiveModal({ year , open, onClose }: ExecutiveModalProps) {
+  const [isVisible, setIsVisible] = useState(open);
+  const [isAnimating, setIsAnimating] = useState(false); 
+  const { data, isLoading, error } = useManageMembersQuery();
+  const [viewData, setViewData] = useState<ManageMember[]|undefined>([]);
+  const postExecutiveMemberMutation = usePostExecutiveMemberMutation(year);
 
   useEffect(() => {
     if (open) {
-        //TODO : API 연동
-        setData(membersData);
-        setViewData(membersData);
         setIsVisible(true);
-        setTimeout(() => setIsAnimating(true), 10); // 애니메이션 적용 (약간의 지연 필요)
+        setViewData(data);
+        setTimeout(() => setIsAnimating(true), 10);
     } else {
         setIsAnimating(false);
-        setTimeout(() => setIsVisible(false), 300); // 닫힘 애니메이션 실행 후 제거
+        setTimeout(() => setIsVisible(false), 300);
     }
-  }, [open]);
+  }, [open , data]);
 
   if (!isVisible) return null;
 
   const Search = (text: string) => {
-    setViewData(data.filter((member) => member.name.includes(text)));
+    setViewData(data?.filter((member) => member.name.includes(text)));
   }
 
   return (
@@ -57,7 +45,7 @@ export default function Modal({ open, onClose }: ModalProps) {
         className={`bg-white p-6 rounded-lg shadow-lg w-[1300px] h-[600px] transition-all duration-300 ${
           isAnimating ? "scale-100 opacity-100" : "scale-95 opacity-0"
         }`}
-        onClick={(e) => e.stopPropagation()} // 내부 클릭 시 닫기 방지
+        onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between m-2 items-center">
             <Input
@@ -71,13 +59,23 @@ export default function Modal({ open, onClose }: ModalProps) {
             </div>
         </div>
         <div className="flex flex-wrap overflow-auto max-h-[500px] rounded-lg" style={{scrollbarWidth:"none"}}>
-            {viewData.map((member) => (
+            {viewData?.map((member) => (
                 <MemberCard
-                    key={member.studentId}
+                    key={member.memberId}
                     name={member.name}
-                    phoneNumber={member.phoneNumber}
-                    studentId={member.studentId}
+                    phoneNumber={member.phone}
+                    studentId={member.studentNumber}
                     type={"medium"}
+                    onClick={() => 
+                      {
+                        postExecutiveMemberMutation.mutate({
+                          year: year,
+                          role: enumRoleType.EXECUTIVE, 
+                          name: member.name, 
+                          memberId: member.memberId
+                        })
+                        onClose()
+                    }}
                 />))}
         </div>
       </div>

@@ -83,7 +83,7 @@ export default function Executive() {
           </div>
         </div>
       ))}
-      <ExecutiveModal open={open} onClose={() =>setOpen(false)}/>
+      <ExecutiveModal year={1} open={open} onClose={() =>setOpen(false)}/>
     </div>
   );
 }

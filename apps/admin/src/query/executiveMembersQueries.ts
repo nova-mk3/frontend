@@ -21,19 +21,20 @@ export const useExecutiveMembersQuery = (year: number) => {
     });
 };
 
-export const usePostExecutiveMemberMutation = (request : PostExecutiveMemberRequest) => {
+export const usePostExecutiveMemberMutation = (year : number) => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: () => PostExecuvtieMember(request),
+        mutationFn: (request : PostExecutiveMemberRequest) => PostExecuvtieMember(request),
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: executiveMembersKeys.list(request.year),
+                queryKey: executiveMembersKeys.list(year),
             });
+            alert("임원이 추가되었습니다.");
         },
         onError: (error) => {
             console.error("임원 추가 실패:", error);
-        }
+        },
     });
 }
 
@@ -46,6 +47,7 @@ export const useDeleteExecutiveMemberMutation = () => {
             queryClient.invalidateQueries({
                 queryKey: executiveMembersKeys.years(),
             });
+            alert("임원이 삭제되었습니다.");
         },
         onError: (error) => {
             console.error("임원 삭제 실패:", error);
