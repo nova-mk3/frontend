@@ -3,7 +3,6 @@ import MemberCard from "@nova/ui/components/ui/MemberCard";
 import { Input } from "@nova/ui/components/ui/input";
 import { Button } from "@nova/ui/components/ui/button";
 import { useEffect, useState } from "react";
-import { membersData } from "./memberTempData";
 import MemberCardModal from './PendingMemberCardModal';
 import { 
   Select,
@@ -12,43 +11,31 @@ import {
   SelectTrigger,
   SelectValue 
 } from "@nova/ui/components/ui/select";
-
-interface Member {
-  studentId: string;
-  name: string;
-  birthday: string;
-  phoneNumber: string;
-  email: string;
-  grade: string;
-  image?: string;
-}
-
-// TODO : API 연동
+import { useManageMembersQuery } from "@/src/query/manageMembersQueries";
+import { ManageMember } from '@/src/types/manageMember';
 
 export default function ManageMembers() {
-  const [data, setData] = useState<Member[]>([]);
-  const [viewData, setViewData] = useState<Member[]>([]);
+  const { data , isLoading , error } = useManageMembersQuery();
+  const [viewData, setViewData] = useState<ManageMember[]| undefined >([]);
   const [viewType , setViewType] = useState<"small"|"medium">("small");
   const [open , setOpen] = useState(false);
   useEffect(() => {
-    // API 연동 위치
-    setData(membersData);
-    setViewData(membersData);
-  }, []);
+    setViewData(data);
+  }, [data , viewType]);
 
   // 카테고리별 데이터 분류
   const categories = [
-    { title: "1학년", members: viewData.filter(member => member.grade === "1학년") },
-    { title: "2학년", members: viewData.filter(member => member.grade === "2학년") },
-    { title: "3학년", members: viewData.filter(member => member.grade === "3학년") },
-    { title: "4학년", members: viewData.filter(member => member.grade === "4학년") },
-    { title: "초과학기", members: viewData.filter(member => member.grade === "초과학기") },
-    { title: "휴학생", members: viewData.filter(member => member.grade === "휴학") },
-    { title: "졸업생", members: viewData.filter(member => member.grade === "졸업") },
+    { title: "1학년", members: viewData?.filter(member => (member.grade === "1학년")&&(member.absence === false)&&(member.graduation === false)) },
+    { title: "2학년", members: viewData?.filter(member => (member.grade === "2학년")&&(member.absence === false)&&(member.graduation === false)) },
+    { title: "3학년", members: viewData?.filter(member => (member.grade === "3학년")&&(member.absence === false)&&(member.graduation === false)) },
+    { title: "4학년", members: viewData?.filter(member => (member.grade === "4학년")&&(member.absence === false)&&(member.graduation === false)) },
+    { title: "초과학기", members: viewData?.filter(member => (member.grade === "초과학기")&&(member.absence === false)&&(member.graduation === false)) },
+    { title: "휴학생", members: viewData?.filter(member => (member.absence === true)) },
+    { title: "졸업생", members: viewData?.filter(member => (member.graduation === true)) },
   ];
 
   const Search = (text : string) => {
-    setViewData(data.filter(member => member.name.includes(text)));
+    setViewData(data?.filter(member => member.name.includes(text)));
   }
 
   const ChangeGradeAll = () => {
@@ -104,22 +91,22 @@ export default function ManageMembers() {
       {categories.map(({ title, members }) => (
         <div key={title} className="">
           <div className="text-lg font-bold ml-4">
-            {title} - {members.length}명
+            {title} - {members?.length}명
           </div>
-          <div className="flex flex-wrap">
-            {members.length > 0 ? (
-              members.map(member => (
+          <div className="flex flex-wrap ml-2">
+            {(members ?? []).length > 0 ? (
+              members?.map(member => (
                 <MemberCard
-                  key={member.studentId}
+                  key={member.memberId}
                   name={member.name}
-                  phoneNumber={member.phoneNumber}
-                  studentId={member.studentId}
+                  phoneNumber={member.phone}
+                  studentId={member.studentNumber}
                   type={viewType}
                   onClick={()=>setOpen(true)}
                 />
               ))
             ) : (
-              <div className="text-gray-500">등록된 학생이 없습니다.</div>
+              <div className="text-gray-500 m-2">등록된 학생이 없습니다.</div>
             )}
           </div>
         </div>

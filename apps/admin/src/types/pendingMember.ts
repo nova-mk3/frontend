@@ -1,3 +1,5 @@
+import { ProfilePhoto } from '@/src/types/manageMember';
+
 export interface Member {
     pendingMemberId: string;
     studentNumber: string;
@@ -7,11 +9,7 @@ export interface Member {
     email: string;
     grade: string;
     pending: string;
-    profilePhoto: {
-      downloadUrl: string;
-      id: string;
-      originalFileName: string;
-    };
+    profilePhoto: ProfilePhoto;
 }
 
 export interface PendingMemberCardModalProps {
@@ -28,12 +26,6 @@ export interface PendingGraduationResponse {
   job: string;
   work: string;
   year: number;
-}
-
-export interface ProfilePhoto {
-  id: string;
-  originalFileName: string;
-  downloadUrl: string;
 }
 
 export interface PendingMemberResponse {

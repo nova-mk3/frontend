@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
-import { GetExecutvieYears , GetExecutiveMemberByYear , PostExecuvtieMember , DeleteExecutiveMember} from '../api/main/member/executiveMember';
+import { GetExecutvieYears , GetExecutiveMemberByYear , PostExecuvtieMember , DeleteExecutiveMember} from '../api/main/member/executiveMemberApi';
 import { PostExecutiveMemberRequest } from '../types/executiveMember';
 
 export const executiveMembersKeys = {
