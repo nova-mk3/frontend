@@ -14,6 +14,8 @@ export async function GetExecutvieYears(){
 export async function GetExecutiveMemberByYear(year: number){
     try{
         const response = await Authapi.get(`/nova/executive-histories/${year}`)
+        console.log(response)
+        console.log(year)
         return response.data.data
     }catch(error:any){
         console.error("Error fetching executive members:", error);
@@ -24,6 +26,7 @@ export async function GetExecutiveMemberByYear(year: number){
 export async function PostExecuvtieMember(request: PostExecutiveMemberRequest){
     try{
         const response = await Authapi.post(`/nova/executive-histories`, request)
+        console.log(response)
         return response.data
     } catch (error:any){
         console.error("Error posting executive member:", error);
@@ -34,6 +37,7 @@ export async function PostExecuvtieMember(request: PostExecutiveMemberRequest){
 export async function DeleteExecutiveMember(executiveHistoryId: string){
     try{
         const response = await Authapi.delete(`/nova/executive-histories/${executiveHistoryId}`)
+
         return response.data
     } catch (error:any){
         console.error("Error deleting executive member:", error);

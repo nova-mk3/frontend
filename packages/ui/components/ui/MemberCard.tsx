@@ -28,10 +28,13 @@ interface MembercardProps {
     birthday? : string,
     email? : string,
     grade? : string,
+    role? : string,
     pendingMemberId?: string,
     onClick? : () => void,
     onApprove?: () => void,
     onReject?: () => void,
+    onChangeRole?: () => void,
+    onDeleteRole?: () => void,
     profilePhoto?: {
         downloadUrl: string;
         id: string;
@@ -51,6 +54,8 @@ export default function MemberCard({
     onClick = (() => {console.log("meow")}),
     onReject = (() => {console.log("reject")}),
     onApprove = (() => {console.log("approve")}),
+    onDeleteRole = (() => {console.log("delete")}),
+    onChangeRole = (() => {console.log("Rolechange")}),
 } : MembercardProps) {
     if(type === "small"){
         return (
@@ -100,7 +105,7 @@ export default function MemberCard({
                 <div className={`text-2xl text-center flex-grow`}>{phoneNumber}</div>
                 <IdCard className={"ml-auto h-8 w-8"}/>
                 <div className={`text-2xl text-center flex-grow`}>{studentId}</div>
-                <Select>
+                <Select onValueChange={(value) => value === "delete" ? onDeleteRole() : onChangeRole()}>
                     <SelectTrigger className="w-[90px] mr-[10px]">
                         <SelectValue placeholder="직위 변경" />
                     </SelectTrigger>

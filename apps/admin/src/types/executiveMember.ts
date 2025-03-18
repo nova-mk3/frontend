@@ -11,6 +11,14 @@ export interface ExecutiveModalProps {
     onClose: () => void;
 }
 
+export interface ExecutiveMember{
+    executiveHistoryId: string;
+    year: number;
+    role: enumRoleType;
+    name: string;
+    memberId: string;
+}
+
 export enum enumRoleType{
     EXECUTIVE = "EXECUTIVE", 
     CHAIRMAN = "CHAIRMAN", 

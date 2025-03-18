@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { GetExecutvieYears , GetExecutiveMemberByYear , PostExecuvtieMember , DeleteExecutiveMember} from '../api/main/member/executiveMemberApi';
-import { PostExecutiveMemberRequest } from '../types/executiveMember';
+import { ExecutiveMember , PostExecutiveMemberRequest } from '@/src/types/executiveMember';
 
 export const executiveMembersKeys = {
     years: () => ['years'] as const,
@@ -8,16 +8,17 @@ export const executiveMembersKeys = {
 };
 
 export const useExecutiveYearsQuery = () => {
-    return useQuery({
+    return useQuery<number[]>({
         queryKey: executiveMembersKeys.years(),
         queryFn: GetExecutvieYears,
     });
 };
 
 export const useExecutiveMembersQuery = (year: number) => {
-    return useQuery({
+    return useQuery<ExecutiveMember[]>({
         queryKey: executiveMembersKeys.list(year),
         queryFn: () => GetExecutiveMemberByYear(year),
+        enabled: year !== 0,
     });
 };
 
@@ -38,16 +39,15 @@ export const usePostExecutiveMemberMutation = (year : number) => {
     });
 }
 
-export const useDeleteExecutiveMemberMutation = () => {
+export const useDeleteExecutiveMemberMutation = (year:number) => {
     const queryClient = useQueryClient();
 
     return useMutation({
         mutationFn: (executiveHistoryId: string) => DeleteExecutiveMember(executiveHistoryId),
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: executiveMembersKeys.years(),
+                queryKey: executiveMembersKeys.list(year),
             });
-            alert("임원이 삭제되었습니다.");
         },
         onError: (error) => {
             console.error("임원 삭제 실패:", error);
