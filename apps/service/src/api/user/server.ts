@@ -25,14 +25,14 @@ export async function getMemberId() {
 }
 
 export async function getMember({ memberId }: { memberId: string }) {
-  const cookieStore = await cookies();
-  const authToken = cookieStore.get("AUTH_TOKEN")?.value;
+  // const cookieStore = await cookies();
+  // const authToken = cookieStore.get("AUTH_TOKEN")?.value;
   try {
     // ✅ `fetch` 요청 시 `Cookie` 포함
     const data = await api.get(`/nova/members/${memberId}`, {
       headers: {
         "Content-Type": "application/json",
-        Cookie: `AUTH_TOKEN=${authToken}`, // ✅ `AUTH_TOKEN`을 `Cookie` 헤더에 추가
+        // Cookie: `AUTH_TOKEN=${authToken}`, // ✅ `AUTH_TOKEN`을 `Cookie` 헤더에 추가
       },
     });
 

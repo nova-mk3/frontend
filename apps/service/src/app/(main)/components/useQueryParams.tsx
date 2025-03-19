@@ -31,7 +31,7 @@ export function useQueryParams() {
   const sortDirection = searchParams.get("sortDirection") || "desc";
   const postId = searchParams.get("id") || "";
   const postType = searchParams.get("type") || "";
-  const redirectUrl = searchParams.get("redirect") || "/";
+  const redirectUrl = searchParams.get("redirect");
 
   return {
     // Getter
