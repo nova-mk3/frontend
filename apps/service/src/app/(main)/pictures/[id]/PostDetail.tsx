@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import { useBoardIdStore } from "@/src/store/BoardId";
-import { POST_TYPE } from "@/src/constant/board";
+import { CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
 import DetailPageTitle from "../../board/components/DetailPageTitle";
 import ImageSlider from "./components/ImageSlider";
 import { usePictureDetailQuery } from "../query/queries";
@@ -14,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { PictureBoardDelete } from "@/src/api/board/picture";
 import { useQueryClient } from "@tanstack/react-query";
 import { postKeys } from "../../board/query/postqueries";
+import { formatDate } from "@/src/libs/utils/dateParsing";
 
 interface PostDetailProps {
   postId: string;
@@ -47,8 +47,7 @@ const ViewCount = dynamic(() => import("../../board/components/ViewCount"), {
 });
 export default function PostDetail({ postId }: PostDetailProps) {
   const router = useRouter();
-  const { INTEGRATED } = useBoardIdStore();
-  const { data } = usePictureDetailQuery(postId, INTEGRATED);
+  const { data } = usePictureDetailQuery({ postId, boardId: CLUB_ARCHIVE });
   const queryClient = useQueryClient();
   console.log(data);
 
@@ -60,7 +59,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
 
   const handleDelete = async () => {
     try {
-      await PictureBoardDelete({ boardId: INTEGRATED, postId });
+      await PictureBoardDelete({ boardId: CLUB_ARCHIVE, postId });
       router.push(`/${POST_TYPE.PICTURES.toLocaleLowerCase()}`);
 
       // TODO : 왔다갔다 하는 조회수 부분은 어떻게 할까 -> 개인적인의견 그렇게 중요한 요소가 아닌데 api 재요청을 할 필요가 있을까
@@ -95,7 +94,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
 
             <div className="flex flex-row items-center  gap-2 text-sm text-gray-500">
               <p className="text-gray-700">{data.authorName}</p>
-              <p className="">5일전</p>
+              <p className="">{formatDate(data.createdTime)}</p>
               {/* <Like className='ml-auto mr-2' count={5}/> */}
               <div className="ml-auto flex flex-row gap-2 items-center cursor-pointer">
                 <p className="" onClick={handleModify}>

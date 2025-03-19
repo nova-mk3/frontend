@@ -1,19 +1,16 @@
 "use client";
 
 import React, { Suspense, useState } from "react";
-import { useBoardIdStore } from "@/src/store/BoardId";
 
 import { Image } from "lucide-react";
 import { useQueryParams } from "../components/useQueryParams";
 import { usePostListQuery } from "../board/query/postqueries";
-import { BOARD_SIZE, POST_TYPE } from "@/src/constant/board";
+import { BOARD_SIZE, CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
 import BoardListTitle from "../board/components/BoardListTitle";
 import PictureList from "./components/PictureList";
 import { PageNation } from "../components/PageNation";
 
 export default function Post() {
-  const { INTEGRATED } = useBoardIdStore();
-
   const { currentPage, keyword, searchType, sortBy, sortDirection } =
     useQueryParams();
 
@@ -25,7 +22,7 @@ export default function Post() {
     searchType: searchType,
     sortBy: sortBy,
     sortDirection: sortDirection,
-    boardId: INTEGRATED,
+    boardId: CLUB_ARCHIVE,
   });
 
   return (

@@ -1,5 +1,5 @@
 import { throwErrorMessage } from "../libs/utils/throwError";
-import { api } from "./core";
+import { api, Authapi } from "./core";
 
 export async function verifyEmail(email: string) {
   const response = await api.post("/nova/email-auth", { email: email });
@@ -43,8 +43,30 @@ export async function login({
       studentNumber,
       password,
     });
-    return response.data; // 로그인 성공 시 반환할 데이터
+    return response; // 로그인 성공 시 반환할 데이터
   } catch (error: any) {
+    throwErrorMessage(error);
+  }
+}
+
+export async function verifyAccessToken(accessToken: string) {
+  try {
+    const response = await api.post(
+      `nova/members/access-token/verify?accessToken=${accessToken}`
+    );
+    return response.data;
+  } catch (error) {
+    return {
+      status: 500,
+    };
+  }
+}
+
+export async function logout() {
+  try {
+    const response = await Authapi.get(`nova/members/logout`);
+    return response.data;
+  } catch (error) {
     throwErrorMessage(error);
   }
 }

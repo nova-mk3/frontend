@@ -1,17 +1,11 @@
 "use client";
 // import { PlateEditor } from "@nova/ui/components/editor/plate-editor"; //plate.js 라이브러리인데 일단은 제외
 import React, { useEffect, useState } from "react";
-import WriteBottomLayout from "../../components/WriteBottomLayout";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { POST_TYPE, POST_TYPE_OPTIONS, PostType } from "@/src/constant/board";
+import { CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  IntegradePostRequest,
-  IntegratedBoardPost,
-} from "@/src/api/board/integrated";
 import { useRouter } from "next/navigation";
-import { useBoardIdStore } from "@/src/store/BoardId";
 import { UploadFilesAPI } from "@/src/api/board/file";
 import PostFileUploader from "../../components/File/PostFileUploader";
 import { SelectFormField } from "@/src/app/(auth)/signup/components/SelectFormField";
@@ -30,7 +24,6 @@ export default function Page() {
   const router = useRouter();
   const queryClient = useQueryClient();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const { CLUB_ARCHIVE } = useBoardIdStore();
   const currentYear = new Date().getFullYear();
   const years = useYearRange(2000, currentYear);
   const form = useForm<ExamInput>({

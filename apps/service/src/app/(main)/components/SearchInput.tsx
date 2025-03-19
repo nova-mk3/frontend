@@ -13,12 +13,19 @@ export default function SearchInput() {
     const value = inputRef.current.value;
     setKeyword(value);
   };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleKeywordSearch();
+    }
+  };
   return (
     <div className="flex flex-row items-center gap-[15px] w-full">
       <Input
         placeholder="검색어를 입력하세요"
         className="w-[250px] h-[36px] px-2 py-1 rounded-lg flex-1"
         ref={inputRef}
+        onKeyDown={handleKeyDown}
       />
       <div
         className="cursor-pointer rounded-lg hover:bg-background02 p-1"

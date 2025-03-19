@@ -1,22 +1,23 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 import Logo from "@/public/image/LogoWithName.svg";
-import Image from "next/image";
 import Navigation from "./Navigation";
 import Link from "next/link";
-import AppSidebar from "./Siderbar/AppSidebar";
-import { Menu } from "lucide-react";
 import Tendinous from "./Tendinous";
+import HeaderLoginMenu from "./HeaderLoginMenu";
+import { cookies } from "next/headers";
+import { getMemberId } from "@/src/api/user/server";
+import { SidebarWrapper } from "./Siderbar/SiderbarWrapper";
+import { Menu } from "lucide-react";
 
-
-export default function Header() {
-  const [isLogin] = useState(false);
-  const [isSiderbar, setIsSiderbar] = useState(false);
-
-  const toggleSiderbar = () => {
-    setIsSiderbar((prev) => !prev);
-  };
-
+export default async function Header() {
+  const cookieStore = await cookies();
+  const authToken = cookieStore.get("AUTH_TOKEN")?.value;
+  let memberId = "";
+  if (authToken) {
+    memberId = await getMemberId();
+  } else {
+    memberId = "";
+  }
   return (
     <>
       <div className="flex flex-row  border-b  px-4 py-3 relative">
@@ -27,10 +28,10 @@ export default function Header() {
           <Navigation />
         </div>
 
-        <div className="flex items-center ml-auto">
-        <Tendinous className="mobile:hidden" href="/suggestion"/>
-          {!isLogin ? (
-            <div className="flex flex-row justify-center items-center gap-[22px] mobile:hidden">
+        <div className="flex flex-row items-center ml-auto gap-4">
+          <Tendinous className="mobile:hidden" href="/suggestion" />
+          {memberId === "" ? (
+            <div className="flex flex-row justify-center items-center gap-4 mobile:hidden">
               <Link href="/signin">
                 <p className="w-[60px] h-[24px] flex content-center justify-center cursor-pointer">
                   로그인
@@ -43,35 +44,17 @@ export default function Header() {
               </Link>
             </div>
           ) : (
-            <div className="flex flex-row justify-center items-center gap-[22px] mobile:hidden">
-              <Image
-                src="/image/Search-d.svg"
-                width={48}
-                height={48}
-                alt="검색"
-              />
-              <Image
-                src="/image/Alarm-d.svg"
-                width={48}
-                height={48}
-                alt="알람"
-              />
-              <Image
-                src="/image/Profile.svg"
-                width={48}
-                height={48}
-                alt="프로필"
-                className="cursor-pointer"
-              />
-            </div>
+            <HeaderLoginMenu
+              trigger={
+                <div className="border-black border-[1px] p-2 rounded-full cursor-pointer">
+                  <Menu size={20} />
+                </div>
+              }
+              memberId={memberId}
+            />
           )}
-          <Menu
-            size={30}
-            className="hidden mobile:block cursor-pointer"
-            onClick={() => setIsSiderbar(true)}
-          />
         </div>
-        <AppSidebar toggleSiderbar={toggleSiderbar} isOpen={isSiderbar} />
+        <SidebarWrapper />
       </div>
     </>
   );

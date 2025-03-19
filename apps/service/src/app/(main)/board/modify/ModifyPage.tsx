@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { POST_TYPE_OPTIONS, PostType } from "@/src/constant/board";
+import { INTEGRATED, POST_TYPE_OPTIONS, PostType } from "@/src/constant/board";
 import {
   IntegratedInput,
   IntegratedSchema,
@@ -12,7 +12,6 @@ import {
   IntegratedPutRequest,
 } from "@/src/api/board/integrated";
 import { useRouter } from "next/navigation";
-import { useBoardIdStore } from "@/src/store/BoardId";
 import { UploadFilesAPI } from "@/src/api/board/file";
 import { postKeys, usePostDetailQuery } from "../query/postqueries";
 import ModifyFileUploader from "../../components/File/ModifyFileUploader";
@@ -26,7 +25,6 @@ import { useQueryParams } from "../../components/useQueryParams";
 import NewPostTitle from "../../components/NewPostTitle";
 
 export default function ModifyPage() {
-  const { INTEGRATED } = useBoardIdStore();
   const { postId, postType } = useQueryParams();
   const router = useRouter();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);

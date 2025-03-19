@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
-import { useBoardIdStore } from "@/src/store/BoardId";
 import { useArchiveDetailQuery } from "../../board/query/postqueries";
-import { POST_TYPE } from "@/src/constant/board";
+import { CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
 import Aside from "../../board/components/Aside";
 import DetailPageSubTitle from "../../board/components/DetailPageSubTitle";
 import { FileListLayout, FileList } from "../../components/File/ViewFileLayout";
@@ -19,7 +18,6 @@ interface PostDetailProps {
 }
 
 export default function PostDetail({ postId }: PostDetailProps) {
-  const { CLUB_ARCHIVE } = useBoardIdStore();
   const { data } = useArchiveDetailQuery({ postId, boardId: CLUB_ARCHIVE });
 
   return (

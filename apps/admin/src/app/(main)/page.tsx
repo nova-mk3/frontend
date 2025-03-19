@@ -1,7 +1,7 @@
 // Dashboard page
 // TODO : 대시보드 창의 내용들이 확정되면 넣을것
-import React from 'react';
-import Logo from "@/public/image/Logo.svg"
+import React from "react";
+import Logo from "@/public/image/Logo.svg";
 
 export default function Dashboard() {
   return (

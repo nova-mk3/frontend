@@ -1,9 +1,8 @@
 "use client";
 
 import React, { Suspense, useState } from "react";
-import { useBoardIdStore } from "@/src/store/BoardId";
 import { usePostListQuery } from "../query/postqueries";
-import { BOARD_SIZE, POST_TYPE } from "@/src/constant/board";
+import { BOARD_SIZE, INTEGRATED, POST_TYPE } from "@/src/constant/board";
 import { PageNation } from "../../components/PageNation";
 import { useQueryParams } from "../../components/useQueryParams";
 import BoardListTitle from "../components/BoardListTitle";
@@ -11,8 +10,6 @@ import { Hand } from "lucide-react";
 import BoardList from "../components/BoardList";
 
 export default function Post() {
-  const { INTEGRATED } = useBoardIdStore();
-
   const { currentPage, keyword, searchType, sortBy, sortDirection } =
     useQueryParams();
 

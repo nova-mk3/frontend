@@ -1,14 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form } from "@nova/ui/components/ui/form";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  grade,
-  semester,
-  SignupInput,
-  SignupSchema,
-} from "@/src/schema/signup.schema";
+import { grade, semester, SignupInput } from "@/src/schema/signup.schema";
 import { InputFormField } from "@/src/app/(auth)/components/InputFormField";
 import { RadioFormField } from "@/src/app/(auth)/signup/components/RadioFormField";
 import { SelectFormField } from "@/src/app/(auth)/signup/components/SelectFormField";
@@ -16,35 +11,66 @@ import { DatePickerForm } from "@/src/app/(auth)/signup/components/DatePickerFie
 import { FileFormField } from "@/src/app/(auth)/signup/components/FileFormField";
 import { Button } from "@nova/ui/components/ui/button";
 import GraduationYearSelect from "@/src/app/(auth)/signup/components/GraduationYearSelect";
-import Modal from "../../../components/Modal";
+
 import {
   ChangeUserInfoInput,
   ChangeUserInfoSchema,
 } from "@/src/schema/changeuserinfo.schema";
+import { useGetUserData } from "../../query/qureies";
+import Modal from "@/src/app/(main)/components/Modal";
 
-export default function EditForm() {
+interface Props {
+  memberId: string;
+}
+
+export interface UserProfile {
+  absence: boolean;
+  birth: string;
+  email: string;
+  grade: number;
+  graduation: boolean;
+  introduction: string;
+  memberId: string;
+  name: string;
+  phone: string;
+  profilePhoto: ProfilePhoto;
+  role: "ADMINISTRATOR" | "USER" | "GUEST"; // 필요한 역할 추가 가능
+  semester: number;
+  studentNumber: string;
+}
+
+interface ProfilePhoto {
+  downloadUrl: string;
+  id: string;
+  originalFileName: string;
+}
+export default function EditForm({ memberId }: Props) {
   const [openModal, setOpenModal] = useState(false);
   const [formData, setFormData] = useState<ChangeUserInfoInput | null>(null);
+
+  const { data } = useGetUserData({ memberId });
+  console.log(data);
   const form = useForm<ChangeUserInfoInput>({
     resolver: zodResolver(ChangeUserInfoSchema),
     defaultValues: {
-      username: "",
-      studentNumber: "",
+      username: data?.name,
+      studentNumber: data?.studentNumber,
       grade: "1학년",
       semester: "1학기",
-      absence: undefined,
-      birth: new Date("1998-10-13"),
+      absence: data?.absence,
+      birth: data?.birth ? new Date("2000-01-05") : undefined,
       profilePhoto: undefined,
-      phoneNumber: "",
-      graduation: false,
-      work: undefined,
-      job: "",
+      phoneNumber: data?.phone,
+      graduation: data?.graduation,
+      work: true,
+      job: undefined,
       contact: false,
       contactInfo: "",
-      contactDescription: "",
+      contactDescription: "dd",
     },
     mode: "onChange",
   });
+
   const graduation = useWatch({
     control: form.control,
     name: "graduation",

@@ -9,16 +9,14 @@ import {
 
 import Content from "../../components/DetailPageContent";
 import DetailPageTitle from "../../components/DetailPageTitle";
-import { useBoardIdStore } from "@/src/store/BoardId";
 
 import CommentTitle from "../../components/comments/CommentTitle";
 import { postKeys, usePostDetailQuery } from "../../query/postqueries";
 import CommentForm from "../../components/comments/CommentForm";
 import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
 import CommentList from "../../components/comments/CommentList";
-import { POST_TYPE } from "@/src/constant/board";
+import { INTEGRATED, POST_TYPE } from "@/src/constant/board";
 import DetailPageSubTitle from "../../components/DetailPageSubTitle";
-import { Book, Hand, MessageSquareMore } from "lucide-react";
 import { Separator } from "@nova/ui/components/ui/separator";
 
 interface PostDetailProps {
@@ -26,7 +24,6 @@ interface PostDetailProps {
 }
 
 export default function PostDetail({ postId }: PostDetailProps) {
-  const { INTEGRATED } = useBoardIdStore();
   const { data } = usePostDetailQuery(postId, INTEGRATED);
 
   return (

@@ -1,7 +1,6 @@
 import React from "react";
-
-import PostDetail from "./PostDetail";
 import ErrorBoundaryWrapper from "../../components/ErrorBoundaryWrapper";
+import Hydration from "./Hydration";
 
 export default async function Page({
   params,
@@ -12,7 +11,7 @@ export default async function Page({
 
   return (
     <ErrorBoundaryWrapper>
-      <PostDetail postId={id} />
+      <Hydration postId={id} />
     </ErrorBoundaryWrapper>
   );
 }
