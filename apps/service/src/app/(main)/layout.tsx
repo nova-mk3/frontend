@@ -22,7 +22,6 @@ export default function RootLayout({
         {/* 추후 수정 예정 @kwonja */}
         <div id="root" className="max-w-screen-xl mx-auto">
           <Header />
-
           <Providers>{children}</Providers>
           <Footer />
         </div>
