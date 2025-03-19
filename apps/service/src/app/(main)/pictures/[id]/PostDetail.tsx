@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import { useBoardIdStore } from "@/src/store/BoardId";
-import { POST_TYPE } from "@/src/constant/board";
+import { CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
 import DetailPageTitle from "../../board/components/DetailPageTitle";
 import ImageSlider from "./components/ImageSlider";
 import { usePictureDetailQuery } from "../query/queries";
@@ -48,7 +47,6 @@ const ViewCount = dynamic(() => import("../../board/components/ViewCount"), {
 });
 export default function PostDetail({ postId }: PostDetailProps) {
   const router = useRouter();
-  const { CLUB_ARCHIVE } = useBoardIdStore();
   const { data } = usePictureDetailQuery({ postId, boardId: CLUB_ARCHIVE });
   const queryClient = useQueryClient();
   console.log(data);

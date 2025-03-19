@@ -1,9 +1,8 @@
 "use client";
 
 import React, { Suspense, useState } from "react";
-import { useBoardIdStore } from "@/src/store/BoardId";
 
-import { BOARD_SIZE, POST_TYPE } from "@/src/constant/board";
+import { BOARD_SIZE, CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
 
 import { Folder } from "lucide-react";
 import { useQueryParams } from "../components/useQueryParams";
@@ -13,8 +12,6 @@ import ArchiveList from "./components/ArchiveList";
 import { PageNation } from "../components/PageNation";
 
 export default function Post() {
-  const { CLUB_ARCHIVE } = useBoardIdStore();
-
   const { currentPage, keyword, searchType, sortBy, sortDirection } =
     useQueryParams();
 

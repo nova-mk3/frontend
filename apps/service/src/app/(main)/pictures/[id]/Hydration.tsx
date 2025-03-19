@@ -15,13 +15,10 @@ interface Props {
 }
 export default async function Hydration({ postId }: Props) {
   const queryClient = new QueryClient();
-  const cookieStore = await cookies();
-  const authToken = cookieStore.get("AUTH_TOKEN")?.value;
 
   await queryClient.prefetchQuery({
     queryKey: postKeys.detail(postId),
-    queryFn: () =>
-      PictureGetDetail({ postId, authToken, boardId: CLUB_ARCHIVE }),
+    queryFn: () => PictureGetDetail({ postId, boardId: CLUB_ARCHIVE }),
   });
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

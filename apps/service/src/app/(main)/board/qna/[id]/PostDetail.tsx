@@ -7,12 +7,11 @@ import {
   FileList,
 } from "../../../components/File/ViewFileLayout";
 import Content from "../../components/DetailPageContent";
-import { useBoardIdStore } from "@/src/store/BoardId";
 import CommentTitle from "../../components/comments/CommentTitle";
 import { usePostDetailQuery } from "../../query/postqueries";
 import CommentForm from "../../components/comments/CommentForm";
 import CommentList from "../../components/comments/CommentList";
-import { POST_TYPE } from "@/src/constant/board";
+import { INTEGRATED, POST_TYPE } from "@/src/constant/board";
 import DetailPageSubTitle from "../../components/DetailPageSubTitle";
 import { Separator } from "@nova/ui/components/ui/separator";
 import DetailPageTitle from "../../components/DetailPageTitle";
@@ -23,7 +22,6 @@ interface PostDetailProps {
 }
 
 export default function PostDetail({ postId }: PostDetailProps) {
-  const { INTEGRATED } = useBoardIdStore();
   const { data } = usePostDetailQuery(postId, INTEGRATED);
 
   console.log(data);

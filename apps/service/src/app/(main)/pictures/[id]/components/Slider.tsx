@@ -23,7 +23,8 @@ export const Slider = ({
   infinite,
   images,
 }: SliderProps) => {
-  const { currentIndex, setCurrentIndex } = useSliderStore();
+  const currentIndex = useSliderStore((state) => state.currentIndex);
+  const setCurrentIndex = useSliderStore((state) => state.setCurrentIndex);
   const count = React.Children.count(children);
   const totalSlides = count;
 

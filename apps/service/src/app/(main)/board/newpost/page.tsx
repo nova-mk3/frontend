@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import WriteBottomLayout from "../../components/WriteBottomLayout";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { POST_TYPE_OPTIONS, PostType } from "@/src/constant/board";
+import { INTEGRATED, POST_TYPE_OPTIONS, PostType } from "@/src/constant/board";
 import {
   IntegratedInput,
   IntegratedSchema,
@@ -15,7 +15,6 @@ import {
   IntegratedBoardPost,
 } from "@/src/api/board/integrated";
 import { useRouter } from "next/navigation";
-import { useBoardIdStore } from "@/src/store/BoardId";
 import { UploadFilesAPI } from "@/src/api/board/file";
 import PostFileUploader from "../../components/File/PostFileUploader";
 import { SelectFormField } from "@/src/app/(auth)/signup/components/SelectFormField";
@@ -29,7 +28,6 @@ export default function Page() {
   const router = useRouter();
   const queryClient = useQueryClient();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const { INTEGRATED } = useBoardIdStore();
 
   const form = useForm<IntegratedInput>({
     resolver: zodResolver(IntegratedSchema),

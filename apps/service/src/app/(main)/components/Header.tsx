@@ -1,22 +1,24 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 import Logo from "@/public/image/LogoWithName.svg";
 import Navigation from "./Navigation";
 import Link from "next/link";
-import AppSidebar from "./Siderbar/AppSidebar";
+
 import { Bell, Menu, Search } from "lucide-react";
 import Tendinous from "./Tendinous";
 import HeaderLoginMenu from "./HeaderLoginMenu";
+import { cookies } from "next/headers";
+import { getMemberId } from "@/src/api/user/server";
+import { SidebarWrapper } from "./Siderbar/SiderbarWrapper";
 
-interface Props {
-  memberId: string;
-}
-export default function Header({ memberId }: Props) {
-  const [isSiderbar, setIsSiderbar] = useState(false);
-
-  const toggleSiderbar = () => {
-    setIsSiderbar((prev) => !prev);
-  };
+export default async function Header() {
+  const cookieStore = await cookies();
+  const authToken = cookieStore.get("AUTH_TOKEN")?.value;
+  let memberId = "";
+  if (authToken) {
+    memberId = await getMemberId();
+  } else {
+    memberId = "";
+  }
 
   return (
     <>
@@ -44,41 +46,17 @@ export default function Header({ memberId }: Props) {
               </Link>
             </div>
           ) : (
-            <div className="flex flex-row justify-center items-center gap-4 mobile:hidden">
-              <div
-                className="border-black border-[1px] p-2 rounded-full cursor-pointer"
-                onClick={() => {
-                  alert("준비중입니다");
-                }}
-              >
-                <Search size={20} />
-              </div>
-              <div
-                className="border-black border-[1px] p-2 rounded-full cursor-pointer"
-                onClick={() => {
-                  alert("준비중입니다");
-                }}
-              >
-                <Bell size={20} />
-              </div>
-
-              <HeaderLoginMenu
-                trigger={
-                  <div className="border-black border-[1px] p-2 rounded-full cursor-pointer">
-                    <Menu size={20} />
-                  </div>
-                }
-                memberId={memberId}
-              />
-            </div>
+            <HeaderLoginMenu
+              trigger={
+                <div className="border-black border-[1px] p-2 rounded-full cursor-pointer">
+                  <Menu size={20} />
+                </div>
+              }
+              memberId={memberId}
+            />
           )}
-          <Menu
-            size={30}
-            className="hidden mobile:block cursor-pointer"
-            onClick={() => setIsSiderbar(true)}
-          />
         </div>
-        <AppSidebar toggleSiderbar={toggleSiderbar} isOpen={isSiderbar} />
+        <SidebarWrapper />
       </div>
     </>
   );

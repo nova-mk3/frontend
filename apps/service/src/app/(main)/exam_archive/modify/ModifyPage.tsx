@@ -1,10 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import { POST_TYPE, PostType } from "@/src/constant/board";
+import { CLUB_ARCHIVE, POST_TYPE, PostType } from "@/src/constant/board";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useBoardIdStore } from "@/src/store/BoardId";
 import { UploadFilesAPI } from "@/src/api/board/file";
 import ModifyFileUploader from "../../components/File/ModifyFileUploader";
 import { FileItemProps } from "../../components/File/ViewFileItem";
@@ -25,7 +24,6 @@ import NewPostTitle from "../../components/NewPostTitle";
 export default function ModifyPage() {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const { CLUB_ARCHIVE } = useBoardIdStore();
   const { postId, postType } = useQueryParams();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [originFiles, setOriginFiles] = useState<FileItemProps[]>([]);

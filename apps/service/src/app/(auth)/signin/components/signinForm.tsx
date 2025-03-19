@@ -10,14 +10,11 @@ import { IdCard, Lock } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { InputFormField } from "../../components/InputFormField";
-import { useMutation } from "@tanstack/react-query";
-import { login } from "@/src/api/auth";
-import { useRouter } from "next/navigation";
-import { useQueryParams } from "@/src/app/(main)/components/useQueryParams";
+import { useLoginMutation } from "../query/mutation";
 
 export function SigninForm() {
-  const { redirectUrl } = useQueryParams();
-  const router = useRouter();
+  const loginMutation = useLoginMutation();
+
   const form = useForm<SigninInput>({
     resolver: zodResolver(SigninSchema),
     defaultValues: {
@@ -27,26 +24,8 @@ export function SigninForm() {
     mode: "onChange",
   });
 
-  const useLoginMutation = useMutation({
-    mutationFn: ({
-      studentNumber,
-      password,
-    }: {
-      studentNumber: string;
-      password: string;
-    }) => login({ studentNumber, password }),
-    onSuccess: (data: any) => {
-      //로그인 성공
-      alert("로그인 성공");
-
-      router.push(redirectUrl);
-    },
-    onError: (error) => {
-      alert(error.message);
-    },
-  });
   function onSubmit(values: SigninInput) {
-    useLoginMutation.mutate({
+    loginMutation.mutate({
       studentNumber: values.studentId,
       password: values.password,
     });

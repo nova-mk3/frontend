@@ -22,7 +22,8 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, total, images }) => {
-  const { currentIndex, setCurrentIndex } = useSliderStore();
+  const currentIndex = useSliderStore((state) => state.currentIndex);
+  const setCurrentIndex = useSliderStore((state) => state.setCurrentIndex);
   const [scale, setScale] = useState(1);
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

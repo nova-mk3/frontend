@@ -9,8 +9,7 @@ import { PictureInput, PictureSchema } from "@/src/schema/picture.schema";
 import { Form } from "@nova/ui/components/ui/form";
 import TextareaFormField from "@/src/app/(auth)/signup/components/TextareaFormField";
 import TextareaFormContentField from "@/src/app/(auth)/signup/components/TextareaFormContentField";
-import { POST_TYPE } from "@/src/constant/board";
-import { useBoardIdStore } from "@/src/store/BoardId";
+import { CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
 import NewPostTitle from "../../components/NewPostTitle";
 import {
   useFileUploadMutation,
@@ -18,7 +17,6 @@ import {
 } from "../query/mutation";
 
 export default function Page() {
-  const { CLUB_ARCHIVE } = useBoardIdStore();
   const [selectedFiles, setSelectedFiles] = useState<ImageFile[]>([]);
 
   const form = useForm<PictureInput>({

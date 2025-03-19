@@ -3,6 +3,7 @@ import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
 import PostDetail from "./PostDetail";
 import { IntegratedBoardGetDetail } from "@/src/api/board/integrated";
 import { Metadata } from "next";
+import { INTEGRATED } from "@/src/constant/board";
 
 // TODO: 메타데이터 확인
 type Props = {
@@ -12,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id: postId } = await params;
   const postData = await IntegratedBoardGetDetail({
     postId,
-    boardId: "dffc0da3-bfb5-48c9-a8de-bcecab8c3541",
+    boardId: INTEGRATED,
   });
   return {
     title: "NOVA",
