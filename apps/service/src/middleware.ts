@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { verifyAccessToken } from "./api/auth";
+import { logout, verifyAccessToken } from "./api/auth";
 
 export async function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
@@ -8,15 +8,13 @@ export async function middleware(request: NextRequest) {
   const AuthToken = request.cookies.get("AUTH_TOKEN")?.value;
   const response = NextResponse.next();
 
-  console.log(request.headers.get("referer"));
-
   //토큰이 존재할때 토큰 만료여부 확인
   if (AuthToken) {
     const data = await verifyAccessToken(AuthToken);
     console.log(data);
 
     // 토큰이 만료되면 리다이렉트
-    if (data.status === 500) {
+    if (data.status === 500 && !pathname.startsWith("/signin")) {
       return NextResponse.redirect(
         new URL(`/signin?redirect=${pathname + search}`, request.url)
       );

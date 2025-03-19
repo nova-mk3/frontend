@@ -11,8 +11,14 @@ export const api = axios.create(config); // 일반 API 요청용 인스턴스
 export const Authapi = axios.create(config); // 인증이 필요한 요청용 인스턴스
 
 Authapi.interceptors.response.use(
-  (response) => {
+  async (response) => {
     // 정상 응답인 경우 그대로 반환
+    const startTime = Date.now();
+    const elapsedTime = Date.now() - startTime;
+    const remainingTime = Math.max(1000 - elapsedTime, 0);
+
+    await new Promise((resolve) => setTimeout(resolve, remainingTime));
+
     return response;
   },
   (error) => {

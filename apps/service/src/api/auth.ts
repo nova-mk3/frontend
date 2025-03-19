@@ -64,7 +64,7 @@ export async function verifyAccessToken(accessToken: string) {
 
 export async function logout() {
   try {
-    const response = await Authapi.get(`nova/members/logout`);
+    const response = await Authapi.get(`/nova/members/logout`);
     return response.data;
   } catch (error) {
     throwErrorMessage(error);

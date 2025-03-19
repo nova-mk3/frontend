@@ -65,9 +65,6 @@ export default function BoardListItem({
             <span className="text-xs">{likeCount}</span>
           </div>
         </div>
-        {/* <div className='t-s'>좋아요 {likeCount}</div>
-            <div className='t-s'>댓글 {commentCount}</div>
-            <div className='t-s'>조회 {viewCount}</div> */}
       </div>
     </div>
   );
