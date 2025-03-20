@@ -3,7 +3,7 @@ import MemberCard from "@nova/ui/components/ui/MemberCard";
 import { Button } from "@nova/ui/components/ui/button";
 import { useEffect, useState } from "react";
 import ExecutiveModal from './ExecutiveModal';
-import { useExecutiveMembersQuery, useExecutiveYearsQuery , useDeleteExecutiveMemberMutation} from "@/src/query/executiveMembersQueries";
+import { useExecutiveMembersQuery, useExecutiveYearsQuery , useDeleteExecutiveMemberMutation , usePostExecutiveYearMutation} from "@/src/query/executiveMembersQueries";
 import { enumRoleType } from "@/src/types/executiveMember";
 
 export default function Executive() {
@@ -12,32 +12,16 @@ export default function Executive() {
   const { data : executiveYears , isLoading : isYearsLoading , error : yearsError } = useExecutiveYearsQuery();
   const { data : executiveMembers , isLoading : isMembersLoading , error :membersError } = useExecutiveMembersQuery(selectedYear);
   const { mutate: deleteExecutiveMember } = useDeleteExecutiveMemberMutation(selectedYear);
+  const { mutate: PostExecutiveYearMutation } = usePostExecutiveYearMutation();
 
   useEffect(() => {
     if (executiveYears && executiveYears.length > 0) {
       const maxYear = Math.max(...executiveYears);
+      console.log(executiveYears)
       setSelectedYear(maxYear);
     }
   }, [executiveYears]);
- 
-  // 임시 사용
-  const handleAddYear = () => {
-    const input = window.prompt("추가할 연도를 입력하세요: 임원을 추가해야 연도가 생성됩니다.");
-    if (!input) return; // 사용자가 취소를 누르면 종료
   
-    const yearToAdd = Number(input);
-    if (isNaN(yearToAdd)) {
-      alert("올바른 숫자를 입력하세요.");
-      return;
-    }
-    if (executiveYears?.includes(yearToAdd)) {
-      alert("이미 존재하는 연도입니다.");
-      return;
-    }
-    setSelectedYear(yearToAdd);
-  };
-  
-
   const categories = [
     { title: "회장", members: executiveMembers?.filter(member => member.role === enumRoleType.CHAIRMAN) },
     { title: "부회장", members: executiveMembers?.filter(member => member.role === enumRoleType.VICE_CHAIRMAN) },
@@ -61,7 +45,7 @@ export default function Executive() {
             {year}
           </Button>
         ))}
-        <Button variant={"default"} className="w-[100px]" onClick={()=> handleAddYear()}>연도 추가</Button>
+        <Button variant={"default"} className="w-[100px]" onClick={()=> PostExecutiveYearMutation()}>연도 추가</Button>
       </div>
 
       {categories.map(({ title, members }) => (

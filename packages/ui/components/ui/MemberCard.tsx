@@ -147,7 +147,7 @@ export default function MemberCard({
                 <Mail className={"ml-auto h-8 w-8"}/>
                 <div className={`text-2xl text-center flex-grow`}>{email}</div>
                 <div className={`text-2xl text-center flex-grow`}>{grade}학년</div>
-                <div>
+                <div onClick={(e) => e.stopPropagation()}>
                     <Button
                     type="button"
                     variant={"default"}

@@ -44,3 +44,13 @@ export async function DeleteExecutiveMember(executiveHistoryId: string){
         throw new Error("임원을 삭제하는 중 오류가 발생했습니다.");
     }
 }
+
+export async function PostExecutiveYear(){
+    try{
+        const response = await Authapi.post(`/nova/executive-histories/year`)
+        return response.data
+    } catch (error:any){
+        console.error("Error posting executive year:", error);
+        throw new Error("임원 연도를 추가하는 중 오류가 발생했습니다.");
+    }
+}
