@@ -24,6 +24,8 @@ COPY --from=builder /app/out/json/ .
 RUN pnpm install
 RUN ls -l /app/node_modules
 COPY --from=builder /app/out/full/ .
+
+RUN rm -rf .next
 RUN pnpm turbo build
 
 # 런타임 설정

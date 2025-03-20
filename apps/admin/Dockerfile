@@ -31,7 +31,7 @@ RUN pnpm install
 COPY --from=builder /app/out/full/ .
 
 # turbo build
-RUN pnpm build
+RUN pnpm turbo build
 
 # 런타임 설정
 FROM base AS runner
