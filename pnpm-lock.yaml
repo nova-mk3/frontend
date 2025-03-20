@@ -257,8 +257,6 @@ importers:
         specifier: ^5
         version: 5.7.2
 
-  files: {}
-
   packages/eslint-config:
     devDependencies:
       '@next/eslint-plugin-next':

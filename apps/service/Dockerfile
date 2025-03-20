@@ -22,7 +22,7 @@ RUN npm install -g pnpm
 WORKDIR /app
 COPY --from=builder /app/out/json/ .
 RUN pnpm install
-
+RUN ls -l /app/node_modules
 COPY --from=builder /app/out/full/ .
 RUN pnpm turbo build
 
