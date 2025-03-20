@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 
 services:
   admin:
@@ -9,7 +9,9 @@ services:
     image: frontend_admin_image:latest
     restart: always
     ports:
-      - 3001:3001
+      - "3001:3001"
+    networks:
+      - backend_network # 네트워크 연결
 
   service:
     container_name: frontend_service
@@ -19,7 +21,10 @@ services:
     image: frontend_service_image:latest
     restart: always
     ports:
-      - 3002:3002
+      - "3002:3002"
+    networks:
+      - backend_network # 네트워크 연결
 
-# Define a network, which allows containers to communicate
-# with each other, by using their container name as a hostname
+networks:
+  backend_network:
+    driver: bridge # 기본 브리지 네트워크 사용

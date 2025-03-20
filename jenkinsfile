@@ -1,0 +1,66 @@
+pipeline {
+    agent any
+    
+    environment {
+        GITHUB_REPO = 'https://github.com/nova-mk3/frontend'
+        GITHUB_CREDENTIALS_ID = 'nova-token'  // GitHub 자격 증명 ID
+    }
+    
+    stages {
+        stage('GitHub Clone') {
+            steps {
+                script {
+                    echo "🔄 Cloning repository..."
+                    sh 'rm -rf frontend || true'  // 기존 폴더 삭제 (에러 방지)
+                    git branch: 'main', credentialsId: GITHUB_CREDENTIALS_ID, url: GITHUB_REPO
+                    echo "✅ Git Clone 완료!"
+                }
+            }
+        }
+
+        stage('Cleanup') {
+            steps {
+                script {
+                    if (fileExists('frontend/docker-compose.yml')) {
+                        echo "🧹 Cleaning up old Docker containers..."
+                        dir('frontend') {
+                            sh '''
+                            docker-compose down --rmi all --volumes --remove-orphans || true
+                            '''
+                        }
+                        echo "✅ Cleanup 완료!"
+                    } else {
+                        echo "⚠️ frontend/docker-compose.yml not found. Skipping cleanup."
+                    }
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    if (fileExists('frontend/docker-compose.yml')) {
+                        echo "🚀 Deploying Docker containers..."
+                        dir('frontend') {
+                            sh '''
+                            docker-compose up -d --build || (echo "❌ Deployment Failed!" && exit 1)
+                            '''
+                        }
+                        echo "✅ Deployment 완료!"
+                    } else {
+                        error "❌ docker-compose.yml not found! Stopping pipeline."
+                    }
+                }
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo "🎉 Deployment 성공! 🚀"
+        }
+        failure {
+            echo "❌ Deployment 실패. Logs 확인 요망."
+        }
+    }
+}
