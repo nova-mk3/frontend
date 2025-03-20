@@ -1,5 +1,5 @@
 import { PostType } from "@/src/constant/board";
-import { api, Authapi } from "../core";
+import { Authapi } from "../core";
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
 
 export interface IntegradePostRequest {
@@ -124,6 +124,7 @@ export async function BoardAllList({
 export async function BoardLatestList({ boardId }: BoardIdParams) {
   try {
     const response = await Authapi.get(`/nova/boards/${boardId}/posts/latest`);
+
     return response.data.data;
   } catch (error) {
     throwErrorMessage(error);
