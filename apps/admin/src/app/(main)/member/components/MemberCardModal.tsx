@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Phone, IdCard, Cake, Mail } from "lucide-react";
 
 // 성민이형의 고양이 사진 임시 사용
-import TempImageLink from "./../../../../../../service/public/image/cat.jpg";
+import TempImageLink from "/image/cat.jpg";
 
 interface MemberCardModalProps {
   open: boolean;
@@ -33,7 +33,13 @@ const MemberInfo = ({ icon: Icon, label }: { icon: any; label: string }) => (
   </div>
 );
 
-export default function MemberCardModal({ open, onClose , type , Aceept , Reject }: MemberCardModalProps) {
+export default function MemberCardModal({
+  open,
+  onClose,
+  type,
+  Aceept,
+  Reject,
+}: MemberCardModalProps) {
   const [isVisible, setIsVisible] = useState(open); // 실제 렌더링 여부
   const [isAnimating, setIsAnimating] = useState(false); // 애니메이션 실행 여부
 
@@ -72,7 +78,10 @@ export default function MemberCardModal({ open, onClose , type , Aceept , Reject
             />
             <div className="text-2xl font-bold">{data.name}</div>
             <MemberInfo icon={Phone} label={data.phoneNumber} />
-            <MemberInfo icon={IdCard} label={`${data.studentId} / ${data.grade}`} />
+            <MemberInfo
+              icon={IdCard}
+              label={`${data.studentId} / ${data.grade}`}
+            />
             <MemberInfo icon={Cake} label={data.birthday} />
             <MemberInfo icon={Mail} label={data.email} />
           </div>
@@ -85,14 +94,24 @@ export default function MemberCardModal({ open, onClose , type , Aceept , Reject
             </div>
             {type === "member" ? (
               <div className="flex justify-end space-x-4 mt-6">
-                <Button variant="default" onClick={onClose}>변경취소</Button>
-                <Button variant="default" onClick={onClose}>확인</Button>
+                <Button variant="default" onClick={onClose}>
+                  변경취소
+                </Button>
+                <Button variant="default" onClick={onClose}>
+                  확인
+                </Button>
               </div>
             ) : type === "newMember" ? (
               <div className="flex justify-end space-x-4 mt-6">
-                <Button variant="default" onClick={onClose}>취소</Button>
-                <Button variant="default" onClick={Aceept}>수락</Button>
-                <Button variant="default" onClick={Reject}>반려</Button>
+                <Button variant="default" onClick={onClose}>
+                  취소
+                </Button>
+                <Button variant="default" onClick={Aceept}>
+                  수락
+                </Button>
+                <Button variant="default" onClick={Reject}>
+                  반려
+                </Button>
               </div>
             ) : null}
           </div>
