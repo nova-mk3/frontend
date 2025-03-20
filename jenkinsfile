@@ -12,7 +12,11 @@ pipeline {
                 script {
                     echo "🔄 Cloning repository..."
                     sh 'rm -rf frontend || true'  // 기존 폴더 삭제 (에러 방지)
-                    git branch: 'main', credentialsId: GITHUB_CREDENTIALS_ID, url: GITHUB_REPO
+                    
+                    // ✅ frontend 디렉토리에서 Git Clone 실행
+                    dir('frontend') {  
+                        git branch: 'main', credentialsId: env.GITHUB_CREDENTIALS_ID, url: env.GITHUB_REPO
+                    }
                     echo "✅ Git Clone 완료!"
                 }
             }
@@ -21,7 +25,8 @@ pipeline {
         stage('Cleanup') {
             steps {
                 script {
-                    if (fileExists('frontend/docker-compose.yml')) {
+                    def composeFile = "frontend/docker-compose.yml"
+                    if (fileExists(composeFile)) {  
                         echo "🧹 Cleaning up old Docker containers..."
                         dir('frontend') {
                             sh '''
@@ -39,9 +44,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    if (fileExists('frontend/docker-compose.yml')) {
+                    def composeFile = "frontend/docker-compose.yml"
+                    if (fileExists(composeFile)) {  
                         echo "🚀 Deploying Docker containers..."
-                        dir('frontend') {
+                        dir('frontend') 
                             sh '''
                             docker-compose up -d --build || (echo "❌ Deployment Failed!" && exit 1)
                             '''
