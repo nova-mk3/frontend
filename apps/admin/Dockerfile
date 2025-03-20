@@ -25,7 +25,7 @@ RUN npm install -g pnpm
 WORKDIR /app
 # 의존성 파일 복사
 COPY --from=builder /app/out/json/ .
-RUN pnpm install --prefer-offline --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 
 # 프로젝트 전체 복사
 COPY --from=builder /app/out/full/ .
