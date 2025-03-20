@@ -26,13 +26,12 @@ WORKDIR /app
 # 의존성 파일 복사
 COPY --from=builder /app/out/json/ .
 RUN pnpm install
-RUN pnpm link @nova/ui
 
 # 프로젝트 전체 복사
 COPY --from=builder /app/out/full/ .
 
 # turbo build
-RUN pnpm turbo build
+RUN pnpm build
 
 # 런타임 설정
 FROM base AS runner
