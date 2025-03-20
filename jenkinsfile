@@ -47,7 +47,7 @@ pipeline {
                     def composeFile = "frontend/docker-compose.yml"
                     if (fileExists(composeFile)) {  
                         echo "🚀 Deploying Docker containers..."
-                        dir('frontend') 
+                        dir('frontend') {
                             sh '''
                             docker-compose up -d --build || (echo "❌ Deployment Failed!" && exit 1)
                             '''
