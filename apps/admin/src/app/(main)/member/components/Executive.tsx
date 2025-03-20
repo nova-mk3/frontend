@@ -1,17 +1,16 @@
 // Members 페이지
-import MemberCard from "@nova/ui/components/ui/MemberCard";
 import { Button } from "@nova/ui/components/ui/button";
 import { useEffect, useState } from "react";
 import ExecutiveModal from './ExecutiveModal';
-import { useExecutiveMembersQuery, useExecutiveYearsQuery , useDeleteExecutiveMemberMutation , usePostExecutiveYearMutation} from "@/src/query/executiveMembersQueries";
+import { useExecutiveMembersQuery, useExecutiveYearsQuery , usePostExecutiveYearMutation} from "@/src/query/executiveMembersQueries";
 import { enumRoleType } from "@/src/types/executiveMember";
+import ExecutiveMembercard from "./ExecutiveMemberCard";
 
 export default function Executive() {
   const [selectedYear, setSelectedYear] = useState<number>(0); // 선택된 연도 상태
   const [open, setOpen] = useState(false);
   const { data : executiveYears , isLoading : isYearsLoading , error : yearsError } = useExecutiveYearsQuery();
   const { data : executiveMembers , isLoading : isMembersLoading , error :membersError } = useExecutiveMembersQuery(selectedYear);
-  const { mutate: deleteExecutiveMember } = useDeleteExecutiveMemberMutation(selectedYear);
   const { mutate: PostExecutiveYearMutation } = usePostExecutiveYearMutation();
 
   useEffect(() => {
@@ -56,11 +55,13 @@ export default function Executive() {
           <div className="flex flex-wrap ml-2">
             {(members ?? []).length > 0 ? (
               members?.map(member => (
-                <MemberCard
+                <ExecutiveMembercard
+                  selectedYear={selectedYear}
                   key={member.executiveHistoryId}
                   name={member.name}
-                  onDeleteRole={()=> deleteExecutiveMember(member.executiveHistoryId)}
-                  type="admin"
+                  phone={member.phone}
+                  role={member.role}
+                  executiveHistoryId={member.executiveHistoryId}
                 />
               ))
             ) : (

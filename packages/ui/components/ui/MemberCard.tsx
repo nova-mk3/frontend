@@ -8,20 +8,13 @@ import {
     Cake,
     Mail, 
 } from "lucide-react";
-import { 
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue 
-} from "@nova/ui/components/ui/select";
 import { Button } from "@nova/ui/components/ui/button";
 import { formatPhoneNumber, formatBirthday } from "../../../../apps/admin/src/utils/formatter";
 // 성민이형의 고양이사진 임시로 사용
 import TempImageLink from "./../../../../apps/service/public/image/cat.jpg";
 
 interface MembercardProps {
-    type? : "small" | "medium" | "large" | "admin",
+    type? : "small" | "medium" | "large" ,
     name? : string,
     studentId? : string,
     phoneNumber? : string,
@@ -33,8 +26,6 @@ interface MembercardProps {
     onClick? : () => void,
     onApprove?: () => void,
     onReject?: () => void,
-    onChangeRole?: () => void,
-    onDeleteRole?: () => void,
     profilePhoto?: {
         downloadUrl: string;
         id: string;
@@ -54,8 +45,6 @@ export default function MemberCard({
     onClick = (() => {console.log("meow")}),
     onReject = (() => {console.log("reject")}),
     onApprove = (() => {console.log("approve")}),
-    onDeleteRole = (() => {console.log("delete")}),
-    onChangeRole = (() => {console.log("Rolechange")}),
 } : MembercardProps) {
     if(type === "small"){
         return (
@@ -87,43 +76,6 @@ export default function MemberCard({
                 <div className={`text-2xl text-center flex-grow`}>{phoneNumber}</div>
                 <IdCard className={"ml-auto h-8 w-8"}/>
                 <div className={`text-2xl text-center flex-grow`}>{studentId}</div>
-            </div>
-        )
-    }else if(type === "admin"){
-        return (
-            <div className={`w-[700px] h-[80px] m-[8px] flex border border-primary rounded-lg items-center hover:bg-background02 cursor-pointer`}>
-                <Image 
-                    src={TempImageLink} 
-                    alt="profileImage" 
-                    width={0}
-                    height={0}
-                    className='ml-[15px] rounded-full h-[64px] w-[64px]'
-                    priority
-                />
-                <div className={`text-2xl text-center flex-grow`}>{name}</div>
-                <Phone className={"ml-auto h-8 w-8"}/>
-                <div className={`text-2xl text-center flex-grow`}>{phoneNumber}</div>
-                <IdCard className={"ml-auto h-8 w-8"}/>
-                <div className={`text-2xl text-center flex-grow`}>{studentId}</div>
-                <Select onValueChange={(value) => value === "delete" ? onDeleteRole() : onChangeRole()}>
-                    <SelectTrigger className="w-[90px] mr-[10px]">
-                        <SelectValue placeholder="직위 변경" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-background01" style={{minWidth: "90px"}}>
-                        <SelectItem value="회장" className="cursor-pointer">
-                            회장
-                        </SelectItem>
-                        <SelectItem value="부회장" className="cursor-pointer">
-                            부회장
-                        </SelectItem>                        
-                        <SelectItem value="임원" className="cursor-pointer">
-                            임원
-                        </SelectItem>
-                        <SelectItem value="delete" className="cursor-pointer">
-                            삭제
-                        </SelectItem>
-                    </SelectContent>
-                </Select>
             </div>
         )
     }else if(type === "large"){

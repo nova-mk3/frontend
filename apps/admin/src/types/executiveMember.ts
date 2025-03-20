@@ -1,3 +1,5 @@
+import { ProfilePhoto } from '@/src/types/manageMember';
+
 export interface PostExecutiveMemberRequest {
     year: number;
     role: enumRoleType;
@@ -17,6 +19,8 @@ export interface ExecutiveMember{
     role: enumRoleType;
     name: string;
     memberId: string;
+    phone: string;
+    profilePhoto: ProfilePhoto;
 }
 
 export enum enumRoleType{
@@ -25,4 +29,19 @@ export enum enumRoleType{
     VICE_CHAIRMAN = "VICE_CHAIRMAN", 
     GENERAL = "GENERAL", 
     ADMINISTRATOR = "ADMINISTRATOR",
+}
+
+export interface ExecutiveMembercardProps {
+    selectedYear?: number,
+    name? : string,
+    studentId? : string,
+    phone? : string,
+    birthday? : string,
+    role? : enumRoleType,
+    executiveHistoryId? : string,
+    profilePhoto?: {
+        downloadUrl: string;
+        id: string;
+        originalFileName: string;
+    },
 }
