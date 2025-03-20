@@ -1,4 +1,4 @@
-import { PostExecutiveMemberRequest } from "@/src/types/executiveMember";
+import { PostExecutiveMemberRequest , enumRoleType } from "@/src/types/executiveMember";
 import { Authapi } from "../../core";
 
 export async function GetExecutvieYears(){
@@ -52,5 +52,17 @@ export async function PostExecutiveYear(){
     } catch (error:any){
         console.error("Error posting executive year:", error);
         throw new Error("임원 연도를 추가하는 중 오류가 발생했습니다.");
+    }
+}
+
+export async function PutExecutiveMember(executiveHistoryId: string, role: enumRoleType){
+    try{
+        const response = await Authapi.put(`/nova/executive-histories/${executiveHistoryId}/${role}`, )
+        console.log(`/nova/executive-histories/${executiveHistoryId}/${role}`)
+        console.log("안녕하세요",response)
+        return response.data
+    } catch (error:any){
+        console.error("Error putting executive member:", error);
+        throw new Error("임원을 수정하는 중 오류가 발생했습니다.");
     }
 }

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
-import { GetExecutvieYears , GetExecutiveMemberByYear , PostExecuvtieMember , DeleteExecutiveMember, PostExecutiveYear} from '../api/main/member/executiveMemberApi';
-import { ExecutiveMember , PostExecutiveMemberRequest } from '@/src/types/executiveMember';
+import { GetExecutvieYears , GetExecutiveMemberByYear , PostExecuvtieMember , DeleteExecutiveMember, PostExecutiveYear, PutExecutiveMember} from '../api/main/member/executiveMemberApi';
+import { enumRoleType, ExecutiveMember , PostExecutiveMemberRequest } from '@/src/types/executiveMember';
 
 export const executiveMembersKeys = {
     years: () => ['years'] as const,
@@ -65,6 +65,23 @@ export const useDeleteExecutiveMemberMutation = (year:number) => {
         },
         onError: (error) => {
             console.error("임원 삭제 실패:", error);
+        }
+    });
+}
+
+export const usePutExecutiveMemberMutation = (year:number) => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: ({executiveHistoryId, role }:{executiveHistoryId: string , role: enumRoleType}) => PutExecutiveMember(executiveHistoryId, role),
+        onSuccess: () => {
+            console.log("미야옹")
+            queryClient.invalidateQueries({
+                queryKey: executiveMembersKeys.list(year),
+            });
+        },
+        onError: (error) => {
+            console.error("임원 수정 실패:", error);
         }
     });
 }
