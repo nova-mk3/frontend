@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Phone, IdCard, Cake, Mail } from "lucide-react";
 
 // 성민이형의 고양이 사진 임시 사용
-import TempImageLink from "/image/cat.jpg";
+// import TempImageLink from "/image/cat.jpg";
 
 interface MemberCardModalProps {
   open: boolean;
@@ -71,11 +71,11 @@ export default function MemberCardModal({
           onClick={(e) => e.stopPropagation()} // 내부 클릭 시 닫기 방지
         >
           <div className="flex flex-col w-[700px] items-center space-y-8 py-20">
-            <Image
+            {/* <Image
               src={TempImageLink}
               alt="profileImage"
               className="rounded-full w-[160px] h-[160px]"
-            />
+            /> */}
             <div className="text-2xl font-bold">{data.name}</div>
             <MemberInfo icon={Phone} label={data.phoneNumber} />
             <MemberInfo
