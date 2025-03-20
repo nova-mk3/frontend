@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         GITHUB_REPO = 'https://github.com/nova-mk3/frontend'
-        GITHUB_CREDENTIALS_ID = 'nova_token'  // GitHub 자격 증명 ID
+        GITHUB_CREDENTIALS_ID = 'github_personal_access_token'  // GitHub 자격 증명 ID
     }
     
     stages {
