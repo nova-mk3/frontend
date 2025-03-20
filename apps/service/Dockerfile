@@ -21,11 +21,9 @@ RUN apk add --no-cache libc6-compat
 RUN npm install -g pnpm
 WORKDIR /app
 COPY --from=builder /app/out/json/ .
-RUN pnpm install --frozen-lockfile --recursive
-RUN ls -l /app/node_modules
+RUN pnpm install
+
 COPY --from=builder /app/out/full/ .
-RUN ls -l /app/node_modules/@nova/ui || (echo "❌ @nova/ui not found!" && exit 1)
-RUN rm -rf .next
 RUN pnpm turbo build
 
 # 런타임 설정
