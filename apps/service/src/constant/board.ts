@@ -43,5 +43,5 @@ export const POST_TYPE_LABEL: Record<PostType, string> = {
   ALL: "전체글보기",
 };
 
-export const INTEGRATED = "03cbc040-fb83-46f7-9118-f637e9c14679";
-export const CLUB_ARCHIVE = "15ae2c32-f158-49f4-850b-b55b5c55ec67";
+export const INTEGRATED = "0e8f938b-b653-4dd5-bf0e-c6e48bb5128e";
+export const CLUB_ARCHIVE = "d0335ade-1ccb-42be-a64c-a1159624c09d";
