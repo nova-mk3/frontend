@@ -25,12 +25,12 @@ RUN npm install -g pnpm
 WORKDIR /app
 # 의존성 파일 복사
 COPY --from=builder /app/out/json/ .
-RUN pnpm install --frozen-lockfile --recursive
+COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+RUN pnpm i --frozen-lockfile
 
 # 프로젝트 전체 복사
 COPY --from=builder /app/out/full/ .
-RUN ls -l /app/node_modules/@nova/ui || (echo "❌ @nova/ui not found!" && exit 1)
-RUN rm -rf .next
+
 # turbo build
 RUN pnpm turbo build
 
