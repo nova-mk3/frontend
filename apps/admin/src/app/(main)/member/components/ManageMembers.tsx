@@ -19,6 +19,7 @@ export default function ManageMembers() {
   const [viewData, setViewData] = useState<ManageMember[]| undefined >([]);
   const [viewType , setViewType] = useState<"small"|"medium">("small");
   const [open , setOpen] = useState(false);
+  
   useEffect(() => {
     setViewData(data);
   }, [data , viewType]);

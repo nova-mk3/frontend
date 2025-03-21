@@ -3,21 +3,25 @@
 import { useEffect, useState } from "react";
 import { Button } from "@nova/ui/components/ui/button";
 import Image from "next/image";
-import { Phone, IdCard, Cake, Mail , GraduationCap} from "lucide-react";
+import { Phone, IdCard, Cake, Mail , GraduationCap, LucideIcon} from "lucide-react";
 import { PendingMemberCardModalProps, PendingGraduationResponse, PendingMemberResponse } from "@/src/types/pendingMember";
 import { useApprovePendingMemberMutation, useRejectPendingMemberMutation, useSpecificPendingMemberQuery } from "@/src/query/pendingMembersQueries";
 
 // 임시 프로필 이미지
 // import TempImageLink from "./../../../../../../service/public/image/cat.jpg";
 
-const MemberInfo = ({ icon: Icon, label }: { icon: any; label: string | undefined }) => (
+const MemberInfo = ({ icon: Icon, label }: { icon: LucideIcon ; label: string | undefined }) => (
   <div className="flex items-center space-x-3">
     <Icon className="h-8 w-8 text-gray-600" />
     <div className="text-2xl">{label}</div>
   </div>
 );
 
-const LeftSide = ({ data, isLoading, error }: { data?: PendingMemberResponse; isLoading: boolean; error?: any }) => {
+const LeftSide = ({ data, isLoading, isError }: { 
+  data?: PendingMemberResponse; 
+  isLoading: boolean; 
+  isError: boolean 
+}) => {
   if (isLoading) {
     return (
       <div className="flex flex-col w-[700px] items-center space-y-8 py-20">
@@ -26,10 +30,10 @@ const LeftSide = ({ data, isLoading, error }: { data?: PendingMemberResponse; is
     );
   }
 
-  if (error) {
+  if (isError) {
     return (
       <div className="flex flex-col w-[700px] items-center space-y-8 py-20">
-        <div className="text-xl text-red-500">데이터 로드 중 오류 발생: {error.message}</div>
+        <div className="text-xl text-red-500">데이터 로드 중 오류 발생</div>
       </div>
     );
   }
@@ -58,12 +62,12 @@ const LeftSide = ({ data, isLoading, error }: { data?: PendingMemberResponse; is
   );
 };
 
-const RightSide = ({ pendingMemberResponse, pendingGraduationResponse ,  isLoading, error ,  onClose }: { 
-  pendingMemberResponse: PendingMemberResponse;
+const RightSide = ({ pendingMemberResponse, pendingGraduationResponse ,  isLoading , isError ,  onClose }: { 
+  pendingMemberResponse?: PendingMemberResponse;
   pendingGraduationResponse? : PendingGraduationResponse;
   isLoading: boolean;
-  error?: any;
-  onClose: () => void | undefined;
+  isError: boolean;
+  onClose: () => void;
 }) => {
   const approveMutation = useApprovePendingMemberMutation();
   const rejectMutation = useRejectPendingMemberMutation();
@@ -78,63 +82,65 @@ const RightSide = ({ pendingMemberResponse, pendingGraduationResponse ,  isLoadi
     );
   }
 
-  if(error){
+  if(isError){
     return (
       <div className="flex flex-col justify-between w-[700px]">
         <div className="text-xl text-gray-700">
           <div className="text-2xl font-bold">추가 정보</div>
-          <div className="text-2xl font-bold">데이터 로드 중 오류 발생: {error.message}</div>
+          <div className="text-2xl font-bold">데이터 로드 중 오류 발생</div>
         </div>
       </div>
     );
   }
   //TODO 아래 졸업자의 세부정보를 어떻게 보여줄지 결정해야함.
-  return (
-    <div className="flex flex-col justify-between w-[700px]">
-      <div className="text-xl text-gray-700">
-        <div className="text-2xl font-bold">자기 소개</div>
-        <div className="mt-4">{pendingMemberResponse?.introduction || "자기소개 없음"} </div>
-          {pendingMemberResponse?.graduation &&  (
-          <div className="mt-6 text-lg text-gray-600">
-            <div className="text-2xl font-bold">취업 정보</div>
-            <div className="mt-4">{pendingGraduationResponse?.job || "취업 정보 없음"}</div>
-            <div className="mt-4">{pendingGraduationResponse?.work || "근무 정보 없음"}</div>
-            <div className="mt-4">{pendingGraduationResponse?.contact || "연락처 없음"}</div>
-            <div className="mt-4">{pendingGraduationResponse?.contactDescription || "연락처 없음"}</div>
-            <div className="mt-4">{pendingGraduationResponse?.contactInfo || "근무 정보 없음"}</div>
-            <div className="mt-4">{pendingGraduationResponse?.year || "근무 연도 정보 없음"}</div>
-          </div>
-        )}
+  if(pendingMemberResponse && pendingGraduationResponse){
+    return (
+      <div className="flex flex-col justify-between w-[700px]">
+        <div className="text-xl text-gray-700">
+          <div className="text-2xl font-bold">자기 소개</div>
+          <div className="mt-4">{pendingMemberResponse?.introduction || "자기소개 없음"} </div>
+            {pendingMemberResponse?.graduation &&  (
+            <div className="mt-6 text-lg text-gray-600">
+              <div className="text-2xl font-bold">취업 정보</div>
+              <div className="mt-4">{pendingGraduationResponse?.job || "취업 정보 없음"}</div>
+              <div className="mt-4">{pendingGraduationResponse?.work || "근무 정보 없음"}</div>
+              <div className="mt-4">{pendingGraduationResponse?.contact || "연락처 없음"}</div>
+              <div className="mt-4">{pendingGraduationResponse?.contactDescription || "연락처 없음"}</div>
+              <div className="mt-4">{pendingGraduationResponse?.contactInfo || "근무 정보 없음"}</div>
+              <div className="mt-4">{pendingGraduationResponse?.year || "근무 연도 정보 없음"}</div>
+            </div>
+          )}
+        </div>
+        <div className="flex justify-end space-x-4 mt-6">
+          <Button variant="default" onClick={onClose}>취소</Button>
+          <Button
+            variant="default"
+            onClick={() => {
+              onClose();
+              approveMutation.mutate(pendingMemberResponse.pendingMemberId);
+            }}
+          >
+            수락
+          </Button>
+          <Button
+            variant="default"
+            onClick={() => {
+              onClose();
+              rejectMutation.mutate(pendingMemberResponse.pendingMemberId);
+            }}
+          >
+            반려
+          </Button>
+        </div>
       </div>
-      <div className="flex justify-end space-x-4 mt-6">
-        <Button variant="default" onClick={onClose}>취소</Button>
-        <Button
-          variant="default"
-          onClick={() => {
-            onClose();
-            approveMutation.mutate(pendingMemberResponse.pendingMemberId);
-          }}
-        >
-          수락
-        </Button>
-        <Button
-          variant="default"
-          onClick={() => {
-            onClose();
-            rejectMutation.mutate(pendingMemberResponse.pendingMemberId);
-          }}
-        >
-          반려
-        </Button>
-      </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default function PendingMemberCardModal({ open, pendingMemberId, onClose }: PendingMemberCardModalProps) {
   const [isVisible, setIsVisible] = useState(open);
   const [isAnimating, setIsAnimating] = useState(false);
-  const { data, isLoading, error } = useSpecificPendingMemberQuery(pendingMemberId, isVisible);
+  const { data, isLoading, isError } = useSpecificPendingMemberQuery(pendingMemberId, isVisible);
 
   useEffect(() => {
     if (open) {
@@ -161,11 +167,19 @@ export default function PendingMemberCardModal({ open, pendingMemberId, onClose 
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        <LeftSide data={data?.pendingMemberResponse} isLoading={isLoading} error={error} />
+        <LeftSide 
+          data={data?.pendingMemberResponse} 
+          isLoading={isLoading} 
+          isError={isError} 
+          />
         <div className="w-[2px] bg-gray-300 mx-6" />
-        {data?.pendingMemberResponse && (
-          <RightSide pendingMemberResponse={data.pendingMemberResponse} pendingGraduationResponse={data?.pendingGraduationResponse} isLoading={isLoading} error={error} onClose={onClose} />
-        )}
+        <RightSide 
+          pendingMemberResponse={data?.pendingMemberResponse} 
+          pendingGraduationResponse={data?.pendingGraduationResponse} 
+          isLoading={isLoading} 
+          isError={isError} 
+          onClose={onClose} 
+        />
       </div>
     </div>
   );

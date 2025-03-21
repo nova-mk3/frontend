@@ -58,25 +58,35 @@ export default function ExecutiveModal({ year , open, onClose }: ExecutiveModalP
                 <Button onClick={onClose}>확인</Button>
             </div>
         </div>
-        <div className="flex flex-wrap overflow-auto max-h-[500px] rounded-lg" style={{scrollbarWidth:"none"}}>
-            {viewData?.map((member) => (
-                <MemberCard
-                    key={member.memberId}
-                    name={member.name}
-                    phoneNumber={member.phone}
-                    studentId={member.studentNumber}
-                    type={"medium"}
-                    onClick={() => 
-                      {
-                        postExecutiveMemberMutation.mutate({
-                          year: year,
-                          role: enumRoleType.EXECUTIVE, 
-                          name: member.name, 
-                          memberId: member.memberId
-                        })
-                        onClose()
-                    }}
-                />))}
+        <div className="flex flex-wrap overflow-auto max-h-[500px] rounded-lg" style={{ scrollbarWidth: "none" }}>
+          {isLoading ? (
+            <div className="w-full flex justify-center items-center py-10 text-gray-500 text-xl">
+              로딩 중...
+            </div>
+          ) : error ? (
+            <div className="w-full flex justify-center items-center py-10 text-red-500 text-xl">
+              데이터 불러오기 중 오류가 발생했습니다.
+            </div>
+          ) : (
+            viewData?.map((member) => (
+              <MemberCard
+                key={member.memberId}
+                name={member.name}
+                phoneNumber={member.phone}
+                studentId={member.studentNumber}
+                type={"medium"}
+                onClick={() => {
+                  postExecutiveMemberMutation.mutate({
+                    year: year,
+                    role: enumRoleType.EXECUTIVE,
+                    name: member.name,
+                    memberId: member.memberId,
+                  });
+                  onClose();
+                }}
+              />
+            ))
+          )}
         </div>
       </div>
     </div>

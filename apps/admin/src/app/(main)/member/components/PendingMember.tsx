@@ -5,7 +5,7 @@ import PendingMemberList from "./PendingMemberList";
 
 
 export default function PendingMembers() {
-  const { data, isLoading, error } = usePendingMembersQuery();
+  const { data, isLoading, isError } = usePendingMembersQuery();
   const [open, setOpen] = useState(false);
   const [selectedPendingMemberId, setSelectedPendingMemberId] = useState("");
 
@@ -14,8 +14,8 @@ export default function PendingMembers() {
       <div className="text-xl font-bold m-4">
         {isLoading
           ? "데이터 로딩중..."
-          : error
-          ? "오류가 발생했습니다"
+          : isError
+          ? "데이터 로딩중 오류가 발생했습니다"
           : `총 ${data?.totalPendingMemberCount || 0}명`}
       </div>
       {isLoading && (
@@ -24,12 +24,12 @@ export default function PendingMembers() {
         </div>
       )}
 
-      {error && (
+      {isError && (
         <div className="text-4xl font-bold text-center text-red-500 w-full flex-grow flex items-center justify-center">
-          오류가 발생했습니다. {error.message}
+          데이터 로딩중 오류가 발생했습니다.
         </div>
       )}
-      {!isLoading && !error && (
+      {!isLoading && !isError && (
         <>
           {data?.pendingMemberResponseList?.length ? (
             <PendingMemberList
