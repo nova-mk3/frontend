@@ -1,11 +1,11 @@
-import { Authapi } from "../../core";
+import { Authapi } from "@/src/api/core";
+import { throwError } from "@/src/utils/throwError";
 
 export async function GetAllMembers() {
     try{
         const response = await Authapi.get(`/nova/executive-histories/members`)
         return response.data.data
-    }catch(error: any){
-        console.error("Error fetching members:", error);
-        throw new Error("회원 목록을 불러오는 중 오류가 발생했습니다.");
+    }catch(error:unknown){
+        throwError(error)
     }
 }
