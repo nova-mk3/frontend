@@ -7,8 +7,7 @@ import { Phone, IdCard, Cake, Mail , GraduationCap, LucideIcon} from "lucide-rea
 import { PendingMemberCardModalProps, PendingGraduationResponse, PendingMemberResponse } from "@/src/types/pendingMember";
 import { useApprovePendingMemberMutation, useRejectPendingMemberMutation, useSpecificPendingMemberQuery } from "@/src/query/pendingMembersQueries";
 
-// 임시 프로필 이미지
-// import TempImageLink from "./../../../../../../service/public/image/cat.jpg";
+import TempImageLink from "@/src/utils/tempImage.png";
 
 const MemberInfo = ({ icon: Icon, label }: { icon: LucideIcon ; label: string | undefined }) => (
   <div className="flex items-center space-x-3">
@@ -40,11 +39,11 @@ const LeftSide = ({ data, isLoading, isError }: {
 
   return (
     <div className="flex flex-col w-[700px] items-center space-y-8 py-20">
-      {/* <Image
+      <Image
         src={TempImageLink}
         alt="profileImage"
         className="rounded-full w-[160px] h-[160px]"
-      /> */}
+      />
       <div className="text-2xl font-bold">{data?.name}</div>
       <MemberInfo icon={Phone} label={data?.phone} />
       <MemberInfo icon={IdCard} label={data?.studentNumber} />
