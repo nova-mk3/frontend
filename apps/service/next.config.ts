@@ -15,11 +15,11 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/nova/:path*',
-        destination: 'http://localhost:8080/api/v1/:path*'
-      }
-    ]
-  }
+        source: "/nova/:path*",
+        destination: "http://localhost:4001/api/v1/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
