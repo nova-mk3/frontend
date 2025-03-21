@@ -13,17 +13,17 @@ services:
     networks:
       - backend_network # 네트워크 연결
 
-  service:
-    container_name: frontend_service
-    build:
-      context: .
-      dockerfile: ./apps/service/Dockerfile
-    image: frontend_service_image:latest
-    restart: always
-    ports:
-      - "3002:3002"
-    networks:
-      - backend_network # 네트워크 연결
+  # service:
+  #   container_name: frontend_service
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/service/Dockerfile
+  #   image: frontend_service_image:latest
+  #   restart: always
+  #   ports:
+  #     - "3002:3002"
+  #   networks:
+  #     - backend_network # 네트워크 연결
 
 networks:
   backend_network:

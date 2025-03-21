@@ -14,7 +14,6 @@ import { Path, UseFormReturn } from "react-hook-form";
 import { useInputFocus } from "./useInputFocus";
 // import { useInputFocus } from "../signup/hooks/useInputFocus";
 
-
 export function InputFormField<T extends Record<string, any>>({
   form,
   name,
@@ -28,7 +27,7 @@ export function InputFormField<T extends Record<string, any>>({
   disabled = false,
 }: {
   form: UseFormReturn<T>;
-   name: Path<T>;
+  name: Path<T>;
   label: string;
   placeHolder: string;
   type?: string;
@@ -55,7 +54,7 @@ export function InputFormField<T extends Record<string, any>>({
                   ? "text-danger"
                   : isFocused
                     ? "text-primary"
-                    : "text-text01",
+                    : "text-text01"
               )}
             >
               {label}
@@ -70,7 +69,7 @@ export function InputFormField<T extends Record<string, any>>({
                   ? "text-danger"
                   : isFocused
                     ? "text-primary"
-                    : "text-line01",
+                    : "text-line01"
               )}
             >
               {leftIcon}
@@ -83,7 +82,7 @@ export function InputFormField<T extends Record<string, any>>({
                 error
                   ? "text-danger border-danger placeholder:text-danger"
                   : "focus:border-primary focus:text-primary focus:placeholder-primary",
-                leftIcon ? "pl-10" : "",
+                leftIcon ? "pl-10" : ""
               )}
               type={hasToggleIcon && !showPassword ? type : "text"}
               placeholder={placeHolder}
@@ -103,7 +102,7 @@ export function InputFormField<T extends Record<string, any>>({
                   ? "text-danger"
                   : isFocused
                     ? "text-primary"
-                    : "text-line01",
+                    : "text-line01"
               )}
               onClick={() => setShowPassword(!showPassword)}
             >
