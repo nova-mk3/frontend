@@ -3,7 +3,7 @@ import MemberCard from "@nova/ui/components/ui/MemberCard";
 import { Input } from "@nova/ui/components/ui/input";
 import { Button } from "@nova/ui/components/ui/button";
 import { useEffect, useState } from "react";
-import MemberCardModal from './PendingMemberCardModal';
+import ManageMemberCardModal from './ManageMemberCardModal';
 import { 
   Select,
   SelectContent,
@@ -19,6 +19,7 @@ export default function ManageMembers() {
   const [viewData, setViewData] = useState<ManageMember[]| undefined >([]);
   const [viewType , setViewType] = useState<"small"|"medium">("small");
   const [open , setOpen] = useState(false);
+  const [selctedMemberId , setSelctedMemberId] = useState<string>("");
   
   useEffect(() => {
     setViewData(data);
@@ -104,7 +105,10 @@ export default function ManageMembers() {
                   studentId={member.studentNumber}
                   profilePhoto={member.profilePhoto}
                   type={viewType}
-                  onClick={()=>setOpen(true)}
+                  onClick={()=>{
+                    setOpen(true)
+                    setSelctedMemberId(member.memberId)
+                  }}
                 />
               ))
             ) : (
@@ -113,7 +117,7 @@ export default function ManageMembers() {
           </div>
         </div>
       ))}
-     {/* <MemberCardModal open={open} onClose={()=>setOpen(false)} type="member"/> */}
+     <ManageMemberCardModal memberId = {selctedMemberId} open={open} onClose={()=>setOpen(false)}/>
     </div>
   );
 }

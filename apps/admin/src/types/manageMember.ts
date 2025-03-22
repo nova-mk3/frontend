@@ -19,3 +19,9 @@ export interface ProfilePhoto {
     originalFileName: string;
     imageUrl: string;
   }
+
+export interface ManageMemberCardModalProps {
+    memberId : string;
+    open : boolean;
+    onClose : () => void;
+}
