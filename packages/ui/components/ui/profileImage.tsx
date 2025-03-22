@@ -19,7 +19,7 @@ export const ProfileImage = ({
       alt={alt}
       width={size}
       height={size}
-      className={`rounded-full h-[${size}px] w-[${size}px] ${className}`}
+      className={`rounded-full object-cover h-[${size}px] w-[${size}px] ${className}`}
       unoptimized
     />
   );
