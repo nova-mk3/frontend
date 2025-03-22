@@ -96,12 +96,13 @@ export default function ManageMembers() {
           </div>
           <div className="flex flex-wrap ml-2">
             {(members ?? []).length > 0 ? (
-              members?.map(member => (
+              members?.map((member) => (
                 <MemberCard
                   key={member.memberId}
                   name={member.name}
                   phoneNumber={member.phone}
                   studentId={member.studentNumber}
+                  profilePhoto={member.profilePhoto}
                   type={viewType}
                   onClick={()=>setOpen(true)}
                 />

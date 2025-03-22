@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: false,
   output: "standalone",
+  images: {
+    domains: ["localhost"],
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/i,

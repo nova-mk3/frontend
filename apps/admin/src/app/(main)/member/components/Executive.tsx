@@ -73,6 +73,7 @@ export default function Executive() {
                     phone={member.phone}
                     role={member.role}
                     executiveHistoryId={member.executiveHistoryId}
+                    profilePhotoResponse={member.profilePhotoResponse}
                   />
                 ))
               ) : (

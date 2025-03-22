@@ -1,15 +1,14 @@
 import { useApprovePendingMemberMutation, useRejectPendingMemberMutation } from "@/src/query/pendingMembersQueries";
 import { PendingMemberResponse } from "@/src/types/pendingMember";
-import MemberCard from "@nova/ui/components/ui/MemberCard";
+import PendingMemberCard from "@/src/app/(main)/member/components/PendingMemberCard";
 
 export default function PendingMemberList({ members, onClick }: { members: PendingMemberResponse[]; onClick: (memberId: string) => void }) {
   const { mutate: approveMember } = useApprovePendingMemberMutation();
   const { mutate: rejectMember } = useRejectPendingMemberMutation();
-
   return (
     <div className="flex-grow">
       {members.map((member) => (
-        <MemberCard
+        <PendingMemberCard
           key={member.pendingMemberId}
           pendingMemberId={member.pendingMemberId}
           studentId={member.studentNumber}
@@ -19,7 +18,6 @@ export default function PendingMemberList({ members, onClick }: { members: Pendi
           birthday={member.birth}
           email={member.email}
           profilePhoto={member.profilePhoto}
-          type="large"
           onClick={() => onClick(member.pendingMemberId)}
           onApprove={() => approveMember(member.pendingMemberId)}
           onReject={() => rejectMember(member.pendingMemberId)}

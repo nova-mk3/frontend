@@ -14,8 +14,6 @@ import {
 import { enumRoleType , ExecutiveMembercardProps } from '@/src/types/executiveMember';
 import { useDeleteExecutiveMemberMutation, usePutExecutiveMemberMutation } from '@/src/query/executiveMembersQueries';
 
-import TempImageLink from "@/src/utils/tempImage.png";
-
 const ROLE_LABELS: Record<enumRoleType, string> = {
     [enumRoleType.EXECUTIVE]: "임원",
     [enumRoleType.CHAIRMAN]: "회장",
@@ -31,6 +29,11 @@ export default function ExecutiveMembercard({
     studentId="2019019014" ,
     executiveHistoryId="00000000",
     role= enumRoleType.EXECUTIVE,
+    profilePhotoResponse = {
+        imageUrl: "test",
+        id: "00000000",
+        originalFileName: "cat.png",
+    }
 } : ExecutiveMembercardProps) {
     const { mutate: putExectuvieMemberMutation } = usePutExecutiveMemberMutation(selectedYear);
     const { mutate: deleteExecutiveMember } = useDeleteExecutiveMemberMutation(selectedYear);
@@ -38,12 +41,12 @@ export default function ExecutiveMembercard({
     return (
         <div className={`w-[700px] h-[80px] m-[8px] flex border border-primary rounded-lg items-center hover:bg-background02 cursor-pointer`}>
             <Image 
-                src={TempImageLink} 
+                src={profilePhotoResponse.imageUrl} 
                 alt="profileImage" 
                 width={0}
                 height={0}
                 className='ml-[15px] rounded-full h-[64px] w-[64px]'
-                priority
+                unoptimized
             />
             <div className={`text-2xl text-center flex-grow`}>{name}</div>
             <Phone className={"ml-auto h-8 w-8"}/>
@@ -82,5 +85,4 @@ export default function ExecutiveMembercard({
             </Select>
         </div>
     )
-
 }

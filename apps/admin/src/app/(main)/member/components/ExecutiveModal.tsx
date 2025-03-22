@@ -74,6 +74,7 @@ export default function ExecutiveModal({ year , open, onClose }: ExecutiveModalP
                 name={member.name}
                 phoneNumber={member.phone}
                 studentId={member.studentNumber}
+                profilePhoto={member.profilePhoto}
                 type={"medium"}
                 onClick={() => {
                   postExecutiveMemberMutation.mutate({

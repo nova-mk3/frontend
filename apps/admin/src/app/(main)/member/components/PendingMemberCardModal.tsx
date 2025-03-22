@@ -7,8 +7,6 @@ import { Phone, IdCard, Cake, Mail , GraduationCap, LucideIcon} from "lucide-rea
 import { PendingMemberCardModalProps, PendingGraduationResponse, PendingMemberResponse } from "@/src/types/pendingMember";
 import { useApprovePendingMemberMutation, useRejectPendingMemberMutation, useSpecificPendingMemberQuery } from "@/src/query/pendingMembersQueries";
 
-import TempImageLink from "@/src/utils/tempImage.png";
-
 const MemberInfo = ({ icon: Icon, label }: { icon: LucideIcon ; label: string | undefined }) => (
   <div className="flex items-center space-x-3">
     <Icon className="h-8 w-8 text-gray-600" />
@@ -37,28 +35,33 @@ const LeftSide = ({ data, isLoading, isError }: {
     );
   }
 
-  return (
-    <div className="flex flex-col w-[700px] items-center space-y-8 py-20">
-      <Image
-        src={TempImageLink}
-        alt="profileImage"
-        className="rounded-full w-[160px] h-[160px]"
-      />
-      <div className="text-2xl font-bold">{data?.name}</div>
-      <MemberInfo icon={Phone} label={data?.phone} />
-      <MemberInfo icon={IdCard} label={data?.studentNumber} />
-      <MemberInfo icon={GraduationCap} 
-        label={
-          data?.graduation 
-            ? "졸업생" 
-            : data?.absence 
-              ? "휴학중" 
-              : `${data?.grade}학년 ${data?.semester}학기`
-        }/>
-      <MemberInfo icon={Cake} label={data?.birth} />
-      <MemberInfo icon={Mail} label={data?.email} />
-    </div>
-  );
+  if(data){
+    return (
+      <div className="flex flex-col w-[700px] items-center space-y-8 py-20">
+        <Image
+          src={data.profilePhoto.imageUrl}
+          width={0}
+          height={0}
+          alt="profileImage"
+          className="rounded-full w-[160px] h-[160px]"
+          unoptimized
+        />
+        <div className="text-2xl font-bold">{data?.name}</div>
+        <MemberInfo icon={Phone} label={data?.phone} />
+        <MemberInfo icon={IdCard} label={data?.studentNumber} />
+        <MemberInfo icon={GraduationCap} 
+          label={
+            data?.graduation 
+              ? "졸업생" 
+              : data?.absence 
+                ? "휴학중" 
+                : `${data?.grade} ${data?.semester}`
+          }/>
+        <MemberInfo icon={Cake} label={data?.birth} />
+        <MemberInfo icon={Mail} label={data?.email} />
+      </div>
+    );
+  }
 };
 
 const RightSide = ({ pendingMemberResponse, pendingGraduationResponse ,  isLoading , isError ,  onClose }: { 

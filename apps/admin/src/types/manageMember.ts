@@ -11,11 +11,11 @@ export interface ManageMember {
     studentNumber: string;
     role: string;
     semester: string;
-    profileImage: ProfilePhoto;
+    profilePhoto: ProfilePhoto;
 }
 
 export interface ProfilePhoto {
     id: string;
     originalFileName: string;
-    downloadUrl: string;
+    imageUrl: string;
   }
