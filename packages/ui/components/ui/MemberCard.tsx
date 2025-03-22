@@ -1,6 +1,7 @@
 // MemberCard.tsx
 import { Phone, IdCard } from "lucide-react";
-import Image from "next/image";
+import { ProfileImage } from "./profileImage";
+
 interface ProfilePhoto {
   id: string;
   originalFileName: string;
@@ -38,14 +39,7 @@ export default function MemberCard({
         onClick={onClick}
         className={`w-[200px] h-[80px] ${baseCardClass}`}
       >
-        <Image 
-            src={profilePhoto.imageUrl} 
-            alt="profileImage" 
-            width={0}
-            height={0}
-            className='ml-[15px] rounded-full h-[64px] w-[64px]'
-            unoptimized 
-        />
+        <ProfileImage src= {profilePhoto.imageUrl} size={64} className="ml-[15px]"/>
         <div className="text-2xl text-center flex-grow">{name}</div>
       </div>
     );
@@ -57,14 +51,7 @@ export default function MemberCard({
         onClick={onClick}
         className={`w-[600px] h-[80px] ${baseCardClass}`}
       >
-        <Image 
-            src={profilePhoto.imageUrl} 
-            alt="profileImage" 
-            width={0}
-            height={0}
-            className='ml-[15px] rounded-full h-[64px] w-[64px]'
-            unoptimized 
-        />
+        <ProfileImage src= {profilePhoto.imageUrl} size={64} className="ml-[15px]"/>
         <div className="text-2xl text-center flex-grow">{name}</div>
         <Phone className="ml-auto h-8 w-8" />
         <div className="text-2xl text-center flex-grow">{phoneNumber}</div>

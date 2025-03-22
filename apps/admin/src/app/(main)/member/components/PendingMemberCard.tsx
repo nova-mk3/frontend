@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { 
     Phone,
     IdCard,
@@ -7,6 +6,7 @@ import {
 } from "lucide-react";
 import { Button } from "@nova/ui/components/ui/button";
 import { ProfilePhoto } from '@/src/types/manageMember';
+import { ProfileImage } from '@nova/ui/components/ui/profileImage';
 
 
 interface PendingMembercardProps {
@@ -43,14 +43,7 @@ export default function PendingMembercard({
 } : PendingMembercardProps) {
     return (
         <div onClick={onClick} className={`w-[1400px] h-[160px] m-[8px] flex border border-primary rounded-lg items-center hover:bg-background02 cursor-pointer`}>
-            <Image 
-                src={profilePhoto.imageUrl} 
-                alt="profileImage" 
-                width={0}
-                height={0}
-                className='ml-[15px] rounded-full h-[100px] w-[100px]'
-                unoptimized 
-            />
+            <ProfileImage src= {profilePhoto.imageUrl} size={100} className='ml-[15px]'/>
             <div className={`text-2xl text-center flex-grow`}>{name}</div>
             <Phone className={"ml-auto h-8 w-8"}/>
             <div className={`text-2xl text-center flex-grow`}>{phoneNumber}</div>

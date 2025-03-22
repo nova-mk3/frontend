@@ -1,5 +1,4 @@
 // ExecutiveMemberCard
-import Image from 'next/image';
 import { 
     Phone,
     IdCard,
@@ -13,6 +12,7 @@ import {
 } from "@nova/ui/components/ui/select";
 import { enumRoleType , ExecutiveMembercardProps } from '@/src/types/executiveMember';
 import { useDeleteExecutiveMemberMutation, usePutExecutiveMemberMutation } from '@/src/query/executiveMembersQueries';
+import { ProfileImage } from '@nova/ui/components/ui/profileImage';
 
 const ROLE_LABELS: Record<enumRoleType, string> = {
     [enumRoleType.EXECUTIVE]: "임원",
@@ -40,14 +40,7 @@ export default function ExecutiveMembercard({
 
     return (
         <div className={`w-[700px] h-[80px] m-[8px] flex border border-primary rounded-lg items-center hover:bg-background02 cursor-pointer`}>
-            <Image 
-                src={profilePhotoResponse.imageUrl} 
-                alt="profileImage" 
-                width={0}
-                height={0}
-                className='ml-[15px] rounded-full h-[64px] w-[64px]'
-                unoptimized
-            />
+            <ProfileImage src={profilePhotoResponse.imageUrl} size={64} className='ml-[15px]'/>
             <div className={`text-2xl text-center flex-grow`}>{name}</div>
             <Phone className={"ml-auto h-8 w-8"}/>
             <div className={`text-2xl text-center flex-grow`}>{phone}</div>

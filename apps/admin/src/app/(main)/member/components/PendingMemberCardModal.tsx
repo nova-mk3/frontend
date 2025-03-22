@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@nova/ui/components/ui/button";
-import Image from "next/image";
 import { Phone, IdCard, Cake, Mail , GraduationCap, LucideIcon} from "lucide-react";
 import { PendingMemberCardModalProps, PendingGraduationResponse, PendingMemberResponse } from "@/src/types/pendingMember";
 import { useApprovePendingMemberMutation, useRejectPendingMemberMutation, useSpecificPendingMemberQuery } from "@/src/query/pendingMembersQueries";
+import { ProfileImage } from '@nova/ui/components/ui/profileImage';
 
 const MemberInfo = ({ icon: Icon, label }: { icon: LucideIcon ; label: string | undefined }) => (
   <div className="flex items-center space-x-3">
@@ -38,14 +38,7 @@ const LeftSide = ({ data, isLoading, isError }: {
   if(data){
     return (
       <div className="flex flex-col w-[700px] items-center space-y-8 py-20">
-        <Image
-          src={data.profilePhoto.imageUrl}
-          width={0}
-          height={0}
-          alt="profileImage"
-          className="rounded-full w-[160px] h-[160px]"
-          unoptimized
-        />
+        <ProfileImage src= {data.profilePhoto.imageUrl} size={160}/>
         <div className="text-2xl font-bold">{data?.name}</div>
         <MemberInfo icon={Phone} label={data?.phone} />
         <MemberInfo icon={IdCard} label={data?.studentNumber} />
