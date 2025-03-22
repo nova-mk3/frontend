@@ -39,7 +39,7 @@ export default function ExecutiveMembercard({
     const { mutate: deleteExecutiveMember } = useDeleteExecutiveMemberMutation(selectedYear);
 
     return (
-        <div className={`w-[700px] h-[80px] m-[8px] flex border border-primary rounded-lg items-center hover:bg-background02 cursor-pointer`}>
+        <div className={`w-[650px] h-[80px] m-[8px] flex border border-primary rounded-lg items-center hover:bg-background02 cursor-pointer`}>
             <ProfileImage src={profilePhotoResponse.imageUrl} size={64} className='ml-[15px]'/>
             <div className={`text-2xl text-center flex-grow`}>{name}</div>
             <Phone className={"ml-auto h-8 w-8"}/>

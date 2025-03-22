@@ -30,7 +30,7 @@ export default function Executive() {
 
   return (
     <div className="font-pretendard">
-      <div className="flex m-4 w-[1500px]">
+      <div className="flex m-4 w-[1400px]">
         {isYearsLoading ? (
           <div className="text-gray-500 text-lg">연도 데이터를 불러오는 중입니다...</div>
         ) : isYearsError ? (
@@ -77,10 +77,10 @@ export default function Executive() {
                   />
                 ))
               ) : (
-                <div className="text-gray-500 m-2">등록된 임원이 없습니다.</div>
+                <div className="text-2xl text-gray-500 m-2 w-[650px] h-[80px]">등록된 임원이 없습니다.</div>
               )}
               {title === "임원" && (
-                <Button className="ml-2 mt-2 w-[700px] h-[80px] text-2xl" onClick={() => setOpen(true)}>
+                <Button className="ml-2 mt-2 w-[650px] h-[80px] text-2xl" onClick={() => setOpen(true)}>
                   + 임원 추가
                 </Button>
               )}
