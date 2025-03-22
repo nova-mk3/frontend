@@ -10,17 +10,9 @@ import {
     SelectTrigger,
     SelectValue 
 } from "@nova/ui/components/ui/select";
-import { enumRoleType , ExecutiveMembercardProps } from '@/src/types/executiveMember';
+import { enumRoleType , ExecutiveMembercardProps, ROLE_LABELS } from '@/src/types/executiveMember';
 import { useDeleteExecutiveMemberMutation, usePutExecutiveMemberMutation } from '@/src/query/executiveMembersQueries';
 import { ProfileImage } from '@nova/ui/components/ui/profileImage';
-
-const ROLE_LABELS: Record<enumRoleType, string> = {
-    [enumRoleType.EXECUTIVE]: "임원",
-    [enumRoleType.CHAIRMAN]: "회장",
-    [enumRoleType.VICE_CHAIRMAN]: "부회장",
-    [enumRoleType.GENERAL]: "일반 회원",
-    [enumRoleType.ADMINISTRATOR]: "서버 관리자",
-};
 
 export default function ExecutiveMembercard({
     selectedYear = 0,

@@ -41,3 +41,11 @@ export interface ExecutiveMembercardProps {
     executiveHistoryId? : string,
     profilePhotoResponse: ProfilePhoto,
 }
+
+export const ROLE_LABELS: Record<enumRoleType, string> = {
+    [enumRoleType.EXECUTIVE]: "임원",
+    [enumRoleType.CHAIRMAN]: "회장",
+    [enumRoleType.VICE_CHAIRMAN]: "부회장",
+    [enumRoleType.GENERAL]: "일반 회원",
+    [enumRoleType.ADMINISTRATOR]: "서버 관리자",
+};

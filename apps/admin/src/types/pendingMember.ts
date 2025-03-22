@@ -53,3 +53,18 @@ export interface PendingMembersApiResponse {
   pendingMemberResponseList: PendingMemberResponse[];
   totalPendingMemberCount: number;
 }
+
+export interface PendingMembercardProps {
+  name? : string,
+  studentId? : string,
+  phoneNumber? : string,
+  birthday? : string,
+  email? : string,
+  grade? : string,
+  role? : string,
+  pendingMemberId?: string,
+  onClick? : () => void,
+  onApprove?: () => void,
+  onReject?: () => void,
+  profilePhoto: ProfilePhoto,
+}

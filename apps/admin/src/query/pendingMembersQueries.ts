@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { GetPendingMembers, GetSpecificPendingMember, ApprovePendingMember, RejectPendingMember } from '../api/main/member/pendingMembersApi';
 import { SpecificPendingMemberApiResponse, PendingMembersApiResponse } from '../types/pendingMember';
+import { manageMembersKeys } from './manageMembersQueries';
 
 export const pendingMembersKeys = {
     list: () => ['pendingMembers'] as const,
@@ -39,8 +40,13 @@ export const useApprovePendingMemberMutation = () => {
     return useMutation({
         mutationFn: (pendingMemberId: string) => ApprovePendingMember(pendingMemberId),
         onSuccess: () => {
+            // pendingMembers 쿼리 다시 진행시키기
             queryClient.invalidateQueries({
                 queryKey: pendingMembersKeys.list(),
+            });
+            // 일반 멤버들 리스트 쿼리 다시 진행시키기
+            queryClient.invalidateQueries({
+                queryKey: manageMembersKeys.list(),
             });
         },
         onError: (error) => {

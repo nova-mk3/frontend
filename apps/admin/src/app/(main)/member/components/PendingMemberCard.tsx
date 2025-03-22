@@ -5,24 +5,8 @@ import {
     Mail, 
 } from "lucide-react";
 import { Button } from "@nova/ui/components/ui/button";
-import { ProfilePhoto } from '@/src/types/manageMember';
 import { ProfileImage } from '@nova/ui/components/ui/profileImage';
-
-
-interface PendingMembercardProps {
-    name? : string,
-    studentId? : string,
-    phoneNumber? : string,
-    birthday? : string,
-    email? : string,
-    grade? : string,
-    role? : string,
-    pendingMemberId?: string,
-    onClick? : () => void,
-    onApprove?: () => void,
-    onReject?: () => void,
-    profilePhoto: ProfilePhoto,
-}
+import { PendingMembercardProps } from "@/src/types/pendingMember";
 
 export default function PendingMembercard({
     name = "고양이" ,
