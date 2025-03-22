@@ -13,6 +13,7 @@ import {
 } from "@nova/ui/components/ui/select";
 import { useManageMembersQuery } from "@/src/query/manageMembersQueries";
 import { ManageMember } from '@/src/types/manageMember';
+import { formatPhoneNumber } from "@/src/utils/formatter";
 
 export default function ManageMembers() {
   const { data , isLoading , error } = useManageMembersQuery();
@@ -101,7 +102,7 @@ export default function ManageMembers() {
                 <MemberCard
                   key={member.memberId}
                   name={member.name}
-                  phoneNumber={member.phone}
+                  phoneNumber={formatPhoneNumber(member.phone)}
                   studentId={member.studentNumber}
                   profilePhoto={member.profilePhoto}
                   type={viewType}

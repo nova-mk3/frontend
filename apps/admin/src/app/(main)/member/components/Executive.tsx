@@ -5,6 +5,7 @@ import ExecutiveModal from './ExecutiveModal';
 import { useExecutiveMembersQuery, useExecutiveYearsQuery , usePostExecutiveYearMutation} from "@/src/query/executiveMembersQueries";
 import { enumRoleType } from "@/src/types/executiveMember";
 import ExecutiveMembercard from "./ExecutiveMemberCard";
+import { formatPhoneNumber } from "@/src/utils/formatter";
 
 export default function Executive() {
   const [selectedYear, setSelectedYear] = useState<number>(0);
@@ -70,14 +71,14 @@ export default function Executive() {
                     selectedYear={selectedYear}
                     key={member.executiveHistoryId}
                     name={member.name}
-                    phone={member.phone}
+                    phone={formatPhoneNumber(member.phone)}
                     role={member.role}
                     executiveHistoryId={member.executiveHistoryId}
                     profilePhotoResponse={member.profilePhotoResponse}
                   />
                 ))
               ) : (
-                <div className="text-2xl text-gray-500 m-2 w-[650px] h-[80px]">등록된 임원이 없습니다.</div>
+                <div className="flex items-center text-2xl text-gray-500 m-2 w-[650px] h-[80px] ">등록된 임원이 없습니다.</div>
               )}
               {title === "임원" && (
                 <Button className="ml-2 mt-2 w-[650px] h-[80px] text-2xl" onClick={() => setOpen(true)}>

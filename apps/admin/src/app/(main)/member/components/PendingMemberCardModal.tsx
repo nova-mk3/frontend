@@ -6,6 +6,7 @@ import { Phone, IdCard, Cake, Mail , GraduationCap, LucideIcon} from "lucide-rea
 import { PendingMemberCardModalProps, PendingGraduationResponse, PendingMemberResponse } from "@/src/types/pendingMember";
 import { useApprovePendingMemberMutation, useRejectPendingMemberMutation, useSpecificPendingMemberQuery } from "@/src/query/pendingMembersQueries";
 import { ProfileImage } from '@nova/ui/components/ui/profileImage';
+import { formatPhoneNumber , formatBirthday} from './../../../../utils/formatter';
 
 const MemberInfo = ({ icon: Icon, label }: { icon: LucideIcon ; label: string | undefined }) => (
   <div className="flex items-center space-x-3">
@@ -40,7 +41,7 @@ const LeftSide = ({ data, isLoading, isError }: {
       <div className="flex flex-col w-[700px] items-center space-y-8 py-20">
         <ProfileImage src= {data.profilePhoto.imageUrl} size={160}/>
         <div className="text-2xl font-bold">{data?.name}</div>
-        <MemberInfo icon={Phone} label={data?.phone} />
+        <MemberInfo icon={Phone} label={formatPhoneNumber(data?.phone)} />
         <MemberInfo icon={IdCard} label={data?.studentNumber} />
         <MemberInfo icon={GraduationCap} 
           label={
@@ -50,7 +51,7 @@ const LeftSide = ({ data, isLoading, isError }: {
                 ? "휴학중" 
                 : `${data?.grade} ${data?.semester}`
           }/>
-        <MemberInfo icon={Cake} label={data?.birth} />
+        <MemberInfo icon={Cake} label={formatBirthday(data?.birth)} />
         <MemberInfo icon={Mail} label={data?.email} />
       </div>
     );
