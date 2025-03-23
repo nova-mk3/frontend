@@ -25,7 +25,7 @@ services:
     networks:
       - backend_network # 네트워크 연결
     volumes:
-      - ./apps/service/.env.production:/app/apps/service/apps/service/.env.production
+      - ./apps/service/.env.production:/app/apps/service/.env.production
 
 networks:
   backend_network:

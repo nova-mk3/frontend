@@ -36,7 +36,7 @@ pipeline {
                     script {
                         dir('frontend/apps/service') {
                             writeFile file: '.env.production', text: ENV_PROD + ''
-                             sh 'ls -l .env.production || echo "❌ 파일 생성 실패!"'
+                             sh 'ls -l || echo "❌ 파일 생성 실패!"'
                             echo "✅ .env.production 생성 완료 at frontend/apps/service/"
                         }
                     }
