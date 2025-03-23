@@ -12,7 +12,11 @@ pipeline {
             script {
                 echo "🔄 Cloning repository..."
                 sh 'rm -rf frontend || true'  // 기존 폴더 삭제
-                git branch: 'main', credentialsId: env.GITHUB_CREDENTIALS_ID, url: env.GITHUB_REPO
+          
+                        dir('frontend') {
+                            git branch: 'main', credentialsId: env.GITHUB_CREDENTIALS_ID, url: env.GITHUB_REPO
+                        }
+          
                 echo "✅ Git Clone 완료!"
             }
         }
@@ -37,12 +41,14 @@ pipeline {
                     def composeFile = "frontend/docker-compose.yml"
                     if (fileExists(composeFile)) {  
                         echo "🧹 Cleaning up old Docker containers..."
+                        
                         dir('frontend') {
                             sh '''
                             docker compose down --rmi all --volumes --remove-orphans || true
                             docker rmi frontend_admin_image:latest frontend_service_image:latest || true
                             '''
                         }
+                    
                         echo "✅ Cleanup 완료!"
                     } else {
                         echo "⚠️ frontend/docker-compose.yml not found. Skipping cleanup."
