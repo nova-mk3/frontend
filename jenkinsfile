@@ -27,7 +27,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'env_production_text_frontend', variable: 'ENV_PROD')]) {
                     script {
                         dir('frontend/apps/service') {
-                            writeFile file: '.env.production', text: "${ENV_PROD}"
+                            writeFile file: '.env.production', text: ENV_PROD + ''
                             echo "✅ .env.production 생성 완료 at frontend/apps/service/"
                         }
                     }
