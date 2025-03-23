@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { logout, verifyAccessToken } from "./api/auth";
+import { verifyAccessToken } from "./api/auth";
 
 export async function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
@@ -39,7 +39,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|signup|nova).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|signup|api).*)"],
 };
 
 // function applySetCookie(req: NextRequest, res: NextResponse): void {
