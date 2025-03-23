@@ -1,14 +1,13 @@
 "use client";
-import { SignupInput } from "@/src/schema/signup.schema";
 import { useEffect, useRef, useState } from "react";
 import { Path, UseFormReturn } from "react-hook-form";
 
-export function useFileFormField({
+export function useFileFormField<T extends Record<string, any>>({
   form,
   name,
 }: {
-  form: UseFormReturn<SignupInput>;
-  name: Path<SignupInput>;
+  form: UseFormReturn<T>;
+  name: Path<T>;
 }) {
   const {
     watch,
@@ -16,19 +15,22 @@ export function useFileFormField({
     formState: { errors },
   } = form;
   const [preview, setPreview] = useState<string | null>(null);
-  const file = watch(name);
+  const file = watch(name) as File;
   const inputRef = useRef<HTMLInputElement | null>(null);
-
+  function isFile(value: unknown): value is File {
+    return value instanceof File;
+  }
   useEffect(() => {
-    if (file && file instanceof File) {
+    if (isFile(file)) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreview(reader.result as string);
       };
       reader.readAsDataURL(file);
-    } else {
-      setPreview(null);
     }
+    // else {
+    //   setPreview(null);
+    // }
   }, [file]);
 
   useEffect(() => {
@@ -38,10 +40,13 @@ export function useFileFormField({
       const target = e.target as HTMLInputElement;
       const selectedFile = target.files?.[0];
       if (selectedFile) {
-        setValue(name, selectedFile, { shouldValidate: true });
-      } else {
-        setValue(name, undefined, { shouldValidate: true });
+        setValue(name, selectedFile as unknown as T[typeof name], {
+          shouldValidate: true,
+        });
       }
+      // else {
+      //   setValue(name, undefined, { shouldValidate: true });
+      // }
     };
     input.addEventListener("change", handleChange);
     return () => {
@@ -55,10 +60,18 @@ export function useFileFormField({
     }
   };
 
+  const handleReset = () => {
+    setPreview(null);
+    setValue(name, undefined as unknown as T[typeof name], {
+      shouldValidate: true,
+    });
+  };
+
   return {
     preview,
     inputRef,
     errors,
     handleIconClick,
+    handleReset,
   };
 }

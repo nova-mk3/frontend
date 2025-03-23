@@ -3,31 +3,31 @@
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import { CalendarIcon } from "lucide-react";
-import { UseFormReturn } from "react-hook-form";
+import { Path, UseFormReturn } from "react-hook-form";
 
 import { SignupInput } from "@/src/schema/signup.schema";
-import { Button } from "@nova/ui/components/button";
-import { Calendar } from "@nova/ui/components/calendar";
+import { Button } from "@nova/ui/components/ui/button";
+import { Calendar } from "@nova/ui/components/ui/calendar";
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-} from "@nova/ui/components/form";
+} from "@nova/ui/components/ui/form";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@nova/ui/components/popover";
+} from "@nova/ui/components/ui/popover";
 import { cn } from "@nova/ui/lib/utils";
 
-export function DatePickerForm({
+export function DatePickerForm<T extends Record<string, any>>({
   form,
   name,
   label,
 }: {
-  form: UseFormReturn<SignupInput>;
-  name: keyof SignupInput;
+  form: UseFormReturn<T>;
+  name: Path<T>;
   label: string;
 }) {
   return (
@@ -46,7 +46,7 @@ export function DatePickerForm({
                   variant={"outline"}
                   className={cn(
                     "w-[180px] pl-3 h-10 text-left b-m !mt-[4px] focus:border-primary focus:text-primary shadow-sm rounded-sm",
-                    !field.value && "text-muted-foreground",
+                    !field.value && "text-muted-foreground"
                   )}
                 >
                   {field.value ? (
@@ -60,12 +60,15 @@ export function DatePickerForm({
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
+                captionLayout="dropdown-buttons"
                 className="bg-background01"
                 mode="single"
+                fromYear={2000}
+                toYear={new Date().getFullYear()}
                 selected={field.value as Date}
                 onSelect={field.onChange}
                 disabled={(date) =>
-                  date > new Date() || date < new Date("1900-01-01")
+                  date > new Date() || date < new Date("2000-01-01")
                 }
                 locale={ko}
                 initialFocus

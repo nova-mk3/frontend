@@ -1,11 +1,11 @@
+"use client";
 import React, { useState } from "react";
 import Link from "next/link";
 import { Bell, CircleX } from "lucide-react";
+import { useSidebar } from "./AppSidebar";
 
-interface HeaderProps {
-  toggle: () => void;
-}
-export default function SidebarHeader({ toggle }: HeaderProps) {
+export default function SidebarHeader() {
+  const { toggleSidebar } = useSidebar();
   // 나중에 로그인으로 바꿀예정
   const [isLogin] = useState(false);
   return (
@@ -18,7 +18,13 @@ export default function SidebarHeader({ toggle }: HeaderProps) {
           </div>
           <div className="flex flex-row ml-auto gap-[24px] items-center">
             <Bell className="cursor-pointer" size={24} />
-            <CircleX className="cursor-pointer" size={24} onClick={toggle} />
+            <div>
+              <CircleX
+                className="cursor-pointer"
+                size={24}
+                onClick={toggleSidebar}
+              />
+            </div>
           </div>
         </>
       ) : (
@@ -34,7 +40,11 @@ export default function SidebarHeader({ toggle }: HeaderProps) {
           </p>
         </div>
         <div className="flex flex-row ml-auto gap-[24px] items-center">
-          <CircleX className="cursor-pointer" size={24} onClick={toggle} />
+          <CircleX
+            className="cursor-pointer"
+            size={24}
+            onClick={toggleSidebar}
+          />
         </div>
       </>
     </div>

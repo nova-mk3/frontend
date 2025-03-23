@@ -1,0 +1,103 @@
+"use client";
+import { Button } from "@nova/ui/components/ui/button";
+import React from "react";
+import DetailPageContent from "../../board/components/DetailPageContent";
+import { useSuggestionDetailQuery } from "../query/queries";
+import { Unlock, Lock, ChevronLeft, MessageSquare } from "lucide-react";
+import Link from "next/link";
+import AdminMessage from "../components/AdminMessage";
+import { Separator } from "@nova/ui/components/ui/separator";
+import { FileListLayout, FileList } from "../components/ViewFileLayout";
+import { toFormattedDate } from "@/src/libs/utils/dateParsing";
+import AdminForm from "../components/AdminForm";
+import { FileItemProps } from "../components/ViewFileItem";
+
+interface PostDetailProps {
+  postId: string;
+}
+
+export interface SuggestionDetail {
+  adminReply: string | null;
+  adminReplyTime: string | null;
+  authorName: string;
+  content: string;
+  createdTime: string;
+  files: FileItemProps[];
+  id: string;
+  private: boolean;
+  title: string;
+}
+export default function PostDetail({ postId }: PostDetailProps) {
+  const isAdmin = "true";
+  const { data } = useSuggestionDetailQuery(postId);
+
+  return (
+    <div className="flex flex-col t-m mx-auto gap-6">
+      <div className="border-b bg-background01">
+        <div className="w-[80%] mx-auto px-4 py-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Link
+                href="/suggestion"
+                className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span className="font-medium">건의함</span>
+              </Link>
+              <Separator orientation="vertical" className="h-4 mx-2" />
+              <div className="flex items-center gap-2">
+                <MessageSquare className="w-4 h-4" />
+                <span className="text-sm text-muted-foreground">
+                  건의사항 #{data.id}
+                </span>
+              </div>
+            </div>
+            <Button variant="outline">
+              <Link href="/suggestion/newpost">새 건의하기</Link>
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col w-[80%] mx-auto gap-6">
+        <div className="mb-8 mt-8">
+          <h1 className="text-3xl font-bold mb-4">{data.title}</h1>
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <span>{toFormattedDate(data.createdTime)}</span>
+            <span>{data.authorName}</span>
+            <div className="flex items-center gap-1">
+              {data.private.toString() === "true" ? (
+                <Unlock className="w-4 h-4" />
+              ) : (
+                <Lock className="w-4 h-4" />
+              )}
+              <span className="text-sm">
+                {data.private.toString() === "true" ? "비공개" : "공개"}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <DetailPageContent content={data.content} />
+        <Separator />
+        <span className="text-xl font-semibold">첨부파일</span>
+        <FileListLayout>
+          <FileList files={data.files} />
+        </FileListLayout>
+        {/* 관리자 답변 영역 */}
+        <div className="mb-12">
+          <h2 className="text-xl font-semibold mb-4 mt-8">관리자 답변</h2>
+          <AdminMessage
+            adminReply={data.adminReply}
+            time={toFormattedDate(data.adminReplyTime!)}
+          />
+        </div>
+
+        {/* 관리자 댓글 입력 영역 */}
+        {isAdmin.toString() === "true" && (
+          <AdminForm postId={postId} adminReply={data.adminReply} />
+        )}
+      </div>
+    </div>
+  );
+}

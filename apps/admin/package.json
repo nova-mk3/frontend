@@ -3,18 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "PORT=3001 next start",
     "lint": "next lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "dependencies": {
+    "@nova/ui": "workspace:*",
     "next": "15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^2.5.5",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -23,7 +25,7 @@
     "@nova/jest-config": "workspace:*",
     "@nova/tailwind-config": "workspace:*",
     "@nova/typescript-config": "workspace:*",
-    "@nova/ui": "workspace:*",
+    "@svgr/webpack": "^8.1.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
@@ -37,7 +39,6 @@
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.17",
     "typescript": "^5"
   },
   "packageManager": "pnpm@9.0.0"

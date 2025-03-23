@@ -1,12 +1,15 @@
 import "@nova/tailwind-config/globalcss";
 import type { Metadata } from "next";
-import React from "react";
+import React, { Suspense } from "react";
 import { pretendard } from "../../theme/font";
 import LayoutClient from "./components/Layout";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Providers from "../../query/providers";
 
 export const metadata: Metadata = {
-  title: "nova",
-  description: "nova web",
+  title: "NOVA",
+  description: "충북대학교 소프트웨어학과 노바",
 };
 
 export default function RootLayout({
@@ -16,7 +19,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${pretendard.variable} font-pretendard`}>
-      <LayoutClient>{children}</LayoutClient>
+      {/* <LayoutClient>{children}</LayoutClient> */}
+      <body>
+        {/* 추후 수정 예정 @kwonja */}
+        <div id="root" className="max-w-screen-xl mx-auto">
+          <Header />
+          <Providers>{children}</Providers>
+          <Footer />
+        </div>
+      </body>
     </html>
   );
 }

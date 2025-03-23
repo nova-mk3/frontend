@@ -2,7 +2,7 @@
 
 import { cn } from "@nova/ui/lib/utils";
 import { HTMLAttributes } from "react";
-import Frame from "./Frame";
+import Frame, { DotGrid } from "./Frame";
 
 export default function FramePictureSection({
   className,
@@ -15,8 +15,9 @@ export default function FramePictureSection({
       <div className="d-l mt-4 mb-4 w-screen text-center">
         CBNU software club NOVA
       </div>
-      <div>
-        <Frame />
+      <div className="relative w-screen flex justify-center">
+        <DotGrid />
+        <Frame className="relative w-[1400px] h-screen" />
       </div>
     </div>
   );

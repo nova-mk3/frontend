@@ -8,14 +8,16 @@ import * as React from "react";
 import { cn } from "../../lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none  disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default: "bg-primary shadow hover:bg-primary/90 text-background01",
         secondary: "bg-success shadow-sm hover:bg-danger/80",
-        outline: "bg-background01 border border-line01 text-text01",
+        outline:
+          "bg-background01 border border-line01 text-text01 hover:bg-accent hover:text-accent-foreground",
         transparent: "bg-transparent text-text01",
+        text: "bg-white text-primary hover:bg-ui01",
       },
       size: {
         default: "h-9 px-4 py-2",
@@ -28,7 +30,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 export interface ButtonProps
@@ -47,7 +49,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       />
     );
-  },
+  }
 );
 Button.displayName = "Button";
 

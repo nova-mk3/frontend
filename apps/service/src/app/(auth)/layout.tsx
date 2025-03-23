@@ -2,6 +2,7 @@ import "@nova/tailwind-config/globalcss";
 import type { Metadata } from "next";
 import React from "react";
 import { pretendard } from "../../theme/font";
+import Providers from "../../query/providers";
 
 export const metadata: Metadata = {
   title: "nova",
@@ -15,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${pretendard.variable} font-pretendard`}>
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
