@@ -13,9 +13,17 @@ pipeline {
                 echo "🔄 Cloning repository..."
                 sh 'rm -rf frontend || true'  // 기존 폴더 삭제
           
-                        dir('frontend') {
-                            git branch: 'main', credentialsId: env.GITHUB_CREDENTIALS_ID, url: env.GITHUB_REPO
-                        }
+                 
+                checkout([
+                $class: 'GitSCM',
+                branches: [[name: '*/main']],
+                userRemoteConfigs: [[
+                    url: env.GITHUB_REPO,
+                    credentialsId: env.GITHUB_CREDENTIALS_ID
+                ]],
+                extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'frontend']]
+])
+            
           
                 echo "✅ Git Clone 완료!"
             }
@@ -28,6 +36,7 @@ pipeline {
                     script {
                         dir('frontend/apps/service') {
                             writeFile file: '.env.production', text: ENV_PROD + ''
+                             sh 'ls -l .env.production || echo "❌ 파일 생성 실패!"'
                             echo "✅ .env.production 생성 완료 at frontend/apps/service/"
                         }
                     }
