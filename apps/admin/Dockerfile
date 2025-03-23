@@ -44,10 +44,9 @@ USER nextjs
 
 
 # Next.js 빌드 결과 복사
-COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/.next/standalone ./
-COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/.next/static ./.next/static
-COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/public ./public
-
+COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/.next/standalone ./ 
+COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/.next/static ./apps/admin/.next/static 
+COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/public ./apps/admin/public
 
 # 포트를 노출합니다.
 EXPOSE 3001

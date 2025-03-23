@@ -40,9 +40,9 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 USER nextjs
 
-COPY --from=installer /app/apps/service/.next/standalone ./
-COPY --from=installer /app/apps/service/.next/static ./.next/static
-COPY --from=installer /app/apps/service/public ./public
+COPY --from=installer /app/apps/service/.next/standalone ./ 
+COPY --from=installer /app/apps/service/.next/static ./apps/service/.next/static 
+COPY --from=installer /app/apps/service/public ./apps/service/public
 
 
 # 포트 노출
