@@ -8,19 +8,15 @@ pipeline {
     
     stages {
         stage('GitHub Clone') {
-            steps {
-                script {
-                    echo "🔄 Cloning repository..."
-                    sh 'rm -rf frontend || true'  // 기존 폴더 삭제 (에러 방지)
-                    
-                    // ✅ frontend 디렉토리에서 Git Clone 실행
-                    dir('frontend') {  
-                        git branch: 'main', credentialsId: env.GITHUB_CREDENTIALS_ID, url: env.GITHUB_REPO
-                    }
-                    echo "✅ Git Clone 완료!"
-                }
+        steps {
+            script {
+                echo "🔄 Cloning repository..."
+                sh 'rm -rf frontend || true'  // 기존 폴더 삭제
+                git branch: 'main', credentialsId: env.GITHUB_CREDENTIALS_ID, url: env.GITHUB_REPO
+                echo "✅ Git Clone 완료!"
             }
         }
+}
 
         stage('Inject .env.production') {
             steps {
