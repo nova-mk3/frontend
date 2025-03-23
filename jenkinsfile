@@ -31,6 +31,7 @@ pipeline {
                         dir('frontend') {
                             sh '''
                             docker-compose down --rmi all --volumes --remove-orphans || true
+                            docker rmi $(docker images --format "{{.ID}} {{.Repository}}" | grep $(basename "$PWD") | awk '{print $1}') || true
                             '''
                         }
                         echo "✅ Cleanup 완료!"
