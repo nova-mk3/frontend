@@ -24,8 +24,6 @@ services:
       - "3002:3002"
     networks:
       - backend_network # 네트워크 연결
-    volumes:
-      - ./apps/service/.env.production:/app/apps/service/.env.production
 
 networks:
   backend_network:
