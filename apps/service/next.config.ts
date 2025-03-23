@@ -12,11 +12,12 @@ const nextConfig: NextConfig = {
     });
     return config;
   },
+  // 평소 개발할때는 바꿔둬야할듯!
   async rewrites() {
     return [
       {
         source: "/nova/:path*",
-        destination: "http://localhost:4001/api/v1/:path*",
+        destination: "https://www.jinybook.site/api/v1/:path*",
       },
     ];
   },
