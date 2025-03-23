@@ -3,7 +3,7 @@ import { Authapi } from "../core";
 
 export async function getMember({ memberId }: { memberId: string }) {
   try {
-    const res = await Authapi.get(`/nova/members/${memberId}`);
+    const res = await Authapi.get(`/members/${memberId}`);
     return res.data.data.memberResponse;
   } catch (error) {
     throwErrorMessage(error);

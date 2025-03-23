@@ -44,7 +44,7 @@ export async function IntegratedBoardPost({
   boardId,
 }: IntegradePostRequest) {
   try {
-    const response = await Authapi.post(`/nova/boards/${boardId}/posts`, {
+    const response = await Authapi.post(`/boards/${boardId}/posts`, {
       title,
       content,
       postType,
@@ -71,7 +71,7 @@ export async function IntegratedBoardGet({
 }: BoardCategoryGetParamType) {
   try {
     const response = await Authapi.get(
-      `/nova/boards/${boardId}/posts/search?postType=${postType}&page=${page}&size=${size}&searchType=${searchType}&keyword=${keyword}&sortBy=${sortBy}&sortDirection=${sortDirection}`
+      `/boards/${boardId}/posts/search?postType=${postType}&page=${page}&size=${size}&searchType=${searchType}&keyword=${keyword}&sortBy=${sortBy}&sortDirection=${sortDirection}`
     );
     return response.data.data;
   } catch (error) {
@@ -87,9 +87,7 @@ export async function IntegratedBoardGetDetail({
   boardId,
 }: BoardGetParamType) {
   try {
-    const response = await Authapi.get(
-      `/nova/boards/${boardId}/posts/${postId}`
-    );
+    const response = await Authapi.get(`/boards/${boardId}/posts/${postId}`);
     return response.data.data;
   } catch (error) {
     throwErrorMessage(error);
@@ -110,7 +108,7 @@ export async function BoardAllList({
 }: BoardAllListParamType) {
   try {
     const response = await Authapi.get(
-      `/nova/boards/${boardId}/posts/all/search?page=${page}&size=${size}&searchType=${searchType}&keyword=${keyword}&sortBy=${sortBy}&sortDirection=${sortDirection}`
+      `/boards/${boardId}/posts/all/search?page=${page}&size=${size}&searchType=${searchType}&keyword=${keyword}&sortBy=${sortBy}&sortDirection=${sortDirection}`
     );
     return response.data.data;
   } catch (error) {
@@ -123,7 +121,7 @@ export async function BoardAllList({
  */
 export async function BoardLatestList({ boardId }: BoardIdParams) {
   try {
-    const response = await Authapi.get(`/nova/boards/${boardId}/posts/latest`);
+    const response = await Authapi.get(`/boards/${boardId}/posts/latest`);
 
     return response.data.data;
   } catch (error) {
@@ -153,15 +151,12 @@ export async function IntegratedBoardPut({
   deleteFileIds,
 }: IntegratedPutRequest) {
   try {
-    const response = await Authapi.put(
-      `/nova/boards/${boardId}/posts/${postId}`,
-      {
-        title,
-        content,
-        fileIds,
-        deleteFileIds,
-      }
-    );
+    const response = await Authapi.put(`/boards/${boardId}/posts/${postId}`, {
+      title,
+      content,
+      fileIds,
+      deleteFileIds,
+    });
     return response.data.data;
   } catch (error: any) {
     throwErrorMessage(error);
@@ -186,9 +181,7 @@ export async function IntegratedBoardDelete({
   postId,
 }: BoardGetParamType) {
   try {
-    const response = await Authapi.delete(
-      `/nova/boards/${boardId}/posts/${postId}`
-    );
+    const response = await Authapi.delete(`/boards/${boardId}/posts/${postId}`);
     return response.data.data;
   } catch (error: any) {
     throwErrorMessage(error);
@@ -211,9 +204,7 @@ export async function BoardIdGet() {
 
     // response.ok가 false면 HTTP 에러 상태 (4xx, 5xx 등)
     if (!response.ok) {
-      throw new Error(
-        `Failed to fetch /nova/boards. Status: ${response.status}`
-      );
+      throw new Error(`Failed to fetch /boards. Status: ${response.status}`);
     }
 
     // JSON 파싱

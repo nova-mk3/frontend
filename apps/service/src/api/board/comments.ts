@@ -16,7 +16,7 @@ export async function CommentsPost({
   parentCommentId,
 }: CommentAPIType) {
   try {
-    const response = await Authapi.post(`/nova/posts/${postId}/comments`, {
+    const response = await Authapi.post(`/posts/${postId}/comments`, {
       content,
       parentCommentId,
     });
@@ -32,7 +32,7 @@ export async function CommentsPost({
 export async function CommentsGetList({ postId }: CommentAPIType) {
   try {
     const response = await Authapi.get(
-      `/nova/posts/${postId}/comments?postId=${postId}`
+      `/posts/${postId}/comments?postId=${postId}`
     );
     return response.data.data;
   } catch (error) {
@@ -51,7 +51,7 @@ export async function CommentsPut({
   content: string;
 }) {
   try {
-    const response = await Authapi.put(`/nova/comments/${commentId}`, {
+    const response = await Authapi.put(`/comments/${commentId}`, {
       content,
     });
     return response.data.data;
@@ -65,7 +65,7 @@ export async function CommentsPut({
  */
 export async function CommentsDelete({ commentId }: { commentId: string }) {
   try {
-    const response = await Authapi.delete(`/nova/comments/${commentId}`);
+    const response = await Authapi.delete(`/comments/${commentId}`);
     return response.data.data;
   } catch (error) {
     throwErrorMessage(error);

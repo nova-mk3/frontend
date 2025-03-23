@@ -26,7 +26,7 @@ export async function ArchivePost({
   boardId,
 }: ArchivePostRequest) {
   try {
-    const response = await Authapi.post(`/nova/boards/${boardId}/exam-posts`, {
+    const response = await Authapi.post(`/boards/${boardId}/exam-posts`, {
       title,
       content,
       year,
@@ -53,7 +53,7 @@ export async function ArchiveGetDetail({
 }) {
   try {
     const response = await Authapi.get(
-      `/nova/boards/${boardId}/exam-posts/${postId}`
+      `/boards/${boardId}/exam-posts/${postId}`
     );
     return response.data.data;
   } catch (error) {
@@ -91,7 +91,7 @@ export async function ArchivePut({
 }: ArchivePutRequest) {
   try {
     const response = await Authapi.put(
-      `/nova/boards/${boardId}/exam-posts/${postId}`,
+      `/boards/${boardId}/exam-posts/${postId}`,
       {
         title,
         content,
@@ -133,7 +133,7 @@ export async function ArchiveDelete({
 }) {
   try {
     const response = await Authapi.delete(
-      `/nova/boards/${boardId}/exam-posts/${postId}`
+      `/boards/${boardId}/exam-posts/${postId}`
     );
     return response.data;
   } catch (error: any) {

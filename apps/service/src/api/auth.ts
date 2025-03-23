@@ -2,7 +2,7 @@ import { throwErrorMessage } from "../libs/utils/throwError";
 import { api, Authapi } from "./core";
 
 export async function verifyEmail(email: string) {
-  const response = await api.post("/nova/email-auth", { email: email });
+  const response = await api.post("/email-auth", { email: email });
   return response.data;
 }
 
@@ -14,7 +14,7 @@ export async function verifyEmailCode({
   authCode: string;
 }) {
   try {
-    const response = await api.post(`/nova/email-auth/check`, {
+    const response = await api.post(`/email-auth/check`, {
       email,
       authCode,
     });
@@ -39,7 +39,7 @@ export async function login({
   password: string;
 }) {
   try {
-    const response = await api.post("/nova/members/login", {
+    const response = await api.post("/members/login", {
       studentNumber,
       password,
     });
@@ -52,7 +52,7 @@ export async function login({
 export async function verifyAccessToken(accessToken: string) {
   try {
     const response = await api.post(
-      `nova/members/access-token/verify?accessToken=${accessToken}`
+      `/members/access-token/verify?accessToken=${accessToken}`
     );
     return response.data;
   } catch (error) {
@@ -64,7 +64,7 @@ export async function verifyAccessToken(accessToken: string) {
 
 export async function logout() {
   try {
-    const response = await Authapi.get(`/nova/members/logout`);
+    const response = await Authapi.get(`/members/logout`);
     return response.data;
   } catch (error) {
     throwErrorMessage(error);
@@ -121,7 +121,7 @@ export async function signup(signUpData: SignUpData) {
     };
   }
 
-  const response = await fetch(`/nova/members`, {
+  const response = await fetch(`/members`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(requestBody),

@@ -8,7 +8,7 @@ import { ERROR_MESSAGES } from "@/src/constant/error";
 export const UploadFilesAPI = async (formdata: FormData, postType: string) => {
   try {
     const response = await Authapi.post(
-      `/nova/files?postType=${postType}`,
+      `/files?postType=${postType}`,
       formdata
     );
     return response.data;
@@ -22,7 +22,7 @@ export const UploadFilesAPI = async (formdata: FormData, postType: string) => {
 */
 export const DownloadFilesAPI = async (fileId: string) => {
   try {
-    const response = await Authapi.get(`/nova/files/${fileId}/download`, {
+    const response = await Authapi.get(`/files/${fileId}/download`, {
       responseType: "blob", // Blob 데이터로 받기
     });
 
@@ -57,7 +57,7 @@ export const DownloadFilesAPI = async (fileId: string) => {
 
 export const DelelteFilesAPI = async (fileId: string) => {
   try {
-    const response = await Authapi.delete(`/nova/files/${fileId}`);
+    const response = await Authapi.delete(`/files/${fileId}`);
     return response.data.data;
   } catch (error: any) {
     throwErrorMessage(error);

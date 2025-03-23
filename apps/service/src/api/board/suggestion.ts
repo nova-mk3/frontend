@@ -20,7 +20,7 @@ export async function SuggestionPost({
   isPrivate,
 }: SuggestionPostRequest) {
   try {
-    const response = await Authapi.post(`/nova/suggestions`, {
+    const response = await Authapi.post(`/suggestions`, {
       title,
       content,
       fileIds,
@@ -37,7 +37,7 @@ export async function SuggestionPost({
  */
 export const SuggestionFileUploadAPI = async (formdata: FormData) => {
   try {
-    const response = await Authapi.post(`/nova/suggestion-files`, formdata);
+    const response = await Authapi.post(`/suggestion-files`, formdata);
     return response.data;
   } catch (error: any) {
     throwErrorMessage(error);
@@ -63,7 +63,7 @@ export async function SuggestionGet({
 }: SearchFiilterParamType) {
   try {
     const response = await Authapi.get(
-      `/nova/suggestions/search?page=${page}&size=${size}&searchType=${searchType}&keyword=${keyword}&sortBy=${sortBy}&sortDirection=${sortDirection}`
+      `/suggestions/search?page=${page}&size=${size}&searchType=${searchType}&keyword=${keyword}&sortBy=${sortBy}&sortDirection=${sortDirection}`
     );
     return response.data.data;
   } catch (error) {
@@ -76,7 +76,7 @@ export async function SuggestionGet({
  */
 export async function SuggestionGetDetail(postid: string) {
   try {
-    const response = await Authapi.get(`/nova/suggestions/${postid}`);
+    const response = await Authapi.get(`/suggestions/${postid}`);
     return response.data.data;
   } catch (error) {
     throwErrorMessage(error);
@@ -91,12 +91,9 @@ export const SuggestionDownloadFilesAPI = async (
   originalFileName: string
 ) => {
   try {
-    const response = await Authapi.get(
-      `/nova/suggestion-files/${fileId}/download`,
-      {
-        responseType: "blob", // Blob 데이터로 받기
-      }
-    );
+    const response = await Authapi.get(`/suggestion-files/${fileId}/download`, {
+      responseType: "blob", // Blob 데이터로 받기
+    });
 
     // Blob 데이터에서 URL 생성
     const url = window.URL.createObjectURL(response.data);
@@ -127,7 +124,7 @@ export async function SuggestionComment({
   reply: string;
 }) {
   try {
-    const response = await Authapi.put(`/nova/suggestions/${postId}/reply`, {
+    const response = await Authapi.put(`/suggestions/${postId}/reply`, {
       reply,
     });
     return response.data.data;

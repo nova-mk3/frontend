@@ -19,14 +19,11 @@ export async function PicturePost({
   boardId,
 }: PicturePostReqeust) {
   try {
-    const response = await Authapi.post(
-      `/nova/boards/${boardId}/picture-posts`,
-      {
-        title,
-        content,
-        imageFileIds,
-      }
-    );
+    const response = await Authapi.post(`/boards/${boardId}/picture-posts`, {
+      title,
+      content,
+      imageFileIds,
+    });
     return response.data.data;
   } catch (error: any) {
     throwErrorMessage(error);
@@ -44,7 +41,7 @@ export async function PictureGetDetail({
   boardId: string;
 }) {
   const response = await Authapi.get(
-    `/nova/boards/${boardId}/picture-posts/${postId}`
+    `/boards/${boardId}/picture-posts/${postId}`
   );
   return response.data.data;
 }
@@ -71,7 +68,7 @@ export async function PicturePut({
 }: PicturePutRequest) {
   try {
     const response = await Authapi.put(
-      `/nova/boards/${boardId}/picture-posts/${postId}`,
+      `/boards/${boardId}/picture-posts/${postId}`,
       {
         title,
         content,
@@ -107,7 +104,7 @@ export async function PictureBoardDelete({
 }) {
   try {
     const response = await Authapi.delete(
-      `/nova/boards/${boardId}/picture-posts/${postId}`
+      `/boards/${boardId}/picture-posts/${postId}`
     );
     return response.data.data;
   } catch (error: any) {
