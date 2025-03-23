@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-
+const isProd = process.env.NODE_ENV === "production";
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
   /* config options here */
@@ -17,7 +17,9 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/nova/:path*",
-        destination: "https://www.jinybook.site/api/v1/:path*",
+        destination: isProd
+          ? "https://www.jinybook.site/api/v1/:path*" // 배포용
+          : "http://localhost:8080/api/v1/:path*", // 개발용
       },
     ];
   },

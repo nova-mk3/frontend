@@ -1,6 +1,6 @@
 import axios from "axios";
-export const BASE_URL = "http://localhost:3002";
-export const EXTERNAL_URL = "http://localhost:8080/api/v1";
+export const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+console.log(BASE_URL);
 const config = {
   baseURL: BASE_URL,
   withCredentials: true,
