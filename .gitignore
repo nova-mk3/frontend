@@ -38,4 +38,5 @@ yarn-error.log*
 *.pem
 
 
+# ✅ 로컬 전용 환경 파일들 (절대 커밋 X)
 .env*

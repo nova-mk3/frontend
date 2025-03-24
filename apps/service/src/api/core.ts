@@ -1,6 +1,5 @@
 import axios from "axios";
 export const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-console.log(BASE_URL);
 const config = {
   baseURL: BASE_URL,
   withCredentials: true,
