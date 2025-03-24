@@ -9,3 +9,13 @@ export async function getMember({ memberId }: { memberId: string }) {
     throwErrorMessage(error);
   }
 }
+
+export async function getMemberId() {
+  try {
+    // ✅ `fetch` 요청 시 `Cookie` 포함
+    const res = await Authapi.get(`/nova/members`);
+    return res.data.data;
+  } catch (error) {
+    return throwErrorMessage(error);
+  }
+}
