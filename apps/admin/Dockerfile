@@ -27,8 +27,12 @@ WORKDIR /app
 COPY --from=builder /app/out/json/ .
 RUN pnpm install
 
+# ✅ .env.production 복사
+COPY ./apps/service/.env.production ./apps/service/.env.production
+
 # 프로젝트 전체 복사
 COPY --from=builder /app/out/full/ .
+
 
 # turbo build
 RUN pnpm turbo build
