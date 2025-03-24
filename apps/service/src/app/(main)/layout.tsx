@@ -21,12 +21,14 @@ export default function RootLayout({
     <html lang="en" className={`${pretendard.variable} font-pretendard`}>
       {/* <LayoutClient>{children}</LayoutClient> */}
       <body>
-        {/* 추후 수정 예정 @kwonja */}
-        <div id="root" className="max-w-screen-xl mx-auto">
-          <Header />
-          <Providers>{children}</Providers>
-          <Footer />
-        </div>
+        <Providers>
+          {/* 추후 수정 예정 @kwonja */}
+          <div id="root" className="max-w-screen-xl mx-auto">
+            <Header />
+            {children}
+            <Footer />
+          </div>
+        </Providers>
       </body>
     </html>
   );

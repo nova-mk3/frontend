@@ -9,18 +9,23 @@ import { getMemberId } from "@/src/api/user/client";
 // API 호출 함수 경로에 맞게 수정해주세요.
 
 export default function HeaderLogin() {
-  //   const { data: memberId, isLoading } = useQuery({
-  //     queryKey: ["memberId"],
-  //     queryFn: getMemberId,
-  //   });
+  const { data: memberId, isLoading } = useQuery({
+    queryKey: ["memberId"],
+    queryFn: getMemberId,
+  });
+  if (isLoading) {
+    return (
+      <div className="flex flex-row justify-center items-center gap-4 mobile:hidden">
+        <div className="w-6 h-6 rounded-full bg-background02 animate-pulse"></div>
+        <div className="w-6 h-6 rounded-full bg-background02 animate-pulse"></div>
+        <div className="w-6 h-6 rounded-full bg-background02 animate-pulse"></div>
+      </div>
+    );
+  }
 
-  //   if (isLoading) {
-  //     return; // 또는 로딩 스피너 등 표시
-  //   }
-  let memberId = "";
   return (
     <>
-      {memberId === "" ? (
+      {!memberId ? (
         <div className="flex flex-row justify-center items-center gap-4 mobile:hidden">
           <Link href="/signin">
             <p className="w-[60px] h-[24px] flex content-center justify-center cursor-pointer">

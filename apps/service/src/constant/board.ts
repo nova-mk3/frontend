@@ -43,5 +43,12 @@ export const POST_TYPE_LABEL: Record<PostType, string> = {
   ALL: "전체글보기",
 };
 
-export const INTEGRATED = "0e8f938b-b653-4dd5-bf0e-c6e48bb5128e";
-export const CLUB_ARCHIVE = "d0335ade-1ccb-42be-a64c-a1159624c09d";
+const isProd = process.env.NODE_ENV === "production";
+
+export const INTEGRATED = isProd
+  ? "0e8f938b-b653-4dd5-bf0e-c6e48bb5128e"
+  : "03cbc040-fb83-46f7-9118-f637e9c14679"; //여기에 로컬변수
+
+export const CLUB_ARCHIVE = isProd
+  ? "d0335ade-1ccb-42be-a64c-a1159624c09d"
+  : "15ae2c32-f158-49f4-850b-b55b5c55ec67"; //여기에 로컬변수

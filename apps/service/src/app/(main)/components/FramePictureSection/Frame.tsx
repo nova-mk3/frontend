@@ -12,161 +12,161 @@ export default function Frame({
   return (
     <div className={cn(className)} {...props}>
       <Image
-        src={"/image/frame/image10.png"}
+        src="/image/frame/image10.png"
         width={177}
         height={125}
         alt="image"
-        className="absolute top-[130px] left-[40px] object-cover"
+        className="absolute top-[130px] left-[0px] object-cover"
       />
       <Image
-        src={"/image/frame/image14.png"}
+        src="/image/frame/image14.png"
         width={129}
         height={137}
         alt="image"
-        className="absolute top-[118px] left-[226px] object-cover"
+        className="absolute top-[118px] left-[186px] object-cover"
       />
       <Image
-        src={"/image/frame/image3.png"}
+        src="/image/frame/image3.png"
         width={190}
         height={150}
         alt="image"
-        className="absolute top-[106px] left-[366px] object-cover"
+        className="absolute top-[106px] left-[326px] object-cover"
       />
       <Image
-        src={"/image/frame/image23.png"}
+        src="/image/frame/image23.png"
         width={175}
         height={138}
         alt="image"
-        className="absolute top-[118px] left-[566px] object-cover"
+        className="absolute top-[118px] left-[526px] object-cover"
       />
       <Image
-        src={"/image/frame/image21.png"}
+        src="/image/frame/image21.png"
         width={190}
         height={150}
         alt="image"
-        className="absolute top-[106px] left-[750px] object-cover"
+        className="absolute top-[106px] left-[710px] object-cover"
       />
       <Image
-        src={"/image/frame/image5.png"}
+        src="/image/frame/image5.png"
         width={115}
         height={147}
         alt="image"
-        className="absolute top-[109px] left-[950px] object-cover"
+        className="absolute top-[109px] left-[910px] object-cover"
       />
       <Image
-        src={"/image/frame/image19.png"}
+        src="/image/frame/image19.png"
         width={133}
         height={126}
         alt="image"
-        className="absolute top-[130px] left-[1074px] object-cover"
+        className="absolute top-[130px] left-[1034px] object-cover"
       />
       <Image
-        src={"/image/frame/image29.png"}
+        src="/image/frame/image29.png"
         width={230}
         height={126}
         alt="image"
-        className="absolute top-[150px] left-[1214px] object-cover"
+        className="absolute top-[150px] left-[1174px] object-cover"
       />
       <Image
-        src={"/image/frame/image2.png"}
+        src="/image/frame/image2.png"
         width={177}
         height={121}
         alt="image"
-        className="absolute top-[270px] left-[0px] object-cover"
+        className="absolute top-[270px] left-[-40px] object-cover"
       />
       <Image
-        src={"/image/frame/image30.png"}
+        src="/image/frame/image30.png"
         width={177}
         height={117}
         alt="image"
-        className="absolute top-[270px] left-[186px] object-cover"
+        className="absolute top-[270px] left-[146px] object-cover"
       />
       <Image
-        src={"/image/frame/image26.png"}
+        src="/image/frame/image26.png"
         width={177}
         height={146}
         alt="image"
-        className="absolute top-[270px] left-[374px] object-cover"
+        className="absolute top-[270px] left-[304px] object-cover"
       />
       <Image
-        src={"/image/frame/image27.png"}
+        src="/image/frame/image27.png"
         width={698}
         height={403}
         alt="image"
-        className="absolute top-[270px] left-[560px] object-cover"
+        className="absolute top-[270px] left-[490px] object-cover"
       />
       <Image
-        src={"/image/frame/image13.png"}
+        src="/image/frame/image13.png"
         width={225}
         height={300}
         alt="image"
-        className="absolute top-[270px] left-[1266px] object-cover"
+        className="absolute top-[270px] left-[1196px] object-cover"
       />
       <Image
-        src={"/image/frame/image18.png"}
+        src="/image/frame/image18.png"
         width={177}
         height={177}
         alt="image"
-        className="absolute top-[404px] left-[20px] object-cover"
+        className="absolute top-[404px] left-[-40px] object-cover"
       />
       <Image
-        src={"/image/frame/image25.png"}
+        src="/image/frame/image25.png"
         width={147}
         height={142}
         alt="image"
-        className="absolute top-[404px] left-[206px] object-cover"
+        className="absolute top-[404px] left-[146px] object-cover"
       />
       <Image
-        src={"/image/frame/image12.png"}
+        src="/image/frame/image12.png"
         width={188}
         height={230}
         alt="image"
-        className="absolute top-[430px] left-[364px] object-cover"
+        className="absolute top-[430px] left-[294px] object-cover"
       />
       <Image
-        src={"/image/frame/image7.png"}
+        src="/image/frame/image7.png"
         width={148}
         height={230}
         alt="image"
-        className="absolute top-[594px] left-[50px] object-cover"
+        className="absolute top-[594px] left-[-20px] object-cover"
       />
       <Image
-        src={"/image/frame/image9.png"}
+        src="/image/frame/image9.png"
         width={148}
         height={230}
         alt="image"
-        className="absolute top-[554px] left-[208px] object-cover"
+        className="absolute top-[554px] left-[138px] object-cover"
       />
       <Image
-        src={"/image/frame/image11.png"}
+        src="/image/frame/image11.png"
         width={272}
         height={193}
         alt="image"
-        className="absolute top-[744px] left-[208px] object-cover"
+        className="absolute top-[744px] left-[138px] object-cover"
       />
       <Image
-        src={"/image/frame/image8.png"}
+        src="/image/frame/image8.png"
         width={123}
         height={193}
         alt="image"
-        className="absolute top-[734px] left-[488px] object-cover"
+        className="absolute top-[734px] left-[418px] object-cover"
       />
       <Image
-        src={"/image/frame/image28.png"}
+        src="/image/frame/image28.png"
         width={480}
         height={165}
         alt="image"
-        className="absolute top-[684px] left-[620px] object-cover"
+        className="absolute top-[684px] left-[550px] object-cover"
       />
       <Image
-        src={"/image/frame/image22.png"}
+        src="/image/frame/image22.png"
         width={240}
         height={165}
         alt="image"
-        className="absolute top-[574px] left-[1266px] object-cover"
+        className="absolute top-[574px] left-[1196px] object-cover"
       />
       <Logo
-        className="absolute top-[206px] left-[568px]"
+        className="absolute top-[206px] left-[498px]"
         fill="#B096F5"
         width="40px"
       />

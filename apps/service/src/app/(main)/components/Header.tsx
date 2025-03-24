@@ -3,9 +3,7 @@ import Logo from "@/public/image/LogoWithName.svg";
 import Navigation from "./Navigation";
 import Link from "next/link";
 import Tendinous from "./Tendinous";
-
 import { SidebarWrapper } from "./Siderbar/SiderbarWrapper";
-
 import HeaderLogin from "./HeaderLogin";
 
 export default function Header() {

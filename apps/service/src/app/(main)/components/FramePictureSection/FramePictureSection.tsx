@@ -17,7 +17,7 @@ export default function FramePictureSection({
       </div>
       <div className="relative w-screen flex justify-center">
         <DotGrid />
-        <Frame className="relative w-[1400px] h-screen" />
+        <Frame className="relative w-[1400px] h-[1100px]" />
       </div>
     </div>
   );
