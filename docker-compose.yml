@@ -27,4 +27,5 @@ services:
 
 networks:
   backend_network:
-    driver: bridge # 기본 브리지 네트워크 사용
+    external: true
+    name: backend_backend_network
