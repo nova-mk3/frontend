@@ -47,7 +47,7 @@ export default function PictureListItem({
         <div className="relative w-full ">
           {/* TODO: size 크기를 통해 이미지 초기 로딩 속도를 개선할 수 있다!*/}
           <Image
-            src={thumbnailUrl.replace("/file", "")}
+            src={thumbnailUrl}
             alt={thumbnailOriginalFileName}
             width={thumbnailWidth}
             height={thumbnailHeight}

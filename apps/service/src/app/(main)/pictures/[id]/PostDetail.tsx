@@ -86,15 +86,15 @@ export default function PostDetail({ postId }: PostDetailProps) {
       <div className="flex flex-col gap-10 w-[80%] mx-auto">
         <div className="flex flex-row gap-10 mt-5 pb-10 border-line01 border-b-[1px] mobile:flex-col">
           <div className="mb-auto w-[50%] aspect-square mobile:w-full">
-            <ImageSlider images={data.images} />
+            <ImageSlider images={data!.images} />
           </div>
 
           <div className="flex flex-col flex-1 gap-3">
-            <p className="text-3xl font-bold">{data.title}</p>
+            <p className="text-3xl font-bold">{data!.title}</p>
 
             <div className="flex flex-row items-center  gap-2 text-sm text-gray-500">
-              <p className="text-gray-700">{data.authorName}</p>
-              <p className="">{formatDate(data.createdTime)}</p>
+              <p className="text-gray-700">{data!.authorName}</p>
+              <p className="">{formatDate(data!.createdTime)}</p>
               {/* <Like className='ml-auto mr-2' count={5}/> */}
               <div className="ml-auto flex flex-row gap-2 items-center cursor-pointer">
                 <p className="" onClick={handleModify}>
@@ -109,16 +109,16 @@ export default function PostDetail({ postId }: PostDetailProps) {
                 />
               </div>
             </div>
-            <div className="mt-5 flex-1">{data.content}</div>
+            <div className="mt-5 flex-1">{data!.content}</div>
 
             <div className="flex flex-row  gap-2 t-m text-text03 items-center">
-              <p>좋아요 {data.likeCount}</p>
-              <p>댓글 {data.commentCount}</p>
-              <ViewCount viewCount={data.viewCount} />
+              <p>좋아요 {data!.likeCount}</p>
+              <p>댓글 {data!.commentCount}</p>
+              <ViewCount viewCount={data!.viewCount} />
             </div>
           </div>
         </div>
-        <CommentSection postId={data.id} />
+        <CommentSection postId={data!.id} />
       </div>
     </div>
   );

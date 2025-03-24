@@ -106,6 +106,7 @@ export async function BoardAllList({
   sortBy,
   sortDirection,
 }: BoardAllListParamType) {
+  console.log("하이");
   try {
     const response = await Authapi.get(
       `/boards/${boardId}/posts/all/search?page=${page}&size=${size}&searchType=${searchType}&keyword=${keyword}&sortBy=${sortBy}&sortDirection=${sortDirection}`

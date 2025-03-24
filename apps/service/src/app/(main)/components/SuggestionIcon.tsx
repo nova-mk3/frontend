@@ -11,7 +11,10 @@ interface TendinousProps {
   className?: string;
   href?: string;
 }
-export default function Tendinous({ className, href = "" }: TendinousProps) {
+export default function SuggestionIcon({
+  className,
+  href = "",
+}: TendinousProps) {
   return (
     <TooltipProvider delayDuration={0}>
       <Tooltip>

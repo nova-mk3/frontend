@@ -1,11 +1,11 @@
 import React from "react";
 import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
-import PostDetail from "./PostDetail";
-import { IntegratedBoardGetDetail } from "@/src/api/board/integrated";
 import { Metadata } from "next";
 import { INTEGRATED } from "@/src/constant/board";
+import Hydration from "./Hydration";
+import { IntegratedBoardGetDetail } from "@/src/api/board/server";
 
-// TODO: 메타데이터 확인
+// TODO: 메타데이터 확인 -> html을 생성할때만 호출됨!
 type Props = {
   params: Promise<{ id: string }>;
 };
@@ -32,7 +32,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <ErrorBoundaryWrapper>
-      <PostDetail postId={id} />
+      <Hydration postId={id} />
     </ErrorBoundaryWrapper>
   );
 }

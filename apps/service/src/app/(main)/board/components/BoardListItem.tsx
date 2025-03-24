@@ -47,8 +47,13 @@ export default function BoardListItem({
           <span className="text-gray-700">{authorName}</span>
           <span className="text-gray-400">·</span>
           <span className="text-gray-500">{formatDate(createdTime)}</span>
-          <span className="text-gray-400">·</span>
-          <span className="text-gray-500">{type}</span>
+
+          {type && (
+            <>
+              <span className="text-gray-400">·</span>
+              <span className="text-gray-500">{type}</span>
+            </>
+          )}
         </div>
 
         <div className="flex items-center gap-3 text-gray-500 ml-auto">

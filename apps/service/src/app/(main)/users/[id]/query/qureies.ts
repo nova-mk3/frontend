@@ -1,5 +1,5 @@
 import { getMember } from "@/src/api/user/client";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { UserProfile } from "../(set)/edit/EditForm";
 
 export const userKeys = {
@@ -8,7 +8,7 @@ export const userKeys = {
 };
 
 export const useGetUserData = ({ memberId }: { memberId: string }) => {
-  return useSuspenseQuery<UserProfile>({
+  return useQuery<UserProfile>({
     queryKey: userKeys.user(memberId),
     queryFn: () => getMember({ memberId }), // ✅ 데이터 타입이 UserProfile로 확정됨
   });

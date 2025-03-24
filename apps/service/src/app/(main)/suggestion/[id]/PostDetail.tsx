@@ -2,7 +2,7 @@
 import { Button } from "@nova/ui/components/ui/button";
 import React from "react";
 import DetailPageContent from "../../board/components/DetailPageContent";
-import { useSuggestionDetailQuery } from "../query/queries";
+import { suggestionKeys, useSuggestionDetailQuery } from "../query/queries";
 import { Unlock, Lock, ChevronLeft, MessageSquare } from "lucide-react";
 import Link from "next/link";
 import AdminMessage from "../components/AdminMessage";
@@ -11,6 +11,9 @@ import { FileListLayout, FileList } from "../components/ViewFileLayout";
 import { toFormattedDate } from "@/src/libs/utils/dateParsing";
 import AdminForm from "../components/AdminForm";
 import { FileItemProps } from "../components/ViewFileItem";
+import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
+import DeferredComponent from "../../components/DeferredComponent";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface PostDetailProps {
   postId: string;
@@ -29,7 +32,15 @@ export interface SuggestionDetail {
 }
 export default function PostDetail({ postId }: PostDetailProps) {
   const isAdmin = "true";
-  const { data } = useSuggestionDetailQuery(postId);
+  const { data, isLoading } = useSuggestionDetailQuery(postId);
+  const queryClient = useQueryClient();
+  if (isLoading) {
+    return (
+      <DeferredComponent>
+        <PendingFallbackUI />
+      </DeferredComponent>
+    );
+  }
 
   return (
     <div className="flex flex-col t-m mx-auto gap-6">
@@ -40,6 +51,12 @@ export default function PostDetail({ postId }: PostDetailProps) {
               <Link
                 href="/suggestion"
                 className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+                onClick={() => {
+                  queryClient.invalidateQueries({
+                    queryKey: suggestionKeys.lists(),
+                    refetchType: "inactive",
+                  });
+                }}
               >
                 <ChevronLeft className="w-4 h-4" />
                 <span className="font-medium">건의함</span>
@@ -48,7 +65,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
               <div className="flex items-center gap-2">
                 <MessageSquare className="w-4 h-4" />
                 <span className="text-sm text-muted-foreground">
-                  건의사항 #{data.id}
+                  건의사항 #{data!.id}
                 </span>
               </div>
             </div>
@@ -61,41 +78,41 @@ export default function PostDetail({ postId }: PostDetailProps) {
 
       <div className="flex flex-col w-[80%] mx-auto gap-6">
         <div className="mb-8 mt-8">
-          <h1 className="text-3xl font-bold mb-4">{data.title}</h1>
+          <h1 className="text-3xl font-bold mb-4">{data!.title}</h1>
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <span>{toFormattedDate(data.createdTime)}</span>
-            <span>{data.authorName}</span>
+            <span>{toFormattedDate(data!.createdTime)}</span>
+            <span>{data!.authorName}</span>
             <div className="flex items-center gap-1">
-              {data.private.toString() === "true" ? (
+              {data!.private.toString() === "true" ? (
                 <Unlock className="w-4 h-4" />
               ) : (
                 <Lock className="w-4 h-4" />
               )}
               <span className="text-sm">
-                {data.private.toString() === "true" ? "비공개" : "공개"}
+                {data!.private.toString() === "true" ? "비공개" : "공개"}
               </span>
             </div>
           </div>
         </div>
 
-        <DetailPageContent content={data.content} />
+        <DetailPageContent content={data!.content} />
         <Separator />
         <span className="text-xl font-semibold">첨부파일</span>
         <FileListLayout>
-          <FileList files={data.files} />
+          <FileList files={data!.files} />
         </FileListLayout>
         {/* 관리자 답변 영역 */}
         <div className="mb-12">
           <h2 className="text-xl font-semibold mb-4 mt-8">관리자 답변</h2>
           <AdminMessage
-            adminReply={data.adminReply}
-            time={toFormattedDate(data.adminReplyTime!)}
+            adminReply={data!.adminReply}
+            time={toFormattedDate(data!.adminReplyTime!)}
           />
         </div>
 
         {/* 관리자 댓글 입력 영역 */}
         {isAdmin.toString() === "true" && (
-          <AdminForm postId={postId} adminReply={data.adminReply} />
+          <AdminForm postId={postId} adminReply={data!.adminReply} />
         )}
       </div>
     </div>

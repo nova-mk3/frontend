@@ -164,7 +164,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, total, images }) => {
               className="min-w-full relative z-20 flex justify-center p-[10%]"
             >
               <Image
-                src={image.imageUrl.replace("/file", "")}
+                src={image.imageUrl}
                 alt={image.originalFileName}
                 width={image.width}
                 height={image.height}

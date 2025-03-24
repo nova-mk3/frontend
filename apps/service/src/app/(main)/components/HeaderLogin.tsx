@@ -16,9 +16,9 @@ export default function HeaderLogin() {
   if (isLoading) {
     return (
       <div className="flex flex-row justify-center items-center gap-4 mobile:hidden">
-        <div className="w-6 h-6 rounded-full bg-background02 animate-pulse"></div>
-        <div className="w-6 h-6 rounded-full bg-background02 animate-pulse"></div>
-        <div className="w-6 h-6 rounded-full bg-background02 animate-pulse"></div>
+        <div className="w-9 h-9 rounded-full bg-background02 animate-pulse"></div>
+        <div className="w-9 h-9 rounded-full bg-background02 animate-pulse"></div>
+        <div className="w-9 h-9 rounded-full bg-background02 animate-pulse"></div>
       </div>
     );
   }

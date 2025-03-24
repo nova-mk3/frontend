@@ -1,8 +1,5 @@
 import { SuggestionGet, SuggestionGetDetail } from "@/src/api/board/suggestion";
-import {
-  useSuspenseQuery,
-  UseSuspenseQueryResult,
-} from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { SuggestionDetail } from "../[id]/PostDetail";
 import { SearchFiilterParamType } from "@/src/api/board/integrated";
 
@@ -26,7 +23,7 @@ export const useSuggestionListQuery = ({
   sortDirection,
   keyword,
 }: SearchFiilterParamType) => {
-  return useSuspenseQuery({
+  return useQuery({
     queryKey: suggestionKeys.list({
       page,
       size,
@@ -40,10 +37,8 @@ export const useSuggestionListQuery = ({
   });
 };
 
-export const useSuggestionDetailQuery = (
-  postId: string
-): UseSuspenseQueryResult<SuggestionDetail> => {
-  return useSuspenseQuery<SuggestionDetail>({
+export const useSuggestionDetailQuery = (postId: string) => {
+  return useQuery<SuggestionDetail>({
     queryKey: suggestionKeys.detail(postId),
     queryFn: () => SuggestionGetDetail(postId),
   });

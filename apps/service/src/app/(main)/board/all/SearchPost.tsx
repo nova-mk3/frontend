@@ -1,6 +1,6 @@
 import React from "react";
-import Post from "./Post";
 import ErrorBoundaryWrapper from "../../components/ErrorBoundaryWrapper";
+import Post from "./Post";
 
 export default function SearchPost() {
   return (

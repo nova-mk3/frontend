@@ -5,7 +5,6 @@ import { INTEGRATED, POST_TYPE, POST_TYPE_LABEL } from "@/src/constant/board";
 import { usePostLatestListQuery } from "../../query/postqueries";
 
 export default function Post() {
-  //  const seartch = useSearchParams(); // 이자식 차이였어...
   const { data } = usePostLatestListQuery({ boardId: INTEGRATED });
 
   return (

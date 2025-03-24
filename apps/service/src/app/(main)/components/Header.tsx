@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "@/public/image/LogoWithName.svg";
 import Navigation from "./Navigation";
 import Link from "next/link";
-import Tendinous from "./Tendinous";
+import SuggestionIcon from "./SuggestionIcon";
 import { SidebarWrapper } from "./Siderbar/SiderbarWrapper";
 import HeaderLogin from "./HeaderLogin";
 
@@ -18,7 +18,7 @@ export default function Header() {
         </div>
 
         <div className="flex flex-row items-center ml-auto gap-4">
-          <Tendinous className="mobile:hidden" href="/suggestion" />
+          <SuggestionIcon className="mobile:hidden" href="/suggestion" />
           <HeaderLogin />
         </div>
         <SidebarWrapper />

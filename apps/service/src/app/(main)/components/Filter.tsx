@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 
 import {
   DropdownMenu,
@@ -10,10 +10,8 @@ import {
   DropdownMenuTrigger,
 } from "@nova/ui/components/ui/dropdown-menu";
 import { Button } from "@nova/ui/components/ui/button";
-import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import { useQueryParams } from "./useQueryParams";
-type Checked = DropdownMenuCheckboxItemProps["checked"];
 export function Filter() {
   const { sortBy, sortDirection, setSortBy, setSortDirection } =
     useQueryParams();

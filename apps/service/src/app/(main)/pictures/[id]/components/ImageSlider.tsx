@@ -37,7 +37,7 @@ const ImageSlider = ({
         {images.map((image) => (
           <div key={image.id} className="min-w-full relative border">
             <Image
-              src={image.imageUrl.replace("/file", "")}
+              src={image.imageUrl}
               alt={image.originalFileName}
               width={image.width}
               height={image.height}
