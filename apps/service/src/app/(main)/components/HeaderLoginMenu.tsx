@@ -10,6 +10,7 @@ import {
 import { Separator } from "@nova/ui/components/ui/separator";
 import { Bell, Search } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface Props {
@@ -17,9 +18,10 @@ interface Props {
   memberId: string;
 }
 export default function HeaderLoginMenu({ trigger, memberId }: Props) {
+  const router = useRouter();
   const handleLogout = async () => {
     await logout();
-    window.location.href = "/";
+    router.push("/");
   };
   return (
     <div className="flex flex-row justify-center items-center gap-4 mobile:hidden">

@@ -1,6 +1,7 @@
 import React from "react";
 
 import FramePictureSection from "./components/FramePictureSection/FramePictureSection";
+import FramePostSection from "./components/FramePictureSection/FramePostSection";
 
 export default function Home() {
   return (
@@ -9,8 +10,8 @@ export default function Home() {
       <div className="flex justify-center">
         <FramePictureSection className="relative w-screen" />
       </div>
-      <div className="snap-start h-screen flex items-center justify-center">
-        제작중
+      <div className="snap-start  flex items-center justify-center">
+        <FramePostSection className="relative w-screen" />
       </div>
       <div className="snap-start h-screen flex items-center justify-center">
         제작중

@@ -11,6 +11,7 @@ export async function getMember({ memberId }: { memberId: string }) {
 }
 
 export async function getMemberId() {
+  console.log("뭔가 이상한데");
   try {
     // ✅ `fetch` 요청 시 `Cookie` 포함
     const res = await Authapi.get(`/members`);
