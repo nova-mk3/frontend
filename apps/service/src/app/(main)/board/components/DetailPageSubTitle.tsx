@@ -6,8 +6,8 @@ import { PostType } from "@/src/constant/board";
 import { IntegratedBoardDelete } from "@/src/api/board/integrated";
 import AlertDialog from "../../components/AlertDialog";
 import dynamic from "next/dynamic";
+import ViewCount from "./ViewCount";
 const MobileLike = dynamic(() => import("./MobileLike"), { ssr: false });
-const ViewCount = dynamic(() => import("./ViewCount"), { ssr: false });
 interface SubTitle {
   title: string;
   writer: string;

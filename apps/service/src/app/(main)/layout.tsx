@@ -2,6 +2,7 @@ import "@nova/tailwind-config/globalcss";
 import type { Metadata } from "next";
 import React, { Suspense } from "react";
 import { pretendard } from "../../theme/font";
+import LayoutClient from "./components/Layout";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Providers from "../../query/providers";
@@ -18,13 +19,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${pretendard.variable} font-pretendard`}>
+      {/* <LayoutClient>{children}</LayoutClient> */}
       <body>
-        {/* 추후 수정 예정 @kwonja */}
-        <div id="root" className="max-w-screen-xl mx-auto">
-          <Header />
-          <Providers>{children}</Providers>
-          <Footer />
-        </div>
+        <Providers>
+          {/* 추후 수정 예정 @kwonja */}
+          <div id="root" className="max-w-screen-xl mx-auto">
+            <Header />
+            {children}
+            <Footer />
+          </div>
+        </Providers>
       </body>
     </html>
   );

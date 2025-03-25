@@ -22,7 +22,7 @@ export default function ModifyFileItem({
     <div className={` w-[100px] h-[100px] relative rounded-md border-[1px]`}>
       {children}
       <Image
-        src={imageurl.replace("/file", "")}
+        src={imageurl}
         alt={originalFileName}
         fill={true}
         className="rounded-md object-cover z-10"

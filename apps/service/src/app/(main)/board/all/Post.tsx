@@ -11,7 +11,6 @@ import { Layers } from "lucide-react";
 import BoardList from "../components/BoardList";
 
 export default function Post() {
-
   const { currentPage, keyword, searchType, sortBy, sortDirection } =
     useQueryParams();
 

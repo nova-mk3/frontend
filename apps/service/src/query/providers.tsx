@@ -15,13 +15,15 @@ function makeQueryClient() {
         // With SSR, we usually want to set some default staleTime
         // above 0 to avoid refetching immediately on the client
         staleTime: 60 * 1000,
+        retry: 0,
+        throwOnError: true,
       },
-      // dehydrate: {
-      //   // include pending queries in dehydration //이걸 사용하면 await 과정이 빠지게된다.
-      //   shouldDehydrateQuery: (query) =>
-      //     defaultShouldDehydrateQuery(query) ||
-      //     query.state.status === 'pending',
-      // },
+      dehydrate: {
+        // include pending queries in dehydration //이걸 사용하면 await 과정이 빠지게된다.
+        shouldDehydrateQuery: (query) =>
+          defaultShouldDehydrateQuery(query) ||
+          query.state.status === "pending",
+      },
     },
   });
 }

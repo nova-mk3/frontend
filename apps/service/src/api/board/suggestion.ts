@@ -44,12 +44,6 @@ export const SuggestionFileUploadAPI = async (formdata: FormData) => {
   }
 };
 
-interface Params {
-  page: number;
-  size: number;
-  sort: string;
-  postid?: string;
-}
 /*
  * 건의 게시판 목록 조회
  */

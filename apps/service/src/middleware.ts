@@ -3,6 +3,7 @@ import type { NextRequest } from "next/server";
 import { verifyAccessToken } from "./api/auth";
 
 export async function middleware(request: NextRequest) {
+  console.log("middleware 실행됨:", request.nextUrl.pathname);
   const { pathname, search } = request.nextUrl;
 
   const AuthToken = request.cookies.get("AUTH_TOKEN")?.value;
@@ -39,7 +40,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|signup|api).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|signup|api|image).*)"],
 };
 
 // function applySetCookie(req: NextRequest, res: NextResponse): void {

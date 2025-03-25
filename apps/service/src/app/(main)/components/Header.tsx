@@ -2,22 +2,11 @@ import React from "react";
 import Logo from "@/public/image/LogoWithName.svg";
 import Navigation from "./Navigation";
 import Link from "next/link";
-import Tendinous from "./Tendinous";
-import HeaderLoginMenu from "./HeaderLoginMenu";
-import { cookies } from "next/headers";
-import { getMemberId } from "@/src/api/user/server";
+import SuggestionIcon from "./SuggestionIcon";
 import { SidebarWrapper } from "./Siderbar/SiderbarWrapper";
-import { Menu } from "lucide-react";
+import HeaderLogin from "./HeaderLogin";
 
-export default async function Header() {
-  const cookieStore = await cookies();
-  const authToken = cookieStore.get("AUTH_TOKEN")?.value;
-  let memberId = "";
-  if (authToken) {
-    memberId = await getMemberId();
-  } else {
-    memberId = "";
-  }
+export default function Header() {
   return (
     <>
       <div className="flex flex-row  border-b  px-4 py-3 relative">
@@ -29,30 +18,8 @@ export default async function Header() {
         </div>
 
         <div className="flex flex-row items-center ml-auto gap-4">
-          <Tendinous className="mobile:hidden" href="/suggestion" />
-          {memberId === "" ? (
-            <div className="flex flex-row justify-center items-center gap-4 mobile:hidden">
-              <Link href="/signin">
-                <p className="w-[60px] h-[24px] flex content-center justify-center cursor-pointer">
-                  로그인
-                </p>
-              </Link>
-              <Link href="/signup">
-                <p className="w-[60px] h-[24px] flex content-center justify-center cursor-pointer ">
-                  회원가입
-                </p>
-              </Link>
-            </div>
-          ) : (
-            <HeaderLoginMenu
-              trigger={
-                <div className="border-black border-[1px] p-2 rounded-full cursor-pointer">
-                  <Menu size={20} />
-                </div>
-              }
-              memberId={memberId}
-            />
-          )}
+          <SuggestionIcon className="mobile:hidden" href="/suggestion" />
+          <HeaderLogin />
         </div>
         <SidebarWrapper />
       </div>

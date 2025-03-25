@@ -1,5 +1,5 @@
-import { CommentsGetList } from "@/src/api/board/comments";
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { CommentsListQueryOptions } from "./options";
 
 export const commentsKeys = {
   all: ["comments"] as const,
@@ -7,8 +7,5 @@ export const commentsKeys = {
 };
 
 export const useCommentsListQuery = (postId: string) => {
-  return useSuspenseQuery({
-    queryKey: commentsKeys.list(postId),
-    queryFn: () => CommentsGetList({ postId }),
-  });
+  return useSuspenseQuery(CommentsListQueryOptions(postId));
 };

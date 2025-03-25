@@ -31,7 +31,7 @@ export default function ModifyPage() {
   const [originFiles, setOriginFiles] = useState<FileItemProps[]>([]);
   const [willDeleteFiles, setwillDeleteFiles] = useState<string[]>([]);
   const queryClient = useQueryClient();
-  const { data } = usePostDetailQuery(postId, INTEGRATED);
+  const { data, isLoading } = usePostDetailQuery(postId, INTEGRATED);
 
   const form = useForm<IntegratedInput>({
     resolver: zodResolver(IntegratedSchema),

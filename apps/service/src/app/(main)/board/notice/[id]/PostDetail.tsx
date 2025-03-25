@@ -25,6 +25,7 @@ interface PostDetailProps {
 
 export default function PostDetail({ postId }: PostDetailProps) {
   const { data } = usePostDetailQuery(postId, INTEGRATED);
+  console.log(data);
 
   return (
     <div className="flex flex-col t-m w-full mx-auto">

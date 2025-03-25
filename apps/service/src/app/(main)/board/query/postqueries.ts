@@ -9,11 +9,11 @@ import {
   BoardIdParams,
   BoardLatestList,
   IntegratedBoardGet,
-  IntegratedBoardGetDetail,
   Params,
 } from "@/src/api/board/integrated";
 import { PostType } from "@/src/constant/board";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { postDetailQueryOptions, postLatestQueryOptions } from "./options";
 
 interface SearchFilter {
   page: number;
@@ -44,10 +44,7 @@ export const postKeys = {
 };
 
 export const usePostDetailQuery = (postId: string, boardId: string) => {
-  return useSuspenseQuery({
-    queryKey: postKeys.detail(postId),
-    queryFn: () => IntegratedBoardGetDetail({ boardId, postId }),
-  });
+  return useSuspenseQuery(postDetailQueryOptions(postId, boardId));
 };
 
 export const usePostListQuery = ({
@@ -111,17 +108,14 @@ export const usePostAllListQuery = ({
 };
 
 export const usePostLatestListQuery = ({ boardId }: BoardIdParams) => {
-  return useSuspenseQuery({
-    queryKey: [...postKeys.latest(boardId)],
-    queryFn: () => BoardLatestList({ boardId }),
-  });
+  return useSuspenseQuery(postLatestQueryOptions(boardId));
 };
 
 export const useArchiveDetailQuery = ({
   postId,
   boardId,
 }: BoardGetParamType) => {
-  return useSuspenseQuery({
+  return useQuery({
     queryKey: postKeys.detail(postId),
     queryFn: () => ArchiveGetDetail({ boardId, postId }),
   });
