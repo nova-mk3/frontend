@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { postKeys } from "../../board/query/postqueries";
 import { PictureGetDetail } from "@/src/api/board/picture";
 import { PictureDetail } from "../[id]/PostDetail";
@@ -10,7 +10,7 @@ export const usePictureDetailQuery = ({
   postId: string;
   boardId: string;
 }) => {
-  return useSuspenseQuery<PictureDetail>({
+  return useQuery<PictureDetail>({
     queryKey: postKeys.detail(postId),
     queryFn: () => PictureGetDetail({ boardId, postId }),
   });

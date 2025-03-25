@@ -52,9 +52,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
   console.log(data);
 
   const handleModify = () => {
-    router.push(
-      `/${POST_TYPE.PICTURES.toLocaleLowerCase()}/modify?id=${postId}&type=${POST_TYPE.PICTURES}`
-    );
+    router.push(`/${POST_TYPE.PICTURES.toLocaleLowerCase()}/${postId}/modify`);
   };
 
   const handleDelete = async () => {

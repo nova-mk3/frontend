@@ -12,13 +12,21 @@ import CommentList from "../../board/components/comments/CommentList";
 import DetailPageContent from "../../board/components/DetailPageContent";
 import DetailPageTitle from "../../board/components/DetailPageTitle";
 import { Separator } from "@nova/ui/components/ui/separator";
+import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
 
 interface PostDetailProps {
   postId: string;
 }
 
 export default function PostDetail({ postId }: PostDetailProps) {
-  const { data } = useArchiveDetailQuery({ postId, boardId: CLUB_ARCHIVE });
+  const { data, isLoading } = useArchiveDetailQuery({
+    postId,
+    boardId: CLUB_ARCHIVE,
+  });
+
+  if (isLoading) {
+    return <PendingFallbackUI />;
+  }
 
   return (
     <div className="flex flex-col t-m w-full mx-auto">

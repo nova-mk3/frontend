@@ -12,7 +12,9 @@ export default function HeaderLogin() {
   const { data: memberId, isLoading } = useQuery({
     queryKey: ["memberId"],
     queryFn: getMemberId,
+    staleTime: 0,
   });
+
   if (isLoading) {
     return (
       <div className="flex flex-row justify-center items-center gap-4 mobile:hidden">

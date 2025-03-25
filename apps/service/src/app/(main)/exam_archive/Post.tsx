@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useState } from "react";
+import React, { Suspense } from "react";
 
 import { BOARD_SIZE, CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
 
@@ -10,12 +10,13 @@ import { usePostListQuery } from "../board/query/postqueries";
 import ArchiveListTitle from "./components/ArchiveListTitle";
 import ArchiveList from "./components/ArchiveList";
 import { PageNation } from "../components/PageNation";
+import PendingFallbackUI from "../components/Skeleton/PendingFallbackUI";
 
 export default function Post() {
   const { currentPage, keyword, searchType, sortBy, sortDirection } =
     useQueryParams();
 
-  const { data } = usePostListQuery({
+  const { data, isLoading } = usePostListQuery({
     postType: POST_TYPE.EXAM_ARCHIVE,
     page: currentPage - 1,
     size: BOARD_SIZE,
@@ -25,6 +26,10 @@ export default function Post() {
     sortDirection: sortDirection,
     boardId: CLUB_ARCHIVE,
   });
+
+  if (isLoading) {
+    return <PendingFallbackUI />;
+  }
 
   return (
     <>

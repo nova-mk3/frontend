@@ -57,7 +57,7 @@ export const usePostListQuery = ({
   sortDirection,
   keyword,
 }: Omit<Params, "postId">) => {
-  return useSuspenseQuery({
+  return useQuery({
     queryKey: postKeys.typelist(
       { page, size, searchType, sortBy, sortDirection, keyword },
       postType

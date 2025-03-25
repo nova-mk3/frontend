@@ -25,13 +25,13 @@ import { useQueryParams } from "../../components/useQueryParams";
 import NewPostTitle from "../../components/NewPostTitle";
 
 export default function ModifyPage() {
+  const queryClient = useQueryClient();
   const { postId, postType } = useQueryParams();
+  const { data, isLoading } = usePostDetailQuery(postId, INTEGRATED);
   const router = useRouter();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [originFiles, setOriginFiles] = useState<FileItemProps[]>([]);
   const [willDeleteFiles, setwillDeleteFiles] = useState<string[]>([]);
-  const queryClient = useQueryClient();
-  const { data, isLoading } = usePostDetailQuery(postId, INTEGRATED);
 
   const form = useForm<IntegratedInput>({
     resolver: zodResolver(IntegratedSchema),
@@ -125,6 +125,10 @@ export default function ModifyPage() {
       });
     }
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Form {...form}>
