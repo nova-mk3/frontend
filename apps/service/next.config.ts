@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
     });
     return config;
   },
+  images: {
+    domains: ["localhost", "jinybook.site"],
+  },
 };
 
 export default nextConfig;

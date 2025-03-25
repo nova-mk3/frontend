@@ -9,14 +9,14 @@ export default function Home() {
       <div className="flex justify-center">
         <FramePictureSection className="relative w-screen" />
       </div>
-      <div className="snap-start h-screen flex items-center justify-center bg-gray-700">
-        하이?
+      <div className="snap-start h-screen flex items-center justify-center">
+        제작중
       </div>
       <div className="snap-start h-screen flex items-center justify-center">
-        하이?
+        제작중
       </div>
       <div className="snap-start h-screen flex items-center justify-center">
-        section4
+        제작중
       </div>
     </>
   );
