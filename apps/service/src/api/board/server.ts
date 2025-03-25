@@ -38,14 +38,11 @@ export async function ArchiveGetDetail({
   const cookieStore = await cookies();
   const authToken = cookieStore.get("AUTH_TOKEN")?.value;
   try {
-    const response = await Authapi.get(
-      `/boards/${boardId}/exam-posts/${postId}`,
-      {
-        headers: {
-          Cookie: `AUTH_TOKEN=${authToken}`, // ✅ `AUTH_TOKEN`을 `Cookie` 헤더에 추가
-        },
-      }
-    );
+    const response = await api.get(`/boards/${boardId}/exam-posts/${postId}`, {
+      headers: {
+        Cookie: `AUTH_TOKEN=${authToken}`, // ✅ `AUTH_TOKEN`을 `Cookie` 헤더에 추가
+      },
+    });
     return response.data.data;
   } catch (error) {
     throwErrorMessage(error);

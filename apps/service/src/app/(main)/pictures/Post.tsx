@@ -9,12 +9,13 @@ import { BOARD_SIZE, CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
 import BoardListTitle from "../board/components/BoardListTitle";
 import PictureList from "./components/PictureList";
 import { PageNation } from "../components/PageNation";
+import PendingFallbackUI from "../components/Skeleton/PendingFallbackUI";
 
 export default function Post() {
   const { currentPage, keyword, searchType, sortBy, sortDirection } =
     useQueryParams();
 
-  const { data } = usePostListQuery({
+  const { data, isLoading } = usePostListQuery({
     postType: POST_TYPE.PICTURES,
     page: currentPage - 1,
     size: BOARD_SIZE,
@@ -25,6 +26,9 @@ export default function Post() {
     boardId: CLUB_ARCHIVE,
   });
 
+  if (isLoading) {
+    return <PendingFallbackUI />;
+  }
   return (
     <>
       <BoardListTitle

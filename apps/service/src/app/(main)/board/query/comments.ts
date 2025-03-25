@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { CommentsListQueryOptions } from "./options";
 
 export const commentsKeys = {
@@ -7,5 +7,5 @@ export const commentsKeys = {
 };
 
 export const useCommentsListQuery = (postId: string) => {
-  return useSuspenseQuery(CommentsListQueryOptions(postId));
+  return useQuery(CommentsListQueryOptions(postId));
 };

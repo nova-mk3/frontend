@@ -4,22 +4,23 @@ import { useForm } from "react-hook-form";
 import TextareaFormContentField from "@/src/app/(auth)/signup/components/TextareaFormContentField";
 import TextareaFormField from "@/src/app/(auth)/signup/components/TextareaFormField";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryParams } from "../../components/useQueryParams";
-import NewPostTitle from "../../components/NewPostTitle";
-import { usePictureDetailQuery } from "../query/queries";
 import { PictureInput, PictureSchema } from "@/src/schema/picture.schema";
-import { ImageProps } from "../[id]/PostDetail";
+import { Form } from "@nova/ui/components/ui/form";
+import { CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
+import ModifyFileUploader from "../../components/ModifyFileUploader";
+import { ImageFile } from "../../components/PostFileUploader";
 import {
   useFileUploadMutation,
   usePicturePutMutation,
-} from "../query/mutation";
-import { ImageFile } from "../components/PostFileUploader";
-import { Form } from "@nova/ui/components/ui/form";
-import { CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
-import ModifyFileUploader from "../components/ModifyFileUploader";
+} from "../../query/mutation";
+import { usePictureDetailQuery } from "../../query/queries";
+import { ImageProps } from "../PostDetail";
+import NewPostTitle from "../../../components/NewPostTitle";
 
-export default function ModifyPage() {
-  const { postId } = useQueryParams();
+interface Props {
+  postId: string;
+}
+export default function ModifyPage({ postId }: Props) {
   const [selectedFiles, setSelectedFiles] = useState<ImageFile[]>([]);
   const [originFiles, setOriginFiles] = useState<ImageProps[]>([]);
   const [willDeleteFiles, setwillDeleteFiles] = useState<string[]>([]);
@@ -32,13 +33,13 @@ export default function ModifyPage() {
     resolver: zodResolver(PictureSchema),
     mode: "onChange",
     defaultValues: {
-      title: data.title,
-      content: data.content,
+      title: data?.title,
+      content: data?.content,
     },
   });
 
   useEffect(() => {
-    setOriginFiles([...data.images]);
+    setOriginFiles([...(data?.images || [])]);
   }, []);
 
   const onSubmit = async (data: PictureInput) => {

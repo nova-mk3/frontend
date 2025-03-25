@@ -9,12 +9,12 @@ import { getMemberId } from "@/src/api/user/client";
 // API 호출 함수 경로에 맞게 수정해주세요.
 
 export default function HeaderLogin() {
-  console.log("하잇");
   const { data: memberId, isLoading } = useQuery({
     queryKey: ["memberId"],
     queryFn: getMemberId,
     staleTime: 0,
   });
+
   if (isLoading) {
     return (
       <div className="flex flex-row justify-center items-center gap-4 mobile:hidden">

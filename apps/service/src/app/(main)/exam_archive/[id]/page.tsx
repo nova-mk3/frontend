@@ -1,9 +1,9 @@
 import React from "react";
 import { Metadata } from "next";
 import { INTEGRATED } from "@/src/constant/board";
-import Hydration from "./Hydration";
 import ErrorBoundaryWrapper from "../../components/ErrorBoundaryWrapper";
 import { ArchiveGetDetail } from "@/src/api/board/exam";
+import PostDetail from "./PostDetail";
 
 // TODO: 메타데이터 확인
 type Props = {
@@ -32,7 +32,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <ErrorBoundaryWrapper>
-      <Hydration postId={id} />
+      <PostDetail postId={id} />
     </ErrorBoundaryWrapper>
   );
 }
