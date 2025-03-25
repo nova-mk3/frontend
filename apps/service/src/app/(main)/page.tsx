@@ -2,6 +2,7 @@ import React from "react";
 
 import FramePictureSection from "./components/FramePictureSection/FramePictureSection";
 import FramePostSection from "./components/FramePictureSection/FramePostSection";
+import FrameAboutMeSection from "./components/FramePictureSection/FrameAboutMeSection";
 
 export default function Home() {
   return (
@@ -10,14 +11,14 @@ export default function Home() {
       <div className="flex justify-center">
         <FramePictureSection className="relative w-screen" />
       </div>
-      <div className="snap-start  flex items-center justify-center">
+      <div className="flex justify-center">
         <FramePostSection className="relative w-screen" />
       </div>
-      <div className="snap-start h-screen flex items-center justify-center">
-        제작중
+      <div className="flex justify-center mt-40">
+        <FrameAboutMeSection className="relative w-screen" />
       </div>
-      <div className="snap-start h-screen flex items-center justify-center">
-        제작중
+      <div className="flex  justify-center">
+        <div className="d-m !font-bold text-center my-10">JOIN NOVA!</div>
       </div>
     </>
   );
