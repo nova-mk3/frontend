@@ -38,7 +38,7 @@ export default function FrameAboutMeSection({
               alt=""
               width={300}
               height={500}
-              className="h-auto object-cover absolute top-[90px] left-[98px] z-10"
+              className="h-auto object-cover absolute top-[100px] left-[98px] z-10"
             />
             <Image
               src="/image/NovaPosterSub.png"
@@ -61,6 +61,9 @@ export default function FrameAboutMeSection({
             nova
           </p>
         </div>
+
+        <Separator />
+        <div className="d-m !font-bold text-center mt-10">JOIN NOVA!</div>
       </div>
     </div>
   );

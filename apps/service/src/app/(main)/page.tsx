@@ -3,6 +3,7 @@ import React from "react";
 import FramePictureSection from "./components/FramePictureSection/FramePictureSection";
 import FramePostSection from "./components/FramePictureSection/FramePostSection";
 import FrameAboutMeSection from "./components/FramePictureSection/FrameAboutMeSection";
+import { Separator } from "@nova/ui/components/ui/separator";
 
 export default function Home() {
   return (
@@ -16,9 +17,6 @@ export default function Home() {
       </div>
       <div className="flex justify-center mt-40">
         <FrameAboutMeSection className="relative w-screen" />
-      </div>
-      <div className="flex  justify-center">
-        <div className="d-m !font-bold text-center my-10">JOIN NOVA!</div>
       </div>
     </>
   );
