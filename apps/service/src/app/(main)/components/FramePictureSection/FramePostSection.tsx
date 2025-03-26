@@ -13,19 +13,19 @@ export default function FramePostSection({
   return (
     <div className={cn(className)} {...props}>
       <div className="w-screen">
-        <div className="absolute  w-screen h-[550px] bg-background02" />
+        <div className="absolute  w-screen h-[550px] bg-background02 mobile:h-[1100px]" />
       </div>
-      <div className="flex flex-row h-[550px] py-20 relative max-w-screen-xl mx-auto">
-        <div className="w-[600px] flex flex-col relative ml-[50px]">
+      <div className="flex flex-row min-h-[550px] py-20 relative max-w-screen-xl w-full mx-auto mobile:flex-col">
+        <div className="flex flex-col relative pl-[50px] mobile:w-full mobile:h-[550px] mobile:items-center">
           <div className="d-s text-primary !font-bold">NOVA</div>
           <div className="d-m !font-bold">NEWS</div>
           <Logo
-            className="absolute top-[50px] left-[60px] -rotate-12"
+            className="-rotate-12 absolute top-[-30px]"
             // fill="#B096F5"
             width="250px"
           />
         </div>
-        <div className="ml-[50px] flex-1">
+        <div className="min-w-[600px] h-[550px] ml-auto mobile:min-w-full mobile:px-8">
           <div className="flex flex-col">
             <div className="flex flex-row gap-3 items-center t-m">
               <div className="text-primary !font-bold cursor-pointer">

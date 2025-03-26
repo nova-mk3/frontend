@@ -3,8 +3,8 @@ import React from "react";
 export default function Footer() {
   return (
     <div className="flex w-full bg-ui01 mt-10">
-      <div className="w-[60%] flex flex-col mx-auto">
-        <div className="flex flex-row justify-between py-5">
+      <div className="w-[60%] flex flex-col mx-auto mobile:w-[80%]">
+        <div className="flex flex-row justify-between py-5 mobile:flex-col gap-5">
           <div className="flex flex-col gap-2">
             <p className="!font-bold">동아리 정보</p>
             <p>학술동아리 노바</p>

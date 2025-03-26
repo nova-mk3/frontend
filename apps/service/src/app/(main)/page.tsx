@@ -15,8 +15,8 @@ export default function Home() {
       <div className="flex justify-center">
         <FramePostSection className="relative w-screen" />
       </div>
-      <div className="flex justify-center mt-40">
-        <FrameAboutMeSection className="relative w-screen" />
+      <div className="flex justify-center mt-40 ">
+        <FrameAboutMeSection className="relative w-screen px-8" />
       </div>
     </>
   );
