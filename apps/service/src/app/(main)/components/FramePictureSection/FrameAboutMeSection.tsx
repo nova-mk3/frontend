@@ -40,14 +40,14 @@ export default function FrameAboutMeSection({
             <div className="flex justify-between items-center h-full mobile:flex-col mobile:gap-10">
               <div className="mobile:flex mobile:flex-col mobile:min-h-[550px]">
                 <Image
-                  src="/image/NovaPoster.png"
+                  src="/image/NovaPoster.jpg"
                   alt=""
                   width={300}
                   height={500}
                   className="h-auto object-cover absolute top-[100px] left-[98px] z-10 mobile:left-0"
                 />
                 <Image
-                  src="/image/NovaPosterSub.png"
+                  src="/image/NovaPosterSub.jpg"
                   alt=""
                   width={300}
                   height={500}
