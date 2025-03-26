@@ -16,15 +16,18 @@ import DetailPageSubTitle from "../../components/DetailPageSubTitle";
 import { Separator } from "@nova/ui/components/ui/separator";
 import DetailPageTitle from "../../components/DetailPageTitle";
 import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
+import PendingFallbackUI from "../../../components/Skeleton/PendingFallbackUI";
 
 interface PostDetailProps {
   postId: string;
 }
 
 export default function PostDetail({ postId }: PostDetailProps) {
-  const { data } = usePostDetailQuery(postId, INTEGRATED);
+  const { data, isLoading } = usePostDetailQuery(postId, INTEGRATED);
 
-  console.log(data);
+  if (isLoading) {
+    return <PendingFallbackUI />;
+  }
   return (
     <div className="flex flex-col t-m w-full mx-auto">
       <DetailPageTitle

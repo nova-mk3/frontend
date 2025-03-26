@@ -5,31 +5,42 @@ import { CLUB_ARCHIVE, POST_TYPE, PostType } from "@/src/constant/board";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { UploadFilesAPI } from "@/src/api/board/file";
-import ModifyFileUploader from "../../components/File/ModifyFileUploader";
-import { FileItemProps } from "../../components/File/ViewFileItem";
+
 import TextareaFormContentField from "@/src/app/(auth)/signup/components/TextareaFormContentField";
 import { Form } from "@nova/ui/components/ui/form";
 import { SelectFormField } from "@/src/app/(auth)/signup/components/SelectFormField";
 import TextareaFormField from "@/src/app/(auth)/signup/components/TextareaFormField";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { postKeys, useArchiveDetailQuery } from "../../board/query/postqueries";
+
 import { ExamInput, ExamSchema } from "@/src/schema/exam.schema";
 import useYearRange from "@/src/libs/hooks/useYearRange";
 import { SEMESTER_OPTIONS } from "@/src/constant/exam";
 import { InputFormField } from "@/src/app/(auth)/components/InputFormField";
 import { ArchivePut, ArchivePutRequest } from "@/src/api/board/exam";
-import { useQueryParams } from "../../components/useQueryParams";
-import NewPostTitle from "../../components/NewPostTitle";
+import { FileItemProps } from "../../../components/File/ViewFileItem";
+import {
+  postKeys,
+  useArchiveDetailQuery,
+} from "../../../board/query/postqueries";
+import PendingFallbackUI from "../../../components/Skeleton/PendingFallbackUI";
+import NewPostTitle from "../../../components/NewPostTitle";
+import ModifyFileUploader from "../../../components/File/ModifyFileUploader";
 
-export default function ModifyPage() {
+interface Props {
+  postId: string;
+}
+
+export default function ModifyPage({ postId }: Props) {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const { postId, postType } = useQueryParams();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [originFiles, setOriginFiles] = useState<FileItemProps[]>([]);
   const [willDeleteFiles, setwillDeleteFiles] = useState<string[]>([]);
 
-  const { data } = useArchiveDetailQuery({ postId, boardId: CLUB_ARCHIVE });
+  const { data, isLoading } = useArchiveDetailQuery({
+    postId,
+    boardId: CLUB_ARCHIVE,
+  });
 
   const currentYear = new Date().getFullYear();
   const years = useYearRange(1980, currentYear);
@@ -37,18 +48,28 @@ export default function ModifyPage() {
     resolver: zodResolver(ExamSchema),
     mode: "onChange",
     defaultValues: {
-      title: data.title,
-      content: data.content,
-      semester: data.semester,
-      year: String(data.year),
-      professorName: data.professorName,
-      subject: data.subject,
+      title: "",
+      content: "",
+      semester: "",
+      year: "",
+      professorName: "",
+      subject: "",
     },
   });
 
   useEffect(() => {
-    setOriginFiles([...data.files]);
-  }, []);
+    if (data) {
+      form.reset({
+        title: data.title,
+        content: data.content,
+        semester: data.semester,
+        year: String(data.year),
+        professorName: data.professorName,
+        subject: data.subject,
+      });
+      setOriginFiles([...data.files]);
+    }
+  }, [data, form]);
 
   const semester = useWatch({
     control: form.control,
@@ -107,11 +128,11 @@ export default function ModifyPage() {
       queryClient.setQueryData(postKeys.detail(postId), data);
 
       queryClient.invalidateQueries({
-        queryKey: postKeys.typelists(postType as PostType),
+        queryKey: postKeys.typelists(data.postType as PostType),
         refetchType: "inactive",
       });
 
-      router.push(`/${postType.toLocaleLowerCase()}/${postId}`);
+      router.push(`/${data.postType.toLocaleLowerCase()}/${postId}`);
     },
     onError: (error) => {
       alert(error.message);
@@ -182,6 +203,10 @@ export default function ModifyPage() {
       });
     }
   };
+
+  if (isLoading) {
+    return <PendingFallbackUI />;
+  }
 
   return (
     <Form {...form}>

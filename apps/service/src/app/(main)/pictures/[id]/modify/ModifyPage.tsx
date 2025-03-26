@@ -16,6 +16,7 @@ import {
 import { usePictureDetailQuery } from "../../query/queries";
 import { ImageProps } from "../PostDetail";
 import NewPostTitle from "../../../components/NewPostTitle";
+import PendingFallbackUI from "../../../components/Skeleton/PendingFallbackUI";
 
 interface Props {
   postId: string;
@@ -27,7 +28,10 @@ export default function ModifyPage({ postId }: Props) {
 
   const pictureMutation = usePicturePutMutation({ postId });
   const uploadMutation = useFileUploadMutation();
-  const { data } = usePictureDetailQuery({ postId, boardId: CLUB_ARCHIVE });
+  const { data, isLoading } = usePictureDetailQuery({
+    postId,
+    boardId: CLUB_ARCHIVE,
+  });
 
   const form = useForm<PictureInput>({
     resolver: zodResolver(PictureSchema),
@@ -39,8 +43,14 @@ export default function ModifyPage({ postId }: Props) {
   });
 
   useEffect(() => {
-    setOriginFiles([...(data?.images || [])]);
-  }, []);
+    if (data) {
+      form.reset({
+        title: data.title,
+        content: data.content,
+      });
+      setOriginFiles([...data.images]);
+    }
+  }, [data, form]);
 
   const onSubmit = async (data: PictureInput) => {
     // 파일이 없을때는 파일 업로드 생략
@@ -88,6 +98,10 @@ export default function ModifyPage({ postId }: Props) {
       });
     }
   };
+
+  if (isLoading) {
+    return <PendingFallbackUI />;
+  }
 
   return (
     <Form {...form}>

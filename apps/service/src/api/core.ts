@@ -22,19 +22,16 @@ Authapi.interceptors.response.use(
   },
   (error) => {
     // 에러 응답 처리 :  CSR 환경
-    // console.log(error);
-    // if (typeof window !== "undefined") {
-    //   console.log(error);
+    console.log(error);
+    if (
+      error.response &&
+      (error.response.status === 401 || error.response.status === 403)
+    ) {
+      alert("토큰이 만료되었습니다");
+      const currentPath = window.location.pathname + window.location.search;
+      window.location.href = `/signin?redirect=${decodeURI(currentPath)}`;
+    }
 
-    //   if (
-    //     error.response &&
-    //     (error.response.status === 401 || error.response.status === 403)
-    //   ) {
-    //     alert("토큰이 만료되었습니다");
-    //     const currentPath = window.location.pathname + window.location.search;
-    //     window.location.href = `/signin?redirect=${decodeURI(currentPath)}`;
-    //   }
-    // }
     return Promise.reject(error);
   }
 );

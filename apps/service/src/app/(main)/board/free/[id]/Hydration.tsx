@@ -13,10 +13,12 @@ interface Props {
 }
 export default async function Hydration({ postId }: Props) {
   const queryClient = getQueryClient();
+
   await queryClient.prefetchQuery({
     queryKey: postKeys.detail(postId),
     queryFn: () => IntegratedBoardGetDetail({ boardId: INTEGRATED, postId }),
   });
+
   await queryClient.prefetchQuery(CommentsListQueryOptions(postId));
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

@@ -1,15 +1,20 @@
 "use client";
 
 import { cn } from "@nova/ui/lib/utils";
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, useState } from "react";
 import Logo from "@/public/image/Logo.svg";
 import { Separator } from "@nova/ui/components/ui/separator";
 import { Ellipsis, Eye } from "lucide-react";
 import Link from "next/link";
+import PostList from "./PostList";
 export default function FramePostSection({
   className,
   ...props
 }: HTMLAttributes<HTMLDivElement>) {
+  const [selectedTab, setSelectedTab] = useState<
+    "latest" | "popular" | "notice" | "intro"
+  >("latest");
+
   return (
     <div className={cn(className)} {...props}>
       <div className="w-screen">
@@ -26,30 +31,56 @@ export default function FramePostSection({
           />
         </div>
         <div className="min-w-[600px] h-[550px] ml-auto mobile:min-w-full mobile:px-8">
+          <div className="flex flex-row gap-3 items-center t-m">
+            <div
+              className={cn(
+                "cursor-pointer",
+                selectedTab === "latest" && "text-primary font-bold"
+              )}
+              onClick={() => setSelectedTab("latest")}
+            >
+              최신글
+            </div>
+            <Separator orientation="vertical" className="h-4" />
+            <div
+              className={cn(
+                "cursor-pointer",
+                selectedTab === "popular" && "text-primary font-bold"
+              )}
+              onClick={() => setSelectedTab("popular")}
+            >
+              인기글
+            </div>
+            <Separator orientation="vertical" className="h-4" />
+            <div
+              className={cn(
+                "cursor-pointer",
+                selectedTab === "notice" && "text-primary font-bold"
+              )}
+              onClick={() => setSelectedTab("notice")}
+            >
+              공지사항
+            </div>
+            <Separator orientation="vertical" className="h-4" />
+            <div
+              className={cn(
+                "cursor-pointer",
+                selectedTab === "intro" && "text-primary font-bold"
+              )}
+              onClick={() => setSelectedTab("intro")}
+            >
+              자기소개
+            </div>
+          </div>
+          <Separator className="mt-3" />
           <div className="flex flex-col">
-            <div className="flex flex-row gap-3 items-center t-m">
-              <div className="text-primary !font-bold cursor-pointer">
-                최신글
-              </div>
-              <Separator orientation="vertical" className="h-4" />
-              <div className="cursor-pointer">인기글</div>
-              <Separator orientation="vertical" className="h-4" />
-              <div className="cursor-pointer">공지사항</div>
-              <Separator orientation="vertical" className="h-4" />
-              <div className="cursor-pointer">자기소개</div>
-              <Link href="/board/home" className="ml-auto">
-                <Ellipsis className="w-6 h-6" />
-              </Link>
-            </div>
-            <Separator className="mt-3" />
-            <div className="flex flex-col">
-              <Item />
-              <Item />
-              <Item />
-              <Item />
-              <Item />
-              <Item />
-            </div>
+            {/* <PostList tab={selectedTab} /> */}
+            <Item />
+            <Item />
+            <Item />
+            <Item />
+            <Item />
+            <Item />
           </div>
         </div>
       </div>

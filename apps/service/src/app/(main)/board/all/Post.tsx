@@ -9,12 +9,14 @@ import { useQueryParams } from "../../components/useQueryParams";
 import BoardListTitle from "../components/BoardListTitle";
 import { Layers } from "lucide-react";
 import BoardList from "../components/BoardList";
+import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
+import DeferredComponent from "../../components/DeferredComponent";
 
 export default function Post() {
   const { currentPage, keyword, searchType, sortBy, sortDirection } =
     useQueryParams();
 
-  const { data } = usePostAllListQuery({
+  const { data, isLoading } = usePostAllListQuery({
     page: currentPage - 1,
     size: BOARD_SIZE,
     keyword: keyword,
@@ -23,6 +25,10 @@ export default function Post() {
     sortDirection: sortDirection,
     boardId: INTEGRATED,
   });
+
+  if (isLoading) {
+    return <PendingFallbackUI />;
+  }
 
   return (
     <>

@@ -18,14 +18,18 @@ import CommentList from "../../components/comments/CommentList";
 import { INTEGRATED, POST_TYPE } from "@/src/constant/board";
 import DetailPageSubTitle from "../../components/DetailPageSubTitle";
 import { Separator } from "@nova/ui/components/ui/separator";
+import PendingFallbackUI from "../../../components/Skeleton/PendingFallbackUI";
 
 interface PostDetailProps {
   postId: string;
 }
 
 export default function PostDetail({ postId }: PostDetailProps) {
-  const { data } = usePostDetailQuery(postId, INTEGRATED);
-  console.log(data);
+  const { data, isLoading } = usePostDetailQuery(postId, INTEGRATED);
+
+  if (isLoading) {
+    return <PendingFallbackUI />;
+  }
 
   return (
     <div className="flex flex-col t-m w-full mx-auto">

@@ -13,20 +13,23 @@ import {
 } from "@/src/api/board/integrated";
 import { useRouter } from "next/navigation";
 import { UploadFilesAPI } from "@/src/api/board/file";
-import { postKeys, usePostDetailQuery } from "../query/postqueries";
-import ModifyFileUploader from "../../components/File/ModifyFileUploader";
-import { FileItemProps } from "../../components/File/ViewFileItem";
 import TextareaFormContentField from "@/src/app/(auth)/signup/components/TextareaFormContentField";
 import { Form } from "@nova/ui/components/ui/form";
 import { SelectFormField } from "@/src/app/(auth)/signup/components/SelectFormField";
 import TextareaFormField from "@/src/app/(auth)/signup/components/TextareaFormField";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryParams } from "../../components/useQueryParams";
-import NewPostTitle from "../../components/NewPostTitle";
+import { postKeys, usePostDetailQuery } from "../../query/postqueries";
+import NewPostTitle from "../../../components/NewPostTitle";
+import ModifyFileUploader from "../../../components/File/ModifyFileUploader";
+import { FileItemProps } from "../../../components/File/ViewFileItem";
+import PendingFallbackUI from "../../../components/Skeleton/PendingFallbackUI";
 
-export default function ModifyPage() {
+interface Props {
+  postId: string;
+}
+
+export default function ModifyPage({ postId }: Props) {
   const queryClient = useQueryClient();
-  const { postId, postType } = useQueryParams();
   const { data, isLoading } = usePostDetailQuery(postId, INTEGRATED);
   const router = useRouter();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
@@ -37,15 +40,22 @@ export default function ModifyPage() {
     resolver: zodResolver(IntegratedSchema),
     mode: "onChange",
     defaultValues: {
-      title: data.title,
-      content: data.content,
-      category: postType,
+      title: "",
+      content: "",
+      category: "",
     },
   });
 
   useEffect(() => {
-    setOriginFiles([...data.files]);
-  }, []);
+    if (data) {
+      form.reset({
+        title: data.title,
+        content: data.content,
+        category: data.postType,
+      });
+      setOriginFiles([...data.files]);
+    }
+  }, [data, form]);
 
   const useIntegratedBoardMutation = useMutation({
     mutationFn: (data: IntegratedPutRequest) => IntegratedBoardPut(data),
@@ -57,11 +67,11 @@ export default function ModifyPage() {
       queryClient.setQueryData(postKeys.detail(postId), data);
 
       queryClient.invalidateQueries({
-        queryKey: postKeys.typelists(postType as PostType),
+        queryKey: postKeys.typelists(data.postType as PostType),
         refetchType: "inactive",
       });
 
-      router.push(`/board/${postType.toLocaleLowerCase()}/${data.id}`);
+      router.push(`/board/${data.postType.toLocaleLowerCase()}/${data.id}`);
     },
     onError: (error) => {
       alert(error.message);
@@ -127,7 +137,7 @@ export default function ModifyPage() {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <PendingFallbackUI />;
   }
 
   return (

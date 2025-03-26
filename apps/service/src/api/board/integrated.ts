@@ -1,5 +1,5 @@
 import { PostType } from "@/src/constant/board";
-import { api, Authapi, BASE_URL } from "../core";
+import { Authapi } from "../core";
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
 
 export interface IntegradePostRequest {
@@ -13,8 +13,8 @@ export interface IntegradePostRequest {
 export interface Params {
   postId: string;
   postType: PostType;
-  size: number;
   boardId: string;
+  size: number;
   page: number;
   keyword: string;
   searchType: string;
@@ -122,23 +122,9 @@ export async function BoardAllList({
  */
 export async function BoardLatestList({ boardId }: BoardIdParams) {
   try {
-    const response = await fetch(`${BASE_URL}/boards/${boardId}/posts/latest`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        // 필요한 경우 인증 토큰 추가
-        // 'Authorization': `Bearer ${token}`,
-      },
-    });
+    const response = await Authapi.get(`/boards/${boardId}/posts/latest`);
 
-    if (!response.ok) {
-      // HTTP 에러 처리
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Something went wrong");
-    }
-
-    const data = await response.json();
-    return data.data;
+    return response.data.data;
   } catch (error) {
     throwErrorMessage(error);
   }
