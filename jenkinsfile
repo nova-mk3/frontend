@@ -6,6 +6,7 @@ pipeline {
         GITHUB_CREDENTIALS_ID = 'github_access_token_frontend'  // GitHub 자격 증명 ID
     }
     
+    
     stages {
         stage('GitHub Clone') {
         steps {
