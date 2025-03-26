@@ -86,7 +86,9 @@ export default function page() {
         <Separator />
       </div>
 
-      <div className="d-l  mt-5 text-primary  my-10 !font-bold">ABOUT NOVA</div>
+      <div className="d-l  mt-5 text-primary  my-10 !font-bold mobile:text-center">
+        ABOUT NOVA
+      </div>
       {/* 여기에 포스터 들어오면 좋을듯! */}
       <div className="flex flex-row  gap-10 mobile:flex-col mobile:mx-auto">
         <Image
