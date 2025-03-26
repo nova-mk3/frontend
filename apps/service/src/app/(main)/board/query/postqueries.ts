@@ -108,7 +108,7 @@ export const usePostAllListQuery = ({
 };
 
 export const usePostLatestListQuery = ({ boardId }: BoardIdParams) => {
-  return useSuspenseQuery(postLatestQueryOptions(boardId));
+  return useQuery(postLatestQueryOptions(boardId));
 };
 
 export const useArchiveDetailQuery = ({

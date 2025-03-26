@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "@nova/ui/components/ui/button";
 import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
-import Hydration from "./Hydration";
+import Post from "./Post";
 
 export default function Layout() {
   return (
@@ -22,7 +22,7 @@ export default function Layout() {
         </div>
       </div>
       <ErrorBoundaryWrapper>
-        <Hydration />
+        <Post />
       </ErrorBoundaryWrapper>
     </div>
   );

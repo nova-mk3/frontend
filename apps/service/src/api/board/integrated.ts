@@ -1,5 +1,5 @@
 import { PostType } from "@/src/constant/board";
-import { Authapi } from "../core";
+import { api, Authapi } from "../core";
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
 
 export interface IntegradePostRequest {
