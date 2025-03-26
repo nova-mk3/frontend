@@ -17,7 +17,7 @@ import { postDetailQueryOptions, postLatestQueryOptions } from "./options";
 interface SearchFilter {
   page: number;
   size: number;
-  searchType: string;
+  searchType?: string;
   sortBy: string;
   sortDirection: string;
   keyword: string;

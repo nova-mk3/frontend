@@ -136,11 +136,6 @@ export default function Page() {
             name="content"
             placeholder="건의 내용을 입력하세요"
           />
-
-          {/* 하단 바 (버튼 등)
-      <WriteBottomLayout
-      postBtnname="건의"
-      /> */}
         </div>
       </form>
     </Form>

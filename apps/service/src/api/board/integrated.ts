@@ -13,8 +13,8 @@ export interface IntegradePostRequest {
 export interface Params {
   postId: string;
   postType: PostType;
-  size: number;
   boardId: string;
+  size: number;
   page: number;
   keyword: string;
   searchType: string;
