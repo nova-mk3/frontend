@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useState } from "react";
+import React, { Suspense } from "react";
 
 import { Image } from "lucide-react";
 import { useQueryParams } from "../components/useQueryParams";

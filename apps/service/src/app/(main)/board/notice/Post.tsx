@@ -8,12 +8,13 @@ import { useQueryParams } from "../../components/useQueryParams";
 import BoardListTitle from "../components/BoardListTitle";
 import { Pin } from "lucide-react";
 import BoardList from "../components/BoardList";
+import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
 
 export default function Post() {
   const { currentPage, keyword, searchType, sortBy, sortDirection } =
     useQueryParams();
 
-  const { data } = usePostListQuery({
+  const { data, isLoading } = usePostListQuery({
     postType: POST_TYPE.NOTICE,
     page: currentPage - 1,
     size: BOARD_SIZE,
@@ -24,6 +25,9 @@ export default function Post() {
     boardId: INTEGRATED,
   });
 
+  if (isLoading) {
+    return <PendingFallbackUI />;
+  }
   return (
     <>
       <BoardListTitle
