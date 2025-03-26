@@ -3,7 +3,6 @@ import React from "react";
 import FramePictureSection from "./components/FramePictureSection/FramePictureSection";
 import FramePostSection from "./components/FramePictureSection/FramePostSection";
 import FrameAboutMeSection from "./components/FramePictureSection/FrameAboutMeSection";
-import { Separator } from "@nova/ui/components/ui/separator";
 
 export default function Home() {
   return (

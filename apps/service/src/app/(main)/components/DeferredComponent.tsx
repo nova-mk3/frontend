@@ -1,6 +1,5 @@
 "use client";
 import { PropsWithChildren, useEffect, useState } from "react";
-import PendingFallbackUI from "./Skeleton/PendingFallbackUI";
 import EmptyFallbackUI from "./Skeleton/EmptyFallbackUI";
 
 // ** 지연시간 200ms 미만일 때 스켈레톤 미노출 / 200ms 이상일 때 스켈레톤 노출 **
@@ -10,7 +9,7 @@ const DeferredComponent = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     const timeOut = setTimeout(() => {
       setIsDeferred(true);
-    }, 500);
+    }, 200);
     return () => clearTimeout(timeOut);
   }, []);
 

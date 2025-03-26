@@ -1,8 +1,6 @@
 import React from "react";
-import Hydration from "./Hydration";
-import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
 import ModifyPage from "./ModifyPage";
-export const dynamic = "force-dynamic";
+import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
 
 type Props = {
   params: Promise<{ id: string }>;

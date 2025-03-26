@@ -37,12 +37,14 @@ export default function Post() {
         defaultHref="/pictures"
       />
       <div>
-        <PictureList content={data.content} />
+        <div className="min-h-[745px]">
+          <PictureList content={data.content} />
+        </div>
         <Suspense fallback={<div className="h-[36px]"></div>}>
           <PageNation
             size={BOARD_SIZE}
             totalPage={data.totalPages}
-            className="my-4"
+            className="my-4 "
           />
         </Suspense>
       </div>

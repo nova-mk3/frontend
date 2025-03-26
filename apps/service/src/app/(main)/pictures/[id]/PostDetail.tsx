@@ -6,7 +6,6 @@ import ImageSlider from "./components/ImageSlider";
 import { usePictureDetailQuery } from "../query/queries";
 import { FileItemProps } from "../../components/File/ViewFileItem";
 import { Separator } from "@nova/ui/components/ui/separator";
-import dynamic from "next/dynamic";
 import CommentSection from "./components/CommentSection";
 import AlertDialog from "../../components/AlertDialog";
 import { useRouter } from "next/navigation";
@@ -14,6 +13,8 @@ import { PictureBoardDelete } from "@/src/api/board/picture";
 import { useQueryClient } from "@tanstack/react-query";
 import { postKeys } from "../../board/query/postqueries";
 import { formatDate } from "@/src/libs/utils/dateParsing";
+import ViewCount from "../../board/components/ViewCount";
+import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
 
 interface PostDetailProps {
   postId: string;
@@ -41,15 +42,13 @@ export interface ImageProps {
   id: string;
 }
 
-const ViewCount = dynamic(() => import("../../board/components/ViewCount"), {
-  ssr: false,
-  loading: () => <p>조회 0</p>,
-});
 export default function PostDetail({ postId }: PostDetailProps) {
   const router = useRouter();
-  const { data } = usePictureDetailQuery({ postId, boardId: CLUB_ARCHIVE });
+  const { data, isLoading } = usePictureDetailQuery({
+    postId,
+    boardId: CLUB_ARCHIVE,
+  });
   const queryClient = useQueryClient();
-  console.log(data);
 
   const handleModify = () => {
     router.push(`/${POST_TYPE.PICTURES.toLocaleLowerCase()}/${postId}/modify`);
@@ -70,6 +69,10 @@ export default function PostDetail({ postId }: PostDetailProps) {
       console.log(error);
     }
   };
+
+  if (isLoading) {
+    return <PendingFallbackUI />;
+  }
 
   return (
     <div className="flex flex-col t-m w-full mx-auto">

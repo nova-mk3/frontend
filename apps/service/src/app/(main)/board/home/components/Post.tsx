@@ -12,7 +12,7 @@ export default function Post() {
     return <PendingFallbackUI />;
   }
   return (
-    <div className="grid gap-4 xl:grid-cols-4 lg:grid-cols-2 mobile:grid-cols-1">
+    <div className="grid gap-4 xl:grid-cols-4 lg:grid-cols-2 mobile:grid-cols-1 min-h-[745px]">
       <HomeListItem
         title={POST_TYPE_LABEL[POST_TYPE.NOTICE]}
         href="/board/notice"

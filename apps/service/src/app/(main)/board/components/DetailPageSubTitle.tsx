@@ -35,7 +35,7 @@ export default function DetailPageSubTitle({
 }: SubTitle) {
   const router = useRouter();
   const handleModify = () => {
-    router.push(`${defaultHref}/modify?id=${postId}&type=${postType}`);
+    router.push(`${defaultHref}/${postId}/modify`);
   };
   const handleDelete = async () => {
     try {

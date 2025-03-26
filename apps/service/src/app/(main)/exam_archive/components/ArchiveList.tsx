@@ -15,7 +15,7 @@ export default function ArchiveList({ content }: PostPreview) {
 
   console.log(content);
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col  min-h-[745px]">
       {content.map((post) => (
         <ArchiveListItem
           key={post.id}

@@ -7,12 +7,11 @@ import {
   BoardAllList,
   BoardGetParamType,
   BoardIdParams,
-  BoardLatestList,
   IntegratedBoardGet,
   Params,
 } from "@/src/api/board/integrated";
 import { PostType } from "@/src/constant/board";
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { postDetailQueryOptions, postLatestQueryOptions } from "./options";
 
 interface SearchFilter {
@@ -44,7 +43,7 @@ export const postKeys = {
 };
 
 export const usePostDetailQuery = (postId: string, boardId: string) => {
-  return useSuspenseQuery(postDetailQueryOptions(postId, boardId));
+  return useQuery(postDetailQueryOptions(postId, boardId));
 };
 
 export const usePostListQuery = ({
@@ -85,7 +84,7 @@ export const usePostAllListQuery = ({
   sortDirection,
   keyword,
 }: Omit<Params, "postId" | "postType">) => {
-  return useSuspenseQuery({
+  return useQuery({
     queryKey: postKeys.list({
       page,
       size,
