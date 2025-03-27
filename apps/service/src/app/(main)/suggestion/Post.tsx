@@ -9,6 +9,7 @@ import { useQueryParams } from "../components/useQueryParams";
 import { BOARD_SIZE } from "@/src/constant/board";
 import SkeletonSuggestionList from "../components/Skeleton/Suggestion/SkeletonSuggestionList";
 import SkeletonSuggestionTitle from "../components/Skeleton/Suggestion/SkeletonSuggestionTitle";
+import DeferredComponent from "../components/DeferredComponent";
 
 export default function Post() {
   const { currentPage, keyword, searchType, sortBy, sortDirection } =
@@ -25,10 +26,12 @@ export default function Post() {
 
   if (isLoading) {
     return (
-      <div className="w-[80%] mx-auto">
-        <SkeletonSuggestionTitle />
-        <SkeletonSuggestionList />
-      </div>
+      <DeferredComponent>
+        <div className="w-[80%] mx-auto">
+          <SkeletonSuggestionTitle />
+          <SkeletonSuggestionList />
+        </div>
+      </DeferredComponent>
     );
   }
 

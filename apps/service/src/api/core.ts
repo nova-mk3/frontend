@@ -23,15 +23,16 @@ Authapi.interceptors.response.use(
   (error) => {
     // 에러 응답 처리 :  CSR 환경
     console.log(error);
-    if (
-      error.response &&
-      (error.response.status === 401 || error.response.status === 403)
-    ) {
-      alert("토큰이 만료되었습니다");
-      const currentPath = window.location.pathname + window.location.search;
-      window.location.href = `/signin?redirect=${decodeURI(currentPath)}`;
+    if (error.response) {
+      if (error.response.status === 401) {
+        alert(error.response.message);
+        const currentPath = window.location.pathname + window.location.search;
+        window.location.href = `/signin?redirect=${decodeURI(currentPath)}`;
+      } else if (error.response.status === 403) {
+        alert(error.response.data.message);
+        window.history.back();
+      }
     }
-
     return Promise.reject(error);
   }
 );

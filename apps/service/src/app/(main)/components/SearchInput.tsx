@@ -1,12 +1,18 @@
 "use client";
 import { Input } from "@nova/ui/components/ui/input";
 import { Search } from "lucide-react";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useQueryParams } from "./useQueryParams";
 
 export default function SearchInput() {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { setKeyword } = useQueryParams();
+  const { setKeyword, keyword } = useQueryParams();
+
+  useEffect(() => {
+    if (keyword && inputRef) {
+      inputRef.current!.value = keyword;
+    }
+  }, []);
 
   const handleKeywordSearch = () => {
     if (!inputRef.current) return;

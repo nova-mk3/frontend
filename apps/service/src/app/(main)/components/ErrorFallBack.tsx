@@ -21,10 +21,9 @@ export default function FallbackErrorUI({
           다시 불러오기!
         </Button>
 
-        {/* ✅ 뒤로 가기
-        <Button variant="text" onClick={() => router.back()}>
+        <Button variant="text" onClick={() => window.history.back()}>
           뒤로가기
-        </Button> */}
+        </Button>
 
         {/* ✅ 메인으로 */}
         <Link href="/">
