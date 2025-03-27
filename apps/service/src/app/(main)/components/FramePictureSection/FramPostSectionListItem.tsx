@@ -1,9 +1,15 @@
+import {
+  POST_TYPE,
+  POST_TYPE_TITLE_LABEL,
+  PostType,
+} from "@/src/constant/board";
 import { toFormattedDate } from "@/src/libs/utils/dateParsing";
+import { cn } from "@nova/ui/lib/utils";
 import { Eye } from "lucide-react";
 import React from "react";
 
 interface Props {
-  type?: string;
+  type?: PostType;
   title: string;
   viewCount: number;
   createdTime: string;
@@ -28,11 +34,16 @@ export default function FramPostSectionListItem({
   );
 }
 
-function Label({ type }: { type?: string }) {
+function Label({ type }: { type?: PostType }) {
   if (type) {
     return (
-      <p className="bg-primary rounded-full text-sm flex items-center justify-center text-background01 px-2 py-0.5">
-        {type}
+      <p
+        className={cn(
+          "bg-gray-400 text-background01  text-sm flex items-center justify-center px-2 py-0.5",
+          type === POST_TYPE.NOTICE && "bg-primary text-background01"
+        )}
+      >
+        {POST_TYPE_TITLE_LABEL[type]}
       </p>
     );
   } else {

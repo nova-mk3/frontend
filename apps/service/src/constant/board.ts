@@ -52,3 +52,14 @@ export const INTEGRATED = isProd
 export const CLUB_ARCHIVE = isProd
   ? "d0335ade-1ccb-42be-a64c-a1159624c09d"
   : "196128e0-4533-4cd9-ae01-a7a0806cd48c"; //여기에 로컬변수
+
+export const POST_TYPE_TITLE_LABEL: Record<PostType, string> = {
+  EXAM_ARCHIVE: "자료",
+  FREE: "자유",
+  INTRODUCTION: "소개",
+  NOTICE: "공지",
+  PICTURES: "사진",
+  QNA: "QA",
+  SUGGESTION: "건의",
+  ALL: "전체글보기",
+};
