@@ -70,15 +70,6 @@ const userSchema = z.object({
     .regex(/^\d+$/, { message: "학번은 숫자만 입력할 수 있습니다." }),
 
   birth: z.date().optional(),
-  profilePhoto: z
-    .instanceof(File)
-    .refine((file) => file instanceof File, {
-      message: "프로필 이미지는 파일이어야 합니다.",
-    })
-    .refine((file: File) => file.type.startsWith("image/"), {
-      message: "이미지 파일만 업로드할 수 있습니다.",
-    })
-    .optional(),
   phoneNumber: z.string().optional(),
 });
 

@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { CircleUser } from "lucide-react";
 import { formatDate } from "@/src/libs/utils/dateParsing";
 import { CommentsDelete, CommentsPut } from "@/src/api/board/comments";
 import { useQueryClient } from "@tanstack/react-query";
@@ -9,7 +8,7 @@ import AlertDialog from "../../../components/AlertDialog";
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
 import ModifyCommentForm from "./ModifyCommentForm";
 import { Profile } from "./CommentListItem";
-
+import Image from "next/image";
 interface ReplyCommentItemProps {
   id: string;
   authorName: string;
@@ -93,10 +92,16 @@ export default function ReplyCommentItem({
     >
       {/* 댓글 타이틀 부분도 컴포넌트 분리가 가능해보인다. */}
       <div className="flex flex-row items-center gap-4">
-        <CircleUser size={40} />
+        <Image
+          src={authorProfilePhoto.imageUrl}
+          alt={authorProfilePhoto.originalFileName}
+          width={40}
+          height={40}
+          className="object-cover w-[40px] h-[40px] rounded-full"
+        />
         <div className="flex flex-col justify-center">
-          <p>{authorName}</p>
-          <p>{formatDate(createdTime)}</p>
+          <p className="text-gray-700">{authorName}</p>
+          <p className="text-gray-500">{formatDate(createdTime)}</p>
         </div>
 
         <div className="ml-auto flex flex-row gap-[10px] ">

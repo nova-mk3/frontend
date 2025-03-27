@@ -15,7 +15,10 @@ export default function LayoutClient({ id, children }: Props) {
   if (isLoading) {
     return <PendingFallbackUI />;
   }
-  if (id !== data.memberId) return <>{children}</>;
+
+  if (!data) return <>{children}</>;
+  if (data.memberId !== id) return <>{children}</>;
+
   return (
     <div>
       <SubNavigation />

@@ -28,7 +28,7 @@ export default function AcrossPostList({ sortBy }: Props) {
       {/* PostListSkeleton */}
       {data.content.map((post: any) => (
         <FramPostSectionListItem
-          defaultHref={`${POST_TYPE.PICTURES !== post.postType && "/board"}`}
+          defaultHref={`${POST_TYPE.PICTURES !== post.postType ? "/board" : ""}`}
           key={post.id}
           type={post.postType}
           title={post.title}

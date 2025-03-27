@@ -62,6 +62,15 @@ export async function verifyAccessToken(accessToken: string) {
   }
 }
 
+export const ProfileUploadAPI = async (formdata: FormData) => {
+  try {
+    const response = await Authapi.post(`/members/profile-photo`, formdata);
+    return response.data;
+  } catch (error: any) {
+    throwErrorMessage(error);
+  }
+};
+
 export async function logout() {
   try {
     const response = await Authapi.get(`/members/logout`);
@@ -77,8 +86,8 @@ export interface MemberSignUpRequest {
   name: string;
   email: string;
   graduation: boolean;
-  grade: number;
-  semester: number;
+  grade: string;
+  semester: string;
   absence: boolean;
   profilePhoto?: string;
   phone?: string;

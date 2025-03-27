@@ -8,6 +8,7 @@ import { Ellipsis, Eye } from "lucide-react";
 import IntroPostList from "./IntroPostList";
 import NoticePostList from "./NoticePostList";
 import AcrossPostList from "./AcrossPostList";
+import Link from "next/link";
 export default function FramePostSection({
   className,
   ...props
@@ -72,6 +73,9 @@ export default function FramePostSection({
             >
               자기소개
             </div>
+            <Link href="/board/home" className="ml-auto">
+              <Ellipsis size={20} className="text-gray-700" />
+            </Link>
           </div>
           <Separator className="mt-3" />
           {selectedTab === "latest" && <AcrossPostList sortBy="createdTime" />}
