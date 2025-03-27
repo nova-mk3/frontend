@@ -120,8 +120,8 @@ export default function Navigation() {
                           <Folder size={28} />
                         </div>
                         <div className="flex flex-col ml-[16px] t-m">
-                          <p className="font-bold">족보 게시판</p>
-                          <p>족보 모음 게시판</p>
+                          <p className="font-bold">자료 게시판</p>
+                          <p>자료 모음 게시판</p>
                         </div>
                       </div>
                     </li>

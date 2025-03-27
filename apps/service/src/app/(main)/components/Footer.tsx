@@ -18,7 +18,7 @@ export default function Footer() {
               통합게시판
             </Link>
             <Link href="/exam_archive" className="hover:underline">
-              족보게시판
+              자료게시판
             </Link>
             <Link href="/pictures" className="hover:underline">
               사진게시판

@@ -169,8 +169,8 @@ export default function Page() {
       >
         <NewPostTitle
           backLink="/exam_archive"
-          backLinkText="족보 게시판"
-          title="족보 작성"
+          backLinkText="자료 게시판"
+          title="자료 작성"
         />
         <div className="flex flex-col gap-6 w-[80%] h-[calc(100vh-86px)] mx-auto relative">
           <TextareaFormField

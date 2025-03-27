@@ -31,9 +31,9 @@ export default function PostDetail({ postId }: PostDetailProps) {
   return (
     <div className="flex flex-col t-m w-full mx-auto">
       <DetailPageTitle
-        title="족보"
+        title="자료"
         backLink={`/${POST_TYPE.EXAM_ARCHIVE}`}
-        backLinkText="족보 목록"
+        backLinkText="자료 목록"
         defaultHref="/exam_archive"
         postId={postId}
       />

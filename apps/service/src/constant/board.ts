@@ -33,7 +33,7 @@ export const POST_TYPE_OPTIONS = [
 export const BOARD_SIZE = 5;
 
 export const POST_TYPE_LABEL: Record<PostType, string> = {
-  EXAM_ARCHIVE: "족보게시판",
+  EXAM_ARCHIVE: "자료게시판",
   FREE: "자유게시판",
   INTRODUCTION: "자기소개",
   NOTICE: "공지사항",
