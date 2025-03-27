@@ -7,21 +7,28 @@ import { toFormattedDate } from "@/src/libs/utils/dateParsing";
 import { cn } from "@nova/ui/lib/utils";
 import { Eye } from "lucide-react";
 import React from "react";
-
+import Link from "next/link";
 interface Props {
   type?: PostType;
   title: string;
   viewCount: number;
   createdTime: string;
+  postId: string;
+  defaultHref: string;
 }
 export default function FramPostSectionListItem({
   type,
   title,
   viewCount,
   createdTime,
+  postId,
+  defaultHref = "",
 }: Props) {
   return (
-    <div className="flex flex-row gap-3 w-full items-center py-4 border-b-[1px] border-line01 hover:cursor-pointer">
+    <Link
+      className="flex flex-row gap-3 w-full items-center py-4 border-b-[1px] border-line01 hover:cursor-pointer"
+      href={`${defaultHref}/${type?.toLocaleLowerCase()}/${postId}`}
+    >
       <Label type={type} />
 
       <div className="w-0 flex-1 truncate">{title}</div>
@@ -30,7 +37,7 @@ export default function FramPostSectionListItem({
         <span className="text-sm">{viewCount}</span>
         <div className="text-sm">{toFormattedDate(createdTime)}</div>
       </div>
-    </div>
+    </Link>
   );
 }
 

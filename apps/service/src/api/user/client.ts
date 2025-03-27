@@ -20,3 +20,13 @@ export async function getMemberId() {
     return "";
   }
 }
+
+export async function getSimpleProfie() {
+  try {
+    // ✅ `fetch` 요청 시 `Cookie` 포함
+    const res = await Authapi.get(`/members/simple-profile`);
+    return res.data.data;
+  } catch (error: any) {
+    throwErrorMessage(error);
+  }
+}

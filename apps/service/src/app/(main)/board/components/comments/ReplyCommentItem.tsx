@@ -1,20 +1,19 @@
 "use client";
 import React, { useState } from "react";
 import { CircleUser } from "lucide-react";
-import TextareaAutosize from "react-textarea-autosize";
 import { formatDate } from "@/src/libs/utils/dateParsing";
 import { CommentsDelete, CommentsPut } from "@/src/api/board/comments";
 import { useQueryClient } from "@tanstack/react-query";
 import { commentsKeys } from "../../query/comments";
-import { Button } from "@nova/ui/components/ui/button";
 import AlertDialog from "../../../components/AlertDialog";
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
 import ModifyCommentForm from "./ModifyCommentForm";
+import { Profile } from "./CommentListItem";
 
 interface ReplyCommentItemProps {
   id: string;
   authorName: string;
-  authorProfilePhoto: string;
+  authorProfilePhoto: Profile;
   children: ReplyCommentItemProps[];
   content: string;
   modifiedTime: string;

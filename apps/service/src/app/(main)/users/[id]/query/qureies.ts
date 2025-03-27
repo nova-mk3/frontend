@@ -4,6 +4,7 @@ import { UserProfile } from "../(set)/edit/EditForm";
 
 export const userKeys = {
   all: ["mypage"] as const,
+  profile: "memberProfile",
   user: (memberId: string) => [...userKeys.all, "user", memberId] as const,
 };
 

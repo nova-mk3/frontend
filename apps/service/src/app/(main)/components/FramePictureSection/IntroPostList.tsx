@@ -17,18 +17,22 @@ export default function IntroPostList() {
 
   if (isLoading)
     return (
-      <div className="w-full bg-background02 animate-pulse">진행중...</div>
+      <div className="w-full bg-background02 animate-pulse h-[317px] flex justify-center items-center">
+        진행중...
+      </div>
     );
   return (
     <div className="flex flex-col gap-2">
       {/* PostListSkeleton */}
       {data.content.map((post: any) => (
         <FramPostSectionListItem
+          defaultHref="/board"
           key={post.id}
           type={post.type}
           title={post.title}
           viewCount={post.viewCount}
           createdTime={post.createdTime}
+          postId={post.id}
         />
       ))}
     </div>

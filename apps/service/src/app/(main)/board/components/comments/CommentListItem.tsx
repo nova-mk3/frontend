@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 
-import { CircleUser } from "lucide-react";
 import ReplyCommentForm from "./ReplyCommentForm";
 import ReplyCommentItem from "./ReplyCommentItem";
 import { Button } from "@nova/ui/components/ui/button";
@@ -13,17 +12,24 @@ import { useQueryClient } from "@tanstack/react-query";
 import { commentsKeys } from "../../query/comments";
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
 import ModifyCommentForm from "./ModifyCommentForm";
+import Image from "next/image";
 
 export interface CommentItemProps {
   id: string;
   authorName: string;
-  authorProfilePhoto: string;
+  authorProfilePhoto: Profile;
   children: CommentItemProps[];
   content: string;
   modifiedTime: string;
   createdTime: string;
   className?: string;
   postId: string;
+}
+
+export interface Profile {
+  id: string;
+  imageUrl: string;
+  originalFileName: string;
 }
 export default function CommentListItem({
   id,
@@ -90,15 +96,21 @@ export default function CommentListItem({
       className={`w-full min-h-[210px] flex flex-col gap-3 border-line01 border-b-[1px] py-[24px] ${className}`}
     >
       {/* 댓글 타이틀 부분도 컴포넌트 분리가 가능해보인다. */}
-      <div className="flex flex-row items-center gap-4">
-        <CircleUser size={40} />
+      <div className="flex flex-row items-center gap-5">
+        <Image
+          src={authorProfilePhoto.imageUrl}
+          alt={authorProfilePhoto.originalFileName}
+          width={40}
+          height={40}
+          className="object-cover w-[40px] h-[40px] rounded-full"
+        />
         <div className="flex flex-col justify-center">
-          <p>{authorName}</p>
-          <p>{formatDate(createdTime)}</p>
+          <p className="text-gray-700">{authorName}</p>
+          <p className="text-gray-500">{formatDate(createdTime)}</p>
         </div>
 
         {/* 수정 삭제 버튼도 컴포넌트로 만들어야겠음 */}
-        <div className="ml-auto flex flex-row gap-[10px] ">
+        <div className="ml-auto flex flex-row gap-[10px] text-gray-500 text-sm">
           <p className="cursor-pointer" onClick={toggleModify}>
             수정
           </p>

@@ -1,9 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Form } from "@nova/ui/components/ui/form";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { grade, semester, SignupInput } from "@/src/schema/signup.schema";
+import { grade, semester } from "@/src/schema/signup.schema";
 import { InputFormField } from "@/src/app/(auth)/components/InputFormField";
 import { RadioFormField } from "@/src/app/(auth)/signup/components/RadioFormField";
 import { SelectFormField } from "@/src/app/(auth)/signup/components/SelectFormField";

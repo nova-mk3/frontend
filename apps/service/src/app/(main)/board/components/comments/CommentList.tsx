@@ -13,6 +13,7 @@ export default function CommentList({ postId }: CommentListProps) {
   if (isLoading) {
     return <PendingFallbackUI />;
   }
+  console.log(data);
   return (
     <>
       {data.map((item: CommentItemProps) => (

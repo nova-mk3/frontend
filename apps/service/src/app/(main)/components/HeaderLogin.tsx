@@ -1,19 +1,15 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import HeaderLoginMenu from "./HeaderLoginMenu";
-import { Menu } from "lucide-react";
-import { getMemberId } from "@/src/api/user/client";
+import Image from "next/image";
+import { SimpleProfileQueryOptions } from "../users/[id]/query/options";
 // API 호출 함수 경로에 맞게 수정해주세요.
 
 export default function HeaderLogin() {
-  const { data: memberId, isLoading } = useQuery({
-    queryKey: ["memberId"],
-    queryFn: getMemberId,
-    staleTime: 0,
-  });
+  const { data, isLoading } = useQuery(SimpleProfileQueryOptions());
 
   if (isLoading) {
     return (
@@ -27,7 +23,7 @@ export default function HeaderLogin() {
 
   return (
     <>
-      {!memberId ? (
+      {!data ? (
         <div className="flex flex-row justify-center items-center gap-4 mobile:hidden">
           <Link href="/signin">
             <p className="w-[60px] h-[24px] flex content-center justify-center cursor-pointer">
@@ -43,11 +39,15 @@ export default function HeaderLogin() {
       ) : (
         <HeaderLoginMenu
           trigger={
-            <div className="border-black border-[1px] p-2 rounded-full cursor-pointer">
-              <Menu size={20} />
-            </div>
+            <Image
+              src={data.profilePhoto.imageUrl}
+              alt={data.profilePhoto.originalFileName}
+              width={40}
+              height={40}
+              className={`w-[40px] h-[40px] object-cover rounded-full border-[1px] border-black cursor-pointer scale-103`}
+            />
           }
-          memberId={memberId}
+          memberId={data.memberId}
         />
       )}
     </>

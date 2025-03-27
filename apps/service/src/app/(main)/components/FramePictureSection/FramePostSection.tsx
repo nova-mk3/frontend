@@ -7,6 +7,7 @@ import { Separator } from "@nova/ui/components/ui/separator";
 import { Ellipsis, Eye } from "lucide-react";
 import IntroPostList from "./IntroPostList";
 import NoticePostList from "./NoticePostList";
+import AcrossPostList from "./AcrossPostList";
 export default function FramePostSection({
   className,
   ...props
@@ -73,10 +74,10 @@ export default function FramePostSection({
             </div>
           </div>
           <Separator className="mt-3" />
-          {selectedTab === "intro" && <IntroPostList />}
+          {selectedTab === "latest" && <AcrossPostList sortBy="createdTime" />}
+          {selectedTab === "popular" && <AcrossPostList sortBy="viewCount" />}
           {selectedTab === "notice" && <NoticePostList />}
-          {selectedTab === "popular" && <IntroPostList />}
-          {selectedTab === "latest" && <IntroPostList />}
+          {selectedTab === "intro" && <IntroPostList />}
         </div>
       </div>
     </div>

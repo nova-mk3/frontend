@@ -1,18 +1,17 @@
 import React from "react";
-import { usePostListQuery } from "../../board/query/postqueries";
+import { useAcrossBoardListQuery } from "../../board/query/postqueries";
 import FramPostSectionListItem from "./FramPostSectionListItem";
-import { INTEGRATED, POST_TYPE } from "@/src/constant/board";
+import { POST_TYPE } from "@/src/constant/board";
 
-export default function NoticePostList() {
-  const { data, isLoading } = usePostListQuery({
-    postType: POST_TYPE.NOTICE,
+interface Props {
+  sortBy: string;
+}
+export default function AcrossPostList({ sortBy }: Props) {
+  const { data, isLoading } = useAcrossBoardListQuery({
     page: 0,
-    size: 7,
-    keyword: "",
-    searchType: "",
-    sortBy: "createdTime",
+    size: 5,
+    sortBy: sortBy,
     sortDirection: "desc",
-    boardId: INTEGRATED,
   });
 
   if (isLoading)
@@ -21,14 +20,17 @@ export default function NoticePostList() {
         진행중...
       </div>
     );
+
+  console.log(data);
+
   return (
     <div className="flex flex-col gap-2">
       {/* PostListSkeleton */}
       {data.content.map((post: any) => (
         <FramPostSectionListItem
-          defaultHref="/board"
+          defaultHref={`${POST_TYPE.PICTURES !== post.postType && "/board"}`}
           key={post.id}
-          type={post.type}
+          type={post.postType}
           title={post.title}
           viewCount={post.viewCount}
           createdTime={post.createdTime}

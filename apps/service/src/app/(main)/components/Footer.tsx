@@ -2,13 +2,9 @@
 import React from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
-import { getMemberId } from "@/src/api/user/client";
+import { SimpleProfileQueryOptions } from "../users/[id]/query/options";
 export default function Footer() {
-  const { data: memberId } = useQuery({
-    queryKey: ["memberId"],
-    queryFn: getMemberId,
-    staleTime: 0,
-  });
+  const { data, isLoading } = useQuery(SimpleProfileQueryOptions());
 
   return (
     <div className="flex w-full bg-ui01 mt-10">
@@ -26,7 +22,7 @@ export default function Footer() {
             <Link href="/boartd/home" className="hover:underline">
               통합게시판
             </Link>
-            {memberId && (
+            {data && (
               <Link href="/exam_archive" className="hover:underline">
                 자료게시판
               </Link>
