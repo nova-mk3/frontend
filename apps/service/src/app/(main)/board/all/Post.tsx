@@ -10,7 +10,6 @@ import BoardListTitle from "../components/BoardListTitle";
 import { Layers } from "lucide-react";
 import BoardList from "../components/BoardList";
 import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
-import DeferredComponent from "../../components/DeferredComponent";
 
 export default function Post() {
   const { currentPage, keyword, searchType, sortBy, sortDirection } =
