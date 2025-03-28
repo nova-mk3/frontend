@@ -20,27 +20,27 @@ const items = [
   {
     title: "Dashboard",
     icon: ScrollText,
-    href: "/",
+    href: "/admin/",
   },
   {
     title: "member",
     icon: Users,
-    href: "/member",
+    href: "/admin/member",
   },
   {
     title: "ServerLog",
     icon: ScrollText,
-    href: "/serverLog",
+    href: "/admin/serverLog",
   },
   {
     title: "ServerStatus",
     icon: PcCase,
-    href: "/serverStatus",
+    href: "/admin/serverStatus",
   },
   {
     title: "UXResearch",
     icon: TestTubeDiagonal,
-    href: "/uxResearch",
+    href: "/admin/uxResearch",
   }
 ]
 

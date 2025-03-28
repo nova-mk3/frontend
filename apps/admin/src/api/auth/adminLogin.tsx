@@ -1,4 +1,5 @@
 import { api } from '@/src/api/core';
+import { throwError } from '@/src/utils/throwError';
 
 export interface AdminLoginRequest {
     studentNumber: string;
@@ -12,12 +13,13 @@ export async function AdminLogin({ studentNumber , password }: AdminLoginRequest
         password,
     });
     if(response.status === 200){
-        window.location.href = '/'; // 성공시 대시보드로 이동
+        window.location.href = '/admin/'; // 성공시 대시보드로 이동
     }else {
         alert("로그인 실패: " + response.data.message);
+        throwError(response.data.message);
     }
-  } catch (error: any) {
-    alert("로그인 실패: " + error.message);
-    throw error;
+  } catch (error: unknown) {
+    alert("로그인 실패 :" + error);
+    throwError(error);
   }
 }

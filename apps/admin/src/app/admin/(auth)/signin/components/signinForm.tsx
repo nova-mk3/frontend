@@ -30,7 +30,7 @@ export function SigninForm() {
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
       }}
     >
-      <Link href={"/"} className="flex-grow-0 flex items-center justify-center">
+      <Link href={"/admin/"} className="flex-grow-0 flex items-center justify-center">
         <Logo height="50px" width="50px" fill="#B096F5" className="block"/>
         <div className="text-4xl font-bold text-primary">novAdmin</div>
       </Link>

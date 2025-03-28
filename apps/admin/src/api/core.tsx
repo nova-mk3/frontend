@@ -23,7 +23,7 @@ Authapi.interceptors.response.use(
       const status = error.response.status;
       if (status === 401 || status === 403) {
         alert("토큰이 만료되었습니다. 다시 로그인해주세요");
-        window.location.href = '/signin'; 
+        window.location.href = '/admin/signin'; 
       }
     }
     
