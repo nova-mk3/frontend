@@ -15,6 +15,7 @@ import { postKeys } from "../../board/query/postqueries";
 import { formatDate } from "@/src/libs/utils/dateParsing";
 import ViewCount from "../../board/components/ViewCount";
 import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
+import PictureLike from "../components/PictureLike";
 
 interface PostDetailProps {
   postId: string;
@@ -32,6 +33,7 @@ export interface PictureDetail {
   modifiedTime: string;
   title: string;
   viewCount: number;
+  liked: boolean;
 }
 
 export interface ImageProps {
@@ -113,6 +115,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
             <div className="mt-5 flex-1">{data!.content}</div>
 
             <div className="flex flex-row  gap-2 t-m text-text03 items-center">
+              <PictureLike postId={data!.id} liked={data!.liked} />
               <p>좋아요 {data!.likeCount}</p>
               <p>댓글 {data!.commentCount}</p>
               <ViewCount viewCount={data!.viewCount} />

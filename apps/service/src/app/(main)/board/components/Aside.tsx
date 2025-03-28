@@ -4,8 +4,6 @@ import { Share2 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
 import { cn } from "@nova/ui/lib/utils";
-import dynamic from "next/dynamic";
-import HeartIcon from "@/public/image/Heart.svg";
 import DesktopLike from "./DesktopLike";
 // boolean은 html이 인식하지 못함 ㄷㄷ....
 // const DesktopLike = dynamic(() => import("./DesktopLike"), {

@@ -1,6 +1,11 @@
+"use client";
 import React from "react";
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import { SimpleProfileQueryOptions } from "../users/[id]/query/options";
 export default function Footer() {
+  const { data, isLoading } = useQuery(SimpleProfileQueryOptions());
+
   return (
     <div className="flex w-full bg-ui01 mt-10">
       <div className="w-[80%] flex flex-col mx-auto mobile:w-[90%]">
@@ -17,9 +22,11 @@ export default function Footer() {
             <Link href="/boartd/home" className="hover:underline">
               통합게시판
             </Link>
-            <Link href="/exam_archive" className="hover:underline">
-              족보게시판
-            </Link>
+            {data && (
+              <Link href="/exam_archive" className="hover:underline">
+                자료게시판
+              </Link>
+            )}
             <Link href="/pictures" className="hover:underline">
               사진게시판
             </Link>

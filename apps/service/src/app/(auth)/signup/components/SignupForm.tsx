@@ -21,6 +21,7 @@ import GraduationYearSelect from "./GraduationYearSelect";
 import {
   GraduationSignUpRequest,
   MemberSignUpRequest,
+  ProfileUploadAPI,
   signup,
   SignUpData,
   verifyEmail,
@@ -101,6 +102,7 @@ export function SignupForm() {
       form.setValue("emailCheck", true, { shouldValidate: true });
     },
     onError: (error) => {
+      alert(error.message);
       console.log(error);
     },
   });
@@ -130,6 +132,10 @@ export function SignupForm() {
     onError: (error) => {
       alert(error.message);
     },
+  });
+
+  const useProfileUploadMutation = useMutation({
+    mutationFn: ({ data }: { data: FormData }) => ProfileUploadAPI(data),
   });
 
   async function onEmailSubmit(value: string) {
@@ -162,43 +168,92 @@ export function SignupForm() {
     useVerifyEmailCodeMutation.mutate({ email: isEmail, authCode: value });
   }
 
-  function onSubmit(values: SignupInput) {
-    const grade = Number(values.grade![0]);
+  async function onSubmit(values: SignupInput) {
+    // 등록할 프로필이 있다면
+    if (values.profilePhoto) {
+      const formData = new FormData();
+      formData.append("profile-photo", values.profilePhoto!);
+      try {
+        const response = await useProfileUploadMutation.mutateAsync({
+          data: formData,
+        });
 
-    const memberSignUpRequest: MemberSignUpRequest = {
-      studentNumber: values.studentNumber,
-      password: values.password,
-      name: values.username,
-      email: values.email,
-      graduation: values.graduation,
-      grade: grade,
-      semester: Number(values.semester),
-      absence: values.absence!,
-      profilePhoto: "", //나중에 file로 바뀌어야함
-      phone: values.phoneNumber,
-      birth: !values.birth ? "" : values.birth.toLocaleDateString("ko-KR"),
-    };
+        const memberSignUpRequest: MemberSignUpRequest = {
+          studentNumber: values.studentNumber,
+          password: values.password,
+          name: values.username,
+          email: values.email,
+          graduation: values.graduation,
+          grade: values.grade!,
+          semester: values.semester!,
+          absence: values.absence!,
+          profilePhoto: response.data.id,
+          phone: values.phoneNumber,
+          birth: !values.birth ? "" : values.birth.toLocaleDateString("ko-KR"),
+        };
 
-    // [2] graduation이 true라면 graduationSignUpRequest 만들기
-    let graduationSignUpRequest: GraduationSignUpRequest | undefined;
-    if (values.graduation) {
-      graduationSignUpRequest = {
-        year: Number(values.year!.split("년")[0]),
-        contact: values.contact!,
-        work: values.work!,
-        job: values.job!,
-        contactInfo: values.contactInfo!,
-        contactDescription: values.contactDescription!,
-      };
+        // [2] graduation이 true라면 graduationSignUpRequest 만들기
+        let graduationSignUpRequest: GraduationSignUpRequest | undefined;
+        if (values.graduation) {
+          graduationSignUpRequest = {
+            year: Number(values.year!.split("년")[0]),
+            contact: values.contact!,
+            work: values.work!,
+            job: values.job!,
+            contactInfo: values.contactInfo!,
+            contactDescription: values.contactDescription!,
+          };
+        }
+
+        // [3] 최종 SignUpData 조합
+        const requestData: SignUpData = {
+          memberSignUpRequest,
+          graduationSignUpRequest,
+        };
+
+        useSignupMutation.mutate(requestData);
+      } catch (error) {
+        alert("파일 업로드 실패");
+        console.log(error);
+      }
     }
+    // 프로필 없을때
+    else {
+      const memberSignUpRequest: MemberSignUpRequest = {
+        studentNumber: values.studentNumber,
+        password: values.password,
+        name: values.username,
+        email: values.email,
+        graduation: values.graduation,
+        grade: values.grade!,
+        semester: values.semester!,
+        absence: values.absence!,
+        profilePhoto: "",
+        phone: values.phoneNumber,
+        birth: !values.birth ? "" : values.birth.toLocaleDateString("ko-KR"),
+      };
 
-    // [3] 최종 SignUpData 조합
-    const requestData: SignUpData = {
-      memberSignUpRequest,
-      graduationSignUpRequest,
-    };
+      // [2] graduation이 true라면 graduationSignUpRequest 만들기
+      let graduationSignUpRequest: GraduationSignUpRequest | undefined;
+      if (values.graduation) {
+        graduationSignUpRequest = {
+          year: Number(values.year!.split("년")[0]),
+          contact: values.contact!,
+          work: values.work!,
+          job: values.job!,
+          contactInfo: values.contactInfo!,
+          contactDescription: values.contactDescription!,
+        };
+      }
 
-    useSignupMutation.mutate(requestData);
+      // [3] 최종 SignUpData 조합
+      const requestData: SignUpData = {
+        memberSignUpRequest,
+        graduationSignUpRequest,
+      };
+
+      useSignupMutation.mutate(requestData);
+    }
   }
 
   return (
@@ -237,7 +292,7 @@ export function SignupForm() {
         )}
         {emailSentMessage && (
           <p className="b-s text-success">{emailSentMessage}</p>
-        )}{" "}
+        )}
         {/* 이메일 전송 성공 메시지 */}
         <InputFormFieldWithButton
           form={form}
@@ -250,11 +305,11 @@ export function SignupForm() {
         />
         {emailVerifiedMessageSuccess && (
           <p className="b-s text-success">{emailVerifiedMessageSuccess}</p>
-        )}{" "}
+        )}
         {/* 이메일 인증 성공 메시지 */}
         {emailVerifiedMessageDanger && (
           <p className="b-s text-danger">{emailVerifiedMessageDanger}</p>
-        )}{" "}
+        )}
         {/* 이메일 인증 실패 메시지 */}
         <RadioFormField
           form={form}

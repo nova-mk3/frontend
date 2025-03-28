@@ -38,7 +38,7 @@ export default function SiderbarContent() {
           </li>
           <li className="w-10/12 cursor-pointer mx-auto rounded-[15px] px-2 py-[6px] hover:bg-[#B096F5] hover:text-white flex flex-row gap-2">
             <Folder />
-            족보게시판
+            자료게시판
           </li>
           <li className="w-10/12 cursor-pointer mx-auto rounded-[15px] px-2 py-[6px] hover:bg-[#B096F5] hover:text-white flex flex-row gap-2">
             <Image />

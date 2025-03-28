@@ -5,8 +5,10 @@ import { HTMLAttributes, useState } from "react";
 import Logo from "@/public/image/Logo.svg";
 import { Separator } from "@nova/ui/components/ui/separator";
 import { Ellipsis, Eye } from "lucide-react";
+import IntroPostList from "./IntroPostList";
+import NoticePostList from "./NoticePostList";
+import AcrossPostList from "./AcrossPostList";
 import Link from "next/link";
-import PostList from "./PostList";
 export default function FramePostSection({
   className,
   ...props
@@ -71,24 +73,22 @@ export default function FramePostSection({
             >
               자기소개
             </div>
+            <Link href="/board/home" className="ml-auto">
+              <Ellipsis size={20} className="text-gray-700" />
+            </Link>
           </div>
           <Separator className="mt-3" />
-          <div className="flex flex-col">
-            {/* <PostList tab={selectedTab} /> */}
-            <Item />
-            <Item />
-            <Item />
-            <Item />
-            <Item />
-            <Item />
-          </div>
+          {selectedTab === "latest" && <AcrossPostList sortBy="createdTime" />}
+          {selectedTab === "popular" && <AcrossPostList sortBy="viewCount" />}
+          {selectedTab === "notice" && <NoticePostList />}
+          {selectedTab === "intro" && <IntroPostList />}
         </div>
       </div>
     </div>
   );
 }
 
-function Item() {
+export function Item() {
   return (
     <div className="flex flex-row gap-3 w-full items-center py-4 border-b-[1px] border-line01 hover:cursor-pointer">
       <p className="bg-primary rounded-full text-sm flex items-center justify-center text-background01 px-2 py-0.5">

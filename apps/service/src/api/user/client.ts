@@ -20,3 +20,55 @@ export async function getMemberId() {
     return "";
   }
 }
+
+export async function getSimpleProfie() {
+  try {
+    // ✅ `fetch` 요청 시 `Cookie` 포함
+    const res = await Authapi.get(`/members/simple-profile`);
+    return res.data.data;
+  } catch (error: any) {
+    throwErrorMessage(error);
+  }
+}
+
+export const UserProfileUploadAPI = async ({
+  formdata,
+  memberId,
+}: {
+  formdata: FormData;
+  memberId: string;
+}) => {
+  try {
+    const response = await Authapi.post(
+      `/members/${memberId}/profile-photo`,
+      formdata
+    );
+    return response.data.data;
+  } catch (error: any) {
+    throwErrorMessage(error);
+  }
+};
+
+export const PutProfileIdAPI = async ({
+  profileMemberId,
+  fileId,
+}: {
+  profileMemberId: string;
+  fileId: string;
+}) => {
+  console.log(fileId);
+  try {
+    const response = await Authapi.put(
+      `/members/${profileMemberId}/profile-photo`,
+      fileId,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data.data;
+  } catch (error: any) {
+    throwErrorMessage(error);
+  }
+};

@@ -20,13 +20,9 @@ import {
   NavigationMenuTrigger,
 } from "@nova/ui/components/ui/navigation-menu";
 import { useQuery } from "@tanstack/react-query";
-import { getMemberId } from "@/src/api/user/client";
+import { SimpleProfileQueryOptions } from "../users/[id]/query/options";
 export default function Navigation() {
-  const { data: memberId } = useQuery({
-    queryKey: ["memberId"],
-    queryFn: getMemberId,
-    staleTime: 0,
-  });
+  const { data, isLoading } = useQuery(SimpleProfileQueryOptions());
 
   return (
     <NavigationMenu className="z-[51]">
@@ -111,7 +107,7 @@ export default function Navigation() {
                 </Link>
               </NavigationMenuLink>
               {/* 노바회원만 볼수 있도록! */}
-              {memberId && (
+              {data && (
                 <NavigationMenuLink asChild>
                   <Link href="/exam_archive">
                     <li className="flex items-center w-[285px] h-[60px] rounded-lg hover:bg-ui01">
@@ -120,8 +116,8 @@ export default function Navigation() {
                           <Folder size={28} />
                         </div>
                         <div className="flex flex-col ml-[16px] t-m">
-                          <p className="font-bold">족보 게시판</p>
-                          <p>족보 모음 게시판</p>
+                          <p className="font-bold">자료 게시판</p>
+                          <p>자료 모음 게시판</p>
                         </div>
                       </div>
                     </li>

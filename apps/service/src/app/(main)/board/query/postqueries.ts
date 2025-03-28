@@ -4,6 +4,7 @@ board에서 사용하는 react-query hooks 모음입니다
 
 import { ArchiveGetDetail } from "@/src/api/board/exam";
 import {
+  AcrossBoardParamType,
   BoardAllList,
   BoardGetParamType,
   BoardIdParams,
@@ -12,9 +13,14 @@ import {
 } from "@/src/api/board/integrated";
 import { PostType } from "@/src/constant/board";
 import { useQuery } from "@tanstack/react-query";
-import { postDetailQueryOptions, postLatestQueryOptions } from "./options";
+import {
+  AcrossBoardQueryOptions,
+  postDetailQueryOptions,
+  postLatestQueryOptions,
+  postSearchQueryOptions,
+} from "./options";
 
-interface SearchFilter {
+export interface SearchFilter {
   page: number;
   size: number;
   searchType?: string;
@@ -56,23 +62,18 @@ export const usePostListQuery = ({
   sortDirection,
   keyword,
 }: Omit<Params, "postId">) => {
-  return useQuery({
-    queryKey: postKeys.typelist(
-      { page, size, searchType, sortBy, sortDirection, keyword },
-      postType
-    ),
-    queryFn: () =>
-      IntegratedBoardGet({
-        postType,
-        page,
-        size,
-        boardId,
-        searchType,
-        sortBy,
-        sortDirection,
-        keyword,
-      }),
-  });
+  return useQuery(
+    postSearchQueryOptions({
+      postType,
+      page,
+      size,
+      boardId,
+      searchType,
+      sortBy,
+      sortDirection,
+      keyword,
+    })
+  );
 };
 
 export const usePostAllListQuery = ({
@@ -118,4 +119,15 @@ export const useArchiveDetailQuery = ({
     queryKey: postKeys.detail(postId),
     queryFn: () => ArchiveGetDetail({ boardId, postId }),
   });
+};
+
+export const useAcrossBoardListQuery = ({
+  size,
+  page,
+  sortBy,
+  sortDirection,
+}: AcrossBoardParamType) => {
+  return useQuery(
+    AcrossBoardQueryOptions({ size, page, sortBy, sortDirection })
+  );
 };

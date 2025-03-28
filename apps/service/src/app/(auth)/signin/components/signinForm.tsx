@@ -67,14 +67,20 @@ export function SigninForm() {
             leftIcon={<Lock size={18} />}
             hasToggleIcon
           />
-          <div className="flex  justify-between">
-            <div className="flex space-x-2 items-center">
+          <div className="flex ml-auto flex-row justify-between gap-3">
+            {/* <div className="flex space-x-2 items-center">
               <Checkbox className="border-line01 text-background01" />
-              {/* TODO : 선택 시 토큰 저장 위치를 다르게 하기. session, cookie의 차이 */}
+
               <p className="b-m text-text01">로그인 정보 저장하기</p>
-            </div>
+            </div> */}
             <p
-              className="b-m text-text01 cursor-pointer"
+              className="flex  b-m text-text01 cursor-pointer"
+              onClick={() => alert("아직은 찾을 수 없습니다")}
+            >
+              아이디 찾기
+            </p>
+            <p
+              className="flex  b-m text-text01 cursor-pointer"
               onClick={() => alert("아직은 찾을 수 없습니다")}
             >
               비밀번호 찾기

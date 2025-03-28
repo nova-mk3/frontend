@@ -1,7 +1,7 @@
 import React from "react";
 
-import Hydration from "./Hydration";
 import ErrorBoundaryWrapper from "@/src/app/(main)/components/ErrorBoundaryWrapper";
+import EditForm from "./EditForm";
 export const dynamic = "force-dynamic";
 
 export default async function page({
@@ -13,7 +13,7 @@ export default async function page({
   return (
     <div className="w-[400px] mx-auto mobile:w-[90%] mt-10">
       <ErrorBoundaryWrapper>
-        <Hydration memberId={id} />
+        <EditForm memberId={id} />
       </ErrorBoundaryWrapper>
     </div>
   );

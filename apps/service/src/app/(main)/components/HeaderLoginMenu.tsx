@@ -19,7 +19,7 @@ interface Props {
 export default function HeaderLoginMenu({ trigger, memberId }: Props) {
   const handleLogout = async () => {
     await logout();
-    window.location.href = "/";
+    window.location.reload();
   };
   return (
     <div className="flex flex-row justify-center items-center gap-4 mobile:hidden">
