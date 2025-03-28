@@ -1,9 +1,9 @@
 import "@nova/tailwind-config/globalcss";
 import type { Metadata } from "next";
-import { pretendard } from "../../theme/fonts";
+import { pretendard } from "../../../theme/fonts";
 import AdminSidebar from "./components/AdminSidebar";
 import { SidebarProvider, SidebarTrigger } from "@nova/ui/components/ui/sidebar";
-import Providers from "../../api/providers";
+import Providers from "../../../api/providers";
 
 export const metadata: Metadata = {
   title: "novAdmin",

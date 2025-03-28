@@ -6,7 +6,7 @@ import { Phone, IdCard, Cake, Mail , GraduationCap, LucideIcon} from "lucide-rea
 import { PendingMemberCardModalProps, PendingGraduationResponse, PendingMemberResponse } from "@/src/types/pendingMember";
 import { useApprovePendingMemberMutation, useRejectPendingMemberMutation, useSpecificPendingMemberQuery } from "@/src/query/pendingMembersQueries";
 import { ProfileImage } from '@nova/ui/components/ui/profileImage';
-import { formatPhoneNumber , formatBirthday} from './../../../../utils/formatter';
+import { formatPhoneNumber , formatBirthday} from '../../../../../utils/formatter';
 
 const MemberInfo = ({ icon: Icon, label }: { icon: LucideIcon ; label: string | undefined }) => (
   <div className="flex items-center space-x-3">
