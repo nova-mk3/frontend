@@ -38,6 +38,7 @@ COPY --from=builder /app .
 # 비루트 사용자 생성
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
+RUN chown -R nextjs:nodejs .next
 USER nextjs
 
 COPY --from=installer /app/apps/service/.next/standalone ./ 

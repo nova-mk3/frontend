@@ -20,6 +20,7 @@ RUN pnpm turbo prune admin --docker
 FROM base AS installer
 RUN apk update
 RUN apk add --no-cache libc6-compat
+
 # pnpm 설치
 RUN npm install -g pnpm
 WORKDIR /app
@@ -44,6 +45,7 @@ WORKDIR /app/apps/admin
 # 비루트 사용자 생성
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs 
+RUN chown -R nextjs:nodejs .next
 USER nextjs
 
 
