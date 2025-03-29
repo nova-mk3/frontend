@@ -45,7 +45,6 @@ WORKDIR /app/apps/admin
 # 비루트 사용자 생성
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs 
-USER nextjs
 
 # RUN chown -R nextjs:nodejs .next
 
@@ -55,6 +54,7 @@ COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/.next/static ./apps/
 COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/public ./apps/admin/public
 
 RUN chown -R nextjs:nodejs ./apps/admin
+USER nextjs
 # 포트를 노출합니다.
 EXPOSE 3001
 
