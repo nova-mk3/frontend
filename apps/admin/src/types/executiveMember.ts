@@ -20,7 +20,7 @@ export interface ExecutiveMember{
     name: string;
     memberId: string;
     phone: string;
-    profilePhotoResponse: ProfilePhoto;
+    profilePhoto: ProfilePhoto;
 }
 
 export enum enumRoleType{
@@ -39,7 +39,7 @@ export interface ExecutiveMembercardProps {
     birthday? : string,
     role? : enumRoleType,
     executiveHistoryId? : string,
-    profilePhotoResponse: ProfilePhoto,
+    profilePhoto: ProfilePhoto,
 }
 
 export const ROLE_LABELS: Record<enumRoleType, string> = {

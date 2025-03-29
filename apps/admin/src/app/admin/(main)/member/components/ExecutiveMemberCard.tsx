@@ -21,7 +21,7 @@ export default function ExecutiveMembercard({
     studentId="2019019014" ,
     executiveHistoryId="00000000",
     role= enumRoleType.EXECUTIVE,
-    profilePhotoResponse = {
+    profilePhoto = {
         imageUrl: "test",
         id: "00000000",
         originalFileName: "cat.png",
@@ -32,7 +32,7 @@ export default function ExecutiveMembercard({
 
     return (
         <div className={`w-[650px] h-[80px] m-[8px] flex border border-primary rounded-lg items-center hover:bg-background02 cursor-pointer`}>
-            <ProfileImage src={profilePhotoResponse.imageUrl} size={64} className='ml-[15px]'/>
+            <ProfileImage src={profilePhoto.imageUrl} size={64} className='ml-[15px]'/>
             <div className={`text-2xl text-center flex-grow`}>{name}</div>
             <Phone className={"ml-auto h-8 w-8"}/>
             <div className={`text-2xl text-center flex-grow`}>{phone}</div>

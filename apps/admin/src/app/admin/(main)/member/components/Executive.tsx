@@ -74,7 +74,7 @@ export default function Executive() {
                     phone={formatPhoneNumber(member.phone)}
                     role={member.role}
                     executiveHistoryId={member.executiveHistoryId}
-                    profilePhotoResponse={member.profilePhotoResponse}
+                    profilePhoto={member.profilePhoto}
                   />
                 ))
               ) : (
