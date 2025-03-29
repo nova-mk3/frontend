@@ -44,7 +44,7 @@ COPY --from=installer --chown=nextjs:nodejs /app/apps/service/.next/standalone .
 COPY --from=installer --chown=nextjs:nodejs /app/apps/service/.next/static ./apps/service/.next/static 
 COPY --from=installer --chown=nextjs:nodejs /app/apps/service/public ./apps/service/public
 
-RUN chown -R nextjs:nodejs ./apps/service
+RUN chown -R nextjs:nodejs ./apps/service/.next
 
 # 이제 사용자 전환
 USER nextjs

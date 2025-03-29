@@ -53,7 +53,7 @@ COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/.next/standalone ./
 COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/.next/static ./apps/admin/.next/static 
 COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/public ./apps/admin/public
 
-RUN chown -R nextjs:nodejs ./apps/admin
+RUN chown -R nextjs:nodejs ./apps/admin/.next
 USER nextjs
 # 포트를 노출합니다.
 EXPOSE 3001

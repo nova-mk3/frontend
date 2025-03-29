@@ -12,7 +12,14 @@ const nextConfig: NextConfig = {
     return config;
   },
   images: {
-    domains: ["localhost", "jinybook.site"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "nova.cbnu.ac.kr",
+        port: "",
+        search: "",
+      },
+    ],
   },
 };
 
