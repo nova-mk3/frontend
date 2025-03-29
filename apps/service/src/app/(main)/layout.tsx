@@ -8,7 +8,7 @@ import Providers from "../../query/providers";
 
 export const metadata: Metadata = {
   title: "NOVA",
-  description: "충북대학교 소프트웨어학과 노바",
+  description: "충북대학교 소프트웨어학과 노바 학술동아리",
 };
 
 export default function RootLayout({
