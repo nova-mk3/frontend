@@ -18,7 +18,6 @@ export const useExecutiveMembersQuery = (year: number) => {
     return useQuery<ExecutiveMember[]>({
         queryKey: executiveMembersKeys.list(year),
         queryFn: () => GetExecutiveMemberByYear(year),
-        // enabled: year !== 0,
     });
 };
 
@@ -75,7 +74,6 @@ export const usePutExecutiveMemberMutation = (year:number) => {
     return useMutation({
         mutationFn: ({executiveHistoryId, role }:{executiveHistoryId: string , role: enumRoleType}) => PutExecutiveMember(executiveHistoryId, role),
         onSuccess: () => {
-            console.log("미야옹")
             queryClient.invalidateQueries({
                 queryKey: executiveMembersKeys.list(year),
             });
