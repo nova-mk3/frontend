@@ -18,6 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${pretendard.variable} font-pretendard`}>
+      <head>
+        <meta
+          name="google-site-verification"
+          content="Ku6VQs4pIm3t7yVPNmrAaM0wZ6FG0inGGHbKiJ0Die8"
+        />
+      </head>
       {/* <LayoutClient>{children}</LayoutClient> */}
       <body>
         <Providers>
