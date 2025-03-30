@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
 interface SliderState {
   currentIndex: number;
@@ -7,5 +7,6 @@ interface SliderState {
 
 export const useSliderStore = create<SliderState>((set) => ({
   currentIndex: 0,
-  setCurrentIndex: (index : number) => set( state => ({currentIndex : state.currentIndex=index})),
+  setCurrentIndex: (index: number) =>
+    set((state) => ({ currentIndex: (state.currentIndex = index) })),
 }));
