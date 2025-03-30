@@ -27,6 +27,7 @@ export default function CommentList({ postId }: CommentListProps) {
           modifiedTime={item.modifiedTime}
           createdTime={item.createdTime}
           postId={postId}
+          authorId={item.authorId}
         />
       ))}
     </>

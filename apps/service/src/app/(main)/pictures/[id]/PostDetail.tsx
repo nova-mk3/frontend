@@ -34,6 +34,7 @@ export interface PictureDetail {
   title: string;
   viewCount: number;
   liked: boolean;
+  authorId: string;
 }
 
 export interface ImageProps {
@@ -46,11 +47,13 @@ export interface ImageProps {
 
 export default function PostDetail({ postId }: PostDetailProps) {
   const router = useRouter();
+  const queryClient = useQueryClient();
+  const userData = queryClient.getQueryData(["memberProfile"]) as any;
+
   const { data, isLoading } = usePictureDetailQuery({
     postId,
     boardId: CLUB_ARCHIVE,
   });
-  const queryClient = useQueryClient();
 
   const handleModify = () => {
     router.push(`/${POST_TYPE.PICTURES.toLocaleLowerCase()}/${postId}/modify`);
@@ -100,16 +103,20 @@ export default function PostDetail({ postId }: PostDetailProps) {
               <p className="">{formatDate(data!.createdTime)}</p>
               {/* <Like className='ml-auto mr-2' count={5}/> */}
               <div className="ml-auto flex flex-row gap-2 items-center cursor-pointer">
-                <p className="" onClick={handleModify}>
-                  수정
-                </p>
-                <Separator orientation="vertical" className="h-4" />
-                <AlertDialog
-                  title="게시글 삭제"
-                  subtitle="게시글을 정말로 삭제하시겠습니까?"
-                  triggerName="삭제"
-                  onAction={handleDelete}
-                />
+                {userData?.memberId === data!.authorId && (
+                  <>
+                    <p className="" onClick={handleModify}>
+                      수정
+                    </p>
+                    <Separator orientation="vertical" className="h-4" />
+                    <AlertDialog
+                      title="게시글 삭제"
+                      subtitle="게시글을 정말로 삭제하시겠습니까?"
+                      triggerName="삭제"
+                      onAction={handleDelete}
+                    />
+                  </>
+                )}
               </div>
             </div>
             <div className="mt-5 flex-1">{data!.content}</div>

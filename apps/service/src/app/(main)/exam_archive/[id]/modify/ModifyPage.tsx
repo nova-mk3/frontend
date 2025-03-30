@@ -14,7 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { ExamInput, ExamSchema } from "@/src/schema/exam.schema";
 import useYearRange from "@/src/libs/hooks/useYearRange";
-import { SEMESTER_OPTIONS } from "@/src/constant/exam";
+import { SEMESTER_MAP, SEMESTER_OPTIONS } from "@/src/constant/exam";
 import { InputFormField } from "@/src/app/(auth)/components/InputFormField";
 import { ArchivePut, ArchivePutRequest } from "@/src/api/board/exam";
 import { FileItemProps } from "../../../components/File/ViewFileItem";
@@ -36,7 +36,7 @@ export default function ModifyPage({ postId }: Props) {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [originFiles, setOriginFiles] = useState<FileItemProps[]>([]);
   const [willDeleteFiles, setwillDeleteFiles] = useState<string[]>([]);
-
+  const [check, setCheck] = useState<boolean>(false);
   const { data, isLoading } = useArchiveDetailQuery({
     postId,
     boardId: CLUB_ARCHIVE,
@@ -92,6 +92,10 @@ export default function ModifyPage({ postId }: Props) {
   });
 
   useEffect(() => {
+    const { year, subject, professorName, semester } = form.getValues();
+    // TODO: 리펙토링, 처음 FORM이 채워지는 것을 기다리는 트리거
+    if (!year && check === false) return;
+    setCheck(true);
     let newTitle = "";
 
     // year가 있다면 맨 앞에 배치
@@ -112,7 +116,9 @@ export default function ModifyPage({ postId }: Props) {
 
     if (semester) {
       // 기존에 무언가가 있다면 ' - ' 붙여서 semester, 없다면 그냥 semester
-      newTitle += newTitle ? ` - ${semester}` : `${semester}`;
+      newTitle += newTitle
+        ? ` - ${SEMESTER_MAP[semester]}`
+        : `${SEMESTER_MAP[semester]}`;
     }
 
     form.setValue("title", newTitle, { shouldValidate: true });

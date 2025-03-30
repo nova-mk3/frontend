@@ -20,6 +20,7 @@ interface ReplyCommentItemProps {
   className?: string;
   postId: string;
   parentCommentId?: string;
+  authorId: string;
 }
 export default function ReplyCommentItem({
   id,
@@ -31,13 +32,14 @@ export default function ReplyCommentItem({
   modifiedTime,
   createdTime,
   postId,
+  authorId,
   parentCommentId,
 }: ReplyCommentItemProps) {
   const queryClient = useQueryClient();
   const [isReplyOpen, setReplyOpen] = useState(false);
   const [isModify, setModify] = useState(false);
   const [value, setValue] = useState("");
-
+  const data = queryClient.getQueryData(["memberProfile"]) as any;
   const toggleModify = () => {
     if (isModify === false) setValue(content);
     setModify((prev) => !prev);
@@ -105,16 +107,20 @@ export default function ReplyCommentItem({
         </div>
 
         <div className="ml-auto flex flex-row gap-[10px] ">
-          <p className="cursor-pointer" onClick={toggleModify}>
-            수정
-          </p>
-          <div className="w-[1px] h-[20px] bg-line01"></div>
-          <AlertDialog
-            title="댓글 삭제"
-            subtitle="댓글을 정말로 삭제하시겠습니까?"
-            triggerName="삭제"
-            onAction={handleDelete}
-          />
+          {data?.memberId === authorId && (
+            <>
+              <p className="cursor-pointer" onClick={toggleModify}>
+                수정
+              </p>
+              <div className="w-[1px] h-[20px] bg-line01"></div>
+              <AlertDialog
+                title="댓글 삭제"
+                subtitle="댓글을 정말로 삭제하시겠습니까?"
+                triggerName="삭제"
+                onAction={handleDelete}
+              />
+            </>
+          )}
         </div>
       </div>
 

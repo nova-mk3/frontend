@@ -24,6 +24,7 @@ export interface CommentItemProps {
   createdTime: string;
   className?: string;
   postId: string;
+  authorId: string;
 }
 
 export interface Profile {
@@ -41,12 +42,14 @@ export default function CommentListItem({
   createdTime,
   className,
   postId,
+  authorId,
 }: CommentItemProps) {
   const queryClient = useQueryClient();
   const [isReplyOpen, setReplyOpen] = useState(false);
   const [isReplyFormOpen, setReplyFormOpen] = useState(false);
   const [isModify, setModify] = useState(false);
   const [value, setValue] = useState(content);
+  const data = queryClient.getQueryData(["memberProfile"]) as any;
   const toggleModify = () => {
     if (isModify === false) setValue(content);
     setModify((prev) => !prev);
@@ -111,16 +114,20 @@ export default function CommentListItem({
 
         {/* 수정 삭제 버튼도 컴포넌트로 만들어야겠음 */}
         <div className="ml-auto flex flex-row gap-[10px] text-gray-500 text-sm">
-          <p className="cursor-pointer" onClick={toggleModify}>
-            수정
-          </p>
-          <div className="w-[1px] h-[20px] bg-line01"></div>
-          <AlertDialog
-            title="댓글 삭제"
-            subtitle="댓글을 정말로 삭제하시겠습니까?"
-            triggerName="삭제"
-            onAction={handleDelete}
-          />
+          {data?.memberId === authorId && (
+            <>
+              <p className="cursor-pointer" onClick={toggleModify}>
+                수정
+              </p>
+              <div className="w-[1px] h-[20px] bg-line01"></div>
+              <AlertDialog
+                title="댓글 삭제"
+                subtitle="댓글을 정말로 삭제하시겠습니까?"
+                triggerName="삭제"
+                onAction={handleDelete}
+              />
+            </>
+          )}
         </div>
       </div>
 
@@ -161,6 +168,7 @@ export default function CommentListItem({
               children={child.children}
               postId={postId}
               parentCommentId={id}
+              authorId={child.authorId}
             />
           ))}
 

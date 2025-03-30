@@ -8,6 +8,7 @@ import AlertDialog from "../../components/AlertDialog";
 import dynamic from "next/dynamic";
 import ViewCount from "./ViewCount";
 import { useQueryClient } from "@tanstack/react-query";
+import { Separator } from "@nova/ui/components/ui/separator";
 const MobileLike = dynamic(() => import("./MobileLike"), { ssr: false });
 interface SubTitle {
   title: string;
@@ -71,6 +72,7 @@ export default function DetailPageSubTitle({
                 <p className="cursor-pointer" onClick={handleModify}>
                   수정
                 </p>
+                <Separator orientation="vertical" className="h-4" />
                 <AlertDialog
                   title="게시글 삭제"
                   subtitle="게시글을 정말로 삭제하시겠습니까?"
