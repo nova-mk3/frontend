@@ -9,6 +9,7 @@ import { throwErrorMessage } from "@/src/libs/utils/throwError";
 import ModifyCommentForm from "./ModifyCommentForm";
 import { Profile } from "./CommentListItem";
 import Image from "next/image";
+import Link from "next/link";
 interface ReplyCommentItemProps {
   id: string;
   authorName: string;
@@ -102,7 +103,9 @@ export default function ReplyCommentItem({
           className="object-cover w-[40px] h-[40px] rounded-full"
         />
         <div className="flex flex-col justify-center">
-          <p className="text-gray-700">{authorName}</p>
+          <Link href={`/users/${authorId}`} className="text-gray-700">
+            {authorName}
+          </Link>
           <p className="text-gray-500">{formatDate(createdTime)}</p>
         </div>
 

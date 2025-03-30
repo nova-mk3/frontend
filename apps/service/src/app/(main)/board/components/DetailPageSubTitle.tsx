@@ -9,6 +9,7 @@ import dynamic from "next/dynamic";
 import ViewCount from "./ViewCount";
 import { useQueryClient } from "@tanstack/react-query";
 import { Separator } from "@nova/ui/components/ui/separator";
+import Link from "next/link";
 const MobileLike = dynamic(() => import("./MobileLike"), { ssr: false });
 interface SubTitle {
   title: string;
@@ -59,7 +60,12 @@ export default function DetailPageSubTitle({
         <div className="text-3xl font-bold mb-4 font-pretendard">{title}</div>
         <div className="flex flex-row mt-2 text-sm text-muted-foreground">
           <div className="flex flex-row  items-center gap-4">
-            <p className="hover:underline cursor-pointer">{writer}</p>
+            <Link
+              href={`/users/${authorId}`}
+              className="text-gray-700 hover:underline"
+            >
+              {writer}
+            </Link>
             <p>{formatDate(date)}</p>
             <ViewCount viewCount={viewCount} />
           </div>

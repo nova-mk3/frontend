@@ -16,6 +16,7 @@ import { formatDate } from "@/src/libs/utils/dateParsing";
 import ViewCount from "../../board/components/ViewCount";
 import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
 import PictureLike from "../components/PictureLike";
+import Link from "next/link";
 
 interface PostDetailProps {
   postId: string;
@@ -99,7 +100,12 @@ export default function PostDetail({ postId }: PostDetailProps) {
             <p className="text-3xl font-bold">{data!.title}</p>
 
             <div className="flex flex-row items-center  gap-2 text-sm text-gray-500">
-              <p className="text-gray-700">{data!.authorName}</p>
+              <Link
+                href={`/users/${data!.authorId}`}
+                className="text-gray-700 hover:underline"
+              >
+                {data!.authorName}
+              </Link>
               <p className="">{formatDate(data!.createdTime)}</p>
               {/* <Like className='ml-auto mr-2' count={5}/> */}
               <div className="ml-auto flex flex-row gap-2 items-center cursor-pointer">

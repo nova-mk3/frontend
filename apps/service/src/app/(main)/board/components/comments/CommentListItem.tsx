@@ -13,6 +13,7 @@ import { commentsKeys } from "../../query/comments";
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
 import ModifyCommentForm from "./ModifyCommentForm";
 import Image from "next/image";
+import Link from "next/link";
 
 export interface CommentItemProps {
   id: string;
@@ -108,7 +109,9 @@ export default function CommentListItem({
           className="object-cover w-[40px] h-[40px] rounded-full"
         />
         <div className="flex flex-col justify-center">
-          <p className="text-gray-700">{authorName}</p>
+          <Link href={`/users/${authorId}`} className="text-gray-700">
+            {authorName}
+          </Link>
           <p className="text-gray-500">{formatDate(createdTime)}</p>
         </div>
 
