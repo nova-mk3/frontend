@@ -52,9 +52,9 @@ export function SignupForm() {
       grade: "1학년",
       semester: "1학기",
       emailCode: "",
-      emailCodeCheck: undefined,
+      emailCodeCheck: false,
       absence: undefined,
-      emailCheck: undefined,
+      emailCheck: false,
       birth: new Date("1998-10-13"),
       profilePhoto: undefined,
       phoneNumber: "",
@@ -126,7 +126,7 @@ export function SignupForm() {
   const useSignupMutation = useMutation({
     mutationFn: (data: SignUpData) => signup(data),
     onSuccess: (data: any) => {
-      alert(data.data);
+      alert("로그인 성공\n관리자에게 문의해 승인을 받으세요!");
       router.push("/signin");
     },
     onError: (error) => {
@@ -196,7 +196,7 @@ export function SignupForm() {
         let graduationSignUpRequest: GraduationSignUpRequest | undefined;
         if (values.graduation) {
           graduationSignUpRequest = {
-            year: Number(values.year!.split("년")[0]),
+            year: values.year!,
             contact: values.contact!,
             work: values.work!,
             job: values.job!,
@@ -237,7 +237,7 @@ export function SignupForm() {
       let graduationSignUpRequest: GraduationSignUpRequest | undefined;
       if (values.graduation) {
         graduationSignUpRequest = {
-          year: Number(values.year!.split("년")[0]),
+          year: values.year!,
           contact: values.contact!,
           work: values.work!,
           job: values.job!,

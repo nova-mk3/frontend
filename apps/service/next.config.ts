@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 /** @type {import('next').NextConfig} */
+
+const isProd = process.env.NODE_ENV === "production";
 const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: false,
@@ -21,6 +23,13 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  compiler: isProd
+    ? {
+        removeConsole: {
+          exclude: ["error", "warn"],
+        },
+      }
+    : {},
 };
 
 export default nextConfig;

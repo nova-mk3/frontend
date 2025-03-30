@@ -95,7 +95,7 @@ export interface MemberSignUpRequest {
 }
 
 export interface GraduationSignUpRequest {
-  year: number;
+  year: string;
   contact: boolean;
   work: boolean;
   job: string;
@@ -130,18 +130,14 @@ export async function signup(signUpData: SignUpData) {
     };
   }
 
-  const response = await fetch(`/members`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(requestBody),
-  });
+  console.log(requestBody);
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    console.log(errorData);
-    const message = errorData?.message || "에러가 발생했습니다.";
-    throw new Error(message);
+  try {
+    const response = await api.post(`/members`, {
+      ...requestBody,
+    });
+    return response.data;
+  } catch (e) {
+    throwErrorMessage(e);
   }
-
-  return response.json();
 }
