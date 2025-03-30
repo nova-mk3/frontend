@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description:
       "충북대학교 소프트웨어학과 학술동아리 노바와 함께 성장해보세요!",
     url: "https://nova.cbnu.ac.kr/",
-    siteName: "CBNU SOFTWARE NOVA",
+    siteName: "NOVA",
     images: [
       {
         url: "https://nova.cbnu.ac.kr/image/frame/image27.png",
@@ -34,6 +34,9 @@ export const metadata: Metadata = {
     description: "충북대학교 소프트웨어학과 노바 학술동아리 공식 홈페이지",
     images: ["https://nova.cbnu.ac.kr/image/frame/image27.png"],
   },
+  icons: {
+    icon: [{ url: "/image/favicon.png", type: "image/png", sizes: "32x32" }],
+  },
 };
 
 export default function RootLayout({
@@ -48,6 +51,7 @@ export default function RootLayout({
           name="google-site-verification"
           content="Ku6VQs4pIm3t7yVPNmrAaM0wZ6FG0inGGHbKiJ0Die8"
         />
+        <meta name="application-name" content="NOVA" />
       </head>
       {/* <LayoutClient>{children}</LayoutClient> */}
       <body>

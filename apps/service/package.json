@@ -10,8 +10,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "dependencies": {
-    "@nova/ui": "workspace:*",
     "@hookform/resolvers": "^3.9.1",
+    "@nova/ui": "workspace:*",
     "@radix-ui/react-slot": "^1.1.1",
     "@tanstack/react-query": "^5.66.0",
     "@tanstack/react-query-devtools": "^5.66.0",
@@ -28,8 +28,8 @@
     "react-hook-form": "^7.54.2",
     "react-textarea-autosize": "^8.5.6",
     "tailwind-merge": "^2.5.5",
-    "tailwindcss-animate": "^1.0.7",
     "tailwindcss": "^3.4.17",
+    "tailwindcss-animate": "^1.0.7",
     "zod": "^3.24.1"
   },
   "devDependencies": {
@@ -51,6 +51,7 @@
     "@types/react-dom": "^19",
     "@types/react-slick": "^0.23.13",
     "autoprefixer": "^10.4.20",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "eslint": "^9",
     "eslint-config-next": "15.1.0",
     "jest": "^29.7.0",
