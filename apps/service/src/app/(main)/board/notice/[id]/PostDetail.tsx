@@ -54,6 +54,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
             boardId={INTEGRATED}
             likeCount={data.likeCount}
             liked={data.liked}
+            authorId={data.authorId}
             defaultHref="/board"
           />
           <Content content={data.content} />

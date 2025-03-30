@@ -7,6 +7,7 @@ import { IntegratedBoardDelete } from "@/src/api/board/integrated";
 import AlertDialog from "../../components/AlertDialog";
 import dynamic from "next/dynamic";
 import ViewCount from "./ViewCount";
+import { useQueryClient } from "@tanstack/react-query";
 const MobileLike = dynamic(() => import("./MobileLike"), { ssr: false });
 interface SubTitle {
   title: string;
@@ -18,6 +19,7 @@ interface SubTitle {
   postType: PostType;
   boardId: string;
   liked: boolean;
+  authorId: string;
   defaultHref?: string;
 }
 
@@ -31,8 +33,11 @@ export default function DetailPageSubTitle({
   postType,
   boardId,
   liked,
+  authorId,
   defaultHref = "",
 }: SubTitle) {
+  const queryClient = useQueryClient();
+  const data = queryClient.getQueryData(["memberProfile"]) as any;
   const router = useRouter();
   const handleModify = () => {
     router.push(`${defaultHref}/${postId}/modify`);
@@ -61,16 +66,19 @@ export default function DetailPageSubTitle({
           <div className="flex flex-row gap-4 items-center ml-auto">
             <MobileLike count={likeCount} postId={postId} liked={liked} />
 
-            <p className="cursor-pointer" onClick={handleModify}>
-              수정
-            </p>
-
-            <AlertDialog
-              title="게시글 삭제"
-              subtitle="게시글을 정말로 삭제하시겠습니까?"
-              triggerName="삭제"
-              onAction={handleDelete}
-            />
+            {data?.memberId === authorId && (
+              <>
+                <p className="cursor-pointer" onClick={handleModify}>
+                  수정
+                </p>
+                <AlertDialog
+                  title="게시글 삭제"
+                  subtitle="게시글을 정말로 삭제하시겠습니까?"
+                  triggerName="삭제"
+                  onAction={handleDelete}
+                />
+              </>
+            )}
           </div>
         </div>
       </div>

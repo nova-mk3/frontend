@@ -19,7 +19,12 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "nova.cbnu.ac.kr",
         port: "",
-        search: "",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "8080",
+        pathname: "**",
       },
     ],
   },

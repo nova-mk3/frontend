@@ -10,8 +10,7 @@ import {
 import Content from "../../components/DetailPageContent";
 import DetailPageTitle from "../../components/DetailPageTitle";
 
-import CommentTitle from "../../components/comments/CommentTitle";
-import { postKeys, usePostDetailQuery } from "../../query/postqueries";
+import { usePostDetailQuery } from "../../query/postqueries";
 import CommentForm from "../../components/comments/CommentForm";
 import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
 import CommentList from "../../components/comments/CommentList";
@@ -54,6 +53,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
             boardId={INTEGRATED}
             likeCount={data.likeCount}
             liked={data.liked}
+            authorId={data.authorId}
             defaultHref="/board"
           />
           <Content content={data.content} />

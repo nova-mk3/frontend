@@ -51,6 +51,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
             boardId={CLUB_ARCHIVE}
             likeCount={data.likeCount}
             liked={data.liked}
+            authorId={data.authorId}
             defaultHref="/exam_archive"
           />
 
