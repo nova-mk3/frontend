@@ -23,27 +23,32 @@ export const UploadFilesAPI = async (formdata: FormData, postType: string) => {
 export const DownloadFilesAPI = async (fileId: string) => {
   try {
     const response = await Authapi.get(`/files/${fileId}/download`, {
-      responseType: "blob", // Blob 데이터로 받기
+      responseType: "blob",
     });
-
     const url = window.URL.createObjectURL(response.data);
     const link = document.createElement("a");
     link.href = url;
 
-    console.log(response);
-    // Content-Disposition 헤더에서 파일명을 추출 (예외 처리 추가)
+    let filename = "downloaded-file";
     const contentDisposition = response.headers["content-disposition"];
-    const filename = contentDisposition
-      ? decodeURIComponent(
-          contentDisposition.split("filename=")[1]?.replace(/"/g, "") ||
-            "downloaded-file"
-        )
-      : "downloaded-file";
+    if (contentDisposition) {
+      const filenameStarMatch = contentDisposition.match(
+        /filename\*\=UTF-8''(.+)/
+      );
+      if (filenameStarMatch?.[1]) {
+        filename = decodeURIComponent(filenameStarMatch[1]);
+      } else {
+        const filenameMatch = contentDisposition.match(/filename="?([^"]+)"?/);
+        if (filenameMatch?.[1]) {
+          filename = filenameMatch[1];
+        }
+      }
+    }
 
-    link.setAttribute("download", filename); // 파일명 설정
+    link.setAttribute("download", filename);
     document.body.appendChild(link);
     link.click();
-    window.URL.revokeObjectURL(url); // 메모리 해제
+    window.URL.revokeObjectURL(url);
     link.remove();
   } catch (error) {
     alert(ERROR_MESSAGES.FILE_ERROR);

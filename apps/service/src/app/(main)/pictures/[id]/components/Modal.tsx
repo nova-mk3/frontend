@@ -13,6 +13,7 @@ import Image from "next/image";
 import { useSliderStore } from "@/src/store/ImageSlider";
 import { ImageProps } from "../PostDetail";
 import { cn } from "@nova/ui/lib/utils";
+import { DownloadFilesAPI } from "@/src/api/board/file";
 
 interface ModalProps {
   isOpen: boolean;
@@ -78,6 +79,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, total, images }) => {
     setScale((prev) => Math.max(1, prev - 0.25));
   };
 
+  const handleDownloadImage = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    await DownloadFilesAPI(images[currentIndex]!.id);
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -104,7 +110,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, total, images }) => {
           <ZoomOut size={24} />
         </button>
         <button
-          onClick={onClose}
+          onClick={handleDownloadImage}
           className=" text-white 0  z-50"
           aria-label="Close Modal"
         >
@@ -175,6 +181,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, total, images }) => {
                 }}
                 className={cn(`object-contain`)}
                 onClick={(e) => e.stopPropagation()}
+                unoptimized={true}
               />
             </div>
           ))}

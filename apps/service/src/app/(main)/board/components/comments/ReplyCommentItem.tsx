@@ -101,6 +101,7 @@ export default function ReplyCommentItem({
           width={40}
           height={40}
           className="object-cover w-[40px] h-[40px] rounded-full"
+          unoptimized={true}
         />
         <div className="flex flex-col justify-center">
           <Link href={`/users/${authorId}`} className="text-gray-700">

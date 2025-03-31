@@ -43,6 +43,8 @@ const ImageSlider = ({
               height={image.height}
               className="w-full h-auto aspect-square object-cover  cursor-pointer"
               onClick={() => openModal()}
+              unoptimized={true}
+              priority={true}
             />
           </div>
         ))}

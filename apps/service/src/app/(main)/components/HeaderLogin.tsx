@@ -45,6 +45,7 @@ export default function HeaderLogin() {
               width={40}
               height={40}
               className={`w-[40px] h-[40px] object-cover rounded-full border-[1px] border-black cursor-pointer scale-103`}
+              unoptimized={true}
             />
           }
           memberId={data.memberId}
