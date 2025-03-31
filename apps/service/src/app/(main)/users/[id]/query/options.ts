@@ -7,5 +7,6 @@ export const SimpleProfileQueryOptions = () => {
     queryKey: [userKeys.profile],
     queryFn: () => getSimpleProfie(),
     staleTime: Infinity,
+    gcTime: Infinity,
   });
 };
