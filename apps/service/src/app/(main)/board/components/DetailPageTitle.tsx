@@ -1,8 +1,10 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import { ChevronLeft, MessageSquareMore } from "lucide-react";
 import { Separator } from "@nova/ui/components/ui/separator";
 import { Button } from "@nova/ui/components/ui/button";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface TitleProps {
   backLinkText: string;
@@ -20,6 +22,8 @@ export default function DetailPageTitle({
   postId,
   defaultHref = "",
 }: TitleProps) {
+  const queryClient = useQueryClient();
+  const data = queryClient.getQueryData(["memberProfile"]) as any;
   return (
     <div className="border-y bg-background01">
       <div className="w-[80%] mx-auto px-4 py-3">
@@ -40,7 +44,15 @@ export default function DetailPageTitle({
               </span>
             </div>
           </div>
-          <Link href={`${defaultHref}/newpost`}>
+          <Link
+            href={`${defaultHref}/newpost`}
+            onClick={(e) => {
+              if (!data) {
+                e.preventDefault(); // ✅ 이동 막기
+                alert("로그인 후 이용해주세요");
+              }
+            }}
+          >
             <Button variant="outline">작성하기</Button>
           </Link>
         </div>

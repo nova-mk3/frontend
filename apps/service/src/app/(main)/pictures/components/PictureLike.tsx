@@ -28,6 +28,7 @@ export default function PictureLike({ liked, postId }: LikeProps) {
       });
     },
     onError: (error) => {
+      console.log(error);
       alert(error.message);
     },
   });

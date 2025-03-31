@@ -29,7 +29,6 @@ Authapi.interceptors.response.use(
         const currentPath = window.location.pathname + window.location.search;
         window.location.href = `/signin?redirect=${decodeURI(currentPath)}`;
       }
-      return;
     }
     return Promise.reject(error);
   }

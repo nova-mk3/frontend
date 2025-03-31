@@ -83,7 +83,6 @@ export default function page() {
           <Clock size={24} />
           연혁
         </p>
-        <Separator />
       </div>
 
       <div className="d-l  mt-5 text-primary  my-10 !font-bold mobile:text-center">

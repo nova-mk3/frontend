@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Button } from "@nova/ui/components/ui/button";
 import Link from "next/link";
@@ -5,6 +6,7 @@ import { POST_TYPE_LABEL, PostType } from "@/src/constant/board";
 import { Filter } from "../../components/Filter";
 import SearchInput from "../../components/SearchInput";
 import SelectSortComponent from "../../components/SelectSortComponent";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface BoardListTitleProps {
   title: string;
@@ -17,6 +19,8 @@ export default function ArchiveListTitle({
   className,
   TitleImage,
 }: BoardListTitleProps) {
+  const queryClient = useQueryClient();
+  const data = queryClient.getQueryData(["memberProfile"]) as any;
   return (
     <div
       className={`flex flex-row flex-wrap items-end border-primary border-b-[1px] py-5 mobile:flex-col mobile:items-center  ${className}`}
@@ -30,7 +34,16 @@ export default function ArchiveListTitle({
         <Filter />
         <SelectSortComponent />
         <SearchInput />
-        <Link href="/exam_archive/newpost" className="mobile:w-full">
+        <Link
+          href="/exam_archive/newpost"
+          className="mobile:w-full"
+          onClick={(e) => {
+            if (!data) {
+              e.preventDefault(); // ✅ 이동 막기
+              alert("로그인 후 이용해주세요");
+            }
+          }}
+        >
           <Button variant="default" className="mobile:w-full">
             글쓰기
           </Button>

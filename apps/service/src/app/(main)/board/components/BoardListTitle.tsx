@@ -1,13 +1,12 @@
-import { Input } from "@nova/ui/components/ui/input";
+"use client";
 import React, { useState } from "react";
-import { Search } from "lucide-react";
 import { Button } from "@nova/ui/components/ui/button";
 import Link from "next/link";
 import SelectSortComponent from "../../components/SelectSortComponent";
-import { useRouter, useSearchParams } from "next/navigation";
 import { POST_TYPE_LABEL, PostType } from "@/src/constant/board";
 import SearchInput from "../../components/SearchInput";
 import { Filter } from "../../components/Filter";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface BoardListTitleProps {
   title: string;
@@ -22,6 +21,8 @@ export default function BoardListTitle({
   TitleImage,
   defaultHref = "",
 }: BoardListTitleProps) {
+  const queryClient = useQueryClient();
+  const data = queryClient.getQueryData(["memberProfile"]) as any;
   return (
     <div
       className={`flex flex-row flex-wrap items-end border-primary border-b-[1px] py-5 mobile:flex-col mobile:items-center  ${className}`}
@@ -35,7 +36,16 @@ export default function BoardListTitle({
         <Filter />
         <SelectSortComponent />
         <SearchInput />
-        <Link href={`${defaultHref}/newpost`} className="mobile:w-full">
+        <Link
+          href={`${defaultHref}/newpost`}
+          className="mobile:w-full"
+          onClick={(e) => {
+            if (!data) {
+              e.preventDefault(); // ✅ 이동 막기
+              alert("로그인 후 이용해주세요");
+            }
+          }}
+        >
           <Button variant="default" className="mobile:w-full">
             글쓰기
           </Button>

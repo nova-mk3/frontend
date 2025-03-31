@@ -2,6 +2,7 @@ import { ERROR_MESSAGES } from "@/src/constant/error";
 
 export const throwErrorMessage = (error: any) => {
   console.log(error);
+
   if (error.response) {
     // 서버가 응답한 경우 (HTTP 상태 코드 존재)
     const status = error.response.status;
