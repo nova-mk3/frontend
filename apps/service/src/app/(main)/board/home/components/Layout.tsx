@@ -3,11 +3,11 @@ import Link from "next/link";
 import { Button } from "@nova/ui/components/ui/button";
 import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
 import Post from "./Post";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import { SimpleProfileQueryOptions } from "../../../users/[id]/query/options";
 
 export default function Layout() {
-  const queryClient = useQueryClient();
-  const data = queryClient.getQueryData(["memberProfile"]) as any;
+  const { data } = useQuery(SimpleProfileQueryOptions());
   return (
     <div className="flex flex-col justify-center gap-5 pt-10">
       <div

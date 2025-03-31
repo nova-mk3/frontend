@@ -8,12 +8,13 @@ import ReplyButton from "./ReplyButton";
 import { formatDate } from "@/src/libs/utils/dateParsing";
 import AlertDialog from "../../../components/AlertDialog";
 import { CommentsDelete, CommentsPut } from "@/src/api/board/comments";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { commentsKeys } from "../../query/comments";
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
 import ModifyCommentForm from "./ModifyCommentForm";
 import Image from "next/image";
 import Link from "next/link";
+import { SimpleProfileQueryOptions } from "../../../users/[id]/query/options";
 
 export interface CommentItemProps {
   id: string;
@@ -50,7 +51,7 @@ export default function CommentListItem({
   const [isReplyFormOpen, setReplyFormOpen] = useState(false);
   const [isModify, setModify] = useState(false);
   const [value, setValue] = useState(content);
-  const data = queryClient.getQueryData(["memberProfile"]) as any;
+  const { data } = useQuery(SimpleProfileQueryOptions());
   const toggleModify = () => {
     if (isModify === false) setValue(content);
     setModify((prev) => !prev);
@@ -147,7 +148,7 @@ export default function CommentListItem({
         />
       )}
 
-      {!isModify && <div className="w-full min-h-[100px] p-1">{content}</div>}
+      {!isModify && <pre className="w-full min-h-[100px] p-1">{content}</pre>}
 
       {/* 대댓글 열기 -> 대댓글을 열었을때 입력폼도 나와줘야함 */}
       <ReplyButton

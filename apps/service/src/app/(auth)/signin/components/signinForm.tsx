@@ -4,18 +4,24 @@ import LogoWithName from "@/public/image/LogoWithName.svg";
 import { SigninInput, SigninSchema } from "@/src/schema/signin.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nova/ui/components/ui/button";
-import { Checkbox } from "@nova/ui/components/ui/checkbox";
 import { Form } from "@nova/ui/components/ui/form";
 import { IdCard, Lock } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { InputFormField } from "../../components/InputFormField";
-
 import { useLoginMutation } from "../query/mutation";
+import { useQueryClient } from "@tanstack/react-query";
+import { useQueryParams } from "@/src/app/(main)/components/useQueryParams";
+import { getSimpleProfie } from "@/src/api/user/client";
+import { userKeys } from "@/src/app/(main)/users/[id]/query/qureies";
+import { usePathname, useRouter } from "next/navigation";
 
 export function SigninForm() {
   const loginMutation = useLoginMutation();
-
+  const queryClient = useQueryClient();
+  const router = useRouter();
+  const { redirectUrl } = useQueryParams();
+  const pathname = usePathname();
   const form = useForm<SigninInput>({
     resolver: zodResolver(SigninSchema),
     defaultValues: {
@@ -25,11 +31,31 @@ export function SigninForm() {
     mode: "onChange",
   });
 
-  function onSubmit(values: SigninInput) {
-    loginMutation.mutate({
-      studentNumber: values.studentId,
-      password: values.password,
-    });
+  async function onSubmit(values: SigninInput) {
+    try {
+      await loginMutation.mutateAsync({
+        studentNumber: values.studentId,
+        password: values.password,
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: [userKeys.profile],
+        refetchType: "all",
+      });
+
+      alert("로그인 성공");
+      if (redirectUrl) {
+        router.push(decodeURI(redirectUrl));
+      } else {
+        if (pathname === "/signup") {
+          router.push("/");
+        } else {
+          router.back();
+        }
+      }
+    } catch (error: any) {
+      alert(error.message);
+    }
   }
 
   return (

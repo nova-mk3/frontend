@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@nova/ui/components/ui/dropdown-menu";
 import { Separator } from "@nova/ui/components/ui/separator";
+import { useQueryClient } from "@tanstack/react-query";
 import { Bell, Search } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -17,8 +18,10 @@ interface Props {
   memberId: string;
 }
 export default function HeaderLoginMenu({ trigger, memberId }: Props) {
+  const queryClient = useQueryClient();
   const handleLogout = async () => {
     await logout();
+    queryClient.removeQueries({ queryKey: ["memberProfile"], exact: true });
     window.location.reload();
   };
   return (

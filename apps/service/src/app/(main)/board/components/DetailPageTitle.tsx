@@ -4,7 +4,8 @@ import Link from "next/link";
 import { ChevronLeft, MessageSquareMore } from "lucide-react";
 import { Separator } from "@nova/ui/components/ui/separator";
 import { Button } from "@nova/ui/components/ui/button";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
 
 interface TitleProps {
   backLinkText: string;
@@ -22,8 +23,7 @@ export default function DetailPageTitle({
   postId,
   defaultHref = "",
 }: TitleProps) {
-  const queryClient = useQueryClient();
-  const data = queryClient.getQueryData(["memberProfile"]) as any;
+  const { data } = useQuery(SimpleProfileQueryOptions());
   return (
     <div className="border-y bg-background01">
       <div className="w-[80%] mx-auto px-4 py-3">

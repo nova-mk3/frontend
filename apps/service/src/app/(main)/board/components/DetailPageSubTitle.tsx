@@ -7,9 +7,10 @@ import { IntegratedBoardDelete } from "@/src/api/board/integrated";
 import AlertDialog from "../../components/AlertDialog";
 import dynamic from "next/dynamic";
 import ViewCount from "./ViewCount";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Separator } from "@nova/ui/components/ui/separator";
 import Link from "next/link";
+import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
 const MobileLike = dynamic(() => import("./MobileLike"), { ssr: false });
 interface SubTitle {
   title: string;
@@ -38,8 +39,7 @@ export default function DetailPageSubTitle({
   authorId,
   defaultHref = "",
 }: SubTitle) {
-  const queryClient = useQueryClient();
-  const data = queryClient.getQueryData(["memberProfile"]) as any;
+  const { data } = useQuery(SimpleProfileQueryOptions());
   const router = useRouter();
   const handleModify = () => {
     router.push(`${defaultHref}/${postId}/modify`);

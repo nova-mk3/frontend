@@ -6,7 +6,8 @@ import { POST_TYPE_LABEL, PostType } from "@/src/constant/board";
 import { Filter } from "../../components/Filter";
 import SearchInput from "../../components/SearchInput";
 import SelectSortComponent from "../../components/SelectSortComponent";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
 
 interface BoardListTitleProps {
   title: string;
@@ -19,8 +20,7 @@ export default function ArchiveListTitle({
   className,
   TitleImage,
 }: BoardListTitleProps) {
-  const queryClient = useQueryClient();
-  const data = queryClient.getQueryData(["memberProfile"]) as any;
+  const { data } = useQuery(SimpleProfileQueryOptions());
   return (
     <div
       className={`flex flex-row flex-wrap items-end border-primary border-b-[1px] py-5 mobile:flex-col mobile:items-center  ${className}`}

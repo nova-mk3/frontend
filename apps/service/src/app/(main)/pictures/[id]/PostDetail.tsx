@@ -10,13 +10,14 @@ import CommentSection from "./components/CommentSection";
 import AlertDialog from "../../components/AlertDialog";
 import { useRouter } from "next/navigation";
 import { PictureBoardDelete } from "@/src/api/board/picture";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { postKeys } from "../../board/query/postqueries";
 import { formatDate } from "@/src/libs/utils/dateParsing";
 import ViewCount from "../../board/components/ViewCount";
 import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
 import PictureLike from "../components/PictureLike";
 import Link from "next/link";
+import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
 
 interface PostDetailProps {
   postId: string;
@@ -49,7 +50,7 @@ export interface ImageProps {
 export default function PostDetail({ postId }: PostDetailProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const userData = queryClient.getQueryData(["memberProfile"]) as any;
+  const { data: userData } = useQuery(SimpleProfileQueryOptions());
 
   const { data, isLoading } = usePictureDetailQuery({
     postId,

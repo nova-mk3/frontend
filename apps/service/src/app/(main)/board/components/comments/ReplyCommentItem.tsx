@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { formatDate } from "@/src/libs/utils/dateParsing";
 import { CommentsDelete, CommentsPut } from "@/src/api/board/comments";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { commentsKeys } from "../../query/comments";
 import AlertDialog from "../../../components/AlertDialog";
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
@@ -10,6 +10,7 @@ import ModifyCommentForm from "./ModifyCommentForm";
 import { Profile } from "./CommentListItem";
 import Image from "next/image";
 import Link from "next/link";
+import { SimpleProfileQueryOptions } from "../../../users/[id]/query/options";
 interface ReplyCommentItemProps {
   id: string;
   authorName: string;
@@ -37,10 +38,9 @@ export default function ReplyCommentItem({
   parentCommentId,
 }: ReplyCommentItemProps) {
   const queryClient = useQueryClient();
-  const [isReplyOpen, setReplyOpen] = useState(false);
   const [isModify, setModify] = useState(false);
   const [value, setValue] = useState("");
-  const data = queryClient.getQueryData(["memberProfile"]) as any;
+  const { data } = useQuery(SimpleProfileQueryOptions());
   const toggleModify = () => {
     if (isModify === false) setValue(content);
     setModify((prev) => !prev);
@@ -141,7 +141,7 @@ export default function ReplyCommentItem({
       )}
 
       {/* 댓글 내용 */}
-      {!isModify && <div className="w-full min-h-[100px] p-1">{content}</div>}
+      {!isModify && <pre className="w-full min-h-[100px] p-1">{content}</pre>}
     </div>
   );
 }
