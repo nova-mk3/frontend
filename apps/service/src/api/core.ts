@@ -25,10 +25,11 @@ Authapi.interceptors.response.use(
     console.log(error);
     if (error.response) {
       if (error.response.status === 401) {
-        alert("토큰이 만료되었습니다.");
+        alert("로그인 해주세요");
         const currentPath = window.location.pathname + window.location.search;
         window.location.href = `/signin?redirect=${decodeURI(currentPath)}`;
       }
+      return;
     }
     return Promise.reject(error);
   }

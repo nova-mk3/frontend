@@ -55,6 +55,15 @@ export default function ModifyPage({ postId }: Props) {
   const onSubmit = async (data: PictureInput) => {
     // 파일이 없을때는 파일 업로드 생략
     // 파일이 존재할때는 파일 업로드가 성공하면 게시글 생성
+
+    if (
+      originFiles.length - willDeleteFiles.length + selectedFiles.length <=
+      0
+    ) {
+      alert("사진을 하나 이상 선택하세요");
+      return;
+    }
+
     const formData = new FormData();
 
     selectedFiles.forEach((file) => {

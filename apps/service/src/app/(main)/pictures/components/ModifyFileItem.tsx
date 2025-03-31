@@ -26,6 +26,8 @@ export default function ModifyFileItem({
         alt={originalFileName}
         fill={true}
         className="rounded-md object-cover z-10"
+        unoptimized={true}
+        priority={true}
       />
       <X
         size={20}
