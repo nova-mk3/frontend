@@ -40,6 +40,7 @@ export default function PictureListItem({
   thumbnailHeight,
   thumbnailWidth,
   thumbnailOriginalFileName,
+  totalFileDownloadCount,
 }: PictureListItemProps) {
   return (
     <div className="w-[100%] border rounded-lg flex flex-col cursor-pointer shadow-md transition ease-in-out hover:-translate-y-2 duration-300">
@@ -69,7 +70,7 @@ export default function PictureListItem({
           </div>
           <div className="flex flex-row gap-1 items-center">
             <Images className="w-4 h-4" />
-            <p>{likeCount}</p>
+            <p>{totalFileDownloadCount}</p>
           </div>
 
           <div className="ml-auto">{authorName}</div>
