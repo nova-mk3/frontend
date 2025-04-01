@@ -12,7 +12,6 @@ export default function page() {
   const form = useForm<PwdInput>({
     resolver: zodResolver(PwdSchema),
     defaultValues: {
-      currentPassword: "",
       newPassword: "",
       confirmNewPassword: "",
     },
@@ -26,18 +25,20 @@ export default function page() {
     <div className="w-[400px] mx-auto mobile:w-[90%] mt-10">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
-          <InputFormField
+          {/* <InputFormField
             form={form}
             name={"currentPassword"}
             label={"현재 비밀번호"}
             placeHolder={"현재 비밀번호를 입력하세요"}
-          />
+          /> */}
 
           <InputFormField
             form={form}
             name={"newPassword"}
             label={"새 비밀번호"}
             placeHolder={"새 비밀번호를 입력해주세요"}
+            type="password"
+            hasToggleIcon
           />
 
           <InputFormField
@@ -45,6 +46,8 @@ export default function page() {
             name={"confirmNewPassword"}
             label={"새 비밀번호 확인"}
             placeHolder={"한번 더 입력해주세요"}
+            type="password"
+            hasToggleIcon
           />
 
           <div>

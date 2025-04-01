@@ -148,7 +148,9 @@ export default function CommentListItem({
         />
       )}
 
-      {!isModify && <pre className="w-full min-h-[100px] p-1">{content}</pre>}
+      {!isModify && (
+        <pre className="w-full min-h-[100px] p-1 t-m">{content}</pre>
+      )}
 
       {/* 대댓글 열기 -> 대댓글을 열었을때 입력폼도 나와줘야함 */}
       <ReplyButton

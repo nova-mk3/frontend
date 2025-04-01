@@ -141,7 +141,9 @@ export default function ReplyCommentItem({
       )}
 
       {/* 댓글 내용 */}
-      {!isModify && <pre className="w-full min-h-[100px] p-1">{content}</pre>}
+      {!isModify && (
+        <pre className="w-full min-h-[100px] p-1 t-m">{content}</pre>
+      )}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import ListItem, { SuggestionItem } from "./SuggestionListItem";
+import { SuggestionItem } from "./SuggestionListItem";
 import SuggestionListItem from "./SuggestionListItem";
 
 interface SuggestionListProps {

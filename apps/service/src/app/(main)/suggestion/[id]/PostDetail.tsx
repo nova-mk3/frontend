@@ -13,7 +13,8 @@ import AdminForm from "../components/AdminForm";
 import { FileItemProps } from "../components/ViewFileItem";
 import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
 import DeferredComponent from "../../components/DeferredComponent";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
 
 interface PostDetailProps {
   postId: string;
@@ -31,8 +32,8 @@ export interface SuggestionDetail {
   title: string;
 }
 export default function PostDetail({ postId }: PostDetailProps) {
-  const isAdmin = "true";
   const { data, isLoading } = useSuggestionDetailQuery(postId);
+  const { data: userData } = useQuery(SimpleProfileQueryOptions());
   const queryClient = useQueryClient();
   if (isLoading) {
     return (
@@ -70,7 +71,17 @@ export default function PostDetail({ postId }: PostDetailProps) {
               </div>
             </div>
             <Button variant="outline">
-              <Link href="/suggestion/newpost">새 건의하기</Link>
+              <Link
+                href="/suggestion/newpost"
+                onClick={(e) => {
+                  if (!userData) {
+                    e.preventDefault(); // ✅ 이동 막기
+                    alert("로그인 후 이용해주세요");
+                  }
+                }}
+              >
+                새 건의하기
+              </Link>
             </Button>
           </div>
         </div>
@@ -111,7 +122,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
         </div>
 
         {/* 관리자 댓글 입력 영역 */}
-        {isAdmin.toString() === "true" && (
+        {userData?.admin.toString() === "true" && (
           <AdminForm postId={postId} adminReply={data!.adminReply} />
         )}
       </div>

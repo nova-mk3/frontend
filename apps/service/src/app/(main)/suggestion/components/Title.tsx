@@ -1,12 +1,12 @@
-import { Input } from "@nova/ui/components/ui/input";
 import React from "react";
-import { Milestone, Search } from "lucide-react";
+import { Milestone } from "lucide-react";
 import { Button } from "@nova/ui/components/ui/button";
 import Link from "next/link";
 import SearchInput from "../../components/SearchInput";
-import { Filter } from "../../components/Filter";
 import SelectSortComponent from "../../components/SelectSortComponent";
 import { SuggestionFilter } from "../../components/SuggestionFilter";
+import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
+import { useQuery } from "@tanstack/react-query";
 
 interface TitleProps {
   title?: string;
@@ -14,6 +14,7 @@ interface TitleProps {
 }
 
 export default function Title({ title, className }: TitleProps) {
+  const { data } = useQuery(SimpleProfileQueryOptions());
   return (
     <div
       className={`flex flex-row flex-wrap items-end border-primary border-b-[1px] py-5 mobile:flex-col mobile:items-center  ${className}`}
@@ -30,7 +31,16 @@ export default function Title({ title, className }: TitleProps) {
         <SuggestionFilter />
         <SelectSortComponent />
         <SearchInput />
-        <Link href="/suggestion/newpost" className="mobile:w-full">
+        <Link
+          href="/suggestion/newpost"
+          className="mobile:w-full"
+          onClick={(e) => {
+            if (!data) {
+              e.preventDefault(); // ✅ 이동 막기
+              alert("로그인 후 이용해주세요");
+            }
+          }}
+        >
           <Button variant="default" className="mobile:w-full">
             건의하기
           </Button>
