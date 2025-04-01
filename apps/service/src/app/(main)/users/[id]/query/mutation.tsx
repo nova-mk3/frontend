@@ -7,7 +7,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { userKeys } from "./qureies";
 
 export function useUserProfilePostMutation({ memberId }: { memberId: string }) {
-  const putMutation = useUserProfilePutMutation({ memberId });
+  const UserProfilePutMutation = useUserProfilePutMutation({ memberId });
 
   return useMutation({
     mutationFn: ({
@@ -19,8 +19,10 @@ export function useUserProfilePostMutation({ memberId }: { memberId: string }) {
     }) => UserProfileUploadAPI({ formdata, memberId }),
     onSuccess: (data: any) => {
       console.log(data);
-
-      putMutation.mutate({ profileMemberId: memberId, fileId: data.id });
+      UserProfilePutMutation.mutate({
+        profileMemberId: memberId,
+        fileId: data.id,
+      });
     },
     onError: (error) => {
       alert(error.message);
