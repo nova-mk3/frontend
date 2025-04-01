@@ -20,7 +20,12 @@ import { useGetUserData } from "../../query/qureies";
 import Modal from "@/src/app/(main)/components/Modal";
 import PendingFallbackUI from "@/src/app/(main)/components/Skeleton/PendingFallbackUI";
 import { Profile } from "@/src/app/(main)/board/components/comments/CommentListItem";
-import { useUserProfilePostMutation } from "../../query/mutation";
+
+import { UserProfileDeleteAPI } from "@/src/api/user/client";
+import {
+  useDeleteProfileMuation,
+  useUserProfilePostMutation,
+} from "../../query/mutation";
 
 interface Props {
   memberId: string;
@@ -47,6 +52,7 @@ export default function EditForm({ memberId }: Props) {
   const [formData, setFormData] = useState<ChangeUserInfoInput | null>(null);
   const { data, isLoading } = useGetUserData({ memberId });
   const useMutation = useUserProfilePostMutation({ memberId });
+  const useProfileDelteMutatuon = useDeleteProfileMuation({ memberId });
   const form = useForm<ChangeUserInfoInput>({
     resolver: zodResolver(ChangeUserInfoSchema),
     defaultValues: {
@@ -136,17 +142,22 @@ export default function EditForm({ memberId }: Props) {
     }
   };
 
+  const handleDeleteProfile = async (profileMemberId: string) => {
+    useProfileDelteMutatuon.mutate(profileMemberId);
+  };
+
   return (
     <div className="w-[400px] mx-auto mobile:w-[90%] mt-10">
       <div className="flex flex-col justify-center items-center">
         <div className="relative items-center">
           <Image
             src={data.profilePhoto.imageUrl}
-            // onClick={handleIconClick}
             alt={data.profilePhoto.originalFileName}
             width={86}
             height={86}
             className={`w-24 h-24 object-cover rounded-full`}
+            unoptimized={true}
+            priority={true}
           />
           <label
             htmlFor="profile"
@@ -162,9 +173,12 @@ export default function EditForm({ memberId }: Props) {
             onChange={handleFileOnChange}
           />
         </div>
-        {/* <div className="text-gray-400 text-base mt-5 cursor-pointer hover:underline">
+        <div
+          className="text-gray-400 text-base mt-5 cursor-pointer hover:underline"
+          onClick={() => handleDeleteProfile(memberId)}
+        >
           이미지 삭제
-        </div> */}
+        </div>
       </div>
 
       <Form {...form}>

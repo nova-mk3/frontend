@@ -1,4 +1,8 @@
-import { PutProfileIdAPI, UserProfileUploadAPI } from "@/src/api/user/client";
+import {
+  PutProfileIdAPI,
+  UserProfileDeleteAPI,
+  UserProfileUploadAPI,
+} from "@/src/api/user/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { userKeys } from "./qureies";
 
@@ -44,6 +48,10 @@ export function useUserProfilePutMutation({ memberId }: { memberId: string }) {
         queryKey: userKeys.user(memberId),
         refetchType: "all",
       });
+      queryClient.invalidateQueries({
+        queryKey: [userKeys.profile],
+        refetchType: "all",
+      });
     },
     onError: (error) => {
       alert(error.message);
@@ -51,3 +59,29 @@ export function useUserProfilePutMutation({ memberId }: { memberId: string }) {
     },
   });
 }
+
+export const useDeleteProfileMuation = ({ memberId }: { memberId: string }) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (profileMemberId: string) =>
+      UserProfileDeleteAPI({ profileMemberId }),
+
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [userKeys.profile],
+        refetchType: "all",
+      });
+      queryClient.invalidateQueries({
+        queryKey: userKeys.user(memberId),
+        refetchType: "all",
+      });
+      alert("삭제 성공\n기본이미지의 경우 삭제가 불가능합니다");
+      // 필요한 경우 캐시 무효화
+    },
+
+    onError: (error) => {
+      alert(error.message);
+    },
+  });
+};

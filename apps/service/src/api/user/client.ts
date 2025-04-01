@@ -49,6 +49,21 @@ export const UserProfileUploadAPI = async ({
   }
 };
 
+export const UserProfileDeleteAPI = async ({
+  profileMemberId,
+}: {
+  profileMemberId: string;
+}) => {
+  try {
+    const response = await Authapi.delete(
+      `/members/${profileMemberId}/profile-photo`
+    );
+    return response.data.data;
+  } catch (error: any) {
+    throwErrorMessage(error);
+  }
+};
+
 export const PutProfileIdAPI = async ({
   profileMemberId,
   fileId,
