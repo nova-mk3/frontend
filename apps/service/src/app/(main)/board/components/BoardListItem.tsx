@@ -18,6 +18,7 @@ export interface BoardListItemType {
   commentCount: number;
   viewCount: number;
   href: string;
+  ishome: boolean;
 }
 export default function BoardListItem({
   title,
@@ -30,6 +31,7 @@ export default function BoardListItem({
   className,
   type,
   href,
+  ishome,
 }: BoardListItemType) {
   return (
     <div
@@ -39,8 +41,8 @@ export default function BoardListItem({
         <Title title={title} type={type} />
       </Link>
 
-      <Link href={href} className="w-full text-muted-foreground">
-        <div className="text-base">{content}</div>
+      <Link href={href} className="w-full text-muted-foreground min-h-7">
+        <div className="text-base line-clamp-1 break-all">{content}</div>
       </Link>
       <div className="mt-4 flex flex-row">
         <div className="flex items-center gap-2 text-sm">
@@ -48,7 +50,7 @@ export default function BoardListItem({
           <span className="text-gray-400">·</span>
           <span className="text-gray-500">{formatDate(createdTime)}</span>
 
-          {type && (
+          {!ishome && (
             <>
               <span className="text-gray-400">·</span>
               <span className="text-gray-500">{type}</span>

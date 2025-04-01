@@ -58,9 +58,11 @@ export default function PictureListItem({
           />
         </div>
         <div className="p-3 flex flex-col gap-3">
-          <div className="t-l">{title}</div>
+          <div className="t-l line-clamp-2 break-all h-[56px] mb-7">
+            {title}
+          </div>
 
-          <div className="t-m text-text02 min-h-[48px]">{content}</div>
+          {/* <div className="t-m text-text02 min-h-[48px]">{content}</div> */}
         </div>
         <div className="flex flex-row border-t-[1px] border-line01 px-3 py-2 text-sm text-text02 gap-2">
           <div>{formatDate(createdTime)}</div>

@@ -43,6 +43,7 @@ export default function BoardList({ content }: PostPreview) {
           commentCount={post.commentCount}
           viewCount={post.viewCount}
           href={`/board/${post.type.toLowerCase()}/${post.id}`}
+          ishome={false}
         />
       ))}
     </div>

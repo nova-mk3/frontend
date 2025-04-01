@@ -53,13 +53,14 @@ export default function HomeListItem({
           authorProfilePhoto={post.authorProfilePhoto}
           title={post.title}
           content={post.content}
-          type={""}
+          type={post.type}
           createdTime={post.createdTime}
           modifiedTime={post.modifiedTime}
           likeCount={post.likeCount}
           commentCount={post.commentCount}
           viewCount={post.viewCount}
           href={`/board/${post.type.toLowerCase()}/${post.id}`}
+          ishome={true}
         />
       ))}
     </div>

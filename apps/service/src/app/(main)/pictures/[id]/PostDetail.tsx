@@ -98,7 +98,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
           </div>
 
           <div className="flex flex-col flex-1 gap-3">
-            <p className="text-3xl font-bold">{data!.title}</p>
+            <p className="text-3xl font-bold break-all">{data!.title}</p>
 
             <div className="flex flex-row items-center  gap-2 text-sm text-gray-500">
               <Link
@@ -126,7 +126,9 @@ export default function PostDetail({ postId }: PostDetailProps) {
                 )}
               </div>
             </div>
-            <div className="mt-5 flex-1">{data!.content}</div>
+            <pre className="mt-5 flex-1 break-all whitespace-pre-wrap">
+              {data!.content}
+            </pre>
 
             <div className="flex flex-row  gap-2 t-m text-text03 items-center">
               <PictureLike postId={data!.id} liked={data!.liked} />
