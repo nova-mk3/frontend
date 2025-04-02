@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 interface Props {
   memberId: string;
 }
-export default function changePwd({ memberId }: Props) {
+export default function ChangePwd({ memberId }: Props) {
   const router = useRouter();
   const form = useForm<PwdInput>({
     resolver: zodResolver(PwdSchema),

@@ -1,9 +1,21 @@
 import React from "react";
 
-export default function page() {
+import ErrorBoundaryWrapper from "@/src/app/(main)/components/ErrorBoundaryWrapper";
+import ChangeEmail from "./ChangeEmail";
+
+export const dynamic = "force-dynamic";
+
+export default async function page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
   return (
-    <div className="w-full bg-background02 flex  justify-center items-center h-[795px] mt-5">
-      개발중
+    <div className="w-[400px] mx-auto mobile:w-[90%] mt-10">
+      <ErrorBoundaryWrapper>
+        <ChangeEmail memberId={id} />
+      </ErrorBoundaryWrapper>
     </div>
   );
 }

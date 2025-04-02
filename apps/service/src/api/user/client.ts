@@ -178,3 +178,33 @@ export const UserPasswordPut = async ({
     throwErrorMessage(e);
   }
 };
+
+export async function userVerifyEmail({
+  profileMemberId,
+  email,
+}: {
+  profileMemberId: string;
+  email: string;
+}) {
+  const response = await Authapi.post(
+    `/members/${profileMemberId}/email/send`,
+    { email }
+  );
+  return response.data;
+}
+
+export async function userVerifyEmailCode({
+  profileMemberId,
+  email,
+  authCode,
+}: {
+  profileMemberId: string;
+  email: string;
+  authCode: string;
+}) {
+  const response = await Authapi.post(
+    `/members/${profileMemberId}/email/send`,
+    { email, authCode }
+  );
+  return response.data;
+}
