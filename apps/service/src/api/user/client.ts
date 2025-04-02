@@ -4,7 +4,7 @@ import { Authapi } from "../core";
 export async function getMember({ memberId }: { memberId: string }) {
   try {
     const res = await Authapi.get(`/members/${memberId}`);
-    return res.data.data.memberResponse;
+    return res.data.data;
   } catch (error) {
     throwErrorMessage(error);
   }
@@ -85,5 +85,96 @@ export const PutProfileIdAPI = async ({
     return response.data.data;
   } catch (error: any) {
     throwErrorMessage(error);
+  }
+};
+
+export interface MemberPutRequest {
+  studentNumber: string;
+  name: string;
+  graduation: boolean;
+  grade: string;
+  semester: string;
+  absence: boolean;
+  profilePhoto?: string;
+  phone?: string;
+  birth?: string;
+  introduction?: string;
+}
+
+export interface GraduationPutRequest {
+  year: string;
+  contact: boolean;
+  work: boolean;
+  job: string;
+  contactInfo?: string;
+  contactDescription?: string;
+}
+
+export interface ProfileUpdateData {
+  // memberSignUpRequest에 필요한 모든 필드
+  MemberPutRequest: MemberPutRequest;
+
+  // graduation === true일 때만 필요한 필드
+  GraduationPutRequest?: GraduationPutRequest;
+}
+
+export async function PutUserProfile({
+  putUserData,
+  profileMemberId,
+}: {
+  putUserData: ProfileUpdateData;
+  profileMemberId: string;
+}) {
+  // graduation이 false면 graduationSignUpRequest를 보내지 않고,
+  // true면 graduationSignUpRequest도 함께 포함해서 보낸다.
+  const { MemberPutRequest, GraduationPutRequest } = putUserData;
+
+  // graduationSignUpRequest를 넣을지 말지 분기
+  const requestBody: any = {
+    updateMemberProfileRequest: {
+      ...MemberPutRequest,
+    },
+  };
+
+  // graduation이 true일 경우에만 graduationSignUpRequest 추가
+  if (MemberPutRequest.graduation && MemberPutRequest) {
+    requestBody.updateGraduationRequest = {
+      ...GraduationPutRequest,
+    };
+  }
+
+  console.log(requestBody);
+
+  try {
+    const response = await Authapi.put(`/members/${profileMemberId}`, {
+      ...requestBody,
+    });
+    return response.data;
+  } catch (e) {
+    throwErrorMessage(e);
+  }
+}
+
+export interface ChangePwdType {
+  profileMemberId: string;
+  currentPassword: string;
+  newPassword: string;
+  checkNewPassword: string;
+}
+export const UserPasswordPut = async ({
+  profileMemberId,
+  currentPassword,
+  newPassword,
+  checkNewPassword,
+}: ChangePwdType) => {
+  try {
+    const response = await Authapi.put(`/members/${profileMemberId}/password`, {
+      currentPassword,
+      newPassword,
+      checkNewPassword,
+    });
+    return response.data;
+  } catch (e) {
+    throwErrorMessage(e);
   }
 };

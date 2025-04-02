@@ -22,6 +22,13 @@ import PendingFallbackUI from "@/src/app/(main)/components/Skeleton/PendingFallb
 import { Profile } from "@/src/app/(main)/board/components/comments/CommentListItem";
 
 import ProfilUpdate from "./ProfilUpdate";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  GraduationPutRequest,
+  MemberPutRequest,
+  ProfileUpdateData,
+  PutUserProfile,
+} from "@/src/api/user/client";
 
 interface Props {
   memberId: string;
@@ -47,6 +54,7 @@ export default function EditForm({ memberId }: Props) {
   const [openModal, setOpenModal] = useState(false);
   const [formData, setFormData] = useState<ChangeUserInfoInput | null>(null);
   const { data, isLoading } = useGetUserData({ memberId });
+  const queryClient = useQueryClient();
 
   const form = useForm<ChangeUserInfoInput>({
     resolver: zodResolver(ChangeUserInfoSchema),
@@ -60,6 +68,7 @@ export default function EditForm({ memberId }: Props) {
       phoneNumber: "",
       graduation: false,
       work: true,
+      year: undefined,
       job: "",
       contact: false,
       contactInfo: "",
@@ -71,19 +80,22 @@ export default function EditForm({ memberId }: Props) {
   useEffect(() => {
     if (data) {
       form.reset({
-        username: data.name,
-        studentNumber: data.studentNumber,
-        grade: "1학년",
-        semester: "1학기",
-        absence: data.absence,
-        birth: data.birth ? new Date("2000-01-05") : undefined,
-        phoneNumber: data.phone,
-        graduation: data.graduation,
-        work: true,
-        job: undefined,
-        contact: false,
-        contactInfo: "",
-        contactDescription: "dd",
+        username: data.memberResponse.name,
+        studentNumber: data.memberResponse.studentNumber,
+        grade: data.memberResponse.grade,
+        semester: data.memberResponse.semester,
+        absence: data.memberResponse.absence,
+        birth: data.memberResponse.birth
+          ? new Date("2000-01-05")
+          : new Date(data.memberResponse.birth),
+        phoneNumber: data.memberResponse.phone,
+        graduation: data.memberResponse.graduation,
+        work: data.graduationResponse.work,
+        job: data.graduationResponse.job,
+        year: data.graduationResponse.year,
+        contact: data.graduationResponse.contact,
+        contactInfo: data.graduationResponse.contactInfo,
+        contactDescription: data.graduationResponse.contactDescription,
       });
     }
   }, [data, form]);
@@ -101,13 +113,69 @@ export default function EditForm({ memberId }: Props) {
     name: "contact",
   });
 
+  const useSignupMutation = useMutation({
+    mutationFn: ({
+      profileMemberId,
+      putUserData,
+    }: {
+      putUserData: ProfileUpdateData;
+      profileMemberId: string;
+    }) => PutUserProfile({ profileMemberId, putUserData }),
+    onSuccess: (data: any) => {
+      alert("프로필 변경 성공");
+      // 추후에 프로필로 이동 예정
+      // window.location.reload();
+    },
+    onError: (error) => {
+      alert(error.message);
+    },
+  });
+
   const onValid = (values: ChangeUserInfoInput) => {
     if (openModal === false) {
       setFormData(values); // 데이터 저장
       setOpenModal(true);
       return;
     }
+
     console.log(values);
+    const memberProfile = queryClient.getQueryData(["memberProfile"]) as any;
+    const MemberPutRequest: MemberPutRequest = {
+      studentNumber: values.studentNumber,
+      name: values.username,
+      graduation: values.graduation,
+      grade: values.grade!,
+      semester: values.semester!,
+      absence: values.absence!,
+      profilePhoto: memberProfile.profilePhoto.id,
+      phone: values.phoneNumber,
+      birth: !values.birth ? "" : values.birth.toLocaleDateString("ko-KR"),
+      introduction: "",
+    };
+
+    // [2] graduation이 true라면 graduationSignUpRequest 만들기
+    let GraduationPutRequest: GraduationPutRequest | undefined;
+    if (values.graduation) {
+      GraduationPutRequest = {
+        year: values.year!,
+        contact: values.contact!,
+        work: values.work!,
+        job: values.job!,
+        contactInfo: values.contactInfo!,
+        contactDescription: values.contactDescription!,
+      };
+    }
+
+    // [3] 최종 SignUpData 조합
+    const requestData: ProfileUpdateData = {
+      MemberPutRequest,
+      GraduationPutRequest,
+    };
+
+    useSignupMutation.mutate({
+      profileMemberId: memberId,
+      putUserData: requestData,
+    });
   };
 
   // ❌ 유효성 검사 실패 시 실행됨
