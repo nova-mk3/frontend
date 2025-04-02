@@ -89,7 +89,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, total, images }) => {
   return (
     // 임시 버튼 추후에 디자인 수정 예정
     <div
-      className="fixed inset-0 z-10 flex items-center justify-center bg-black/90 "
+      className={cn(
+        "fixed inset-0 z-10 flex items-center justify-center bg-black/90 transition-all duration-300"
+        // isOpen
+        //   ? "opacity-100 pointer-events-auto scale-100"
+        //   : "opacity-0 pointer-events-none scale-95"
+      )}
       onClick={onClose}
     >
       {/* 상단 아이콘 모음 */}
@@ -182,6 +187,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, total, images }) => {
                 className={cn(`object-contain`)}
                 onClick={(e) => e.stopPropagation()}
                 unoptimized={true}
+                priority={true}
               />
             </div>
           ))}

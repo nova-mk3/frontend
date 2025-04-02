@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
 import DetailPageTitle from "../../board/components/DetailPageTitle";
 import ImageSlider from "./components/ImageSlider";
@@ -18,6 +18,7 @@ import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
 import PictureLike from "../components/PictureLike";
 import Link from "next/link";
 import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
+import { useSliderStore } from "@/src/store/ImageSlider";
 
 interface PostDetailProps {
   postId: string;
@@ -48,6 +49,7 @@ export interface ImageProps {
 }
 
 export default function PostDetail({ postId }: PostDetailProps) {
+  const setCurrentIndex = useSliderStore((state) => state.setCurrentIndex);
   const router = useRouter();
   const queryClient = useQueryClient();
   const { data: userData } = useQuery(SimpleProfileQueryOptions());
@@ -77,6 +79,9 @@ export default function PostDetail({ postId }: PostDetailProps) {
     }
   };
 
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [setCurrentIndex]);
   if (isLoading) {
     return <PendingFallbackUI />;
   }
@@ -126,7 +131,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
                 )}
               </div>
             </div>
-            <pre className="mt-5 flex-1 break-all whitespace-pre-wrap">
+            <pre className="mt-5 flex-1 break-all whitespace-pre-wrap t-m">
               {data!.content}
             </pre>
 

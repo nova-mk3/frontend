@@ -47,11 +47,11 @@ const isProd = process.env.NODE_ENV === "production";
 
 export const INTEGRATED = isProd
   ? "0e8f938b-b653-4dd5-bf0e-c6e48bb5128e"
-  : "22b78283-8cd1-465c-bb0e-4a481160807b"; //여기에 로컬변수
+  : "7661181e-491b-49ba-a2a9-c13e09393534"; //여기에 로컬변수
 
 export const CLUB_ARCHIVE = isProd
   ? "d0335ade-1ccb-42be-a64c-a1159624c09d"
-  : "21fa3bfa-c93e-43db-8b57-f12f523b47c1"; //여기에 로컬변수
+  : "196128e0-4533-4cd9-ae01-a7a0806cd48c"; //여기에 로컬변수
 
 export const POST_TYPE_TITLE_LABEL: Record<PostType, string> = {
   EXAM_ARCHIVE: "자료",

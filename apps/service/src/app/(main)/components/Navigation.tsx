@@ -25,7 +25,7 @@ export default function Navigation() {
   const { data, isLoading } = useQuery(SimpleProfileQueryOptions());
 
   return (
-    <NavigationMenu className="z-[51]">
+    <NavigationMenu className="z-[40]">
       <NavigationMenuList className="gap-[20px]">
         <NavigationMenuItem>
           <NavigationMenuTrigger className="t-m font-bold">

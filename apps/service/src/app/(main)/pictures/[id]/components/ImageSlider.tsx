@@ -34,7 +34,7 @@ const ImageSlider = ({
   return (
     <>
       <Slider {...settings} images={images}>
-        {images.map((image) => (
+        {images.map((image, index) => (
           <div key={image.id} className="min-w-full relative border">
             <Image
               src={image.imageUrl}
@@ -45,6 +45,7 @@ const ImageSlider = ({
               onClick={() => openModal()}
               unoptimized={true}
               priority={true}
+              // priority={index === 0 ? true : false} // 첫번째 이미지만 priority
             />
           </div>
         ))}
