@@ -46,10 +46,10 @@ export function useUserProfilePutMutation({ memberId }: { memberId: string }) {
       console.log(data);
       alert("변경 성공");
 
-      queryClient.invalidateQueries({
-        queryKey: userKeys.user(memberId),
-        refetchType: "all",
-      });
+      // queryClient.invalidateQueries({
+      //   queryKey: userKeys.user(memberId),
+      //   refetchType: "all",
+      // });
       queryClient.invalidateQueries({
         queryKey: [userKeys.profile],
         refetchType: "all",

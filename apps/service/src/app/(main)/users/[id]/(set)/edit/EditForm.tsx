@@ -8,10 +8,10 @@ import { InputFormField } from "@/src/app/(auth)/components/InputFormField";
 import { RadioFormField } from "@/src/app/(auth)/signup/components/RadioFormField";
 import { SelectFormField } from "@/src/app/(auth)/signup/components/SelectFormField";
 import { DatePickerForm } from "@/src/app/(auth)/signup/components/DatePickerField";
-import Image from "next/image";
+
 import { Button } from "@nova/ui/components/ui/button";
 import GraduationYearSelect from "@/src/app/(auth)/signup/components/GraduationYearSelect";
-import { Camera } from "lucide-react";
+
 import {
   ChangeUserInfoInput,
   ChangeUserInfoSchema,
@@ -21,11 +21,7 @@ import Modal from "@/src/app/(main)/components/Modal";
 import PendingFallbackUI from "@/src/app/(main)/components/Skeleton/PendingFallbackUI";
 import { Profile } from "@/src/app/(main)/board/components/comments/CommentListItem";
 
-import { UserProfileDeleteAPI } from "@/src/api/user/client";
-import {
-  useDeleteProfileMuation,
-  useUserProfilePostMutation,
-} from "../../query/mutation";
+import ProfilUpdate from "./ProfilUpdate";
 
 interface Props {
   memberId: string;
@@ -51,8 +47,7 @@ export default function EditForm({ memberId }: Props) {
   const [openModal, setOpenModal] = useState(false);
   const [formData, setFormData] = useState<ChangeUserInfoInput | null>(null);
   const { data, isLoading } = useGetUserData({ memberId });
-  const useMutation = useUserProfilePostMutation({ memberId });
-  const useProfileDelteMutatuon = useDeleteProfileMuation({ memberId });
+
   const form = useForm<ChangeUserInfoInput>({
     resolver: zodResolver(ChangeUserInfoSchema),
     defaultValues: {
@@ -132,54 +127,9 @@ export default function EditForm({ memberId }: Props) {
     return <PendingFallbackUI />;
   }
 
-  const handleFileOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-
-    if (file) {
-      const formdata = new FormData();
-      formdata.append("profilePhoto", file);
-      useMutation.mutate({ formdata, memberId });
-    }
-  };
-
-  const handleDeleteProfile = async (profileMemberId: string) => {
-    useProfileDelteMutatuon.mutate(profileMemberId);
-  };
-
   return (
     <div className="w-[400px] mx-auto mobile:w-[90%] mt-10">
-      <div className="flex flex-col justify-center items-center">
-        <div className="relative items-center">
-          <Image
-            src={data.profilePhoto.imageUrl}
-            alt={data.profilePhoto.originalFileName}
-            width={86}
-            height={86}
-            className={`w-24 h-24 object-cover rounded-full`}
-            unoptimized={true}
-            priority={true}
-          />
-          <label
-            htmlFor="profile"
-            className="w-8 h-8 flex items-center justify-center rounded-full bg-black border-[3px] border-white absolute bottom-[-5px] right-[-5px] cursor-pointer"
-          >
-            <Camera size={16} className="text-white" />
-          </label>
-          <input
-            id="profile"
-            type="file"
-            className="hidden"
-            accept=".jpg, .png"
-            onChange={handleFileOnChange}
-          />
-        </div>
-        <div
-          className="text-gray-400 text-base mt-5 cursor-pointer hover:underline"
-          onClick={() => handleDeleteProfile(memberId)}
-        >
-          이미지 삭제
-        </div>
-      </div>
+      <ProfilUpdate memberId={memberId} />
 
       <Form {...form}>
         <form
