@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
-import { GetExecutvieYears , GetExecutiveMemberByYear , PostExecuvtieMember , DeleteExecutiveMember, PostExecutiveYear, PutExecutiveMember} from '../api/main/member/executiveMemberApi';
+import { GetExecutvieYears , GetExecutiveMemberByYear , PostExecuvtieMember , DeleteExecutiveMember, PostExecutiveYear, PutExecutiveMember, DeleteExecutiveYear} from '../api/main/member/executiveMemberApi';
 import { enumRoleType, ExecutiveMember , PostExecutiveMemberRequest } from '@/src/types/executiveMember';
 
 export const executiveMembersKeys = {
@@ -13,6 +13,36 @@ export const useExecutiveYearsQuery = () => {
         queryFn: GetExecutvieYears,
     });
 };
+
+export const usePostExecutiveYearMutation = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: () => PostExecutiveYear(),
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: executiveMembersKeys.years(),
+            });
+        },
+        onError: (error) => {
+            console.error("임원 연도 추가 실패:", error);
+        },
+    });
+}
+
+export const useDeleteExecutiveYearMutation = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: () => DeleteExecutiveYear(),
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: executiveMembersKeys.years(),
+            });
+        },
+        onError: (error) => {
+            console.error("임원 연도 삭제 실패:", error);
+        },
+    });
+}
 
 export const useExecutiveMembersQuery = (year: number) => {
     return useQuery<ExecutiveMember[]>({
@@ -33,21 +63,6 @@ export const usePostExecutiveMemberMutation = (year : number) => {
         },
         onError: (error) => {
             console.error("임원 추가 실패:", error);
-        },
-    });
-}
-
-export const usePostExecutiveYearMutation = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: () => PostExecutiveYear(),
-        onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: executiveMembersKeys.years(),
-            });
-        },
-        onError: (error) => {
-            console.error("임원 연도 추가 실패:", error);
         },
     });
 }

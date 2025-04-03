@@ -2,7 +2,7 @@
 import { Button } from "@nova/ui/components/ui/button";
 import { useEffect, useState } from "react";
 import ExecutiveModal from './ExecutiveModal';
-import { useExecutiveMembersQuery, useExecutiveYearsQuery , usePostExecutiveYearMutation} from "@/src/query/executiveMembersQueries";
+import { useDeleteExecutiveYearMutation, useExecutiveMembersQuery, useExecutiveYearsQuery , usePostExecutiveYearMutation} from "@/src/query/executiveMembersQueries";
 import { enumRoleType } from "@/src/types/executiveMember";
 import ExecutiveMembercard from "./ExecutiveMemberCard";
 import { formatPhoneNumber } from "@/src/utils/formatter";
@@ -14,6 +14,7 @@ export default function Executive() {
   const { data: executiveYears, isLoading: isYearsLoading, isError: isYearsError } = useExecutiveYearsQuery();
   const { data: executiveMembers, isLoading: isMembersLoading, isError: isMembersError } = useExecutiveMembersQuery(selectedYear);
   const { mutate: postExecutiveYear } = usePostExecutiveYearMutation();
+  const { mutate: deleteExecutiveYear } = useDeleteExecutiveYearMutation();
 
   useEffect(() => {
     if (executiveYears && executiveYears.length > 0) {
@@ -49,8 +50,25 @@ export default function Executive() {
                 {year}
               </Button>
             ))}
-            <Button variant="default" className="w-[100px]" onClick={() => postExecutiveYear()}>
+            <Button
+              variant="default" 
+              className="mr-2 w-[100px]"
+              onClick={() => {
+                if (window.confirm("연도를 추가하시겠습니까?\n새로 추가시 현재 임원들은 권한을 잃습니다.")) {
+                  postExecutiveYear();
+                }}}
+            >
               연도 추가
+            </Button>
+            <Button 
+              variant="text" 
+              className="w-[100px]" 
+              onClick={() => {
+                if (window.confirm("연도를 삭제하시겠습니까?\n삭제된 연도의 임원 권한들이 사라집니다.")){
+                  deleteExecutiveYear()
+                }}}
+              >
+              연도 삭제
             </Button>
           </>
         )}

@@ -11,6 +11,24 @@ export async function GetExecutvieYears(){
     }
 }
 
+export async function PostExecutiveYear(){
+    try{
+        const response = await Authapi.post(`/nova/executive-histories/year`)
+        return response.data
+    } catch (error:unknown){
+        throwError(error)
+    }
+}
+
+export async function DeleteExecutiveYear(){
+    try{
+        const response = await Authapi.delete(`/nova/executive-histories`)
+        return response.data
+    }catch(error:unknown){
+        throwError(error)
+    }
+}
+
 export async function GetExecutiveMemberByYear(year: number){
     try{
         const response = await Authapi.get(`/nova/executive-histories/${year}`)
@@ -32,15 +50,6 @@ export async function PostExecuvtieMember(request: PostExecutiveMemberRequest){
 export async function DeleteExecutiveMember(executiveHistoryId: string){
     try{
         const response = await Authapi.delete(`/nova/executive-histories/${executiveHistoryId}`)
-        return response.data
-    } catch (error:unknown){
-        throwError(error)
-    }
-}
-
-export async function PostExecutiveYear(){
-    try{
-        const response = await Authapi.post(`/nova/executive-histories/year`)
         return response.data
     } catch (error:unknown){
         throwError(error)
