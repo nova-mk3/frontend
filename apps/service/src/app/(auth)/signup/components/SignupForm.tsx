@@ -60,6 +60,7 @@ export function SignupForm() {
       phoneNumber: "",
       password: "",
       confirmPassword: "",
+      year: "2025년",
       graduation: false,
       work: undefined,
       job: "",
@@ -127,7 +128,7 @@ export function SignupForm() {
     mutationFn: (data: SignUpData) => signup(data),
     onSuccess: (data: any) => {
       alert("로그인 성공\n관리자에게 문의해 승인을 받으세요!");
-      router.push("/signin");
+      router.push(`/signin?redirect=${decodeURI("/signup")}`);
     },
     onError: (error) => {
       alert(error.message);

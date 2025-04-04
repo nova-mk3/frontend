@@ -42,16 +42,14 @@ export function SigninForm() {
         queryKey: [userKeys.profile],
         refetchType: "all",
       });
-
+      console.log(redirectUrl);
       alert("로그인 성공");
       if (redirectUrl) {
-        router.push(decodeURI(redirectUrl));
-      } else {
-        if (pathname === "/signup") {
+        if (decodeURI(redirectUrl) === "/signup") {
           router.push("/");
-        } else {
-          router.back();
-        }
+        } else router.push(decodeURI(redirectUrl));
+      } else {
+        router.back();
       }
     } catch (error: any) {
       alert(error.message);

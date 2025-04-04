@@ -63,12 +63,12 @@ export function DatePickerForm<T extends Record<string, any>>({
                 captionLayout="dropdown-buttons"
                 className="bg-background01"
                 mode="single"
-                fromYear={2000}
+                fromYear={1990}
                 toYear={new Date().getFullYear()}
                 selected={field.value as Date}
                 onSelect={field.onChange}
                 disabled={(date) =>
-                  date > new Date() || date < new Date("2000-01-01")
+                  date > new Date() || date < new Date("1990-01-01")
                 }
                 locale={ko}
                 initialFocus

@@ -29,6 +29,7 @@ import {
   ProfileUpdateData,
   PutUserProfile,
 } from "@/src/api/user/client";
+import { useRouter } from "next/navigation";
 
 interface Props {
   memberId: string;
@@ -54,6 +55,7 @@ export default function EditForm({ memberId }: Props) {
   const [openModal, setOpenModal] = useState(false);
   const [formData, setFormData] = useState<ChangeUserInfoInput | null>(null);
   const { data, isLoading } = useGetUserData({ memberId });
+  const router = useRouter();
   const queryClient = useQueryClient();
 
   const form = useForm<ChangeUserInfoInput>({
@@ -86,7 +88,7 @@ export default function EditForm({ memberId }: Props) {
         semester: data.memberResponse.semester,
         absence: data.memberResponse.absence,
         birth: data.memberResponse.birth
-          ? new Date("2000-01-05")
+          ? new Date("1990-01-05")
           : new Date(data.memberResponse.birth),
         phoneNumber: data.memberResponse.phone,
         graduation: data.memberResponse.graduation,
@@ -123,7 +125,7 @@ export default function EditForm({ memberId }: Props) {
     }) => PutUserProfile({ profileMemberId, putUserData }),
     onSuccess: (data: any) => {
       alert("프로필 변경 성공");
-      // 추후에 프로필로 이동 예정
+      router.push(`/users/${memberId}`);
       // window.location.reload();
     },
     onError: (error) => {
