@@ -1,5 +1,4 @@
 import React from "react";
-
 import FramePictureSection from "./components/FramePictureSection/FramePictureSection";
 import FramePostSection from "./components/FramePictureSection/FramePostSection";
 import FrameAboutMeSection from "./components/FramePictureSection/FrameAboutMeSection";

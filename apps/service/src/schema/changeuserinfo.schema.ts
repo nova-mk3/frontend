@@ -8,7 +8,7 @@ const studentSchema = z
     grade: z.enum(Zodgrade).optional(),
     semester: z.enum(Zodsemester).optional(),
     absence: z.boolean().optional(),
-
+    introduction: z.string().optional(),
     // 졸업생
     year: z.string().optional(),
     work: z.boolean().optional(),

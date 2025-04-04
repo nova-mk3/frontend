@@ -1,25 +1,12 @@
 import React from "react";
-import Card from "./components/Card";
-import Title from "./components/Title";
-import { Users } from "lucide-react";
+import ErrorBoundaryWrapper from "../components/ErrorBoundaryWrapper";
+import MemberPage from "./components/MemberPage";
 
 export default function page() {
+  // 쿼리가 들어갈 예정
   return (
-    <div className="flex flex-col gap-6">
-      <Title title="동아리원 소개" TitleImage={<Users size={24} />} />
-
-      <div className="w-[90%] xl:w-full mx-auto">
-        <div className="mx-auto grid gap-9  lg:grid-cols-3 xl:grid-cols-4 mobile:grid-cols-1 ">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-        </div>
-      </div>
-    </div>
+    <ErrorBoundaryWrapper>
+      <MemberPage />
+    </ErrorBoundaryWrapper>
   );
 }

@@ -1,12 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@nova/ui/components/ui/button";
 import Link from "next/link";
 import SelectSortComponent from "../../components/SelectSortComponent";
 import { POST_TYPE_LABEL, PostType } from "@/src/constant/board";
 import SearchInput from "../../components/SearchInput";
 import { Filter } from "../../components/Filter";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
 
 interface BoardListTitleProps {

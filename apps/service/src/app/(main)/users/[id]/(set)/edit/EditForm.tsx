@@ -16,7 +16,7 @@ import {
   ChangeUserInfoInput,
   ChangeUserInfoSchema,
 } from "@/src/schema/changeuserinfo.schema";
-import { useGetUserData } from "../../query/qureies";
+import { useGetUserData, userKeys } from "../../query/qureies";
 import Modal from "@/src/app/(main)/components/Modal";
 import PendingFallbackUI from "@/src/app/(main)/components/Skeleton/PendingFallbackUI";
 import { Profile } from "@/src/app/(main)/board/components/comments/CommentListItem";
@@ -66,8 +66,9 @@ export default function EditForm({ memberId }: Props) {
       grade: "1학년",
       semester: "1학기",
       absence: false,
-      birth: new Date("2000-01-05"),
+      birth: new Date("1990-01-05"),
       phoneNumber: "",
+      introduction: "",
       graduation: false,
       work: true,
       year: undefined,
@@ -91,6 +92,7 @@ export default function EditForm({ memberId }: Props) {
           ? new Date("1990-01-05")
           : new Date(data.memberResponse.birth),
         phoneNumber: data.memberResponse.phone,
+        introduction: data.memberResponse.introduction,
         graduation: data.memberResponse.graduation,
         work: data.graduationResponse.work,
         job: data.graduationResponse.job,
@@ -127,6 +129,11 @@ export default function EditForm({ memberId }: Props) {
       alert("프로필 변경 성공");
       router.push(`/users/${memberId}`);
       // window.location.reload();
+
+      queryClient.invalidateQueries({
+        queryKey: userKeys.user(memberId),
+        refetchType: "all",
+      });
     },
     onError: (error) => {
       alert(error.message);
@@ -152,7 +159,7 @@ export default function EditForm({ memberId }: Props) {
       profilePhoto: memberProfile.profilePhoto.id,
       phone: values.phoneNumber,
       birth: !values.birth ? "" : values.birth.toLocaleDateString("ko-KR"),
-      introduction: "",
+      introduction: values.introduction,
     };
 
     // [2] graduation이 true라면 graduationSignUpRequest 만들기
@@ -183,6 +190,7 @@ export default function EditForm({ memberId }: Props) {
   // ❌ 유효성 검사 실패 시 실행됨
   const onInvalid = (errors: any) => {
     console.log("유효성 검사 실패:", errors);
+    alert("졸업생 쪽 졸업년도를 확인해주세요!");
   };
 
   // ✅ "확인" 버튼을 누르면 최종 제출 실행
@@ -206,6 +214,12 @@ export default function EditForm({ memberId }: Props) {
           onSubmit={form.handleSubmit(onValid, onInvalid)}
           className="space-y-3"
         >
+          <InputFormField
+            form={form}
+            name={"introduction"}
+            label={"한줄 소개"}
+            placeHolder={"한줄 소개를 작성해주세요"}
+          />
           <InputFormField
             form={form}
             name={"username"}

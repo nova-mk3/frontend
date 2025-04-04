@@ -12,7 +12,6 @@ import { InputFormField } from "../../components/InputFormField";
 import { useLoginMutation } from "../query/mutation";
 import { useQueryClient } from "@tanstack/react-query";
 import { useQueryParams } from "@/src/app/(main)/components/useQueryParams";
-import { getSimpleProfie } from "@/src/api/user/client";
 import { userKeys } from "@/src/app/(main)/users/[id]/query/qureies";
 import { usePathname, useRouter } from "next/navigation";
 
