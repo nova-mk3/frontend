@@ -10,6 +10,8 @@ import {
 } from "@nova/ui/components/ui/select";
 import { Button } from "@nova/ui/components/ui/button";
 import Link from "next/link";
+import { useQueryParams } from "../../components/useQueryParams";
+import useYearRange from "@/src/libs/hooks/useYearRange";
 
 interface TitleProps {
   title?: string;
@@ -18,6 +20,9 @@ interface TitleProps {
 }
 
 export default function Title({ title, className, TitleImage }: TitleProps) {
+  const { year, setYear } = useQueryParams();
+  const years = useYearRange(2019, new Date().getFullYear());
+
   return (
     <div
       className={`flex flex-col gap-6 py-6 mobile:flex-col mobile:items-center  ${className}`}
@@ -27,29 +32,20 @@ export default function Title({ title, className, TitleImage }: TitleProps) {
         {title}
       </p>
       <div className="flex flex-row items-center gap-[15px] mobile:flex-col mobile:w-full">
-        <Select defaultValue="seq">
+        <Select value={year} onValueChange={setYear}>
           <SelectTrigger className="w-[180px] ">
             <SelectValue placeholder="정렬 선택" />
           </SelectTrigger>
           <SelectContent className="bg-background01">
-            <SelectItem value="seq" className="cursor-pointer ">
-              2024
-            </SelectItem>
-            <SelectItem value="new" className="cursor-pointer ">
-              2023
-            </SelectItem>
-            <SelectItem value="3" className="cursor-pointer">
-              2022
-            </SelectItem>
-            <SelectItem value="4" className="cursor-pointer">
-              2021
-            </SelectItem>
-            <SelectItem value="5" className="cursor-pointer">
-              2020
-            </SelectItem>
-            <SelectItem value="6" className="cursor-pointer">
-              2019
-            </SelectItem>
+            {years.map((year) => (
+              <SelectItem
+                key={year}
+                value={year.toString()}
+                className="cursor-pointer"
+              >
+                {year + "년"}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>

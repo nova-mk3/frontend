@@ -33,6 +33,7 @@ export function useQueryParams() {
   const postType = searchParams.get("type") || "";
   const redirectUrl = searchParams.get("redirect");
   const grade = searchParams.get("grade") || "1";
+  const year = searchParams.get("year") || "2025";
 
   return {
     // Getter
@@ -45,6 +46,7 @@ export function useQueryParams() {
     postType,
     redirectUrl,
     grade,
+    year,
 
     // Setter
     setCurrentPage: (page: number) => setParam("page", page),
@@ -53,5 +55,6 @@ export function useQueryParams() {
     setSortBy: (value: string) => setParam("sortBy", value),
     setSortDirection: (value: string) => setParam("sortDirection", value),
     setGrade: (value: string) => setParam("grade", value),
+    setYear: (value: string) => setParam("year", value),
   };
 }

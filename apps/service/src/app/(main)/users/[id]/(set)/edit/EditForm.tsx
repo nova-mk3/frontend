@@ -55,6 +55,7 @@ export default function EditForm({ memberId }: Props) {
   const [openModal, setOpenModal] = useState(false);
   const [formData, setFormData] = useState<ChangeUserInfoInput | null>(null);
   const { data, isLoading } = useGetUserData({ memberId });
+
   const router = useRouter();
   const queryClient = useQueryClient();
 
@@ -69,7 +70,7 @@ export default function EditForm({ memberId }: Props) {
       birth: new Date("1990-01-05"),
       phoneNumber: "",
       introduction: "",
-      graduation: false,
+      graduation: undefined,
       work: true,
       year: undefined,
       job: "",
@@ -78,6 +79,19 @@ export default function EditForm({ memberId }: Props) {
       contactDescription: "",
     },
     mode: "onChange",
+  });
+  const graduation = useWatch({
+    control: form.control,
+    name: "graduation",
+  });
+
+  const isWork = useWatch({
+    control: form.control,
+    name: "work",
+  });
+  const isContact = useWatch({
+    control: form.control,
+    name: "contact",
   });
 
   useEffect(() => {
@@ -101,21 +115,12 @@ export default function EditForm({ memberId }: Props) {
         contactInfo: data.graduationResponse.contactInfo,
         contactDescription: data.graduationResponse.contactDescription,
       });
+      form.setValue("graduation", data.memberResponse.graduation, {
+        shouldValidate: true,
+      });
+      console.log(data.memberResponse.graduation);
     }
   }, [data, form]);
-
-  const graduation = useWatch({
-    control: form.control,
-    name: "graduation",
-  });
-  const isWork = useWatch({
-    control: form.control,
-    name: "work",
-  });
-  const isContact = useWatch({
-    control: form.control,
-    name: "contact",
-  });
 
   const useSignupMutation = useMutation({
     mutationFn: ({

@@ -13,22 +13,25 @@ export default function FallbackErrorUI({
         {error.message}
         <br />
       </span>
-      <span>오류가 발생했습니다! 아래 버튼을 통해 재시도를 해보세요!</span>
+      <span>오류가 발생했습니다! 아래 버튼을 통해 다른시도를 해보세요!</span>
 
       <div className="flex justify-center mt-8 flex-row gap-8">
         {/* ✅ 다시 시도 (에러 바운더리 리셋) */}
-        <Button variant="default" onClick={resetErrorBoundary}>
+        <Link href="/signin">
+          <Button variant="default">로그인</Button>
+        </Link>
+
+        {/* ✅ 메인으로 */}
+        <Link href="/">
+          <Button variant="text">메인으로</Button>
+        </Link>
+        <Button variant="text" onClick={resetErrorBoundary}>
           다시 불러오기!
         </Button>
 
         <Button variant="text" onClick={() => window.history.back()}>
           뒤로가기
         </Button>
-
-        {/* ✅ 메인으로 */}
-        <Link href="/">
-          <Button variant="text">메인으로</Button>
-        </Link>
       </div>
     </div>
   );

@@ -43,6 +43,9 @@ export function SigninForm() {
       });
       console.log(redirectUrl);
       alert("로그인 성공");
+
+      queryClient.resetQueries();
+
       if (redirectUrl) {
         if (decodeURI(redirectUrl) === "/signup") {
           router.push("/");

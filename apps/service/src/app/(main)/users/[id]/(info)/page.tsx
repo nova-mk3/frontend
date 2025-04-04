@@ -1,9 +1,18 @@
 import React from "react";
+import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
+import Profile from "./components/Profile";
 
-export default function page() {
+export default async function page({
+  params,
+  children,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
   return (
-    <div className="w-full bg-background02 flex  justify-center items-center h-[795px] mt-5">
-      개발중
-    </div>
+    <ErrorBoundaryWrapper>
+      <Profile memberId={id} />
+    </ErrorBoundaryWrapper>
   );
 }
