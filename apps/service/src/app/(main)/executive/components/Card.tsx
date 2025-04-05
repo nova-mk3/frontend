@@ -3,15 +3,27 @@ import Image from "next/image";
 import CardLogo from "@/public/image/CardLogo.svg";
 import { Phone, CrownIcon } from "lucide-react";
 import { Profile } from "../../board/components/comments/CommentListItem";
+import Link from "next/link";
 
 interface CardProps {
   profilePhoto: Profile;
   role: string;
   name: string;
   phone: string;
+  grade: string;
+  semester: string;
+  memberId: string;
 }
 
-export default function Card({ profilePhoto, role, name, phone }: CardProps) {
+export default function Card({
+  profilePhoto,
+  role,
+  name,
+  phone,
+  grade,
+  semester,
+  memberId,
+}: CardProps) {
   return (
     <div className=" p-5 flex flex-col gap-1 t-m shadow-md hover:shadow-lg ">
       <div className="flex flex-row gap-3">
@@ -26,10 +38,15 @@ export default function Card({ profilePhoto, role, name, phone }: CardProps) {
         />
         <div className="w-[1px] h-[40px] bg-line01 my-auto"></div>
         <div className="flex flex-col mr-2">
-          <p className="!font-bold line-clamp-1">{name}</p>
-          {/* <p className="t-s text-text03">
+          <Link
+            href={`/users/${memberId}`}
+            className="!font-bold line-clamp-1 cursor-pointer hover:underline"
+          >
+            {name}
+          </Link>
+          <p className="t-s text-text03">
             {grade} {semester}
-          </p> */}
+          </p>
         </div>
         <CardLogo width={50} className="ml-auto flex-shrink-0" />
       </div>

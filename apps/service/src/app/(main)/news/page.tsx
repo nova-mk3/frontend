@@ -1,7 +1,6 @@
 import React from "react";
 import { Clock } from "lucide-react";
 import Image from "next/image";
-import { Separator } from "@nova/ui/components/ui/separator";
 import HistoryList from "./components/HistoryList";
 import { History } from "./components/HistoryList";
 export default function page() {

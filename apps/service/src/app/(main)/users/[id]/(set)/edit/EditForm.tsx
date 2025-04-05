@@ -99,8 +99,10 @@ export default function EditForm({ memberId }: Props) {
       form.reset({
         username: data.memberResponse.name,
         studentNumber: data.memberResponse.studentNumber,
-        grade: data.memberResponse.grade,
-        semester: data.memberResponse.semester,
+        grade: data.memberResponse.grade ? data.memberResponse.grade : "1학년",
+        semester: data.memberResponse.semester
+          ? data.memberResponse.semester
+          : "1학기",
         absence: data.memberResponse.absence,
         birth: data.memberResponse.birth
           ? new Date("1990-01-05")
@@ -110,7 +112,9 @@ export default function EditForm({ memberId }: Props) {
         graduation: data.memberResponse.graduation,
         work: data.graduationResponse.work,
         job: data.graduationResponse.job,
-        year: data.graduationResponse.year,
+        year: data.graduationResponse.year
+          ? data.graduationResponse.year
+          : "2025년",
         contact: data.graduationResponse.contact,
         contactInfo: data.graduationResponse.contactInfo,
         contactDescription: data.graduationResponse.contactDescription,

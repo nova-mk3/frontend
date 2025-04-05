@@ -64,14 +64,14 @@ export function DatePickerForm<T extends Record<string, any>>({
                 className="bg-background01"
                 mode="single"
                 fromYear={1990}
+                defaultMonth={field.value}
                 toYear={new Date().getFullYear()}
-                selected={field.value as Date}
+                selected={field.value ? new Date(field.value) : undefined}
                 onSelect={field.onChange}
                 disabled={(date) =>
                   date > new Date() || date < new Date("1990-01-01")
                 }
                 locale={ko}
-                initialFocus
               />
             </PopoverContent>
           </Popover>

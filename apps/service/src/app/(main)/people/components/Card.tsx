@@ -3,10 +3,12 @@ import Image from "next/image";
 import CardLogo from "@/public/image/CardLogo.svg";
 import { IdCard, Phone, Mail, Send, TriangleAlert } from "lucide-react";
 import { Profile } from "../../board/components/comments/CommentListItem";
+import Link from "next/link";
 
 interface CardProps {
   profilePhoto: Profile;
   studentNumber: string;
+  memberId: string;
   name: string;
   email: string;
   phone?: string;
@@ -24,6 +26,7 @@ interface CardProps {
 export default function Card({
   profilePhoto,
   studentNumber,
+  memberId,
   name,
   email,
   phone,
@@ -46,7 +49,12 @@ export default function Card({
         />
         <div className="w-[1px] h-[40px] bg-line01 my-auto"></div>
         <div className="flex flex-col mr-2">
-          <p className="!font-bold line-clamp-1">{name}</p>
+          <Link
+            href={`/users/${memberId}`}
+            className="!font-bold line-clamp-1 cursor-pointer hover:underline"
+          >
+            {name}
+          </Link>
           <p className="t-s text-text03">
             {grade} {semester}
           </p>

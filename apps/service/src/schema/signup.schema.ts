@@ -2,11 +2,19 @@ import { z } from "zod";
 import { isStrongPassword } from "../libs/utils/isStrongPassword";
 
 // z.enum value를 변수로 관리하고 싶은데, 리터럴만 받아야한다고 하는데 고민이 더 필요할듯
-export let Zodgrade = ["1학년", "2학년", "3학년", "4학년", "5학년"] as const;
-export let Zodsemester = ["1학기", "2학기"] as const;
+// 0학년은 졸업생입니다!
+export let Zodgrade = [
+  "0학년",
+  "1학년",
+  "2학년",
+  "3학년",
+  "4학년",
+  "5학년",
+] as const;
+export let Zodsemester = ["0학기", "1학기", "2학기"] as const;
 
-export let grade = ["1학년", "2학년", "3학년", "4학년", "5학년"];
-export let semester = ["1학기", "2학기"];
+export let grade = ["0학년", "1학년", "2학년", "3학년", "4학년", "5학년"];
+export let semester = ["0학기", "1학기", "2학기"];
 
 // TODO: email, studentId, phoneNumber 에 대해서 api 로 중복 검증
 const studentSchema = z

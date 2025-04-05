@@ -4,9 +4,7 @@ import Profile from "./components/Profile";
 
 export default async function page({
   params,
-  children,
 }: {
-  children: React.ReactNode;
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;

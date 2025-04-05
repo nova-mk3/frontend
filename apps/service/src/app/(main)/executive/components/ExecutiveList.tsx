@@ -41,6 +41,9 @@ export default function ExecutiveList() {
               name={chairman.name}
               profilePhoto={chairman.profilePhoto}
               phone={chairman.phone}
+              grade={chairman.grade}
+              semester={chairman.semester}
+              memberId={chairman.memberId}
             />
           ) : (
             <div className="">회장이 아직 없어요 😔</div>
@@ -58,6 +61,9 @@ export default function ExecutiveList() {
               name={viceChairman.name}
               profilePhoto={viceChairman.profilePhoto}
               phone={viceChairman.phone}
+              grade={viceChairman.grade}
+              semester={viceChairman.semester}
+              memberId={viceChairman.memberId}
             />
           ) : (
             <div className="">부회장이 아직 없어요 😔</div>
@@ -75,6 +81,9 @@ export default function ExecutiveList() {
               name={executive.name}
               profilePhoto={executive.profilePhoto}
               phone={executive.phone}
+              grade={executive.grade}
+              semester={executive.semester}
+              memberId={executive.memberId}
             />
           ))}
         </div>

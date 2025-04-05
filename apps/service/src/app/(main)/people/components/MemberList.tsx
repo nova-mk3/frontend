@@ -35,6 +35,7 @@ export default function MemberList() {
             grade={data.grade}
             semester={data.semester}
             studentNumber={data.studentNumber}
+            memberId={data.memberId}
           />
         ))}
       </div>
