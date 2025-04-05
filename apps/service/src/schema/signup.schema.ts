@@ -10,10 +10,19 @@ export let Zodgrade = [
   "3학년",
   "4학년",
   "5학년",
+  "6학년",
 ] as const;
 export let Zodsemester = ["0학기", "1학기", "2학기"] as const;
 
-export let grade = ["0학년", "1학년", "2학년", "3학년", "4학년", "5학년"];
+export let grade = [
+  "0학년",
+  "1학년",
+  "2학년",
+  "3학년",
+  "4학년",
+  "5학년",
+  "6학년",
+];
 export let semester = ["0학기", "1학기", "2학기"];
 
 // TODO: email, studentId, phoneNumber 에 대해서 api 로 중복 검증
