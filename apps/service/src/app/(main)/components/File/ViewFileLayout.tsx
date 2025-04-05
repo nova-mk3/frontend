@@ -7,7 +7,7 @@ interface FileListProps {
 
 
 export function FileList( {files} : FileListProps) {
-    if(!files || files.length === 0) return <p className='text-text02 p-1'>저장된 파일이 없습니다</p>
+    if(!files || files.length === 0) return <p className='text-text02'>저장된 파일이 없습니다</p>
 
     if(files.length > 0){
     return (

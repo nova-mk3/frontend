@@ -1,35 +1,53 @@
 "use client";
 
-import React, { Suspense, useState } from 'react'
-import ItemList from '../components/HomeListItem';
-import BoardList from '../components/BoardList';
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { IntegratedBoardGet } from '@/src/api/board/integrated';
-import { useBoardIdStore } from '@/src/store/BoardId';
-import { ErrorBoundary } from 'react-error-boundary';
-import { usePostListQuery } from '../query/postqueries';
-import { PostType } from '@/src/constant/board';
-import { PageNation } from '../../components/PageNation';
-interface Props{
-    postType : PostType;
-    page : number;
-    size : number;
-    sort : string;
-}
+import React, { Suspense } from "react";
 
-export default function Post({postType,page,size,sort} : Props) {
-    const {INTEGRATED} = useBoardIdStore();
-    const { data } = usePostListQuery({postType, page : page-1, size, sort , boardId : INTEGRATED})
-    
+import { usePostListQuery } from "../query/postqueries";
+import { BOARD_SIZE, INTEGRATED, POST_TYPE } from "@/src/constant/board";
+import { PageNation } from "../../components/PageNation";
+import { useQueryParams } from "../../components/useQueryParams";
+import BoardListTitle from "../components/BoardListTitle";
+import { Book } from "lucide-react";
+import BoardList from "../components/BoardList";
+import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
+import DeferredComponent from "../../components/DeferredComponent";
 
-    return (
+export default function Post() {
+  const { currentPage, keyword, searchType, sortBy, sortDirection } =
+    useQueryParams();
+
+  const { data, isLoading } = usePostListQuery({
+    postType: POST_TYPE.FREE,
+    page: currentPage - 1,
+    size: BOARD_SIZE,
+    keyword: keyword,
+    searchType: searchType,
+    sortBy: sortBy,
+    sortDirection: sortDirection,
+    boardId: INTEGRATED,
+  });
+
+  if (isLoading) {
+    return <PendingFallbackUI />;
+  }
+
+  return (
+    <>
+      <BoardListTitle
+        title={POST_TYPE.FREE}
+        TitleImage={<Book size={20} />}
+        defaultHref="/board"
+      />
       <div>
-          <BoardList content={data.content}/>
-          <Suspense fallback={<div className='h-[36px]'></div>}> 
-                  <PageNation size={size} totalPage={data.totalPages} className="my-4" />
-          </Suspense>
+        <BoardList content={data.content} />
+        <Suspense fallback={<div className="h-[36px]"></div>}>
+          <PageNation
+            size={BOARD_SIZE}
+            totalPage={data.totalPages}
+            className="my-4"
+          />
+        </Suspense>
       </div>
-    )
+    </>
+  );
 }
-
-

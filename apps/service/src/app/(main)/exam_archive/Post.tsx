@@ -1,33 +1,52 @@
 "use client";
 
-import React, { Suspense } from 'react'
-import { useBoardIdStore } from '@/src/store/BoardId';
-import { PostType } from '@/src/constant/board';
-import { usePostListQuery } from '../board/query/postqueries';
-import { PageNation } from '../components/PageNation';
-import ArchiveList from './components/ArchiveList';
+import React, { Suspense } from "react";
 
-interface Props{
-    postType : PostType;
-    page : number;
-    size : number;
-    sort : string;
-}
+import { BOARD_SIZE, CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
 
-export default function Post({postType,page,size,sort} : Props) {
-    const {CLUB_ARCHIVE} = useBoardIdStore();
-    const { data } = usePostListQuery({postType, page : page-1, size, sort , boardId : CLUB_ARCHIVE})
-    
+import { Folder } from "lucide-react";
+import { useQueryParams } from "../components/useQueryParams";
+import { usePostListQuery } from "../board/query/postqueries";
+import ArchiveListTitle from "./components/ArchiveListTitle";
+import ArchiveList from "./components/ArchiveList";
+import { PageNation } from "../components/PageNation";
+import PendingFallbackUI from "../components/Skeleton/PendingFallbackUI";
 
-    
-    return (
+export default function Post() {
+  const { currentPage, keyword, searchType, sortBy, sortDirection } =
+    useQueryParams();
+
+  const { data, isLoading } = usePostListQuery({
+    postType: POST_TYPE.EXAM_ARCHIVE,
+    page: currentPage - 1,
+    size: BOARD_SIZE,
+    keyword: keyword,
+    searchType: searchType,
+    sortBy: sortBy,
+    sortDirection: sortDirection,
+    boardId: CLUB_ARCHIVE,
+  });
+
+  if (isLoading) {
+    return <PendingFallbackUI />;
+  }
+
+  return (
+    <>
+      <ArchiveListTitle
+        title={POST_TYPE.EXAM_ARCHIVE}
+        TitleImage={<Folder size={20} />}
+      />
       <div>
-          <ArchiveList content={data.content}/>
-          <Suspense fallback={<div className='h-[36px]'></div>}> 
-                  <PageNation size={size} totalPage={data.totalPages} className="my-4" />
-          </Suspense>
+        <ArchiveList content={data.content} />
+        <Suspense fallback={<div className="h-[36px]"></div>}>
+          <PageNation
+            size={BOARD_SIZE}
+            totalPage={data.totalPages}
+            className="my-4"
+          />
+        </Suspense>
       </div>
-    )
+    </>
+  );
 }
-
-

@@ -3,51 +3,47 @@
 import React, { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { Button } from "@nova/ui/components/ui/button";
-import {  useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CommentAPIType, CommentsPost } from "@/src/api/board/comments";
 import { postKeys } from "../../query/postqueries";
 import { commentsKeys } from "../../query/comments";
 
-
-
-interface CommentFormProps{
+interface CommentFormProps {
   postId: string;
   parentCommentId?: string;
 }
-export default function CommentForm({parentCommentId="",postId} : CommentFormProps) {
-  const [value,setValue] = useState("");
+export default function CommentForm({
+  parentCommentId = "",
+  postId,
+}: CommentFormProps) {
+  const [value, setValue] = useState("");
   const queryClient = useQueryClient();
-  
-  const useCommentMutation =  useMutation({
-    mutationFn: ({postId,content,parentCommentId} : CommentAPIType) => CommentsPost({postId,content,parentCommentId}),
-    onSuccess: (data : any) => {
-      setValue("");   
+
+  const useCommentMutation = useMutation({
+    mutationFn: ({ postId, content, parentCommentId }: CommentAPIType) =>
+      CommentsPost({ postId, content, parentCommentId }),
+    onSuccess: (data: any) => {
+      setValue("");
       queryClient.invalidateQueries({
         queryKey: commentsKeys.list(postId),
-        refetchType : 'all'
-      })
+        refetchType: "all",
+      });
 
-      queryClient.setQueryData(
-        postKeys.detail(postId),
-        (previous: any) => {
-
-         return {
+      queryClient.setQueryData(postKeys.detail(postId), (previous: any) => {
+        return {
           ...previous,
-           commentCount : previous.commentCount +1,
-           }
-        }
-      )
-
+          commentCount: previous.commentCount + 1,
+        };
+      });
     },
     onError: (error) => {
       alert(error.message);
     },
   });
 
-const handleSubmit = ()=>{
-  useCommentMutation.mutate({postId,content : value, parentCommentId});
-}
-
+  const handleSubmit = () => {
+    useCommentMutation.mutate({ postId, content: value, parentCommentId });
+  };
 
   return (
     <div className="w-[90%] mx-auto p-1 mb-3 mt-3">
@@ -56,11 +52,13 @@ const handleSubmit = ()=>{
           className="flex w-full min-h-[98px] t-m resize-none outline-none p-4 border-none"
           placeholder="댓글을 입력하세요"
           value={value}
-          onChange={(e)=> setValue(e.target.value)}
+          onChange={(e) => setValue(e.target.value)}
         />
       </div>
 
-      <Button className="flex w-[120px] mt-5 ml-auto" onClick={handleSubmit}>댓글 작성</Button>
+      <Button className="flex w-[120px] mt-5 ml-auto" onClick={handleSubmit}>
+        댓글 작성
+      </Button>
     </div>
   );
 }

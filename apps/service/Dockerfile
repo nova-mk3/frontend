@@ -23,6 +23,9 @@ WORKDIR /app
 COPY --from=builder /app/out/json/ .
 RUN pnpm install
 
+# ✅ .env.production 복사
+COPY ./apps/service/.env.production ./apps/service/.env.production
+
 COPY --from=builder /app/out/full/ .
 RUN pnpm turbo build
 
@@ -35,11 +38,16 @@ COPY --from=builder /app .
 # 비루트 사용자 생성
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
-USER nextjs
 
-COPY --from=installer /app/apps/service/.next/standalone ./ 
-COPY --from=installer /app/apps/service/.next/static ./apps/service/.next/static 
-COPY --from=installer /app/apps/service/public ./apps/service/public
+
+COPY --from=installer --chown=nextjs:nodejs /app/apps/service/.next/standalone ./     
+COPY --from=installer --chown=nextjs:nodejs /app/apps/service/.next/static ./apps/service/.next/static 
+COPY --from=installer --chown=nextjs:nodejs /app/apps/service/public ./apps/service/public
+
+RUN chown -R nextjs:nodejs ./apps/service/.next
+
+# 이제 사용자 전환
+USER nextjs
 
 
 # 포트 노출

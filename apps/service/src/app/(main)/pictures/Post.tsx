@@ -1,35 +1,53 @@
 "use client";
 
-import React, { Suspense } from 'react'
-import { useBoardIdStore } from '@/src/store/BoardId';
-import { PostType } from '@/src/constant/board';
-import { usePostListQuery } from '../board/query/postqueries';
-import { PageNation } from '../components/PageNation';
-import PictureList from './components/PictureList';
+import React, { Suspense } from "react";
 
-interface Props{
-    postType : PostType;
-    page : number;
-    size : number;
-    sort : string;
-}
+import { Image } from "lucide-react";
+import { useQueryParams } from "../components/useQueryParams";
+import { usePostListQuery } from "../board/query/postqueries";
+import { BOARD_SIZE, CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
+import BoardListTitle from "../board/components/BoardListTitle";
+import PictureList from "./components/PictureList";
+import { PageNation } from "../components/PageNation";
+import PendingFallbackUI from "../components/Skeleton/PendingFallbackUI";
 
-export default function Post({postType,page,size,sort} : Props) {
-    const {INTEGRATED} = useBoardIdStore();
-    const { data } = usePostListQuery({postType, page : page-1, size, sort , boardId : INTEGRATED})
+export default function Post() {
+  const { currentPage, keyword, searchType, sortBy, sortDirection } =
+    useQueryParams();
 
+  const { data, isLoading } = usePostListQuery({
+    postType: POST_TYPE.PICTURES,
+    page: currentPage - 1,
+    size: BOARD_SIZE,
+    keyword: keyword,
+    searchType: searchType,
+    sortBy: sortBy,
+    sortDirection: sortDirection,
+    boardId: CLUB_ARCHIVE,
+  });
 
-    console.log(data);
-
-    
-    return (
+  if (isLoading) {
+    return <PendingFallbackUI />;
+  }
+  return (
+    <>
+      <BoardListTitle
+        title={POST_TYPE.PICTURES}
+        TitleImage={<Image size={20} />}
+        defaultHref="/pictures"
+      />
       <div>
-           <PictureList content={data.content}/>
-          <Suspense fallback={<div className='h-[36px]'></div>}> 
-                  <PageNation size={size} totalPage={data.totalPages} className="my-4" />
-          </Suspense>
+        <div className="min-h-[745px]">
+          <PictureList content={data.content} />
+        </div>
+        <Suspense fallback={<div className="h-[36px]"></div>}>
+          <PageNation
+            size={BOARD_SIZE}
+            totalPage={data.totalPages}
+            className="my-4 "
+          />
+        </Suspense>
       </div>
-    )
+    </>
+  );
 }
-
-

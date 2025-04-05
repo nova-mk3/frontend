@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
-
 /** @type {import('next').NextConfig} */
+
+const isProd = process.env.NODE_ENV === "production";
 const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: false,
@@ -12,14 +13,28 @@ const nextConfig: NextConfig = {
     });
     return config;
   },
-  async rewrites() {
-    return [
+  images: {
+    remotePatterns: [
       {
-        source: '/nova/:path*',
-        destination: 'http://localhost:8080/api/v1/:path*'
+        protocol: "https",
+        hostname: "nova.cbnu.ac.kr",
+        port: "",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "8080",
+        pathname: "**",
+      },
+    ],
+  },
+  compiler: isProd
+    ? {
+        removeConsole: {
+          exclude: ["error", "warn"],
+        },
       }
-    ]
-  }
+    : {},
 };
 
 export default nextConfig;

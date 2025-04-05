@@ -1,16 +1,11 @@
-import { CommentsGetList } from "@/src/api/board/comments";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import { CommentsListQueryOptions } from "./options";
 
 export const commentsKeys = {
-    all: ['comments',] as const,
-    list: (postId : string) => [...commentsKeys.all, 'list',postId] as const,
-}
-
-
-export const useCommentsListQuery = (postId: string) => {
-    return useSuspenseQuery({
-      queryKey: commentsKeys.list(postId), 
-      queryFn: () => CommentsGetList({postId }),
-    });
+  all: ["comments"] as const,
+  list: (postId: string) => [...commentsKeys.all, "list", postId] as const,
 };
 
+export const useCommentsListQuery = (postId: string) => {
+  return useQuery(CommentsListQueryOptions(postId));
+};

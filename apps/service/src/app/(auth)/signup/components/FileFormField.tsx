@@ -13,21 +13,22 @@ import Image from "next/image";
 import { Path, UseFormReturn } from "react-hook-form";
 import { useFileFormField } from "../hooks/useFileFormField";
 
-export function FileFormField({
+export function FileFormField<T extends Record<string, any>>({
   form,
   name,
   label,
-  accept = "image/*"
+  accept = "image/*",
 }: {
-  form: UseFormReturn<SignupInput>;
-  name: Path<SignupInput>;
+  form: UseFormReturn<T>;
+  name: Path<T>;
   label: string;
   accept?: string;
 }) {
-  const { preview, inputRef, errors, handleIconClick,handleReset } = useFileFormField({
-    form,
-    name,
-  });
+  const { preview, inputRef, errors, handleIconClick, handleReset } =
+    useFileFormField({
+      form,
+      name,
+    });
 
   return (
     <FormField
@@ -40,7 +41,7 @@ export function FileFormField({
               <FormLabel
                 className={cn(
                   "t-m !font-bold ml-1 text-text01 transition-colors peer-focus:text-primary",
-                  errors[name] && "text-danger",
+                  errors[name] && "text-danger"
                 )}
               >
                 {label}
@@ -66,7 +67,11 @@ export function FileFormField({
                   height={40}
                   className={`w-10 h-10 object-cover rounded-full cursor-pointer`}
                 />
-                <X size={15} onClick={handleReset}  className="cursor-pointer mb-auto"/>
+                <X
+                  size={15}
+                  onClick={handleReset}
+                  className="cursor-pointer mb-auto"
+                />
               </div>
             ) : (
               <Button
@@ -77,7 +82,7 @@ export function FileFormField({
                   "w-10 h-10 p-2 rounded-sm !mt-[4px] border-line01 group",
                   errors[name]
                     ? "border-danger"
-                    : "border-line01 focus:border-primary",
+                    : "border-line01 focus:border-primary"
                 )}
                 aria-label="프로필 이미지 업로드"
               >

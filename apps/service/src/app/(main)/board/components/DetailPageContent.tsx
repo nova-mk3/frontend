@@ -1,12 +1,17 @@
+import { cn } from "@nova/ui/lib/utils";
 import React from "react";
 
 interface Props {
-  content? : string;
+  content?: string;
 }
-export default function DetailPageContent({content} : Props) {
+export default function DetailPageContent({ content }: Props) {
   return (
-    <div className="min-h-[240px] mt-5">
+    <pre
+      className={cn(
+        "max-w-none mb-8 min-h-[240px] t-m break-all whitespace-pre-wrap"
+      )}
+    >
       {content}
-    </div>
+    </pre>
   );
 }

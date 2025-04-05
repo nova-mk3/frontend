@@ -20,6 +20,7 @@ RUN pnpm turbo prune admin --docker
 FROM base AS installer
 RUN apk update
 RUN apk add --no-cache libc6-compat
+
 # pnpm 설치
 RUN npm install -g pnpm
 WORKDIR /app
@@ -27,8 +28,12 @@ WORKDIR /app
 COPY --from=builder /app/out/json/ .
 RUN pnpm install
 
+# ✅ .env.production 복사
+COPY ./apps/service/.env.production ./apps/service/.env.production
+
 # 프로젝트 전체 복사
 COPY --from=builder /app/out/full/ .
+
 
 # turbo build
 RUN pnpm turbo build
@@ -40,14 +45,16 @@ WORKDIR /app/apps/admin
 # 비루트 사용자 생성
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs 
-USER nextjs
 
+# RUN chown -R nextjs:nodejs .next
 
 # Next.js 빌드 결과 복사
 COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/.next/standalone ./ 
 COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/.next/static ./apps/admin/.next/static 
 COPY --from=installer --chown=nextjs:nodejs /app/apps/admin/public ./apps/admin/public
 
+RUN chown -R nextjs:nodejs ./apps/admin/.next
+USER nextjs
 # 포트를 노출합니다.
 EXPOSE 3001
 

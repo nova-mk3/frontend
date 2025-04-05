@@ -1,0 +1,9 @@
+import { UserListGet } from "@/src/api/people";
+import { useQuery } from "@tanstack/react-query";
+
+export const useUserListQuery = ({ grade }: { grade: string }) => {
+  return useQuery({
+    queryKey: ["userlist", grade],
+    queryFn: () => UserListGet({ grade }),
+  });
+};

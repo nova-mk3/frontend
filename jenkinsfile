@@ -1,0 +1,97 @@
+pipeline {
+    agent any
+    
+    environment {
+        GITHUB_REPO = 'https://github.com/nova-mk3/frontend'
+        GITHUB_CREDENTIALS_ID = 'For Jenkins Github Token'  // GitHub 자격 증명 ID
+    }
+    
+    
+    stages {
+        stage('GitHub Clone') {
+        steps {
+            script {
+                echo "🔄 Cloning repository..."
+                sh 'rm -rf frontend || true'  // 기존 폴더 삭제
+          
+                 
+                checkout([
+                $class: 'GitSCM',
+                branches: [[name: '*/main']],
+                userRemoteConfigs: [[
+                    url: env.GITHUB_REPO,
+                    credentialsId: env.GITHUB_CREDENTIALS_ID
+                ]],
+                extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'frontend']]
+])
+            
+          
+                echo "✅ Git Clone 완료!"
+            }
+        }
+}
+
+        stage('Inject .env.production') {
+            steps {
+                withCredentials([string(credentialsId: 'env_production_text_frontend', variable: 'ENV_PROD')]) {
+                    script {
+                        dir('frontend/apps/service') {
+                            writeFile file: '.env.production', text: ENV_PROD + ''
+                            echo "✅ .env.production 생성 완료 at frontend/apps/service/"
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Cleanup') {
+            steps {
+                script {
+                    def composeFile = "frontend/docker-compose.yml"
+                    if (fileExists(composeFile)) {  
+                        echo "🧹 Cleaning up old Docker containers..."
+                        
+                        dir('frontend') {
+                            sh '''
+                            docker compose down --rmi all --volumes --remove-orphans || true
+                            docker rmi frontend_admin_image:latest frontend_service_image:latest || true
+                            '''
+                        }
+                    
+                        echo "✅ Cleanup 완료!"
+                    } else {
+                        echo "⚠️ frontend/docker-compose.yml not found. Skipping cleanup."
+                    }
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    def composeFile = "frontend/docker-compose.yml"
+                    if (fileExists(composeFile)) {  
+                        echo "🚀 Deploying Docker containers..."
+                        dir('frontend') {
+                            sh '''
+                            docker compose up -d --build || (echo "❌ Deployment Failed!" && exit 1)
+                            '''
+                        }
+                        echo "✅ Deployment 완료!"
+                    } else {
+                        error "❌ docker-compose.yml not found! Stopping pipeline."
+                    }
+                }
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo "🎉 Deployment 성공! 🚀"
+        }
+        failure {
+            echo "❌ Deployment 실패. Logs 확인 요망."
+        }
+    }
+}

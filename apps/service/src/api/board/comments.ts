@@ -2,17 +2,24 @@ import { throwErrorMessage } from "@/src/libs/utils/throwError";
 import { Authapi } from "../core";
 
 export interface CommentAPIType {
-    postId?: string;
-    content?: string;
-    parentCommentId?: string;
+  postId?: string;
+  content?: string;
+  parentCommentId?: string;
 }
 
 /*
  * 댓글 작성
  */
-export async function CommentsPost({ postId, content, parentCommentId }: CommentAPIType) {
+export async function CommentsPost({
+  postId,
+  content,
+  parentCommentId,
+}: CommentAPIType) {
   try {
-    const response = await Authapi.post(`/nova/posts/${postId}/comments`, { content, parentCommentId });
+    const response = await Authapi.post(`/posts/${postId}/comments`, {
+      content,
+      parentCommentId,
+    });
     return response.data;
   } catch (error) {
     throwErrorMessage(error);
@@ -24,7 +31,9 @@ export async function CommentsPost({ postId, content, parentCommentId }: Comment
  */
 export async function CommentsGetList({ postId }: CommentAPIType) {
   try {
-    const response = await Authapi.get(`/nova/posts/${postId}/comments?postId=${postId}`);
+    const response = await Authapi.get(
+      `/posts/${postId}/comments?postId=${postId}`
+    );
     return response.data.data;
   } catch (error) {
     throwErrorMessage(error);
@@ -34,9 +43,17 @@ export async function CommentsGetList({ postId }: CommentAPIType) {
 /*
  * 댓글 수정
  */
-export async function CommentsPut({ commentId, content }: { commentId: string; content: string }) {
+export async function CommentsPut({
+  commentId,
+  content,
+}: {
+  commentId: string;
+  content: string;
+}) {
   try {
-    const response = await Authapi.put(`/nova/comments/${commentId}`, { content });
+    const response = await Authapi.put(`/comments/${commentId}`, {
+      content,
+    });
     return response.data.data;
   } catch (error) {
     throwErrorMessage(error);
@@ -48,7 +65,7 @@ export async function CommentsPut({ commentId, content }: { commentId: string; c
  */
 export async function CommentsDelete({ commentId }: { commentId: string }) {
   try {
-    const response = await Authapi.delete(`/nova/comments/${commentId}`);
+    const response = await Authapi.delete(`/comments/${commentId}`);
     return response.data.data;
   } catch (error) {
     throwErrorMessage(error);

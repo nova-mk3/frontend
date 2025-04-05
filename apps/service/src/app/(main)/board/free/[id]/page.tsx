@@ -1,25 +1,36 @@
-"use client";
-import React from 'react'
-import { useParams } from 'next/navigation';
+import React from "react";
+import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
+import PostDetail from "./PostDetail";
 
+// TODO: 메타데이터 확인 -> html을 생성할때만 호출됨!
+type Props = {
+  params: Promise<{ id: string }>;
+};
+// export async function generateMetadata({ params }: Props): Promise<Metadata> {
+//   const { id: postId } = await params;
+//   const postData = await IntegratedBoardGetDetail({
+//     postId,
+//     boardId: INTEGRATED,
+//   });
 
-import ErrorBoundaryWrapper from '../../../components/ErrorBoundaryWrapper';
-import PendingFallbackUI from '../../../components/PendingFallbackUI';
-import dynamic from 'next/dynamic';
+//   return {
+//     title: "NOVA",
+//     description: "충북대학교 소프트웨어학과 노바",
+//     openGraph: {
+//       title: postData.title,
+//       description: postData.content,
+//       type: "article",
+//       authors: [postData.authorName],
+//     },
+//   };
+// }
 
-
-const PostDetail = dynamic(() => import("./PostDetail"), {
-  ssr: false, // 클라이언트에서만 렌더링
-  loading: () => <PendingFallbackUI />,
-});
-  
-export default  function page() {
-  const {id } = useParams();
-
+export default async function Page({ params }: Props) {
+  const { id } = await params;
 
   return (
     <ErrorBoundaryWrapper>
-      <PostDetail postId={id as string}/>
+      <PostDetail postId={id} />
     </ErrorBoundaryWrapper>
   );
 }

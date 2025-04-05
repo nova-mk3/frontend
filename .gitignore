@@ -36,3 +36,10 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+
+# ✅ 로컬 전용 환경 파일들 (절대 커밋 X)
+.env*
+
+# VSCode settings
+.vscode/

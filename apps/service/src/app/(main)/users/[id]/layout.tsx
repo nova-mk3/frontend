@@ -1,15 +1,18 @@
-import React from 'react'
-import Navigation from '../components/Navigation';
+import React from "react";
+import LayoutClient from "./components/LayoutClient";
+import ErrorBoundaryWrapper from "../../components/ErrorBoundaryWrapper";
 
-export default function layout({
+export default async function layout({
+  params,
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
   return (
-    <div>
-      <Navigation/>
-      {children}
-    </div>
-  )
+    <ErrorBoundaryWrapper>
+      <LayoutClient id={id}>{children}</LayoutClient>
+    </ErrorBoundaryWrapper>
+  );
 }

@@ -5,57 +5,66 @@ import { ERROR_MESSAGES } from "@/src/constant/error";
 /*
 카테고리별 파일 업로드
 */
-export const UploadFilesAPI = async(formdata : FormData, postType : string)=>{
-  try{
-
-    const response = await Authapi.post(`/nova/files?postType=${ postType}`,formdata);
+export const UploadFilesAPI = async (formdata: FormData, postType: string) => {
+  try {
+    const response = await Authapi.post(
+      `/files?postType=${postType}`,
+      formdata
+    );
     return response.data;
-  }catch(error : any){
+  } catch (error: any) {
     throwErrorMessage(error);
   }
-}
+};
 
 /*
 파일 다운로드
 */
 export const DownloadFilesAPI = async (fileId: string) => {
-    try {
-      const response = await Authapi.get(`/nova/files/${fileId}/download`, {
-        responseType: 'blob', // Blob 데이터로 받기
-      });
-  
-      const url = window.URL.createObjectURL(response.data);
-      const link = document.createElement('a');
-      link.href = url;
-  
-      // Content-Disposition 헤더에서 파일명을 추출 (예외 처리 추가)
-      const contentDisposition = response.headers['content-disposition'];
-      const filename = contentDisposition
-        ? decodeURIComponent(contentDisposition.split('filename=')[1]?.replace(/"/g, '') || 'downloaded-file')
-        : 'downloaded-file';
-  
-      link.setAttribute('download', filename); // 파일명 설정
-      document.body.appendChild(link);
-      link.click();
-      window.URL.revokeObjectURL(url); // 메모리 해제
-      link.remove();
-    } catch (error) {
-      alert(ERROR_MESSAGES.FILE_ERROR);
-      throwErrorMessage(error);
-    }
-};
+  try {
+    const response = await Authapi.get(`/files/${fileId}/download`, {
+      responseType: "blob",
+    });
+    const url = window.URL.createObjectURL(response.data);
+    const link = document.createElement("a");
+    link.href = url;
 
+    let filename = "downloaded-file";
+    const contentDisposition = response.headers["content-disposition"];
+    if (contentDisposition) {
+      const filenameStarMatch = contentDisposition.match(
+        /filename\*\=UTF-8''(.+)/
+      );
+      if (filenameStarMatch?.[1]) {
+        filename = decodeURIComponent(filenameStarMatch[1]);
+      } else {
+        const filenameMatch = contentDisposition.match(/filename="?([^"]+)"?/);
+        if (filenameMatch?.[1]) {
+          filename = filenameMatch[1];
+        }
+      }
+    }
+
+    link.setAttribute("download", filename);
+    document.body.appendChild(link);
+    link.click();
+    window.URL.revokeObjectURL(url);
+    link.remove();
+  } catch (error) {
+    alert(ERROR_MESSAGES.FILE_ERROR);
+    throwErrorMessage(error);
+  }
+};
 
 /*
 파일 삭제
 */
 
-export const DelelteFilesAPI = async(fileId : string)=>{
-
-  try{
-    const response = await Authapi.delete(`/nova/files/${fileId}`);
+export const DelelteFilesAPI = async (fileId: string) => {
+  try {
+    const response = await Authapi.delete(`/files/${fileId}`);
     return response.data.data;
-  }catch(error : any){
+  } catch (error: any) {
     throwErrorMessage(error);
   }
-}
+};

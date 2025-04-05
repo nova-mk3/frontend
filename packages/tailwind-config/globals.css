@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* microsoft Edge input 눈 없애기 */
 input[type="password"]::-ms-reveal,
 input[type="password"]::-ms-clear {
@@ -22,9 +21,14 @@ input[type="password"]::-ms-clear {
     --line-01: 0 0% 85%;
     --danger: 6 100% 69%;
     --success: 199 100% 62%;
-    --background-02: 241, 243, 245;       
+    --background-02: 241, 243, 245;
     --font-pretendard: "Pretendard", sans-serif;
     --font-paperlogy: "Paperlogy", sans-serif;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --foreground: 240 10% 3.9%;
   }
 
   /* 다크모드 설정(이긴 한데 그냥 똑같음) */
@@ -102,5 +106,15 @@ input[type="password"]::-ms-clear {
 
   .b-s {
     @apply !text-b3 font-pretendard tracking-wide4;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

@@ -1,7 +1,4 @@
 "use client";
-
-import { SignupInput } from "@/src/schema/signup.schema";
-
 import {
   FormControl,
   FormField,
@@ -10,18 +7,18 @@ import {
   FormMessage,
 } from "@nova/ui/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@nova/ui/components/ui/radio-group";
-import { UseFormReturn } from "react-hook-form";
+import { Path, UseFormReturn } from "react-hook-form";
 
-export function RadioFormField({
+export function RadioFormField<T extends Record<string, any>>({
   form,
   name,
   label,
   options,
 }: {
-  form: UseFormReturn<SignupInput>;
-  name: keyof SignupInput;
+  form: UseFormReturn<T>;
+  name: Path<T>;
   label: string;
-  options: { value: any ; label: string }[];
+  options: { value: any; label: string }[];
 }) {
   return (
     <FormField
@@ -32,16 +29,15 @@ export function RadioFormField({
           <RadioGroupField
             label={label}
             options={options}
-            value={field.value as string}
+            value={field.value}
             onChange={field.onChange}
           />
-          <FormMessage className="b-s text-danger transition-colors"/>
+          <FormMessage className="b-s text-danger transition-colors" />
         </>
       )}
     />
   );
 }
-
 
 // 라디오 아이템 컴포넌트
 export function RadioOption({
@@ -78,10 +74,10 @@ export function RadioGroupField({
       <FormControl>
         <RadioGroup
           onValueChange={onChange}
-          defaultValue={value}
+          value={value}
           className="flex gap-6 !mt-[4px]"
         >
-          {options.map((option,index) => (
+          {options.map((option, index) => (
             <RadioOption key={index} {...option} />
           ))}
         </RadioGroup>

@@ -1,15 +1,20 @@
 import { throwErrorMessage } from "../libs/utils/throwError";
-import { api } from "./core";
-import axios, { AxiosError } from "axios";
+import { api, Authapi } from "./core";
 
-export async function verifyEmail(email : string) {
-  const response = await api.post('/nova/email-auth', { email: email });
+export async function verifyEmail(email: string) {
+  const response = await api.post("/email-auth", { email: email });
   return response.data;
 }
 
-export async function verifyEmailCode({ email, authCode }: { email: string; authCode: string }) {
+export async function verifyEmailCode({
+  email,
+  authCode,
+}: {
+  email: string;
+  authCode: string;
+}) {
   try {
-    const response = await api.post(`/nova/email-auth/check`, {
+    const response = await api.post(`/email-auth/check`, {
       email,
       authCode,
     });
@@ -18,7 +23,6 @@ export async function verifyEmailCode({ email, authCode }: { email: string; auth
     throwErrorMessage(error);
   }
 }
-
 
 /*
 response 객체는 서버를 통해 스트림 형태로 존재한다.
@@ -35,25 +39,55 @@ export async function login({
   password: string;
 }) {
   try {
-    const response = await api.post("/api/auth/login", {
+    const response = await api.post("/members/login", {
       studentNumber,
       password,
     });
-    return response.data; // 로그인 성공 시 반환할 데이터
+    return response; // 로그인 성공 시 반환할 데이터
   } catch (error: any) {
     throwErrorMessage(error);
   }
 }
 
+export async function verifyAccessToken(accessToken: string) {
+  try {
+    const response = await api.post(
+      `/members/access-token/verify?accessToken=${accessToken}`
+    );
+    return response.data;
+  } catch (error) {
+    return {
+      status: 500,
+    };
+  }
+}
+
+export const ProfileUploadAPI = async (formdata: FormData) => {
+  try {
+    const response = await Authapi.post(`/members/profile-photo`, formdata);
+    return response.data;
+  } catch (error: any) {
+    throwErrorMessage(error);
+  }
+};
+
+export async function logout() {
+  try {
+    const response = await Authapi.get(`/members/logout`);
+    return response.data;
+  } catch (error) {
+    throwErrorMessage(error);
+  }
+}
 
 export interface MemberSignUpRequest {
   studentNumber: string;
   password: string;
   name: string;
   email: string;
-  graduation: boolean; 
-  grade: number;
-  semester: number;
+  graduation: boolean;
+  grade: string;
+  semester: string;
   absence: boolean;
   profilePhoto?: string;
   phone?: string;
@@ -61,7 +95,7 @@ export interface MemberSignUpRequest {
 }
 
 export interface GraduationSignUpRequest {
-  year: number;
+  year: string;
   contact: boolean;
   work: boolean;
   job: string;
@@ -85,34 +119,25 @@ export async function signup(signUpData: SignUpData) {
   // graduationSignUpRequest를 넣을지 말지 분기
   const requestBody: any = {
     memberSignUpRequest: {
-      ...memberSignUpRequest
-    }
+      ...memberSignUpRequest,
+    },
   };
 
   // graduation이 true일 경우에만 graduationSignUpRequest 추가
   if (memberSignUpRequest.graduation && graduationSignUpRequest) {
     requestBody.graduationSignUpRequest = {
-      ...graduationSignUpRequest
+      ...graduationSignUpRequest,
     };
   }
-  
-  const response = await fetch(`/nova/members`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(requestBody),
-  });
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    console.log(errorData);
-    const message = errorData?.message || "에러가 발생했습니다.";
-    throw new Error(message);
+  console.log(requestBody);
+
+  try {
+    const response = await api.post(`/members`, {
+      ...requestBody,
+    });
+    return response.data;
+  } catch (e) {
+    throwErrorMessage(e);
   }
-
-  return response.json();
 }
-
-
-
-
-

@@ -1,57 +1,51 @@
-import { Input } from "@nova/ui/components/ui/input";
-import React, { useState } from "react";
-import { Search } from "lucide-react";
+"use client";
+import React from "react";
 import { Button } from "@nova/ui/components/ui/button";
 import Link from "next/link";
-import SelectSortComponent from "../../components/SortOption";
-import { useRouter, useSearchParams } from "next/navigation";
+import SelectSortComponent from "../../components/SelectSortComponent";
 import { POST_TYPE_LABEL, PostType } from "@/src/constant/board";
-
+import SearchInput from "../../components/SearchInput";
+import { Filter } from "../../components/Filter";
+import { useQuery } from "@tanstack/react-query";
+import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
 
 interface BoardListTitleProps {
   title: string;
   className?: string;
   TitleImage: React.ReactElement<SVGElement>;
-  searchQuery: string;
-  setSearchQuery: (query: string) => void;
-  sortOption: string;
-  setSortOption: (sort: string) => void;
-  defaultHref? : string;
+  defaultHref?: string;
 }
 
-export default function BoardListTitle({title, className ,TitleImage,searchQuery,sortOption,setSearchQuery,setSortOption,defaultHref="" } : BoardListTitleProps) {
-
-  const searchParams = useSearchParams();
-  const router = useRouter();
-
-  const handleSearch = () => {
-    const params = new URLSearchParams();
-    if (searchQuery) params.set("query", searchQuery);
-    if (sortOption) params.set("sort", sortOption);
-    params.set("page", "1"); // 검색 후 페이지는 항상 1로
-    router.push(`?${params.toString()}`);
-  };
-  
+export default function BoardListTitle({
+  title,
+  className,
+  TitleImage,
+  defaultHref = "",
+}: BoardListTitleProps) {
+  const { data } = useQuery(SimpleProfileQueryOptions());
   return (
-    <div className={`flex flex-row flex-wrap items-end border-primary border-b-[1px] py-5 mobile:flex-col mobile:items-center  ${className}`}>
-      <p className="t-l !font-bold text-primary mobile:mb-[15px] flex items-center gap-2">{TitleImage}{POST_TYPE_LABEL[title as PostType]}</p>
+    <div
+      className={`flex flex-row flex-wrap items-end border-primary border-b-[1px] py-5 mobile:flex-col mobile:items-center  ${className}`}
+    >
+      <p className="t-l !font-bold text-primary mobile:mb-[15px] flex items-center gap-2">
+        {TitleImage}
+        {POST_TYPE_LABEL[title as PostType]}
+      </p>
 
       <div className="flex flex-row items-center gap-[15px] ml-auto mt-auto mobile:flex-col mobile:w-full">
-        <SelectSortComponent
-          value={sortOption}
-          onChange={(value) => setSortOption(value)}
-        />
-        <div className="flex flex-row items-center gap-[15px] w-full">
-          <Input
-            placeholder="검색어를 입력하세요"
-            className="w-[250px] h-[36px] px-2 py-1 rounded-lg flex-1"
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <div className="cursor-pointer rounded-lg hover:bg-background02 p-1" onClick={handleSearch}>
-          <Search size="24"/>
-          </div>
-        </div>
-        <Link href={`${defaultHref}/newpost`} className="mobile:w-full">
+        <Filter />
+        <SelectSortComponent />
+        <SearchInput />
+        <Link
+          href={`${defaultHref}/newpost`}
+          className="mobile:w-full"
+          onClick={(e) => {
+            if (!data) {
+              e.preventDefault(); // ✅ 이동 막기
+              alert("로그인 후 이용해주세요");
+            }
+          }}
+        >
           <Button variant="default" className="mobile:w-full">
             글쓰기
           </Button>
@@ -60,5 +54,3 @@ export default function BoardListTitle({title, className ,TitleImage,searchQuery
     </div>
   );
 }
-
-
