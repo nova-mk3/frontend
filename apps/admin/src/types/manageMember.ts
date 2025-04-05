@@ -26,6 +26,11 @@ export interface ManageMemberCardModalProps {
     onClose : () => void;
 }
 
+export interface MamnageMemberCardModalContentProps {
+    memberId : string;
+    onClose : () => void;
+}
+
 export interface PutMemberInfoRequest {
     updateMemberProfileRequest : updateMemberProfileRequest;
     updateMemberStatusRequest : updateGraduationRequest;

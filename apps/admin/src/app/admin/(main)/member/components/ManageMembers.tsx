@@ -42,20 +42,9 @@ export default function ManageMembers() {
     setViewData(data?.filter(member => member.name.includes(text)));
   }
 
-
   const DownloadExcel = () => {
     // TODO : 엑셀 다운로드 API 연동 후 적용
     console.log("엑셀 다운로드");
-  }
-
-  const SaveChange = () => {
-    // TODO : 변경 저장 API 연동 후 적용
-    console.log("변경 저장");
-  }
-
-  const CancelChange = () => {
-    // TODO : 변경 취소 API 연동 후 적용
-    console.log("변경 취소");
   }
 
   return (
@@ -84,8 +73,6 @@ export default function ManageMembers() {
         <div className="flex flex-row items-center gap-[15px] ml-auto">
           <Button className="ml-2" onClick={() => putAllMemberSemesterMutation()}>전체 재학생 학기 증가</Button>
           <Button className="ml-2" onClick={DownloadExcel}>To Excel</Button>
-          <Button className="ml-2" onClick={SaveChange}>변경 저장</Button>
-          <Button className="ml-2" variant={"text"} onClick={CancelChange}>변경 취소</Button>
         </div>
       </div>
       {categories.map(({ title, members }) => (
