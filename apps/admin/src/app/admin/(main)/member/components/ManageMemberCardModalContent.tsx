@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@nova/ui/components/ui/button";
 import {
   Phone,
@@ -13,37 +13,62 @@ import { Input } from "@nova/ui/components/ui/input";
 import { cn } from "@nova/ui/lib/utils";
 import { RadioGroup, RadioGroupItem } from "@nova/ui/components/ui/radio-group";
 import { Textarea } from "@nova/ui/components/ui/textarea"; 
-import {
-  MamnageMemberCardModalContentProps,
-} from "@/src/types/manageMember";
+import { MamnageMemberCardModalContentProps } from "@/src/types/manageMember";
+import { useManageMemberInfoQuery, usePutMemberInfoMutation } from "@/src/query/manageMembersQueries";
 
 export default function ManageMemberCardModalContent({
   memberId,
   onClose,
 }: MamnageMemberCardModalContentProps) {
+  const { data, isLoading, error } = useManageMemberInfoQuery(memberId);
   const [isEditMode, setIsEditMode] = useState(false);
-
+  const putMemberInfoMutation = usePutMemberInfoMutation();
   const [formData, setFormData] = useState({
-    profilePhoto: {
-      imageUrl: "string",
-    },
-    name: "홍길동",
-    phone: "010-1234-5678",
-    studentNumber: "2012345678",
-    email: "test@example.com",
-    grade: "3",
+    profilePhoto: { imageUrl: "string" },
+    name: "",
+    phone: "",
+    studentNumber: "",
+    email: "",
+    grade: "1",
     semester: "1",
-    birth: "1999-01-01",
-    introduction: "안녕하세요! (한 줄)",
-    job: "백엔드 개발자",
+    birth: "",
+    introduction: "",
+    job: "",
     work: false,
     contact: false,
-    contactInfo: "카카오톡 mykakao",
-    contactDescription: "연락 부탁드립니다.",
-    year: "2022",
+    contactInfo: "",
+    contactDescription: "",
+    year: "",
     isGraduation: false,
     isAbadence: false,
   });
+
+  useEffect(() => {
+    if (data) {
+      setFormData({
+        profilePhoto: { imageUrl: data.memberResponse.profilePhoto.imageUrl || "string" },
+        name: data.memberResponse.name,
+        phone: data.memberResponse.phone,
+        studentNumber: data.memberResponse.studentNumber,
+        email: data.memberResponse.email,
+        grade: data.memberResponse.grade,
+        semester: data.memberResponse.semester,
+        birth: data.memberResponse.birth,
+        introduction: data.memberResponse.introduction,
+        isGraduation: data.memberResponse.graduation,
+        isAbadence: data.memberResponse.absence,
+        job: data.graduationResponse.job,
+        work: data.graduationResponse.work,
+        contact: data.graduationResponse.contact,
+        contactInfo: data.graduationResponse.contactInfo,
+        contactDescription: data.graduationResponse.contactDescription,
+        year: data.graduationResponse.year,
+      });
+    }
+  }, [data]);
+
+  if (isLoading) return <div>로딩 중...</div>;
+  if (error) return <div>오류가 발생했습니다: {String(error)}</div>;
 
   const commonInputClass = cn(
     "mt-1",
@@ -61,7 +86,6 @@ export default function ManageMemberCardModalContent({
     if (isAbadence) return "휴학중";
     return "재학중";
   }
-  
   function mapRadioValueToBooleans(value: "재학중" | "휴학중" | "졸업") {
     switch (value) {
       case "졸업":
@@ -98,15 +122,47 @@ export default function ManageMemberCardModalContent({
   }
 
   const handleEditOrSave = () => {
-    setIsEditMode((prev) => !prev);
-    // 여기서 서버에 저장하는 로직 등 수행 가능
+    const wasEditing = isEditMode;
+    setIsEditMode(!isEditMode);
+    
+    if (wasEditing) {
+      const Request = {
+        updateMemberProfileRequest: {
+          name: formData.name,
+          studentNumber: formData.studentNumber,
+          graduation: formData.isGraduation,
+          grade: formData.grade,
+          semester: formData.semester,
+          absence: formData.isAbadence,
+          email: formData.email,
+          birth: formData.birth,
+          phone: formData.phone,
+          introduction: formData.introduction,
+          profilePhoto: formData.profilePhoto?.imageUrl,
+        },
+        updateGraduationRequest: {
+          year: formData.year,
+          work: formData.work,
+          job: formData.job,
+          contact: formData.contact,
+          contactInfo: formData.contactInfo,
+          contactDescription: formData.contactDescription,
+        },
+      };
+      console.log("최종 업데이트 요청:", Request);
+      // 이 부분에서 mutation 실행
+      putMemberInfoMutation.mutate({
+        memberId,       // props에서 받은 memberId
+        request: Request
+      });
+    }
   };
 
   return (
-    <>
-      <div className="flex flex-col items-center w-[700px] space-y-8 py-20">
+    <div className="flex">
+      <div className="flex flex-col items-center w-[650px] space-y-8 py-20">
         <ProfileImage
-          src={formData.profilePhoto.imageUrl}
+          src={formData.profilePhoto?.imageUrl}
           size={160}
         />
         <Input
@@ -227,7 +283,7 @@ export default function ManageMemberCardModalContent({
         </div>
       </div>
       <div className="w-[2px] bg-gray-300 mx-6" />
-      <div className="flex flex-col justify-between w-[700px] text-gray-700">
+      <div className="flex flex-col justify-between w-[650px] text-gray-700">
         <div>
           <div className="mb-4">
             <div className="text-2xl font-semibold">자기소개</div>
@@ -245,7 +301,6 @@ export default function ManageMemberCardModalContent({
               placeholder="자기소개를 최대 250자까지 입력 가능..."
             />
           </div>
-
           {formData.isGraduation && (
             <>
               <div className="flex mb-4 space-x-8">
@@ -278,7 +333,9 @@ export default function ManageMemberCardModalContent({
                     onValueChange={(v) => {
                       setFormData((prev) => ({
                         ...prev,
-                        contact: mapRadioValueToContact(v as "취업정보 공개" | "취업정보 미공개"),
+                        contact: mapRadioValueToContact(
+                          v as "취업정보 공개" | "취업정보 미공개"
+                        ),
                       }));
                     }}
                     className="flex items-center space-x-6 text-xl"
@@ -347,6 +404,6 @@ export default function ManageMemberCardModalContent({
           </Button>
         </div>
       </div>
-    </>
+    </div>
   );
 }

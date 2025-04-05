@@ -1,3 +1,4 @@
+
 export interface ManageMember {
     absence : boolean;
     birth: string;
@@ -31,29 +32,61 @@ export interface MamnageMemberCardModalContentProps {
     onClose : () => void;
 }
 
+export interface ManageMemberInfoResponse {
+    memberResponse : MemberResponse;
+    graduationResponse : GraduationResponse;
+}
+
+export interface MemberResponse { 
+    memberId: string;
+    studentNumber: string;
+    name: string;
+    email: string;
+    grade: string;
+    semester: string;
+    profilePhoto: ProfilePhoto;
+    phone: string;
+    introduction: string;
+    birth: string;
+    role: string;
+    graduation: boolean;
+    absence : boolean;
+}
+
+export interface GraduationResponse {
+    graduationId : string;
+    year : string;
+    contact : boolean;
+    work : boolean;
+    job : string;
+    contactInfo : string;
+    contactDescription : string;
+}
+
 export interface PutMemberInfoRequest {
     updateMemberProfileRequest : updateMemberProfileRequest;
-    updateMemberStatusRequest : updateGraduationRequest;
+    updateGraduationRequest : updateGraduationRequest;
 }
 
 export interface updateMemberProfileRequest {
-    name : string
-    studentNumber: string,
-    graduation: boolean,
-    grade: number,
-    semester: number,
-    absence: boolean,
-    birth: string,
-    profilePhoto: string,
-    phone: string,
-    introduction: string
+    name: string;
+    studentNumber: string;
+    email: string;
+    grade: string;
+    semester: string;
+    profilePhoto: string;
+    phone: string;
+    introduction: string;
+    birth: string;
+    graduation: boolean;
+    absence : boolean;
 }
 
 export interface updateGraduationRequest {
-    year: number,
-    work: boolean,
-    job: string,
-    contact : boolean,
-    contactInfo: string,
-    contactDescription: string
+    year : string;
+    contact : boolean;
+    work : boolean;
+    job : string;
+    contactInfo : string;
+    contactDescription : string;
   }

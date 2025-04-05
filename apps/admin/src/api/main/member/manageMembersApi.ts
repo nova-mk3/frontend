@@ -11,16 +11,27 @@ export async function GetAllMembers() {
     }
 }
 
-export async function PutMemberInfo(memberId: number, request: PutMemberInfoRequest) {
+export async function GetMemberInfo(memberId: string){
     try{
-        const response = await Authapi.put(`/nova/members/members/${memberId}`, request)
+        const response = await Authapi.get(`/nova/admin/members/${memberId}`)
         return response.data.data
     }catch(error:unknown){
         throwError(error)
     }
 }
 
-export async function PutMemberGraduation(memberId: number, Graduation: boolean) {
+export async function PutMemberInfo(memberId: string, request: PutMemberInfoRequest) {
+    try{
+        console.log(memberId)
+        console.log(request)
+        const response = await Authapi.put(`/nova/admin/members/${memberId}`, request)
+        return response.data.data
+    }catch(error:unknown){
+        throwError(error)
+    }
+}
+
+export async function PutMemberGraduation(memberId: string, Graduation: boolean) {
     try{
         const response = await Authapi.put(`/nova/admin/members/${memberId}/graduation?isGraduation=${Graduation}`)
         return response.data.data
@@ -29,7 +40,7 @@ export async function PutMemberGraduation(memberId: number, Graduation: boolean)
     }
 }
 
-export async function PutMemberGrade(memberId: number, grade: number) {
+export async function PutMemberGrade(memberId: string, grade: number) {
     try{
         const response = await Authapi.put(`/nova/admin/members/${memberId}/grade?grade=${grade}`)
         return response.data.data
@@ -38,7 +49,7 @@ export async function PutMemberGrade(memberId: number, grade: number) {
     }
 }
 
-export async function PutMemberAbsence(memberId: number , absence: boolean) {
+export async function PutMemberAbsence(memberId: string , absence: boolean) {
     try{
         const response = await Authapi.put( `/nova/admin/members/${memberId}/absence?isAbsent=${absence}`)
         return response.data.data
@@ -47,7 +58,7 @@ export async function PutMemberAbsence(memberId: number , absence: boolean) {
     }
 }
 
-export async function DeleteMember(memberId: number) {
+export async function DeleteMember(memberId: string) {
     try{
         const response = await Authapi.put(`/nova/admin/members/${memberId}/deleted`)
         return response.data.data

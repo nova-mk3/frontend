@@ -7,7 +7,7 @@ import ManageMemberCardModalContent from "./ManageMemberCardModalContent";
 export default function ManagaMemberCardModal({ open, memberId, onClose }: ManageMemberCardModalProps) {
   const [isVisible, setIsVisible] = useState(open);
   const [isAnimating, setIsAnimating] = useState(false);
-  // 임시기때문에 작동하지않음.
+  
   useEffect(() => {
     if (open) {
       setIsVisible(true);
