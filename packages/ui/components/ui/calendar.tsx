@@ -4,7 +4,13 @@ import { DayPicker } from "react-day-picker";
 
 import { cn } from "../../lib/utils";
 import { buttonVariants } from "./button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./select";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
@@ -14,13 +20,15 @@ function Calendar({
   showOutsideDays = true,
   ...props
 }: CalendarProps) {
-
-  const handleCalendarChange = (_value: string | number, _e: React.ChangeEventHandler<HTMLSelectElement>) => {
+  const handleCalendarChange = (
+    _value: string | number,
+    _e: React.ChangeEventHandler<HTMLSelectElement>
+  ) => {
     const _event = {
       target: {
-        value: String(_value)
+        value: String(_value),
       },
-    } as React.ChangeEvent<HTMLSelectElement>
+    } as React.ChangeEvent<HTMLSelectElement>;
     _e(_event);
   };
 
@@ -33,12 +41,14 @@ function Calendar({
         month: "space-y-4",
         caption: "flex justify-center pt-1 relative items-center",
         caption_label: "text-sm font-medium flex",
-        vhidden: "hidden [.is-between_&]:flex [.is-end_&]:flex [.is-start.is-end_&]:hidden",
-        caption_dropdowns: "flex flex-row-reverse justify-center grow dropdowns px-12",
+        vhidden:
+          "hidden [.is-between_&]:flex [.is-end_&]:flex [.is-start.is-end_&]:hidden",
+        caption_dropdowns:
+          "flex flex-row-reverse justify-center grow dropdowns px-12",
         nav: "space-x-1 flex items-center",
         nav_button: cn(
           buttonVariants({ variant: "outline" }),
-          "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100",
+          "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100"
         ),
         nav_button_previous: "absolute left-1",
         nav_button_next: "absolute right-1",
@@ -51,11 +61,11 @@ function Calendar({
           "relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected].day-range-end)]:rounded-r-md",
           props.mode === "range"
             ? "[&:has(>.day-range-end)]:rounded-r-md [&:has(>.day-range-start)]:rounded-l-md first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md"
-            : "[&:has([aria-selected])]:rounded-md",
+            : "[&:has([aria-selected])]:rounded-md"
         ),
         day: cn(
           buttonVariants({ variant: "transparent" }),
-          "h-8 w-8 p-0 font-normal aria-selected:opacity-100",
+          "h-8 w-8 p-0 font-normal aria-selected:opacity-100"
         ),
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",
@@ -82,20 +92,31 @@ function Calendar({
             {...props}
             onValueChange={(value) => {
               if (props.onChange) {
-                handleCalendarChange(value, props.onChange)
+                handleCalendarChange(value, props.onChange);
               }
             }}
             value={props.value as string}
           >
-            <SelectTrigger className={cn(buttonVariants({ variant : "text" }), "px-2 py-1 h-7 border-none shadow-none font-medium [.is-between_&]:hidden [.is-end_&]:hidden [.is-start.is-end_&]:flex")}>
-              <SelectValue placeholder={props?.caption}>{props?.caption}</SelectValue>
+            <SelectTrigger
+              className={cn(
+                buttonVariants({ variant: "text" }),
+                "px-2 py-1 h-7 border-none shadow-none font-medium [.is-between_&]:hidden [.is-end_&]:hidden [.is-start.is-end_&]:flex"
+              )}
+            >
+              <SelectValue placeholder={props?.caption}>
+                {props?.caption}
+              </SelectValue>
             </SelectTrigger>
             <SelectContent className="overflow-y-auto scrolling-auto ">
               {props.children &&
-                React.Children.map(props.children, (child) =>
-                  <SelectItem value={(child as React.ReactElement<any>)?.props?.value} className="">{(child as React.ReactElement<any>)?.props?.children}</SelectItem>
-                )
-              }
+                React.Children.map(props.children, (child) => (
+                  <SelectItem
+                    value={(child as React.ReactElement<any>)?.props?.value}
+                    className=""
+                  >
+                    {(child as React.ReactElement<any>)?.props?.children}
+                  </SelectItem>
+                ))}
             </SelectContent>
           </Select>
         ),
