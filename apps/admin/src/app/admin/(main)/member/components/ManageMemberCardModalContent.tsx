@@ -1,20 +1,17 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Button } from "@nova/ui/components/ui/button";
-import {
-  Phone,
-  IdCard,
-  Cake,
-  Mail,
-  GraduationCap,
-} from "lucide-react";
+import { Phone, IdCard, Cake, Mail, GraduationCap } from "lucide-react";
 import { ProfileImage } from "@nova/ui/components/ui/profileImage";
 import { Input } from "@nova/ui/components/ui/input";
 import { cn } from "@nova/ui/lib/utils";
 import { RadioGroup, RadioGroupItem } from "@nova/ui/components/ui/radio-group";
-import { Textarea } from "@nova/ui/components/ui/textarea"; 
+import { Textarea } from "@nova/ui/components/ui/textarea";
 import { MamnageMemberCardModalContentProps } from "@/src/types/manageMember";
-import { useManageMemberInfoQuery, usePutMemberInfoMutation } from "@/src/query/manageMembersQueries";
+import {
+  useManageMemberInfoQuery,
+  usePutMemberInfoMutation,
+} from "@/src/query/manageMembersQueries";
 
 export default function ManageMemberCardModalContent({
   memberId,
@@ -46,7 +43,9 @@ export default function ManageMemberCardModalContent({
   useEffect(() => {
     if (data) {
       setFormData({
-        profilePhoto: { imageUrl: data.memberResponse.profilePhoto.imageUrl || "string" },
+        profilePhoto: {
+          imageUrl: data.memberResponse.profilePhoto.imageUrl || "string",
+        },
         name: data.memberResponse.name,
         phone: data.memberResponse.phone,
         studentNumber: data.memberResponse.studentNumber,
@@ -73,7 +72,8 @@ export default function ManageMemberCardModalContent({
   const commonInputClass = cn(
     "mt-1",
     "md:text-2xl",
-    !isEditMode && "border-none shadow-none outline-none focus:outline-none focus:ring-0"
+    !isEditMode &&
+      "border-none shadow-none outline-none focus:outline-none focus:ring-0"
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -124,7 +124,7 @@ export default function ManageMemberCardModalContent({
   const handleEditOrSave = () => {
     const wasEditing = isEditMode;
     setIsEditMode(!isEditMode);
-    
+
     if (wasEditing) {
       const Request = {
         updateMemberProfileRequest: {
@@ -152,8 +152,8 @@ export default function ManageMemberCardModalContent({
       console.log("최종 업데이트 요청:", Request);
       // 이 부분에서 mutation 실행
       putMemberInfoMutation.mutate({
-        memberId,       // props에서 받은 memberId
-        request: Request
+        memberId, // props에서 받은 memberId
+        request: Request,
       });
     }
   };
@@ -161,10 +161,7 @@ export default function ManageMemberCardModalContent({
   return (
     <div className="flex">
       <div className="flex flex-col items-center w-[650px] space-y-8 py-20">
-        <ProfileImage
-          src={formData.profilePhoto?.imageUrl}
-          size={160}
-        />
+        <ProfileImage src={formData.profilePhoto?.imageUrl} size={160} />
         <Input
           name="name"
           value={formData.name}
@@ -172,7 +169,8 @@ export default function ManageMemberCardModalContent({
           readOnly={!isEditMode}
           className={cn(
             "md:text-4xl font-bold text-center h-[50px] w-[400px]",
-            !isEditMode && "border-none shadow-none outline-none focus:outline-none focus:ring-0"
+            !isEditMode &&
+              "border-none shadow-none outline-none focus:outline-none focus:ring-0"
           )}
         />
         <div className="flex items-center space-x-3">
@@ -317,17 +315,27 @@ export default function ManageMemberCardModalContent({
                     className="flex items-center space-x-6 text-xl"
                   >
                     <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="구직" id="radio-work-false" disabled={!isEditMode} />
+                      <RadioGroupItem
+                        value="구직"
+                        id="radio-work-false"
+                        disabled={!isEditMode}
+                      />
                       <label htmlFor="radio-work-false">구직</label>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="재직" id="radio-work-true" disabled={!isEditMode} />
+                      <RadioGroupItem
+                        value="재직"
+                        id="radio-work-true"
+                        disabled={!isEditMode}
+                      />
                       <label htmlFor="radio-work-true">재직</label>
                     </div>
                   </RadioGroup>
                 </div>
                 <div className="flex-1">
-                  <div className="text-2xl font-semibold mb-2">취업정보 공개 여부</div>
+                  <div className="text-2xl font-semibold mb-2">
+                    취업정보 공개 여부
+                  </div>
                   <RadioGroup
                     value={mapContactToRadioValue(formData.contact)}
                     onValueChange={(v) => {
