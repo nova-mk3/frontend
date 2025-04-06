@@ -13,6 +13,8 @@ export default function UXResearchDashboard() {
       <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2 text-black">
         <BookOpen className="text-primary" size={24} /> UX 리서치 요약
       </h2>
+      <span className="text-2xl font-bold text-primary">임시내용입니다</span>
+
       <ul className="text-sm text-gray-700 list-disc ml-4 space-y-1">
         {insights.map((item, i) => <li key={i}>{item}</li>)}
       </ul>

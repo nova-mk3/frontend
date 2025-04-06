@@ -14,6 +14,8 @@ export default function ServerStatusDashboard() {
       <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2 text-black">
         <Server className="text-primary" size={24} /> Server Status
       </h2>
+      <span className="text-2xl font-bold text-primary">임시내용입니다</span>
+
       <ul className="text-base text-gray-800 space-y-2">
         <li>CPU 사용량: {status.cpu}</li>
         <li>메모리 사용량: {status.memory}</li>
