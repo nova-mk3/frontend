@@ -61,10 +61,10 @@ export default function ManageMembers() {
       ),
     },
     {
-      title: "초과학기",
+      title: "초과 학기",
       members: filteredData?.filter(
         (member) =>
-          member.grade === "초과학기" && !member.absence && !member.graduation
+          member.grade === "초과 학기" && !member.absence && !member.graduation
       ),
     },
     {
