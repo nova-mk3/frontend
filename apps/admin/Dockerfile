@@ -29,7 +29,7 @@ COPY --from=builder /app/out/json/ .
 RUN pnpm install
 
 # ✅ .env.production 복사
-COPY ./apps/service/.env.production ./apps/service/.env.production
+COPY ./apps/admin/.env.production ./apps/admin/.env.production
 
 # 프로젝트 전체 복사
 COPY --from=builder /app/out/full/ .
