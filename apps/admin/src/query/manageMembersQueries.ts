@@ -1,4 +1,4 @@
-import { useQuery, QueryClient, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { GetAllMembers, GetMemberInfo, PutAllMemberSemester, PutMemberInfo } from '@/src/api/main/member/manageMembersApi';
 import { ManageMember, ManageMemberInfoResponse, PutMemberInfoRequest } from '@/src/types/manageMember';
 
