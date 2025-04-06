@@ -21,7 +21,7 @@ export default function ManageMemberCardModalContent({
   const [isEditMode, setIsEditMode] = useState(false);
   const putMemberInfoMutation = usePutMemberInfoMutation();
   const [formData, setFormData] = useState({
-    profilePhoto: { imageUrl: "string" },
+    profilePhoto: "",
     name: "",
     phone: "",
     studentNumber: "",
@@ -43,9 +43,7 @@ export default function ManageMemberCardModalContent({
   useEffect(() => {
     if (data) {
       setFormData({
-        profilePhoto: {
-          imageUrl: data.memberResponse.profilePhoto.imageUrl || "string",
-        },
+        profilePhoto: data.memberResponse.profilePhoto.id,
         name: data.memberResponse.name,
         phone: data.memberResponse.phone,
         studentNumber: data.memberResponse.studentNumber,
@@ -56,12 +54,12 @@ export default function ManageMemberCardModalContent({
         introduction: data.memberResponse.introduction,
         isGraduation: data.memberResponse.graduation,
         isAbadence: data.memberResponse.absence,
-        job: data.graduationResponse.job,
-        work: data.graduationResponse.work,
-        contact: data.graduationResponse.contact,
-        contactInfo: data.graduationResponse.contactInfo,
-        contactDescription: data.graduationResponse.contactDescription,
-        year: data.graduationResponse.year,
+        job: data.graduationResponse.job || "",
+        work: data.graduationResponse.work || false,
+        contact: data.graduationResponse.contact || false,
+        contactInfo: data.graduationResponse.contactInfo || "",
+        contactDescription: data.graduationResponse.contactDescription || "",
+        year: data.graduationResponse.year || "",
       });
     }
   }, [data]);
@@ -138,7 +136,7 @@ export default function ManageMemberCardModalContent({
           birth: formData.birth,
           phone: formData.phone,
           introduction: formData.introduction,
-          profilePhoto: formData.profilePhoto?.imageUrl,
+          profilePhoto: data?.memberResponse.profilePhoto.id || "",
         },
         updateGraduationRequest: {
           year: formData.year,
@@ -149,19 +147,15 @@ export default function ManageMemberCardModalContent({
           contactDescription: formData.contactDescription,
         },
       };
-      console.log("최종 업데이트 요청:", Request);
-      // 이 부분에서 mutation 실행
-      putMemberInfoMutation.mutate({
-        memberId, // props에서 받은 memberId
-        request: Request,
-      });
+
+      putMemberInfoMutation.mutate({ memberId, request: Request,});
     }
   };
 
   return (
     <div className="flex">
       <div className="flex flex-col items-center w-[650px] space-y-8 py-20">
-        <ProfileImage src={formData.profilePhoto?.imageUrl} size={160} />
+        <ProfileImage src={data?.memberResponse.profilePhoto?.imageUrl || ""} size={160} />
         <Input
           name="name"
           value={formData.name}

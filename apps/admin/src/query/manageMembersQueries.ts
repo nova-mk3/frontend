@@ -1,4 +1,4 @@
-import { useQuery, QueryClient, useMutation } from '@tanstack/react-query';
+import { useQuery, QueryClient, useMutation, useQueryClient } from '@tanstack/react-query';
 import { GetAllMembers, GetMemberInfo, PutAllMemberSemester, PutMemberInfo } from '@/src/api/main/member/manageMembersApi';
 import { ManageMember, ManageMemberInfoResponse, PutMemberInfoRequest } from '@/src/types/manageMember';
 
@@ -18,34 +18,29 @@ export const useManageMemberInfoQuery = (memberId: string) => {
     return useQuery<ManageMemberInfoResponse>({
       queryKey: manageMembersKeys.detail(memberId),
       queryFn: () => GetMemberInfo(memberId),
-      staleTime: Infinity,
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
       refetchInterval: false,
     });
   };
 
-  export const usePutMemberInfoMutation = () => {
-    const queryClient = new QueryClient();
-  
-    return useMutation({
-      mutationFn: async (props: { memberId: string; request: PutMemberInfoRequest }) => {
-        const { memberId, request } = props;
-        return PutMemberInfo(memberId, request);
-      },
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: manageMembersKeys.list(),
-        });
-      },
-      onError: (error) => {
-        console.error('회원 정보 수정 실패:', error);
-      },
-    });
-  };
+export const usePutMemberInfoMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (props: { memberId: string; request: PutMemberInfoRequest }) => {
+      const { memberId, request } = props;
+      return PutMemberInfo(memberId, request);
+    },
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: manageMembersKeys.detail(variables.memberId) });
+      queryClient.invalidateQueries({ queryKey: manageMembersKeys.list() });
+    },
+  });
+};
 
 export const usePutAllMemberSemesterMutation = () => {
-    const queryClient = new QueryClient();
+    const queryClient = useQueryClient();
     return useMutation({
         mutationFn: () => PutAllMemberSemester(),
         onSuccess: () => {
