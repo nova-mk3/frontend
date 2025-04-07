@@ -2,7 +2,10 @@ import "@nova/tailwind-config/globalcss";
 import type { Metadata } from "next";
 import { pretendard } from "../../../theme/fonts";
 import AdminSidebar from "./components/AdminSidebar";
-import { SidebarProvider, SidebarTrigger } from "@nova/ui/components/ui/sidebar";
+import {
+  SidebarProvider,
+  SidebarTrigger,
+} from "@nova/ui/components/ui/sidebar";
 import Providers from "../../../api/providers";
 
 export const metadata: Metadata = {
@@ -20,14 +23,14 @@ export default function RootLayout({
       <body className="flex max-w-screen-xl max-h-screen">
         <Providers>
           <SidebarProvider>
-            <AdminSidebar/>
+            <AdminSidebar />
             <main>
-              <SidebarTrigger /> 
+              <SidebarTrigger />
               {/* 사이드바 줄이기 용도가 필요할경우 Trigger 사용 */}
               {children}
             </main>
           </SidebarProvider>
-       </Providers>
+        </Providers>
       </body>
     </html>
   );
