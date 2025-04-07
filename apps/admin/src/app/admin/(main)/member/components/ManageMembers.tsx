@@ -60,6 +60,7 @@ export default function ManageMembers() {
 
   const DownloadExcel = () => {
     console.log("엑셀 다운로드");
+    alert("추가예정인 기능입니다.")
   };
 
   const handleDrop = (grade: string) => {
@@ -165,7 +166,7 @@ export default function ManageMembers() {
           onDrop={() => handleDrop(title)}
           className="border-2 border-dashed border-gray-300 rounded-xl p-2 m-4"
         >
-          <div className="text-lg font-bold ml-2">
+          <div className="text-lg font-bold ml-4">
             {title} - {members.length}명
           </div>
           <div className="flex flex-wrap ml-2 min-h-[50px]">
@@ -190,7 +191,9 @@ export default function ManageMembers() {
                 </div>
               ))
             ) : (
-              <div className="text-gray-500 m-2">등록된 학생이 없습니다.</div>
+              <div className="text-gray-500 m-2 text-center w-full h-full min-h-[80px] flex items-center text-2xl">
+                등록된 회원이 없습니다.
+              </div>
             )}
           </div>
         </div>

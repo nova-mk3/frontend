@@ -99,7 +99,7 @@ export default function Executive() {
               key={title}
               onDragOver={(e) => e.preventDefault()}
               onDrop={() => handleDrop(role)}
-              className="mb-8 border-2 border-dashed border-gray-300 rounded-xl p-2 m-4"
+              className="border-2 border-dashed border-gray-300 rounded-xl p-2 m-4"
             >
               <div className="text-lg font-bold ml-4">{title}</div>
               <div className="flex flex-wrap ml-2 min-h-[80px]">
@@ -126,7 +126,7 @@ export default function Executive() {
                     </div>
                   ))
                 ) : (
-                  <div className="flex items-center justify-center flex items-center text-center text-2xl text-gray-500 m-2 w-[650px] h-[80px]">
+                  <div className="flex items-center flex items-center text-center text-2xl text-gray-500 m-2 w-[650px] h-[80px]">
                     등록된 임원이 없습니다.
                   </div>
                 )}
