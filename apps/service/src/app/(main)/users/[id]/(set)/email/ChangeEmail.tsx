@@ -4,14 +4,16 @@ import { InputFormFieldWithButton } from "@/src/app/(auth)/components/InputFormF
 import { EmailInput, EmailSchema } from "@/src/schema/changeemail.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@nova/ui/components/ui/form";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
+import { useGetUserData } from "../../query/qureies";
 interface Props {
   memberId: string;
 }
 export default function ChangeEmail({ memberId }: Props) {
+  const { data, isLoading } = useGetUserData({ memberId });
   const router = useRouter();
   // 이메일 인증 메시지 상태
   const [emailSentMessage, setEmailSentMessage] = useState<string | null>(null);
@@ -132,7 +134,6 @@ export default function ChangeEmail({ memberId }: Props) {
       profileMemberId: memberId,
     });
   }
-
   return (
     <div className="w-[400px] mx-auto mobile:w-[90%] mt-10">
       <Form {...form}>
@@ -141,7 +142,7 @@ export default function ChangeEmail({ memberId }: Props) {
             form={form}
             name={"email"}
             label={"이메일"}
-            placeHolder={"변경할 이메일을 입력하세요"}
+            placeHolder={"변경하고 싶은 이메일을 입력하세요"}
             type="email"
             btnText="인증번호 전송"
             disabled={emailCheck === true ? true : false}
