@@ -1,8 +1,8 @@
-// Members 페이지
+// ManageMembers.tsx
 import MemberCard from "@nova/ui/components/ui/MemberCard";
 import { Input } from "@nova/ui/components/ui/input";
 import { Button } from "@nova/ui/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ManageMemberCardModal from "./ManageMemberCardModal";
 import {
   Select,
@@ -14,75 +14,111 @@ import {
 import {
   useManageMembersQuery,
   usePutAllMemberSemesterMutation,
+  usePutMemberGradeMutation,
+  usePutMemberAbsenceMutation,
+  usePutMemberGraduationMutation,
 } from "@/src/query/manageMembersQueries";
 import { formatPhoneNumber } from "@/src/utils/formatter";
+import { ManageMember } from "@/src/types/manageMember";
 
 export default function ManageMembers() {
   const { data, isLoading, error } = useManageMembersQuery();
   const { mutate: putAllMemberSemesterMutation } = usePutAllMemberSemesterMutation();
+  const { mutate: putMemberGrade } = usePutMemberGradeMutation();
+  const { mutate: putMemberAbsence } = usePutMemberAbsenceMutation();
+  const { mutate: putMemberGraduation } = usePutMemberGraduationMutation();
+
   const [viewType, setViewType] = useState<"small" | "medium">("small");
   const [open, setOpen] = useState(false);
   const [selectedMemberId, setSelectedMemberId] = useState<string>("");
   const [searchText, setSearchText] = useState<string>("");
+  const [members, setMembers] = useState<ManageMember[]>([]);
+  const [draggedMemberId, setDraggedMemberId] = useState<string>("");
 
-  const filteredData = !searchText
-    ? data
-    : data?.filter((member) =>
+  useEffect(() => {
+    if (data) {
+      setMembers(data);
+    }
+  }, [data]);
+
+  const filteredMembers = !searchText
+    ? members
+    : members.filter((member) =>
         member.name.toLowerCase().includes(searchText.toLowerCase())
       );
 
-  const categories = [
-    {
-      title: "1학년",
-      members: filteredData?.filter(
-        (member) =>
-          member.grade === "1학년" && !member.absence && !member.graduation
-      ),
-    },
-    {
-      title: "2학년",
-      members: filteredData?.filter(
-        (member) =>
-          member.grade === "2학년" && !member.absence && !member.graduation
-      ),
-    },
-    {
-      title: "3학년",
-      members: filteredData?.filter(
-        (member) =>
-          member.grade === "3학년" && !member.absence && !member.graduation
-      ),
-    },
-    {
-      title: "4학년",
-      members: filteredData?.filter(
-        (member) =>
-          member.grade === "4학년" && !member.absence && !member.graduation
-      ),
-    },
-    {
-      title: "초과 학기",
-      members: filteredData?.filter(
-        (member) =>
-          member.grade === "초과 학기" && !member.absence && !member.graduation
-      ),
-    },
-    {
-      title: "휴학생",
-      members: filteredData?.filter((member) => member.absence),
-    },
-    {
-      title: "졸업생",
-      members: filteredData?.filter((member) => member.graduation),
-    },
-  ];
+  const grades = ["1학년", "2학년", "3학년", "4학년", "초과 학기", "휴학생", "졸업생"];
+
+  const categories = grades.map((grade) => ({
+    title: grade,
+    members: filteredMembers.filter((member) => {
+      if (grade === "휴학생") return member.absence && !member.graduation;
+      if (grade === "졸업생") return member.graduation;
+      return member.grade === grade && !member.absence && !member.graduation;
+    }),
+  }));
 
   const DownloadExcel = () => {
-    // TODO : 엑셀 다운로드 API 연동 후 적용
     console.log("엑셀 다운로드");
   };
 
-  // 🔄 로딩 & 에러 처리
+  const handleDrop = (grade: string) => {
+    if (!draggedMemberId) return;
+
+    const member = members.find((m) => m.memberId === draggedMemberId);
+    if (!member) return;
+
+    const gradeToNumber = (grade: string): number => {
+      switch (grade) {
+        case "1학년": return 1;
+        case "2학년": return 2;
+        case "3학년": return 3;
+        case "4학년": return 4;
+        case "초과 학기": return 5;
+        default: return 0;
+      }
+    };
+
+    if (grade === "휴학생") {
+      if (!member.absence) {
+        putMemberAbsence({ memberId: draggedMemberId, absence: true });
+      }
+      setMembers((prev) =>
+        prev.map((m) =>
+          m.memberId === draggedMemberId ? { ...m, absence: true } : m
+        )
+      );
+    } else if (grade === "졸업생") {
+      if (!member.graduation) {
+        putMemberGraduation({ memberId: draggedMemberId, Graduation: true });
+      }
+      setMembers((prev) =>
+        prev.map((m) =>
+          m.memberId === draggedMemberId ? { ...m, graduation: true } : m
+        )
+      );
+    } else {
+      const newGrade = gradeToNumber(grade);
+      if (member.grade !== grade) {
+        putMemberGrade({ memberId: draggedMemberId, grade: newGrade });
+      }
+      if (member.absence) {
+        putMemberAbsence({ memberId: draggedMemberId, absence: false });
+      }
+      if (member.graduation) {
+        putMemberGraduation({ memberId: draggedMemberId, Graduation: false });
+      }
+      setMembers((prev) =>
+        prev.map((m) =>
+          m.memberId === draggedMemberId
+            ? { ...m, grade, absence: false, graduation: false }
+            : m
+        )
+      );
+    }
+    setDraggedMemberId("");
+  };
+
   if (isLoading) return <div className="m-4">불러오는 중...</div>;
   if (error)
     return <div className="m-4 text-red-500">에러 발생: {String(error)}</div>;
@@ -99,16 +135,9 @@ export default function ManageMembers() {
               {viewType === "small" ? "작게보기" : "크게보기"}
             </SelectValue>
           </SelectTrigger>
-          <SelectContent
-            className="bg-background01"
-            style={{ minWidth: "100px" }}
-          >
-            <SelectItem value="small" className="cursor-pointer">
-              작게 보기
-            </SelectItem>
-            <SelectItem value="medium" className="cursor-pointer">
-              크게 보기
-            </SelectItem>
+          <SelectContent className="bg-background01">
+            <SelectItem value="small">작게 보기</SelectItem>
+            <SelectItem value="medium">크게 보기</SelectItem>
           </SelectContent>
         </Select>
 
@@ -122,38 +151,43 @@ export default function ManageMembers() {
         </div>
 
         <div className="flex flex-row items-center gap-[15px] ml-auto">
-          <Button
-            className="ml-2"
-            onClick={() => putAllMemberSemesterMutation()}
-          >
+          <Button onClick={() => putAllMemberSemesterMutation()}>
             전체 재학생 학기 증가
           </Button>
-          <Button className="ml-2" onClick={DownloadExcel}>
-            To Excel
-          </Button>
+          <Button onClick={DownloadExcel}>To Excel</Button>
         </div>
       </div>
 
       {categories.map(({ title, members }) => (
-        <div key={title} className="">
-          <div className="text-lg font-bold ml-4">
-            {title} - {members?.length ?? 0}명
+        <div
+          key={title}
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={() => handleDrop(title)}
+          className="border-2 border-dashed border-gray-300 rounded-xl p-2 m-4"
+        >
+          <div className="text-lg font-bold ml-2">
+            {title} - {members.length}명
           </div>
-          <div className="flex flex-wrap ml-2">
-            {(members ?? []).length > 0 ? (
-              members?.map((member) => (
-                <MemberCard
+          <div className="flex flex-wrap ml-2 min-h-[50px]">
+            {members.length > 0 ? (
+              members.map((member) => (
+                <div
                   key={`${title}-${member.memberId}`}
-                  name={member.name}
-                  phoneNumber={formatPhoneNumber(member.phone)}
-                  studentId={member.studentNumber}
-                  profilePhoto={member.profilePhoto}
-                  type={viewType}
-                  onClick={() => {
-                    setOpen(true);
-                    setSelectedMemberId(member.memberId);
-                  }}
-                />
+                  draggable
+                  onDragStart={() => setDraggedMemberId(member.memberId)}
+                >
+                  <MemberCard
+                    name={member.name}
+                    phoneNumber={formatPhoneNumber(member.phone)}
+                    studentId={member.studentNumber}
+                    profilePhoto={member.profilePhoto}
+                    type={viewType}
+                    onClick={() => {
+                      setOpen(true);
+                      setSelectedMemberId(member.memberId);
+                    }}
+                  />
+                </div>
               ))
             ) : (
               <div className="text-gray-500 m-2">등록된 학생이 없습니다.</div>
