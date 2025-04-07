@@ -51,7 +51,7 @@ export async function PutMemberGrade(memberId: string, grade: number) {
 
 export async function PutMemberAbsence(memberId: string , absence: boolean) {
     try{
-        const response = await Authapi.put( `/nova/admin/members/${memberId}/absence?isAbsent=${absence}`)
+        const response = await Authapi.put( `/nova/admin/members/${memberId}/absence?isAbsence=${absence}`)
         return response.data.data
     }catch(error:unknown){
         throwError(error)

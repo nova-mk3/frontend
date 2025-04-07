@@ -2,6 +2,8 @@
 import { IdCard } from "lucide-react";
 import { ProfileImage } from "./profileImage";
 
+export const baseCardClass = "m-[8px] flex items-center rounded-lg border-2 border-primary/50 cursor-pointer shadow-md transition-all duration-200 hover:bg-primary/10 hover:shadow-lg hover:scale-[1.02]";
+
 interface ProfilePhoto {
   id: string;
   originalFileName: string;
@@ -28,9 +30,6 @@ export default function MemberCard({
   },
   onClick = () => console.log("meow"),
 }: MemberCardProps) {
-  const baseCardClass =
-  "m-[8px] flex items-center rounded-lg border border-primary cursor-pointer shadow-sm transition-all duration-200 bg-gradient-to-br from-white to-[#f9f9ff] hover:bg-primary/10 hover:shadow-md hover:scale-[1.02]";
-
   if (type === "small") {
     return (
       <div

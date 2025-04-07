@@ -13,6 +13,8 @@ import {
 import { enumRoleType , ExecutiveMembercardProps, ROLE_LABELS } from '@/src/types/executiveMember';
 import { useDeleteExecutiveMemberMutation, usePutExecutiveMemberMutation } from '@/src/query/executiveMembersQueries';
 import { ProfileImage } from '@nova/ui/components/ui/profileImage';
+import { baseCardClass } from "@nova/ui/components/ui/MemberCard";
+
 
 export default function ExecutiveMembercard({
     selectedYear = 0,
@@ -29,10 +31,6 @@ export default function ExecutiveMembercard({
 } : ExecutiveMembercardProps) {
     const { mutate: putExectuvieMemberMutation } = usePutExecutiveMemberMutation(selectedYear);
     const { mutate: deleteExecutiveMember } = useDeleteExecutiveMemberMutation(selectedYear);
-
-    const baseCardClass =
-    "m-[8px] flex items-center rounded-lg border border-primary cursor-pointer shadow-sm transition-all duration-200 bg-gradient-to-br from-white to-[#f9f9ff] hover:bg-primary/10 hover:shadow-md hover:scale-[1.02]";
-  
 
     return (
         <div className={`w-[650px] h-[80px] ${baseCardClass}`}>

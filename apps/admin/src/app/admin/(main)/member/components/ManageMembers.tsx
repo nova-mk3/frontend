@@ -18,7 +18,6 @@ import {
   usePutMemberAbsenceMutation,
   usePutMemberGraduationMutation,
 } from "@/src/query/manageMembersQueries";
-import { formatPhoneNumber } from "@/src/utils/formatter";
 import { ManageMember } from "@/src/types/manageMember";
 
 export default function ManageMembers() {

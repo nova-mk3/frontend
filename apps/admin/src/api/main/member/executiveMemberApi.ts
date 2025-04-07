@@ -38,7 +38,7 @@ export async function GetExecutiveMemberByYear(year: number){
     }
 }
 
-export async function PostExecuvtieMember(request: PostExecutiveMemberRequest){
+export async function PostExecutiveMember(request: PostExecutiveMemberRequest){
     try{
         const response = await Authapi.post(`/nova/executive-histories`, request)
         return response.data
