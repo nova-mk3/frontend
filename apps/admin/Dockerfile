@@ -14,7 +14,7 @@ RUN pnpm add turbo
 # 프로젝트 복사
 COPY . . 
 # turbo prune 사용
-RUN pnpm turbo prune admin --docker --include-dependencies
+RUN pnpm turbo prune admin --docker -- --include-dependencies
 
 # Dependencies 설치
 FROM base AS installer
