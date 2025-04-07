@@ -15,8 +15,6 @@ export default function LayoutClient({ id, children }: Props) {
     return <PendingFallbackUI />;
   }
   if (!data) return <>{children}</>;
-  console.log(data.memberId);
-  console.log(id);
   if (data.memberId !== id) return <>{children}</>;
   return (
     <div>
