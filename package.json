@@ -18,6 +18,11 @@
       "pre-commit": "lint-staged"
     }
   },
+  "dependencies": {
+    "@tanstack/react-query": "^5.66.0",
+    "@tanstack/react-query-devtools": "^5.66.0",
+    "axios": "^1.7.9"
+  },
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",

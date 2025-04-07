@@ -7,6 +7,16 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@tanstack/react-query':
+        specifier: ^5.66.0
+        version: 5.69.0(react@19.0.0)
+      '@tanstack/react-query-devtools':
+        specifier: ^5.66.0
+        version: 5.69.0(@tanstack/react-query@5.69.0(react@19.0.0))(react@19.0.0)
+      axios:
+        specifier: ^1.7.9
+        version: 1.8.4
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.6.1
@@ -129,15 +139,6 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.1.1
         version: 1.1.2(@types/react@19.0.12)(react@19.0.0)
-      '@tanstack/react-query':
-        specifier: ^5.66.0
-        version: 5.69.0(react@19.0.0)
-      '@tanstack/react-query-devtools':
-        specifier: ^5.66.0
-        version: 5.69.0(@tanstack/react-query@5.69.0(react@19.0.0))(react@19.0.0)
-      axios:
-        specifier: ^1.7.9
-        version: 1.8.4
       cookie:
         specifier: ^1.0.2
         version: 1.0.2
