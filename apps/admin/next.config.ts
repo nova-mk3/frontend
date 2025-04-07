@@ -5,9 +5,10 @@ const isProd = process.env.NODE_ENV === "production";
 const { NEXT_PUBLIC_API_BASE_URL } = process.env;
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactStrictMode: false,
   output: "standalone",
+  // basePath: "/admin",   -> 이런기능이 잇었네, 폴더 옮기게해서 미안하다 범수야..
+  assetPrefix: "/admin",
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/i,
