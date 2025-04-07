@@ -46,7 +46,7 @@ export default function BoardListItem({
         className="flex flex-col w-full text-muted-foreground min-h-10"
       >
         <div className="text-base line-clamp-1 break-all">{content}</div>
-        <span className="text-sm text-gray-500 ml-auto">
+        <span className="text-sm text-gray-500 ml-auto mt-3">
           {formatDate(createdTime)}
         </span>
       </Link>
