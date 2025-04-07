@@ -49,12 +49,10 @@ export default function MemberCard({
     return (
       <div
         onClick={onClick}
-        className={`w-[600px] h-[80px] ${baseCardClass}`}
+        className={`w-[400px] h-[80px] ${baseCardClass}`}
       >
         <ProfileImage src= {profilePhoto.imageUrl} size={64} className="ml-[15px]"/>
         <div className="text-2xl text-center flex-grow">{name}</div>
-        <Phone className="ml-auto h-8 w-8" />
-        <div className="text-2xl text-center flex-grow">{phoneNumber}</div>
         <IdCard className="ml-auto h-8 w-8" />
         <div className="text-2xl text-center flex-grow">{studentId}</div>
       </div>
