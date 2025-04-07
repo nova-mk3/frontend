@@ -11,7 +11,7 @@ export async function AdminLogin({
   password,
 }: AdminLoginRequest) {
   try {
-    const response = await api.post("/nova/members/login", {
+    const response = await api.post("/members/login", {
       studentNumber,
       password,
     });

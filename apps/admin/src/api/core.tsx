@@ -4,7 +4,7 @@ import axios from "axios";
 // 현재 서버에서는 CORS정책을 3000, 8080, 3001 사용중
 // 하지만 localghost:3000에서 요청을 보낼경우 문제없이 작동하므로 임시로 사용중
 
-export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const config = {
   baseURL: BASE_URL,
