@@ -30,8 +30,12 @@ export default function ExecutiveMembercard({
     const { mutate: putExectuvieMemberMutation } = usePutExecutiveMemberMutation(selectedYear);
     const { mutate: deleteExecutiveMember } = useDeleteExecutiveMemberMutation(selectedYear);
 
+    const baseCardClass =
+    "m-[8px] flex items-center rounded-lg border border-primary cursor-pointer shadow-sm transition-all duration-200 bg-gradient-to-br from-white to-[#f9f9ff] hover:bg-primary/10 hover:shadow-md hover:scale-[1.02]";
+  
+
     return (
-        <div className={`w-[650px] h-[80px] m-[8px] flex border border-primary rounded-lg items-center hover:bg-background02 cursor-pointer`}>
+        <div className={`w-[650px] h-[80px] ${baseCardClass}`}>
             <ProfileImage src={profilePhoto.imageUrl} size={64} className='ml-[15px]'/>
             <div className={`text-2xl text-center flex-grow`}>{name}</div>
             <Phone className={"ml-auto h-8 w-8"}/>

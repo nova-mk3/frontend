@@ -1,5 +1,5 @@
 // MemberCard.tsx
-import { Phone, IdCard } from "lucide-react";
+import { IdCard } from "lucide-react";
 import { ProfileImage } from "./profileImage";
 
 interface ProfilePhoto {
@@ -12,7 +12,6 @@ interface MemberCardProps {
   type?: "small" | "medium";
   name?: string;
   studentId?: string;
-  phoneNumber?: string;
   profilePhoto: ProfilePhoto;
   pendingMemberId?: string;
   onClick?: () => void;
@@ -21,7 +20,6 @@ interface MemberCardProps {
 export default function MemberCard({
   name = "고양이",
   type = "small",
-  phoneNumber = "010-0000-0000",
   studentId = "2019019014",
   profilePhoto = {
     id: "00000000",
@@ -31,7 +29,7 @@ export default function MemberCard({
   onClick = () => console.log("meow"),
 }: MemberCardProps) {
   const baseCardClass =
-    "m-[8px] flex border border-primary rounded-lg items-center hover:bg-background02 cursor-pointer";
+  "m-[8px] flex items-center rounded-lg border border-primary cursor-pointer shadow-sm transition-all duration-200 bg-gradient-to-br from-white to-[#f9f9ff] hover:bg-primary/10 hover:shadow-md hover:scale-[1.02]";
 
   if (type === "small") {
     return (

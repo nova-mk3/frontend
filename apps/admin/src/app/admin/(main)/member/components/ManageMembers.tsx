@@ -179,7 +179,6 @@ export default function ManageMembers() {
                 >
                   <MemberCard
                     name={member.name}
-                    phoneNumber={formatPhoneNumber(member.phone)}
                     studentId={member.studentNumber}
                     profilePhoto={member.profilePhoto}
                     type={viewType}
