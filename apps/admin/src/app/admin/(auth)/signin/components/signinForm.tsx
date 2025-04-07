@@ -5,9 +5,9 @@ import { IdCard, Lock } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { InputFormField } from "./InputFormField";
-import Logo from '@/public/image/Logo.svg';
+import Logo from "@/public/image/Logo.svg";
 import { AdminLogin } from "@/src/api/auth/adminLogin";
-import { SigninInput } from './signin.schema';
+import { SigninInput } from "./signin.schema";
 
 export function SigninForm() {
   const form = useForm<SigninInput>({
@@ -30,8 +30,11 @@ export function SigninForm() {
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
       }}
     >
-      <Link href={"/admin/"} className="flex-grow-0 flex items-center justify-center">
-        <Logo height="50px" width="50px" fill="#B096F5" className="block"/>
+      <Link
+        href={"/admin/"}
+        className="flex-grow-0 flex items-center justify-center"
+      >
+        <Logo height="50px" width="50px" fill="#B096F5" className="block" />
         <div className="text-4xl font-bold text-primary">novAdmin</div>
       </Link>
       <Form {...form}>
