@@ -105,7 +105,7 @@ export function InputFormField<T extends Record<string, any>>({
               )}
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? <Eye size={22}/>:<EyeClosed size={22} />}
+              {showPassword ? <EyeClosed size={22} />:<Eye size={22}/>}
             </Button>
           )}
         </FormItem>
