@@ -17,6 +17,8 @@ interface CardProps {
   grade: string;
   semester: string;
 
+  graduation: boolean;
+  graduationYear: string;
   job?: string;
   isContact?: boolean;
   contactInfo?: string;
@@ -34,6 +36,8 @@ export default function Card({
   introduction,
   grade,
   semester,
+  graduation,
+  graduationYear,
 }: CardProps) {
   return (
     <div className=" p-5 flex flex-col gap-1 t-m shadow-md hover:shadow-lg ">
@@ -56,7 +60,7 @@ export default function Card({
             {name}
           </Link>
           <p className="t-s text-text03">
-            {grade} {semester}
+            {!graduation ? `${grade} ${semester}` : `${graduationYear} 졸업`}
           </p>
         </div>
         <CardLogo width={50} className="ml-auto flex-shrink-0" />

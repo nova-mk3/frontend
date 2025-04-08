@@ -93,7 +93,7 @@ export default function ModifyPage({ postId }: Props) {
     // 파일이 없을때는 파일 업로드 생략
     // 파일이 존재할때는 파일 업로드가 성공하면 게시글 생성
     const formData = new FormData();
-
+    console.log(data);
     selectedFiles.forEach((file) => {
       formData.append("files", file);
     });

@@ -36,6 +36,8 @@ export default function MemberList() {
             semester={data.semester}
             studentNumber={data.studentNumber}
             memberId={data.memberId}
+            graduation={data.graduation}
+            graduationYear={data.graduationYear}
           />
         ))}
       </div>
