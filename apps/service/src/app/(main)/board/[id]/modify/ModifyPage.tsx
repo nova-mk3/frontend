@@ -118,6 +118,7 @@ export default function ModifyPage({ postId }: Props) {
           deleteFileIds: [...willDeleteFiles],
           postId: postId,
           boardId: INTEGRATED,
+          postType: data.category,
         });
       } catch (error) {
         alert("파일 업로드 실패");
@@ -132,6 +133,7 @@ export default function ModifyPage({ postId }: Props) {
         deleteFileIds: [...willDeleteFiles],
         postId: postId,
         boardId: INTEGRATED,
+        postType: data.category,
       });
     }
   };

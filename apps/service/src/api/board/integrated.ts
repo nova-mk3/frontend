@@ -140,6 +140,7 @@ export async function BoardLatestList({ boardId }: BoardIdParams) {
 
 export interface IntegratedPutRequest {
   title: string;
+  postType: string;
   content: string;
   boardId: string;
   fileIds: string[];
@@ -153,6 +154,7 @@ export async function IntegratedBoardPut({
   fileIds,
   boardId,
   postId,
+  postType,
   deleteFileIds,
 }: IntegratedPutRequest) {
   try {
@@ -161,6 +163,7 @@ export async function IntegratedBoardPut({
       content,
       fileIds,
       deleteFileIds,
+      postType,
     });
     return response.data.data;
   } catch (error: any) {
@@ -171,15 +174,6 @@ export async function IntegratedBoardPut({
 /*
 게시글 삭제
 */
-
-export interface IntegratedPutRequest {
-  title: string;
-  content: string;
-  boardId: string;
-  fileIds: string[];
-  postId: string;
-  deleteFileIds: string[];
-}
 
 export async function IntegratedBoardDelete({
   boardId,
