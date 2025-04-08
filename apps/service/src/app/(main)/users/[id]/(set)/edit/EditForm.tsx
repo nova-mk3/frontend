@@ -104,7 +104,7 @@ export default function EditForm({ memberId }: Props) {
           ? data.memberResponse.semester
           : "1학기",
         absence: data.memberResponse.absence,
-        birth: data.memberResponse.birth
+        birth: !data.memberResponse.birth
           ? new Date("1990-01-05")
           : new Date(data.memberResponse.birth),
         phoneNumber: data.memberResponse.phone,
