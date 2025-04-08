@@ -4,7 +4,7 @@ import { useGetUserData } from "../../query/qureies";
 import Image from "next/image";
 import Link from "next/link";
 import PendingFallbackUI from "@/src/app/(main)/components/Skeleton/PendingFallbackUI";
-import { Badge, Calendar, Mail, Phone, School, User } from "lucide-react";
+import { Calendar, Mail, Phone, School, User } from "lucide-react";
 import { formatKoreanDate } from "@/src/libs/utils/koreandate";
 import { Button } from "@nova/ui/components/ui/button";
 import { cn } from "@nova/ui/lib/utils";

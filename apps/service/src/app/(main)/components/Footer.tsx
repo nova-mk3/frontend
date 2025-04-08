@@ -19,7 +19,7 @@ export default function Footer() {
 
           <div className="flex flex-col gap-2">
             <p className="!font-bold">게시판</p>
-            <Link href="/boartd/home" className="hover:underline">
+            <Link href="/board/home" className="hover:underline">
               통합게시판
             </Link>
             {data && (

@@ -1,5 +1,6 @@
 import axios from "axios";
 export const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 const config = {
   baseURL: BASE_URL,
   withCredentials: true,
@@ -12,6 +13,7 @@ export const Authapi = axios.create(config); // 인증이 필요한 요청용 �
 Authapi.interceptors.response.use(
   async (response) => {
     // // 정상 응답인 경우 그대로 반환
+
     // const startTime = Date.now();
     // const elapsedTime = Date.now() - startTime;
     // const remainingTime = Math.max(1000 - elapsedTime, 0);

@@ -10,10 +10,13 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useGetUserData } from "../../query/qureies";
+
 interface Props {
   memberId: string;
 }
 export default function ChangePwd({ memberId }: Props) {
+  const { data, isLoading } = useGetUserData({ memberId });
   const router = useRouter();
   const form = useForm<PwdInput>({
     resolver: zodResolver(PwdSchema),
@@ -56,6 +59,7 @@ export default function ChangePwd({ memberId }: Props) {
       checkNewPassword: values.confirmNewPassword,
     });
   }
+
   return (
     <div className="w-[400px] mx-auto mobile:w-[90%] mt-10">
       <Form {...form}>

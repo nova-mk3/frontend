@@ -43,8 +43,8 @@ export function InputFormFieldWithButton<T extends Record<string, any>>({
   hasToggleIcon?: boolean;
   disabled?: boolean;
   btnText?: string;
-  onClick?: (value : string) => void;
-} ) {
+  onClick?: (value: string) => void;
+}) {
   const { isFocused, inputRef } = useInputFocus();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -63,7 +63,7 @@ export function InputFormFieldWithButton<T extends Record<string, any>>({
                   ? "text-danger"
                   : isFocused
                     ? "text-primary"
-                    : "text-text01",
+                    : "text-text01"
               )}
             >
               {label}
@@ -78,36 +78,32 @@ export function InputFormFieldWithButton<T extends Record<string, any>>({
                   ? "text-danger"
                   : isFocused
                     ? "text-primary"
-                    : "text-line01",
+                    : "text-line01"
               )}
             >
               {leftIcon}
             </div>
           )}
           <div className="flex w-full gap-2">
-
-          <FormControl ref={inputRef}>
-            <Input
-              className={cn(
-                "peer b-m h-10 transition-colors rounded-sm border-line01 w-full",
-                error
-                  ? "text-danger border-danger placeholder:text-danger"
-                  : "focus:border-primary focus:text-primary focus:placeholder-primary",
-                leftIcon ? "pl-10" : "",
-              )}
-              type={hasToggleIcon && !showPassword ? "password" : type}
-              placeholder={placeHolder}
-              disabled={disabled}
-              {...(inputMode ? { inputMode } : {})}
-              {...(pattern ? { pattern } : {})}
-              {...field}
-            />
-          </FormControl>
-          <Button
-              type="button"
-              onClick={ ()=> onClick?.(field.value) }
-             >
-              { disabled === true ? "변경" : btnText}
+            <FormControl ref={inputRef}>
+              <Input
+                className={cn(
+                  "peer b-m h-10 transition-colors rounded-sm border-line01 w-full",
+                  error
+                    ? "text-danger border-danger placeholder:text-danger"
+                    : "focus:border-primary focus:text-primary focus:placeholder-primary",
+                  leftIcon ? "pl-10" : ""
+                )}
+                type={hasToggleIcon && !showPassword ? "password" : type}
+                placeholder={placeHolder}
+                disabled={disabled}
+                {...(inputMode ? { inputMode } : {})}
+                {...(pattern ? { pattern } : {})}
+                {...field}
+              />
+            </FormControl>
+            <Button type="button" onClick={() => onClick?.(field.value)}>
+              {disabled === true ? "변경" : btnText}
             </Button>
           </div>
           {hasToggleIcon && (
@@ -120,7 +116,7 @@ export function InputFormFieldWithButton<T extends Record<string, any>>({
                   ? "text-danger"
                   : isFocused
                     ? "text-primary"
-                    : "text-line01",
+                    : "text-line01"
               )}
               onClick={() => setShowPassword(!showPassword)}
             >

@@ -12,7 +12,7 @@ export default async function page({
 }) {
   const { id } = await params;
   return (
-    <div className="w-[400px] mx-auto mobile:w-[90%] mt-10">
+    <div className="w-[400px] mx-auto mobile:w-[90%] mt-10 min-h-[795px]">
       <ErrorBoundaryWrapper>
         <ChangeEmail memberId={id} />
       </ErrorBoundaryWrapper>
