@@ -70,6 +70,7 @@ export default function ManageMemberCardModalContent({
   const commonInputClass = cn(
     "mt-1",
     "md:text-2xl",
+    "text-center",
     !isEditMode &&
       "border-none shadow-none outline-none focus:outline-none focus:ring-0"
   );
@@ -154,7 +155,7 @@ export default function ManageMemberCardModalContent({
 
   return (
     <div className="flex">
-      <div className="flex flex-col items-center w-[650px] space-y-8 py-20">
+      <div className="flex flex-col items-center w-[650px] space-y-6 py-10">
         <ProfileImage src={data?.memberResponse.profilePhoto?.imageUrl || ""} size={160} />
         <Input
           name="name"
@@ -168,20 +169,20 @@ export default function ManageMemberCardModalContent({
           )}
         />
         <div className="flex items-center space-x-3">
-          <Phone className="h-8 w-8 text-gray-600" />
-          <Input
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            readOnly={!isEditMode}
-            className={commonInputClass}
-          />
-        </div>
-        <div className="flex items-center space-x-3">
           <IdCard className="h-8 w-8 text-gray-600" />
           <Input
             name="studentNumber"
             value={formData.studentNumber}
+            onChange={handleChange}
+            readOnly={true}
+            className="mt-1 md:text-2xl text-center border-none shadow-none outline-none focus:outline-none focus:ring-0"
+          />
+        </div>
+        <div className="flex items-center space-x-3">
+          <Phone className="h-8 w-8 text-gray-600" />
+          <Input
+            name="phone"
+            value={formData.phone}
             onChange={handleChange}
             readOnly={!isEditMode}
             className={commonInputClass}
@@ -287,7 +288,7 @@ export default function ManageMemberCardModalContent({
                 setFormData((prev) => ({ ...prev, [name]: value }));
               }}
               readOnly={!isEditMode}
-              rows={10}
+              rows={8}
               maxLength={250}
               className="md:text-2xl"
               placeholder="자기소개를 최대 250자까지 입력 가능..."

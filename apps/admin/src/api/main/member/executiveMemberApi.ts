@@ -43,7 +43,7 @@ export async function GetExecutiveMemberByYear(year: number) {
 
 export async function PostExecutiveMember(request: PostExecutiveMemberRequest){
     try{
-        const response = await Authapi.post(`/nova/executive-histories`, request)
+        const response = await Authapi.post(`/executive-histories`, request)
         return response.data
     } catch (error:unknown){
         throwError(error)

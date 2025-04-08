@@ -7,7 +7,6 @@ export const pendingMembersKeys = {
     list: () => ['pendingMembers'] as const,
 };
 
-// 상세 쿼리 키를 독립적으로 분리를 통해 mutate시 영향받지않게 설정
 export const specificPendingMemberKeys = {
     detail: (pendingMemberId: string) => ['specificPendingMember', pendingMemberId] as const,
 };
@@ -40,11 +39,9 @@ export const useApprovePendingMemberMutation = () => {
     return useMutation({
         mutationFn: (pendingMemberId: string) => ApprovePendingMember(pendingMemberId),
         onSuccess: () => {
-            // pendingMembers 쿼리 다시 진행시키기
             queryClient.invalidateQueries({
                 queryKey: pendingMembersKeys.list(),
             });
-            // 일반 멤버들 리스트 쿼리 다시 진행시키기
             queryClient.invalidateQueries({
                 queryKey: manageMembersKeys.list(),
             });
