@@ -9,12 +9,14 @@ import { formatKoreanDate } from "@/src/libs/utils/koreandate";
 import { Button } from "@nova/ui/components/ui/button";
 import { cn } from "@nova/ui/lib/utils";
 import { translateRole } from "@/src/libs/utils/translateRole";
+import { useQuery } from "@tanstack/react-query";
+import { SimpleProfileQueryOptions } from "../../query/options";
 interface Props {
   memberId: string;
 }
 export default function Profile({ memberId }: Props) {
   const { data, isLoading } = useGetUserData({ memberId });
-
+  const { data: loginUserData } = useQuery(SimpleProfileQueryOptions());
   if (isLoading) return <PendingFallbackUI />;
 
   return (
@@ -79,11 +81,13 @@ export default function Profile({ memberId }: Props) {
               </div>
 
               {/* 편집 버튼 */}
-              <div>
-                <Link href={`/users/${memberId}/edit`}>
-                  <Button variant="outline">프로필 편집</Button>
-                </Link>
-              </div>
+              {loginUserData.memberId === memberId && (
+                <div>
+                  <Link href={`/users/${memberId}/edit`}>
+                    <Button variant="outline">프로필 편집</Button>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
 
