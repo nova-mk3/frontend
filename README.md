@@ -106,6 +106,7 @@ Effective React Query Keys 문서를 참고해 query-key-factory 패턴으로 �
     <th></th>
     <th>로그인</th>
     <th>회원가입</th>
+   <th></th>
   </tr>
   <tr>
     <td><strong>이미지</strong></td>
@@ -141,6 +142,7 @@ Effective React Query Keys 문서를 참고해 query-key-factory 패턴으로 �
     <th></th>
     <th>댓글/대댓글</th>
     <th>댓글/대댓글(gif)</th>
+    <th></th>
   </tr>
   <tr>
     <td><strong>이미지</strong></td>
@@ -151,15 +153,18 @@ Effective React Query Keys 문서를 참고해 query-key-factory 패턴으로 �
     <th></th>
     <th>건의함</th>
     <th>건의상세</th>
+    <th></th>
   </tr>
   <tr>
     <td><strong>이미지</strong></td>
     <td><img src="./exec/건의함.png" alt="post" width="450"/></td>
     <td><img src="./exec/건의함2.png" alt="post" width="450"/></td>
+    <th></th>
   </tr>
   
   
 </table>
+
 - 연혁, 동아리원, 임원 소개 추가 예정
 
 ### 관리자
