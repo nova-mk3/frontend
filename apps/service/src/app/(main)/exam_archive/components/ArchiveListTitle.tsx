@@ -4,8 +4,8 @@ import { Button } from "@nova/ui/components/ui/button";
 import Link from "next/link";
 import { POST_TYPE_LABEL, PostType } from "@/src/constant/board";
 import { Filter } from "../../components/Filter";
-import SearchInput from "../../components/SearchInput";
-import SelectSortComponent from "../../components/SelectSortComponent";
+import SearchInput from "../../components/Search/SearchInput";
+import SelectSortComponent from "../../components/Search/SelectSortComponent";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
 

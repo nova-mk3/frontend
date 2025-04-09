@@ -12,7 +12,7 @@ import DetailPageTitle from "../../components/DetailPageTitle";
 
 import { usePostDetailQuery } from "../../query/postqueries";
 import CommentForm from "../../components/comments/CommentForm";
-import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
+import ErrorBoundaryWrapper from "../../../components/ErrorBoundary/ErrorBoundaryWrapper";
 import CommentList from "../../components/comments/CommentList";
 import { INTEGRATED, POST_TYPE } from "@/src/constant/board";
 import DetailPageSubTitle from "../../components/DetailPageSubTitle";

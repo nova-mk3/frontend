@@ -12,7 +12,7 @@ import { toFormattedDate } from "@/src/libs/utils/dateParsing";
 import AdminForm from "../components/AdminForm";
 import { FileItemProps } from "../components/ViewFileItem";
 import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
-import DeferredComponent from "../../components/DeferredComponent";
+import DeferredComponent from "../../components/ErrorBoundary/DeferredComponent";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
 

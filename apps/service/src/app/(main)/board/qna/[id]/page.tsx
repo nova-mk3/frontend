@@ -1,5 +1,5 @@
 import React from "react";
-import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
+import ErrorBoundaryWrapper from "../../../components/ErrorBoundary/ErrorBoundaryWrapper";
 import { IntegratedBoardGetDetail } from "@/src/api/board/integrated";
 import { Metadata } from "next";
 import { INTEGRATED } from "@/src/constant/board";

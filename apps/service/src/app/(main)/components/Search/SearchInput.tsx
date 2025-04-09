@@ -2,7 +2,7 @@
 import { Input } from "@nova/ui/components/ui/input";
 import { Search } from "lucide-react";
 import React, { useEffect, useRef } from "react";
-import { useQueryParams } from "./useQueryParams";
+import { useQueryParams } from "../useQueryParams";
 
 export default function SearchInput() {
   const inputRef = useRef<HTMLInputElement>(null);

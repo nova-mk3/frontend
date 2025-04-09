@@ -1,7 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import { CLUB_ARCHIVE, INTEGRATED } from "@/src/constant/board";
-import ErrorBoundaryWrapper from "../../components/ErrorBoundaryWrapper";
+import ErrorBoundaryWrapper from "../../components/ErrorBoundary/ErrorBoundaryWrapper";
 import { ArchiveGetDetail } from "@/src/api/board/exam";
 import PostDetail from "./PostDetail";
 

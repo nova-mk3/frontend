@@ -58,8 +58,12 @@ export function usePicturePutMutation({ postId }: { postId: string }) {
       alert("변경 성공");
 
       // 내 수정사항은 나만 다시보면 된다 -> api 호출 최적화
-      queryClient.setQueryData(postKeys.detail(postId), data);
-
+      // 캐시가 바로 수정되어 이동전에 수정된 캐시값으로 랜더링되서 보인다.. 사용자 경험을 해친다
+      // queryClient.setQueryData(postKeys.detail(postId), data);
+      queryClient.invalidateQueries({
+        queryKey: postKeys.detail(postId),
+        refetchType: "all",
+      });
       queryClient.invalidateQueries({
         queryKey: postKeys.typelists(POST_TYPE.PICTURES),
         refetchType: "inactive",

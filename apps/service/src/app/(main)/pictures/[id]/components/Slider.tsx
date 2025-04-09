@@ -5,7 +5,7 @@ import { useSliderStore } from "@/src/store/ImageSlider";
 import { ChevronLeft, ChevronRight, Download } from "lucide-react";
 import React, { useState } from "react";
 import { ImageProps } from "../PostDetail";
-import { DownloadProgressModal } from "../../../components/DownloadProgressModal";
+import { DownloadProgressModal } from "../../../components/Modal/DownloadProgressModal";
 
 interface settings {
   speed: number;

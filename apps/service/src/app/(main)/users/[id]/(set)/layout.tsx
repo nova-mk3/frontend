@@ -1,6 +1,6 @@
 import React from "react";
 import LayoutClient from "./components/LayoutClient";
-import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
+import ErrorBoundaryWrapper from "../../../components/ErrorBoundary/ErrorBoundaryWrapper";
 
 export default async function layout({
   params,

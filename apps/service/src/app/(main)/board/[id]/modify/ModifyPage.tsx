@@ -23,6 +23,7 @@ import NewPostTitle from "../../../components/NewPostTitle";
 import ModifyFileUploader from "../../../components/File/ModifyFileUploader";
 import { FileItemProps } from "../../../components/File/ViewFileItem";
 import PendingFallbackUI from "../../../components/Skeleton/PendingFallbackUI";
+import LoadingModal from "../../../components/Modal/LoadingModal";
 
 interface Props {
   postId: string;
@@ -35,7 +36,7 @@ export default function ModifyPage({ postId }: Props) {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [originFiles, setOriginFiles] = useState<FileItemProps[]>([]);
   const [willDeleteFiles, setwillDeleteFiles] = useState<string[]>([]);
-
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const form = useForm<IntegratedInput>({
     resolver: zodResolver(IntegratedSchema),
     mode: "onChange",
@@ -100,6 +101,7 @@ export default function ModifyPage({ postId }: Props) {
 
     if (selectedFiles.length > 0) {
       try {
+        setIsOpen(true);
         const response = await useFileUploadMutation.mutateAsync({
           data: formData,
           POST_TYPE_OPTIONS: data.category,
@@ -123,6 +125,8 @@ export default function ModifyPage({ postId }: Props) {
       } catch (error) {
         alert("파일 업로드 실패");
         console.log(error);
+      } finally {
+        setIsOpen(false);
       }
     } else {
       console.log(...originFiles.map((file) => file.id));
@@ -143,49 +147,52 @@ export default function ModifyPage({ postId }: Props) {
   }
 
   return (
-    <Form {...form}>
-      <form
-        className="flex flex-col gap-6"
-        onSubmit={form.handleSubmit(onSubmit)}
-      >
-        <NewPostTitle
-          backLink="/board/home"
-          backLinkText="통합 게시판"
-          title="게시글 변경"
-        />
-
-        <div className="flex flex-col gap-6  w-[80%] h-[calc(100vh-86px)] mx-auto relative">
-          <SelectFormField
-            form={form}
-            name="category"
-            label="카테고리"
-            options={POST_TYPE_OPTIONS}
-            className="w-[180px] mobile:w-full mb-5"
+    <>
+      <Form {...form}>
+        <form
+          className="flex flex-col gap-6"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
+          <NewPostTitle
+            backLink="/board/home"
+            backLinkText="통합 게시판"
+            title="게시글 변경"
           />
 
-          {/* 첨부 파일 영역 */}
-          <ModifyFileUploader
-            selectedFiles={selectedFiles}
-            setSelectedFiles={setSelectedFiles}
-            originFiles={originFiles}
-            setOriginFiles={setOriginFiles}
-            willdeletedFiles={willDeleteFiles}
-            setwillDeleteFiles={setwillDeleteFiles}
-          />
-          {/* 제목 입력란 */}
-          <TextareaFormField
-            form={form}
-            name="title"
-            placeholder="제목을 입력하세요"
-          />
+          <div className="flex flex-col gap-6  w-[80%] h-[calc(100vh-86px)] mx-auto relative">
+            <SelectFormField
+              form={form}
+              name="category"
+              label="카테고리"
+              options={POST_TYPE_OPTIONS}
+              className="w-[180px] mobile:w-full mb-5"
+            />
 
-          <TextareaFormContentField
-            form={form}
-            name="content"
-            placeholder="내용을 입력하세요"
-          />
-        </div>
-      </form>
-    </Form>
+            {/* 첨부 파일 영역 */}
+            <ModifyFileUploader
+              selectedFiles={selectedFiles}
+              setSelectedFiles={setSelectedFiles}
+              originFiles={originFiles}
+              setOriginFiles={setOriginFiles}
+              willdeletedFiles={willDeleteFiles}
+              setwillDeleteFiles={setwillDeleteFiles}
+            />
+            {/* 제목 입력란 */}
+            <TextareaFormField
+              form={form}
+              name="title"
+              placeholder="제목을 입력하세요"
+            />
+
+            <TextareaFormContentField
+              form={form}
+              name="content"
+              placeholder="내용을 입력하세요"
+            />
+          </div>
+        </form>
+      </Form>
+      <LoadingModal isOpen={isOpen} />
+    </>
   );
 }

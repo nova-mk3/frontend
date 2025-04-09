@@ -1,7 +1,6 @@
 "use client";
 // import { PlateEditor } from "@nova/ui/components/editor/plate-editor"; //plate.js 라이브러리인데 일단은 제외
-import React, { useEffect, useState } from "react";
-import WriteBottomLayout from "../../components/WriteBottomLayout";
+import React, { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { INTEGRATED, POST_TYPE_OPTIONS, PostType } from "@/src/constant/board";
@@ -23,12 +22,13 @@ import TextareaFormField from "@/src/app/(auth)/signup/components/TextareaFormFi
 import TextareaFormContentField from "@/src/app/(auth)/signup/components/TextareaFormContentField";
 import { postKeys } from "../query/postqueries";
 import NewPostTitle from "../../components/NewPostTitle";
+import LoadingModal from "../../components/Modal/LoadingModal";
 
 export default function Page() {
   const router = useRouter();
   const queryClient = useQueryClient();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const form = useForm<IntegratedInput>({
     resolver: zodResolver(IntegratedSchema),
     mode: "onChange",
@@ -85,6 +85,7 @@ export default function Page() {
 
     if (selectedFiles.length > 0) {
       try {
+        setIsOpen(true);
         const response = await useFileUploadMutation.mutateAsync({
           data: formData,
           POST_TYPE_OPTIONS: data.category,
@@ -104,6 +105,8 @@ export default function Page() {
       } catch (error) {
         alert("파일 업로드 실패");
         console.log(error);
+      } finally {
+        setIsOpen(false);
       }
     } else {
       useIntegratedBoardMutation.mutate({
@@ -122,49 +125,52 @@ export default function Page() {
   });
 
   return (
-    <Form {...form}>
-      <form
-        className="flex flex-col gap-6"
-        onSubmit={form.handleSubmit(onSubmit)}
-      >
-        <NewPostTitle
-          backLink="/board/home"
-          backLinkText="통합 게시판"
-          title="통합 게시글 작성"
-        />
-        <div className="flex flex-col gap-6 w-[80%] h-[calc(100vh-86px)] mx-auto relative">
-          {/* TODO: 좀 더 컴포넌트 화 가능할듯! */}
-          <SelectFormField
-            form={form}
-            name="category"
-            label="카테고리"
-            options={POST_TYPE_OPTIONS}
-            className="w-[180px] mobile:w-full mb-5"
+    <>
+      <Form {...form}>
+        <form
+          className="flex flex-col gap-6"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
+          <NewPostTitle
+            backLink="/board/home"
+            backLinkText="통합 게시판"
+            title="통합 게시글 작성"
           />
+          <div className="flex flex-col gap-6 w-[80%] h-[calc(100vh-86px)] mx-auto relative">
+            {/* TODO: 좀 더 컴포넌트 화 가능할듯! */}
+            <SelectFormField
+              form={form}
+              name="category"
+              label="카테고리"
+              options={POST_TYPE_OPTIONS}
+              className="w-[180px] mobile:w-full mb-5"
+            />
 
-          {/* 제목 입력란 */}
+            {/* 제목 입력란 */}
 
-          {/* 첨부 파일 영역 */}
-          <PostFileUploader
-            selectedFiles={selectedFiles}
-            setSelectedFiles={setSelectedFiles}
-          />
-          <TextareaFormField
-            form={form}
-            name="title"
-            placeholder="제목을 입력하세요"
-          />
+            {/* 첨부 파일 영역 */}
+            <PostFileUploader
+              selectedFiles={selectedFiles}
+              setSelectedFiles={setSelectedFiles}
+            />
+            <TextareaFormField
+              form={form}
+              name="title"
+              placeholder="제목을 입력하세요"
+            />
 
-          {/* 본문 스크롤 영역 */}
-          {/* <PlateEditor /> */}
+            {/* 본문 스크롤 영역 */}
+            {/* <PlateEditor /> */}
 
-          <TextareaFormContentField
-            form={form}
-            name="content"
-            placeholder="내용을 입력하세요"
-          />
-        </div>
-      </form>
-    </Form>
+            <TextareaFormContentField
+              form={form}
+              name="content"
+              placeholder="내용을 입력하세요"
+            />
+          </div>
+        </form>
+      </Form>
+      <LoadingModal isOpen={isOpen} />
+    </>
   );
 }

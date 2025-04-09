@@ -1,5 +1,5 @@
 import React from "react";
-import ErrorBoundaryWrapper from "../../components/ErrorBoundaryWrapper";
+import ErrorBoundaryWrapper from "../../components/ErrorBoundary/ErrorBoundaryWrapper";
 import PostDetail from "./PostDetail";
 
 export default async function Page({

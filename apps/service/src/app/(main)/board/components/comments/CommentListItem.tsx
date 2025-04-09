@@ -6,7 +6,7 @@ import ReplyCommentItem from "./ReplyCommentItem";
 import { Button } from "@nova/ui/components/ui/button";
 import ReplyButton from "./ReplyButton";
 import { formatDate } from "@/src/libs/utils/dateParsing";
-import AlertDialog from "../../../components/AlertDialog";
+import AlertDialog from "../../../components/Modal/AlertDialog";
 import { CommentsDelete, CommentsPut } from "@/src/api/board/comments";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { commentsKeys } from "../../query/comments";

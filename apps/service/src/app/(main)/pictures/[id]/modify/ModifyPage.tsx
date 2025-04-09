@@ -17,6 +17,7 @@ import { usePictureDetailQuery } from "../../query/queries";
 import { ImageProps } from "../PostDetail";
 import NewPostTitle from "../../../components/NewPostTitle";
 import PendingFallbackUI from "../../../components/Skeleton/PendingFallbackUI";
+import LoadingModal from "../../../components/Modal/LoadingModal";
 
 interface Props {
   postId: string;
@@ -25,7 +26,7 @@ export default function ModifyPage({ postId }: Props) {
   const [selectedFiles, setSelectedFiles] = useState<ImageFile[]>([]);
   const [originFiles, setOriginFiles] = useState<ImageProps[]>([]);
   const [willDeleteFiles, setwillDeleteFiles] = useState<string[]>([]);
-
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const pictureMutation = usePicturePutMutation({ postId });
   const uploadMutation = useFileUploadMutation();
   const { data, isLoading } = usePictureDetailQuery({
@@ -56,10 +57,9 @@ export default function ModifyPage({ postId }: Props) {
     // 파일이 없을때는 파일 업로드 생략
     // 파일이 존재할때는 파일 업로드가 성공하면 게시글 생성
 
-    if (
-      originFiles.length - willDeleteFiles.length + selectedFiles.length <=
-      0
-    ) {
+    console.log(originFiles);
+    console.log(willDeleteFiles);
+    if (originFiles.length + selectedFiles.length <= 0) {
       alert("사진을 하나 이상 선택하세요");
       return;
     }
@@ -72,6 +72,7 @@ export default function ModifyPage({ postId }: Props) {
 
     if (selectedFiles.length > 0) {
       try {
+        setIsOpen(true);
         const response = await uploadMutation.mutateAsync({
           data: formData,
           POST_TYPE: POST_TYPE.PICTURES,
@@ -94,6 +95,8 @@ export default function ModifyPage({ postId }: Props) {
       } catch (error) {
         alert("파일 업로드 실패");
         console.log(error);
+      } finally {
+        setIsOpen(false);
       }
     } else {
       console.log(...originFiles.map((file) => file.id));
@@ -113,42 +116,45 @@ export default function ModifyPage({ postId }: Props) {
   }
 
   return (
-    <Form {...form}>
-      <form
-        className="flex flex-col gap-6"
-        onSubmit={form.handleSubmit(onSubmit)}
-      >
-        <NewPostTitle
-          backLink="/pictures"
-          backLinkText="사진 게시판"
-          title="사진 수정"
-        />
-        <div className="flex flex-col gap-6 w-[80%] h-[calc(100vh-86px)] mx-auto relative">
-          {/* 제목 입력란 */}
-          <TextareaFormField
-            form={form}
-            name="title"
-            placeholder="제목을 입력하세요"
+    <>
+      <Form {...form}>
+        <form
+          className="flex flex-col gap-6"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
+          <NewPostTitle
+            backLink="/pictures"
+            backLinkText="사진 게시판"
+            title="사진 수정"
           />
+          <div className="flex flex-col gap-6 w-[80%] h-[calc(100vh-86px)] mx-auto relative">
+            {/* 제목 입력란 */}
+            <TextareaFormField
+              form={form}
+              name="title"
+              placeholder="제목을 입력하세요"
+            />
 
-          {/* 첨부 파일 영역 */}
-          <ModifyFileUploader
-            selectedFiles={selectedFiles}
-            setSelectedFiles={setSelectedFiles}
-            originFiles={originFiles}
-            setOriginFiles={setOriginFiles}
-            willdeletedFiles={willDeleteFiles}
-            setwillDeleteFiles={setwillDeleteFiles}
-          />
+            {/* 첨부 파일 영역 */}
+            <ModifyFileUploader
+              selectedFiles={selectedFiles}
+              setSelectedFiles={setSelectedFiles}
+              originFiles={originFiles}
+              setOriginFiles={setOriginFiles}
+              willdeletedFiles={willDeleteFiles}
+              setwillDeleteFiles={setwillDeleteFiles}
+            />
 
-          {/* 본문 스크롤 영역 */}
-          <TextareaFormContentField
-            form={form}
-            name="content"
-            placeholder="내용을 입력하세요"
-          />
-        </div>
-      </form>
-    </Form>
+            {/* 본문 스크롤 영역 */}
+            <TextareaFormContentField
+              form={form}
+              name="content"
+              placeholder="내용을 입력하세요"
+            />
+          </div>
+        </form>
+      </Form>
+      <LoadingModal isOpen={isOpen} />
+    </>
   );
 }

@@ -7,7 +7,7 @@ import { usePictureDetailQuery } from "../query/queries";
 import { FileItemProps } from "../../components/File/ViewFileItem";
 import { Separator } from "@nova/ui/components/ui/separator";
 import CommentSection from "./components/CommentSection";
-import AlertDialog from "../../components/AlertDialog";
+import AlertDialog from "../../components/Modal/AlertDialog";
 import { useRouter } from "next/navigation";
 import { PictureBoardDelete } from "@/src/api/board/picture";
 import { useQuery, useQueryClient } from "@tanstack/react-query";

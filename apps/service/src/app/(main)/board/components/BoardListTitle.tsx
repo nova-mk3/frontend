@@ -2,9 +2,9 @@
 import React from "react";
 import { Button } from "@nova/ui/components/ui/button";
 import Link from "next/link";
-import SelectSortComponent from "../../components/SelectSortComponent";
+import SelectSortComponent from "../../components/Search/SelectSortComponent";
 import { POST_TYPE_LABEL, PostType } from "@/src/constant/board";
-import SearchInput from "../../components/SearchInput";
+import SearchInput from "../../components/Search/SearchInput";
 import { Filter } from "../../components/Filter";
 import { useQuery } from "@tanstack/react-query";
 import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";

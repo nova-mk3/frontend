@@ -7,7 +7,7 @@ import DetailPageSubTitle from "../../board/components/DetailPageSubTitle";
 import { FileListLayout, FileList } from "../../components/File/ViewFileLayout";
 import CommentTitle from "../../board/components/comments/CommentTitle";
 import CommentForm from "../../board/components/comments/CommentForm";
-import ErrorBoundaryWrapper from "../../components/ErrorBoundaryWrapper";
+import ErrorBoundaryWrapper from "../../components/ErrorBoundary/ErrorBoundaryWrapper";
 import CommentList from "../../board/components/comments/CommentList";
 import DetailPageContent from "../../board/components/DetailPageContent";
 import DetailPageTitle from "../../board/components/DetailPageTitle";

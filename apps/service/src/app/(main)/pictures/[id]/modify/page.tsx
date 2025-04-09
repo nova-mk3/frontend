@@ -1,6 +1,6 @@
 import React from "react";
 import Hydration from "./Hydration";
-import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
+import ErrorBoundaryWrapper from "../../../components/ErrorBoundary/ErrorBoundaryWrapper";
 import ModifyPage from "./ModifyPage";
 export const dynamic = "force-dynamic";
 

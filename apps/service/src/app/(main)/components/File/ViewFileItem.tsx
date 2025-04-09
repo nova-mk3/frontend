@@ -2,7 +2,7 @@
 import { DownloadFilesAPI } from "@/src/api/board/file";
 import { FileDown } from "lucide-react";
 import React, { useState } from "react";
-import { DownloadProgressModal } from "../DownloadProgressModal";
+import { DownloadProgressModal } from "../Modal/DownloadProgressModal";
 
 export interface FileItemProps {
   downloadUrl: string;

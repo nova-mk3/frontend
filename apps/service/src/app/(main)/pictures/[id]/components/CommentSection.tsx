@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@nova/ui/components/ui/button";
 import React, { useState } from "react";
-import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
+import ErrorBoundaryWrapper from "../../../components/ErrorBoundary/ErrorBoundaryWrapper";
 import CommentList from "../../../board/components/comments/CommentList";
 import CommentForm from "../../../board/components/comments/CommentForm";
 

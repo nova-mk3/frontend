@@ -4,7 +4,7 @@ import { formatDate } from "@/src/libs/utils/dateParsing";
 import { useRouter } from "next/navigation";
 import { PostType } from "@/src/constant/board";
 import { IntegratedBoardDelete } from "@/src/api/board/integrated";
-import AlertDialog from "../../components/AlertDialog";
+import AlertDialog from "../../components/Modal/AlertDialog";
 import dynamic from "next/dynamic";
 import ViewCount from "./ViewCount";
 import { useQuery, useQueryClient } from "@tanstack/react-query";

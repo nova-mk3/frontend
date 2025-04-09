@@ -25,6 +25,7 @@ import {
 import PendingFallbackUI from "../../../components/Skeleton/PendingFallbackUI";
 import NewPostTitle from "../../../components/NewPostTitle";
 import ModifyFileUploader from "../../../components/File/ModifyFileUploader";
+import LoadingModal from "../../../components/Modal/LoadingModal";
 
 interface Props {
   postId: string;
@@ -41,7 +42,7 @@ export default function ModifyPage({ postId }: Props) {
     postId,
     boardId: CLUB_ARCHIVE,
   });
-
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const currentYear = new Date().getFullYear();
   const years = useYearRange(1980, currentYear);
   const form = useForm<ExamInput>({
@@ -167,6 +168,7 @@ export default function ModifyPage({ postId }: Props) {
 
     if (selectedFiles.length > 0) {
       try {
+        setIsOpen(true);
         const response = await useFileUploadMutation.mutateAsync({
           data: formData,
           POST_TYPE_OPTIONS: POST_TYPE.EXAM_ARCHIVE,
@@ -193,6 +195,8 @@ export default function ModifyPage({ postId }: Props) {
       } catch (error) {
         alert("파일 업로드 실패");
         console.log(error);
+      } finally {
+        setIsOpen(false);
       }
     } else {
       useArchivePutMutation.mutate({
@@ -215,69 +219,72 @@ export default function ModifyPage({ postId }: Props) {
   }
 
   return (
-    <Form {...form}>
-      <form
-        className="flex flex-col gap-6"
-        onSubmit={form.handleSubmit(onSubmit)}
-      >
-        <NewPostTitle
-          backLink="/exam_archive"
-          backLinkText="자료 게시판"
-          title="자료 수정"
-        />
-        <div className="flex flex-col gap-6 w-[80%] h-[calc(100vh-86px)] mx-auto relative">
-          <TextareaFormField
-            form={form}
-            name="title"
-            placeholder="제목은 자동으로 작성됩니다"
-            readonly={true}
+    <>
+      <Form {...form}>
+        <form
+          className="flex flex-col gap-6"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
+          <NewPostTitle
+            backLink="/exam_archive"
+            backLinkText="자료 게시판"
+            title="자료 수정"
           />
-          <InputFormField
-            form={form}
-            name={"subject"}
-            label={"과목명"}
-            placeHolder={"과목명을 입력해주세요"}
-          />
-          <InputFormField
-            form={form}
-            name={"professorName"}
-            label={"교수명"}
-            placeHolder={"교수명을 입력해주세요"}
-          />
-          <div className="flex flex-row gap-3 mobile:flex-col">
-            <SelectFormField
+          <div className="flex flex-col gap-6 w-[80%] h-[calc(100vh-86px)] mx-auto relative">
+            <TextareaFormField
               form={form}
-              name="year"
-              label="년도"
-              options={years}
-              className="w-[180px] mobile:w-full mb-5"
+              name="title"
+              placeholder="제목은 자동으로 작성됩니다"
+              readonly={true}
             />
-            <SelectFormField
+            <InputFormField
               form={form}
-              name="semester"
-              label="학기"
-              options={SEMESTER_OPTIONS}
-              className="w-[180px] mobile:w-full mb-5"
+              name={"subject"}
+              label={"과목명"}
+              placeHolder={"과목명을 입력해주세요"}
+            />
+            <InputFormField
+              form={form}
+              name={"professorName"}
+              label={"교수명"}
+              placeHolder={"교수명을 입력해주세요"}
+            />
+            <div className="flex flex-row gap-3 mobile:flex-col">
+              <SelectFormField
+                form={form}
+                name="year"
+                label="년도"
+                options={years}
+                className="w-[180px] mobile:w-full mb-5"
+              />
+              <SelectFormField
+                form={form}
+                name="semester"
+                label="학기"
+                options={SEMESTER_OPTIONS}
+                className="w-[180px] mobile:w-full mb-5"
+              />
+            </div>
+
+            {/* 첨부 파일 영역 */}
+            <ModifyFileUploader
+              selectedFiles={selectedFiles}
+              setSelectedFiles={setSelectedFiles}
+              originFiles={originFiles}
+              setOriginFiles={setOriginFiles}
+              willdeletedFiles={willDeleteFiles}
+              setwillDeleteFiles={setwillDeleteFiles}
+            />
+
+            <TextareaFormContentField
+              form={form}
+              name="content"
+              placeholder="내용을 입력하세요"
             />
           </div>
-
-          {/* 첨부 파일 영역 */}
-          <ModifyFileUploader
-            selectedFiles={selectedFiles}
-            setSelectedFiles={setSelectedFiles}
-            originFiles={originFiles}
-            setOriginFiles={setOriginFiles}
-            willdeletedFiles={willDeleteFiles}
-            setwillDeleteFiles={setwillDeleteFiles}
-          />
-
-          <TextareaFormContentField
-            form={form}
-            name="content"
-            placeholder="내용을 입력하세요"
-          />
-        </div>
-      </form>
-    </Form>
+        </form>
+      </Form>
+      <LoadingModal isOpen={isOpen} />
+    </>
   );
 }

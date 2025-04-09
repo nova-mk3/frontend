@@ -15,10 +15,11 @@ import {
   useFileUploadMutation,
   usePicturePostMutation,
 } from "../query/mutation";
+import LoadingModal from "../../components/Modal/LoadingModal";
 
 export default function Page() {
   const [selectedFiles, setSelectedFiles] = useState<ImageFile[]>([]);
-
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const form = useForm<PictureInput>({
     resolver: zodResolver(PictureSchema),
     mode: "onChange",
@@ -47,6 +48,7 @@ export default function Page() {
 
     if (selectedFiles.length > 0) {
       try {
+        setIsOpen(true);
         const response = await fileMutation.mutateAsync({
           data: formData,
           POST_TYPE: POST_TYPE.PICTURES,
@@ -65,6 +67,8 @@ export default function Page() {
       } catch (error) {
         alert("파일 업로드 실패");
         console.log(error);
+      } finally {
+        setIsOpen(false);
       }
     } else {
       pictureMutation.mutate({
@@ -77,38 +81,41 @@ export default function Page() {
   };
 
   return (
-    <Form {...form}>
-      <form
-        className="flex flex-col gap-6"
-        onSubmit={form.handleSubmit(onSubmit)}
-      >
-        <NewPostTitle
-          backLink="/pictures"
-          backLinkText="사진 게시판"
-          title="사진 작성"
-        />
-        <div className="flex flex-col gap-6 w-[80%] h-[calc(100vh-86px)] mx-auto relative">
-          {/* 제목 입력란 */}
-          <TextareaFormField
-            form={form}
-            name="title"
-            placeholder="제목을 입력하세요"
+    <>
+      <Form {...form}>
+        <form
+          className="flex flex-col gap-6"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
+          <NewPostTitle
+            backLink="/pictures"
+            backLinkText="사진 게시판"
+            title="사진 작성"
           />
+          <div className="flex flex-col gap-6 w-[80%] h-[calc(100vh-86px)] mx-auto relative">
+            {/* 제목 입력란 */}
+            <TextareaFormField
+              form={form}
+              name="title"
+              placeholder="제목을 입력하세요"
+            />
 
-          {/* 첨부 파일 영역 */}
-          <PostFileUploader
-            selectedFiles={selectedFiles}
-            setSelectedFiles={setSelectedFiles}
-          />
+            {/* 첨부 파일 영역 */}
+            <PostFileUploader
+              selectedFiles={selectedFiles}
+              setSelectedFiles={setSelectedFiles}
+            />
 
-          {/* 본문 스크롤 영역 */}
-          <TextareaFormContentField
-            form={form}
-            name="content"
-            placeholder="내용을 입력하세요"
-          />
-        </div>
-      </form>
-    </Form>
+            {/* 본문 스크롤 영역 */}
+            <TextareaFormContentField
+              form={form}
+              name="content"
+              placeholder="내용을 입력하세요"
+            />
+          </div>
+        </form>
+      </Form>
+      <LoadingModal isOpen={isOpen} />
+    </>
   );
 }

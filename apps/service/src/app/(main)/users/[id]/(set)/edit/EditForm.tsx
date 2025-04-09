@@ -17,7 +17,7 @@ import {
   ChangeUserInfoSchema,
 } from "@/src/schema/changeuserinfo.schema";
 import { useGetUserData, userKeys } from "../../query/qureies";
-import Modal from "@/src/app/(main)/components/Modal";
+import Modal from "@/src/app/(main)/components/Modal/Modal";
 import PendingFallbackUI from "@/src/app/(main)/components/Skeleton/PendingFallbackUI";
 import { Profile } from "@/src/app/(main)/board/components/comments/CommentListItem";
 

@@ -14,7 +14,7 @@ import { useSliderStore } from "@/src/store/ImageSlider";
 import { ImageProps } from "../PostDetail";
 import { cn } from "@nova/ui/lib/utils";
 import { DownloadFilesAPI } from "@/src/api/board/file";
-import { DownloadProgressModal } from "../../../components/DownloadProgressModal";
+import { DownloadProgressModal } from "../../../components/Modal/DownloadProgressModal";
 
 interface ModalProps {
   isOpen: boolean;

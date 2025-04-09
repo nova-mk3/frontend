@@ -4,7 +4,7 @@ import { formatDate } from "@/src/libs/utils/dateParsing";
 import { CommentsDelete, CommentsPut } from "@/src/api/board/comments";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { commentsKeys } from "../../query/comments";
-import AlertDialog from "../../../components/AlertDialog";
+import AlertDialog from "../../../components/Modal/AlertDialog";
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
 import ModifyCommentForm from "./ModifyCommentForm";
 import { Profile } from "./CommentListItem";

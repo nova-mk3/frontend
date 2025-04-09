@@ -1,6 +1,6 @@
 import React from "react";
 
-import ErrorBoundaryWrapper from "@/src/app/(main)/components/ErrorBoundaryWrapper";
+import ErrorBoundaryWrapper from "@/src/app/(main)/components/ErrorBoundary/ErrorBoundaryWrapper";
 import ChangeEmail from "./ChangeEmail";
 
 export const dynamic = "force-dynamic";

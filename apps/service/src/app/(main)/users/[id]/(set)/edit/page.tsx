@@ -1,5 +1,5 @@
 import React from "react";
-import ErrorBoundaryWrapper from "@/src/app/(main)/components/ErrorBoundaryWrapper";
+import ErrorBoundaryWrapper from "@/src/app/(main)/components/ErrorBoundary/ErrorBoundaryWrapper";
 import EditForm from "./EditForm";
 export const dynamic = "force-dynamic";
 export default async function page({

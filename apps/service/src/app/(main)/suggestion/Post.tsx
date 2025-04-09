@@ -9,7 +9,7 @@ import { useQueryParams } from "../components/useQueryParams";
 import { BOARD_SIZE } from "@/src/constant/board";
 import SkeletonSuggestionList from "../components/Skeleton/Suggestion/SkeletonSuggestionList";
 import SkeletonSuggestionTitle from "../components/Skeleton/Suggestion/SkeletonSuggestionTitle";
-import DeferredComponent from "../components/DeferredComponent";
+import DeferredComponent from "../components/ErrorBoundary/DeferredComponent";
 
 export default function Post() {
   const { currentPage, keyword, searchType, sortBy, sortDirection } =

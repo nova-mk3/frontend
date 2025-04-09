@@ -6,7 +6,7 @@ import {
   SelectItem,
   SelectContent,
 } from "@nova/ui/components/ui/select";
-import { useQueryParams } from "./useQueryParams";
+import { useQueryParams } from "../useQueryParams";
 
 export default function SelectSortComponent() {
   const { searchType, setSearchType } = useQueryParams();

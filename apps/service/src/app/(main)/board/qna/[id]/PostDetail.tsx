@@ -15,7 +15,7 @@ import { INTEGRATED, POST_TYPE } from "@/src/constant/board";
 import DetailPageSubTitle from "../../components/DetailPageSubTitle";
 import { Separator } from "@nova/ui/components/ui/separator";
 import DetailPageTitle from "../../components/DetailPageTitle";
-import ErrorBoundaryWrapper from "../../../components/ErrorBoundaryWrapper";
+import ErrorBoundaryWrapper from "../../../components/ErrorBoundary/ErrorBoundaryWrapper";
 import PendingFallbackUI from "../../../components/Skeleton/PendingFallbackUI";
 
 interface PostDetailProps {
