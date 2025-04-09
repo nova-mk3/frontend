@@ -23,11 +23,11 @@ export default function FramePostSection({
         <div className="absolute  w-screen h-[550px] bg-background02 mobile:h-[1100px]" />
       </div>
       <div className="flex flex-row min-h-[550px] py-20 relative max-w-screen-xl w-full mx-auto mobile:flex-col">
-        <div className="flex flex-col relative pl-[50px] mobile:w-full mobile:h-[550px] mobile:items-center">
+        <div className="flex flex-col relative pl-[50px] mobile:w-full mobile:h-[550px] mobile:justify-center">
           <div className="d-s text-primary !font-bold">NOVA</div>
           <div className="d-m !font-bold">NEWS</div>
           <Logo
-            className="-rotate-12 absolute top-[-30px]"
+            className="-rotate-12 relative top-[-60px]"
             // fill="#B096F5"
             width="250px"
           />
