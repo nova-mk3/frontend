@@ -112,7 +112,7 @@ export default function Profile({ memberId }: Props) {
                   </div>
                 </div>
                 <div className="flex flex-row">
-                  <div className="text-gray-500">역활</div>
+                  <div className="text-gray-500">역할</div>
                   <div className="ml-auto text-gray-700">
                     {translateRole(data.memberResponse.role)}
                   </div>
