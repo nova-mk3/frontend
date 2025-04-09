@@ -78,6 +78,8 @@ export default function ModifyPage({ postId }: Props) {
           POST_TYPE: POST_TYPE.PICTURES,
         });
 
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
         const temp = [
           ...response.data.map((file: any) => {
             return file.id;

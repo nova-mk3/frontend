@@ -90,6 +90,7 @@ export default function Page() {
           data: formData,
           POST_TYPE_OPTIONS: data.category,
         });
+        await new Promise((resolve) => setTimeout(resolve, 500));
         // 업로드 성공 후 다른 API 호출 예시
         useIntegratedBoardMutation.mutate({
           title: data.title,

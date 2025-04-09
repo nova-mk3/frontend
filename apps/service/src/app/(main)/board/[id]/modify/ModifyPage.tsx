@@ -106,7 +106,7 @@ export default function ModifyPage({ postId }: Props) {
           data: formData,
           POST_TYPE_OPTIONS: data.category,
         });
-
+        await new Promise((resolve) => setTimeout(resolve, 500));
         const temp = [
           ...response.data.map((file: any) => {
             return file.id;
