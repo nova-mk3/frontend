@@ -20,10 +20,19 @@ export const UploadFilesAPI = async (formdata: FormData, postType: string) => {
 /*
 파일 다운로드
 */
-export const DownloadFilesAPI = async (fileId: string) => {
+export const DownloadFilesAPI = async (
+  fileId: string,
+  onProgress?: (percent: number) => void
+) => {
   try {
     const response = await Authapi.get(`/files/${fileId}/download`, {
       responseType: "blob",
+      onDownloadProgress: (progressEvent) => {
+        if (progressEvent.total) {
+          const percent = (progressEvent.loaded / progressEvent.total) * 100;
+          onProgress?.(percent);
+        }
+      },
     });
     const url = window.URL.createObjectURL(response.data);
     const link = document.createElement("a");

@@ -67,7 +67,7 @@ export default function PostFileUploader({
         <input
           id="fileUpload"
           type="file"
-          accept=".pdf, .jpg, .jpeg, .png"
+          accept=".pdf, .jpg, .jpeg, .png, .mp4, .mov, .avi"
           multiple
           onChange={handleFileChange}
           className="hidden"

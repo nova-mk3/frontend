@@ -82,11 +82,18 @@ export async function SuggestionGetDetail(postid: string) {
 */
 export const SuggestionDownloadFilesAPI = async (
   fileId: string,
-  originalFileName: string
+  originalFileName: string,
+  onProgress?: (percent: number) => void
 ) => {
   try {
     const response = await Authapi.get(`/suggestion-files/${fileId}/download`, {
       responseType: "blob", // Blob 데이터로 받기
+      onDownloadProgress: (progressEvent) => {
+        if (progressEvent.total) {
+          const percent = (progressEvent.loaded / progressEvent.total) * 100;
+          onProgress?.(percent);
+        }
+      },
     });
 
     // Blob 데이터에서 URL 생성

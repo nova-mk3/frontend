@@ -88,7 +88,7 @@ export default function ModifyFileUploader({
         <input
           id="fileUpload"
           type="file"
-          accept=".pdf, .jpg, .jpeg, .png"
+          accept=".pdf, .jpg, .jpeg, .png, .mp4, .mov"
           multiple
           onChange={handleFileChange}
           className="hidden"

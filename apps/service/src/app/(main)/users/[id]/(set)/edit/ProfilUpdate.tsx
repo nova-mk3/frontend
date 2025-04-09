@@ -49,7 +49,7 @@ export default function ProfilUpdate({ memberId }: { memberId: string }) {
           id="profile"
           type="file"
           className="hidden"
-          accept=".jpg, .png"
+          accept=".jpg, .jpeg, .png"
           onChange={handleFileOnChange}
         />
       </div>
