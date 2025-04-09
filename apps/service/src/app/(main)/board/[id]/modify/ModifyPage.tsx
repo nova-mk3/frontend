@@ -64,8 +64,10 @@ export default function ModifyPage({ postId }: Props) {
       console.log(data);
       alert("변경 성공");
 
-      // 내 수정사항은 나만 다시보면 된다 -> api 호출 최적화
-      queryClient.setQueryData(postKeys.detail(postId), data);
+      queryClient.invalidateQueries({
+        queryKey: postKeys.detail(postId),
+        refetchType: "all",
+      });
 
       queryClient.invalidateQueries({
         queryKey: postKeys.typelists(data.postType as PostType),
