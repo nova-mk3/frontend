@@ -15,8 +15,7 @@
 데이터 보안과 지속성을 고려해 **온-프레미스** 형태로 서비스를 운영중입니다
 
 ## 페이지 URL
-
-https://nova.cbnu.ac.kr/
+https://nova.cbnu.ac.kr
 
 ## 참여인원
 
