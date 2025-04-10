@@ -9,7 +9,6 @@ import { ManageMember } from "@/src/types/manageMember";
 import { useManageMembersQuery } from "@/src/query/manageMembersQueries";
 import { usePostExecutiveMemberMutation } from "@/src/query/executiveMembersQueries";
 import { enumRoleType } from "@/src/types/executiveMember";
-import { formatPhoneNumber } from "@/src/utils/formatter";
 
 export default function ExecutiveModal({ year , open, onClose }: ExecutiveModalProps) {
   const [isVisible, setIsVisible] = useState(open);
@@ -73,7 +72,6 @@ export default function ExecutiveModal({ year , open, onClose }: ExecutiveModalP
               <MemberCard
                 key={member.memberId}
                 name={member.name}
-                phoneNumber={formatPhoneNumber(member.phone)}
                 studentId={member.studentNumber}
                 profilePhoto={member.profilePhoto}
                 type={"medium"}

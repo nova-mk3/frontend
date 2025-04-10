@@ -25,8 +25,6 @@ export async function PutMemberInfo(
   request: PutMemberInfoRequest
 ) {
   try {
-    console.log(memberId);
-    console.log(request);
     const response = await Authapi.put(`/admin/members/${memberId}`, request);
     return response.data.data;
   } catch (error: unknown) {
@@ -59,15 +57,13 @@ export async function PutMemberGrade(memberId: string, grade: number) {
   }
 }
 
-export async function PutMemberAbsence(memberId: string, absence: boolean) {
-  try {
-    const response = await Authapi.put(
-      `/admin/members/${memberId}/absence?isAbsent=${absence}`
-    );
-    return response.data.data;
-  } catch (error: unknown) {
-    throwError(error);
-  }
+export async function PutMemberAbsence(memberId: string , absence: boolean) {
+    try{
+        const response = await Authapi.put( `/admin/members/${memberId}/absence?isAbsence=${absence}`)
+        return response.data.data
+    }catch(error:unknown){
+        throwError(error)
+    }
 }
 
 export async function DeleteMember(memberId: string) {
