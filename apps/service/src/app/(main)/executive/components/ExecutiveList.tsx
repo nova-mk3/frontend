@@ -54,7 +54,7 @@ export default function ExecutiveList() {
           <span className="inline-block w-3 h-8 bg-gray-400 mr-3"></span>
           부회장
         </h2>
-        <div className="flex flex-row md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {viceChairman ? (
             <Card
               role={viceChairman.role}
