@@ -45,7 +45,8 @@ export default function Card({
             {name}
           </Link>
           <p className="t-s text-text03">
-            {grade} {semester}
+            {grade}
+            {/* {semester} */}
           </p>
         </div>
         <CardLogo width={50} className="ml-auto flex-shrink-0" />

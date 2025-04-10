@@ -190,13 +190,15 @@ export default function Page() {
               form={form}
               name={"subject"}
               label={"과목명"}
-              placeHolder={"과목명을 입력해주세요"}
+              placeHolder={
+                "과목명을 공백 없이 입력해주세요 ex) 객설 X 객체지향 X 객체지향설계 O"
+              }
             />
             <InputFormField
               form={form}
               name={"professorName"}
               label={"교수명"}
-              placeHolder={"교수명을 입력해주세요"}
+              placeHolder={"교수명을 공백 없이 입력해주세요 ex) 홍 신 X 홍신 O"}
             />
             <div className="flex flex-row gap-3 mobile:flex-col">
               <SelectFormField

@@ -62,7 +62,7 @@ const studentSchema = z
       if (data.absence === undefined) {
         ctx.addIssue({
           path: ["absence"],
-          message: "결석 여부는 필수입니다.",
+          message: "휴학 여부는 필수입니다.",
           code: z.ZodIssueCode.custom,
         });
       }

@@ -343,7 +343,7 @@ export default function EditForm({ memberId }: Props) {
             form={form}
             name={"phoneNumber"}
             label={"전화번호"}
-            placeHolder={"010-0000-0000"}
+            placeHolder={"전화번호 작성시 공개됩니다 ex)010-0000-0000"}
             type="tel"
           />
           <Button className="mt-8 w-full b-l mb-5" type="submit">
