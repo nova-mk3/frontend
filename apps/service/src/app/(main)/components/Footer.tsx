@@ -13,7 +13,7 @@ export default function Footer() {
           <div className="flex flex-col gap-2">
             <p className="!font-bold">동아리 정보</p>
             <p>학술동아리 노바</p>
-            <p>위치 : 충정북도 청주시 충북대학교 s4-117호</p>
+            <p>위치 : 충정북도 청주시 충북대학교 s4-1 117호</p>
             <p>회장 : 송동선</p>
           </div>
 

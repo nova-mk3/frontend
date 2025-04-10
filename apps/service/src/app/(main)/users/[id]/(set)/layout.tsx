@@ -12,7 +12,7 @@ export default async function layout({
   const { id } = await params;
   return (
     <ErrorBoundaryWrapper>
-      <LayoutClient id={id}>{children}</LayoutClient>;
+      <LayoutClient id={id}>{children}</LayoutClient>
     </ErrorBoundaryWrapper>
   );
 }
