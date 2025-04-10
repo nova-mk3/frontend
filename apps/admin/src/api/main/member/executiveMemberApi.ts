@@ -41,13 +41,13 @@ export async function GetExecutiveMemberByYear(year: number) {
   }
 }
 
-export async function PostExecuvtieMember(request: PostExecutiveMemberRequest) {
-  try {
-    const response = await Authapi.post(`/executive-histories`, request);
-    return response.data;
-  } catch (error: unknown) {
-    throwError(error);
-  }
+export async function PostExecutiveMember(request: PostExecutiveMemberRequest){
+    try{
+        const response = await Authapi.post(`/executive-histories`, request)
+        return response.data
+    } catch (error:unknown){
+        throwError(error)
+    }
 }
 
 export async function DeleteExecutiveMember(executiveHistoryId: string) {

@@ -7,6 +7,7 @@ import {
 import { Button } from "@nova/ui/components/ui/button";
 import { ProfileImage } from '@nova/ui/components/ui/profileImage';
 import { PendingMembercardProps } from "@/src/types/pendingMember";
+import { baseCardClass } from "@nova/ui/components/ui/MemberCard";
 
 export default function PendingMembercard({
     name = "고양이" ,
@@ -26,7 +27,7 @@ export default function PendingMembercard({
     },
 } : PendingMembercardProps) {
     return (
-        <div onClick={onClick} className={`w-[1400px] h-[160px] m-[8px] flex border border-primary rounded-lg items-center hover:bg-background02 cursor-pointer`}>
+        <div onClick={onClick} className={`w-[1400px] h-[160px] ${baseCardClass}`}>
             <ProfileImage src= {profilePhoto.imageUrl} size={100} className='ml-[15px]'/>
             <div className={`text-2xl text-center flex-grow`}>{name}</div>
             <Phone className={"ml-auto h-8 w-8"}/>

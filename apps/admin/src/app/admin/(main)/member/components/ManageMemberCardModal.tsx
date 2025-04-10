@@ -28,7 +28,7 @@ export default function ManagaMemberCardModal({ open, memberId, onClose }: Manag
       onClick={onClose}
     >
       <div
-        className={`flex bg-white p-6 rounded-lg shadow-lg w-[1400px] min-h-[700px] transition-all duration-300 ${
+        className={`flex bg-white p-6 rounded-lg shadow-lg w-[1400px] min-h-[700px] max-h-[800px]transition-all duration-300 ${
           isAnimating ? "scale-100 opacity-100" : "scale-95 opacity-0"
         }`}
         onClick={(e) => e.stopPropagation()}

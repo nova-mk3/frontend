@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
-import { GetExecutvieYears , GetExecutiveMemberByYear , PostExecuvtieMember , DeleteExecutiveMember, PostExecutiveYear, PutExecutiveMember, DeleteExecutiveYear} from '../api/main/member/executiveMemberApi';
+import { GetExecutvieYears , GetExecutiveMemberByYear , PostExecutiveMember , DeleteExecutiveMember, PostExecutiveYear, PutExecutiveMember, DeleteExecutiveYear} from '../api/main/member/executiveMemberApi';
 import { enumRoleType, ExecutiveMember , PostExecutiveMemberRequest } from '@/src/types/executiveMember';
 
 export const executiveMembersKeys = {
@@ -54,7 +54,7 @@ export const useExecutiveMembersQuery = (year: number) => {
 export const usePostExecutiveMemberMutation = (year : number) => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (request : PostExecutiveMemberRequest) => PostExecuvtieMember(request),
+        mutationFn: (request : PostExecutiveMemberRequest) => PostExecutiveMember(request),
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: executiveMembersKeys.list(year),
