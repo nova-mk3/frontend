@@ -28,13 +28,13 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // compiler: isProd
-  //   ? {
-  //       removeConsole: {
-  //         exclude: ["error", "warn"],
-  //       },
-  //     }
-  //   : {},
+  compiler: isProd
+    ? {
+        removeConsole: {
+          exclude: ["error", "warn"],
+        },
+      }
+    : {},
 };
 
 export default nextConfig;

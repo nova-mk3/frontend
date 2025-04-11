@@ -8,13 +8,13 @@ export default function SubNavigation() {
   const userId = pathname.split("/")[2];
   return (
     <ul className="flex flex-row gap-8 flex-wrap mx-auto justify-center border-b-[1px] border-line01">
-      <NavigationMenuItem href={`/users/setting/${userId}/edit`}>
+      <NavigationMenuItem href={`/users/${userId}/edit`} pathname={pathname}>
         회원정보 수정
       </NavigationMenuItem>
-      <NavigationMenuItem href={`/users/setting/${userId}/pwd`}>
+      <NavigationMenuItem href={`/users${userId}/pwd`} pathname={pathname}>
         비밀번호 변경
       </NavigationMenuItem>
-      <NavigationMenuItem href={`/users/setting/${userId}/email`}>
+      <NavigationMenuItem href={`/users/${userId}/email`} pathname={pathname}>
         이메일 변경
       </NavigationMenuItem>
     </ul>
@@ -26,11 +26,15 @@ interface ItemsProps {
   children: React.ReactNode;
   href: string;
   activeHref?: string[];
+  pathname: string;
 }
 
-function NavigationMenuItem({ children, href, className }: ItemsProps) {
-  const pathname = usePathname();
-
+function NavigationMenuItem({
+  children,
+  href,
+  className,
+  pathname,
+}: ItemsProps) {
   // 현재 URL과 링크의 href가 같다면 활성화된 스타일을 적용
 
   const isActive = pathname === href;

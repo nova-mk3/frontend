@@ -1,6 +1,7 @@
 import React from "react";
 import ErrorBoundaryWrapper from "@/src/app/(main)/components/ErrorBoundary/ErrorBoundaryWrapper";
 import EditForm from "./EditForm";
+import LayoutClient from "../components/LayoutClient";
 export const dynamic = "force-dynamic";
 export default async function page({
   params,
@@ -9,10 +10,12 @@ export default async function page({
 }) {
   const { id } = await params;
   return (
-    <div className="w-[400px] mx-auto mobile:w-[90%] mt-10">
-      {/* <ErrorBoundaryWrapper> */}
-      {/* <EditForm memberId={id} /> */}
-      {/* </ErrorBoundaryWrapper> */}
-    </div>
+    <ErrorBoundaryWrapper>
+      <LayoutClient id={id}>
+        <div className="w-[400px] mx-auto mobile:w-[90%] mt-10">
+          <EditForm memberId={id} />
+        </div>
+      </LayoutClient>
+    </ErrorBoundaryWrapper>
   );
 }
