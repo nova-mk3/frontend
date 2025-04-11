@@ -211,7 +211,7 @@ export default function EditForm({ memberId }: Props) {
   };
 
   if (isLoading) {
-    return <>프로필 설정 팬딩</>;
+    return <PendingFallbackUI />;
   }
 
   return (

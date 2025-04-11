@@ -14,6 +14,7 @@ export interface SuggestionItem {
   className?: string;
   index: string;
   id: string;
+  authorName: string;
 }
 
 const MakeNameToAnonymous = (name: string) => {
@@ -30,13 +31,14 @@ export default function SuggestionListItem({
   className,
   index,
   id,
+  authorName,
 }: SuggestionItem) {
   const anonymousName = useMemo(() => MakeNameToAnonymous(title), [title]);
 
   return (
     <Link
       href={`/suggestion/${id}`}
-      className={`flex flex-row t-m border rounded-xl border-line01 py-2 hover:bg-background02 cursor-pointer ${className}`}
+      className={`flex flex-row t-m border rounded-xl border-line01 py-2 hover:bg-background02 cursor-pointer ${className} items-center`}
     >
       <div className={`w-[60px] text-center`}>{index.substring(0, 2)}</div>
       <div className={`flex flex-row items-center gap-1 flex-1`}>
@@ -46,7 +48,9 @@ export default function SuggestionListItem({
 
         <p className="w-0 flex-1 truncate">{title}</p>
       </div>
-      <div className={`w-[100px] text-center`}>{anonymousName}</div>
+      <div className={`w-[100px] text-center`}>
+        {Private ? anonymousName : authorName}
+      </div>
       <div className={`w-[100px] text-center`}>{formatDate(createdTime)}</div>
       <div
         className={`w-[100px] text-center ${adminRead.toString() === "true" ? "text-success" : "text-danger"}`}

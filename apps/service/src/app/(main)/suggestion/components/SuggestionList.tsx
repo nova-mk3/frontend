@@ -30,6 +30,7 @@ export default function SuggestionList({ content }: SuggestionListProps) {
           createdTime={item.createdTime}
           modifiedTime={item.modifiedTime}
           private={item.private}
+          authorName={item.authorName}
         />
       ))}
     </div>

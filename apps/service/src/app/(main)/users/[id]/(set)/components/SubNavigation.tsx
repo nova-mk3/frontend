@@ -11,7 +11,7 @@ export default function SubNavigation() {
       <NavigationMenuItem href={`/users/${userId}/edit`} pathname={pathname}>
         회원정보 수정
       </NavigationMenuItem>
-      <NavigationMenuItem href={`/users${userId}/pwd`} pathname={pathname}>
+      <NavigationMenuItem href={`/users/${userId}/pwd`} pathname={pathname}>
         비밀번호 변경
       </NavigationMenuItem>
       <NavigationMenuItem href={`/users/${userId}/email`} pathname={pathname}>

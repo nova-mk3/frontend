@@ -95,9 +95,9 @@ export default function PostDetail({ postId }: PostDetailProps) {
             <span>{data!.authorName}</span>
             <div className="flex items-center gap-1">
               {data!.private.toString() === "true" ? (
-                <Unlock className="w-4 h-4" />
-              ) : (
                 <Lock className="w-4 h-4" />
+              ) : (
+                <Unlock className="w-4 h-4" />
               )}
               <span className="text-sm">
                 {data!.private.toString() === "true" ? "비공개" : "공개"}
