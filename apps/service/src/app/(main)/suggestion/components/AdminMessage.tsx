@@ -29,7 +29,7 @@ export default function AdminMessage({ adminReply, time }: Props) {
           </div>
         </div>
         <div className="prose prose-sm max-w-none">
-          <p>{adminReply}</p>
+          <pre className="p-1 t-m">{adminReply}</pre>
         </div>
       </div>
     );
