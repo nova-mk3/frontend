@@ -17,7 +17,7 @@ export default function ErrorBoundaryWrapper({
     <QueryErrorResetBoundary>
       {({ reset }) => (
         <ErrorBoundary onReset={reset} fallbackRender={FallbackErrorUI}>
-          <Suspense fallback={<>asdasdasdasdasd</>}>{children}</Suspense>
+          <Suspense fallback={<PendingFallbackUI />}>{children}</Suspense>
         </ErrorBoundary>
       )}
     </QueryErrorResetBoundary>
