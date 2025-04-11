@@ -103,10 +103,10 @@ export default function Profile({ memberId }: Props) {
                   학업 정보
                 </h3>
                 <div className="flex flex-row">
-                  <div className="text-gray-500">학년/학기</div>
+                  <div className="text-gray-500">학년</div>
                   <div className="ml-auto text-gray-700">
                     {data.memberResponse.grade}
-                    {data.memberResponse.semester}
+                    {/* {data.memberResponse.semester} */}
                   </div>
                 </div>
                 <div className="flex flex-row">
