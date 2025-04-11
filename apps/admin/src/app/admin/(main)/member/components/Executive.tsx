@@ -119,6 +119,7 @@ export default function Executive() {
                         selectedYear={selectedYear}
                         name={member.name}
                         phone={formatPhoneNumber(member.phone)}
+                        studentId={member.studentNumber}
                         role={member.role}
                         executiveHistoryId={member.executiveHistoryId}
                         profilePhoto={member.profilePhoto}
