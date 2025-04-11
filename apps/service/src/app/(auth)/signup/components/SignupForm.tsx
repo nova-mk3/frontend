@@ -55,7 +55,7 @@ export function SignupForm() {
       emailCodeCheck: false,
       absence: undefined,
       emailCheck: false,
-      birth: new Date("1998-10-13"),
+      birth: new Date(`${new Date().getFullYear() - 19}-01-05`),
       profilePhoto: undefined,
       phoneNumber: "",
       password: "",

@@ -67,7 +67,7 @@ export default function EditForm({ memberId }: Props) {
       grade: "1학년",
       semester: "1학기",
       absence: false,
-      birth: new Date("1990-01-05"),
+      birth: new Date(`${new Date().getFullYear() - 19}-01-05`),
       phoneNumber: "",
       introduction: "",
       graduation: undefined,
@@ -105,7 +105,7 @@ export default function EditForm({ memberId }: Props) {
           : "1학기",
         absence: data.memberResponse.absence,
         birth: !data.memberResponse.birth
-          ? new Date("1990-01-05")
+          ? new Date(`${new Date().getFullYear() - 19}-01-05`)
           : new Date(data.memberResponse.birth),
         phoneNumber: data.memberResponse.phone,
         introduction: data.memberResponse.introduction,
