@@ -3,7 +3,6 @@ import React from "react";
 import { useArchiveDetailQuery } from "../../board/query/postqueries";
 import { CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
 import Aside from "../../board/components/Aside";
-import DetailPageSubTitle from "../../board/components/DetailPageSubTitle";
 import { FileListLayout, FileList } from "../../components/File/ViewFileLayout";
 import CommentTitle from "../../board/components/comments/CommentTitle";
 import CommentForm from "../../board/components/comments/CommentForm";
@@ -13,6 +12,7 @@ import DetailPageContent from "../../board/components/DetailPageContent";
 import DetailPageTitle from "../../board/components/DetailPageTitle";
 import { Separator } from "@nova/ui/components/ui/separator";
 import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
+import ArchiveDetailPageSubTitle from "../components/ArchiveDetailPageSubTitle";
 
 interface PostDetailProps {
   postId: string;
@@ -41,7 +41,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
         <Aside count={data.likeCount} liked={data.liked} postId={postId} />
         <div className="flex flex-col gap-[20px] mx-auto flex-1">
           {/* 게시판 내용 */}
-          <DetailPageSubTitle
+          <ArchiveDetailPageSubTitle
             title={data.title}
             writer={data.authorName}
             date={data.createdTime}

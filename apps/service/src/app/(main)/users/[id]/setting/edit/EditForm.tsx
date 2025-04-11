@@ -52,12 +52,12 @@ export interface UserProfile {
 }
 
 export default function EditForm({ memberId }: Props) {
+  const queryClient = useQueryClient();
   const [openModal, setOpenModal] = useState(false);
   const [formData, setFormData] = useState<ChangeUserInfoInput | null>(null);
   const { data, isLoading } = useGetUserData({ memberId });
 
   const router = useRouter();
-  const queryClient = useQueryClient();
 
   const form = useForm<ChangeUserInfoInput>({
     resolver: zodResolver(ChangeUserInfoSchema),
@@ -211,7 +211,7 @@ export default function EditForm({ memberId }: Props) {
   };
 
   if (isLoading) {
-    return <PendingFallbackUI />;
+    return <>프로필 설정 팬딩</>;
   }
 
   return (

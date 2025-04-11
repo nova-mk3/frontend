@@ -2,17 +2,20 @@
 import React from "react";
 import { formatDate } from "@/src/libs/utils/dateParsing";
 import { useRouter } from "next/navigation";
-import { POST_TYPE, PostType } from "@/src/constant/board";
+import { PostType } from "@/src/constant/board";
 import { IntegratedBoardDelete } from "@/src/api/board/integrated";
 import AlertDialog from "../../components/Modal/AlertDialog";
 import dynamic from "next/dynamic";
-import ViewCount from "./ViewCount";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Separator } from "@nova/ui/components/ui/separator";
 import Link from "next/link";
 import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
-import { postKeys } from "../query/postqueries";
-const MobileLike = dynamic(() => import("./MobileLike"), { ssr: false });
+import ViewCount from "../../board/components/ViewCount";
+import { ArchiveDelete } from "@/src/api/board/exam";
+import { postKeys } from "../../board/query/postqueries";
+const MobileLike = dynamic(() => import("../../board/components/MobileLike"), {
+  ssr: false,
+});
 interface SubTitle {
   title: string;
   writer: string;
@@ -27,7 +30,7 @@ interface SubTitle {
   defaultHref?: string;
 }
 
-export default function DetailPageSubTitle({
+export default function ArchiveDetailPageSubTitle({
   title,
   writer,
   date,
@@ -47,16 +50,13 @@ export default function DetailPageSubTitle({
     router.push(`${defaultHref}/${postId}/modify`);
   };
   const handleDelete = async () => {
+    console.log(postId);
     try {
-      await IntegratedBoardDelete({ boardId, postId });
-      router.push(`${defaultHref}/${postType.toLocaleLowerCase()}`);
+      await ArchiveDelete({ boardId, postId });
+      router.push(`${defaultHref}`);
 
       queryClient.invalidateQueries({
         queryKey: postKeys.typelists(postType),
-        refetchType: "inactive",
-      });
-      queryClient.invalidateQueries({
-        queryKey: postKeys.listmain(),
         refetchType: "inactive",
       });
     } catch (error: any) {

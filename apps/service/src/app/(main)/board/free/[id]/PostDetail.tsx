@@ -49,7 +49,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
             date={data.createdTime}
             viewCount={data.viewCount}
             postId={postId}
-            postType={POST_TYPE.INTRODUCTION}
+            postType={POST_TYPE.FREE}
             boardId={INTEGRATED}
             likeCount={data.likeCount}
             liked={data.liked}

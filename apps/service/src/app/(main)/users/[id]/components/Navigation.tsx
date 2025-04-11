@@ -27,11 +27,11 @@ export default function Navigation({ className }: NavigationProps) {
           </NavigationMenuItem>
           {/* 이걸 안보여준다고 해도, 다른 사람이 이 경로를 들어가는걸 막아야하는데 */}
           <NavigationMenuItem
-            href={`/users/${userId}/edit`}
+            href={`/users/${userId}/setting/edit`}
             activeHref={[
-              `/users/${userId}/edit`,
-              `/users/${userId}/pwd`,
-              `/users/${userId}/email`,
+              `/users/${userId}/setting/edit`,
+              `/users/${userId}/setting/pwd`,
+              `/users/${userId}/setting/email`,
             ]}
           >
             설정

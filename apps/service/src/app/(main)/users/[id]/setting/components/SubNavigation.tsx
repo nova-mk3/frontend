@@ -8,13 +8,13 @@ export default function SubNavigation() {
   const userId = pathname.split("/")[2];
   return (
     <ul className="flex flex-row gap-8 flex-wrap mx-auto justify-center border-b-[1px] border-line01">
-      <NavigationMenuItem href={`/users/${userId}/edit`}>
+      <NavigationMenuItem href={`/users/setting/${userId}/edit`}>
         회원정보 수정
       </NavigationMenuItem>
-      <NavigationMenuItem href={`/users/${userId}/pwd`}>
+      <NavigationMenuItem href={`/users/setting/${userId}/pwd`}>
         비밀번호 변경
       </NavigationMenuItem>
-      <NavigationMenuItem href={`/users/${userId}/email`}>
+      <NavigationMenuItem href={`/users/setting/${userId}/email`}>
         이메일 변경
       </NavigationMenuItem>
     </ul>

@@ -5,7 +5,8 @@ import { getSimpleProfie } from "@/src/api/user/client";
 export const SimpleProfileQueryOptions = () => {
   return queryOptions({
     queryKey: [userKeys.profile],
-    queryFn: () => getSimpleProfie(),
+    queryFn: getSimpleProfie,
     staleTime: Infinity,
+    throwOnError: false,
   });
 };

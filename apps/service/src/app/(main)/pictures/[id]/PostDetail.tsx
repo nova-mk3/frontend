@@ -68,10 +68,12 @@ export default function PostDetail({ postId }: PostDetailProps) {
       await PictureBoardDelete({ boardId: CLUB_ARCHIVE, postId });
       router.push(`/${POST_TYPE.PICTURES.toLocaleLowerCase()}`);
 
-      // TODO : 왔다갔다 하는 조회수 부분은 어떻게 할까 -> 개인적인의견 그렇게 중요한 요소가 아닌데 api 재요청을 할 필요가 있을까
-
       queryClient.invalidateQueries({
         queryKey: postKeys.typelists(POST_TYPE.PICTURES),
+        refetchType: "inactive",
+      });
+      queryClient.invalidateQueries({
+        queryKey: postKeys.listmain(),
         refetchType: "inactive",
       });
     } catch (error: any) {

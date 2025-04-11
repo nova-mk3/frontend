@@ -1,6 +1,6 @@
 import React from "react";
-import LayoutClient from "./components/LayoutClient";
 import ErrorBoundaryWrapper from "../../components/ErrorBoundary/ErrorBoundaryWrapper";
+import NavClient from "./components/NavClient";
 
 export default async function layout({
   params,
@@ -12,7 +12,7 @@ export default async function layout({
   const { id } = await params;
   return (
     <ErrorBoundaryWrapper>
-      <LayoutClient id={id}>{children}</LayoutClient>
+      <NavClient id={id}>{children}</NavClient>
     </ErrorBoundaryWrapper>
   );
 }
