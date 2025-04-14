@@ -12,6 +12,7 @@ import { Eye, EyeClosed } from "lucide-react";
 import { JSX, useState } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { useInputFocus } from "../signup/hooks/useInputFocus";
+import { formatPhoneNumber } from "@/src/libs/utils/formatPhoneNumber";
 
 // StringKeys 타입 정의: T에서 string 또는 number 타입의 키만 추출
 type StringKeys<T> = {
@@ -100,6 +101,17 @@ export function InputFormFieldWithButton<T extends Record<string, any>>({
                 {...(inputMode ? { inputMode } : {})}
                 {...(pattern ? { pattern } : {})}
                 {...field}
+                value={
+                  type === "tel" && typeof field.value === "string"
+                    ? formatPhoneNumber(field.value)
+                    : field.value
+                }
+                onChange={(e) => {
+                  const newValue = e.target.value;
+                  const formatted =
+                    type === "tel" ? formatPhoneNumber(newValue) : newValue;
+                  field.onChange(formatted);
+                }}
               />
             </FormControl>
             <Button type="button" onClick={() => onClick?.(field.value)}>

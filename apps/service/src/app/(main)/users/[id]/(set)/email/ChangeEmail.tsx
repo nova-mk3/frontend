@@ -1,19 +1,24 @@
 "use client";
-import { userVerifyEmail, userVerifyEmailCode } from "@/src/api/user/client";
+import {
+  PutUserEmail,
+  userVerifyEmail,
+  userVerifyEmailCode,
+} from "@/src/api/user/client";
 import { InputFormFieldWithButton } from "@/src/app/(auth)/components/InputFormFieldWithButton";
 import { EmailInput, EmailSchema } from "@/src/schema/changeemail.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@nova/ui/components/ui/form";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import { useGetUserData } from "../../query/qureies";
+import { useGetUserData, userKeys } from "../../query/qureies";
+import { Button } from "@nova/ui/components/ui/button";
 interface Props {
   memberId: string;
 }
 export default function ChangeEmail({ memberId }: Props) {
-  const { data, isLoading } = useGetUserData({ memberId });
+  const queryClient = useQueryClient();
   const router = useRouter();
   // 이메일 인증 메시지 상태
   const [emailSentMessage, setEmailSentMessage] = useState<string | null>(null);
@@ -41,16 +46,6 @@ export default function ChangeEmail({ memberId }: Props) {
     control: form.control,
     name: "email",
   });
-
-  function onSubmit(values: EmailInput) {
-    console.log(values);
-    //   useChnagePasswordMutation.mutate({
-    //     profileMemberId: memberId,
-    //     currentPassword: values.currentPassword,
-    //     newPassword: values.newPassword,
-    //     checkNewPassword: values.confirmNewPassword,
-    //   });
-  }
 
   // 이것도 따로 관리할 수 있을 것 같다는 의견
   const useVerifyEmailMutation = useMutation({
@@ -109,13 +104,34 @@ export default function ChangeEmail({ memberId }: Props) {
       form.setValue("emailCodeCheck", true, { shouldValidate: true });
       setEmailVerifiedMessageSuccess(data.data);
       setEmailVerifiedMessageDanger(null);
-      alert("변경 성공!");
-      router.push(`/users/${memberId}`);
     },
     onError: (error) => {
       console.log(error);
       setEmailVerifiedMessageDanger(error.message);
       setEmailVerifiedMessageSuccess(null);
+    },
+  });
+
+  const usePutEmailMutation = useMutation({
+    mutationFn: ({
+      email,
+      profileMemberId,
+    }: {
+      email: string;
+      profileMemberId: string;
+    }) => PutUserEmail({ email, profileMemberId }),
+    onSuccess: (data: any) => {
+      console.log(data);
+
+      queryClient.invalidateQueries({
+        queryKey: userKeys.user(memberId),
+        refetchType: "inactive",
+      });
+      router.push(`/users/${memberId}`);
+    },
+    onError: (error) => {
+      console.log(error);
+      alert(error.message);
     },
   });
 
@@ -134,10 +150,34 @@ export default function ChangeEmail({ memberId }: Props) {
       profileMemberId: memberId,
     });
   }
+  const onValid = (data: EmailInput) => {
+    console.log(data);
+    usePutEmailMutation.mutate({
+      email: data.email,
+      profileMemberId: memberId,
+    });
+  };
+
+  const onInvalid = (errors: any) => {
+    if (errors.emailCheck) {
+      form.setError("email", {
+        message: errors.emailCheck.message + " 지웠다가 다시 작성해주세요",
+      });
+    }
+
+    if (errors.emailCodeCheck) {
+      form.setError("emailCode", {
+        message: errors.emailCheck.message + " 지웠다가 다시 작성해주세요",
+      });
+    }
+  };
   return (
     <div className="w-[400px] mx-auto mobile:w-[90%] mt-10">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form
+          onSubmit={form.handleSubmit(onValid, onInvalid)}
+          className="space-y-6"
+        >
           <InputFormFieldWithButton
             form={form}
             name={"email"}
@@ -167,6 +207,10 @@ export default function ChangeEmail({ memberId }: Props) {
           {emailVerifiedMessageDanger && (
             <p className="b-s text-danger">{emailVerifiedMessageDanger}</p>
           )}
+
+          <Button className="mt-8 w-full b-l mb-5" type="submit">
+            완료
+          </Button>
         </form>
       </Form>
     </div>

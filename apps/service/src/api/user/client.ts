@@ -203,8 +203,27 @@ export async function userVerifyEmailCode({
   authCode: string;
 }) {
   const response = await Authapi.post(
-    `/members/${profileMemberId}/email/send`,
+    `/members/${profileMemberId}/email/check`,
     { email, authCode }
+  );
+  return response.data;
+}
+
+export async function PutUserEmail({
+  profileMemberId,
+  email,
+}: {
+  profileMemberId: string;
+  email: string;
+}) {
+  const response = await Authapi.put(
+    `/members/${profileMemberId}/email/send`,
+    email,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
   );
   return response.data;
 }
