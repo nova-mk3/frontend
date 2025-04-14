@@ -26,9 +26,9 @@ export default function DetailPageTitle({
   const { data } = useQuery(SimpleProfileQueryOptions());
   return (
     <div className="border-y bg-background01">
-      <div className="w-[80%] mx-auto px-4 py-3">
+      <div className="w-[80%] mx-auto px-4 py-3 mobile:w-full">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 ">
             <Link
               href={backLink.toLocaleLowerCase()}
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"

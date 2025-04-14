@@ -38,7 +38,7 @@ export default function FrameAboutMeSection({
           </p>
           <div className=" relative flex-1 ">
             <div className="flex justify-between items-center h-full mobile:flex-col mobile:gap-10">
-              <div className="mobile:flex mobile:flex-col mobile:min-h-[550px]">
+              <div className="mobile:flex mobile:flex-col mobile:min-h-[550px] ">
                 <Image
                   src="/image/NovaPoster.jpg"
                   alt=""

@@ -10,6 +10,7 @@ import {
   Folder,
   UserCog,
   PanelTop,
+  Milestone,
 } from "lucide-react";
 import Link from "next/link";
 import { SidebarMenuItem } from "./AppSidebar";
@@ -33,6 +34,12 @@ export default function SiderbarContent() {
               <Link href={`/users/${data.memberId}/edit`}>
                 <UserCog />
                 설정
+              </Link>
+            </SidebarMenuItem>
+            <SidebarMenuItem asChild>
+              <Link href={`/suggestion`}>
+                <Milestone />
+                건의함
               </Link>
             </SidebarMenuItem>
           </ul>

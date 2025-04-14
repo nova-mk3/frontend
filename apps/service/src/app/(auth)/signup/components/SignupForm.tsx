@@ -170,6 +170,7 @@ export function SignupForm() {
   }
 
   async function onSubmit(values: SignupInput) {
+    console.log(values);
     // 등록할 프로필이 있다면
     if (values.profilePhoto) {
       const formData = new FormData();

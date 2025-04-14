@@ -12,7 +12,7 @@ interface Props {
 export default function NewPostTitle({ backLink, backLinkText, title }: Props) {
   return (
     <div className="border-b bg-background01 t-m">
-      <div className="w-[80%] mx-auto px-4 py-3">
+      <div className="w-[80%] mx-auto px-4 py-3 mobile:w-full">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Link
