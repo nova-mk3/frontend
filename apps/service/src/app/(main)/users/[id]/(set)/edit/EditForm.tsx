@@ -143,6 +143,10 @@ export default function EditForm({ memberId }: Props) {
         queryKey: userKeys.user(memberId),
         refetchType: "all",
       });
+      queryClient.invalidateQueries({
+        queryKey: [userKeys.profile],
+        refetchType: "all",
+      });
     },
     onError: (error) => {
       alert(error.message);

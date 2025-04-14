@@ -3,7 +3,7 @@
 import { Menu } from "lucide-react";
 import SidebarLayout, { Sidebar, SidebarTrigger } from "./AppSidebar";
 import SidebarHeader from "./SidebarHeader";
-import Searchbox from "./Searchbox";
+
 import SiderbarContent from "./SiderbarContent";
 
 export function SidebarWrapper() {
@@ -14,7 +14,7 @@ export function SidebarWrapper() {
       </SidebarTrigger>
       <SidebarLayout className="hidden mobile:block">
         <SidebarHeader />
-        <Searchbox />
+
         <SiderbarContent />
       </SidebarLayout>
     </Sidebar>

@@ -3,17 +3,42 @@ import {
   History,
   Crown,
   Users,
-  Folder,
   Layers,
   Image,
   ShieldCheck,
   BookText,
+  Folder,
+  UserCog,
+  PanelTop,
 } from "lucide-react";
 import Link from "next/link";
 import { SidebarMenuItem } from "./AppSidebar";
+import { useQuery } from "@tanstack/react-query";
+import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
 export default function SiderbarContent() {
+  const { data } = useQuery(SimpleProfileQueryOptions());
   return (
     <div className="flex flex-col gap-[30px] pt-[10px] px-[20px]">
+      {data && (
+        <div>
+          <p className="h-s mb-2">메뉴</p>
+          <ul className="t-m list-inside list-disc flex flex-col gap-[5px]">
+            <SidebarMenuItem asChild>
+              <Link href={`/users/${data.memberId}`}>
+                <PanelTop />
+                마이페이지
+              </Link>
+            </SidebarMenuItem>
+            <SidebarMenuItem asChild>
+              <Link href={`/users/${data.memberId}/edit`}>
+                <UserCog />
+                설정
+              </Link>
+            </SidebarMenuItem>
+          </ul>
+        </div>
+      )}
+
       <div>
         <p className="h-s mb-2">소개</p>
         <ul className="t-m list-inside list-disc flex flex-col gap-[5px]">
@@ -46,12 +71,15 @@ export default function SiderbarContent() {
               통합게시판
             </Link>
           </SidebarMenuItem>
-          {/* <SidebarMenuItem asChild>
-            <Link href={"/exam_archive"}>
-              <Folder />
-              자료게시판
-            </Link>
-          </SidebarMenuItem> */}
+          {data && (
+            <SidebarMenuItem asChild>
+              <Link href={"/exam_archive"}>
+                <Folder />
+                자료게시판
+              </Link>
+            </SidebarMenuItem>
+          )}
+
           <SidebarMenuItem asChild>
             <Link href={"/pictures"}>
               <Image />
