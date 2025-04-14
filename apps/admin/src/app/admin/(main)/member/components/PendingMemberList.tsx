@@ -14,7 +14,7 @@ export default function PendingMemberList({ members, onClick }: { members: Pendi
           pendingMemberId={member.pendingMemberId}
           studentId={member.studentNumber}
           name={member.name}
-          grade={member.grade}
+          grade={member.absence ? "휴학생" : member.graduation ? "졸업생" : member.grade}
           phoneNumber={formatPhoneNumber(member.phone)}
           birthday={formatBirthday(member.birth)}
           email={member.email}
