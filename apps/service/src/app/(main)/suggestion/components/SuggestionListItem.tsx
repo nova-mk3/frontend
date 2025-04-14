@@ -46,6 +46,7 @@ export default function SuggestionListItem({
         {Private && <Lock size={16} className="text-text02" />}
         {!Private && <Unlock size={16} className="text-text02" />}
 
+        {/* 이거 진짜 신기하긴하네 */}
         <p className="w-0 flex-1 truncate">{title}</p>
       </div>
       <div className={`w-[100px] text-center`}>
