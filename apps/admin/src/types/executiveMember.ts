@@ -15,6 +15,7 @@ export interface ExecutiveModalProps {
 
 export interface ExecutiveMember{
     executiveHistoryId: string;
+    studentNumber: string;
     year: number;
     role: enumRoleType;
     name: string;
