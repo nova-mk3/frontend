@@ -159,6 +159,7 @@ export default function ChangeEmail({ memberId }: Props) {
   };
 
   const onInvalid = (errors: any) => {
+    console.log(errors);
     if (errors.emailCheck) {
       form.setError("email", {
         message: errors.emailCheck.message + " 지웠다가 다시 작성해주세요",
@@ -167,7 +168,7 @@ export default function ChangeEmail({ memberId }: Props) {
 
     if (errors.emailCodeCheck) {
       form.setError("emailCode", {
-        message: errors.emailCheck.message + " 지웠다가 다시 작성해주세요",
+        message: errors.emailCodeCheck.message + " 지웠다가 다시 작성해주세요",
       });
     }
   };

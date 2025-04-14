@@ -7,7 +7,7 @@ export default function NoticePostList() {
   const { data, isLoading } = usePostListQuery({
     postType: POST_TYPE.NOTICE,
     page: 0,
-    size: 7,
+    size: 5,
     keyword: "",
     searchType: "",
     sortBy: "createdTime",

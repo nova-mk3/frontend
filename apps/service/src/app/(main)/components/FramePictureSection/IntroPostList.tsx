@@ -7,7 +7,7 @@ export default function IntroPostList() {
   const { data, isLoading } = usePostListQuery({
     postType: POST_TYPE.INTRODUCTION,
     page: 0,
-    size: 7,
+    size: 5,
     keyword: "",
     searchType: "",
     sortBy: "createdTime",

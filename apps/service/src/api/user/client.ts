@@ -216,14 +216,12 @@ export async function PutUserEmail({
   profileMemberId: string;
   email: string;
 }) {
-  const response = await Authapi.put(
-    `/members/${profileMemberId}/email/send`,
-    email,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  return response.data;
+  try {
+    const response = await Authapi.put(`/members/${profileMemberId}/email`, {
+      email,
+    });
+    return response.data;
+  } catch (e) {
+    throwErrorMessage(e);
+  }
 }
