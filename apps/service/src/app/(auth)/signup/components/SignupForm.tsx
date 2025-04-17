@@ -30,6 +30,7 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { parseDatetoString } from "@/src/libs/utils/dateParsing";
 
 // TODO : 사이사이에 숨어있는 as 들 없애기.
 export function SignupForm() {
@@ -191,7 +192,7 @@ export function SignupForm() {
           absence: values.absence!,
           profilePhoto: response.data.id,
           phone: values.phoneNumber,
-          birth: !values.birth ? "" : values.birth.toLocaleDateString("ko-KR"),
+          birth: !values.birth ? "" : parseDatetoString(values.birth),
         };
 
         // [2] graduation이 true라면 graduationSignUpRequest 만들기
@@ -232,7 +233,7 @@ export function SignupForm() {
         absence: values.absence!,
         profilePhoto: "",
         phone: values.phoneNumber,
-        birth: !values.birth ? "" : values.birth.toLocaleDateString("ko-KR"),
+        birth: !values.birth ? "" : parseDatetoString(values.birth),
       };
 
       // [2] graduation이 true라면 graduationSignUpRequest 만들기

@@ -30,6 +30,10 @@ import {
   PutUserProfile,
 } from "@/src/api/user/client";
 import { useRouter } from "next/navigation";
+import {
+  parseDatetoString,
+  parseStringToDate,
+} from "@/src/libs/utils/dateParsing";
 
 interface Props {
   memberId: string;
@@ -106,7 +110,7 @@ export default function EditForm({ memberId }: Props) {
         absence: data.memberResponse.absence,
         birth: !data.memberResponse.birth
           ? new Date(`${new Date().getFullYear() - 19}-01-05`)
-          : new Date(data.memberResponse.birth),
+          : parseStringToDate(data.memberResponse.birth),
         phoneNumber: data.memberResponse.phone,
         introduction: data.memberResponse.introduction,
         graduation: data.memberResponse.graduation,
@@ -171,7 +175,7 @@ export default function EditForm({ memberId }: Props) {
       absence: values.absence!,
       profilePhoto: memberProfile.profilePhoto.id,
       phone: values.phoneNumber,
-      birth: !values.birth ? "" : values.birth.toLocaleDateString("ko-KR"),
+      birth: !values.birth ? "" : parseDatetoString(values.birth),
       introduction: values.introduction,
     };
 

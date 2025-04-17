@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export const formatDate = (inputDate: string): string => {
   const date = new Date(inputDate); // 문자열을 Date 객체로 변환
   const today = new Date();
@@ -29,3 +31,9 @@ export const toFormattedDate = (dateString: string): string => {
 
   return `${year}-${month}-${day} ${hours}:${minutes}`;
 };
+
+export const parseStringToDate = (str: string): Date =>
+  dayjs(str, "YYYY-MM-DD").toDate();
+
+export const parseDatetoString = (date: Date): string =>
+  dayjs(date).format("YYYY-MM-DD");
