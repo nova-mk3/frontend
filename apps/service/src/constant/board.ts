@@ -46,11 +46,11 @@ export const POST_TYPE_LABEL: Record<PostType, string> = {
 const isProd = process.env.NODE_ENV === "production";
 
 export const INTEGRATED = isProd
-  ? "0e8f938b-b653-4dd5-bf0e-c6e48bb5128e"
+  ? "7b59772b-32d3-4157-8adf-aafb099a2a9b"
   : "7661181e-491b-49ba-a2a9-c13e09393534"; //여기에 로컬변수
 
 export const CLUB_ARCHIVE = isProd
-  ? "d0335ade-1ccb-42be-a64c-a1159624c09d"
+  ? "5949f734-918b-4cea-aabc-f90e874ce34e"
   : "196128e0-4533-4cd9-ae01-a7a0806cd48c"; //여기에 로컬변수
 
 export const POST_TYPE_TITLE_LABEL: Record<PostType, string> = {
