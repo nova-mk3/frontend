@@ -69,12 +69,7 @@ export default function ArchiveDetailPageSubTitle({
         <div className="text-3xl font-bold mb-4 font-pretendard">{title}</div>
         <div className="flex flex-row mt-2 text-sm text-muted-foreground">
           <div className="flex flex-row  items-center gap-4">
-            <Link
-              href={`/users/${authorId}`}
-              className="text-gray-700 hover:underline"
-            >
-              {writer}
-            </Link>
+            <div className="text-gray-700 hover:underline">비공개</div>
             <p>{formatDate(date)}</p>
             <ViewCount viewCount={viewCount} />
           </div>

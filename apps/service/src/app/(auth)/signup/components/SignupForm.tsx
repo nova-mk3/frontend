@@ -128,8 +128,11 @@ export function SignupForm() {
   const useSignupMutation = useMutation({
     mutationFn: (data: SignUpData) => signup(data),
     onSuccess: (data: any) => {
-      alert("로그인 성공\n관리자에게 문의해 승인을 받으세요!");
-      router.push(`/signin?redirect=${decodeURI("/signup")}`);
+      alert("회원가입 성공!\n관리자에게 문의해 승인을 받으세요!");
+      // 사파리에서는 alret 함수를 지나치는 경향이 있다
+      setTimeout(() => {
+        router.push(`/signin?redirect=${decodeURI("/signup")}`);
+      }, 100);
     },
     onError: (error) => {
       alert(error.message);

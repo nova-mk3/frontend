@@ -47,7 +47,7 @@ export default function ArchiveListItem({
       </Link>
       <div className="mt-4 flex flex-row">
         <div className="flex items-center gap-2 text-sm">
-          <span className="text-gray-700">{authorName}</span>
+          <span className="text-gray-700">비공개</span>
           <span className="text-gray-400">·</span>
           <span className="text-gray-500">{formatDate(createdTime)}</span>
           <span className="text-gray-400">·</span>
