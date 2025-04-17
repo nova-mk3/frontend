@@ -52,7 +52,7 @@ export function DatePickerForm<T extends Record<string, any>>({
                   {field.value ? (
                     format(field.value as Date, "PPP", { locale: ko })
                   ) : (
-                    <span>Pick a date</span>
+                    <span>날짜를 선택하세요</span>
                   )}
                   <CalendarIcon className="ml-auto h-4 w-4 opacity-60" />
                 </Button>
@@ -64,7 +64,11 @@ export function DatePickerForm<T extends Record<string, any>>({
                 className="bg-background01"
                 mode="single"
                 fromYear={1990}
-                defaultMonth={field.value}
+                defaultMonth={
+                  field.value === undefined
+                    ? new Date(`${new Date().getFullYear() - 19}-01-05`)
+                    : field.value
+                }
                 toYear={new Date().getFullYear()}
                 selected={field.value ? new Date(field.value) : undefined}
                 onSelect={field.onChange}
