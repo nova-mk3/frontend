@@ -68,8 +68,8 @@ export default function EditForm({ memberId }: Props) {
     defaultValues: {
       username: "",
       studentNumber: "",
-      grade: "1학년",
-      semester: "1학기",
+      grade: "",
+      semester: "",
       absence: false,
       birth: undefined,
       phoneNumber: "",
@@ -97,16 +97,24 @@ export default function EditForm({ memberId }: Props) {
     control: form.control,
     name: "contact",
   });
+  const isGrade = useWatch({
+    control: form.control,
+    name: "grade",
+  });
 
   useEffect(() => {
     if (data) {
       form.reset({
         username: data.memberResponse.name,
         studentNumber: data.memberResponse.studentNumber,
-        grade: data.memberResponse.grade ? data.memberResponse.grade : "1학년",
-        semester: data.memberResponse.semester
-          ? data.memberResponse.semester
-          : "1학기",
+        grade:
+          data.memberResponse.grade && data.memberResponse.grade !== "0학년"
+            ? data.memberResponse.grade
+            : "",
+        semester:
+          data.memberResponse.semester === "0학기"
+            ? ""
+            : data.memberResponse.semester || "",
         absence: data.memberResponse.absence,
         birth: !data.memberResponse.birth
           ? undefined
@@ -116,9 +124,7 @@ export default function EditForm({ memberId }: Props) {
         graduation: data.memberResponse.graduation,
         work: data.graduationResponse.work,
         job: data.graduationResponse.job,
-        year: data.graduationResponse.year
-          ? data.graduationResponse.year
-          : "2025년",
+        year: data.graduationResponse.year ? data.graduationResponse.year : "",
         contact: data.graduationResponse.contact,
         contactInfo: data.graduationResponse.contactInfo,
         contactDescription: data.graduationResponse.contactDescription,
@@ -130,6 +136,12 @@ export default function EditForm({ memberId }: Props) {
     }
   }, [data, form]);
 
+  useEffect(() => {
+    if (isGrade === "초과학기") {
+      form.setValue("semester", "", { shouldValidate: true });
+    }
+  }, [isGrade, form]);
+
   const useSignupMutation = useMutation({
     mutationFn: ({
       profileMemberId,
@@ -139,7 +151,6 @@ export default function EditForm({ memberId }: Props) {
       profileMemberId: string;
     }) => PutUserProfile({ profileMemberId, putUserData }),
     onSuccess: (data: any) => {
-      alert("프로필 변경 성공");
       router.push(`/users/${memberId}`);
       // window.location.reload();
 
@@ -207,7 +218,7 @@ export default function EditForm({ memberId }: Props) {
   // ❌ 유효성 검사 실패 시 실행됨
   const onInvalid = (errors: any) => {
     console.log("유효성 검사 실패:", errors);
-    alert("졸업생 쪽 졸업년도를 확인해주세요!");
+    alert("유효성 검사 실패");
   };
 
   // ✅ "확인" 버튼을 누르면 최종 제출 실행
@@ -271,12 +282,14 @@ export default function EditForm({ memberId }: Props) {
                   label="학년"
                   options={grade}
                 />
-                <SelectFormField
-                  form={form}
-                  name={"semester"}
-                  label="학기"
-                  options={semester}
-                />
+                {isGrade !== "초과학기" && (
+                  <SelectFormField
+                    form={form}
+                    name={"semester"}
+                    label="학기"
+                    options={semester}
+                  />
+                )}
               </div>
               <RadioFormField
                 form={form}

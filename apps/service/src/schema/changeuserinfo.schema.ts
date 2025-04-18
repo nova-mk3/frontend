@@ -27,7 +27,7 @@ const studentSchema = z
           code: z.ZodIssueCode.custom,
         });
       }
-      if (!data.semester) {
+      if (data.grade !== "초과학기") {
         ctx.addIssue({
           path: ["semester"],
           message: "학기는 필수입니다.",

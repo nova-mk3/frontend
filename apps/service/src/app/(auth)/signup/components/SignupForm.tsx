@@ -29,7 +29,7 @@ import {
 } from "@/src/api/auth";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { parseDatetoString } from "@/src/libs/utils/dateParsing";
 
 // TODO : 사이사이에 숨어있는 as 들 없애기.
@@ -50,8 +50,8 @@ export function SignupForm() {
       username: "",
       email: "",
       studentNumber: "",
-      grade: "1학년",
-      semester: "1학기",
+      grade: "",
+      semester: "",
       emailCode: "",
       emailCodeCheck: false,
       absence: undefined,
@@ -61,7 +61,7 @@ export function SignupForm() {
       phoneNumber: "",
       password: "",
       confirmPassword: "",
-      year: "2025년",
+      year: "",
       graduation: false,
       work: undefined,
       job: "",
@@ -94,6 +94,16 @@ export function SignupForm() {
     control: form.control,
     name: "contact",
   });
+  const isGrade = useWatch({
+    control: form.control,
+    name: "grade",
+  });
+
+  useEffect(() => {
+    if (isGrade === "초과학기") {
+      form.setValue("semester", "", { shouldValidate: true });
+    }
+  }, [isGrade, form]);
 
   // 이것도 따로 관리할 수 있을 것 같다는 의견
   const useVerifyEmailMutation = useMutation({
@@ -335,12 +345,14 @@ export function SignupForm() {
                 label="학년"
                 options={grade}
               />
-              <SelectFormField
-                form={form}
-                name={"semester"}
-                label="학기"
-                options={semester}
-              />
+              {isGrade !== "초과학기" && (
+                <SelectFormField
+                  form={form}
+                  name={"semester"}
+                  label="학기"
+                  options={semester}
+                />
+              )}
             </div>
             <RadioFormField
               form={form}
