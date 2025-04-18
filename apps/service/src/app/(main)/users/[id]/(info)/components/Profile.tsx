@@ -63,7 +63,7 @@ export default function Profile({ memberId }: Props) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   <div className="flex items-center gap-2 text-sm text-gray-600">
                     <User size={16} />
-                    {loginUserData.admin ? (
+                    {data.memberResponse.studentNumber === "2020202020" ? (
                       <span>비공개</span>
                     ) : (
                       <span>학번: {data.memberResponse.studentNumber}</span>
