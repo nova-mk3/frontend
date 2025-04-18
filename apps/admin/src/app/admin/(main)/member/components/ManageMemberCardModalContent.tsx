@@ -11,15 +11,18 @@ import { MamnageMemberCardModalContentProps } from "@/src/types/manageMember";
 import {
   useManageMemberInfoQuery,
   usePutMemberInfoMutation,
+  useDeleteMemberMutation,
 } from "@/src/query/manageMembersQueries";
 
 export default function ManageMemberCardModalContent({
   memberId,
+  open,
   onClose,
 }: MamnageMemberCardModalContentProps) {
-  const { data, isLoading, error } = useManageMemberInfoQuery(memberId);
+  const { data, isLoading, error } = useManageMemberInfoQuery(memberId , open);
   const [isEditMode, setIsEditMode] = useState(false);
   const putMemberInfoMutation = usePutMemberInfoMutation();
+  const DeleteMemberMutation = useDeleteMemberMutation();
   const [formData, setFormData] = useState({
     profilePhoto: "",
     name: "",
@@ -396,8 +399,15 @@ export default function ManageMemberCardModalContent({
           )}
         </div>
         <div className="flex justify-end space-x-4 mt-6">
-          <Button variant="default" onClick={onClose}>
-            취소
+          <Button variant="text" onClick={
+            ()=> {
+              if (window.confirm("정말 회원을 삭제합니까?\n 삭제할경우 되돌릴수 없습니다.")) {
+                onClose()
+                DeleteMemberMutation.mutate(memberId)
+              }
+            }
+          }>
+            회원 탈퇴
           </Button>
           <Button variant="default" onClick={handleEditOrSave}>
             {isEditMode ? "저장" : "편집"}

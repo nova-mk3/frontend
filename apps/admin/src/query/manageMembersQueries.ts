@@ -1,9 +1,12 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { GetAllMembers, GetMemberInfo, PutAllMemberSemester, PutMemberAbsence, PutMemberGrade, PutMemberGraduation, PutMemberInfo } from '@/src/api/main/member/manageMembersApi';
+import { DeleteMember, GetAllMembers, GetMemberInfo, PutAllMemberSemester, PutMemberAbsence, PutMemberGrade, PutMemberGraduation, PutMemberInfo } from '@/src/api/main/member/manageMembersApi';
 import { ManageMember, ManageMemberInfoResponse, PutMemberInfoRequest } from '@/src/types/manageMember';
 
 export const manageMembersKeys = {
     list: () => ['manageMembers'] as const,
+}
+
+export const specificManageMemberKeys = {
     detail: (memberId: string) => ['manageMembers', memberId] as const,
 }
 
@@ -14,13 +17,15 @@ export const useManageMembersQuery = () => {
     });
 };
 
-export const useManageMemberInfoQuery = (memberId: string) => {
+export const useManageMemberInfoQuery = (memberId: string , open: boolean) => {
     return useQuery<ManageMemberInfoResponse>({
-      queryKey: manageMembersKeys.detail(memberId),
+      queryKey: specificManageMemberKeys.detail(memberId),
       queryFn: () => GetMemberInfo(memberId),
+      enabled: open,
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
       refetchInterval: false,
+      staleTime: Infinity,
     });
   };
 
@@ -33,7 +38,7 @@ export const usePutMemberInfoMutation = () => {
       return PutMemberInfo(memberId, request);
     },
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({ queryKey: manageMembersKeys.detail(variables.memberId) });
+      queryClient.invalidateQueries({ queryKey: specificManageMemberKeys.detail(variables.memberId) });
       queryClient.invalidateQueries({ queryKey: manageMembersKeys.list() });
     },
   });
@@ -63,8 +68,8 @@ export const usePutMemberGraduationMutation = () => {
             return PutMemberGraduation(memberId, Graduation);
         },
         onSuccess: (_, variables) => {
-            queryClient.invalidateQueries({ queryKey: manageMembersKeys.detail(variables.memberId) });
             queryClient.invalidateQueries({ queryKey: manageMembersKeys.list() });
+            queryClient.invalidateQueries({ queryKey: specificManageMemberKeys.detail(variables.memberId) });
         },
     });
 }
@@ -77,8 +82,8 @@ export const usePutMemberGradeMutation = () => {
             return PutMemberGrade(memberId, grade);
         },
         onSuccess: (_, variables) => {
-            queryClient.invalidateQueries({ queryKey: manageMembersKeys.detail(variables.memberId) });
             queryClient.invalidateQueries({ queryKey: manageMembersKeys.list() });
+            queryClient.invalidateQueries({ queryKey: specificManageMemberKeys.detail(variables.memberId) });
         },
     });
 }
@@ -90,8 +95,21 @@ export const usePutMemberAbsenceMutation = () => {
             return PutMemberAbsence(memberId, absence);
         },
         onSuccess: (_, variables) => {
-            queryClient.invalidateQueries({ queryKey: manageMembersKeys.detail(variables.memberId) });
+            queryClient.invalidateQueries({ queryKey: manageMembersKeys.list() });
+            queryClient.invalidateQueries({ queryKey: specificManageMemberKeys.detail(variables.memberId) });
+        },
+    });
+}
+
+export const useDeleteMemberMutation = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (memberId: string) => {
+            return DeleteMember(memberId);
+        },
+        onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: manageMembersKeys.list() });
         },
     });
+
 }
