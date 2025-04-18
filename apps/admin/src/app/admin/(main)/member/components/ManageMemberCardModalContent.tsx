@@ -13,6 +13,7 @@ import {
   usePutMemberInfoMutation,
   useDeleteMemberMutation,
 } from "@/src/query/manageMembersQueries";
+import { formatBirthDay, formatPhoneNumber } from "@/src/utils/formatter";
 
 export default function ManageMemberCardModalContent({
   memberId,
@@ -48,12 +49,12 @@ export default function ManageMemberCardModalContent({
       setFormData({
         profilePhoto: data.memberResponse.profilePhoto.id,
         name: data.memberResponse.name,
-        phone: data.memberResponse.phone,
+        phone: formatPhoneNumber(data.memberResponse.phone),
         studentNumber: data.memberResponse.studentNumber,
         email: data.memberResponse.email,
         grade: data.memberResponse.grade,
         semester: data.memberResponse.semester,
-        birth: data.memberResponse.birth,
+        birth: formatBirthDay(data.memberResponse.birth),
         introduction: data.memberResponse.introduction,
         isGraduation: data.memberResponse.graduation,
         isAbadence: data.memberResponse.absence,
@@ -186,7 +187,13 @@ export default function ManageMemberCardModalContent({
           <Input
             name="phone"
             value={formData.phone}
-            onChange={handleChange}
+            onChange={(e) => {
+              const formatted = formatPhoneNumber(e.target.value);
+              setFormData((prev) => ({
+                ...prev,
+                phone: formatted,
+              }));
+            }}
             readOnly={!isEditMode}
             className={commonInputClass}
           />
@@ -229,7 +236,13 @@ export default function ManageMemberCardModalContent({
           <Input
             name="birth"
             value={formData.birth}
-            onChange={handleChange}
+            onChange={(e) => {
+              const formatted = formatBirthDay(e.target.value);
+              setFormData((prev) => ({
+                ...prev,
+                birth: formatted,
+              }));
+            }}
             readOnly={!isEditMode}
             className={commonInputClass}
           />
@@ -401,7 +414,7 @@ export default function ManageMemberCardModalContent({
         <div className="flex justify-end space-x-4 mt-6">
           <Button variant="text" onClick={
             ()=> {
-              if (window.confirm("정말 회원을 삭제합니까?\n 삭제할경우 되돌릴수 없습니다.")) {
+              if (window.confirm("정말 회원을 삭제합니까?\n삭제할경우 되돌릴수 없습니다.")) {
                 onClose()
                 DeleteMemberMutation.mutate(memberId)
               }

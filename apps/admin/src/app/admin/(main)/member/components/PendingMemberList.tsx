@@ -1,7 +1,7 @@
 import { useApprovePendingMemberMutation, useRejectPendingMemberMutation } from "@/src/query/pendingMembersQueries";
 import { PendingMemberResponse } from "@/src/types/pendingMember";
 import PendingMemberCard from "@/src/app/admin/(main)/member/components/PendingMemberCard";
-import { formatBirthday, formatPhoneNumber } from '@/src/utils/formatter';
+import { formatBirthDay, formatPhoneNumber } from '@/src/utils/formatter';
 
 export default function PendingMemberList({ members, onClick }: { members: PendingMemberResponse[]; onClick: (memberId: string) => void }) {
   const { mutate: approveMember } = useApprovePendingMemberMutation();
@@ -16,7 +16,7 @@ export default function PendingMemberList({ members, onClick }: { members: Pendi
           name={member.name}
           grade={member.absence ? "휴학생" : member.graduation ? "졸업생" : member.grade}
           phoneNumber={formatPhoneNumber(member.phone)}
-          birthday={formatBirthday(member.birth)}
+          birthday={formatBirthDay(member.birth)}
           email={member.email}
           profilePhoto={member.profilePhoto}
           onClick={() => onClick(member.pendingMemberId)}
