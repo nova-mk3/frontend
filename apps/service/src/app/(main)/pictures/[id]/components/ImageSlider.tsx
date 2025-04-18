@@ -43,6 +43,7 @@ const ImageSlider = ({
               height={image.height}
               className="w-full h-auto aspect-square object-cover  cursor-pointer"
               onClick={() => openModal()}
+              // unoptimized={true}
               // priority={true}
               // priority={index === 0 ? true : false} // 첫번째 이미지만 priority
             />

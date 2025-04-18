@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "nova.cbnu.ac.kr",
+        pathname: "/files/public/**",
         port: "",
       },
       {
