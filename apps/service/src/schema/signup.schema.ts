@@ -43,12 +43,14 @@ const studentSchema = z
           code: z.ZodIssueCode.custom,
         });
       }
-      if (!data.semester) {
-        ctx.addIssue({
-          path: ["semester"],
-          message: "학기는 필수입니다.",
-          code: z.ZodIssueCode.custom,
-        });
+      if (data.grade !== "초과학기") {
+        if (!data.semester) {
+          ctx.addIssue({
+            path: ["semester"],
+            message: "학기는 필수입니다.",
+            code: z.ZodIssueCode.custom,
+          });
+        }
       }
       if (data.absence === undefined) {
         ctx.addIssue({
