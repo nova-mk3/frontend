@@ -35,6 +35,7 @@ export default function ManagaMemberCardModal({ open, memberId, onClose }: Manag
       >
         <ManageMemberCardModalContent
           memberId={memberId}
+          open = {open}
           onClose={onClose} 
         />
       </div>
