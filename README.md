@@ -15,8 +15,8 @@
 데이터 보안과 지속성을 고려해 **온-프레미스** 형태로 서비스를 운영중입니다
 
 ## 페이지 URL
-~~https://nova.cbnu.ac.kr~~
-현재 서버 교체로 인해 2~3일 정도 소요될 것 같습니다
+
+https://nova.cbnu.ac.kr
 
 ## 참여인원
 
@@ -100,12 +100,12 @@ Effective React Query Keys 문서를 참고해 query-key-factory 패턴으로 �
 ## 기능소개
 
 ### 노바 서비스
+
 <table> <tr> <th>로그인</th> <th>회원가입</th> </tr> <tr> <td><img src="./exec/로그인.png" width="450"/></td> <td><img src="./exec/회원가입.png" width="450"/></td> </tr> </table>
 <table> <tr> <th>홈</th> <th>목록</th> <th>상세</th> </tr> <tr> <td><img src="./exec/image1.png" width="300"/></td> <td><img src="./exec/image2.png" width="300"/></td> <td><img src="./exec/image3.png" width="300"/></td> </tr> </table>
 <table> <tr> <th>목록</th> <th>상세</th> <th>상세(확대)</th> </tr> <tr> <td><img src="./exec/image4.png" width="300"/></td> <td><img src="./exec/gif1.gif" width="300"/></td> <td><img src="./exec/gif2.gif" width="300"/></td> </tr> </table>
 <table> <tr> <th>댓글/대댓글</th> <th>댓글/대댓글(gif)</th> </tr> <tr> <td><img src="./exec/image5.png" width="450"/></td> <td><img src="./exec/gif3.gif" width="450"/></td> </tr> </table>
 <table> <tr> <th>건의함</th> <th>건의상세</th> </tr> <tr> <td><img src="./exec/건의함.png" width="450"/></td> <td><img src="./exec/건의함2.png" width="450"/></td> </tr> </table>
-
 
 - 연혁, 동아리원, 임원 소개 추가 예정
 
