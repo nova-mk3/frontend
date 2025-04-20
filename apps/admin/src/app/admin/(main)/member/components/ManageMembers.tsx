@@ -46,7 +46,7 @@ export default function ManageMembers() {
         member.name.toLowerCase().includes(searchText.toLowerCase())
       );
 
-  const grades = ["1학년", "2학년", "3학년", "4학년", "초과 학기", "휴학생", "졸업생"];
+  const grades = ["1학년", "2학년", "3학년", "4학년", "초과학기", "휴학생", "졸업생"];
 
   const categories = grades.map((grade) => ({
     title: grade,
@@ -74,7 +74,7 @@ export default function ManageMembers() {
         case "2학년": return 2;
         case "3학년": return 3;
         case "4학년": return 4;
-        case "초과 학기": return 5;
+        case "초과학기": return 5;
         default: return 0;
       }
     };

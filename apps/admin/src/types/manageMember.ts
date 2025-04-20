@@ -29,6 +29,7 @@ export interface ManageMemberCardModalProps {
 
 export interface MamnageMemberCardModalContentProps {
     memberId : string;
+    open : boolean;
     onClose : () => void;
 }
 

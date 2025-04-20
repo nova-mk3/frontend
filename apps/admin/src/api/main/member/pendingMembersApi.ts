@@ -23,7 +23,7 @@ export async function GetSpecificPendingMember(pendingMemberId: string) {
 // Reject pending member
 export async function RejectPendingMember(pendingMemberId: string) {
   try {
-    const response = await Authapi.delete(
+    const response = await Authapi.post(
       `/pending-members/${pendingMemberId}/rejected`
     );
     return response.data;
