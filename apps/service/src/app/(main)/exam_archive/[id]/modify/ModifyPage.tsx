@@ -141,7 +141,7 @@ export default function ModifyPage({ postId }: Props) {
         refetchType: "inactive",
       });
 
-      router.push(`/${data.postType.toLocaleLowerCase()}/${postId}`);
+      router.push(`/${POST_TYPE.EXAM_ARCHIVE.toLocaleLowerCase()}/${postId}`);
     },
     onError: (error) => {
       alert(error.message);
