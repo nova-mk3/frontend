@@ -42,8 +42,6 @@ export default function Page() {
   const useIntegratedBoardMutation = useMutation({
     mutationFn: (data: IntegradePostRequest) => IntegratedBoardPost(data),
     onSuccess: (data: any) => {
-      alert("글쓰기 성공");
-
       router.push(`/board/${watchcategory.toLocaleLowerCase()}/${data.id}`);
 
       // 전체글보기, 노바 홈

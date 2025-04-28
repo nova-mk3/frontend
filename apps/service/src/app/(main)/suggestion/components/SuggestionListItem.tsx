@@ -40,8 +40,7 @@ export default function SuggestionListItem({
       href={`/suggestion/${id}`}
       className={`flex flex-row t-m border rounded-xl border-line01 py-2 hover:bg-background02 cursor-pointer ${className} items-center`}
     >
-      <div className={`w-[60px] text-center`}>{index.substring(0, 2)}</div>
-      <div className={`flex flex-row items-center gap-1 flex-1`}>
+      <div className={`flex flex-row items-center gap-1 flex-1 pl-5`}>
         {/* 이부분 신기하네요 */}
         {Private && <Lock size={16} className="text-text02" />}
         {!Private && <Unlock size={16} className="text-text02" />}
