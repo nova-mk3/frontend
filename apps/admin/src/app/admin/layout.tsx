@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "novAdmin",
   description: "충북대학교 소프트웨어학과 학술동아리 Nova 관리 페이지",
   openGraph: {
-    title: "충북대학교 소프트웨어학과 학술동아리Nova 관리 페이지",
+    title: "충북대학교 소프트웨어학과 학술동아리 Nova 관리 페이지",
     description: "학술동아리의 Nova 관리자 전용 페이지입니다.",
     url: "https://nova.cbnu.ac.kr/admin",
     siteName: "NOVA",
