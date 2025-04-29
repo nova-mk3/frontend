@@ -87,16 +87,16 @@ export default function page() {
         <div className="flex flex-col gap-2 mt-5">
           <AlarmList content={dummyAlarms} />
         </div>
+        <div
+          className="bg-primary text-white rounded-md px-2 py-3 flex items-center justify-center cursor-pointer"
+          onClick={() => {
+            alert("준비중입니다.");
+          }}
+        >
+          {" "}
+          알림 더보기
+        </div>
       </section>
-      <div
-        className="bg-primary text-white rounded-md px-2 py-3 flex items-center justify-center cursor-pointer"
-        onClick={() => {
-          alert("준비중입니다.");
-        }}
-      >
-        {" "}
-        알림 더보기
-      </div>
     </div>
   );
 }

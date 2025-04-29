@@ -9,7 +9,7 @@ import HeaderLogin from "./HeaderLogin";
 export default function Header() {
   return (
     <>
-      <div className="flex flex-row  border-b  px-4 py-3 relative">
+      <div className="flex flex-row  border-b  py-3 relative">
         <Link href={"/"}>
           <Logo width={161.83} height={45} fill={"#B096F5"} />
         </Link>
