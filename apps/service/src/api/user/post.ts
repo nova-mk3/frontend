@@ -18,3 +18,20 @@ export async function mypagePostGet({
     throwErrorMessage(error);
   }
 }
+
+export async function mypageSuggestionGet({
+  page,
+  size,
+}: {
+  page: number;
+  size: number;
+}) {
+  try {
+    const response = await Authapi.get(
+      `/mypage/suggestion-posts?page=${page}&size=${size}`
+    );
+    return response.data.data;
+  } catch (error: any) {
+    throwErrorMessage(error);
+  }
+}

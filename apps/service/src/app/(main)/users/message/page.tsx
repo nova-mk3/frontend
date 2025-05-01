@@ -88,7 +88,7 @@ export default function page() {
           <AlarmList content={dummyAlarms} />
         </div>
         <div
-          className="bg-primary text-white rounded-md px-2 py-3 flex items-center justify-center cursor-pointer"
+          className="bg-primary text-white rounded-md px-2 py-3 flex items-center justify-center cursor-pointer mt-5"
           onClick={() => {
             alert("준비중입니다.");
           }}

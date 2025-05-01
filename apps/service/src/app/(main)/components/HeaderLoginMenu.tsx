@@ -35,7 +35,7 @@ export default function HeaderLoginMenu({ trigger, memberId }: Props) {
         <Search size={20} />
       </div>
       <Link
-        href={`users/message`}
+        href={`/users/message`}
         className="border-black border-[1px] p-2 rounded-full cursor-pointer"
       >
         <Bell size={20} />
