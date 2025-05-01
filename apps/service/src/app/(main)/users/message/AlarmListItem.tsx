@@ -21,7 +21,11 @@ export default function AlarmListItem({
         {!isRead && (
           <div className="bg-gray-300 w-2 h-2 rounded-full flex-shrink-0"></div>
         )}
-        <div className="line-clamp-2 break-all">{message}</div>
+
+        {isRead && (
+          <div className="line-clamp-2 break-all text-gray-500">{message}</div>
+        )}
+        {!isRead && <div className="line-clamp-2 break-all">{message}</div>}
       </div>
       <div className="flex ml-auto pl-5 flex-shrink-0 text-sm items-center text-gray-500 mobile:m-0 mobile:pl-4">
         {createAt}
