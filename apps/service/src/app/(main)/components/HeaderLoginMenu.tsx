@@ -34,12 +34,14 @@ export default function HeaderLoginMenu({ trigger, memberId }: Props) {
       >
         <Search size={20} />
       </div>
-      <Link
-        href={`/users/message`}
+      <div
+        onClick={() => {
+          alert("준비중입니다");
+        }}
         className="border-black border-[1px] p-2 rounded-full cursor-pointer"
       >
         <Bell size={20} />
-      </Link>
+      </div>
 
       <DropdownMenu>
         {/* asChild를 써주면 태그에 클릭이 붙는게 아니라  자식 element에 클릭 이벤트가 붙는다 */}
