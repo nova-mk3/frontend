@@ -7,7 +7,7 @@ export default function PopUp() {
   const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("NovaUpdatePopup") === "true") {
+    if (localStorage.getItem("NovaUpdatePopupClose") === "true") {
       setIsHidden(true);
     } else setIsHidden(false);
   }, []);
@@ -18,7 +18,7 @@ export default function PopUp() {
   };
 
   const handleAction = () => {
-    localStorage.setItem("NovaUpdatePopup", "true");
+    localStorage.setItem("NovaUpdatePopupClose", "true");
     setIsOpen(false);
   };
   if (!isHidden) {

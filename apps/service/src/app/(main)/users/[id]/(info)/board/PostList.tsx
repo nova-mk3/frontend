@@ -3,7 +3,7 @@ import BoardListItem, {
 } from "@/src/app/(main)/board/components/BoardListItem";
 import { PageNation } from "@/src/app/(main)/components/PageNation";
 import PendingFallbackUI from "@/src/app/(main)/components/Skeleton/PendingFallbackUI";
-import { BOARD_SIZE } from "@/src/constant/board";
+import { BOARD_SIZE, POST_TYPE } from "@/src/constant/board";
 import React, { Suspense } from "react";
 import { useMypagePostQuery } from "../../query/qureies";
 import { useQueryParams } from "@/src/app/(main)/components/useQueryParams";
@@ -30,24 +30,34 @@ export default function PostList() {
   return (
     <>
       <div className="flex flex-col gap-2 min-h-[700px] mt-5">
-        {data.content.map((post: BoardListItemType) => (
-          <BoardListItem
-            key={post.id}
-            id={post.id}
-            authorName={post.authorName}
-            authorProfilePhoto={post.authorProfilePhoto}
-            title={post.title}
-            content={post.content}
-            type={post.type}
-            createdTime={post.createdTime}
-            modifiedTime={post.modifiedTime}
-            likeCount={post.likeCount}
-            commentCount={post.commentCount}
-            viewCount={post.viewCount}
-            href={`/board/${post.type.toLowerCase()}/${post.id}`}
-            ishome={false}
-          />
-        ))}
+        {data.content.map((post: BoardListItemType) => {
+          const PostTypeCheck =
+            post.type === POST_TYPE.EXAM_ARCHIVE ||
+            post.type === POST_TYPE.PICTURES;
+
+          return (
+            <BoardListItem
+              key={post.id}
+              id={post.id}
+              authorName={post.authorName}
+              authorProfilePhoto={post.authorProfilePhoto}
+              title={post.title}
+              content={post.content}
+              type={post.type}
+              createdTime={post.createdTime}
+              modifiedTime={post.modifiedTime}
+              likeCount={post.likeCount}
+              commentCount={post.commentCount}
+              viewCount={post.viewCount}
+              href={
+                PostTypeCheck
+                  ? `/${post.type.toLowerCase()}/${post.id}`
+                  : `/board/${post.type.toLowerCase()}/${post.id}`
+              }
+              ishome={false}
+            />
+          );
+        })}
       </div>
       <Suspense fallback={<div className="h-[36px]"></div>}>
         <PageNation
