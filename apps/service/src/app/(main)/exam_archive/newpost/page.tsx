@@ -93,7 +93,6 @@ export default function Page() {
     mutationFn: (data: ArchivePostRequest) => ArchivePost(data),
     onSuccess: (data: any) => {
       console.log(data);
-      alert("글쓰기 성공");
 
       router.push(`/${POST_TYPE.EXAM_ARCHIVE.toLocaleLowerCase()}/${data.id}`);
 

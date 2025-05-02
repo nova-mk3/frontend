@@ -54,7 +54,7 @@ export default function RootLayout({
         />
         <meta name="application-name" content="NOVA" />
       </head>
-      <body>
+      <body className="relative">
         <Providers>{children}</Providers>
       </body>
     </html>

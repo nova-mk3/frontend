@@ -17,9 +17,6 @@ export function usePicturePostMutation() {
   return useMutation({
     mutationFn: (data: PicturePostReqeust) => PicturePost(data),
     onSuccess: (data: any) => {
-      console.log(data);
-      alert("글쓰기 성공");
-
       router.push(`/${POST_TYPE.PICTURES.toLowerCase()}/${data.id}`);
 
       // 내가 쓴 글의 리스트 무효화

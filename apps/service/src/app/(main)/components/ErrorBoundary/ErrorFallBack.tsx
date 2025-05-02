@@ -25,9 +25,6 @@ export default function FallbackErrorUI({
         <Link href="/">
           <Button variant="text">메인으로</Button>
         </Link>
-        <Button variant="text" onClick={resetErrorBoundary}>
-          다시 불러오기!
-        </Button>
 
         <Button variant="text" onClick={() => window.history.back()}>
           뒤로가기

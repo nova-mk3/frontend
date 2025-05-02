@@ -35,10 +35,10 @@ export default function HeaderLoginMenu({ trigger, memberId }: Props) {
         <Search size={20} />
       </div>
       <div
-        className="border-black border-[1px] p-2 rounded-full cursor-pointer"
         onClick={() => {
           alert("준비중입니다");
         }}
+        className="border-black border-[1px] p-2 rounded-full cursor-pointer"
       >
         <Bell size={20} />
       </div>

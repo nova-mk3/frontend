@@ -1,9 +1,13 @@
 import React from "react";
-
+import Post from "./Post";
+import ErrorBoundaryWrapper from "@/src/app/(main)/components/ErrorBoundary/ErrorBoundaryWrapper";
+export const dynamic = "force-dynamic";
 export default function page() {
   return (
-    <div className="w-full bg-background02 flex  justify-center items-center h-[795px] mt-5">
-      개발중
+    <div className="w-[80%] mx-auto mt-5">
+      <ErrorBoundaryWrapper>
+        <Post />
+      </ErrorBoundaryWrapper>
     </div>
   );
 }

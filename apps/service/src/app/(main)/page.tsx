@@ -2,6 +2,7 @@ import React from "react";
 import FramePictureSection from "./components/FramePictureSection/FramePictureSection";
 import FramePostSection from "./components/FramePictureSection/FramePostSection";
 import FrameAboutMeSection from "./components/FramePictureSection/FrameAboutMeSection";
+import PopUp from "./components/PopUp";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <div className="flex justify-center mt-40 ">
         <FrameAboutMeSection className="relative w-screen px-8 mobile:w-[90%]" />
       </div>
+      <PopUp />
     </>
   );
 }
