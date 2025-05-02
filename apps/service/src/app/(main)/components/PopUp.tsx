@@ -7,7 +7,9 @@ export default function PopUp() {
   const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
-    setIsHidden(!localStorage.getItem("NovaUpdatePopup"));
+    if (localStorage.getItem("NovaUpdatePopup") === "true") {
+      setIsHidden(true);
+    } else setIsHidden(false);
   }, []);
   // 페이지 로드시 체크
 
@@ -16,7 +18,7 @@ export default function PopUp() {
   };
 
   const handleAction = () => {
-    localStorage.setItem("NovaUpdatePopup", "false");
+    localStorage.setItem("NovaUpdatePopup", "true");
     setIsOpen(false);
   };
   if (!isHidden) {
