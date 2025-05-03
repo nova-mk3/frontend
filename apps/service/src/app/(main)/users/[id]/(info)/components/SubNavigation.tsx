@@ -2,8 +2,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import { SimpleProfileQueryOptions } from "../../query/options";
+import { useQuery } from "@tanstack/react-query";
 
-export default function SubNavigation() {
+export default function SubNavigation({ id }: { id: string }) {
+  const { data } = useQuery(SimpleProfileQueryOptions());
+
   const pathname = usePathname();
   const userId = pathname.split("/")[2];
   return (
@@ -11,15 +15,21 @@ export default function SubNavigation() {
       <NavigationMenuItem href={`/users/${userId}`} pathname={pathname}>
         프로필
       </NavigationMenuItem>
-      <NavigationMenuItem href={`/users/${userId}/board`} pathname={pathname}>
-        게시글
-      </NavigationMenuItem>
-      <NavigationMenuItem
-        href={`/users/${userId}/suggestion`}
-        pathname={pathname}
-      >
-        건의함
-      </NavigationMenuItem>
+
+      {data.memberId === id && (
+        <NavigationMenuItem href={`/users/${userId}/board`} pathname={pathname}>
+          게시글
+        </NavigationMenuItem>
+      )}
+
+      {data.memberId === id && (
+        <NavigationMenuItem
+          href={`/users/${userId}/suggestion`}
+          pathname={pathname}
+        >
+          건의함
+        </NavigationMenuItem>
+      )}
     </ul>
   );
 }
