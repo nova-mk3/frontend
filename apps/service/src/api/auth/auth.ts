@@ -1,5 +1,5 @@
-import { throwErrorMessage } from "../libs/utils/throwError";
-import { api, Authapi } from "./core";
+import { throwErrorMessage } from "../../libs/utils/throwError";
+import { api, Authapi } from "../core";
 
 export async function verifyEmail(email: string) {
   const response = await api.post("/email-auth", { email: email });
@@ -140,4 +140,4 @@ export async function signup(signUpData: SignUpData) {
   } catch (e) {
     throwErrorMessage(e);
   }
-}
+}     

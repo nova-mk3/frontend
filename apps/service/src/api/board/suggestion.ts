@@ -1,7 +1,7 @@
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
 import { Authapi } from "../core";
 import { ERROR_MESSAGES } from "@/src/constant/error";
-import { SearchFiilterParamType } from "./integrated";
+import { SearchFiilterParamType } from "./integrated/api";
 
 export interface SuggestionPostRequest {
   title: string;

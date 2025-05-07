@@ -1,52 +1,24 @@
-import { PostType } from "@/src/constant/board";
-import { api, Authapi } from "../core";
+import { api, Authapi } from "../../core";
 import { throwErrorMessage } from "@/src/libs/utils/throwError";
+import {
+  GetAllIntegratedPostsParams,
+  GetIntegratedBoardParams,
+  GetIntegratedBoardsByCategoryParams,
+  IntegratedBoardParams,
+  PostIntegratedBoardRequest,
+  PutIntegratedBoardRequest,
+} from "./type";
 
-export interface IntegradePostRequest {
-  title: string;
-  content: string;
-  postType: string;
-  fileIds: string[];
-  boardId: string;
-}
-
-export interface Params {
-  postId: string;
-  postType: PostType;
-  boardId: string;
-  size: number;
-  page: number;
-  keyword: string;
-  searchType: string;
-  sortBy: string;
-  sortDirection: string;
-}
-
-// 선택
-export type BoardGetParamType = Pick<Params, "postId" | "boardId">;
-export type BoardIdParams = Pick<Params, "boardId">;
-
-// 제외한 나머지
-export type BoardCategoryGetParamType = Omit<Params, "postId">;
-export type BoardAllListParamType = Omit<Params, "postId" | "postType">;
-export type SearchFiilterParamType = Omit<
-  Params,
-  "postId" | "postType" | "boardId"
->;
-export type AcrossBoardParamType = Omit<
-  Params,
-  "postId" | "postType" | "boardId" | "keyword" | "searchType"
->;
-/*
-게시글 작성
-*/
-export async function IntegratedBoardPost({
+/**
+ * 게시글 생성
+ */
+export async function PostIntegratedBoard({
   title,
   content,
   postType,
   fileIds,
   boardId,
-}: IntegradePostRequest) {
+}: PostIntegratedBoardRequest) {
   try {
     const response = await Authapi.post(`/boards/${boardId}/posts`, {
       title,
@@ -60,10 +32,10 @@ export async function IntegratedBoardPost({
   }
 }
 
-/*
- * 카테고리별 목록 조회
+/**
+ * 카테고리별 게시글 조회
  */
-export async function IntegratedBoardGet({
+export async function GetIntegratedBoardsByCategory({
   postType,
   boardId,
   page,
@@ -72,7 +44,7 @@ export async function IntegratedBoardGet({
   sortBy,
   sortDirection,
   keyword,
-}: BoardCategoryGetParamType) {
+}: GetIntegratedBoardsByCategoryParams) {
   try {
     const response = await Authapi.get(
       `/boards/${boardId}/posts/search?postType=${postType}&page=${page}&size=${size}&searchType=${searchType}&keyword=${keyword}&sortBy=${sortBy}&sortDirection=${sortDirection}`
@@ -83,13 +55,13 @@ export async function IntegratedBoardGet({
   }
 }
 
-/*
+/**
  * 게시글 상세 조회
  */
-export async function IntegratedBoardGetDetail({
+export async function GetIntegratedBoard({
   postId,
   boardId,
-}: BoardGetParamType) {
+}: GetIntegratedBoardParams) {
   try {
     const response = await Authapi.get(`/boards/${boardId}/posts/${postId}`);
     return response.data.data;
@@ -99,9 +71,9 @@ export async function IntegratedBoardGetDetail({
 }
 
 /*
- * 전체 게시판 목록 조회
+ * 통합 게시판 전체글 보기 조회
  */
-export async function BoardAllList({
+export async function GetAllIntegratedBoards({
   boardId,
   page,
   size,
@@ -109,8 +81,7 @@ export async function BoardAllList({
   keyword,
   sortBy,
   sortDirection,
-}: BoardAllListParamType) {
-  console.log("하이");
+}: GetAllIntegratedPostsParams) {
   try {
     const response = await Authapi.get(
       `/boards/${boardId}/posts/all/search?page=${page}&size=${size}&searchType=${searchType}&keyword=${keyword}&sortBy=${sortBy}&sortDirection=${sortDirection}`
@@ -124,7 +95,11 @@ export async function BoardAllList({
 /*
  * 각 PostType(QnA, 자유게시판, 자기소개, 공지사항)별 최신 6개 게시글 조회
  */
-export async function BoardLatestList({ boardId }: BoardIdParams) {
+export async function GetRecentIntegratedBoards({
+  boardId,
+}: {
+  boardId: string;
+}) {
   try {
     const response = await Authapi.get(`/boards/${boardId}/posts/latest`);
 
@@ -134,21 +109,11 @@ export async function BoardLatestList({ boardId }: BoardIdParams) {
   }
 }
 
-/*
-게시글 수정!
-*/
+/**
+ * 게시글 수정
+ */
 
-export interface IntegratedPutRequest {
-  title: string;
-  postType: string;
-  content: string;
-  boardId: string;
-  fileIds: string[];
-  postId: string;
-  deleteFileIds: string[];
-}
-
-export async function IntegratedBoardPut({
+export async function PutIntegratedBoard({
   title,
   content,
   fileIds,
@@ -156,7 +121,7 @@ export async function IntegratedBoardPut({
   postId,
   postType,
   deleteFileIds,
-}: IntegratedPutRequest) {
+}: PutIntegratedBoardRequest) {
   try {
     const response = await Authapi.put(`/boards/${boardId}/posts/${postId}`, {
       title,
@@ -174,29 +139,12 @@ export async function IntegratedBoardPut({
 /*
 게시글 삭제
 */
-
-export async function IntegratedBoardDelete({
+export async function DeleteIntegratedBoard({
   boardId,
   postId,
-}: BoardGetParamType) {
+}: Partial<IntegratedBoardParams>) {
   try {
     const response = await Authapi.delete(`/boards/${boardId}/posts/${postId}`);
-    return response.data.data;
-  } catch (error: any) {
-    throwErrorMessage(error);
-  }
-}
-
-export async function getAcrossBoard({
-  size,
-  page,
-  sortDirection,
-  sortBy,
-}: AcrossBoardParamType) {
-  try {
-    const response = await api.get(
-      `/posts/across-boards?sortBy=${sortBy}&sortDirection=${sortDirection}&page=${page}&size=${size}`
-    );
     return response.data.data;
   } catch (error: any) {
     throwErrorMessage(error);

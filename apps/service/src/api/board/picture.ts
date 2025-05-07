@@ -86,14 +86,7 @@ export async function PicturePut({
   게시글 삭제
   */
 
-export interface IntegratedPutRequest {
-  title: string;
-  content: string;
-  boardId: string;
-  fileIds: string[];
-  postId: string;
-  deleteFileIds: string[];
-}
+
 
 export async function PictureBoardDelete({
   boardId,
