@@ -1,8 +1,8 @@
 "use client";
 import { useMemo } from "react";
 import { Lock, Unlock } from "lucide-react";
-import { formatDate } from "@/src/libs/utils/dateParsing";
 import Link from "next/link";
+import { formatDate } from "@/src/shared/utils/dateParsing";
 export interface SuggestionItem {
   adminRead: boolean;
   answered: boolean;

@@ -3,9 +3,10 @@ import React from "react";
 import Link from "next/link";
 import { Bell, CircleX } from "lucide-react";
 import { useSidebar } from "./AppSidebar";
-import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
+
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { logout } from "@/src/api/auth/auth";
+import { SimpleProfileQueryOptions } from "@/src/app/(main)/users/[id]/query/options";
+import { logout } from "@/src/features/auth/api/auth";
 
 export default function SidebarHeader() {
   const queryClient = useQueryClient();

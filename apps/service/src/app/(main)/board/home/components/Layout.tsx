@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
 import { Button } from "@nova/ui/components/ui/button";
-import ErrorBoundaryWrapper from "../../../components/ErrorBoundary/ErrorBoundaryWrapper";
+
 import Post from "./Post";
 import { useQuery } from "@tanstack/react-query";
 import { SimpleProfileQueryOptions } from "../../../users/[id]/query/options";
+import ErrorBoundaryWrapper from "@/src/shared/ui/errorBoundary/ErrorBoundaryWrapper";
 
 export default function Layout() {
   const { data } = useQuery(SimpleProfileQueryOptions());

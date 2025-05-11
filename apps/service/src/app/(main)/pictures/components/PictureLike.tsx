@@ -2,10 +2,11 @@
 import React, { useState } from "react";
 import HeartIcon from "@/public/image/Heart.svg";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { LikeAPI, UnLikeAPI } from "@/src/api/board/like";
+
 import { cn } from "@nova/ui/lib/utils";
-import { postKeys } from "../../board/query/postqueries";
-import { EmojiCirCleButton } from "../../board/components/Aside";
+import { LikeAPI, UnLikeAPI } from "@/src/features/like/api/like.api";
+import { postKeys } from "@/src/features/board/query/queryKey";
+import { EmojiCirCleButton } from "@/src/shared/ui/buttom/EmojiCirCleButton";
 
 interface LikeProps {
   liked: boolean;

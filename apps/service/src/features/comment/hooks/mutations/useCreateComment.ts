@@ -1,8 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { PostComment } from "../../api/comment.api";
 import { PostCommentRequest } from "../../api/comment.type";
-import { postKeys } from "@/src/app/(main)/board/query/postqueries";
+
 import { commentsKeys } from "../../query/queryKeys";
+import { postKeys } from "@/src/features/board/query/queryKey";
 
 export const useCreateCommentMutation = ({
   postId,

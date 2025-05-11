@@ -13,8 +13,8 @@ import Image from "next/image";
 import { useSliderStore } from "@/src/store/ImageSlider";
 import { ImageProps } from "../PostDetail";
 import { cn } from "@nova/ui/lib/utils";
-import { DownloadFilesAPI } from "@/src/api/board/file";
-import { DownloadProgressModal } from "../../../components/Modal/DownloadProgressModal";
+import { DownloadFilesAPI } from "@/src/features/file/api/file";
+import { DownloadProgressModal } from "@/src/shared/ui/modal/DownloadProgressModal";
 
 interface ModalProps {
   isOpen: boolean;

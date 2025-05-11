@@ -1,24 +1,24 @@
 "use client";
 import React, { useEffect } from "react";
 import { CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
-import DetailPageTitle from "../../board/components/DetailPageTitle";
 import ImageSlider from "./components/ImageSlider";
 import { usePictureDetailQuery } from "../query/queries";
-import { FileItemProps } from "../../components/File/ViewFileItem";
 import { Separator } from "@nova/ui/components/ui/separator";
 import CommentSection from "./components/CommentSection";
-import AlertDialog from "../../components/Modal/AlertDialog";
 import { useRouter } from "next/navigation";
 import { PictureBoardDelete } from "@/src/api/board/picture";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { postKeys } from "../../board/query/postqueries";
-import { formatDate } from "@/src/libs/utils/dateParsing";
-import ViewCount from "../../board/components/ViewCount";
-import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
 import PictureLike from "../components/PictureLike";
 import Link from "next/link";
 import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
 import { useSliderStore } from "@/src/store/ImageSlider";
+import { FileItemProps } from "@/src/features/file/components/ViewFileItem";
+import { postKeys } from "@/src/features/board/query/queryKey";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
+import { formatDate } from "@/src/shared/utils/dateParsing";
+import DetailPageTitle from "@/src/features/board/components/DetailPageTitle";
+import AlertDialog from "@/src/shared/ui/modal/AlertDialog";
+import ViewCount from "@/src/features/board/components/ViewCount";
 
 interface PostDetailProps {
   postId: string;

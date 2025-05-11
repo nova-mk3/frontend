@@ -1,12 +1,11 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import React from "react";
 import PostDetail from "./PostDetail";
-
-import getQueryClient from "@/src/query/getQueryClient";
 import { INTEGRATED } from "@/src/constant/board";
-import { CommentsListQueryOptions } from "../../query/options";
-import { postKeys } from "../../query/postqueries";
-import { IntegratedBoardGetDetail } from "@/src/api/board/integrated";
+import getQueryClient from "@/src/shared/query/getQueryClient";
+import { postKeys } from "@/src/features/board/query/queryKey";
+import { IntegratedBoardGetDetail } from "@/src/api/board/server";
+import { CommentsListQueryOptions } from "@/src/features/comment/query/option";
 
 interface Props {
   postId: string;

@@ -2,15 +2,16 @@
 
 import React, { Suspense } from "react";
 
-import { usePostListQuery } from "../query/postqueries";
 import { BOARD_SIZE, INTEGRATED, POST_TYPE } from "@/src/constant/board";
-import { PageNation } from "../../components/PageNation";
-import { useQueryParams } from "../../components/useQueryParams";
-import BoardListTitle from "../components/BoardListTitle";
+
 import { Book } from "lucide-react";
-import BoardList from "../components/BoardList";
-import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
-import DeferredComponent from "../../components/ErrorBoundary/DeferredComponent";
+
+import { usePostListQuery } from "@/src/features/board/query/queries";
+import BoardListTitle from "@/src/features/board/components/BoardListTitle";
+import BoardList from "@/src/features/board/components/BoardList";
+import { useQueryParams } from "@/src/shared/hooks/useQueryParams";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
+import { PageNation } from "@/src/shared/ui/pageNation/PageNation";
 
 export default function Post() {
   const { currentPage, keyword, searchType, sortBy, sortDirection } =

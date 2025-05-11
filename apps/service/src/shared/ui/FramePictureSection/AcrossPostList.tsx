@@ -1,10 +1,11 @@
 import React from "react";
-import { useAcrossBoardListQuery } from "../../board/query/postqueries";
-import FramPostSectionListItem from "./FramPostSectionListItem";
 import { POST_TYPE } from "@/src/constant/board";
+import { useAcrossBoardListQuery } from "@/src/features/board/query/queries";
+import { sortByType } from "../../types/searchFilter.type";
+import FramePostSectionListItem from "./FramePostSectionListItem";
 
 interface Props {
-  sortBy: string;
+  sortBy: sortByType;
 }
 export default function AcrossPostList({ sortBy }: Props) {
   const { data, isLoading } = useAcrossBoardListQuery({
@@ -27,7 +28,7 @@ export default function AcrossPostList({ sortBy }: Props) {
     <div className="flex flex-col gap-2">
       {/* PostListSkeleton */}
       {data.content.map((post: any) => (
-        <FramPostSectionListItem
+        <FramePostSectionListItem
           defaultHref={`${POST_TYPE.PICTURES !== post.postType ? "/board" : ""}`}
           key={post.id}
           type={post.postType}

@@ -15,7 +15,7 @@ import {
 import Link from "next/link";
 import { SidebarMenuItem } from "./AppSidebar";
 import { useQuery } from "@tanstack/react-query";
-import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
+import { SimpleProfileQueryOptions } from "@/src/app/(main)/users/[id]/query/options";
 export default function SiderbarContent() {
   const { data } = useQuery(SimpleProfileQueryOptions());
   return (

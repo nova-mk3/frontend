@@ -11,7 +11,7 @@ import {
 } from "@nova/ui/components/ui/dropdown-menu";
 import { Button } from "@nova/ui/components/ui/button";
 import { ChevronDown } from "lucide-react";
-import { useQueryParams } from "../useQueryParams";
+import { useQueryParams } from "../../hooks/useQueryParams";
 export function SuggestionFilter() {
   const { sortBy, sortDirection, setSortBy, setSortDirection } =
     useQueryParams();

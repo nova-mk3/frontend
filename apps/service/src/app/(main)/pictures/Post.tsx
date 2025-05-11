@@ -1,15 +1,15 @@
 "use client";
 
 import React, { Suspense } from "react";
-
 import { Image } from "lucide-react";
-import { useQueryParams } from "../components/useQueryParams";
-import { usePostListQuery } from "../board/query/postqueries";
 import { BOARD_SIZE, CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
-import BoardListTitle from "../board/components/BoardListTitle";
+
 import PictureList from "./components/PictureList";
-import { PageNation } from "../components/PageNation";
-import PendingFallbackUI from "../components/Skeleton/PendingFallbackUI";
+import { useQueryParams } from "@/src/shared/hooks/useQueryParams";
+import { usePostListQuery } from "@/src/features/board/query/queries";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
+import BoardListTitle from "@/src/features/board/components/BoardListTitle";
+import { PageNation } from "@/src/shared/ui/pageNation/PageNation";
 
 export default function Post() {
   const { currentPage, keyword, searchType, sortBy, sortDirection } =

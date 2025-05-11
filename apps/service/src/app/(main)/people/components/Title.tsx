@@ -7,7 +7,7 @@ import {
   SelectItem,
   SelectContent,
 } from "@nova/ui/components/ui/select";
-import { useQueryParams } from "../../components/useQueryParams";
+import { useQueryParams } from "@/src/shared/hooks/useQueryParams";
 
 interface TitleProps {
   title?: string;

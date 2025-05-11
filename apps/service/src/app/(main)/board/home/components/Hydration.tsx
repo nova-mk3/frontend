@@ -1,9 +1,9 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import React from "react";
-import getQueryClient from "@/src/query/getQueryClient";
 import Post from "./Post";
-import { postLatestQueryOptions } from "../../query/options";
 import { INTEGRATED } from "@/src/constant/board";
+import { postLatestQueryOptions } from "@/src/features/board/query/options";
+import getQueryClient from "@/src/shared/query/getQueryClient";
 
 export default async function Hydration() {
   const queryClient = getQueryClient();

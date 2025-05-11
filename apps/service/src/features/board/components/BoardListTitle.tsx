@@ -2,12 +2,12 @@
 import React from "react";
 import { Button } from "@nova/ui/components/ui/button";
 import Link from "next/link";
-import SelectSortComponent from "../../components/Search/SelectSortComponent";
-import { POST_TYPE_LABEL, PostType } from "@/src/constant/board";
-import SearchInput from "../../components/Search/SearchInput";
-import { Filter } from "../../components/Filter";
+import { SimpleProfileQueryOptions } from "@/src/app/(main)/users/[id]/query/options";
 import { useQuery } from "@tanstack/react-query";
-import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
+import { POST_TYPE_LABEL, PostType } from "@/src/constant/board";
+import { Filter } from "@/src/shared/ui/filter/Filter";
+import SelectSortComponent from "@/src/shared/ui/search/SelectSortComponent";
+import SearchInput from "@/src/shared/ui/search/SearchInput";
 
 interface BoardListTitleProps {
   title: string;

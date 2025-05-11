@@ -7,15 +7,17 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PictureInput, PictureSchema } from "@/src/schema/picture.schema";
 import { Form } from "@nova/ui/components/ui/form";
-import TextareaFormField from "@/src/app/(auth)/signup/components/TextareaFormField";
-import TextareaFormContentField from "@/src/app/(auth)/signup/components/TextareaFormContentField";
+
 import { CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
-import NewPostTitle from "../../components/NewPostTitle";
+
 import {
   useFileUploadMutation,
   usePicturePostMutation,
 } from "../query/mutation";
-import LoadingModal from "../../components/Modal/LoadingModal";
+import NewPostTitle from "@/src/shared/ui/board/NewPostTitle";
+import TextareaFormField from "@/src/features/auth/components/signup/TextareaFormField";
+import TextareaFormContentField from "@/src/features/auth/components/signup/TextareaFormContentField";
+import LoadingModal from "@/src/shared/ui/modal/LoadingModal";
 
 export default function Page() {
   const [selectedFiles, setSelectedFiles] = useState<ImageFile[]>([]);

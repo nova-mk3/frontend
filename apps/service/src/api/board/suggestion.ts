@@ -1,7 +1,7 @@
-import { throwErrorMessage } from "@/src/libs/utils/throwError";
-import { Authapi } from "../core";
 import { ERROR_MESSAGES } from "@/src/constant/error";
-import { SearchFiilterParamType } from "./integrated/api";
+import { Authapi } from "@/src/shared/api/core";
+import { searchFilter } from "@/src/shared/types/searchFilter.type";
+import { throwErrorMessage } from "@/src/shared/utils/throwError";
 
 export interface SuggestionPostRequest {
   title: string;
@@ -10,9 +10,10 @@ export interface SuggestionPostRequest {
   isPrivate: boolean;
 }
 
-/*
-   게시글 작성
-*/
+/**
+ * 게시글 생성
+ */
+
 export async function SuggestionPost({
   title,
   content,
@@ -54,7 +55,7 @@ export async function SuggestionGet({
   keyword,
   sortBy,
   sortDirection,
-}: SearchFiilterParamType) {
+}: searchFilter) {
   try {
     const response = await Authapi.get(
       `/suggestions/search?page=${page}&size=${size}&searchType=${searchType}&keyword=${keyword}&sortBy=${sortBy}&sortDirection=${sortDirection}`

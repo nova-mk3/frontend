@@ -1,12 +1,13 @@
-import PendingFallbackUI from "@/src/app/(main)/components/Skeleton/PendingFallbackUI";
-import { useQueryParams } from "@/src/app/(main)/components/useQueryParams";
 import React, { Suspense } from "react";
 import { useMypageSuggestionQuery } from "../../query/qureies";
 import SuggestionListItem, {
   SuggestionItem,
 } from "@/src/app/(main)/suggestion/components/SuggestionListItem";
-import { PageNation } from "@/src/app/(main)/components/PageNation";
+
 import { BOARD_SIZE } from "@/src/constant/board";
+import { useQueryParams } from "@/src/shared/hooks/useQueryParams";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
+import { PageNation } from "@/src/shared/ui/pageNation/PageNation";
 
 export default function PostList() {
   const { currentPage } = useQueryParams();

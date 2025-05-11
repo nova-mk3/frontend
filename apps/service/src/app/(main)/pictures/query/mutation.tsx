@@ -5,10 +5,10 @@ import {
   PicturePut,
 } from "@/src/api/board/picture";
 import { POST_TYPE, PostType } from "@/src/constant/board";
+import { postKeys } from "@/src/features/board/query/queryKey";
+import { UploadFilesAPI } from "@/src/features/file/api/file";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { postKeys } from "../../board/query/postqueries";
-import { UploadFilesAPI } from "@/src/api/board/file";
 
 export function usePicturePostMutation() {
   const queryClient = useQueryClient();

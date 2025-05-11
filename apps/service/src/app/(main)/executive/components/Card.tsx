@@ -2,11 +2,11 @@ import React from "react";
 import Image from "next/image";
 import CardLogo from "@/public/image/CardLogo.svg";
 import { Phone, CrownIcon } from "lucide-react";
-import { Profile } from "../../board/components/comments/CommentListItem";
 import Link from "next/link";
+import { UserProfilePhoto } from "@/src/entities/user/user.type";
 
 interface CardProps {
-  profilePhoto: Profile;
+  profilePhoto: UserProfilePhoto;
   role: string;
   name: string;
   phone: string;

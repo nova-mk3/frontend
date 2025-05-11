@@ -1,24 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { formatDate } from "@/src/libs/utils/dateParsing";
 import { POST_TYPE } from "@/src/constant/board";
 import { Eye, Heart, MessageSquare } from "lucide-react";
+import { Board } from "@/src/entities/board/board.type";
+import { formatDate } from "@/src/shared/utils/dateParsing";
 
-export interface BoardListItemType {
+interface BoardListItemProps extends Board {
   className?: string;
-  id: string;
-  authorName: string;
-  authorProfilePhoto: string;
-  title: string;
-  content: string;
-  type: string;
-  createdTime: string;
-  modifiedTime: string;
-  likeCount: number;
-  commentCount: number;
-  viewCount: number;
-  href: string;
-  ishome: boolean;
 }
 export default function BoardListItem({
   title,
@@ -32,7 +20,7 @@ export default function BoardListItem({
   type,
   href,
   ishome,
-}: BoardListItemType) {
+}: BoardListItemProps) {
   return (
     <div
       className={`border-b-[1px] border-line01 flex flex-col p-4 gap-2 hover:bg-gray-50 ${className}`}

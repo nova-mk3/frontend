@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import HomeListItem from "../../components/HomeListItem";
 import { INTEGRATED, POST_TYPE, POST_TYPE_LABEL } from "@/src/constant/board";
-import { usePostLatestListQuery } from "../../query/postqueries";
-import PendingFallbackUI from "../../../components/Skeleton/PendingFallbackUI";
+import { usePostLatestListQuery } from "@/src/features/board/query/queries";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
+import HomeListItem from "@/src/features/board/components/HomeListItem";
 
 export default function Post() {
   const { data, isLoading } = usePostLatestListQuery({ boardId: INTEGRATED });

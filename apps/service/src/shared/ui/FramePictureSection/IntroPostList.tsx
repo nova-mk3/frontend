@@ -1,7 +1,7 @@
 import React from "react";
-import { usePostListQuery } from "../../board/query/postqueries";
-import FramPostSectionListItem from "./FramPostSectionListItem";
 import { INTEGRATED, POST_TYPE } from "@/src/constant/board";
+import { usePostListQuery } from "@/src/features/board/query/queries";
+import FramePostSectionListItem from "./FramePostSectionListItem";
 
 export default function IntroPostList() {
   const { data, isLoading } = usePostListQuery({
@@ -9,7 +9,7 @@ export default function IntroPostList() {
     page: 0,
     size: 5,
     keyword: "",
-    searchType: "",
+    searchType: "ALL",
     sortBy: "createdTime",
     sortDirection: "desc",
     boardId: INTEGRATED,
@@ -25,7 +25,7 @@ export default function IntroPostList() {
     <div className="flex flex-col gap-2">
       {/* PostListSkeleton */}
       {data.content.map((post: any) => (
-        <FramPostSectionListItem
+        <FramePostSectionListItem
           defaultHref="/board"
           key={post.id}
           type={post.type}

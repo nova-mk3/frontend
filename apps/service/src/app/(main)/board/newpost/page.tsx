@@ -9,20 +9,20 @@ import {
   IntegratedSchema,
 } from "@/src/schema/integrated.schema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  IntegradePostRequest,
-  IntegratedBoardPost,
-} from "@/src/api/board/integrated";
+
 import { useRouter } from "next/navigation";
-import { UploadFilesAPI } from "@/src/api/board/file";
-import PostFileUploader from "../../components/File/PostFileUploader";
-import { SelectFormField } from "@/src/app/(auth)/signup/components/SelectFormField";
+
+import { PostIntegratedBoardRequest } from "@/src/features/board/api/integrated.type";
+import { PostIntegratedBoard } from "@/src/features/board/api/integrated";
+import { postKeys } from "@/src/features/board/query/queryKey";
+import { UploadFilesAPI } from "@/src/features/file/api/file";
 import { Form } from "@nova/ui/components/ui/form";
-import TextareaFormField from "@/src/app/(auth)/signup/components/TextareaFormField";
-import TextareaFormContentField from "@/src/app/(auth)/signup/components/TextareaFormContentField";
-import { postKeys } from "../query/postqueries";
-import NewPostTitle from "../../components/NewPostTitle";
-import LoadingModal from "../../components/Modal/LoadingModal";
+import NewPostTitle from "@/src/shared/ui/board/NewPostTitle";
+import { SelectFormField } from "@/src/features/auth/components/signup/SelectFormField";
+import PostFileUploader from "@/src/features/file/components/PostFileUploader";
+import TextareaFormField from "@/src/features/auth/components/signup/TextareaFormField";
+import TextareaFormContentField from "@/src/features/auth/components/signup/TextareaFormContentField";
+import LoadingModal from "@/src/shared/ui/modal/LoadingModal";
 
 export default function Page() {
   const router = useRouter();
@@ -40,7 +40,7 @@ export default function Page() {
   });
 
   const useIntegratedBoardMutation = useMutation({
-    mutationFn: (data: IntegradePostRequest) => IntegratedBoardPost(data),
+    mutationFn: (data: PostIntegratedBoardRequest) => PostIntegratedBoard(data),
     onSuccess: (data: any) => {
       router.push(`/board/${watchcategory.toLocaleLowerCase()}/${data.id}`);
 

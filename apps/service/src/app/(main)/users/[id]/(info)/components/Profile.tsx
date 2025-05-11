@@ -3,14 +3,14 @@ import React from "react";
 import { useGetUserData } from "../../query/qureies";
 import Image from "next/image";
 import Link from "next/link";
-import PendingFallbackUI from "@/src/app/(main)/components/Skeleton/PendingFallbackUI";
 import { Calendar, Mail, Phone, School, User } from "lucide-react";
-import { formatKoreanDate } from "@/src/libs/utils/koreandate";
 import { Button } from "@nova/ui/components/ui/button";
 import { cn } from "@nova/ui/lib/utils";
-import { translateRole } from "@/src/libs/utils/translateRole";
 import { useQuery } from "@tanstack/react-query";
 import { SimpleProfileQueryOptions } from "../../query/options";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
+import { formatKoreanDate } from "@/src/shared/utils/koreandate";
+import { translateRole } from "@/src/shared/utils/translateRole";
 interface Props {
   memberId: string;
 }

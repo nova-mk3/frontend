@@ -1,8 +1,7 @@
 import React from "react";
-
-import ErrorBoundaryWrapper from "@/src/app/(main)/components/ErrorBoundary/ErrorBoundaryWrapper";
 import ChangeEmail from "./ChangeEmail";
 import LayoutClient from "../components/LayoutClient";
+import ErrorBoundaryWrapper from "@/src/shared/ui/errorBoundary/ErrorBoundaryWrapper";
 
 export const dynamic = "force-dynamic";
 

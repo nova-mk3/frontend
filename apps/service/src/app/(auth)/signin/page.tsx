@@ -1,6 +1,8 @@
 import { Suspense } from "react";
-import { Background } from "./components/background";
-import { SigninForm } from "./components/signinForm";
+
+import { SigninForm } from "@/src/features/auth/components/signin/signinForm";
+import { Background } from "@/src/features/auth/components/signin/background";
+
 // export const dynamic = "force-dynamic";
 
 export default function Signin() {

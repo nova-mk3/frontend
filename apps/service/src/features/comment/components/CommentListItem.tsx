@@ -5,37 +5,22 @@ import ReplyCommentForm from "./ReplyCommentForm";
 import ReplyCommentItem from "./ReplyCommentItem";
 import { Button } from "@nova/ui/components/ui/button";
 import ReplyButton from "./ReplyButton";
-import { formatDate } from "@/src/libs/utils/dateParsing";
-
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-
-import { throwErrorMessage } from "@/src/libs/utils/throwError";
 import ModifyCommentForm from "./ModifyCommentForm";
 import Image from "next/image";
 import Link from "next/link";
 import { SimpleProfileQueryOptions } from "@/src/app/(main)/users/[id]/query/options";
 import { DeleteComment, PutComment } from "../api/comment.api";
 import { commentsKeys } from "../query/queryKeys";
-import AlertDialog from "@/src/app/(main)/components/Modal/AlertDialog";
+import { Comment } from "@/src/entities/comment/comment.types";
+import { throwErrorMessage } from "@/src/shared/utils/throwError";
+import { formatDate } from "@/src/shared/utils/dateParsing";
+import AlertDialog from "@/src/shared/ui/modal/AlertDialog";
 
-export interface CommentItemProps {
-  id: string;
-  authorName: string;
-  authorProfilePhoto: Profile;
-  children: CommentItemProps[];
-  content: string;
-  modifiedTime: string;
-  createdTime: string;
+interface CommentListItemProps extends Comment {
   className?: string;
-  postId: string;
-  authorId: string;
 }
 
-export interface Profile {
-  id: string;
-  imageUrl: string;
-  originalFileName: string;
-}
 export default function CommentListItem({
   id,
   authorName,
@@ -44,10 +29,10 @@ export default function CommentListItem({
   content,
   modifiedTime,
   createdTime,
-  className,
   postId,
   authorId,
-}: CommentItemProps) {
+  className,
+}: CommentListItemProps) {
   const queryClient = useQueryClient();
   const [isReplyOpen, setReplyOpen] = useState(false);
   const [isReplyFormOpen, setReplyFormOpen] = useState(false);

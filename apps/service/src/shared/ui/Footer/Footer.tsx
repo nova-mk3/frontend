@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
-import { SimpleProfileQueryOptions } from "../users/[id]/query/options";
+import { SimpleProfileQueryOptions } from "@/src/app/(main)/users/[id]/query/options";
 export default function Footer() {
   const { data, isLoading } = useQuery(SimpleProfileQueryOptions());
 

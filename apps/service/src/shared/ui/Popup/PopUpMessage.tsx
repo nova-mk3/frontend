@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import PopUpModal from "../Modal/PopUpModal";
+import PopUpModal from "../modal/PopUpModal";
 
 export default function PopUpMessage() {
   const [isOpen, setIsOpen] = useState(true);

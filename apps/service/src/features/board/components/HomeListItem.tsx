@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
-import Item, { BoardListItemType } from "./BoardListItem";
+import Item from "./BoardListItem";
 import Link from "next/link";
 import BoardListItem from "./BoardListItem";
+import { Board } from "@/src/entities/board/board.type";
 
 interface HomeListItemType {
   className?: string;
-  data: BoardListItemType[];
+  data: Board[];
   title: string;
   href: string;
 }

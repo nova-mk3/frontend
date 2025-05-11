@@ -2,11 +2,12 @@ import React from "react";
 import { Milestone } from "lucide-react";
 import { Button } from "@nova/ui/components/ui/button";
 import Link from "next/link";
-import SearchInput from "../../components/Search/SearchInput";
-import SelectSortComponent from "../../components/Search/SelectSortComponent";
-import { SuggestionFilter } from "../../components/Search/SuggestionFilter";
+
 import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
 import { useQuery } from "@tanstack/react-query";
+import { SuggestionFilter } from "@/src/shared/ui/search/SuggestionFilter";
+import SelectSortComponent from "@/src/shared/ui/search/SelectSortComponent";
+import SearchInput from "@/src/shared/ui/search/SearchInput";
 
 interface TitleProps {
   title?: string;

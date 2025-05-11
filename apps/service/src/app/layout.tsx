@@ -2,7 +2,7 @@ import "@nova/tailwind-config/globalcss";
 import type { Metadata } from "next";
 import React from "react";
 import { pretendard, paperlogy } from "../theme/font";
-import Providers from "../query/providers";
+import Providers from "../shared/query/providers";
 
 export const metadata: Metadata = {
   title: "NOVA",

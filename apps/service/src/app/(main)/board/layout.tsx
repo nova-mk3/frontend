@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import Navigation from "./components/Navigation";
 import { usePathname } from "next/navigation";
+import BoardNavigation from "@/src/features/board/components/BoardNavigation";
 
 export default function layout({
   children,
@@ -22,7 +22,7 @@ export default function layout({
   } else
     return (
       <>
-        <Navigation />
+        <BoardNavigation />
         <div className="flex flex-col  w-full t-m mx-auto screenLg:w-[80%]">
           {children}
         </div>

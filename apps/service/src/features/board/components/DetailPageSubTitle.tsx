@@ -11,7 +11,7 @@ import { DeleteIntegratedBoard } from "../api/integrated";
 import { postKeys } from "../query/queryKey";
 import { SimpleProfileQueryOptions } from "@/src/app/(main)/users/[id]/query/options";
 import { formatDate } from "@/src/shared/utils/dateParsing";
-import AlertDialog from "@/src/app/(main)/components/Modal/AlertDialog";
+import AlertDialog from "@/src/shared/ui/modal/AlertDialog";
 
 const MobileLike = dynamic(() => import("../../like/components/MobileLike"), {
   ssr: false,

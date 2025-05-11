@@ -1,8 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import TextareaFormContentField from "@/src/app/(auth)/signup/components/TextareaFormContentField";
-import TextareaFormField from "@/src/app/(auth)/signup/components/TextareaFormField";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PictureInput, PictureSchema } from "@/src/schema/picture.schema";
 import { Form } from "@nova/ui/components/ui/form";
@@ -15,9 +14,11 @@ import {
 } from "../../query/mutation";
 import { usePictureDetailQuery } from "../../query/queries";
 import { ImageProps } from "../PostDetail";
-import NewPostTitle from "../../../components/NewPostTitle";
-import PendingFallbackUI from "../../../components/Skeleton/PendingFallbackUI";
-import LoadingModal from "../../../components/Modal/LoadingModal";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
+import TextareaFormContentField from "@/src/features/auth/components/signup/TextareaFormContentField";
+import LoadingModal from "@/src/shared/ui/modal/LoadingModal";
+import TextareaFormField from "@/src/features/auth/components/signup/TextareaFormField";
+import NewPostTitle from "@/src/shared/ui/board/NewPostTitle";
 
 interface Props {
   postId: string;

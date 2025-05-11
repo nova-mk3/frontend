@@ -2,9 +2,9 @@
 import { QueryErrorResetBoundary } from "@tanstack/react-query";
 import { ErrorBoundary } from "react-error-boundary";
 import { Suspense, ReactNode } from "react";
-import PendingFallbackUI from "../Skeleton/PendingFallbackUI";
-import DeferredComponent from "./DeferredComponent";
+
 import FallbackErrorUI from "./ErrorFallBack";
+import PendingFallbackUI from "../skeleton/PendingFallbackUI";
 
 interface ErrorBoundaryWrapperProps {
   children: ReactNode;

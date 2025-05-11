@@ -1,10 +1,8 @@
-import { Background } from "./components/background";
-import { SignupForm } from "./components/SignupForm";
+import { Background } from "@/src/features/auth/components/signup/background";
+import { SignupForm } from "@/src/features/auth/components/signup/SignupForm";
 
 export default function Signup() {
-
   return (
-
     <div className="bg-primary w-screen h-screen flex overflow-hidden mobile:overflow-auto relative">
       <Background />
       <div className="absolute  right-0 h-screen w-[880px] mobile:w-screen bg-background01 rounded-s-[40px] mobile:rounded-none flex justify-center z-10 overflow-y-auto items-center">

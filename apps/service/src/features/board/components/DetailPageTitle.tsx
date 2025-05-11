@@ -5,7 +5,7 @@ import { ChevronLeft, MessageSquareMore } from "lucide-react";
 import { Separator } from "@nova/ui/components/ui/separator";
 import { Button } from "@nova/ui/components/ui/button";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
+import { SimpleProfileQueryOptions } from "@/src/app/(main)/users/[id]/query/options";
 
 interface TitleProps {
   backLinkText: string;

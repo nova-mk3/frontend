@@ -1,4 +1,4 @@
-import ErrorBoundaryWrapper from "../../components/ErrorBoundary/ErrorBoundaryWrapper";
+import ErrorBoundaryWrapper from "@/src/shared/ui/errorBoundary/ErrorBoundaryWrapper";
 import Post from "./Post";
 
 export default function SearchPost() {

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import HeaderLoginMenu from "./HeaderLoginMenu";
 import Image from "next/image";
-import { SimpleProfileQueryOptions } from "../users/[id]/query/options";
+import { SimpleProfileQueryOptions } from "@/src/app/(main)/users/[id]/query/options";
 // API 호출 함수 경로에 맞게 수정해주세요.
 
 export default function HeaderLogin() {

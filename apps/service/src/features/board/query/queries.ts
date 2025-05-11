@@ -77,16 +77,6 @@ export const usePostLatestListQuery = ({ boardId }: { boardId: string }) => {
   return useQuery(postLatestQueryOptions(boardId));
 };
 
-// export const useArchiveDetailQuery = ({
-//   postId,
-//   boardId,
-// }: ) => {
-//   return useQuery({
-//     queryKey: postKeys.detail(postId),
-//     queryFn: () => ArchiveGetDetail({ boardId, postId }),
-//   });
-// };
-
 export const useAcrossBoardListQuery = ({
   size,
   page,

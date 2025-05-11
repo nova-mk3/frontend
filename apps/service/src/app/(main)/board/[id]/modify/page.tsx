@@ -1,6 +1,6 @@
 import React from "react";
 import ModifyPage from "./ModifyPage";
-import ErrorBoundaryWrapper from "../../../components/ErrorBoundary/ErrorBoundaryWrapper";
+import ErrorBoundaryWrapper from "@/src/shared/ui/errorBoundary/ErrorBoundaryWrapper";
 
 type Props = {
   params: Promise<{ id: string }>;

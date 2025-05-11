@@ -3,6 +3,7 @@ import { postKeys } from "./queryKey";
 import {
   GetIntegratedBoard,
   GetIntegratedBoardsByCategory,
+  GetRecentIntegratedBoards,
 } from "../api/integrated";
 import { GetBoardsExcludeExamParams } from "../api/main.type";
 import { GetBoardsExcludeExam } from "../api/main";
@@ -18,7 +19,7 @@ export const postDetailQueryOptions = (postId: string, boardId: string) => {
 export const postLatestQueryOptions = (boardId: string) => {
   return queryOptions({
     queryKey: postKeys.latest(boardId),
-    queryFn: () => ({ boardId }),
+    queryFn: () => GetRecentIntegratedBoards({ boardId }),
   });
 };
 

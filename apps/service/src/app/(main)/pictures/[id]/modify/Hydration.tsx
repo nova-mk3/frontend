@@ -1,11 +1,11 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import React from "react";
 
-import getQueryClient from "@/src/query/getQueryClient";
 import { PictureGetDetail } from "@/src/api/board/server";
 import { CLUB_ARCHIVE } from "@/src/constant/board";
 import ModifyPage from "./ModifyPage";
-import { postKeys } from "../../../board/query/postqueries";
+import getQueryClient from "@/src/shared/query/getQueryClient";
+import { postKeys } from "@/src/features/board/query/queryKey";
 
 interface Props {
   postId: string;

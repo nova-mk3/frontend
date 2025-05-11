@@ -1,23 +1,21 @@
 "use client";
 import React, { useState } from "react";
-import { formatDate } from "@/src/libs/utils/dateParsing";
-
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-
-import { throwErrorMessage } from "@/src/libs/utils/throwError";
 import ModifyCommentForm from "./ModifyCommentForm";
-import { Profile } from "./CommentListItem";
 import Image from "next/image";
 import Link from "next/link";
 import { SimpleProfileQueryOptions } from "@/src/app/(main)/users/[id]/query/options";
 import { DeleteComment, PutComment } from "../api/comment.api";
 import { commentsKeys } from "../query/queryKeys";
-import AlertDialog from "@/src/app/(main)/components/Modal/AlertDialog";
+import { throwErrorMessage } from "@/src/shared/utils/throwError";
+import { formatDate } from "@/src/shared/utils/dateParsing";
+import AlertDialog from "@/src/shared/ui/modal/AlertDialog";
+import { UserProfilePhoto } from "@/src/entities/user/user.type";
 
 interface ReplyCommentItemProps {
   id: string;
   authorName: string;
-  authorProfilePhoto: Profile;
+  authorProfilePhoto: UserProfilePhoto;
   children: ReplyCommentItemProps[];
   content: string;
   modifiedTime: string;
@@ -120,6 +118,7 @@ export default function ReplyCommentItem({
                 수정
               </p>
               <div className="w-[1px] h-[20px] bg-line01"></div>
+
               <AlertDialog
                 title="댓글 삭제"
                 subtitle="댓글을 정말로 삭제하시겠습니까?"

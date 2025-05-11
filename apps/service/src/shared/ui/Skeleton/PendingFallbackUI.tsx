@@ -1,5 +1,5 @@
 import React from "react";
-import DeferredComponent from "../ErrorBoundary/DeferredComponent";
+import DeferredComponent from "../errorBoundary/DeferredComponent";
 
 export default function PendingFallbackUI() {
   return (

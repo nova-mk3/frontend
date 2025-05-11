@@ -1,8 +1,9 @@
 "use client";
 import React from "react";
-import CommentListItem, { CommentItemProps } from "./CommentListItem";
-import PendingFallbackUI from "@/src/app/(main)/components/Skeleton/PendingFallbackUI";
+import CommentListItem from "./CommentListItem";
 import { useCommentsListQuery } from "../hooks/queries";
+import { Comment } from "@/src/entities/comment/comment.types";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
 
 interface CommentListProps {
   postId: string;
@@ -13,10 +14,10 @@ export default function CommentList({ postId }: CommentListProps) {
   if (isLoading) {
     return <PendingFallbackUI />;
   }
-  console.log(data);
+
   return (
     <>
-      {data.map((item: CommentItemProps) => (
+      {data.map((item: Comment) => (
         <CommentListItem
           key={item.id}
           id={item.id}

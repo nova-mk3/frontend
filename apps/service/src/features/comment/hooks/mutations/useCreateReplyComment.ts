@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { PostComment } from "../../api/comment.api";
 import { PostCommentRequest } from "../../api/comment.type";
-import { postKeys } from "@/src/app/(main)/board/query/postqueries";
 import { commentsKeys } from "../../query/queryKeys";
+import { postKeys } from "@/src/features/board/query/queryKey";
 
 export const useCreateReplyMutation = ({
   postId,
@@ -16,6 +16,7 @@ export const useCreateReplyMutation = ({
   return useMutation({
     mutationFn: ({ postId, content, parentCommentId }: PostCommentRequest) =>
       PostComment({ postId, content, parentCommentId }),
+
     onSuccess: (data: any) => {
       setValue("");
       queryClient.invalidateQueries({
@@ -27,6 +28,7 @@ export const useCreateReplyMutation = ({
         commentCount: previous.commentCount + 1,
       }));
     },
+
     onError: (error: any) => {
       alert(error.message);
     },

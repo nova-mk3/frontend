@@ -1,9 +1,6 @@
 import React from "react";
-import { Metadata } from "next";
-import { CLUB_ARCHIVE, INTEGRATED } from "@/src/constant/board";
-import ErrorBoundaryWrapper from "../../components/ErrorBoundary/ErrorBoundaryWrapper";
-import { ArchiveGetDetail } from "@/src/api/board/exam";
 import PostDetail from "./PostDetail";
+import ErrorBoundaryWrapper from "@/src/shared/ui/errorBoundary/ErrorBoundaryWrapper";
 
 // TODO: 메타데이터 확인
 type Props = {

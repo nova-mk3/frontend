@@ -7,23 +7,23 @@ import {
   IntegratedSchema,
 } from "@/src/schema/integrated.schema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  IntegratedBoardPut,
-  IntegratedPutRequest,
-} from "@/src/api/board/integrated";
 import { useRouter } from "next/navigation";
-import { UploadFilesAPI } from "@/src/api/board/file";
-import TextareaFormContentField from "@/src/app/(auth)/signup/components/TextareaFormContentField";
-import { Form } from "@nova/ui/components/ui/form";
-import { SelectFormField } from "@/src/app/(auth)/signup/components/SelectFormField";
-import TextareaFormField from "@/src/app/(auth)/signup/components/TextareaFormField";
+
+import { usePostDetailQuery } from "@/src/features/board/query/queries";
+import { PutIntegratedBoardRequest } from "@/src/features/board/api/integrated.type";
+import { PutIntegratedBoard } from "@/src/features/board/api/integrated";
+import { postKeys } from "@/src/features/board/query/queryKey";
+import { FileItemProps } from "@/src/features/file/components/ViewFileItem";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { postKeys, usePostDetailQuery } from "../../query/postqueries";
-import NewPostTitle from "../../../components/NewPostTitle";
-import ModifyFileUploader from "../../../components/File/ModifyFileUploader";
-import { FileItemProps } from "../../../components/File/ViewFileItem";
-import PendingFallbackUI from "../../../components/Skeleton/PendingFallbackUI";
-import LoadingModal from "../../../components/Modal/LoadingModal";
+import { UploadFilesAPI } from "@/src/features/file/api/file";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
+import { Form } from "@nova/ui/components/ui/form";
+import NewPostTitle from "@/src/shared/ui/board/NewPostTitle";
+import { SelectFormField } from "@/src/features/auth/components/signup/SelectFormField";
+import ModifyFileUploader from "@/src/features/file/components/ModifyFileUploader";
+import TextareaFormField from "@/src/features/auth/components/signup/TextareaFormField";
+import TextareaFormContentField from "@/src/features/auth/components/signup/TextareaFormContentField";
+import LoadingModal from "@/src/shared/ui/modal/LoadingModal";
 
 interface Props {
   postId: string;
@@ -59,7 +59,7 @@ export default function ModifyPage({ postId }: Props) {
   }, [data, form]);
 
   const useIntegratedBoardMutation = useMutation({
-    mutationFn: (data: IntegratedPutRequest) => IntegratedBoardPut(data),
+    mutationFn: (data: PutIntegratedBoardRequest) => PutIntegratedBoard(data),
     onSuccess: (data: any) => {
       console.log(data);
       alert("변경 성공");

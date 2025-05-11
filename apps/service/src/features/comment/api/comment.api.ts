@@ -1,11 +1,11 @@
-import { Authapi } from "@/src/api/core";
-import { throwErrorMessage } from "@/src/libs/utils/throwError";
+import { Authapi } from "@/src/shared/api/core";
 import {
   CommentIdParams,
   CommentPostIdParams,
   PostCommentRequest,
   PutCommentRequest,
 } from "./comment.type";
+import { throwErrorMessage } from "@/src/shared/utils/throwError";
 
 /*
  * 댓글 작성

@@ -1,6 +1,7 @@
 import React from "react";
-import ErrorBoundaryWrapper from "../../components/ErrorBoundary/ErrorBoundaryWrapper";
+
 import PostDetail from "./PostDetail";
+import ErrorBoundaryWrapper from "@/src/shared/ui/errorBoundary/ErrorBoundaryWrapper";
 
 export default async function Page({
   params,

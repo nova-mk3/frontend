@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 import HeartIcon from "@/public/image/Heart.svg";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { LikeAPI, UnLikeAPI } from "@/src/api/board/like";
 import { postKeys } from "../../board/query/queryKey";
+import { LikeAPI, UnLikeAPI } from "../api/like.api";
+
 interface LikeProps {
   liked: boolean;
   postId: string;

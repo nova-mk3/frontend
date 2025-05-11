@@ -6,20 +6,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { UploadFilesAPI } from "@/src/api/board/file";
-import PostFileUploader from "../../components/File/PostFileUploader";
-import { SelectFormField } from "@/src/app/(auth)/signup/components/SelectFormField";
-import { Form } from "@nova/ui/components/ui/form";
-import TextareaFormField from "@/src/app/(auth)/signup/components/TextareaFormField";
-import TextareaFormContentField from "@/src/app/(auth)/signup/components/TextareaFormContentField";
+import useYearRange from "@/src/shared/hooks/useYearRange";
 import { ExamInput, ExamSchema } from "@/src/schema/exam.schema";
-import { InputFormField } from "@/src/app/(auth)/components/InputFormField";
 import { SEMESTER_MAP, SEMESTER_OPTIONS } from "@/src/constant/exam";
-import useYearRange from "@/src/libs/hooks/useYearRange";
-import { postKeys } from "../../board/query/postqueries";
-import { ArchivePost, ArchivePostRequest } from "@/src/api/board/exam";
-import NewPostTitle from "../../components/NewPostTitle";
-import LoadingModal from "../../components/Modal/LoadingModal";
+import { PostArchive } from "@/src/features/exam_archive/api/exam_archive";
+import { PostArchiveRequest } from "@/src/features/exam_archive/api/exam_archive.type";
+import { postKeys } from "@/src/features/board/query/queryKey";
+import { UploadFilesAPI } from "@/src/features/file/api/file";
+import { Form } from "@nova/ui/components/ui/form";
+import NewPostTitle from "@/src/shared/ui/board/NewPostTitle";
+import TextareaFormField from "@/src/features/auth/components/signup/TextareaFormField";
+import { InputFormField } from "@/src/features/auth/components/signup/InputFormField";
+import { SelectFormField } from "@/src/features/auth/components/signup/SelectFormField";
+import PostFileUploader from "@/src/features/file/components/PostFileUploader";
+import LoadingModal from "@/src/shared/ui/modal/LoadingModal";
+import TextareaFormContentField from "@/src/features/auth/components/signup/TextareaFormContentField";
 
 export default function Page() {
   const router = useRouter();
@@ -90,7 +91,7 @@ export default function Page() {
   }, [year, subject, professorName, semester]);
 
   const useIntegratedBoardMutation = useMutation({
-    mutationFn: (data: ArchivePostRequest) => ArchivePost(data),
+    mutationFn: (data: PostArchiveRequest) => PostArchive(data),
     onSuccess: (data: any) => {
       console.log(data);
 

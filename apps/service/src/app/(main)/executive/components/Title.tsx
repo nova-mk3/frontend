@@ -1,6 +1,4 @@
-import { Input } from "@nova/ui/components/ui/input";
 import React from "react";
-import { Layers, Search } from "lucide-react";
 import {
   Select,
   SelectTrigger,
@@ -8,10 +6,8 @@ import {
   SelectItem,
   SelectContent,
 } from "@nova/ui/components/ui/select";
-import { Button } from "@nova/ui/components/ui/button";
-import Link from "next/link";
-import { useQueryParams } from "../../components/useQueryParams";
-import useYearRange from "@/src/libs/hooks/useYearRange";
+import { useQueryParams } from "@/src/shared/hooks/useQueryParams";
+import useYearRange from "@/src/shared/hooks/useYearRange";
 
 interface TitleProps {
   title?: string;

@@ -2,9 +2,9 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
-import PendingFallbackUI from "@/src/app/(main)/components/Skeleton/PendingFallbackUI";
 import SubNavigation from "./SubNavigation";
 import { SimpleProfileQueryOptions } from "../../query/options";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
 
 interface Props {
   id: string;

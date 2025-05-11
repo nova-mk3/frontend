@@ -37,14 +37,13 @@ export function PageNation({ totalPage, size, className }: PaginationProps) {
     return pages;
   }, [totalPage, size, currentPage]);
 
-
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", page.toString());
     router.push(`?${params.toString()}`); // 새로고침 없이 URL 업데이트
   };
 
-  if(!totalPage) return null;
+  if (!totalPage) return null;
   return (
     <Pagination className={className}>
       <PaginationContent>
@@ -61,7 +60,7 @@ export function PageNation({ totalPage, size, className }: PaginationProps) {
         {paginationRange.map((page) => (
           <PaginationItem key={page}>
             <PaginationLink
-             onClick={() => handlePageChange(page)}
+              onClick={() => handlePageChange(page)}
               // href={`?page=${page}`}
               isActive={page === currentPage}
               className="cursor-pointer"
@@ -74,10 +73,11 @@ export function PageNation({ totalPage, size, className }: PaginationProps) {
         {/* Next Page Button */}
         <PaginationItem>
           <PaginationNext
-          onClick={() => handlePageChange(Math.min(totalPage, currentPage + 1))}
+            onClick={() =>
+              handlePageChange(Math.min(totalPage, currentPage + 1))
+            }
             // href={`?page=${Math.min(totalPage, currentPage + 1)}`}
             className={`cursor-pointer  ${currentPage === totalPage ? "pointer-events-none" : ""}`}
-            
           />
         </PaginationItem>
       </PaginationContent>

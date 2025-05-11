@@ -1,11 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { EmojiCirCleButton } from "./Aside";
+
 import HeartIcon from "@/public/image/Heart.svg";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { LikeAPI, UnLikeAPI } from "@/src/api/board/like";
-import { postKeys } from "../query/postqueries";
+
 import { cn } from "@nova/ui/lib/utils";
+import { LikeAPI, UnLikeAPI } from "../../like/api/like.api";
+import { postKeys } from "../query/queryKey";
+import { EmojiCirCleButton } from "@/src/shared/ui/buttom/EmojiCirCleButton";
 
 interface LikeProps {
   liked: boolean;

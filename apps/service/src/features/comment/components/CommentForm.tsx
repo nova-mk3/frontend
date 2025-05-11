@@ -14,7 +14,6 @@ export default function CommentForm({
   postId,
 }: CommentFormProps) {
   const [value, setValue] = useState("");
-
   const { mutate } = useCreateCommentMutation({ postId, setValue });
 
   const handleSubmit = () => {

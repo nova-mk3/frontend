@@ -1,6 +1,6 @@
-import { throwErrorMessage } from "@/src/libs/utils/throwError";
+import { api } from "@/src/shared/api/core";
+import { throwErrorMessage } from "@/src/shared/utils/throwError";
 import { cookies } from "next/headers";
-import { api } from "../core";
 
 export async function getMemberId() {
   // ✅ 서버에서 쿠키 가져오기

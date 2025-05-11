@@ -1,6 +1,7 @@
 /**
  * 검색 필터
  */
+
 export interface searchFilter {
   page: number;
   size: number;

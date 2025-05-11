@@ -1,5 +1,6 @@
 "use client";
-import { logout } from "@/src/api/auth/auth";
+
+import { logout } from "@/src/features/auth/api/auth";
 import {
   DropdownMenu,
   DropdownMenuContent,

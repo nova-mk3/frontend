@@ -1,6 +1,6 @@
 import React from "react";
-import ErrorBoundaryWrapper from "../../../components/ErrorBoundary/ErrorBoundaryWrapper";
 import Profile from "./components/Profile";
+import ErrorBoundaryWrapper from "@/src/shared/ui/errorBoundary/ErrorBoundaryWrapper";
 
 export default async function page({
   params,

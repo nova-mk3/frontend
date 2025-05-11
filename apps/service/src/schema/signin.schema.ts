@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { isStrongPassword } from "../libs/utils/isStrongPassword";
+import { isStrongPassword } from "../shared/utils/isStrongPassword";
 
 // TODO: studentId에 대해서 등록되어 있으면 password창이 나오게 나중에 유지보수할 때 바꾸면 좋을거 같습니다.
 // TODO: api 연결하면은 어떻게 할지 생각 할 것?
