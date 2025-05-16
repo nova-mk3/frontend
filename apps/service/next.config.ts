@@ -14,12 +14,6 @@ const nextConfig: NextConfig = {
       use: ["@svgr/webpack"],
     });
 
-    // ✅ @ alias 추가
-    config.resolve.alias = {
-      ...(config.resolve.alias || {}),
-      "@": path.resolve(__dirname, "src"),
-    };
-
     return config;
   },
   images: {
