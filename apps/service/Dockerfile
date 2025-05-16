@@ -27,6 +27,8 @@ RUN pnpm install
 COPY ./apps/service/.env.production ./apps/service/.env.production
 
 COPY --from=builder /app/out/full/ .
+COPY ./apps/service/src ./apps/service/src
+
 RUN pnpm turbo build
 
 # 런타임 설정
