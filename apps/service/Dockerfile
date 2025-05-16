@@ -28,6 +28,7 @@ COPY ./apps/service/.env.production ./apps/service/.env.production
 
 COPY --from=builder /app/out/full/ .
 COPY ./apps/service/src ./apps/service/src
+COPY ./apps/service/next.config.js ./apps/service/next.config.js
 
 RUN pnpm turbo build
 
