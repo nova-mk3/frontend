@@ -8,8 +8,7 @@ export const POST_TYPE = {
   SUGGESTION: "SUGGESTION",
   ALL: "ALL",
 } as const;
-
-export type PostType = (typeof POST_TYPE)[keyof typeof POST_TYPE];
+export type PostType = keyof typeof POST_TYPE;
 
 export const POST_TYPE_OPTIONS = [
   {

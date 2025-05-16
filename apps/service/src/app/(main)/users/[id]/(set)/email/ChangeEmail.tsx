@@ -1,10 +1,4 @@
 "use client";
-import {
-  PutUserEmail,
-  userVerifyEmail,
-  userVerifyEmailCode,
-} from "@/src/api/user/client";
-import { InputFormFieldWithButton } from "@/src/app/(auth)/components/InputFormFieldWithButton";
 import { EmailInput, EmailSchema } from "@/src/schema/changeemail.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@nova/ui/components/ui/form";
@@ -14,6 +8,12 @@ import React, { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useGetUserData, userKeys } from "../../query/qureies";
 import { Button } from "@nova/ui/components/ui/button";
+import {
+  PutUserEmail,
+  userVerifyEmail,
+  userVerifyEmailCode,
+} from "@/src/features/user/list/api/user";
+import { InputFormFieldWithButton } from "@/src/features/auth/components/signup/InputFormFieldWithButton";
 interface Props {
   memberId: string;
 }

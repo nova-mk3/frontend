@@ -3,9 +3,10 @@ import React from "react";
 import { Users } from "lucide-react";
 import Title from "./Title";
 import Card from "./Card";
-import { useQueryParams } from "../../components/useQueryParams";
+import { useQueryParams } from "@/src/shared/hooks/useQueryParams";
 import { useUserListQuery } from "../query/queries";
-import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
+
 export default function MemberList() {
   const { grade } = useQueryParams();
   const { data: datas, isLoading } = useUserListQuery({ grade });

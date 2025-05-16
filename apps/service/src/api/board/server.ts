@@ -1,5 +1,5 @@
-import { throwErrorMessage } from "@/src/libs/utils/throwError";
-import { api } from "../core";
+import { api } from "@/src/shared/api/core";
+import { throwErrorMessage } from "@/src/shared/utils/throwError";
 import { cookies } from "next/headers";
 
 export async function IntegratedBoardGetDetail({

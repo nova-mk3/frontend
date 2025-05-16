@@ -1,6 +1,6 @@
 import { queryOptions } from "@tanstack/react-query";
 import { userKeys } from "./qureies";
-import { getSimpleProfie } from "@/src/api/user/client";
+import { getSimpleProfie } from "@/src/features/user/list/api/user";
 
 export const SimpleProfileQueryOptions = () => {
   return queryOptions({

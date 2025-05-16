@@ -1,14 +1,12 @@
 import { SuggestionGet, SuggestionGetDetail } from "@/src/api/board/suggestion";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { SuggestionDetail } from "../[id]/PostDetail";
-import { SearchFiilterParamType } from "@/src/api/board/integrated";
-
-type SearchFilter = SearchFiilterParamType;
+import { searchFilter } from "@/src/shared/types/searchFilter.type";
 
 export const suggestionKeys = {
   all: ["suggestion"] as const,
   lists: () => [...suggestionKeys.all, "list"] as const,
-  list: (filters: SearchFilter) =>
+  list: (filters: searchFilter) =>
     [...suggestionKeys.lists(), filters] as const, //전체보기
   details: () => [...suggestionKeys.all, "detail"] as const, //상세보기
   detail: (postId: string) =>
@@ -22,7 +20,7 @@ export const useSuggestionListQuery = ({
   sortBy,
   sortDirection,
   keyword,
-}: SearchFiilterParamType) => {
+}: searchFilter) => {
   return useQuery({
     queryKey: suggestionKeys.list({
       page,

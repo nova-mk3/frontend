@@ -1,6 +1,6 @@
+import Footer from "@/src/shared/ui/footer/Footer";
+import Header from "@/src/shared/ui/header/Header";
 import React from "react";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 
 export default function layout({
   children,

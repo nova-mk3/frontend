@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { formatDate } from "@/src/libs/utils/dateParsing";
 import { Heart, Images } from "lucide-react";
+import { formatDate } from "@/src/shared/utils/dateParsing";
 
 export interface PictureListItemProps {
   className?: string;

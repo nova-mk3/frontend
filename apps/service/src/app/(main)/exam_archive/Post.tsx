@@ -5,12 +5,12 @@ import React, { Suspense } from "react";
 import { BOARD_SIZE, CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
 
 import { Folder } from "lucide-react";
-import { useQueryParams } from "../components/useQueryParams";
-import { usePostListQuery } from "../board/query/postqueries";
-import ArchiveListTitle from "./components/ArchiveListTitle";
-import ArchiveList from "./components/ArchiveList";
-import { PageNation } from "../components/PageNation";
-import PendingFallbackUI from "../components/Skeleton/PendingFallbackUI";
+import { useQueryParams } from "@/src/shared/hooks/useQueryParams";
+import { usePostListQuery } from "@/src/features/board/query/queries";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
+import ArchiveListTitle from "@/src/features/exam_archive/components/ArchiveListTitle";
+import ArchiveList from "@/src/features/exam_archive/components/ArchiveList";
+import { PageNation } from "@/src/shared/ui/pageNation/PageNation";
 
 export default function Post() {
   const { currentPage, keyword, searchType, sortBy, sortDirection } =

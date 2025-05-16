@@ -1,12 +1,11 @@
-import BoardListItem, {
-  BoardListItemType,
-} from "@/src/app/(main)/board/components/BoardListItem";
-import { PageNation } from "@/src/app/(main)/components/PageNation";
-import PendingFallbackUI from "@/src/app/(main)/components/Skeleton/PendingFallbackUI";
 import { BOARD_SIZE, POST_TYPE } from "@/src/constant/board";
 import React, { Suspense } from "react";
 import { useMypagePostQuery } from "../../query/qureies";
-import { useQueryParams } from "@/src/app/(main)/components/useQueryParams";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
+import { useQueryParams } from "@/src/shared/hooks/useQueryParams";
+import BoardListItem from "@/src/features/board/components/BoardListItem";
+import { Board } from "@/src/entities/board/board.type";
+import { PageNation } from "@/src/shared/ui/pageNation/PageNation";
 
 export default function PostList() {
   const { currentPage } = useQueryParams();
@@ -30,7 +29,7 @@ export default function PostList() {
   return (
     <>
       <div className="flex flex-col gap-2 min-h-[700px] mt-5">
-        {data.content.map((post: BoardListItemType) => {
+        {data.content.map((post: Board) => {
           const PostTypeCheck =
             post.type === POST_TYPE.EXAM_ARCHIVE ||
             post.type === POST_TYPE.PICTURES;

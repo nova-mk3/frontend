@@ -1,6 +1,6 @@
 import React from "react";
-import ErrorBoundaryWrapper from "../components/ErrorBoundary/ErrorBoundaryWrapper";
 import ExecutivePage from "./components/ExecutivePage";
+import ErrorBoundaryWrapper from "@/src/shared/ui/errorBoundary/ErrorBoundaryWrapper";
 
 export default function page() {
   return (

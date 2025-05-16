@@ -1,7 +1,7 @@
 import React from "react";
 import Hydration from "./Hydration";
-import ErrorBoundaryWrapper from "../../../components/ErrorBoundary/ErrorBoundaryWrapper";
 import ModifyPage from "./ModifyPage";
+import ErrorBoundaryWrapper from "@/src/shared/ui/errorBoundary/ErrorBoundaryWrapper";
 export const dynamic = "force-dynamic";
 
 type Props = {

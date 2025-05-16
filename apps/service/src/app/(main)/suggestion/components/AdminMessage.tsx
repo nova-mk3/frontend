@@ -1,4 +1,4 @@
-import { toFormattedDate } from "@/src/libs/utils/dateParsing";
+import { toFormattedDate } from "@/src/shared/utils/dateParsing";
 import { Circle } from "lucide-react";
 import React from "react";
 

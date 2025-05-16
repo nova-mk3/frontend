@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { postKeys } from "../../board/query/postqueries";
 import { PictureGetDetail } from "@/src/api/board/picture";
 import { PictureDetail } from "../[id]/PostDetail";
+import { postKeys } from "@/src/features/board/query/queryKey";
 
 export const usePictureDetailQuery = ({
   postId,

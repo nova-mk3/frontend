@@ -1,24 +1,25 @@
 "use client";
 
 import React from "react";
-import Aside from "../../components/Aside";
+
+import { INTEGRATED, POST_TYPE } from "@/src/constant/board";
+
+import { Separator } from "@nova/ui/components/ui/separator";
+
+import { usePostDetailQuery } from "@/src/features/board/query/queries";
+import DetailPageTitle from "@/src/features/board/components/DetailPageTitle";
+import DetailPageSubTitle from "@/src/features/board/components/DetailPageSubTitle";
+import DetailPageContent from "@/src/features/board/components/DetailPageContent";
+import CommentTitle from "@/src/features/comment/components/CommentTitle";
+import CommentForm from "@/src/features/comment/components/CommentForm";
+import CommentList from "@/src/features/comment/components/CommentList";
+import BoardAside from "@/src/features/board/components/BoardAside";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
+import ErrorBoundaryWrapper from "@/src/shared/ui/errorBoundary/ErrorBoundaryWrapper";
 import {
   FileListLayout,
   FileList,
-} from "../../../components/File/ViewFileLayout";
-
-import Content from "../../components/DetailPageContent";
-import DetailPageTitle from "../../components/DetailPageTitle";
-
-import CommentTitle from "../../components/comments/CommentTitle";
-import { usePostDetailQuery } from "../../query/postqueries";
-import CommentForm from "../../components/comments/CommentForm";
-import ErrorBoundaryWrapper from "../../../components/ErrorBoundary/ErrorBoundaryWrapper";
-import CommentList from "../../components/comments/CommentList";
-import { INTEGRATED, POST_TYPE } from "@/src/constant/board";
-import DetailPageSubTitle from "../../components/DetailPageSubTitle";
-import { Separator } from "@nova/ui/components/ui/separator";
-import PendingFallbackUI from "../../../components/Skeleton/PendingFallbackUI";
+} from "@/src/features/file/components/ViewFileLayout";
 
 interface PostDetailProps {
   postId: string;
@@ -40,7 +41,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
         postId={postId}
       />
       <div className="flex flex-row gap-[50px]">
-        <Aside count={data.likeCount} liked={data.liked} postId={postId} />
+        <BoardAside count={data.likeCount} liked={data.liked} postId={postId} />
         <div className="flex flex-col gap-[20px] mx-auto flex-1">
           {/* 게시판 내용 */}
           <DetailPageSubTitle
@@ -56,7 +57,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
             authorId={data.authorId}
             defaultHref="/board"
           />
-          <Content content={data.content} />
+          <DetailPageContent content={data.content} />
           <Separator />
           <p className="text-xl font-semibold">첨부파일</p>
           <FileListLayout>

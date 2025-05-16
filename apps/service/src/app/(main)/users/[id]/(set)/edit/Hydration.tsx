@@ -1,10 +1,10 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import React from "react";
-import { getMember } from "@/src/api/user/server";
 
 import EditForm from "./EditForm";
 import { userKeys } from "../../query/qureies";
-import getQueryClient from "@/src/query/getQueryClient";
+import getQueryClient from "@/src/shared/query/getQueryClient";
+import { getMember } from "@/src/api/user/server";
 
 interface Props {
   memberId: string;

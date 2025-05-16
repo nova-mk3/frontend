@@ -1,7 +1,5 @@
 "use client";
 
-import { ChangePwdType, UserPasswordPut } from "@/src/api/user/client";
-import { InputFormField } from "@/src/app/(auth)/components/InputFormField";
 import { PwdInput, PwdSchema } from "@/src/schema/changepwd.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nova/ui/components/ui/button";
@@ -11,6 +9,11 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useGetUserData } from "../../query/qureies";
+import {
+  ChangePwdType,
+  UserPasswordPut,
+} from "@/src/features/user/list/api/user";
+import { InputFormField } from "@/src/features/auth/components/signup/InputFormField";
 
 interface Props {
   memberId: string;

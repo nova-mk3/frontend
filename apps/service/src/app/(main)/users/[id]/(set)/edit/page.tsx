@@ -1,7 +1,8 @@
 import React from "react";
-import ErrorBoundaryWrapper from "@/src/app/(main)/components/ErrorBoundary/ErrorBoundaryWrapper";
+
 import EditForm from "./EditForm";
 import LayoutClient from "../components/LayoutClient";
+import ErrorBoundaryWrapper from "@/src/shared/ui/errorBoundary/ErrorBoundaryWrapper";
 export const dynamic = "force-dynamic";
 export default async function page({
   params,

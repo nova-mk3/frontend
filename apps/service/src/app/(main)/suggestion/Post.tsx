@@ -1,15 +1,17 @@
 "use client";
 
 import React, { Suspense } from "react";
-import { PageNation } from "../components/PageNation";
+
 import { useSuggestionListQuery } from "./query/queries";
 import SuggestionList from "./components/SuggestionList";
 import Title from "./components/Title";
-import { useQueryParams } from "../components/useQueryParams";
+
 import { BOARD_SIZE } from "@/src/constant/board";
-import SkeletonSuggestionList from "../components/Skeleton/Suggestion/SkeletonSuggestionList";
-import SkeletonSuggestionTitle from "../components/Skeleton/Suggestion/SkeletonSuggestionTitle";
-import DeferredComponent from "../components/ErrorBoundary/DeferredComponent";
+import { useQueryParams } from "@/src/shared/hooks/useQueryParams";
+import DeferredComponent from "@/src/shared/ui/errorBoundary/DeferredComponent";
+import SkeletonSuggestionTitle from "@/src/shared/ui/skeleton/Suggestion/SkeletonSuggestionTitle";
+import SkeletonSuggestionList from "@/src/shared/ui/skeleton/Suggestion/SkeletonSuggestionList";
+import { PageNation } from "@/src/shared/ui/pageNation/PageNation";
 
 export default function Post() {
   const { currentPage, keyword, searchType, sortBy, sortDirection } =

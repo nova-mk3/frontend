@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { isStrongPassword } from "../libs/utils/isStrongPassword";
+import { isStrongPassword } from "../shared/utils/isStrongPassword";
 
 export const PwdSchema = z
   .object({

@@ -1,11 +1,11 @@
 "use client";
 
-import { DownloadFilesAPI } from "@/src/api/board/file";
 import { useSliderStore } from "@/src/store/ImageSlider";
 import { ChevronLeft, ChevronRight, Download } from "lucide-react";
 import React, { useState } from "react";
 import { ImageProps } from "../PostDetail";
-import { DownloadProgressModal } from "../../../components/Modal/DownloadProgressModal";
+import { DownloadFilesAPI } from "@/src/features/file/api/file";
+import { DownloadProgressModal } from "@/src/shared/ui/modal/DownloadProgressModal";
 
 interface settings {
   speed: number;

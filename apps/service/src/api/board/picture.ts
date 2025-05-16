@@ -1,9 +1,5 @@
-import { throwErrorMessage } from "@/src/libs/utils/throwError";
-import { Authapi } from "../core";
-
-/*
-게시글 작성
-*/
+import { Authapi } from "@/src/shared/api/core";
+import { throwErrorMessage } from "@/src/shared/utils/throwError";
 
 export interface PicturePostReqeust {
   title: string;
@@ -24,6 +20,7 @@ export async function PicturePost({
       content,
       imageFileIds,
     });
+
     return response.data.data;
   } catch (error: any) {
     throwErrorMessage(error);
@@ -85,15 +82,6 @@ export async function PicturePut({
 /*
   게시글 삭제
   */
-
-export interface IntegratedPutRequest {
-  title: string;
-  content: string;
-  boardId: string;
-  fileIds: string[];
-  postId: string;
-  deleteFileIds: string[];
-}
 
 export async function PictureBoardDelete({
   boardId,

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { isStrongPassword } from "../libs/utils/isStrongPassword";
+import { isStrongPassword } from "../shared/utils/isStrongPassword";
 
 // z.enum value를 변수로 관리하고 싶은데, 리터럴만 받아야한다고 하는데 고민이 더 필요할듯
 // 0학년 0학기는 졸업생입니다!

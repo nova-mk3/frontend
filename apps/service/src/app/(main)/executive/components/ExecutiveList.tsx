@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
 
-import { useQueryParams } from "../../components/useQueryParams";
-import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
 import { useExecutibeListQuery } from "../query/queries";
 import Card from "./Card";
+import { useQueryParams } from "@/src/shared/hooks/useQueryParams";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
 
 export default function ExecutiveList() {
   const { year } = useQueryParams();

@@ -1,9 +1,9 @@
 "use client";
+import CommentForm from "@/src/features/comment/components/CommentForm";
+import CommentList from "@/src/features/comment/components/CommentList";
+import ErrorBoundaryWrapper from "@/src/shared/ui/errorBoundary/ErrorBoundaryWrapper";
 import { Button } from "@nova/ui/components/ui/button";
 import React, { useState } from "react";
-import ErrorBoundaryWrapper from "../../../components/ErrorBoundary/ErrorBoundaryWrapper";
-import CommentList from "../../../board/components/comments/CommentList";
-import CommentForm from "../../../board/components/comments/CommentForm";
 
 export default function CommentSection({ postId }: { postId: string }) {
   const [isCommentOpen, setIsCommentOpen] = useState(false);

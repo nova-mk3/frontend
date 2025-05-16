@@ -1,10 +1,10 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { userKeys } from "./qureies";
 import {
   PutProfileIdAPI,
   UserProfileDeleteAPI,
   UserProfileUploadAPI,
-} from "@/src/api/user/client";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { userKeys } from "./qureies";
+} from "@/src/features/user/list/api/user";
 
 export function useUserProfilePostMutation({ memberId }: { memberId: string }) {
   const UserProfilePutMutation = useUserProfilePutMutation({ memberId });

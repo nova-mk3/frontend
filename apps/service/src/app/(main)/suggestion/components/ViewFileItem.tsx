@@ -1,8 +1,8 @@
 "use client";
 import { SuggestionDownloadFilesAPI } from "@/src/api/board/suggestion";
+import { DownloadProgressModal } from "@/src/shared/ui/modal/DownloadProgressModal";
 import { FileDown } from "lucide-react";
 import React, { useState } from "react";
-import { DownloadProgressModal } from "../../components/Modal/DownloadProgressModal";
 
 export interface FileItemProps {
   downloadUrl: string;

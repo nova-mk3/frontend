@@ -1,7 +1,9 @@
-import { getMember } from "@/src/api/user/client";
+import { getMember } from "@/src/features/user/list/api/user";
+import {
+  mypagePostGet,
+  mypageSuggestionGet,
+} from "@/src/features/user/mypage/mypage";
 import { useQuery } from "@tanstack/react-query";
-import { postKeys } from "../../../board/query/postqueries";
-import { mypagePostGet, mypageSuggestionGet } from "@/src/api/user/post";
 
 export const userKeys = {
   all: ["mypage"] as const,

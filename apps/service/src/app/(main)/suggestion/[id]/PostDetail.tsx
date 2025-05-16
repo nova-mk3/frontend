@@ -1,20 +1,23 @@
 "use client";
 import { Button } from "@nova/ui/components/ui/button";
 import React from "react";
-import DetailPageContent from "../../board/components/DetailPageContent";
+
 import { suggestionKeys, useSuggestionDetailQuery } from "../query/queries";
 import { Unlock, Lock, ChevronLeft, MessageSquare } from "lucide-react";
 import Link from "next/link";
 import AdminMessage from "../components/AdminMessage";
 import { Separator } from "@nova/ui/components/ui/separator";
 import { FileListLayout, FileList } from "../components/ViewFileLayout";
-import { toFormattedDate } from "@/src/libs/utils/dateParsing";
+
 import AdminForm from "../components/AdminForm";
 import { FileItemProps } from "../components/ViewFileItem";
-import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
-import DeferredComponent from "../../components/ErrorBoundary/DeferredComponent";
+
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { SimpleProfileQueryOptions } from "../../users/[id]/query/options";
+import DeferredComponent from "@/src/shared/ui/errorBoundary/DeferredComponent";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
+import { toFormattedDate } from "@/src/shared/utils/dateParsing";
+import DetailPageContent from "@/src/features/board/components/DetailPageContent";
 
 interface PostDetailProps {
   postId: string;

@@ -1,4 +1,4 @@
-import { ExecutiveList } from "@/src/api/people";
+import { ExecutiveList } from "@/src/features/user/list/api/user";
 import { useQuery } from "@tanstack/react-query";
 
 export const useExecutibeListQuery = ({ year }: { year: string }) => {

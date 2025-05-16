@@ -1,7 +1,7 @@
 export const tailwindConfig = {
   darkMode: "class",
   content: [
-    "app/**/*.{ts,tsx}",
+    "src/**/*.{ts,tsx}",
     "components/**/*.{ts,tsx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -12,12 +12,12 @@ export const tailwindConfig = {
       colors: {
         primary: "hsl(var(--primary))",
         background01: "hsl(var(--background-01))",
-        background02 : "rgb(var(--background-02))",
+        background02: "rgb(var(--background-02))",
         ui01: "hsl(var(--ui-01))",
         ui02: "hsl(var(--ui-02))",
         text01: "hsl(var(--text-01))",
-        text02: "hsl(var(--text-02))",   
-        text03: "rgb(var(--text-03))",   
+        text02: "hsl(var(--text-02))",
+        text03: "rgb(var(--text-03))",
         line01: "hsl(var(--line-01))",
         danger: "hsl(var(--danger))",
         success: "hsl(var(--success))",
@@ -25,7 +25,7 @@ export const tailwindConfig = {
         "accent-foreground": "hsl(var(--accent-foreground))",
         muted: "hsl(var(--muted))",
         "muted-foreground": "hsl(var(--muted-foreground))",
-        foreground : "hsl(var(--foreground))",
+        foreground: "hsl(var(--foreground))",
       },
       borderRadius: {
         lg: `var(--radius)`,
@@ -34,8 +34,8 @@ export const tailwindConfig = {
       },
       screens: {
         mobile: { max: "768px" },
-        screenLg : {max : "1280px" },
-        screenMd : {max : "1020px" },
+        screenLg: { max: "1280px" },
+        screenMd: { max: "1020px" },
       },
       fontFamily: {
         pretendard: ["var(--font-pretendard)"],
@@ -69,10 +69,10 @@ export const tailwindConfig = {
         b2: ["14px", { lineHeight: "20px", fontWeight: "400" }],
         b3: ["12px", { lineHeight: "16px", fontWeight: "400" }],
       },
-      boxShadow : {
-        footer : '0 0 8px rgba(0, 0, 0, 0.1)',
-        card: '4px 0px 4px 0 rgba(0, 0, 0, 0.25), 0px 4px 4px 0 rgba(0, 0, 0, 0.25)',
-      }
+      boxShadow: {
+        footer: "0 0 8px rgba(0, 0, 0, 0.1)",
+        card: "4px 0px 4px 0 rgba(0, 0, 0, 0.25), 0px 4px 4px 0 rgba(0, 0, 0, 0.25)",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

@@ -1,18 +1,21 @@
 "use client";
-import React from "react";
-import { useArchiveDetailQuery } from "../../board/query/postqueries";
 import { CLUB_ARCHIVE, POST_TYPE } from "@/src/constant/board";
-import Aside from "../../board/components/Aside";
-import { FileListLayout, FileList } from "../../components/File/ViewFileLayout";
-import CommentTitle from "../../board/components/comments/CommentTitle";
-import CommentForm from "../../board/components/comments/CommentForm";
-import ErrorBoundaryWrapper from "../../components/ErrorBoundary/ErrorBoundaryWrapper";
-import CommentList from "../../board/components/comments/CommentList";
-import DetailPageContent from "../../board/components/DetailPageContent";
-import DetailPageTitle from "../../board/components/DetailPageTitle";
+import DetailPageContent from "@/src/features/board/components/DetailPageContent";
+import DetailPageTitle from "@/src/features/board/components/DetailPageTitle";
+import ArchiveDetailPageSubTitle from "@/src/features/exam_archive/components/ArchiveDetailPageSubTitle";
+import { useArchiveDetailQuery } from "@/src/features/exam_archive/query/queries";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
 import { Separator } from "@nova/ui/components/ui/separator";
-import PendingFallbackUI from "../../components/Skeleton/PendingFallbackUI";
-import ArchiveDetailPageSubTitle from "../components/ArchiveDetailPageSubTitle";
+import React from "react";
+import {
+  FileListLayout,
+  FileList,
+} from "../../suggestion/components/ViewFileLayout";
+import CommentTitle from "@/src/features/comment/components/CommentTitle";
+import CommentForm from "@/src/features/comment/components/CommentForm";
+import ErrorBoundaryWrapper from "@/src/shared/ui/errorBoundary/ErrorBoundaryWrapper";
+import CommentList from "@/src/features/comment/components/CommentList";
+import BoardAside from "@/src/features/board/components/BoardAside";
 
 interface PostDetailProps {
   postId: string;
@@ -38,7 +41,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
         postId={postId}
       />
       <div className="flex flex-row gap-[50px]">
-        <Aside count={data.likeCount} liked={data.liked} postId={postId} />
+        <BoardAside count={data.likeCount} liked={data.liked} postId={postId} />
         <div className="flex flex-col gap-[20px] mx-auto flex-1">
           {/* 게시판 내용 */}
           <ArchiveDetailPageSubTitle

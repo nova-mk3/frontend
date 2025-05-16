@@ -1,6 +1,6 @@
 import React from "react";
-import ErrorBoundaryWrapper from "../../../components/ErrorBoundary/ErrorBoundaryWrapper";
 import PostDetail from "./PostDetail";
+import ErrorBoundaryWrapper from "@/src/shared/ui/errorBoundary/ErrorBoundaryWrapper";
 
 // TODO: 메타데이터 확인 -> html을 생성할때만 호출됨!
 type Props = {

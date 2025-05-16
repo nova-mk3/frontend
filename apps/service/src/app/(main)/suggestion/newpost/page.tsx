@@ -7,9 +7,7 @@ import {
   SuggestionSchema,
 } from "@/src/schema/suggestion.schema";
 import { Form } from "@nova/ui/components/ui/form";
-import TextareaFormField from "@/src/app/(auth)/signup/components/TextareaFormField";
-import TextareaFormContentField from "@/src/app/(auth)/signup/components/TextareaFormContentField";
-import { RadioFormField } from "@/src/app/(auth)/signup/components/RadioFormField";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   SuggestionFileUploadAPI,
@@ -18,9 +16,13 @@ import {
 } from "@/src/api/board/suggestion";
 import { POST_TYPE } from "@/src/constant/board";
 import { useRouter } from "next/navigation";
-import PostFileUploader from "../../components/File/PostFileUploader";
+
 import { suggestionKeys } from "../query/queries";
-import NewPostTitle from "../../components/NewPostTitle";
+import NewPostTitle from "@/src/shared/ui/board/NewPostTitle";
+import { RadioFormField } from "@/src/features/auth/components/signup/RadioFormField";
+import PostFileUploader from "@/src/features/file/components/PostFileUploader";
+import TextareaFormField from "@/src/features/auth/components/signup/TextareaFormField";
+import TextareaFormContentField from "@/src/features/auth/components/signup/TextareaFormContentField";
 
 export default function Page() {
   const queryClient = useQueryClient();

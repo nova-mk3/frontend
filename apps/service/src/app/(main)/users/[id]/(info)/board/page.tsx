@@ -1,6 +1,6 @@
 import React from "react";
 import Post from "./Post";
-import ErrorBoundaryWrapper from "@/src/app/(main)/components/ErrorBoundary/ErrorBoundaryWrapper";
+import ErrorBoundaryWrapper from "@/src/shared/ui/errorBoundary/ErrorBoundaryWrapper";
 export const dynamic = "force-dynamic";
 export default function page() {
   return (

@@ -4,28 +4,25 @@ import { useForm, useWatch } from "react-hook-form";
 import { CLUB_ARCHIVE, POST_TYPE, PostType } from "@/src/constant/board";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { UploadFilesAPI } from "@/src/api/board/file";
-
-import TextareaFormContentField from "@/src/app/(auth)/signup/components/TextareaFormContentField";
-import { Form } from "@nova/ui/components/ui/form";
-import { SelectFormField } from "@/src/app/(auth)/signup/components/SelectFormField";
-import TextareaFormField from "@/src/app/(auth)/signup/components/TextareaFormField";
-import { zodResolver } from "@hookform/resolvers/zod";
-
+import { useArchiveDetailQuery } from "@/src/features/exam_archive/query/queries";
+import useYearRange from "@/src/shared/hooks/useYearRange";
 import { ExamInput, ExamSchema } from "@/src/schema/exam.schema";
-import useYearRange from "@/src/libs/hooks/useYearRange";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { SEMESTER_MAP, SEMESTER_OPTIONS } from "@/src/constant/exam";
-import { InputFormField } from "@/src/app/(auth)/components/InputFormField";
-import { ArchivePut, ArchivePutRequest } from "@/src/api/board/exam";
-import { FileItemProps } from "../../../components/File/ViewFileItem";
-import {
-  postKeys,
-  useArchiveDetailQuery,
-} from "../../../board/query/postqueries";
-import PendingFallbackUI from "../../../components/Skeleton/PendingFallbackUI";
-import NewPostTitle from "../../../components/NewPostTitle";
-import ModifyFileUploader from "../../../components/File/ModifyFileUploader";
-import LoadingModal from "../../../components/Modal/LoadingModal";
+import { PutArchiveRequest } from "@/src/features/exam_archive/api/exam_archive.type";
+import { PutArchive } from "@/src/features/exam_archive/api/exam_archive";
+import { postKeys } from "@/src/features/board/query/queryKey";
+import { UploadFilesAPI } from "@/src/features/file/api/file";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
+import NewPostTitle from "@/src/shared/ui/board/NewPostTitle";
+import TextareaFormField from "@/src/features/auth/components/signup/TextareaFormField";
+import { InputFormField } from "@/src/features/auth/components/signup/InputFormField";
+import { SelectFormField } from "@/src/features/auth/components/signup/SelectFormField";
+import ModifyFileUploader from "@/src/features/file/components/ModifyFileUploader";
+import TextareaFormContentField from "@/src/features/auth/components/signup/TextareaFormContentField";
+import LoadingModal from "@/src/shared/ui/modal/LoadingModal";
+import { Form } from "@nova/ui/components/ui/form";
+import { FileItemProps } from "@/src/features/file/components/ViewFileItem";
 
 interface Props {
   postId: string;
@@ -126,7 +123,7 @@ export default function ModifyPage({ postId }: Props) {
   }, [year, subject, professorName, semester]);
 
   const useArchivePutMutation = useMutation({
-    mutationFn: (data: ArchivePutRequest) => ArchivePut(data),
+    mutationFn: (data: PutArchiveRequest) => PutArchive(data),
     onSuccess: (data: any) => {
       console.log(data);
       alert("변경 성공");

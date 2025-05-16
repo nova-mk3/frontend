@@ -1,10 +1,7 @@
 import React from "react";
-import ErrorBoundaryWrapper from "../../../components/ErrorBoundary/ErrorBoundaryWrapper";
-import { IntegratedBoardGetDetail } from "@/src/api/board/integrated";
-import { Metadata } from "next";
-import { INTEGRATED } from "@/src/constant/board";
-import Hydration from "./Hydration";
+
 import PostDetail from "./PostDetail";
+import ErrorBoundaryWrapper from "@/src/shared/ui/errorBoundary/ErrorBoundaryWrapper";
 
 // TODO: 메타데이터 확인
 type Props = {

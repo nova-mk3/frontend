@@ -4,36 +4,34 @@ import { Form } from "@nova/ui/components/ui/form";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { grade, semester } from "@/src/schema/signup.schema";
-import { InputFormField } from "@/src/app/(auth)/components/InputFormField";
-import { RadioFormField } from "@/src/app/(auth)/signup/components/RadioFormField";
-import { SelectFormField } from "@/src/app/(auth)/signup/components/SelectFormField";
-import { DatePickerForm } from "@/src/app/(auth)/signup/components/DatePickerField";
 
 import { Button } from "@nova/ui/components/ui/button";
-import GraduationYearSelect from "@/src/app/(auth)/signup/components/GraduationYearSelect";
-
 import {
   ChangeUserInfoInput,
   ChangeUserInfoSchema,
 } from "@/src/schema/changeuserinfo.schema";
 import { useGetUserData, userKeys } from "../../query/qureies";
-import Modal from "@/src/app/(main)/components/Modal/Modal";
-import PendingFallbackUI from "@/src/app/(main)/components/Skeleton/PendingFallbackUI";
-import { Profile } from "@/src/app/(main)/board/components/comments/CommentListItem";
-
 import ProfilUpdate from "./ProfilUpdate";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  GraduationPutRequest,
-  MemberPutRequest,
-  ProfileUpdateData,
-  PutUserProfile,
-} from "@/src/api/user/client";
 import { useRouter } from "next/navigation";
 import {
   parseDatetoString,
   parseStringToDate,
-} from "@/src/libs/utils/dateParsing";
+} from "@/src/shared/utils/dateParsing";
+import {
+  ProfileUpdateData,
+  PutUserProfile,
+  GraduationPutRequest,
+  MemberPutRequest,
+} from "@/src/features/user/list/api/user";
+import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
+import { InputFormField } from "@/src/features/auth/components/signup/InputFormField";
+import { RadioFormField } from "@/src/features/auth/components/signup/RadioFormField";
+import { SelectFormField } from "@/src/features/auth/components/signup/SelectFormField";
+import GraduationYearSelect from "@/src/features/auth/components/signup/GraduationYearSelect";
+import { DatePickerForm } from "@/src/features/auth/components/signup/DatePickerField";
+import Modal from "@/src/shared/ui/modal/Modal";
+import { UserProfilePhoto } from "@/src/entities/user/user.type";
 
 interface Props {
   memberId: string;
@@ -49,7 +47,7 @@ export interface UserProfile {
   memberId: string;
   name: string;
   phone: string;
-  profilePhoto: Profile;
+  profilePhoto: UserProfilePhoto;
   role: "ADMINISTRATOR" | "USER" | "GUEST"; // 필요한 역할 추가 가능
   semester: number;
   studentNumber: string;

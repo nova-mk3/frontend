@@ -2,7 +2,7 @@ import "@nova/tailwind-config/globalcss";
 import type { Metadata } from "next";
 import React from "react";
 import { pretendard, paperlogy } from "../theme/font";
-import Providers from "../query/providers";
+import Providers from "../shared/query/providers";
 
 export const metadata: Metadata = {
   title: "NOVA",
@@ -54,7 +54,7 @@ export default function RootLayout({
         />
         <meta name="application-name" content="NOVA" />
       </head>
-      <body className="relative">
+      <body className="relative mobile:px-3">
         <Providers>{children}</Providers>
       </body>
     </html>
