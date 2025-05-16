@@ -18,11 +18,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UploadFilesAPI } from "@/src/features/file/api/file";
 import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
 import { Form } from "@nova/ui/components/ui/form";
-import NewPostTitle from "@/src/shared/ui/board/NewPostTitle";
 import { SelectFormField } from "@/src/features/auth/components/signup/SelectFormField";
 import ModifyFileUploader from "@/src/features/file/components/ModifyFileUploader";
 import TextareaFormField from "@/src/features/auth/components/signup/TextareaFormField";
 import TextareaFormContentField from "@/src/features/auth/components/signup/TextareaFormContentField";
+import NewPostTitle from "@/src/shared/ui/board/NewPostTitle";
 import LoadingModal from "@/src/shared/ui/modal/LoadingModal";
 
 interface Props {
