@@ -1,16 +1,25 @@
+import path from "path";
 import type { NextConfig } from "next";
 /** @type {import('next').NextConfig} */
 
 const isProd = process.env.NODE_ENV === "production";
+
 const nextConfig: NextConfig = {
-  /* config options here */
   reactStrictMode: false,
   output: "standalone",
   webpack: (config) => {
+    // SVG loader 추가
     config.module.rules.push({
       test: /\.svg$/i,
       use: ["@svgr/webpack"],
     });
+
+    // ✅ @ alias 추가
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      "@": path.resolve(__dirname, "src"),
+    };
+
     return config;
   },
   images: {
