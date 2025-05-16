@@ -19,7 +19,7 @@ import { SimpleProfileQueryOptions } from "@/src/app/(main)/users/[id]/query/opt
 export default function SiderbarContent() {
   const { data } = useQuery(SimpleProfileQueryOptions());
   return (
-    <div className="flex flex-col gap-[30px] pt-[10px] pb-[30px] px-[20px]">
+    <div className="flex flex-col gap-[30px] pt-[10px] pb-[30px] px-[20px] mb-8">
       {data && (
         <div>
           <p className="h-s mb-2">메뉴</p>

@@ -1,3 +1,5 @@
+import { PostType } from "@/src/constant/board";
+
 export interface Board {
   id: string;
   authorName: string;
@@ -12,4 +14,12 @@ export interface Board {
   viewCount: number;
   href: string;
   ishome: boolean;
+}
+
+export interface MainBoard {
+  id: string;
+  postType: PostType;
+  title: string;
+  viewCount: number;
+  createdTime: string;
 }

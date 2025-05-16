@@ -12,7 +12,7 @@ export function SidebarWrapper() {
       <SidebarTrigger className="hidden mobile:flex">
         <Menu size={30} />
       </SidebarTrigger>
-      <SidebarLayout className="hidden mobile:block">
+      <SidebarLayout className="hidden mobile:block ">
         <SidebarHeader />
 
         <SiderbarContent />

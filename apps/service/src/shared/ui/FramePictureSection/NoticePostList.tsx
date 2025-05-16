@@ -2,29 +2,15 @@ import React from "react";
 import { INTEGRATED, POST_TYPE } from "@/src/constant/board";
 import { usePostListQuery } from "@/src/features/board/query/queries";
 import FramePostSectionListItem from "./FramePostSectionListItem";
-
-export default function NoticePostList() {
-  const { data, isLoading } = usePostListQuery({
-    postType: POST_TYPE.NOTICE,
-    page: 0,
-    size: 5,
-    keyword: "",
-    searchType: "ALL",
-    sortBy: "createdTime",
-    sortDirection: "desc",
-    boardId: INTEGRATED,
-  });
-
-  if (isLoading)
-    return (
-      <div className="w-full bg-background02 animate-pulse h-[317px] flex justify-center items-center">
-        진행중...
-      </div>
-    );
+import { MainBoard } from "@/src/entities/board/board.type";
+interface Props {
+  data: MainBoard[];
+}
+export default function NoticePostList({ data }: Props) {
   return (
     <div className="flex flex-col gap-2">
       {/* PostListSkeleton */}
-      {data.content.map((post: any) => (
+      {data.map((post: any) => (
         <FramePostSectionListItem
           defaultHref="/board"
           key={post.id}

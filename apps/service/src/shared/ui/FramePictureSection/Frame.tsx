@@ -166,7 +166,7 @@ export default function Frame({
         className="absolute top-[574px] left-[1196px] object-cover"
       />
       <Logo
-        className="absolute top-[96px] left-[498px]"
+        className="absolute top-[90px] left-[498px]"
         fill="#B096F5"
         width="40px"
       />
