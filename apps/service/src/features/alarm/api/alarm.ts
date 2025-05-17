@@ -16,6 +16,8 @@ export async function GetAlarms({ page, size, sortBy }: GetAlarmsParam) {
     const response = await Authapi.get(
       `/notifications?page=${page}&size=${size}&sort=${sortBy}`
     );
+
+    setTimeout(() => {}, 1000);
     return response.data.data; // 요청 성공 시 데이터 반환
   } catch (error) {
     throwErrorMessage(error);

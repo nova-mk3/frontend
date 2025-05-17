@@ -10,4 +10,5 @@ export const useUnreadAlarmCountQuery = ({
     queryKey: ["unreadAlarmCount"],
     queryFn: GetUnreadAlarmCount,
     enabled: enabled,
+    throwOnError: false,
   });
