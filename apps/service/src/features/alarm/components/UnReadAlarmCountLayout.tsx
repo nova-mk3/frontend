@@ -1,25 +1,19 @@
 "use client";
-import React, { useEffect } from "react";
-import { GetUnreadAlarmCount } from "../api/alarm";
+import React from "react";
+import { useUnreadAlarmCountQuery } from "../query/queries";
 
 interface Props {
   children: React.ReactNode;
 }
 export default function UnReadAlarmCountLayout({ children }: Props) {
-  const getUnreadAlarmCount = async () => {
-    try {
-      const response = await GetUnreadAlarmCount();
-      console.log(response);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  useEffect(() => {
-    getUnreadAlarmCount();
-  }, []);
+  const { data, isError } = useUnreadAlarmCountQuery({});
+
+  if (isError) return null;
   return (
     <>
-      <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-primary rounded-full"></div>
+      {data.count > 0 && (
+        <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-primary rounded-full"></div>
+      )}
       {children}
     </>
   );

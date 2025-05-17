@@ -6,15 +6,19 @@ interface AlarmListProps {
 }
 
 export default function AlarmList({ content }: AlarmListProps) {
+  console.log(content);
   return (
     <div className="flex flex-col">
       {content.map((item: AlarmListItemProps) => (
         <AlarmListItem
-          key={item.id}
-          id={item.id}
-          createAt={item.createAt}
+          key={item.uuid}
+          uuid={item.uuid}
+          targetId={item.targetId}
+          targetType={item.targetType}
+          eventType={item.eventType}
           message={item.message}
-          isRead={item.isRead}
+          read={item.read}
+          createdTime={item.createdTime}
         />
       ))}
     </div>

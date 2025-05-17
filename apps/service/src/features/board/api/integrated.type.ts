@@ -34,7 +34,6 @@ export interface PutIntegratedBoardRequest {
 /**
  * 카테고리 별 게시글 조회 타입
  */
-
 export type GetIntegratedBoardsByCategoryParams = Pick<
   IntegratedBoardParams,
   | "postType"
