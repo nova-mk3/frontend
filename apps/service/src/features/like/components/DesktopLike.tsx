@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { cn } from "@nova/ui/lib/utils";
 import { postKeys } from "../../board/query/queryKey";
 import { LikeAPI, UnLikeAPI } from "../api/like.api";
-import { EmojiCirCleButton } from "@/src/shared/ui/buttom/EmojiCirCleButton";
+import { EmojiCirCleButton } from "@/src/shared/ui/button/EmojiCirCleButton";
 
 interface LikeProps {
   liked: boolean;

@@ -1,5 +1,6 @@
 "use client";
 
+import UnReadAlarmCountLayout from "@/src/features/alarm/components/UnReadAlarmCountLayout";
 import { logout } from "@/src/features/auth/api/auth";
 import {
   DropdownMenu,
@@ -35,14 +36,14 @@ export default function HeaderLoginMenu({ trigger, memberId }: Props) {
       >
         <Search size={20} />
       </div>
-      <div
-        onClick={() => {
-          alert("준비중입니다");
-        }}
-        className="border-black border-[1px] p-2 rounded-full cursor-pointer"
+      <Link
+        href={"/users/message"}
+        className="relative border-black border-[1px] p-2 rounded-full cursor-pointer hover:text-primary"
       >
-        <Bell size={20} />
-      </div>
+        <UnReadAlarmCountLayout>
+          <Bell size={20} />
+        </UnReadAlarmCountLayout>
+      </Link>
 
       <DropdownMenu>
         {/* asChild를 써주면 태그에 클릭이 붙는게 아니라  자식 element에 클릭 이벤트가 붙는다 */}

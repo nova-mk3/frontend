@@ -1,6 +1,6 @@
 "use client";
-import AlarmList from "@/src/features/alarm/AlarmList";
-import { AlarmListItemProps } from "@/src/features/alarm/AlarmListItem";
+import AlarmList from "@/src/features/alarm/components/AlarmList";
+import { AlarmListItemProps } from "@/src/features/alarm/components/AlarmListItem";
 import React from "react";
 
 export default function page() {

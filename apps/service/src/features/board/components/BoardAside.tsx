@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@nova/ui/lib/utils";
 import DesktopLike from "./DesktopLike";
 import { throwErrorMessage } from "@/src/shared/utils/throwError";
-import { EmojiCirCleButton } from "@/src/shared/ui/buttom/EmojiCirCleButton";
+import { EmojiCirCleButton } from "@/src/shared/ui/button/EmojiCirCleButton";
 // boolean은 html이 인식하지 못함 ㄷㄷ....
 // const DesktopLike = dynamic(() => import("./DesktopLike"), {
 //   ssr: false,

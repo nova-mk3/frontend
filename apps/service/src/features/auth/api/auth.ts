@@ -10,7 +10,6 @@ export async function verifyEmail(email: string) {
   const response = await api.post("/email-auth", { email: email });
   return response.data;
 }
-
 export async function verifyEmailCode({
   email,
   authCode,

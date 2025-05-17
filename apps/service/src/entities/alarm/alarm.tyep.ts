@@ -4,3 +4,7 @@ export interface Alarm {
   message: string;
   createAt: string;
 }
+
+export interface UnReadAlarm {
+  count: number;
+}

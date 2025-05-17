@@ -13,11 +13,6 @@ const nextConfig: NextConfig = {
       test: /\.svg$/i,
       use: ["@svgr/webpack"],
     });
-    // ✅ 별칭 추가
-    config.resolve.alias = {
-      ...(config.resolve.alias || {}),
-      "@": path.resolve(__dirname, "src"), // apps/service/src 기준
-    };
 
     return config;
   },
