@@ -83,12 +83,14 @@ export function Title({ title, type, className }: ItemTitleProps) {
         <p className="bg-primary rounded-full text-sm flex items-center justify-center text-background01 px-2 py-0.5">
           공지
         </p>
-        <p className="flex-1  hover:text-primary line-clamp-1 t-l">{title}</p>
+        <p className="flex-1  hover:text-primary line-clamp-1 t-l break-all">
+          {title}
+        </p>
       </div>
     );
 
   return (
-    <div className="font-medium text-gray-900 t-l  hover:text-primary line-clamp-1">
+    <div className="font-medium text-gray-900 t-l  hover:text-primary line-clamp-1 break-all">
       {title}
     </div>
   );

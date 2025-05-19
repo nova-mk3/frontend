@@ -28,15 +28,17 @@ export default function ArchiveListItem({
       <Link href={href} className="w-full">
         <Title title={title} type={type} />
       </Link>
-      <Link href={href} className="w-full text-muted-foreground min-h-7">
-        <div className="text-base line-clamp-1">{content}</div>
+      <Link
+        href={href}
+        className="flex flex-col w-full text-muted-foreground min-h-7"
+      >
+        <div className="text-base line-clamp-1 break-all">{content}</div>
+        <span className="text-sm text-gray-500 ml-auto mt-3">
+          {formatDate(createdTime)}
+        </span>
       </Link>
-      <div className="mt-4 flex flex-row">
-        <div className="flex items-center gap-2 text-sm">
-          <span className="text-gray-700">비공개</span>
-          <span className="text-gray-400">·</span>
-          <span className="text-gray-500">{formatDate(createdTime)}</span>
-          <span className="text-gray-400">·</span>
+      <div className="flex flex-row">
+        <div className="flex items-center gap-2 text-sm ">
           <span className="text-gray-500">{POST_TYPE.EXAM_ARCHIVE}</span>
         </div>
         <div className="flex items-center gap-3 text-gray-500 ml-auto">
@@ -79,12 +81,14 @@ export function Title({ title, type, className }: ItemTitleProps) {
         <p className="bg-primary rounded-full text-sm flex items-center justify-center text-background01 px-2 py-0.5">
           공지
         </p>
-        <p className="flex-1  hover:text-primary line-clamp-1 t-l">{title}</p>
+        <p className="flex-1  hover:text-primary line-clamp-1 t-l break-all">
+          {title}
+        </p>
       </div>
     );
 
   return (
-    <div className="font-medium text-gray-900 t-l  hover:text-primary line-clamp-1">
+    <div className="font-medium text-gray-900 t-l  hover:text-primary line-clamp-1 break-all">
       {title}
     </div>
   );

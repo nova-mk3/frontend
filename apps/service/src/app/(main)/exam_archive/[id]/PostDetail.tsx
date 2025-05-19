@@ -7,15 +7,16 @@ import { useArchiveDetailQuery } from "@/src/features/exam_archive/query/queries
 import PendingFallbackUI from "@/src/shared/ui/skeleton/PendingFallbackUI";
 import { Separator } from "@nova/ui/components/ui/separator";
 import React from "react";
-import {
-  FileListLayout,
-  FileList,
-} from "../../suggestion/components/ViewFileLayout";
+
 import CommentTitle from "@/src/features/comment/components/CommentTitle";
 import CommentForm from "@/src/features/comment/components/CommentForm";
 import ErrorBoundaryWrapper from "@/src/shared/ui/errorBoundary/ErrorBoundaryWrapper";
 import CommentList from "@/src/features/comment/components/CommentList";
 import BoardAside from "@/src/features/board/components/BoardAside";
+import {
+  FileListLayout,
+  FileList,
+} from "@/src/features/file/components/ViewFileLayout";
 
 interface PostDetailProps {
   postId: string;
