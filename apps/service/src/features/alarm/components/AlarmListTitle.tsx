@@ -2,12 +2,26 @@
 import { useUnreadAlarmCountQuery } from "@/src/features/alarm/query/queries";
 import React from "react";
 import { PatchReadAlarms } from "../api/alarm";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function AlarmListTitle() {
   const { data, isLoading, isError } = useUnreadAlarmCountQuery({});
-
+  const queryClient = useQueryClient();
   const handleReadAlarms = async () => {
-    await PatchReadAlarms();
+    try {
+      await PatchReadAlarms();
+      queryClient.invalidateQueries({
+        queryKey: ["unreadAlarmCount"],
+        refetchType: "all",
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: ["alarms"],
+        refetchType: "all",
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
   if (isLoading) {
     return (
