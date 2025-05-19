@@ -7,7 +7,7 @@ export default function PopUpMessage() {
   const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("NovaUpdatePopupClose") === "true") {
+    if (localStorage.getItem("NovaUpdatePopup1") === "true") {
       setIsHidden(true);
     } else setIsHidden(false);
   }, []);
@@ -18,7 +18,7 @@ export default function PopUpMessage() {
   };
 
   const handleAction = () => {
-    localStorage.setItem("NovaUpdatePopupClose", "true");
+    localStorage.setItem("NovaUpdatePopup1", "true");
     setIsOpen(false);
   };
   if (!isHidden) {
@@ -31,11 +31,10 @@ export default function PopUpMessage() {
         </div>
 
         <div className="!font-bold mt-2">✅ 업데이트 내역</div>
-        <div>1. 마이페이지 건의함/게시글 보기 기능 추가</div>
+        <div>1. 알림 기능</div>
 
         <div className="!font-bold mt-4">🛠 개선 예정</div>
-        <div>1. 모바일 호환성</div>
-        <div>2. 알림 기능</div>
+        <div>1. 비밀번호 찾기</div>
 
         <div className="mt-4 text-sm text-gray-500">
           ※ 피드백은 건의함을 통해 남겨주세요!

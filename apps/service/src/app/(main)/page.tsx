@@ -17,7 +17,7 @@ export default function Home() {
       <div className="flex justify-center mt-40 ">
         <FrameAboutMeSection className="relative w-screen px-8 mobile:w-[90%]" />
       </div>
-      {/* <PopUpMessage /> */}
+      <PopUpMessage />
     </>
   );
 }

@@ -11,4 +11,5 @@ export const useUnreadAlarmCountQuery = ({
     queryFn: GetUnreadAlarmCount,
     enabled: enabled,
     throwOnError: false,
+    staleTime: 0,
   });
