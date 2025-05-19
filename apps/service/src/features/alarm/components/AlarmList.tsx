@@ -5,7 +5,7 @@ import { GetAlarms } from "../api/alarm";
 import AlarmListItem, { AlarmListItemProps } from "./AlarmListItem";
 
 export default function AlarmList() {
-  const size = 3;
+  const size = 5;
 
   const {
     data,
@@ -73,6 +73,11 @@ export default function AlarmList() {
           알림 더 보기
         </div>
       )}
+
+      {!hasNextPage ||
+        (isFetchingNextPage && (
+          <div className=" text-white rounded-md px-2 py-3 flex items-center justify-center cursor-pointer mt-5 h-[48px]"></div>
+        ))}
     </>
   );
 }

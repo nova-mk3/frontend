@@ -1,9 +1,11 @@
+import { PostType } from "@/src/constant/board";
+
 export interface Alarm {
   uuid: string;
   eventType: string;
   message: string;
   targetId: string;
-  targetType: string;
+  targetType: PostType;
   createdTime: string;
   read: boolean;
 }

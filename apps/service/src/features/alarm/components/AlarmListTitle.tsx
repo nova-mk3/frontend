@@ -1,10 +1,14 @@
 "use client";
 import { useUnreadAlarmCountQuery } from "@/src/features/alarm/query/queries";
 import React from "react";
+import { PatchReadAlarms } from "../api/alarm";
 
 export default function AlarmListTitle() {
   const { data, isLoading, isError } = useUnreadAlarmCountQuery({});
 
+  const handleReadAlarms = async () => {
+    await PatchReadAlarms();
+  };
   if (isLoading) {
     return (
       <div className="flex flex-row bg-background02 py-2 px-2  h-[40px]">
@@ -27,7 +31,10 @@ export default function AlarmListTitle() {
       <div className="flex flex-row gap-1">
         읽지 않은 알림 <p className="text-primary !font-bold">{data.count}</p>개
       </div>
-      <div className="ml-auto text-sm text-gray-500 cursor-pointer">
+      <div
+        className="ml-auto text-sm text-gray-500 cursor-pointer"
+        onClick={handleReadAlarms}
+      >
         모두 읽기
       </div>
     </div>
