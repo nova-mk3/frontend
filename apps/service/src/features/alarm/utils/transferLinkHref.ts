@@ -7,7 +7,8 @@ export function transferLinkHref({
 }: Pick<Alarm, "targetType" | "targetId">) {
   if (
     targetType === POST_TYPE.EXAM_ARCHIVE ||
-    targetType === POST_TYPE.PICTURES
+    targetType === POST_TYPE.PICTURES || 
+    targetType === POST_TYPE.SUGGESTION
   ) {
     return `/${targetType.toLowerCase()}/${targetId}`;
   } else {
