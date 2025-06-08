@@ -26,7 +26,7 @@ export default function HeaderNavigation() {
 
   return (
     <NavigationMenu className="z-[40]">
-      <NavigationMenuList className="gap-[20px]">
+      <NavigationMenuList className="gap-[20px] font-paperlogy">
         <NavigationMenuItem>
           <NavigationMenuTrigger className="t-m font-bold">
             소개
