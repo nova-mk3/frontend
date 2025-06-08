@@ -25,7 +25,7 @@ export const pretendard = localFont({
   ],
   variable: "--font-pretendard",
   display: "swap",
-  preload: false,
+  preload: true,
 });
 
 export const paperlogy = localFont({
@@ -54,5 +54,5 @@ export const paperlogy = localFont({
   ],
   display: "swap",
   variable: "--font-paperlogy",
-  preload: true,
+  preload: false,
 });

@@ -28,9 +28,7 @@ export default function HeaderNavigation() {
     <NavigationMenu className="z-[40]">
       <NavigationMenuList className="gap-[20px]">
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="font-bold">
-            소개
-          </NavigationMenuTrigger>
+          <NavigationMenuTrigger>소개</NavigationMenuTrigger>
           {/* NavigationMenuContent 부분을 복사해 네비게이션 추가삭제가 가능함 -> 추후 리펙토링 예정 */}
           <NavigationMenuContent>
             <ul className="flex flex-col gap-[15px] p-4 md:w-[325px] lg:grid-cols-[.75fr_1fr] bg-background01">
@@ -86,9 +84,7 @@ export default function HeaderNavigation() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger className=" font-bold">
-            게시판
-          </NavigationMenuTrigger>
+          <NavigationMenuTrigger>게시판</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="flex flex-col gap-[15px] p-4 md:w-[325px] lg:grid-cols-[.75fr_1fr] bg-background01">
               <NavigationMenuLink asChild>
@@ -145,9 +141,7 @@ export default function HeaderNavigation() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="font-bold">
-            가이드
-          </NavigationMenuTrigger>
+          <NavigationMenuTrigger>가이드</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="flex flex-col gap-[15px] p-4 md:w-[325px] lg:grid-cols-[.75fr_1fr] bg-background01">
               <NavigationMenuLink asChild>
