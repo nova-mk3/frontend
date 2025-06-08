@@ -2,51 +2,26 @@ import localFont from "next/font/local";
 
 export const pretendard = localFont({
   src: [
-    // {
-    //   path: "./fonts/Pretendard-Thin.subset.woff2",
-    //   weight: "100",
-    //   style: "normal",
-    // },
-    // {
-    //   path: "./fonts/Pretendard-ExtraLight.subset.woff2",
-    //   weight: "200",
-    //   style: "normal",
-    // },
-    // {
-    //   path: "./fonts/Pretendard-Light.subset.woff2",
-    //   weight: "300",
-    //   style: "normal",
-    // },
     {
       path: "./fonts/Pretendard-Regular.subset.woff2",
       weight: "400",
       style: "normal",
     },
-    {
-      path: "./fonts/Pretendard-Medium.subset.woff2",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "./fonts/Pretendard-SemiBold.subset.woff2",
-      weight: "600",
-      style: "normal",
-    },
+    // {
+    //   path: "./fonts/Pretendard-Medium.subset.woff2",
+    //   weight: "500",
+    //   style: "normal",
+    // },
+    // {
+    //   path: "./fonts/Pretendard-SemiBold.subset.woff2",
+    //   weight: "600",
+    //   style: "normal",
+    // },
     {
       path: "./fonts/Pretendard-Bold.subset.woff2",
       weight: "700",
       style: "normal",
     },
-    // {
-    //   path: "./fonts/Pretendard-ExtraBold.subset.woff2",
-    //   weight: "800",
-    //   style: "normal",
-    // },
-    // {
-    //   path: "./fonts/Pretendard-Black.subset.woff2",
-    //   weight: "900",
-    //   style: "normal",
-    // },
   ],
   variable: "--font-pretendard",
   display: "swap",
@@ -55,49 +30,25 @@ export const pretendard = localFont({
 
 export const paperlogy = localFont({
   src: [
-    // {
-    //   path: "./fonts/Paperlogy-1Thin.woff2",
-    //   weight: "100",
-    //   style: "normal",
-    // },
-    // {
-    //   path: "./fonts/Paperlogy-2ExtraLight.woff2",
-    //   weight: "200",
-    //   style: "normal",
-    // },
-    // {
-    //   path: "./fonts/Paperlogy-3Light.woff2",
-    //   weight: "300",
-    //   style: "normal",
-    // },
     {
       path: "./fonts/Paperlogy-4Regular.woff2",
       weight: "400",
       style: "normal",
     },
-    {
-      path: "./fonts/Paperlogy-5Medium.woff2",
-      weight: "500",
-      style: "normal",
-    },
     // {
-    //   path: "./fonts/Paperlogy-6SemiBold.woff2",
-    //   weight: "600",
+    //   path: "./fonts/Paperlogy-5Medium.woff2",
+    //   weight: "500",
     //   style: "normal",
     // },
+
     {
       path: "./fonts/Paperlogy-7Bold.woff2",
       weight: "700",
       style: "normal",
     },
-    {
-      path: "./fonts/Paperlogy-8ExtraBold.woff2",
-      weight: "800",
-      style: "normal",
-    },
     // {
-    //   path: "./fonts/Paperlogy-9Black.woff2",
-    //   weight: "900",
+    //   path: "./fonts/Paperlogy-8ExtraBold.woff2",
+    //   weight: "800",
     //   style: "normal",
     // },
   ],
