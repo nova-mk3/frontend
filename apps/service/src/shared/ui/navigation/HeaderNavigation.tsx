@@ -26,9 +26,9 @@ export default function HeaderNavigation() {
 
   return (
     <NavigationMenu className="z-[40]">
-      <NavigationMenuList className="gap-[20px] font-paperlogy">
+      <NavigationMenuList className="gap-[20px]">
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="t-m font-bold">
+          <NavigationMenuTrigger className="font-bold">
             소개
           </NavigationMenuTrigger>
           {/* NavigationMenuContent 부분을 복사해 네비게이션 추가삭제가 가능함 -> 추후 리펙토링 예정 */}
@@ -86,7 +86,7 @@ export default function HeaderNavigation() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="t-m font-bold">
+          <NavigationMenuTrigger className=" font-bold">
             게시판
           </NavigationMenuTrigger>
           <NavigationMenuContent>
@@ -145,7 +145,7 @@ export default function HeaderNavigation() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="t-m font-bold">
+          <NavigationMenuTrigger className="font-bold">
             가이드
           </NavigationMenuTrigger>
           <NavigationMenuContent>
