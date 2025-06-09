@@ -1,7 +1,7 @@
 import "@nova/tailwind-config/globalcss";
 import type { Metadata } from "next";
 import React from "react";
-import { pretendard, paperlogy } from "../theme/font";
+import { paperlogy } from "../theme/font";
 import Providers from "../shared/query/providers";
 
 export const metadata: Metadata = {
@@ -43,10 +43,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${pretendard.variable} ${paperlogy.variable} font-pretendard`}
-    >
+    <html lang="en" className={`${paperlogy.variable} font-pretendard`}>
       <head>
         <meta
           name="google-site-verification"

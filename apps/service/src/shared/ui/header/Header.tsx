@@ -12,7 +12,7 @@ export default function Header() {
       <div className="flex flex-row  border-b  py-3 relative h-[72px] items-center">
         <Link href={"/"}>
           <Logo width={161.83} height={45} fill={"#B096F5"} />
-        </Link>     
+        </Link>
         <div className="flex flex-row items-center ml-[20px] mobile:hidden">
           <HeaderNavigation />
         </div>
