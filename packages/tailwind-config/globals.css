@@ -22,7 +22,8 @@ input[type="password"]::-ms-clear {
     --danger: 6 100% 69%;
     --success: 199 100% 62%;
     --background-02: 241, 243, 245;
-    --font-pretendard: "Pretendard", sans-serif;
+    /* --font-pretendard: "Pretendard", sans-serif; */
+    --font-pretendard: sans-serif;
     --font-paperlogy: "Paperlogy", sans-serif;
     --accent: 240 4.8% 95.9%;
     --accent-foreground: 240 5.9% 10%;
