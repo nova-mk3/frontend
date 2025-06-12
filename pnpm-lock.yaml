@@ -253,9 +253,6 @@ importers:
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.21(postcss@8.5.3)
-      cssnano:
-        specifier: ^7.0.7
-        version: 7.0.7(postcss@8.5.3)
       eslint:
         specifier: ^9
         version: 9.22.0(jiti@2.4.2)
@@ -331,6 +328,9 @@ importers:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.17)
     devDependencies:
+      cssnano:
+        specifier: ^7.0.7
+        version: 7.0.7(postcss@8.5.3)
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.17
@@ -10144,7 +10144,7 @@ snapshots:
   caniuse-api@3.0.0:
     dependencies:
       browserslist: 4.25.0
-      caniuse-lite: 1.0.30001706
+      caniuse-lite: 1.0.30001722
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
 
