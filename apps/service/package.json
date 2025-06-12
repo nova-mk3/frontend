@@ -30,7 +30,6 @@
     "react-hook-form": "^7.54.2",
     "react-textarea-autosize": "^8.5.6",
     "shared": "*",
-    "sharp": "^0.34.2",
     "tailwind-merge": "^2.5.5",
     "tailwindcss": "^3.4.17",
     "tailwindcss-animate": "^1.0.7",
