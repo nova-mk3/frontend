@@ -105,6 +105,7 @@ export default function Frame({
         height={403}
         alt="image"
         sizes="698px"
+        priority
         className="absolute top-[270px] left-[490px] object-cover"
       />
       <Image
