@@ -16,6 +16,7 @@ export default function Frame({
         width={177}
         height={125}
         alt="image"
+        sizes="177px"
         className="absolute top-[130px] left-[0px] object-cover"
       />
       <Image
@@ -23,6 +24,7 @@ export default function Frame({
         width={129}
         height={137}
         alt="image"
+        sizes="137px"
         className="absolute top-[118px] left-[186px] object-cover"
       />
       <Image
@@ -30,6 +32,7 @@ export default function Frame({
         width={190}
         height={150}
         alt="image"
+        sizes="190px"
         className="absolute top-[106px] left-[326px] object-cover"
       />
       <Image
@@ -37,6 +40,7 @@ export default function Frame({
         width={175}
         height={138}
         alt="image"
+        sizes="175px"
         className="absolute top-[118px] left-[526px] object-cover"
       />
       <Image
@@ -44,6 +48,7 @@ export default function Frame({
         width={190}
         height={150}
         alt="image"
+        sizes="190px"
         className="absolute top-[106px] left-[710px] object-cover"
       />
       <Image
@@ -51,6 +56,7 @@ export default function Frame({
         width={115}
         height={147}
         alt="image"
+        sizes="147px"
         className="absolute top-[109px] left-[910px] object-cover"
       />
       <Image
@@ -58,6 +64,7 @@ export default function Frame({
         width={133}
         height={126}
         alt="image"
+        sizes="133px"
         className="absolute top-[130px] left-[1034px] object-cover"
       />
       <Image
@@ -65,6 +72,7 @@ export default function Frame({
         width={230}
         height={126}
         alt="image"
+        sizes="230px"
         className="absolute top-[150px] left-[1174px] object-cover"
       />
       <Image
@@ -72,6 +80,7 @@ export default function Frame({
         width={177}
         height={121}
         alt="image"
+        sizes="177px"
         className="absolute top-[270px] left-[-40px] object-cover"
       />
       <Image
@@ -79,6 +88,7 @@ export default function Frame({
         width={177}
         height={117}
         alt="image"
+        sizes="177px"
         className="absolute top-[270px] left-[146px] object-cover"
       />
       <Image
@@ -86,6 +96,7 @@ export default function Frame({
         width={177}
         height={146}
         alt="image"
+        sizes="177px"
         className="absolute top-[270px] left-[304px] object-cover"
       />
       <Image
@@ -93,7 +104,7 @@ export default function Frame({
         width={698}
         height={403}
         alt="image"
-        sizes="(max-width: 768px) 100vw, 698px"
+        sizes="698px"
         className="absolute top-[270px] left-[490px] object-cover"
       />
       <Image
@@ -101,6 +112,7 @@ export default function Frame({
         width={225}
         height={300}
         alt="image"
+        sizes="300px"
         className="absolute top-[270px] left-[1196px] object-cover"
       />
       <Image
@@ -108,6 +120,7 @@ export default function Frame({
         width={177}
         height={177}
         alt="image"
+        sizes="180px"
         className="absolute top-[404px] left-[-40px] object-cover"
       />
       <Image
@@ -115,6 +128,7 @@ export default function Frame({
         width={147}
         height={142}
         alt="image"
+        sizes="150px"
         className="absolute top-[404px] left-[146px] object-cover"
       />
       <Image
@@ -122,6 +136,7 @@ export default function Frame({
         width={188}
         height={230}
         alt="image"
+        sizes="230px"
         className="absolute top-[430px] left-[294px] object-cover"
       />
       <Image
@@ -129,6 +144,7 @@ export default function Frame({
         width={148}
         height={230}
         alt="image"
+        sizes="230px"
         className="absolute top-[594px] left-[-20px] object-cover"
       />
       <Image
@@ -136,6 +152,7 @@ export default function Frame({
         width={148}
         height={230}
         alt="image"
+        sizes="230px"
         className="absolute top-[554px] left-[138px] object-cover"
       />
       <Image
@@ -143,6 +160,7 @@ export default function Frame({
         width={272}
         height={193}
         alt="image"
+        sizes="280px"
         className="absolute top-[744px] left-[138px] object-cover"
       />
       <Image
@@ -150,6 +168,7 @@ export default function Frame({
         width={123}
         height={193}
         alt="image"
+        sizes="200px"
         className="absolute top-[734px] left-[418px] object-cover"
       />
       <Image
@@ -157,6 +176,7 @@ export default function Frame({
         width={480}
         height={165}
         alt="image"
+        sizes="480px"
         className="absolute top-[684px] left-[550px] object-cover"
       />
       <Image
@@ -164,6 +184,7 @@ export default function Frame({
         width={240}
         height={165}
         alt="image"
+        sizes="240px"
         className="absolute top-[574px] left-[1196px] object-cover"
       />
       <Logo
