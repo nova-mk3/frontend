@@ -170,10 +170,10 @@ export default async function Frame({
       <Image
         src={image12}
         width={188}
-        height={230}
+        height={294}
         placeholder="blur"
         alt="image"
-        sizes="230px"
+        sizes="188px"
         className="absolute top-[430px] left-[294px] object-cover"
       />
       <Image
