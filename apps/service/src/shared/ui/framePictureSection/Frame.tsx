@@ -93,6 +93,7 @@ export default function Frame({
         width={698}
         height={403}
         alt="image"
+        sizes="(max-width: 768px) 100vw, 698px"
         className="absolute top-[270px] left-[490px] object-cover"
       />
       <Image
