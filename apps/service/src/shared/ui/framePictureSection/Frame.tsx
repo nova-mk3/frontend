@@ -35,7 +35,7 @@ export default async function Frame({
         src={image10}
         width={177}
         height={125}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="177px"
         className="absolute top-[130px] left-[0px] object-cover"
@@ -44,7 +44,7 @@ export default async function Frame({
         src={image14}
         width={129}
         height={137}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="137px"
         className="absolute top-[118px] left-[186px] object-cover"
@@ -53,7 +53,7 @@ export default async function Frame({
         src={image3}
         width={190}
         height={150}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="190px"
         className="absolute top-[106px] left-[326px] object-cover"
@@ -62,7 +62,7 @@ export default async function Frame({
         src={image23}
         width={175}
         height={138}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="175px"
         className="absolute top-[118px] left-[526px] object-cover"
@@ -71,7 +71,7 @@ export default async function Frame({
         src={image21}
         width={190}
         height={150}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="190px"
         className="absolute top-[106px] left-[710px] object-cover"
@@ -80,7 +80,7 @@ export default async function Frame({
         src={image5}
         width={115}
         height={147}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="147px"
         className="absolute top-[109px] left-[910px] object-cover"
@@ -89,7 +89,7 @@ export default async function Frame({
         src={image19}
         width={133}
         height={126}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="133px"
         className="absolute top-[130px] left-[1034px] object-cover"
@@ -98,7 +98,7 @@ export default async function Frame({
         src={image29}
         width={230}
         height={126}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="230px"
         className="absolute top-[150px] left-[1174px] object-cover"
@@ -107,7 +107,7 @@ export default async function Frame({
         src={image2}
         width={177}
         height={121}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="177px"
         className="absolute top-[270px] left-[-40px] object-cover"
@@ -116,7 +116,7 @@ export default async function Frame({
         src={image30}
         width={177}
         height={117}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="177px"
         className="absolute top-[270px] left-[146px] object-cover"
@@ -125,7 +125,7 @@ export default async function Frame({
         src={image26}
         width={177}
         height={146}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="177px"
         className="absolute top-[270px] left-[304px] object-cover"
@@ -134,7 +134,7 @@ export default async function Frame({
         src={image27}
         width={698}
         height={403}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="698px"
         priority
@@ -144,7 +144,7 @@ export default async function Frame({
         src={image13}
         width={225}
         height={300}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="300px"
         className="absolute top-[270px] left-[1196px] object-cover"
@@ -153,7 +153,7 @@ export default async function Frame({
         src={image18}
         width={177}
         height={177}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="180px"
         className="absolute top-[404px] left-[-40px] object-cover"
@@ -162,7 +162,7 @@ export default async function Frame({
         src={image25}
         width={147}
         height={142}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="150px"
         className="absolute top-[404px] left-[146px] object-cover"
@@ -171,7 +171,7 @@ export default async function Frame({
         src={image12}
         width={188}
         height={294}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="188px"
         className="absolute top-[430px] left-[294px] object-cover"
@@ -180,7 +180,7 @@ export default async function Frame({
         src={image7}
         width={148}
         height={230}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="230px"
         className="absolute top-[594px] left-[-20px] object-cover"
@@ -189,7 +189,7 @@ export default async function Frame({
         src={image9}
         width={148}
         height={230}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="230px"
         className="absolute top-[554px] left-[138px] object-cover"
@@ -198,7 +198,7 @@ export default async function Frame({
         src={image11}
         width={272}
         height={193}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="280px"
         className="absolute top-[744px] left-[138px] object-cover"
@@ -207,7 +207,7 @@ export default async function Frame({
         src={image8}
         width={123}
         height={193}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="200px"
         className="absolute top-[734px] left-[418px] object-cover"
@@ -216,7 +216,7 @@ export default async function Frame({
         src={image28}
         width={480}
         height={165}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="480px"
         className="absolute top-[684px] left-[550px] object-cover"
@@ -225,7 +225,7 @@ export default async function Frame({
         src={image22}
         width={240}
         height={165}
-        placeholder="blur"
+        // placeholder="blur"
         alt="image"
         sizes="240px"
         className="absolute top-[574px] left-[1196px] object-cover"
