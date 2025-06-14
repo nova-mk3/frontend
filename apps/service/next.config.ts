@@ -19,7 +19,20 @@ const nextConfig: NextConfig = {
 
   images: {
     formats: ["image/avif", "image/webp"],
-    domains: ["nova.cbnu.ac.kr", "localhost"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "nova.cbnu.ac.kr",
+        pathname: "**",
+        port: "",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "8080",
+        pathname: "**",
+      },
+    ],
     deviceSizes: [320, 420, 768, 1024, 1200],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
