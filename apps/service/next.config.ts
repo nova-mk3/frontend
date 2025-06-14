@@ -33,6 +33,7 @@ const nextConfig: NextConfig = {
         pathname: "**",
       },
     ],
+    deviceSizes: [360, 414, 768, 1024, 1280, 1440, 1920],
   },
   compiler: isProd
     ? {
