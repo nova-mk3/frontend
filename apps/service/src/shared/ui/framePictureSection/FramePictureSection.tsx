@@ -1,5 +1,3 @@
-"use client";
-
 import { cn } from "@nova/ui/lib/utils";
 import { HTMLAttributes } from "react";
 import Frame, { DotGrid } from "./Frame";
