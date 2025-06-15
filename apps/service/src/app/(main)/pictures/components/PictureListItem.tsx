@@ -54,7 +54,7 @@ export default function PictureListItem({
             height={thumbnailHeight}
             className="w-full h-auto aspect-video border-line01 rounded-t-lg object-cover"
             sizes=" (max-width: 767px) 100vw, (max-width: 1023px) 50vw, (max-width: 1279px) 33vw, 25vw"
-            unoptimized={true}
+            // unoptimized={true}
           />
         </div>
         <div className="p-3 flex flex-col gap-3">

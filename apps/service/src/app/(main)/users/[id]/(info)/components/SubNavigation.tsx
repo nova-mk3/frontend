@@ -10,6 +10,9 @@ export default function SubNavigation({ id }: { id: string }) {
 
   const pathname = usePathname();
   const userId = pathname.split("/")[2];
+  if (!data) {
+    return null;
+  }
   return (
     <ul className="flex flex-row gap-8 flex-wrap mx-auto justify-center border-b-[1px] border-line01 ">
       <NavigationMenuItem href={`/users/${userId}`} pathname={pathname}>
