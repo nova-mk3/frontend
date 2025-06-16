@@ -31,6 +31,12 @@ const nextConfig: NextConfig = {
         port: "8080",
         pathname: "**",
       },
+      {
+        protocol: "http",
+        hostname: "spring-app",
+        port: "8080",
+        pathname: "/files/public/**",
+      },
     ],
     deviceSizes: [320, 420, 700, 1024, 1200],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
@@ -48,7 +54,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/proxy/files/public/:path*",
-        destination: "http://localhost:4001/files/public/:path*",
+        destination: "http://spring-app:8080/files/public/:path*",
       },
     ];
   },
