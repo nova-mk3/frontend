@@ -31,6 +31,7 @@ const nextConfig: NextConfig = {
         port: "8080",
         pathname: "**",
       },
+      //배포 컨테이터 권한 접근을 위한 설정
       {
         protocol: "http",
         hostname: "spring-app",
