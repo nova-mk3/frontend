@@ -42,14 +42,19 @@ export default function PictureListItem({
   thumbnailOriginalFileName,
   totalFileDownloadCount,
 }: PictureListItemProps) {
+  const proxyImageUrl = thumbnailUrl.replace(
+    "https://nova.cbnu.ac.kr/files/public",
+    "/proxy/files/public"
+  );
+
   return (
     <div className="w-[100%] border rounded-lg flex flex-col cursor-pointer shadow-md transition ease-in-out hover:-translate-y-2 duration-300">
       <Link href={href}>
         <div className="relative w-full ">
           {/* TODO: size 크기를 통해 이미지 초기 로딩 속도를 개선할 수 있다!*/}
           <Image
-            src={thumbnailUrl}
-            alt={thumbnailOriginalFileName}
+            src={proxyImageUrl}
+            alt={thumbnailOriginalFileName + "썸네일"}
             width={thumbnailWidth}
             height={thumbnailHeight}
             className="w-full h-auto aspect-video border-line01 rounded-t-lg object-cover"

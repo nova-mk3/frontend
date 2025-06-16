@@ -45,10 +45,9 @@ const nextConfig: NextConfig = {
 
   async rewrites() {
     if (!isProd) return [];
-
     return [
       {
-        source: "/files/public/:path*",
+        source: "/proxy/files/public/:path*",
         destination: "http://localhost:4001/files/public/:path*",
       },
     ];
