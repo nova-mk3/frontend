@@ -15,6 +15,7 @@ import { ImageProps } from "../PostDetail";
 import { cn } from "@nova/ui/lib/utils";
 import { DownloadFilesAPI } from "@/src/features/file/api/file";
 import { DownloadProgressModal } from "@/src/shared/ui/modal/DownloadProgressModal";
+import { blurDataURL, imageUrlProxy } from "@/src/shared/utils/image";
 
 interface ModalProps {
   isOpen: boolean;
@@ -190,7 +191,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, total, images }) => {
                 className="min-w-full relative z-20 flex justify-center p-[10%]"
               >
                 <Image
-                  src={image.imageUrl}
+                  src={imageUrlProxy(image.imageUrl)}
                   alt={image.originalFileName}
                   width={image.width}
                   height={image.height}
@@ -202,6 +203,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, total, images }) => {
                   className={cn(`object-contain`)}
                   sizes={image.width.toString() + "px"}
                   onClick={(e) => e.stopPropagation()}
+                  placeholder="blur"
+                  blurDataURL={blurDataURL}
                 />
               </div>
             ))}

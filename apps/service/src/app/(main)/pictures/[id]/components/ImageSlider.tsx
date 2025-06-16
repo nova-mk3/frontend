@@ -45,6 +45,7 @@ const ImageSlider = ({
               height={image.height}
               className="w-full h-auto aspect-square object-cover  cursor-pointer"
               onClick={() => openModal()}
+              placeholder="blur"
               blurDataURL={blurDataURL}
               sizes="(max-width: 768px) 100vw, (max-width: 1047px) 50vw, 510px"
               priority={index === 0 ? true : false} // 첫번째 이미지만 priority
