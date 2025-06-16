@@ -27,6 +27,7 @@ export default function ProfilUpdate({ memberId }: { memberId: string }) {
     useProfileDelteMutatuon.mutate(profileMemberId);
   };
 
+  if (!data) return null;
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="relative items-center">

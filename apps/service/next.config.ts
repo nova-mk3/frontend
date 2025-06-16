@@ -23,8 +23,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "nova.cbnu.ac.kr",
-        pathname: "**",
-        port: "",
+        pathname: "/files/public/**",
       },
       {
         protocol: "http",
@@ -33,8 +32,8 @@ const nextConfig: NextConfig = {
         pathname: "**",
       },
     ],
-    deviceSizes: [320, 420, 768, 1024, 1200],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    deviceSizes: [320, 420, 700, 1024, 1200],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256],
   },
   compiler: isProd
     ? {

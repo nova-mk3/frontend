@@ -77,6 +77,7 @@ export default function FrameMobile({
               alt={`frame-${idx}`}
               placeholder="blur"
               className="w-full h-auto aspect-square object-cover"
+              sizes="70vw"
             />
           </CarouselItem>
         ))}
