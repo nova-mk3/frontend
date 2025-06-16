@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Heart, Images } from "lucide-react";
 import { formatDate } from "@/src/shared/utils/dateParsing";
+import { blurDataURL } from "@/src/shared/utils/image";
 
 export interface PictureListItemProps {
   className?: string;
@@ -46,11 +47,6 @@ export default function PictureListItem({
     "https://nova.cbnu.ac.kr/files/public",
     "/proxy/files/public"
   );
-  const blurDataURL = `data:image/svg+xml;base64,${btoa(`
-    <svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
-      <rect width="100%" height="100%" fill="#e5e5e5"/>
-    </svg>
-  `)}`;
 
   return (
     <div className="w-[100%] border rounded-lg flex flex-col cursor-pointer shadow-md transition ease-in-out hover:-translate-y-2 duration-300">
@@ -63,7 +59,7 @@ export default function PictureListItem({
             width={thumbnailWidth}
             height={thumbnailHeight}
             className="w-full h-auto aspect-video border-line01 rounded-t-lg object-cover"
-            sizes=" (max-width: 768px) 100vw, (max-width: 1023px) 50vw, (max-width: 1279px) 33vw, 320px" //최적화 옵션 끄면 안나오네
+            sizes=" (max-width: 768px) 100vw, (max-width: 1023px) 50vw, (max-width: 1279px) 33vw, 320px"
             placeholder="blur"
             blurDataURL={blurDataURL}
           />

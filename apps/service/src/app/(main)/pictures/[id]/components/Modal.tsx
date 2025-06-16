@@ -200,9 +200,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, total, images }) => {
                     transition: "transform 300ms",
                   }}
                   className={cn(`object-contain`)}
+                  sizes={image.width.toString() + "px"}
                   onClick={(e) => e.stopPropagation()}
-                  unoptimized={true}
-                  priority={true}
                 />
               </div>
             ))}
