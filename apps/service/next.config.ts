@@ -42,6 +42,17 @@ const nextConfig: NextConfig = {
         },
       }
     : {},
+
+  async rewrites() {
+    if (!isProd) return [];
+
+    return [
+      {
+        source: "/files/public/:path*",
+        destination: "http://localhost:4001/files/public/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
