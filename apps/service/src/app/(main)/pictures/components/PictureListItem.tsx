@@ -53,8 +53,7 @@ export default function PictureListItem({
             width={thumbnailWidth}
             height={thumbnailHeight}
             className="w-full h-auto aspect-video border-line01 rounded-t-lg object-cover"
-            sizes=" (max-width: 767px) 100vw, (max-width: 1023px) 50vw, (max-width: 1279px) 33vw, 25vw"
-            unoptimized={true}
+            sizes=" (max-width: 767px) 100vw, (max-width: 1023px) 50vw, (max-width: 1279px) 33vw, 25vw" //최적화 옵션 끄면 안나오네
           />
         </div>
         <div className="p-3 flex flex-col gap-3">
