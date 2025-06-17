@@ -102,7 +102,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, total, images }) => {
   if (!isOpen) return null;
 
   return (
-    // 임시 버튼 추후에 디자인 수정 예정
     <>
       <div
         className={cn(
@@ -200,11 +199,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, total, images }) => {
                       index === currentIndex ? `scale(${scale})` : "scale(1)",
                     transition: "transform 300ms",
                   }}
-                  className={cn(`object-contain`)}
+                  className={cn(` object-contain`)}
                   sizes={image.width.toString() + "px"}
                   onClick={(e) => e.stopPropagation()}
-                  placeholder="blur"
-                  blurDataURL={blurDataURL}
                 />
               </div>
             ))}
