@@ -1,10 +1,8 @@
-"use client";
-
 import { cn } from "@nova/ui/lib/utils";
 import { HTMLAttributes } from "react";
 import Logo from "@/public/image/Logo.svg";
 
-import PostSection from "./PostSection";
+import PostSectionHydration from "./PostSectionHydration";
 export default function FramePostSection({
   className,
   ...props
@@ -20,7 +18,7 @@ export default function FramePostSection({
           <div className="d-m !font-bold">NEWS</div>
           <Logo fill="#000000" width="250px" />
         </div>
-        <PostSection />
+        <PostSectionHydration />
       </div>
     </div>
   );

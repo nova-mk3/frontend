@@ -12,8 +12,11 @@ import React, { useState } from "react";
 import AcrossPostList from "./AcrossPostList";
 import NoticePostList from "./NoticePostList";
 import IntroPostList from "./IntroPostList";
-import PendingFallbackUI from "../skeleton/PendingFallbackUI";
 
+/**
+ *
+ * SSR의 경우 최신글만 반영
+ */
 export default function PostSection() {
   const [selectedTab, setSelectedTab] = useState<
     "latest" | "popular" | "notice" | "intro"
