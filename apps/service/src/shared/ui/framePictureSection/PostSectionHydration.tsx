@@ -1,15 +1,13 @@
 // components/server/PostSectionHydration.tsx
-
-"use client";
-
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
 import { INTEGRATED, POST_TYPE } from "@/src/constant/board";
 import getQueryClient from "../../query/getQueryClient";
-import { useAcrossBoardListQuery } from "@/src/features/board/query/queries";
 import {
   AcrossBoardQueryOptions,
   postSearchQueryOptions,
+  ServerAcrossBoardQueryOptions,
+  serverPostSearchQueryOptions,
 } from "@/src/features/board/query/options";
 import PostSection from "./PostSection";
 
@@ -19,7 +17,7 @@ export default async function PostSectionHydration() {
   // 📦 Pre-fetch all necessary queries
   await Promise.all([
     queryClient.prefetchQuery(
-      AcrossBoardQueryOptions({
+      ServerAcrossBoardQueryOptions({
         page: 0,
         size: 5,
         sortBy: "createdTime",
@@ -27,7 +25,7 @@ export default async function PostSectionHydration() {
       })
     ),
     queryClient.prefetchQuery(
-      AcrossBoardQueryOptions({
+      ServerAcrossBoardQueryOptions({
         page: 0,
         size: 5,
         sortBy: "viewCount",
@@ -35,7 +33,7 @@ export default async function PostSectionHydration() {
       })
     ),
     queryClient.prefetchQuery(
-      postSearchQueryOptions({
+      serverPostSearchQueryOptions({
         postType: POST_TYPE.NOTICE,
         boardId: INTEGRATED,
         page: 0,
@@ -47,7 +45,7 @@ export default async function PostSectionHydration() {
       })
     ),
     queryClient.prefetchQuery(
-      postSearchQueryOptions({
+      serverPostSearchQueryOptions({
         postType: POST_TYPE.INTRODUCTION,
         boardId: INTEGRATED,
         page: 0,

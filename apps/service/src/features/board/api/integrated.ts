@@ -50,6 +50,8 @@ export async function GetIntegratedBoardsByCategory({
     const response = await Authapi.get(
       `/boards/${boardId}/posts/search?postType=${postType}&page=${page}&size=${size}&searchType=${searchType}&keyword=${keyword}&sortBy=${sortBy}&sortDirection=${sortDirection}`
     );
+
+    console.log(response);
     return response.data.data;
   } catch (error) {
     throwErrorMessage(error);

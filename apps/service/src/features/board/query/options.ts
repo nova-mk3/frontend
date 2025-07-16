@@ -8,6 +8,10 @@ import {
 import { GetBoardsExcludeExamParams } from "../api/main.type";
 import { GetBoardsExcludeExam } from "../api/main";
 import { GetIntegratedBoardsByCategoryParams } from "../api/integrated.type";
+import {
+  ServerGetBoardsExcludeExam,
+  ServerGetIntegratedBoardsByCategory,
+} from "../api/server";
 
 export const postDetailQueryOptions = (postId: string, boardId: string) => {
   return queryOptions({
@@ -61,5 +65,47 @@ export const postSearchQueryOptions = ({
         sortDirection,
         keyword,
       }),
+  });
+};
+
+export const serverPostSearchQueryOptions = ({
+  page,
+  size,
+  searchType,
+  sortBy,
+  sortDirection,
+  keyword,
+  postType,
+  boardId,
+}: GetIntegratedBoardsByCategoryParams) => {
+  return queryOptions({
+    queryKey: postKeys.typelist(
+      { page, size, searchType, sortBy, sortDirection, keyword },
+      postType
+    ),
+    queryFn: () =>
+      ServerGetIntegratedBoardsByCategory({
+        postType,
+        page,
+        size,
+        boardId,
+        searchType,
+        sortBy,
+        sortDirection,
+        keyword,
+      }),
+  });
+};
+
+export const ServerAcrossBoardQueryOptions = ({
+  size,
+  page,
+  sortDirection,
+  sortBy,
+}: GetBoardsExcludeExamParams) => {
+  return queryOptions({
+    queryKey: postKeys.list({ size, page, sortDirection, sortBy, keyword: "" }),
+    queryFn: () =>
+      ServerGetBoardsExcludeExam({ size, page, sortDirection, sortBy }),
   });
 };

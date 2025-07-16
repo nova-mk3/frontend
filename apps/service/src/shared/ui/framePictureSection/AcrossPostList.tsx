@@ -1,7 +1,5 @@
 import React from "react";
 import { POST_TYPE } from "@/src/constant/board";
-import { useAcrossBoardListQuery } from "@/src/features/board/query/queries";
-import { sortByType } from "../../types/searchFilter.type";
 import FramePostSectionListItem from "./FramePostSectionListItem";
 import { MainBoard } from "@/src/entities/board/board.type";
 

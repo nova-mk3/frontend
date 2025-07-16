@@ -1,10 +1,12 @@
 import axios from "axios";
-export const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+const isServer = typeof window === "undefined";
 
 const config = {
-  baseURL: BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
   withCredentials: true,
 };
+console.log(config);
 
 // axios 인스턴스 생성
 export const api = axios.create(config); // 일반 API 요청용 인스턴스
