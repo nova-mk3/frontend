@@ -3,6 +3,7 @@ import { HTMLAttributes } from "react";
 import Logo from "@/public/image/Logo.svg";
 
 import PostSectionHydration from "./PostSectionHydration";
+import PostSectionClientWrapper from "../errorBoundary/PostSectionClientWrapper";
 export default function FramePostSection({
   className,
   ...props
@@ -18,7 +19,9 @@ export default function FramePostSection({
           <div className="d-m !font-bold">NEWS</div>
           <Logo fill="#000000" width="250px" />
         </div>
-        <PostSectionHydration />
+        <PostSectionClientWrapper>
+          <PostSectionHydration />
+        </PostSectionClientWrapper>
       </div>
     </div>
   );

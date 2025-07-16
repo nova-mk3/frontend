@@ -32,23 +32,23 @@ pipeline {
 }
 
         stage('Inject .env.production') {
-            steps {
-                withCredentials([string(credentialsId: 'env_production_text_frontend', variable: 'ENV_PROD')]) {
-                    script {
-                        // service 경로에 파일 생성
-                        dir('frontend/apps/service') {
-                            writeFile file: '.env.production', text: ENV_PROD + ''
-                            echo "✅ service .env.production 생성 완료 at frontend/apps/service/"
-                        }
+    steps {
+        withCredentials([file(credentialsId: 'frontend_env_files', variable: 'ENV_FILE')]) {
+            script {
+                // frontend/apps/service로 복사
+                dir('frontend/apps/service') {
+                    sh "cp $ENV_FILE .env.production"
+                    echo "✅ service .env.production 복사 완료"
+                }
 
-                        // admin 경로에 파일 생성
-                        dir('frontend/apps/admin') {
-                            writeFile file: '.env.production', text: ENV_PROD + ''
-                            echo "✅ admin .env.production 생성 완료 at frontend/apps/admin/"
-                        }
-                    }
+                // frontend/apps/admin으로 복사
+                dir('frontend/apps/admin') {
+                    sh "cp $ENV_FILE .env.production"
+                    echo "✅ admin .env.production 복사 완료"
                 }
             }
+        }
+    }
 }
 
         stage('Cleanup') {
