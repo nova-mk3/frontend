@@ -46,7 +46,7 @@ export default function ChangePwd({ memberId }: Props) {
       }),
     onSuccess: (data: any) => {
       alert("비밀번호 변경 성공\n 재 로그인을 해주세요");
-      router.push("/signin");
+      router.push("/signin?redirect=/resetpwd");
     },
     onError: (error) => {
       alert(error.message);

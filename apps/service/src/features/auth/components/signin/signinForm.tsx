@@ -36,12 +36,12 @@ export function SigninForm() {
         studentNumber: values.studentId,
         password: values.password,
       });
-
       queryClient.resetQueries();
       const profile = await queryClient.fetchQuery({
         queryKey: [userKeys.profile],
         queryFn: getSimpleProfie,
       });
+      console.log(profile);
 
       const memberId = profile.memberId;
       alert("로그인 성공");
@@ -54,10 +54,14 @@ export function SigninForm() {
         //현재비밀번호를 전달해주면 더 좋을거같은데
       } else {
         if (redirectUrl) {
-          if (decodeURI(redirectUrl) === "/signup") {
+          if (
+            decodeURI(redirectUrl) === "/signup" ||
+            decodeURI(redirectUrl) === "/resetpwd"
+          ) {
             router.push("/");
           } else router.push(decodeURI(redirectUrl));
         } else {
+          //재설정 페이지에서 돌아오면 메인페이지로 가게끔하고싶은데
           router.back();
         }
       }
