@@ -13,6 +13,7 @@ import { JSX, useState } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { useInputFocus } from "../../hooks/useInputFocus";
 import { formatPhoneNumber } from "@/src/shared/utils/formatPhoneNumber";
+import EmailAutoComplete from "./EmailAutoComplete";
 
 // StringKeys 타입 정의: T에서 string 또는 number 타입의 키만 추출
 type StringKeys<T> = {
@@ -48,7 +49,7 @@ export function InputFormFieldWithButton<T extends Record<string, any>>({
 }) {
   const { isFocused, inputRef } = useInputFocus();
   const [showPassword, setShowPassword] = useState(false);
-
+  const [emailInput, setEmailInput] = useState("");
   return (
     <FormField
       control={form.control}
@@ -95,6 +96,7 @@ export function InputFormFieldWithButton<T extends Record<string, any>>({
                     : "focus:border-primary focus:text-primary focus:placeholder-primary",
                   leftIcon ? "pl-10" : ""
                 )}
+                autoComplete="off"
                 type={hasToggleIcon && !showPassword ? "password" : type}
                 placeholder={placeHolder}
                 disabled={disabled}
@@ -108,6 +110,7 @@ export function InputFormFieldWithButton<T extends Record<string, any>>({
                 }
                 onChange={(e) => {
                   const newValue = e.target.value;
+                  setEmailInput(newValue);
                   const formatted =
                     type === "tel" ? formatPhoneNumber(newValue) : newValue;
                   field.onChange(formatted);
@@ -135,6 +138,17 @@ export function InputFormFieldWithButton<T extends Record<string, any>>({
               {showPassword ? <EyeClosed size={22} /> : <Eye size={22} />}
             </Button>
           )}
+          {type === "email" &&
+            isFocused &&
+            emailInput[emailInput.length - 1] === "@" && (
+              <EmailAutoComplete
+                text={emailInput}
+                onSelect={(newEmail) => {
+                  setEmailInput(newEmail); // 내부 상태 업데이트
+                  field.onChange(newEmail); // react-hook-form 필드 업데이트
+                }}
+              />
+            )}
         </FormItem>
       )}
     />
