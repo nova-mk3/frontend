@@ -10,17 +10,17 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { userKeys } from "@/src/app/(main)/users/[id]/query/qureies";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useLoginMutation } from "../../hooks/mutation/useLoginMutation";
 import { useQueryParams } from "@/src/shared/hooks/useQueryParams";
 import { InputFormField } from "../signup/InputFormField";
+import { getSimpleProfie } from "@/src/features/user/list/api/user";
 
 export function SigninForm() {
   const loginMutation = useLoginMutation();
   const queryClient = useQueryClient();
   const router = useRouter();
   const { redirectUrl } = useQueryParams();
-  const pathname = usePathname();
   const form = useForm<SigninInput>({
     resolver: zodResolver(SigninSchema),
     defaultValues: {
@@ -32,26 +32,34 @@ export function SigninForm() {
 
   async function onSubmit(values: SigninInput) {
     try {
-      await loginMutation.mutateAsync({
+      const response = await loginMutation.mutateAsync({
         studentNumber: values.studentId,
         password: values.password,
       });
 
-      queryClient.invalidateQueries({
+      queryClient.resetQueries();
+      const profile = await queryClient.fetchQuery({
         queryKey: [userKeys.profile],
-        refetchType: "all",
+        queryFn: getSimpleProfie,
       });
-      console.log(redirectUrl);
+
+      const memberId = profile.memberId;
       alert("로그인 성공");
 
-      queryClient.resetQueries();
-
-      if (redirectUrl) {
-        if (decodeURI(redirectUrl) === "/signup") {
-          router.push("/");
-        } else router.push(decodeURI(redirectUrl));
+      const tempPassword = response?.data.data.tempPassword as boolean;
+      if (tempPassword === true) {
+        sessionStorage.setItem("tempPassword", values.password);
+        //비밀번호 재설정 페이지로 이동
+        router.push(`/users/${memberId}/pwd`);
+        //현재비밀번호를 전달해주면 더 좋을거같은데
       } else {
-        router.back();
+        if (redirectUrl) {
+          if (decodeURI(redirectUrl) === "/signup") {
+            router.push("/");
+          } else router.push(decodeURI(redirectUrl));
+        } else {
+          router.back();
+        }
       }
     } catch (error: any) {
       alert(error.message);
@@ -105,12 +113,11 @@ export function SigninForm() {
             >
               아이디 찾기
             </p>
-            <p
-              className="flex  b-m text-text01 cursor-pointer"
-              onClick={() => alert("아직은 찾을 수 없습니다")}
-            >
-              비밀번호 찾기
-            </p>
+            <Link href="/findpwd">
+              <p className="flex  b-m text-text01 cursor-pointer">
+                비밀번호 찾기
+              </p>
+            </Link>
           </div>
 
           <div>

@@ -6,7 +6,7 @@ import { Button } from "@nova/ui/components/ui/button";
 import { Form } from "@nova/ui/components/ui/form";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useGetUserData } from "../../query/qureies";
 import {
@@ -53,6 +53,17 @@ export default function ChangePwd({ memberId }: Props) {
     },
   });
 
+  useEffect(() => {
+    const tempPassword = sessionStorage.getItem("tempPassword");
+    if (tempPassword) {
+      form.setValue("currentPassword", tempPassword, { shouldValidate: true });
+    }
+
+    //비밀번호 변경 페이지를 빠져나올때 세션에 있는 임시 비밀번호를 제거
+    return () => {
+      sessionStorage.removeItem("tempPassword");
+    };
+  }, []);
   function onSubmit(values: PwdInput) {
     console.log(values);
     useChnagePasswordMutation.mutate({
