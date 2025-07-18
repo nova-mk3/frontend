@@ -10,3 +10,10 @@ export const EmailList = [
   { id: 9, domain: "kakao.com" }, // 카카오 계정 기반 서비스
   { id: 10, domain: "yahoo.com" }, // 글로벌 사용자 다수 보유
 ];
+
+export const isEmail = (value: string) =>
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
+export function isNonEmptyArray<T>(arr: T[]): arr is [T, ...T[]] {
+  return arr.length > 0;
+}

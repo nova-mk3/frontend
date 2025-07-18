@@ -10,10 +10,11 @@ import { Input } from "@nova/ui/components/ui/input";
 import { cn } from "@nova/ui/lib/utils";
 import { Eye, EyeClosed } from "lucide-react";
 import { JSX, useState } from "react";
-import { Path, UseFormReturn } from "react-hook-form";
+import { ControllerRenderProps, Path, UseFormReturn } from "react-hook-form";
 import { formatPhoneNumber } from "@/src/shared/utils/formatPhoneNumber";
 import { useInputFocus } from "../../hooks/useInputFocus";
 import EmailAutoComplete from "./EmailAutoComplete";
+import { EmailList, isEmail, isNonEmptyArray } from "../../utils/email";
 
 // StringKeys 타입 정의: T에서 string 또는 number 타입의 키만 추출
 type StringKeys<T> = {
@@ -46,7 +47,56 @@ export function InputFormField<T extends Record<string, any>>({
   const { isFocused, inputRef } = useInputFocus();
   const [showPassword, setShowPassword] = useState(false);
   const [emailInput, setEmailInput] = useState("");
-  const isEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  const [focusIdx, setFocusIdx] = useState<number>(-1);
+
+  const atIndex = emailInput.indexOf("@");
+  let domainSearch = atIndex === -1 ? "" : emailInput.slice(atIndex + 1);
+  // 골뱅이가 여러개일 때 체크
+  if (domainSearch.includes("@")) {
+    let splitAt = domainSearch.split("@");
+    if (isNonEmptyArray(splitAt)) {
+      domainSearch = splitAt[0];
+    }
+  }
+
+  const filteredEmailList =
+    atIndex === -1
+      ? EmailList
+      : EmailList.filter((list) => list.domain.startsWith(domainSearch));
+
+  // 이메일을 keyDown 형태로 추가하고싶어서 진행했는데 리스트 위치를 알아야해서 리스트를 input이 있는곳에서 관리해줘야함 아래에서 위 함수를 정의하는 방식은 위험하다.
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    field: ControllerRenderProps<T, any>
+  ) => {
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        setFocusIdx((prev) => (prev + 1) % filteredEmailList.length);
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        setFocusIdx((prev) =>
+          prev <= 0 ? filteredEmailList.length - 1 : prev - 1
+        );
+        break;
+      case "Enter":
+        e.preventDefault();
+        if (focusIdx >= 0 && focusIdx < filteredEmailList.length) {
+          const selected = filteredEmailList[focusIdx]!;
+          const base = emailInput.split("@")[0];
+          const newEmail = `${base}@${selected.domain}`;
+          setEmailInput(newEmail);
+          field.onChange(newEmail);
+          setFocusIdx(-1);
+        }
+        break;
+      case "Escape":
+        setFocusIdx(-1);
+        break;
+    }
+  };
+
   return (
     <FormField
       control={form.control}
@@ -111,6 +161,9 @@ export function InputFormField<T extends Record<string, any>>({
                   type === "tel" ? formatPhoneNumber(newValue) : newValue;
                 field.onChange(formatted);
               }}
+              onKeyDown={
+                type === "email" ? (e) => handleKeyDown(e, field) : undefined
+              }
             />
           </FormControl>
           {hasToggleIcon && (
@@ -136,6 +189,8 @@ export function InputFormField<T extends Record<string, any>>({
             emailInput.includes("@") &&
             !isEmail(emailInput) && (
               <EmailAutoComplete
+                items={filteredEmailList}
+                focusIdx={focusIdx}
                 text={emailInput}
                 onSelect={(newEmail) => {
                   setEmailInput(newEmail); // 내부 상태 업데이트
