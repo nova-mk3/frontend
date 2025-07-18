@@ -9,17 +9,20 @@ export default function EmailAutoCompleteItem({
   domain: string;
   onSelect: (email: string) => void;
 }) {
-  const SumEmailPlusDomain = text + domain;
+  const atIndex = text.indexOf("@");
+  const userPart = atIndex === -1 ? text : text.slice(0, atIndex);
+  const autoEmail = `${userPart}@${domain}`;
 
   return (
     <div
       className="cursor-pointer hover:bg-background02 py-3"
-      onMouseDown={() => {
-        console.log("하이?");
-        onSelect(SumEmailPlusDomain);
+      onMouseDown={(e) => {
+        // mouseDown 이후의 이벤트 막기 -> blur 이벤트를 막아서 focus 유지하기!
+        e.preventDefault();
+        onSelect(autoEmail);
       }}
     >
-      <span className="ml-1.5">{SumEmailPlusDomain}</span>
+      <span className="ml-1.5">{autoEmail}</span>
     </div>
   );
 }

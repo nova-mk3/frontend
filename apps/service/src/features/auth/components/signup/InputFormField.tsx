@@ -46,6 +46,7 @@ export function InputFormField<T extends Record<string, any>>({
   const { isFocused, inputRef } = useInputFocus();
   const [showPassword, setShowPassword] = useState(false);
   const [emailInput, setEmailInput] = useState("");
+  const isEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
   return (
     <FormField
       control={form.control}
@@ -129,9 +130,11 @@ export function InputFormField<T extends Record<string, any>>({
               {showPassword ? <EyeClosed size={22} /> : <Eye size={22} />}
             </Button>
           )}
+          {/* TODO: onMouseDown 말고 onClick으로 따로 변수 만들어서 on/off 하는게 더 부드러워 보일것 같음! */}
           {type === "email" &&
             isFocused &&
-            emailInput[emailInput.length - 1] === "@" && (
+            emailInput.includes("@") &&
+            !isEmail(emailInput) && (
               <EmailAutoComplete
                 text={emailInput}
                 onSelect={(newEmail) => {
