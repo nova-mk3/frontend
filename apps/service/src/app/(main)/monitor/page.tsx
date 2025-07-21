@@ -126,9 +126,9 @@ export default function Page() {
               <div className="text-xs text-gray-400">
                 생성일: {new Date(file.created).toLocaleString()}
               </div>
-              <div className="text-xs text-gray-400">
+              {/* <div className="text-xs text-gray-400">
                 접근일: {new Date(file.accessed).toLocaleString()}
-              </div>
+              </div> */}
               <button
                 onClick={() => handleDelete(file.file)}
                 className="bg-danger text-white px-3 py-1 rounded text-sm mt-auto"
