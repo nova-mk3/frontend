@@ -117,7 +117,7 @@ export default function Page() {
                 alt={file.filename}
                 className="w-full h-auto rounded object-contain"
               />
-              <div className="text-sm font-medium break-words">
+              <div className="text-sm font-medium break-all">
                 {file.filename}
               </div>
               <div className="text-sm text-gray-500">
