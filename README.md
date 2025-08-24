@@ -112,3 +112,4 @@ Effective React Query Keys 문서를 참고해 query-key-factory 패턴으로 �
 ### 관리자
 
 - 작성 예정
+- 핫픽스 테스트
