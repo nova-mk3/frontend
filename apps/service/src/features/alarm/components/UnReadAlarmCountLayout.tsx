@@ -12,7 +12,7 @@ export default function UnReadAlarmCountLayout({ children }: Props) {
   return (
     <>
       {data.count > 0 && (
-        <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-primary rounded-full"></div>
+        <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-danger rounded-full"></div>
       )}
       {children}
     </>
