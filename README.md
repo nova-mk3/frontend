@@ -116,4 +116,4 @@ Effective React Query Keys 문서를 참고해 query-key-factory 패턴으로 �
 - 테스트 3
 - 작성 예정
 - 핫픽스 테스트
-- 릴리즈 추가 테스트
+- 릴리즈 추가 테스트2
