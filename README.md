@@ -111,4 +111,5 @@ Effective React Query Keys 문서를 참고해 query-key-factory 패턴으로 �
 
 ### 관리자
 
-- 작성 예정
+- git flow 기능 마무리 테스트
+- 테스트 2
